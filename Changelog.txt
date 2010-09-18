@@ -1,0 +1,43 @@
+------------------------------ v1.3.2 ------------------------------
+
+* Improved progress-bar 
+  (now counts size of files, not number of all files)
+* Removed 64-bit version of FlagSync
+* Elapsed time counter now stops when a job gets paused
+* Window now maximizes at startup
+
+------------------------------ v1.3.1 ------------------------------
+
++ Added elapsed time
++ Added error log, if an invalid settings file gets read
+
+* Improved log
+
+------------------------------ v1.3.0 ------------------------------
+
++ Program now only requires .NET Framework 2.0
+
+* Improved user interface
+* Improved stop function
+* Limited log to 60,000 characters
+
+------------------------------ v1.2.1 ------------------------------
+
++ Added tooltips
+
+* Improved translations
+* New jobs are now at default checked
+* When loading the settings, they are now at default checked
+
+------------------------------ v1.2.0 ------------------------------
+
++ Added German translation
+
+------------------------------ v1.1.0 ------------------------------
+
++ Added job saving and loading
+
+------------------------------ v1.0.0 ------------------------------
+
+# Release of public version
+# Requires .NET Framework 3.5

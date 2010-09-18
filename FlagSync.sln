@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync.Core", "FlagSync.Core\FlagSync.Core.csproj", "{1149F3C5-DBFE-4CFD-98F6-DB396343E647}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync.GUI", "FlagSync.GUI\FlagSync.GUI.csproj", "{F180885D-ACDF-41DD-AB72-21C67A31FE91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync2.Core", "FlagSync2.Core\FlagSync2.Core.csproj", "{4314C573-0724-4180-9698-ED984AA6940F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync2.View", "FlagSync2.View\FlagSync2.View.csproj", "{466638B9-3017-47FD-8508-5B738CD750D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1149F3C5-DBFE-4CFD-98F6-DB396343E647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1149F3C5-DBFE-4CFD-98F6-DB396343E647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1149F3C5-DBFE-4CFD-98F6-DB396343E647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1149F3C5-DBFE-4CFD-98F6-DB396343E647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F180885D-ACDF-41DD-AB72-21C67A31FE91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F180885D-ACDF-41DD-AB72-21C67A31FE91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F180885D-ACDF-41DD-AB72-21C67A31FE91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F180885D-ACDF-41DD-AB72-21C67A31FE91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4314C573-0724-4180-9698-ED984AA6940F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4314C573-0724-4180-9698-ED984AA6940F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4314C573-0724-4180-9698-ED984AA6940F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4314C573-0724-4180-9698-ED984AA6940F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{466638B9-3017-47FD-8508-5B738CD750D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{466638B9-3017-47FD-8508-5B738CD750D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{466638B9-3017-47FD-8508-5B738CD750D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{466638B9-3017-47FD-8508-5B738CD750D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

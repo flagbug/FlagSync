@@ -1,0 +1,1795 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="splitContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <metadata name="currentJobOverviewGroupBox.GridSize" type="System.Drawing.Size, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>5, 5</value>
+  </metadata>
+  <data name="currentJobOverviewGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="currentJobNameLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="currentJobNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="currentJobNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 20</value>
+  </data>
+  <data name="currentJobNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 16</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="currentJobNameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;currentJobNameLabel.Name" xml:space="preserve">
+    <value>currentJobNameLabel</value>
+  </data>
+  <data name="&gt;&gt;currentJobNameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentJobNameLabel.Parent" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;currentJobNameLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="currentJobNameDescriptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="currentJobNameDescriptionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 20</value>
+  </data>
+  <data name="currentJobNameDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 16</value>
+  </data>
+  <data name="currentJobNameDescriptionLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="currentJobNameDescriptionLabel.Text" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="&gt;&gt;currentJobNameDescriptionLabel.Name" xml:space="preserve">
+    <value>currentJobNameDescriptionLabel</value>
+  </data>
+  <data name="&gt;&gt;currentJobNameDescriptionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentJobNameDescriptionLabel.Parent" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;currentJobNameDescriptionLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="currentJobSyncModeLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="currentJobSyncModeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 65</value>
+  </data>
+  <data name="currentJobSyncModeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 16</value>
+  </data>
+  <data name="currentJobSyncModeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;currentJobSyncModeLabel.Name" xml:space="preserve">
+    <value>currentJobSyncModeLabel</value>
+  </data>
+  <data name="&gt;&gt;currentJobSyncModeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentJobSyncModeLabel.Parent" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;currentJobSyncModeLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="currentDirectoryBLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="currentDirectoryBLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 50</value>
+  </data>
+  <data name="currentDirectoryBLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 16</value>
+  </data>
+  <data name="currentDirectoryBLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;currentDirectoryBLabel.Name" xml:space="preserve">
+    <value>currentDirectoryBLabel</value>
+  </data>
+  <data name="&gt;&gt;currentDirectoryBLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentDirectoryBLabel.Parent" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;currentDirectoryBLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="currentDirectoryALabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="currentDirectoryALabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 35</value>
+  </data>
+  <data name="currentDirectoryALabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 16</value>
+  </data>
+  <data name="currentDirectoryALabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;currentDirectoryALabel.Name" xml:space="preserve">
+    <value>currentDirectoryALabel</value>
+  </data>
+  <data name="&gt;&gt;currentDirectoryALabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentDirectoryALabel.Parent" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;currentDirectoryALabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="currentJobSyncModeDescriptionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 65</value>
+  </data>
+  <data name="currentJobSyncModeDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 16</value>
+  </data>
+  <data name="currentJobSyncModeDescriptionLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="currentJobSyncModeDescriptionLabel.Text" xml:space="preserve">
+    <value>Mode:</value>
+  </data>
+  <data name="&gt;&gt;currentJobSyncModeDescriptionLabel.Name" xml:space="preserve">
+    <value>currentJobSyncModeDescriptionLabel</value>
+  </data>
+  <data name="&gt;&gt;currentJobSyncModeDescriptionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentJobSyncModeDescriptionLabel.Parent" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;currentJobSyncModeDescriptionLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="currentJobDirectoryBDescriptionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 50</value>
+  </data>
+  <data name="currentJobDirectoryBDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 16</value>
+  </data>
+  <data name="currentJobDirectoryBDescriptionLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="currentJobDirectoryBDescriptionLabel.Text" xml:space="preserve">
+    <value>Directory B:</value>
+  </data>
+  <data name="&gt;&gt;currentJobDirectoryBDescriptionLabel.Name" xml:space="preserve">
+    <value>currentJobDirectoryBDescriptionLabel</value>
+  </data>
+  <data name="&gt;&gt;currentJobDirectoryBDescriptionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentJobDirectoryBDescriptionLabel.Parent" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;currentJobDirectoryBDescriptionLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="currentJobDirectoryDescriptionALabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 35</value>
+  </data>
+  <data name="currentJobDirectoryDescriptionALabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 16</value>
+  </data>
+  <data name="currentJobDirectoryDescriptionALabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="currentJobDirectoryDescriptionALabel.Text" xml:space="preserve">
+    <value>Directory A:</value>
+  </data>
+  <data name="&gt;&gt;currentJobDirectoryDescriptionALabel.Name" xml:space="preserve">
+    <value>currentJobDirectoryDescriptionALabel</value>
+  </data>
+  <data name="&gt;&gt;currentJobDirectoryDescriptionALabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentJobDirectoryDescriptionALabel.Parent" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;currentJobDirectoryDescriptionALabel.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="currentJobOverviewGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="currentJobOverviewGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>448, 90</value>
+  </data>
+  <data name="currentJobOverviewGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="currentJobOverviewGroupBox.Text" xml:space="preserve">
+    <value>Current Job Overview</value>
+  </data>
+  <data name="&gt;&gt;currentJobOverviewGroupBox.Name" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
+  </data>
+  <data name="&gt;&gt;currentJobOverviewGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentJobOverviewGroupBox.Parent" xml:space="preserve">
+    <value>splitContainer.Panel1</value>
+  </data>
+  <data name="&gt;&gt;currentJobOverviewGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel1.Name" xml:space="preserve">
+    <value>splitContainer.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="controlsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="controlButtonsTableLayoutPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="controlButtonsTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="stopButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="stopButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="stopButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="stopButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>357, 3</value>
+  </data>
+  <data name="stopButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 24</value>
+  </data>
+  <data name="stopButton.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="stopButton.Text" xml:space="preserve">
+    <value> Stop</value>
+  </data>
+  <data name="&gt;&gt;stopButton.Name" xml:space="preserve">
+    <value>stopButton</value>
+  </data>
+  <data name="&gt;&gt;stopButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stopButton.Parent" xml:space="preserve">
+    <value>controlButtonsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;stopButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pauseButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pauseButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="pauseButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pauseButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 3</value>
+  </data>
+  <data name="pauseButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 24</value>
+  </data>
+  <data name="pauseButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="pauseButton.Text" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="&gt;&gt;pauseButton.Name" xml:space="preserve">
+    <value>pauseButton</value>
+  </data>
+  <data name="&gt;&gt;pauseButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pauseButton.Parent" xml:space="preserve">
+    <value>controlButtonsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;pauseButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="startButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="startButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="startButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 3</value>
+  </data>
+  <data name="startButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 24</value>
+  </data>
+  <data name="startButton.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="startButton.Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="&gt;&gt;startButton.Name" xml:space="preserve">
+    <value>startButton</value>
+  </data>
+  <data name="&gt;&gt;startButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;startButton.Parent" xml:space="preserve">
+    <value>controlButtonsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;startButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="previewButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="previewButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="previewButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="previewButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 24</value>
+  </data>
+  <data name="previewButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="previewButton.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="&gt;&gt;previewButton.Name" xml:space="preserve">
+    <value>previewButton</value>
+  </data>
+  <data name="&gt;&gt;previewButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;previewButton.Parent" xml:space="preserve">
+    <value>controlButtonsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;previewButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="controlButtonsTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 50</value>
+  </data>
+  <data name="controlButtonsTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="controlButtonsTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>472, 30</value>
+  </data>
+  <data name="controlButtonsTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;controlButtonsTableLayoutPanel.Name" xml:space="preserve">
+    <value>controlButtonsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;controlButtonsTableLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;controlButtonsTableLayoutPanel.Parent" xml:space="preserve">
+    <value>controlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;controlButtonsTableLayoutPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="controlButtonsTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="stopButton" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="pauseButton" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="startButton" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="previewButton" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,25,Percent,25,Percent,25,Percent,25" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="progressBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="progressBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 20</value>
+  </data>
+  <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>470, 23</value>
+  </data>
+  <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;progressBar.Name" xml:space="preserve">
+    <value>progressBar</value>
+  </data>
+  <data name="&gt;&gt;progressBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;progressBar.Parent" xml:space="preserve">
+    <value>controlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="controlsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="controlsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 90</value>
+  </data>
+  <data name="controlsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="controlsGroupBox.Text" xml:space="preserve">
+    <value>Controls</value>
+  </data>
+  <data name="&gt;&gt;controlsGroupBox.Name" xml:space="preserve">
+    <value>controlsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;controlsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;controlsGroupBox.Parent" xml:space="preserve">
+    <value>splitContainer.Panel2</value>
+  </data>
+  <data name="&gt;&gt;controlsGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel2.Name" xml:space="preserve">
+    <value>splitContainer.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>984, 110</value>
+  </data>
+  <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
+    <value>468</value>
+  </data>
+  <data name="splitContainer.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
+    <value>splitContainer</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.Parent" xml:space="preserve">
+    <value>overviewTabPage</value>
+  </data>
+  <data name="&gt;&gt;splitContainer.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="mainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 0</value>
+  </metadata>
+  <data name="loadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
+  </data>
+  <data name="loadToolStripMenuItem.Text" xml:space="preserve">
+    <value>Load settings</value>
+  </data>
+  <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
+  </data>
+  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save settings</value>
+  </data>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
+  </data>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="programToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="programToolStripMenuItem.Text" xml:space="preserve">
+    <value>Program</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 22</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="mainMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1008, 24</value>
+  </data>
+  <data name="mainMenuStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="mainMenuStrip.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;mainMenuStrip.Name" xml:space="preserve">
+    <value>mainMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;mainMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mainMenuStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mainMenuStrip.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="logTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="logTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="logTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>984, 558</value>
+  </data>
+  <data name="logTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="logTextBox.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;logTextBox.Name" xml:space="preserve">
+    <value>logTextBox</value>
+  </data>
+  <data name="&gt;&gt;logTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logTextBox.Parent" xml:space="preserve">
+    <value>textBoxPanel</value>
+  </data>
+  <data name="&gt;&gt;logTextBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>143, 17</value>
+  </metadata>
+  <data name="syncRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="syncRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 120</value>
+  </data>
+  <data name="syncRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 17</value>
+  </data>
+  <data name="syncRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="syncRadioButton.Text" xml:space="preserve">
+    <value>Synchronization</value>
+  </data>
+  <data name="syncRadioButton.ToolTip" xml:space="preserve">
+    <value>Synchronization mode copies new and modified files from folder A to folder B an from folder B to folder A, but don't deletes any files.</value>
+  </data>
+  <data name="&gt;&gt;syncRadioButton.Name" xml:space="preserve">
+    <value>syncRadioButton</value>
+  </data>
+  <data name="&gt;&gt;syncRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;syncRadioButton.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;syncRadioButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="backupRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="backupRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 104</value>
+  </data>
+  <data name="backupRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="backupRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="backupRadioButton.Text" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="backupRadioButton.ToolTip" xml:space="preserve">
+    <value>Backup mode copies new an modified files from folder A to folder B and deletes missing files in folder B.</value>
+  </data>
+  <data name="&gt;&gt;backupRadioButton.Name" xml:space="preserve">
+    <value>backupRadioButton</value>
+  </data>
+  <data name="&gt;&gt;backupRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;backupRadioButton.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;backupRadioButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="textBoxPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="textBoxPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 110</value>
+  </data>
+  <data name="textBoxPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>984, 558</value>
+  </data>
+  <data name="textBoxPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;textBoxPanel.Name" xml:space="preserve">
+    <value>textBoxPanel</value>
+  </data>
+  <data name="&gt;&gt;textBoxPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxPanel.Parent" xml:space="preserve">
+    <value>overviewTabPage</value>
+  </data>
+  <data name="&gt;&gt;textBoxPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="overviewTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="overviewTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="overviewTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>981, 662</value>
+  </data>
+  <data name="overviewTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="overviewTabPage.Text" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="&gt;&gt;overviewTabPage.Name" xml:space="preserve">
+    <value>overviewTabPage</value>
+  </data>
+  <data name="&gt;&gt;overviewTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;overviewTabPage.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;overviewTabPage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="settingsPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="directorySettingsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 110</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Mode:</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="jobSettingsNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="jobSettingsNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 24</value>
+  </data>
+  <data name="jobSettingsNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>302, 20</value>
+  </data>
+  <data name="jobSettingsNameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsNameTextBox.Name" xml:space="preserve">
+    <value>jobSettingsNameTextBox</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsNameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsNameTextBox.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsNameTextBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="jobSettingsNameLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="jobSettingsNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 24</value>
+  </data>
+  <data name="jobSettingsNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="jobSettingsNameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="jobSettingsNameLabel.Text" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsNameLabel.Name" xml:space="preserve">
+    <value>jobSettingsNameLabel</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsNameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsNameLabel.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsNameLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="browseDirectoryBButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 77</value>
+  </data>
+  <data name="browseDirectoryBButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="browseDirectoryBButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="browseDirectoryBButton.Text" xml:space="preserve">
+    <value>Directory B</value>
+  </data>
+  <data name="&gt;&gt;browseDirectoryBButton.Name" xml:space="preserve">
+    <value>browseDirectoryBButton</value>
+  </data>
+  <data name="&gt;&gt;browseDirectoryBButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;browseDirectoryBButton.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;browseDirectoryBButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="browseDirectoryAButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 48</value>
+  </data>
+  <data name="browseDirectoryAButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="browseDirectoryAButton.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="browseDirectoryAButton.Text" xml:space="preserve">
+    <value>Directory A</value>
+  </data>
+  <data name="&gt;&gt;browseDirectoryAButton.Name" xml:space="preserve">
+    <value>browseDirectoryAButton</value>
+  </data>
+  <data name="&gt;&gt;browseDirectoryAButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;browseDirectoryAButton.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;browseDirectoryAButton.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="jobSettingsDirectoryBTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="jobSettingsDirectoryBTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 79</value>
+  </data>
+  <data name="jobSettingsDirectoryBTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 20</value>
+  </data>
+  <data name="jobSettingsDirectoryBTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsDirectoryBTextBox.Name" xml:space="preserve">
+    <value>jobSettingsDirectoryBTextBox</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsDirectoryBTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsDirectoryBTextBox.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsDirectoryBTextBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="jobSettingsDirectoryATextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="jobSettingsDirectoryATextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 50</value>
+  </data>
+  <data name="jobSettingsDirectoryATextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 20</value>
+  </data>
+  <data name="jobSettingsDirectoryATextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsDirectoryATextBox.Name" xml:space="preserve">
+    <value>jobSettingsDirectoryATextBox</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsDirectoryATextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsDirectoryATextBox.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsDirectoryATextBox.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="directorySettingsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 10</value>
+  </data>
+  <data name="directorySettingsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 144</value>
+  </data>
+  <data name="directorySettingsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="directorySettingsGroupBox.Text" xml:space="preserve">
+    <value>Directory Settings</value>
+  </data>
+  <data name="&gt;&gt;directorySettingsGroupBox.Name" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;directorySettingsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;directorySettingsGroupBox.Parent" xml:space="preserve">
+    <value>settingsPanel</value>
+  </data>
+  <data name="&gt;&gt;directorySettingsGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="deleteJobButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="deleteJobButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 630</value>
+  </data>
+  <data name="deleteJobButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 30</value>
+  </data>
+  <data name="deleteJobButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="deleteJobButton.Text" xml:space="preserve">
+    <value>Delete Job</value>
+  </data>
+  <data name="&gt;&gt;deleteJobButton.Name" xml:space="preserve">
+    <value>deleteJobButton</value>
+  </data>
+  <data name="&gt;&gt;deleteJobButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;deleteJobButton.Parent" xml:space="preserve">
+    <value>settingsPanel</value>
+  </data>
+  <data name="&gt;&gt;deleteJobButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="jobSettingsCheckedListBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="jobSettingsCheckedListBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 10</value>
+  </data>
+  <data name="jobSettingsCheckedListBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 589</value>
+  </data>
+  <data name="jobSettingsCheckedListBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsCheckedListBox.Name" xml:space="preserve">
+    <value>jobSettingsCheckedListBox</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsCheckedListBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsCheckedListBox.Parent" xml:space="preserve">
+    <value>settingsPanel</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsCheckedListBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="newJobButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="newJobButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 600</value>
+  </data>
+  <data name="newJobButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 30</value>
+  </data>
+  <data name="newJobButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="newJobButton.Text" xml:space="preserve">
+    <value>New Job</value>
+  </data>
+  <data name="&gt;&gt;newJobButton.Name" xml:space="preserve">
+    <value>newJobButton</value>
+  </data>
+  <data name="&gt;&gt;newJobButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newJobButton.Parent" xml:space="preserve">
+    <value>settingsPanel</value>
+  </data>
+  <data name="&gt;&gt;newJobButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="settingsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="settingsPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>984, 668</value>
+  </data>
+  <data name="settingsPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;settingsPanel.Name" xml:space="preserve">
+    <value>settingsPanel</value>
+  </data>
+  <data name="&gt;&gt;settingsPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingsPanel.Parent" xml:space="preserve">
+    <value>settingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;settingsPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="settingsTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="settingsTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>981, 662</value>
+  </data>
+  <data name="settingsTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="settingsTabPage.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="&gt;&gt;settingsTabPage.Name" xml:space="preserve">
+    <value>settingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;settingsTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingsTabPage.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;settingsTabPage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 32</value>
+  </data>
+  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>989, 688</value>
+  </data>
+  <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="jobSettingsSaveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>233, 17</value>
+  </metadata>
+  <data name="jobSettingsSaveFileDialog.Filter" xml:space="preserve">
+    <value>FlagSync-Files|*.xml</value>
+  </data>
+  <metadata name="jobSettingsOpenFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>425, 17</value>
+  </metadata>
+  <data name="jobSettingsOpenFileDialog.Filter" xml:space="preserve">
+    <value>FlagSync-Files|*.xml</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>46</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1008, 730</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAQAEBAAAAAAIABoBAAARgAAACAgAAAAACAAqBAAAK4EAAAwMAAAAAAgAKglAABWFQAAQEAAAAAA
+        IAAoQgAA/joAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wFZWFYR////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wF2dHIzc3Fv23Z1czF0cnAxdHJwMXRycDFzcW8xbWxqJf///wH///8B////Af//
+        /wH///8B////Af///wGFhIJRjYuJ9ZGPjf+Pjoz/j42L/4+Ni/+PjYv/jo2L/4aFg9////8B////Af//
+        /wH///8B////Af///wGUkpFxoJ+d+6SioP+koqD/pKKg/6SioP+koqD/pKKg/6SioP+dm5rf////Af//
+        /wH///8B////Af///wH///8BsK+udbm4t/22tbP/trWz/7a1s/+2tbP/trWz/7a1s/+2tbP/r62s3///
+        /wH///8B////Af///wH///8B////Af///wHFxMNVysnI9cnIx//Ozcz/zczL/83My//NzMv/zczL/7++
+        vd////8B////Af///wH///8B////Af///wH///8B////Ac7OzTnPz87du7u5Mbe2tTG2trQxtra0Maqb
+        gUWtrasn////Af///wH///8B////Af///wH///8B////Af///wGidiEnrYxORat8IzGrfCMxq3wjMa9/
+        JDGvfB7drn0iOf///wH///8B////Af///wH///8B////Af///wH///8BvY4z38mXNv/JmDf/yZg3/8mY
+        N//KmDf/zJo3/8WVNvW6jjZV////Af///wH///8B////Af///wH///8B////Ac6lS9/XrE7/16xO/9es
+        Tv/XrE7/16xO/9esTv/XrE7/0qhN/b+bSXX///8B////Af///wH///8B////Af///wHZtmHf4r5l/+K+
+        Zf/ivmX/4r5l/+K+Zf/ivmX/4r5l/+HAcfvRt3lx////Af///wH///8B////Af///wH///8B3cR83+vR
+        h//r0Yj/69GI/+vRiP/s0oj/7dB+/+nQifXcyJJR////Af///wH///8B////Af///wH///8B////Aci0
+        cSXQu3Yx0bx3MdG8dzHSvXcx18F6MeTSltvj06Ez////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wHGuH0R////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BAAD//wAA
+        //8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//ygA
+        AAAgAAAAQAAAAAEAIAAAAAAAgBAAAAAAAAAAAAAAAAAAAAAAAAD///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AVlYVkP///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AWdlZAVoZmSbZmRj3///
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wFwbm0NdnVzu3x7
+        ef97enjveXd1X3RycV90cnBfdHJwX3RycF90cnBfdHJwX3RycF9zcnBfc3FvX3BvbV9qaWcz////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BeHZ1IYB+
+        fNeJh4b/jIqJ/4yKiP+KiIf/iIaF/4iGhf+IhoX/iIaF/4iGhf+IhoX/iIaF/4eGhP+HhYP/g4GA/3h2
+        db////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AYKB
+        fzeIh4Xnk5KQ/5aUkv+WlJL/lpSS/5aUkv+WlJL/lpSS/5aUkv+WlJL/lpSS/5aUkv+WlJL/lpSS/5aU
+        kv+UkpD/h4aEv////wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wGMiohXlZOS852bmv+fnZz/n52c/5+dnP+fnZz/n52c/5+dnP+fnZz/n52c/5+dnP+fnZz/n52c/5+d
+        nP+fnZz/n52c/56cm/+SkI6/////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BjIuKa5qZl/+mpaP/qKel/6inpf+op6X/qKel/6inpf+op6X/qKel/6inpf+op6X/qKel/6in
+        pf+op6X/qKel/6inpf+op6X/p6ak/5qZmL////8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wGZmJd3u7q5/7Cvrf+xsK7/sbCu/7Gwrv+xsK7/sbCu/7Gwrv+xsK7/sbCu/7Gw
+        rv+xsK7/sbCu/7Gwrv+xsK7/sbCu/7Gwrv+wr63/oqGgv////wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wGxsK9fycjH+7u6uf+7ubj/u7m4/7u5uP+7ubj/u7m4/7u5
+        uP+7ubj/u7m4/7u5uP+7ubj/u7m4/7u5uP+7ubj/u7m4/7q4t/+rqai/////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wGysbA/zc3M78bFw//Ew8H/xMPB/8TD
+        wf/Ew8H/xMPB/8TDwf/Ew8H/xMPB/8TDwf/Ew8H/xMPB/8TDwf/Ew8H/wcC+/7Gwrr////8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wGtrKwp0M/O29DP
+        zv/NzMv/z87N/9nY1//X19b/19fW/9fW1f/X1tX/19bV/9fW1f/X1tX/19bV/9XV1P/Qz8//tLSzv///
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wGvrq0Z09PSw9fW1f/Lysnzv7+9Y7e3tV+3trVft7a1X7a2tF+2trRftra0X7a2tF+2tbRftbSzX7Gx
+        r1+np6Y7////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wG1tLMJ0M/Pp8vKyd////8B////Af///wH///8B////Af///wH///8B////AZFh
+        DlP///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8BtLOyU////wH///8B////Af///wH///8B////Af//
+        /wH///8BoW8W36RyF6efbxoJ////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wGdciA7pnkiX6l7I1+qfCNfq3wjX6t8I1+rfCNfq3wjX6t8
+        I1+rfCNfq30jX7KBJWO5hSTzuoYk/7B+IsOkdyMZ////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Aa2AKr+8iy7/wpAw/8ORMP/DkTD/xJEw/8SR
+        MP/EkTD/xJEw/8SRMP/FkjH/x5Qx/8mVMv/JlTL/xJEw/7WHLduqgCwp////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Buo43v8ycPP/Pnj3/z549/8+e
+        Pf/Pnj3/z549/8+ePf/Pnj3/z549/8+ePf/Pnj3/z549/8+ePf/Pnj3/y5s8/76ROO+2jTg/////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wHCmEK/06ZI/9Sn
+        Sf/Up0n/1KdJ/9SnSf/Up0n/1KdJ/9SnSf/Up0n/1KdJ/9SnSf/Up0n/1KdJ/9SnSf/Up0n/0qZI/8ed
+        RPu4kkFf////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Aceh
+        Tb/Zr1T/2rBU/9qwVP/asFT/2rBU/9qwVP/asFT/2rBU/9qwVP/asFT/2rBU/9qwVP/asFT/2rBU/9qw
+        VP/asFT/165T/8eiTf+0k0d3////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BzKpXv964X//fuV//37lf/9+5X//fuV//37lf/9+5X//fuV//37lf/9+5X//fuV//37lf/9+5
+        X//fuV//37lf/9+5X//duGH/28KH/72gXGv///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wHRsWG/48Fq/+XCa//lwmv/5cJr/+XCa//lwmv/5cJr/+XCa//lwmv/5cJr/+XC
+        a//lwmv/5cJr/+XCa//lwmv/5MNx/+POl/PNtHNX////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////AdO3a7/nyHX/6st3/+rLd//qy3f/6st3/+rLd//qy3f/6st3/+rL
+        d//qy3f/6st3/+rLd//qy3f/6st3/+jMgP/i0J3nzbZ2N////wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B0Lp3v+bSlf/r15j/7NeZ/+zYmf/t2Jn/7diZ/+3Y
+        mf/t2Jn/7diZ/+3Zmf/v25r/8NaI/+/Ugv/u15L/5NOh18izcyH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wHBrW0zzLd0X9C7dl/RvHdf0bx3X9G8
+        d1/RvHdf0bx3X9K9d1/SvXdf0753X9zFfV/n0YXv7tuf/+XWpLvJtHIN////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////AdrMmN/cz56bybh5Bf///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Bxrh9Q////wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAoAAAAMAAAAGAAAAABACAAAAAAAIAlAAAAAAAAAAAAAAAAAAAAAAAA////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AVtZWDFZWFZp////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wFnZWQDZmRjVWVj
+        YttjYWDP////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AWpp
+        aA1wbm1ZcG9t7XJwbv9vbWvP////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BcG5tCXV0cnF5eHblfn16/39+fP99fHrzenh2j3V0co90cnGPc3Jvj3RycI90cm+PdHJwj3Ry
+        cI90cnCPdHJwj3RycI90cnCPc3Jwj3NxcI9zcW+PcG9tj21saolpZ2Yz////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wF3dXQZe3l4pYKAf/+IhoX/iomI/4uJiP+KiIf/iIaF/4eFg/+Fg4L/hYOC/4WD
+        gv+Fg4L/hYOC/4WDgv+Fg4L/hYOC/4WDgv+Fg4L/hIOC/4SCgf+EgoD/gX9+/3t5eP90cnCf////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////AXt6eCmAfnyjiIaE/46Miv+Rj43/kY+N/5GPjf+Rj43/kY+N/5GP
+        jf+Qjo3/kI+N/5COjf+Qjo3/kI6N/5GPjf+Qj43/kI6N/5GPjf+Qj43/kI6M/5COjP+Qjoz/joyK/4iG
+        hP9+fHqf////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8BgoF/L4aFg8GMi4r5lJOR/5aVk/+XlZP/l5WT/5aV
+        k/+XlZP/l5WT/5aVk/+XlZP/l5WT/5aVk/+XlZP/l5WT/5eVk/+XlZP/l5WT/5eVk/+XlZP/l5WT/5eV
+        k/+XlZP/lpSS/5CPjf+FhIKf////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////AYaEhAmKiIdLkI6N5ZeWlP+cmpn/npyb/56c
+        m/+enJv/npyb/56cm/+enJv/npyb/56cm/+enJv/npyb/56cm/+enJv/npyb/56cm/+enJv/npyb/56c
+        m/+enJv/npyb/56cm/+enJv/nZua/5iWlf+Ni4qf////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Bh4eFDY2Mi2eUk5Hhnpyb/6Kh
+        n/+joqD/pKKg/6OioP+joqD/pKKg/6OioP+joqD/pKKg/6OioP+joqD/pKKg/6OioP+joqD/pKKg/6Si
+        oP+koqD/pKKg/6SioP+koqD/pKKg/6SioP+koqD/o6Gg/56dm/+SkY+f////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Bi4qJY5SS
+        keuenZv/p6ak/6mnpv+pqKb/qaim/6mopv+pqKb/qaim/6mopv+pqKb/qaim/6mopv+pqKb/qaim/6mo
+        pv+pqKb/qaim/6mopv+pqKb/qaim/6mopv+pqKb/qaim/6mopv+pqKb/qaem/6Siof+XlpWf////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BlJOSda6trO2zsrH/rq2r/7Cvrf+wr63/sK+t/7Cvrf+wr63/sK+t/7Cvrf+wr63/sK+t/7Cv
+        rf+wr63/sK+t/7Cvrf+wr63/sK+t/7Cvrf+wr63/sK+t/7Cvrf+wr63/sK+t/7Cvrf+wr63/r66s/6qp
+        p/+dnJuf////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8BkZCPD6yrqnPEw8Llv769/7e2tP+2tbP/trWz/7a0s/+2tLP/trWz/7a0
+        s/+2tLP/trWz/7a0s/+2tLP/trWz/7a0s/+2tLP/trWz/7a1s/+2tbP/trWz/7a1s/+2tbP/trWz/7a1
+        s/+2tbP/trSz/7Cvrf+joqCf////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////AZeWlQ2wr65NxsXE98jHxv+8urn/u7q5/7y6
+        uf+7urn/u7q5/7y6uf+7urn/u7q5/7y6uf+7urn/u7q5/7y6uf+7urn/vLq5/7y6uf+8urn/vLq5/7y6
+        uf+8urn/vLq5/7y6uf+8urn/u7q5/7W0s/+npqWf////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Br66tOcjH
+        xsfOzcz7xMPB/8LBwP/DwsD/w8LA/8PCwP/DwsD/w8LA/8PCwP/DwsD/w8LA/8PCwP/DwsD/w8LA/8PC
+        wP/DwsD/w8LA/8PCwP/DwsD/w8LA/8PCwP/DwsD/wcC+/7q5t/+sq6qf////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BoaCfA7SzsjPEw8Oz09LR/8rJyf/Ix8b/yMfG/8jHxv/JyMf/zMrJ/8zKyv/Mysn/y8rJ/8vK
+        yf/Mysn/y8rJ/8vKyf/Lysn/y8rJ/8vKyf/Lysn/y8rJ/8vKyf/Lycj/x8bF/769vP+urayf////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wGsrKwfxsXEr9bW1f/Qz87/zs3M/87NzP/S0dD/3dzb/9vb
+        2v/a2tn/2tnY/9rZ2P/Z2Nj/2tnY/9rZ2P/a2dj/2tnY/9rZ2P/a2dj/2tnY/9nY2P/Y2Nf/1dTT/8bG
+        xf+vr66f////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Br66sE8XEw4Pa2tnr1tXU/9HQ
+        z//Lysn1wcG/mbm5t4+3trWPtra1j7e2tY+2trWPtra0j7a2tI+2trSPtra0j7a2tI+2trSPtrW0j7a1
+        tI+0tLKPsrKvj6ysqo+lpKM/////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AbGw
+        rw3Kychr2djX7dXU0//Ew8LV////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wG1tLMHycjHY9PS0efFxcTP////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8BkWEOgZJiDj3///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////AbW0tD20s7KB////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8BnWwUz6FuFeeicBdjnm8aB////wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Bq3gc1bB8Hf+tex3tqXgea6Fz
+        HQ3///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Bm3EgP6F2IY+neSKPqXsjj6p8
+        I4+qfCOPqnwjj6t8I4+qfCOPqnwjj6t8I4+qfCOPq3wjj6t8I4+rfCOPq30jj61+I4+0giWZu4cl976J
+        Jv+8iCb/tIEk66t7I4OjdyMT////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Bp3snn7OE
+        Kv+6iSz/v40u/8COLf/Aji7/wI4u/8GOLv/Bji7/wY4u/8GOLv/Bji7/wY4u/8GOLv/Bji7/wo8v/8OQ
+        Lv/Fki//yJQw/8mVMP/IlDD/xJAv/7qJLP+wgiuvqoAsH////wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BsIUwn76PM//Gljb/ypg3/8uYN//LmTf/y5k4/8uZN//MmTj/zJk4/8uZN//MmTj/y5k3/8uZ
+        N//MmTj/y5k3/8yZN//Mmjj/zJk3/8yZN//Mmjj/y5k3/8eWNv++jzT/s4cxs7CGMTWpgTID////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8Bt4w3n8aYPP/Onj7/0J8+/9CfPv/Qnz7/0J8+/9CfPv/Qnz7/0J8+/9Cf
+        Pv/Qnz7/0J8+/9CfPv/Qnz7/0J8+/9CfPv/Qnz7/0J8+/9CfPv/Qnz7/0J8+/8+fPv/MnD3/w5Y6+7uQ
+        Oce1jDc5////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8BvJM/n8ygRP/TpUf/06ZH/9OmR//Tpkf/06ZH/9Om
+        R//Tpkf/06ZH/9OmR//Tpkf/06ZH/9OmR//Tpkf/06ZH/9OmR//Tpkf/06ZH/9OmR//Tpkf/06ZH/9Om
+        R//Tpkf/0aRG/8ygRf/CmEH3t5E/TbCMPw3///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BwJlGn9ClTP/Xq07/16xP/9er
+        T//XrE//16xP/9erT//XrE//16xP/9erT//XrE//16tO/9erTv/XrE//16tO/9erTv/XrE//16tO/9er
+        Tv/XrE//16tO/9erTv/XrE//16tO/9WqTv/Qpkz/wptH5beTRHOwjkIP////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Bw55Mn9Or
+        Uv/asVX/2rFV/9qxVf/asVX/2rFV/9qxVf/asVX/2rFV/9qxVf/asVX/2rFV/9qxVf/asVX/2rFV/9qx
+        Vf/asVX/2rFV/9qxVf/asVX/2rFV/9qxVf/asVX/2rFV/9qxVf/Xr1T/zKZQ/76bS+2ykUZ1////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BxqVUn9eyW//et17/3rhe/964Xv/euF7/3rhe/964Xv/euF7/3rhe/964Xv/euF7/3rhe/964
+        Xv/euF7/3rhe/964Xv/euF7/3rhe/964Xv/euF7/3rhe/964Xv/euF7/3rhe/964Xv/ct1//2rx3/9C2
+        euu6nFdj////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8Byqlan9q3Yf/ivWT/4r5l/+K9ZP/ivmX/4r5l/+K9ZP/ivmX/4r5l/+K9
+        ZP/ivmX/4r1k/+K9Zf/ivmX/4r1k/+K9Zf/ivmX/4r1k/+K9Zf/ivmX/4r1k/+K9Zf/ivmX/4r1k/+G9
+        aP/jyIb/3MaQ4cuydGe2mE8N////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8BzK5gn928aP/kw2z/5cNs/+XDbP/lw2z/5cNs/+XD
+        bP/lw2z/5cNs/+XDbP/lw2z/5cNs/+XDbP/lw2z/5cNs/+XDbP/lw2z/5cNs/+XDbP/lw2z/5cNs/+XD
+        bP/lw2z/5MRw/+bOkf/eyZLly7JwS7udVAn///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BzrJnn9/BcP/oyHT/6cp1/+nK
+        df/pynX/6cp1/+nKdf/pynX/6cp1/+nKdf/pynX/6cp1/+nKdf/pynX/6cp1/+nKdf/pynX/6cp1/+nK
+        df/pynX/6cp1/+nJdf/nynz/5tKc+dvIlMHMtHMv////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BzbVtn9/F
+        e//pzoL/7NGE/+3ShP/t0oX/7dKF/+3Shf/t0oX/7dKF/+3Shf/t0oX/7dGF/+3ShP/t0oX/7dKF/+3S
+        hf/u04X/7dF//+3QfP/t0Hz/7M98/+zSif/o1aD/2siWo8iwbin///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8ByrRyn9zJjP/m1Jr/6tec/+vYnf/r2J3/69md/+zZnf/s2Z3/7Nmd/+zZnf/s2Z3/7Nmd/+zZ
+        nf/s2Z3/7Nqd/+7anv/w3Z//8dmO//DVg//v1YP/7teT/+vbqP/cypOlyLNzGf///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8Bv6tsM8aycYnMuHSP0Lt2j9C8d4/QvHeP0Lx3j9C8d4/QvHeP0Lx3j9C8
+        d4/RvHeP0r13j9K9d4/SvXeP0r13j9XAeY/ex36P6NGF8+zViv/u2pr/696y5d3LknHIs3IJ////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B2siFz+fXoP/n2q3t3cyRWcy4
+        dg3///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B1ceSz93R
+        pNvXyZNVyLh4A////wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8Bxrh9aca3fDH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8BAAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAA
+        AAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA
+        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAA
+        AAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA
+        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAA
+        AAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA
+        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//KAAAAEAAAACAAAAAAQAgAAAA
+        AAAAQgAAAAAAAAAAAAAAAAAAAAAAAP///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BW1lYf1lYVo////8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BYV9en2Nh
+        YP9gX12/////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wFnZWQPaWdlz21raf9ta2n/aGdlv////wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wFramgvcnBuz3Z1c/95d3X/eHZ1/3RycL////8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wFwbm0vd3Z07318ev+Af33/goF//4KBf/9/fnz/fHp4v3Z1
+        c791c3G/dHJxv3RycL90cnC/dHJwv3RycL90cnC/dHJwv3RycL90cnC/dHJwv3RycL90cnC/dHJwv3Ry
+        cL9zcnC/c3Fwv3Nxb79xcG6/b25sv2tqaK9mZGMf////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wFzcXFffHp5/4OBgP+HhoX/iYiH/4qI
+        h/+KiIf/iYeG/4eFhP+Fg4L/hIKB/4OBgP+DgYD/g4GA/4OBgP+DgYD/goGA/4KBgP+CgYD/goGA/4KB
+        gP+CgYD/goGA/4KBgP+CgYD/goB//4KAf/+Bf37/f359/3x6ef92dHP/b21sf////wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wF4dnV/gX99/4iG
+        hP+Ni4n/j42L/4+Ni/+PjYv/j42L/4+Ni/+PjYv/j42L/46Miv+OjIr/joyK/46Miv+OjIr/joyK/46M
+        iv+OjIr/joyK/46Miv+OjIr/joyK/46Miv+OjIr/joyK/42Lif+Ni4n/jIqI/4uJh/+HhYP/gX99/3d1
+        c3////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wF7enifhoSC/46Miv+SkI7/lJKQ/5SSkP+UkpD/lJKQ/5SSkP+UkpD/lJKQ/5SSkP+UkpD/lJKQ/5SS
+        kP+UkpD/lJKQ/5SSkP+UkpD/lJKQ/5SSkP+UkpD/lJKQ/5SSkP+UkpD/lJKQ/5SSkP+UkpD/lJKQ/5SS
+        kP+TkY//kI6M/4mHhf99e3p/////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////AX59ew+DgoDPi4qI/5GQj/+WlZP/mJeV/5iXlf+Yl5X/mJeV/5iXlf+Yl5X/mJeV/5iX
+        lf+Yl5X/mJeV/5iXlf+Yl5X/mJeV/5iXlf+Yl5X/mJeV/5iXlf+Yl5X/mJeV/5iXlf+Yl5X/mJeV/5iX
+        lf+Yl5X/mJeV/5iXlf+Yl5X/mJeV/5WUkv+OjYz/goF/f////wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////AYOBgC+LiYjPkpGQ/5iWlf+cmpn/nZua/52bmv+dm5r/nZua/52b
+        mv+dm5r/nZua/52bmv+dm5r/nZua/52bmv+dm5r/nZua/52bmv+dm5r/nZua/52bmv+dm5r/nZua/52b
+        mv+dm5r/nZua/52bmv+dm5r/nZua/52bmv+dm5r/nZua/52bmv+bmZj/lJKR/4eFhH////8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////AYaEhD+QjozvmJaV/56cmv+hn53/oqCe/6Kg
+        nv+ioJ7/oqCe/6Kgnv+ioJ7/oqCe/6Kgnv+ioJ7/oqCe/6Kgnv+ioJ7/oqCe/6Kgnv+ioJ7/oqCe/6Kg
+        nv+ioJ7/oqCe/6Kgnv+ioJ7/oqCe/6Kgnv+ioJ7/oqCe/6Kgnv+ioJ7/oqCe/6Kgnv+ioJ7/oJ6c/5mX
+        lf+Lioh/////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AYeHhV+RkI//m5qY/6Kh
+        n/+lpKL/pqWj/6alo/+mpaP/pqWj/6alo/+mpaP/pqWj/6alo/+mpaP/pqWj/6alo/+mpaP/pqWj/6al
+        o/+mpaP/pqWj/6alo/+mpaP/pqWj/6alo/+mpaP/pqWj/6alo/+mpaP/pqWj/6alo/+mpaP/pqWj/6al
+        o/+mpaP/pqWj/6Sjov+dnJr/j46Nf////wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AYiG
+        hU+Qj47/m5mY/6OhoP+pp6b/q6mo/6upqP+rqaj/q6mo/6upqP+rqaj/q6mo/6upqP+rqaj/q6mo/6up
+        qP+rqaj/q6mo/6upqP+rqaj/q6mo/6upqP+rqaj/q6mo/6upqP+rqaj/q6mo/6upqP+rqaj/q6mo/6up
+        qP+rqaj/q6mo/6upqP+rqaj/q6mo/6upqP+pp6b/oqCf/5OSkX////8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wGKiYhvo6Kh/7m4t/+npqT/rayq/6+urP+vrqz/r66s/6+urP+vrqz/r66s/6+u
+        rP+vrqz/r66s/6+urP+vrqz/r66s/6+urP+vrqz/r66s/6+urP+vrqz/r66s/6+urP+vrqz/r66s/6+u
+        rP+vrqz/r66s/6+urP+vrqz/r66s/6+urP+vrqz/r66s/6+urP+vrqz/rayq/6Wko/+XlpR/////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////AZGQj2/Av77/z87O/7Kxr/+0s7H/tLOx/7Sz
+        sf+0s7H/tLOx/7Szsf+0s7H/tLOx/7Szsf+0s7H/tLOx/7Szsf+0s7H/tLOx/7Szsf+0s7H/tLOx/7Sz
+        sf+0s7H/tLOx/7Szsf+0s7H/tLOx/7Szsf+0s7H/tLOx/7Szsf+0s7H/tLOx/7Szsf+0s7H/tLOx/7Kx
+        r/+qqaf/m5qZf////wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8Bl5aVX8C/
+        vu/T0tH/vLu6/7m3tv+5t7b/ube2/7m3tv+5t7b/ube2/7m3tv+5t7b/ube2/7m3tv+5t7b/ube2/7m3
+        tv+5t7b/ube2/7m3tv+5t7b/ube2/7m3tv+5t7b/ube2/7m3tv+5t7b/ube2/7m3tv+5t7b/ube2/7m3
+        tv+5t7b/ube2/7m3tv+3tbT/r62s/5+enH////8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wGcm5kvvLu679ra2f/Av77/vLu6/728u/+9vLv/vby7/728u/+9vLv/vby7/728
+        u/+9vLv/vby7/728u/+9vLv/vby7/728u/+9vLv/vby7/728u/+9vLv/vby7/728u/+9vLv/vby7/728
+        u/+9vLv/vby7/728u/+9vLv/vby7/728u/+9vLv/u7q5/7KxsP+ioaB/////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////AZ+enR+3trXP29va/8nIx//Av73/wsG//8LB
+        v//Cwb//wsG//8LBv//Cwb//wsG//8LBv//Cwb//wsG//8LBv//Cwb//wsG//8LBv//Cwb//wsG//8LB
+        v//Cwb//wsG//8LBv//Cwb//wsG//8LBv//Cwb//wsG//8LBv//Cwb//wsG//769u/+1tLP/pqWjf///
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BoaCfD7a1
+        tL/X1tb/0tHQ/8TDwv/HxcT/x8XE/8fFxP/HxcT/x8XE/8fFxP/HxcT/x8XE/8fFxP/HxcT/x8XE/8fF
+        xP/HxcT/x8XE/8fFxP/HxcT/x8XE/8fFxP/HxcT/x8XE/8fFxP/HxcT/x8XE/8fFxP/HxcT/x8XE/8bE
+        w//Av77/t7a1/6inpn////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8Braysn9jX1v/X1tb/ysnI/8vKyf/Lysn/y8rJ/8vKyf/NzMv/0tHQ/9LR
+        0P/R0dD/0dHQ/9HR0P/R0dD/0dDP/9HQz//R0M//0dDP/9HQz//R0M//0dDP/9HQz//R0M//0dDP/9HQ
+        z//R0M//0M/O/8/Ozf/My8r/yMfG/7m4t/+pqKd/////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wGrq6lv09LR/9/f3v/Ozcz/0M/O/9DP
+        zv/Qz87/1tXU/+Lh4P/f397/3t7e/97d3P/e3dz/3t3c/93c3P/d3Nz/3dzc/93c3P/d3Nz/3dzc/93c
+        3P/d3Nz/3dzc/93c3P/d3Nz/3dzc/9zc2//c29r/2tnZ/9XU0/+9vbz/p6alf////wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Aa+u
+        rV/Pz87v4+Pi/9TT0v/S0dD/0dDP/8zLyv/Ew8LPu7u5v7i4tr+3trW/t7a1v7e2tb+3trW/t7a1v7a2
+        tL+2trS/tra0v7a2tL+2trS/tra0v7a2tL+2trS/tra0v7a1tL+2tbS/tLSyv7Ozsb+vr62/qqmov5+f
+        ni////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8BsrGwL8/Oze/k4+L/1NPS/8zLyv/Ew8LP////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wG1tLMfycjHz+Tj4//R0M//vLu6v///
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AbW0
+        sw/CwcC/29va/769vb////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8BkWEOr5JiDp////8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////AbW0tJ+0s7Kv////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////AZlpE7+ebBT/nWsTv5pqFQ////8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wGicRm/qnYa/6p3
+        Gv+ldBrPn28aH////wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BsH0gz7aCIf+3gyH/s4Ag/6t6H++idB4v////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AZZtIC+fdCG/pHgiv6h6
+        I7+peyO/qnwjv6p8I7+rfCO/q3wjv6t8I7+rfCO/q3wjv6t8I7+rfCO/q3wjv6t8I7+rfCO/q3wjv6t8
+        I7+rfCO/q30jv6x9JL+vfyS/toQmz76JJ//BjCj/wowo/7+KKP+5hib/r34k76R3I1////8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wGhdiV/rX8o/7WFKv+5iCv/vIos/72LLP++jCz/vows/76MLP++jCz/vows/76MLP++jCz/vows/76M
+        LP++jCz/vows/76MLP++jCz/v4ws/8CNLf/Aji3/wo8t/8WRLv/Iky//yZQv/8mUL//Iky//xJAu/72L
+        LP+zgyn/p3wob////wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8BqH4sf7aIL/+/jzL/xJMz/8eVNP/IljT/yZY0/8mXNf/JlzX/ypc1/8qX
+        Nf/KlzX/ypc1/8qXNf/KlzX/ypc1/8qXNf/KlzX/ypc1/8qXNf/KlzX/ypc1/8uYNf/LmDX/y5g1/8uY
+        Nf/LmDX/y5g1/8qXNf/HlTT/wI8y/7WIL/+qgCyf////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Aa6EMn+9kDb/x5c5/8ybO//OnDv/zpw7/86c
+        O//OnDv/zpw7/86cO//OnDv/zpw7/86cO//OnDv/zpw7/86cO//OnDv/zpw7/86cO//OnDv/zpw7/86c
+        O//OnDv/zpw7/86cO//OnDv/zpw7/86cO//OnDv/zpw7/8uZOv/DlDj/uo01/7GHMr+pgTIP////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wGyiTZ/w5Y8/82e
+        P//RoUD/0aFA/9GhQP/RoUD/0aFA/9GhQP/RoUD/0aFA/9GhQP/RoUD/0aFA/9GhQP/RoUD/0aFA/9Gh
+        QP/RoUD/0aFA/9GhQP/RoUD/0aFA/9GhQP/RoUD/0aFA/9GhQP/RoUD/0aFA/9GhQP/RoUD/zp8//8mb
+        Pf/BlTv/uY85z62HNh////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BtY08f8abQv/Qo0X/06VG/9OlRv/TpUb/06VG/9OlRv/TpUb/06VG/9OlRv/TpUb/06VG/9Ol
+        Rv/TpUb/06VG/9OlRv/TpUb/06VG/9OlRv/TpUb/06VG/9OlRv/TpUb/06VG/9OlRv/TpUb/06VG/9Ol
+        Rv/TpUb/06VG/9OlRv/RpEX/zaFE/8ebQv+8kz7vr4o7L////wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////AbiSQX/KoEf/1KhL/9aqTP/Wqkz/1qpM/9aqTP/Wqkz/1qpM/9aq
+        TP/Wqkz/1qpM/9aqTP/Wqkz/1qpM/9aqTP/Wqkz/1qpM/9aqTP/Wqkz/1qpM/9aqTP/Wqkz/1qpM/9aq
+        TP/Wqkz/1qpM/9aqTP/Wqkz/1qpM/9aqTP/Wqkz/1qpM/9WpTP/Rpkr/yqBH/76XQ++wjD9f////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wG7lkZ/zKRN/9esUf/ZrlL/2a5S/9mu
+        Uv/ZrlL/2a5S/9muUv/ZrlL/2a5S/9muUv/ZrlL/2a5S/9muUv/ZrlL/2a5S/9muUv/ZrlL/2a5S/9mu
+        Uv/ZrlL/2a5S/9muUv/ZrlL/2a5S/9muUv/ZrlL/2a5S/9muUv/ZrlL/2a5S/9muUv/ZrlL/2K1S/9Oq
+        UP/Kokz/vplI/7COQ2////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BvZpLf8+p
+        Uv/ZsVb/27NX/9uzV//bs1f/27NX/9uzV//bs1f/27NX/9uzV//bs1f/27NX/9uzV//bs1f/27NX/9uz
+        V//bs1f/27NX/9uzV//bs1f/27NX/9uzV//bs1f/27NX/9uzV//bs1f/27NX/9uzV//bs1f/27NX/9uz
+        V//bs1f/27NX/9uzV//YsVb/0atT/8aiT/+6mEr/rY1Fb////wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Ab+eUH/RrVj/3LVc/963Xf/et13/3rdd/963Xf/et13/3rdd/963Xf/et13/3rdd/963
+        Xf/et13/3rdd/963Xf/et13/3rdd/963Xf/et13/3rdd/963Xf/et13/3rdd/963Xf/et13/3rdd/963
+        Xf/et13/3rdd/963Xf/et13/3rdd/963Xf/et13/27Vc/9ayXv/cxY//xaln/6+QSE////8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wHBolR/1LFd/9+6Yf/hvGL/4bxi/+G8Yv/hvGL/4bxi/+G8
+        Yv/hvGL/4bxi/+G8Yv/hvGL/4bxi/+G8Yv/hvGL/4bxi/+G8Yv/hvGL/4bxi/+G8Yv/hvGL/4bxi/+G8
+        Yv/hvGL/4bxi/+G8Yv/hvGL/4bxi/+G8Yv/hvGL/4bxi/+G8Yv/hvGL/4Lti/928av/m06X/18GL/7aY
+        T1////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BxKVaf9e1Yv/ivmf/5MBo/+TA
+        aP/kwGj/5MBo/+TAaP/kwGj/5MBo/+TAaP/kwGj/5MBo/+TAaP/kwGj/5MBo/+TAaP/kwGj/5MBo/+TA
+        aP/kwGj/5MBo/+TAaP/kwGj/5MBo/+TAaP/kwGj/5MBo/+TAaP/kwGj/5MBo/+TAaP/kwGj/479n/+LC
+        dv/r27T/1r6B77udVD////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Acap
+        Xn/YuWf/48Jt/+bFbv/mxW7/5sVu/+bFbv/mxW7/5sVu/+bFbv/mxW7/5sVu/+bFbv/mxW7/5sVu/+bF
+        bv/mxW7/5sVu/+bFbv/mxW7/5sVu/+bFbv/mxW7/5sVu/+bFbv/mxW7/5sVu/+bFbv/mxW7/5sVu/+bF
+        bv/mxW7/5MRt/+XLif/q27H/1b19z72hWS////8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wHHrGN/2bxs/+XFcv/pyXT/6cl0/+nJdP/pyXT/6cl0/+nJdP/pyXT/6cl0/+nJ
+        dP/pyXT/6cl0/+nJdP/pyXT/6cl0/+nJdP/pyXT/6cl0/+nJdP/pyXT/6cl0/+nJdP/pyXT/6cl0/+nJ
+        dP/pyXT/6cl0/+nJdP/pyXT/5sZz/+fQkv/p27P/z7h4z76jXQ////8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8Bx65nf9m+cP/lyHb/6815/+zOev/sznr/7M56/+zO
+        ev/sznr/7M56/+zOev/sznr/7M56/+zOev/sznr/7M56/+zOev/sznr/7M56/+zOev/sznr/7M56/+zO
+        ev/sznr/7M56/+zOev/sznr/7M56/+zOev/sznr/6ct4/+rYpP/o2bD/yLBun////wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////AcavaX/ZwXz/5c6L/+rT
+        jf/t1Y//7taP/+7WkP/u1pD/7taQ/+/WkP/v1pD/79aQ/+/WkP/v1pD/79aQ/+/WkP/v1pD/79aQ/+/W
+        kP/v1pD/79eQ/+/Xkf/w2JH/8NiR/+/ViP/u0n//7tJ//+7Sf//u0n//7NGB/+/fsf/k1KT/yLNzf///
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wHBrGp/1cCC/+PTnv/n1qD/6dih/+vZov/r2aL/69qi/+vaov/r2qL/69qi/+vaov/r2qL/69qi/+va
+        ov/r2qL/69qi/+vaov/s2qL/7Nqi/+zbov/t26P/7t2k//Hgpf/y3JX/8deF//HXhf/w1oX/79eQ//Dj
+        uP/l1aP/yLJtX////wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8BuKVoH8Ovb6/KtnO/zrl1v9C7dr/RvHe/0bx3v9G8d7/RvHe/0bx3v9G8
+        d7/RvHe/0bx3v9G8d7/RvHe/0r13v9K9d7/SvXe/0r13v9K9d7/SvXe/1L94v9fBer/hyoC/6tKF/+7W
+        iP/v1oj/7diS//PnxP/i0ZrvybRyL////wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Ad3Kgr/l0Yf/69qg//Hnxf/gz5XPzLh2L////wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wHRv36/4tOe/+vhvP/YyI/Pybh5D////wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B0MKKv+LYsv/Nv4Sf////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Aca4
+        fo/GuH1/////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>FlagSync</value>
+  </data>
+  <data name="&gt;&gt;programToolStripMenuItem.Name" xml:space="preserve">
+    <value>programToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;programToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;loadToolStripMenuItem.Name" xml:space="preserve">
+    <value>loadToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;loadToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveToolStripMenuItem.Name" xml:space="preserve">
+    <value>saveToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;saveToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
+    <value>exitToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
+    <value>helpToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
+    <value>aboutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
+    <value>toolTip</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsSaveFileDialog.Name" xml:space="preserve">
+    <value>jobSettingsSaveFileDialog</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsSaveFileDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsOpenFileDialog.Name" xml:space="preserve">
+    <value>jobSettingsOpenFileDialog</value>
+  </data>
+  <data name="&gt;&gt;jobSettingsOpenFileDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>
