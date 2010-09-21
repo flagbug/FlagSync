@@ -127,7 +127,10 @@
     <value>Bytes geschrieben</value>
   </data>
   <data name="CantCopyFile" xml:space="preserve">
-    <value>Kann Datei nocht kopieren</value>
+    <value>Kann Datei nicht kopieren</value>
+  </data>
+  <data name="CantDeleteDirectory" xml:space="preserve">
+    <value>Konnte Ordner nicht kopieren</value>
   </data>
   <data name="CountingFiles" xml:space="preserve">
     <value>Zähle Dateien</value>
@@ -166,7 +169,7 @@
     <value>Aufgabe abgeschlossen</value>
   </data>
   <data name="JobSettingsLoadError" xml:space="preserve">
-    <value>Fehler beim Laden der Einstellungsdatei. Ist die Datei gültig?</value>
+    <value>Fehler beim Laden der Einstellungsdatei.  Ist die Datei gültig?</value>
   </data>
   <data name="JobSettingsLoadSucceed" xml:space="preserve">
     <value>Einstellungen wurden geladen</value>

@@ -65,8 +65,6 @@ namespace FlagSync.Core
             {
                 if (!Directory.Exists(Path.Combine(target.FullName, directory.Name)))
                 {
-                    this.OnDeletedDirectory(directory);
-
                     FileInfo[] files = directory.GetFiles("*", SearchOption.AllDirectories);
                   
                     foreach (FileInfo file in files)
@@ -76,7 +74,16 @@ namespace FlagSync.Core
 
                     if(!preview)
                     {
-                        directory.Delete(true);
+                        try
+                        {
+                            directory.Delete(true);
+                            this.OnDeletedDirectory(directory);
+                        }
+
+                        catch (IOException)
+                        {
+                            this.OnDirectoryDeletionError(directory);
+                        }
                     }
                 }
 

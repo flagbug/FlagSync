@@ -45,6 +45,11 @@ namespace FlagSync.Core
         /// </summary>
         public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeleted;
 
+        /// <summary>
+        /// Gets invoked when an error occurs while a directory gets deleted
+        /// </summary>
+        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
+
         private JobSettings settings = new JobSettings();
         public JobSettings Settings
         {
@@ -353,6 +358,14 @@ namespace FlagSync.Core
             if(this.FileProceeded != null)
             {
                 this.FileProceeded.Invoke(this, new FileProceededEventArgs(file));
+            }
+        }
+
+        protected virtual void OnDirectoryDeletionError(DirectoryInfo directory)
+        {
+            if (this.DirectoryDeletionError != null)
+            {
+                this.DirectoryDeletionError.Invoke(this, new DirectoryDeletionEventArgs(directory));
             }
         }
     }

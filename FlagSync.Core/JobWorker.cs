@@ -20,9 +20,10 @@ namespace FlagSync.Core
         public event EventHandler<FileDeletionEventArgs> FileDeleted;
         public event EventHandler<DirectoryCreationEventArgs> DirectoryCreated;
         public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeleted;
+        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
         public event EventHandler<JobEventArgs> JobStarted;
         public event EventHandler<JobEventArgs> JobFinished;
-
+        
         private System.Threading.Thread workerThread;
 
         private Job currentJob;
@@ -98,6 +99,20 @@ namespace FlagSync.Core
         {
             this.TotalWrittenBytes = 0;
 
+            this.QueueJobs(jobs, preview);
+
+            this.FileCounterResult = this.GetFileCounterResults();
+
+            if (this.FilesCounted != null)
+            {
+                this.FilesCounted.Invoke(this, new EventArgs());
+            }
+
+            this.DoNextJob();
+        }
+
+        private void QueueJobs(IEnumerable<JobSettings> jobs, bool preview)
+        {
             foreach (JobSettings job in jobs)
             {
                 switch (job.SyncMode)
@@ -111,15 +126,6 @@ namespace FlagSync.Core
                         break;
                 }
             }
-
-            this.FileCounterResult = this.GetFileCounterResults();
-
-            if (this.FilesCounted != null)
-            {
-                this.FilesCounted.Invoke(this, new EventArgs());
-            }
-
-            this.DoNextJob();
         }
 
         private FileCounter.FileCounterResults GetFileCounterResults()
@@ -146,6 +152,15 @@ namespace FlagSync.Core
             this.currentJob.Finished += new EventHandler(currentJob_Finished);
             this.currentJob.FoundModifiedFile += new EventHandler<FileCopyEventArgs>(currentJob_FoundModifiedFile);
             this.currentJob.FoundNewFile += new EventHandler<FileCopyEventArgs>(currentJob_FoundNewerFile);
+            this.currentJob.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DirectoryDeletionError);
+        }
+
+        void currentJob_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
+        {
+            if (this.DirectoryDeletionError != null)
+            {
+                this.DirectoryDeletionError.Invoke(this, e);
+            }
         }
 
         void currentJob_FoundNewerFile(object sender, FileCopyEventArgs e)
@@ -225,7 +240,7 @@ namespace FlagSync.Core
 
         private void OnJobStarted()
         {
-            if(this.jobQueue != null)
+            if(this.JobStarted != null)
             {
                 this.JobStarted.Invoke(this, new JobEventArgs(this.currentJob.Settings));
             }

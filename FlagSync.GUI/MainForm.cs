@@ -93,10 +93,22 @@ namespace FlagSync.GUI
             this.jobWorker.DirectoryDeleted += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeleted);
             this.jobWorker.JobStarted += new EventHandler<JobEventArgs>(jobWorker_JobStarted);
             this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
+            this.jobWorker.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeletionError);
 
             this.AddNewJob();
 
             this.WindowState = FormWindowState.Maximized;
+        }
+
+        void jobWorker_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeletionError), new object[] { sender, e });
+                return;
+            }
+
+            this.AddLogMessage(new LogMessage(rm.GetString("CantDeleteDirectory") + ": " + e.Directory.FullName, LogMessage.MessageType.ErrorMessage));
         }
 
         void elapsedTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -209,7 +221,8 @@ namespace FlagSync.GUI
 
             this.AddLogMessage(new LogMessage(rm.GetString("FilesCounted") + ": " + this.jobWorker.FileCounterResult.CountedFiles, LogMessage.MessageType.StatusMessage));
             this.AddLogMessage(new LogMessage(rm.GetString("BytesCounted") + ": " + String.Format("{0:F2}", ((float)(jobWorker.FileCounterResult.CountedBytes * 1.0) / 1048576.0)) + " MB", LogMessage.MessageType.StatusMessage));
-            
+
+            this.progressBar.Style = ProgressBarStyle.Blocks;
             this.progressBar.Maximum = (int)(jobWorker.FileCounterResult.CountedBytes / 1024);
         }
 
@@ -315,6 +328,7 @@ namespace FlagSync.GUI
 
             this.AddLogMessage(new LogMessage(rm.GetString("Starting") + "...", LogMessage.MessageType.StatusMessage));
             this.AddLogMessage(new LogMessage(rm.GetString("CountingFiles") + "...", LogMessage.MessageType.StatusMessage));
+            this.progressBar.Style = ProgressBarStyle.Marquee;
 
             this.Update();
 
@@ -540,7 +554,7 @@ namespace FlagSync.GUI
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             this.jobWorker.Stop();
-
+      
             System.Windows.Forms.Application.DoEvents();
             
             base.OnClosing(e);

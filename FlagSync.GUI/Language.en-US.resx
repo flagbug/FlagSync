@@ -129,6 +129,9 @@
   <data name="CantCopyFile" xml:space="preserve">
     <value>Cannot copy file</value>
   </data>
+  <data name="CantDeleteDirectory" xml:space="preserve">
+    <value>Cannot delete directory</value>
+  </data>
   <data name="CountingFiles" xml:space="preserve">
     <value>Counting files</value>
   </data>
