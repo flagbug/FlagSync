@@ -94,10 +94,22 @@ namespace FlagSync.GUI
             this.jobWorker.JobStarted += new EventHandler<JobEventArgs>(jobWorker_JobStarted);
             this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
             this.jobWorker.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeletionError);
+            this.jobWorker.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(jobWorker_FileDeletionError);
 
             this.AddNewJob();
 
             this.WindowState = FormWindowState.Maximized;
+        }
+
+        void jobWorker_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new EventHandler<FileDeletionErrorEventArgs>(jobWorker_FileDeletionError), new object[] { sender, e });
+                return;
+            }
+
+            this.AddLogMessage(new LogMessage(rm.GetString("CantDeleteDFile") + ": " + e.File.FullName, LogMessage.MessageType.ErrorMessage));
         }
 
         void jobWorker_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)

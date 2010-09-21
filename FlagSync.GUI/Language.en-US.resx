@@ -132,6 +132,9 @@
   <data name="CantDeleteDirectory" xml:space="preserve">
     <value>Cannot delete directory</value>
   </data>
+  <data name="CantDeleteFile" xml:space="preserve">
+    <value>Cannot delete file</value>
+  </data>
   <data name="CountingFiles" xml:space="preserve">
     <value>Counting files</value>
   </data>

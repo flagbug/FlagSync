@@ -23,6 +23,7 @@ namespace FlagSync.Core
         public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
         public event EventHandler<JobEventArgs> JobStarted;
         public event EventHandler<JobEventArgs> JobFinished;
+        public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
         
         private System.Threading.Thread workerThread;
 
@@ -153,6 +154,15 @@ namespace FlagSync.Core
             this.currentJob.FoundModifiedFile += new EventHandler<FileCopyEventArgs>(currentJob_FoundModifiedFile);
             this.currentJob.FoundNewFile += new EventHandler<FileCopyEventArgs>(currentJob_FoundNewerFile);
             this.currentJob.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DirectoryDeletionError);
+            this.currentJob.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(currentJob_FileDeletionError);
+        }
+
+        void currentJob_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
+        {
+            if (this.FileDeletionError != null)
+            {
+                this.FileDeletionError.Invoke(this, e);
+            }
         }
 
         void currentJob_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)

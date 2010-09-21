@@ -31,9 +31,14 @@ namespace FlagSync.Core
         public event EventHandler<FileCopyEventArgs> FoundModifiedFile;
 
         /// <summary>
-        /// Gets invoked when an error occurs
+        /// Gets invoked when an error while copying occurs
         /// </summary>
         public event EventHandler<FileCopyErrorEventArgs> FileCopyError;
+
+        /// <summary>
+        /// Gets invoked when an error while deleting occurs
+        /// </summary>
+        public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
 
         /// <summary>
         /// Gets invoked after a folder creation
@@ -132,7 +137,7 @@ namespace FlagSync.Core
 
         protected void CheckPause()
         {
-            while(paused)
+            while (paused)
             {
                 System.Threading.Thread.Sleep(250);
             }
@@ -146,14 +151,14 @@ namespace FlagSync.Core
         protected void CopyFile(FileInfo file, DirectoryInfo directory)
         {
             this.CheckPause();
-            
+
             try
             {
                 file.CopyTo(Path.Combine(directory.FullName, file.Name), true);
                 this.writtenBytes += file.Length;
             }
 
-            catch(Exception)
+            catch (Exception)
             {
                 this.OnFileCopyError(file, directory);
             }
@@ -169,18 +174,18 @@ namespace FlagSync.Core
         {
             this.BackupDirectory(source, target, preview);
 
-            foreach(DirectoryInfo directory in source.GetDirectories())
+            foreach (DirectoryInfo directory in source.GetDirectories())
             {
-                if(this.stopped)
+                if (this.stopped)
                 {
                     return;
                 }
 
-                if(!Directory.Exists(Path.Combine(target.FullName, directory.Name)))
+                if (!Directory.Exists(Path.Combine(target.FullName, directory.Name)))
                 {
                     this.OnNewDirectory(directory, target);
 
-                    if(!preview)
+                    if (!preview)
                     {
                         Directory.CreateDirectory(Path.Combine(target.FullName, directory.Name));
                     }
@@ -200,29 +205,29 @@ namespace FlagSync.Core
         {
             this.CheckPause();
 
-            foreach(FileInfo fileA in source.GetFiles())
+            foreach (FileInfo fileA in source.GetFiles())
             {
-                if(this.stopped)
+                if (this.stopped)
                 {
                     return;
                 }
 
                 //Check if fileA isn't already in target directory
-                if(!File.Exists(Path.Combine(target.FullName, fileA.Name)))
+                if (!File.Exists(Path.Combine(target.FullName, fileA.Name)))
                 {
                     this.OnFoundNewFile(fileA, source, target);
 
-                    if(!preview)
+                    if (!preview)
                     {
                         CopyFile(fileA, target);
                     }
                 }
 
-                if(target.Exists)
+                if (target.Exists)
                 {
-                    foreach(FileInfo fileB in target.GetFiles())
+                    foreach (FileInfo fileB in target.GetFiles())
                     {
-                        if(this.stopped)
+                        if (this.stopped)
                         {
                             return;
                         }
@@ -230,13 +235,13 @@ namespace FlagSync.Core
                         this.CheckPause();
 
                         //Check on modified file
-                        if(fileA.Name.Equals(fileB.Name, StringComparison.OrdinalIgnoreCase))
+                        if (fileA.Name.Equals(fileB.Name, StringComparison.OrdinalIgnoreCase))
                         {
-                            if(this.IsFileModified(fileA, fileB))
+                            if (this.IsFileModified(fileA, fileB))
                             {
                                 this.OnFoundModifiedFile(fileA, source, target);
 
-                                if(!preview)
+                                if (!preview)
                                 {
                                     CopyFile(fileA, target);
                                 }
@@ -268,7 +273,7 @@ namespace FlagSync.Core
         /// <param name="targetDirectory">The target directory of the file</param>
         protected virtual void OnFoundNewFile(FileInfo file, DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory)
         {
-            if(this.FoundNewFile != null)
+            if (this.FoundNewFile != null)
             {
                 this.FoundNewFile.Invoke(this, new FileCopyEventArgs(file, sourceDirectory, targetDirectory));
             }
@@ -282,7 +287,7 @@ namespace FlagSync.Core
         /// <param name="targetDirectory">The target directory of the file</param>
         protected virtual void OnFoundModifiedFile(FileInfo file, DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory)
         {
-            if(this.FoundModifiedFile != null)
+            if (this.FoundModifiedFile != null)
             {
                 this.FoundModifiedFile.Invoke(this, new FileCopyEventArgs(file, sourceDirectory, targetDirectory));
             }
@@ -295,7 +300,7 @@ namespace FlagSync.Core
         /// <param name="targetDirectory">Target directoy</param>
         protected virtual void OnNewDirectory(DirectoryInfo directory, DirectoryInfo targetDirectory)
         {
-            if(this.DirectoryCreated != null)
+            if (this.DirectoryCreated != null)
             {
                 this.DirectoryCreated.Invoke(this, new DirectoryCreationEventArgs(directory, targetDirectory));
             }
@@ -307,7 +312,7 @@ namespace FlagSync.Core
         /// <param name="directory">The directory that gets deleted</param>
         protected virtual void OnDeletedDirectory(DirectoryInfo directory)
         {
-            if(this.DirectoryDeleted != null)
+            if (this.DirectoryDeleted != null)
             {
                 this.DirectoryDeleted.Invoke(this, new DirectoryDeletionEventArgs(directory));
             }
@@ -320,7 +325,7 @@ namespace FlagSync.Core
         /// <param name="targetDirectory">The directory where the file should get copied</param>
         protected virtual void OnFileCopyError(FileInfo file, DirectoryInfo targetDirectory)
         {
-            if(this.FileCopyError != null)
+            if (this.FileCopyError != null)
             {
                 this.FileCopyError.Invoke(this, new FileCopyErrorEventArgs(file, targetDirectory));
             }
@@ -332,7 +337,7 @@ namespace FlagSync.Core
         /// <param name="file">The file that gets deleted</param>
         protected virtual void OnDeletedFile(FileInfo file)
         {
-            if(this.FileDeleted != null)
+            if (this.FileDeleted != null)
             {
                 this.FileDeleted.Invoke(this, new FileDeletionEventArgs(file));
             }
@@ -343,7 +348,7 @@ namespace FlagSync.Core
         /// </summary>
         protected virtual void OnFinished()
         {
-            if(this.Finished != null)
+            if (this.Finished != null)
             {
                 this.Finished.Invoke(this, new EventArgs());
             }
@@ -355,17 +360,33 @@ namespace FlagSync.Core
         /// <param name="file">The file that gets proceeded</param>
         protected virtual void OnFileProceeded(FileInfo file)
         {
-            if(this.FileProceeded != null)
+            if (this.FileProceeded != null)
             {
                 this.FileProceeded.Invoke(this, new FileProceededEventArgs(file));
             }
         }
 
+        /// <summary>
+        /// Raises the DirectoryDeletionError event
+        /// </summary>
+        /// <param name="directory">The directory where the error occurs</param>
         protected virtual void OnDirectoryDeletionError(DirectoryInfo directory)
         {
             if (this.DirectoryDeletionError != null)
             {
                 this.DirectoryDeletionError.Invoke(this, new DirectoryDeletionEventArgs(directory));
+            }
+        }
+
+        /// <summary>
+        /// Raises the FileDeletionError event
+        /// </summary>
+        /// <param name="file">The file where the error occurs</param>
+        protected virtual void OnFileDeletionError(FileInfo file)
+        {
+            if (this.FileDeletionError != null)
+            {
+                this.FileDeletionError.Invoke(this, new FileDeletionErrorEventArgs(file));
             }
         }
     }

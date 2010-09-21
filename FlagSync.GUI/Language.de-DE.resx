@@ -132,6 +132,9 @@
   <data name="CantDeleteDirectory" xml:space="preserve">
     <value>Konnte Ordner nicht kopieren</value>
   </data>
+  <data name="CantDeleteFile" xml:space="preserve">
+    <value>Kann Datei nicht löschen</value>
+  </data>
   <data name="CountingFiles" xml:space="preserve">
     <value>Zähle Dateien</value>
   </data>

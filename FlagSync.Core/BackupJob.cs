@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Security;
 
 namespace FlagSync.Core
 {
@@ -56,7 +57,25 @@ namespace FlagSync.Core
 
                     if (!preview)
                     {
-                        file.Delete();
+                        try
+                        {
+                            file.Delete();
+                        }
+
+                        catch (IOException)
+                        {
+                            
+                        }
+
+                        catch (SecurityException)
+                        {
+                            
+                        }
+
+                        catch (UnauthorizedAccessException)
+                        {
+                            
+                        }
                     }
                 }     
             }
@@ -81,6 +100,16 @@ namespace FlagSync.Core
                         }
 
                         catch (IOException)
+                        {
+                            this.OnDirectoryDeletionError(directory);
+                        }
+
+                        catch (System.Security.SecurityException)
+                        {
+                            this.OnDirectoryDeletionError(directory);
+                        }
+
+                        catch (UnauthorizedAccessException)
                         {
                             this.OnDirectoryDeletionError(directory);
                         }

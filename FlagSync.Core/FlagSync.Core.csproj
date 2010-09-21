@@ -26,14 +26,11 @@
   <ItemGroup>
     <Compile Include="BackupJob.cs" />
     <Compile Include="FileCounter.cs" />
-    <Compile Include="PlaylistReader\IPlaylistReader.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobEventArgs.cs" />
     <Compile Include="JobSettings.cs" />
     <Compile Include="JobSettingSerializer.cs" />
     <Compile Include="JobWorker.cs" />
-    <Compile Include="PlaylistReader\ITunesPlaylistReader.cs" />
-    <Compile Include="PlaylistReader\Song.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncJob.cs" />
   </ItemGroup>

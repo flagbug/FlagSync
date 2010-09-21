@@ -2,6 +2,20 @@
 
 namespace FlagSync.Core
 {
+    public class FileDeletionErrorEventArgs : System.EventArgs
+    {
+        public FileInfo File
+        {
+            get;
+            private set;
+        }
+
+        public FileDeletionErrorEventArgs(FileInfo file)
+        {
+            this.File = file;
+        }
+    }
+
     public class JobEventArgs : System.EventArgs
     {
         public JobSettings Job
