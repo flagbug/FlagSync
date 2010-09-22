@@ -17,7 +17,7 @@ namespace FlagSync.GUI
         private ResourceManager rm = new ResourceManager("FlagSync.GUI.Language", System.Reflection.Assembly.GetExecutingAssembly()); 
 
         /// <summary>
-        /// Resource worker handles the jobs
+        /// Job worker handles the jobs
         /// </summary>
         private JobWorker jobWorker = new JobWorker();
 
@@ -567,8 +567,8 @@ namespace FlagSync.GUI
         {
             this.jobWorker.Stop();
       
-            System.Windows.Forms.Application.DoEvents();
-            
+            Application.DoEvents();
+
             base.OnClosing(e);
         }
     }

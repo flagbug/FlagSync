@@ -132,6 +132,7 @@ namespace FlagSync.Core
         /// </summary>
         public void Stop()
         {
+            this.paused = false;
             this.stopped = true;
         }
 

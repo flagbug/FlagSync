@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace FlagSync.Core
 {
@@ -25,7 +26,7 @@ namespace FlagSync.Core
         public event EventHandler<JobEventArgs> JobFinished;
         public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
         
-        private System.Threading.Thread workerThread;
+        private Thread workerThread;
 
         private Job currentJob;
 
@@ -85,16 +86,27 @@ namespace FlagSync.Core
             {
                 this.currentJob = this.jobQueue.Dequeue();
                 this.InitEvents();
-                this.workerThread = new System.Threading.Thread(this.currentJob.Start);
-                this.workerThread.Start();
                 this.OnJobStarted();
+                this.currentJob.Start();   
             }
 
             else
             {
                 this.OnFinished();
             }
-        }        
+        }
+
+        private void Start()
+        {
+            this.FileCounterResult = this.GetFileCounterResults();
+
+            if(this.FilesCounted != null)
+            {
+                this.FilesCounted.Invoke(this, new EventArgs());
+            }
+
+            this.DoNextJob();
+        }
         
         public void Start(IEnumerable<JobSettings> jobs, bool preview)
         {
@@ -102,14 +114,7 @@ namespace FlagSync.Core
 
             this.QueueJobs(jobs, preview);
 
-            this.FileCounterResult = this.GetFileCounterResults();
-
-            if (this.FilesCounted != null)
-            {
-                this.FilesCounted.Invoke(this, new EventArgs());
-            }
-
-            this.DoNextJob();
+            ThreadPool.QueueUserWorkItem(new WaitCallback(callback => this.Start()));
         }
 
         private void QueueJobs(IEnumerable<JobSettings> jobs, bool preview)
