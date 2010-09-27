@@ -175,24 +175,32 @@ namespace FlagSync.Core
         {
             this.BackupDirectory(source, target, preview);
 
-            foreach (DirectoryInfo directory in source.GetDirectories())
+            try
             {
-                if (this.stopped)
+                foreach (DirectoryInfo directory in source.GetDirectories())
                 {
-                    return;
-                }
-
-                if (!Directory.Exists(Path.Combine(target.FullName, directory.Name)))
-                {
-                    this.OnNewDirectory(directory, target);
-
-                    if (!preview)
+                    if (this.stopped)
                     {
-                        Directory.CreateDirectory(Path.Combine(target.FullName, directory.Name));
+                        return;
                     }
-                }
 
-                this.BackupDirectories(directory, new DirectoryInfo(Path.Combine(target.FullName, directory.Name)), preview);
+                    if (!Directory.Exists(Path.Combine(target.FullName, directory.Name)))
+                    {
+                        this.OnNewDirectory(directory, target);
+
+                        if (!preview)
+                        {
+                            Directory.CreateDirectory(Path.Combine(target.FullName, directory.Name));
+                        }
+                    }
+
+                    this.BackupDirectories(directory, new DirectoryInfo(Path.Combine(target.FullName, directory.Name)), preview);
+                }
+            }
+
+            catch (System.UnauthorizedAccessException)
+            {
+                //TODO: Add log
             }
         }
 
@@ -206,52 +214,60 @@ namespace FlagSync.Core
         {
             this.CheckPause();
 
-            foreach (FileInfo fileA in source.GetFiles())
+            try
             {
-                if (this.stopped)
+                foreach (FileInfo fileA in source.GetFiles())
                 {
-                    return;
-                }
-
-                //Check if fileA isn't already in target directory
-                if (!File.Exists(Path.Combine(target.FullName, fileA.Name)))
-                {
-                    this.OnFoundNewFile(fileA, source, target);
-
-                    if (!preview)
+                    if (this.stopped)
                     {
-                        CopyFile(fileA, target);
+                        return;
                     }
-                }
 
-                if (target.Exists)
-                {
-                    foreach (FileInfo fileB in target.GetFiles())
+                    //Check if fileA isn't already in target directory
+                    if (!File.Exists(Path.Combine(target.FullName, fileA.Name)))
                     {
-                        if (this.stopped)
+                        this.OnFoundNewFile(fileA, source, target);
+
+                        if (!preview)
                         {
-                            return;
+                            CopyFile(fileA, target);
                         }
+                    }
 
-                        this.CheckPause();
-
-                        //Check on modified file
-                        if (fileA.Name.Equals(fileB.Name, StringComparison.OrdinalIgnoreCase))
+                    if (target.Exists)
+                    {
+                        foreach (FileInfo fileB in target.GetFiles())
                         {
-                            if (this.IsFileModified(fileA, fileB))
+                            if (this.stopped)
                             {
-                                this.OnFoundModifiedFile(fileA, source, target);
+                                return;
+                            }
 
-                                if (!preview)
+                            this.CheckPause();
+
+                            //Check on modified file
+                            if (fileA.Name.Equals(fileB.Name, StringComparison.OrdinalIgnoreCase))
+                            {
+                                if (this.IsFileModified(fileA, fileB))
                                 {
-                                    CopyFile(fileA, target);
+                                    this.OnFoundModifiedFile(fileA, source, target);
+
+                                    if (!preview)
+                                    {
+                                        CopyFile(fileA, target);
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                this.OnFileProceeded(fileA);
+                    this.OnFileProceeded(fileA);
+                }
+            }
+
+            catch (System.UnauthorizedAccessException)
+            {
+                //TODO: Add log
             }
         }
 

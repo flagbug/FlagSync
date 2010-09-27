@@ -46,80 +46,88 @@ namespace FlagSync.Core
             {
                 return;
             }
-            
-            foreach (FileInfo file in source.GetFiles())
+
+            try
             {
-                this.OnFileProceeded(file);
-
-                if (!File.Exists(Path.Combine(target.FullName, file.Name)))
+                foreach (FileInfo file in source.GetFiles())
                 {
-                    this.OnDeletedFile(file);
+                    this.OnFileProceeded(file);
 
-                    if (!preview)
+                    if (!File.Exists(Path.Combine(target.FullName, file.Name)))
                     {
-                        try
-                        {
-                            file.Delete();
-                        }
+                        this.OnDeletedFile(file);
 
-                        catch (IOException)
+                        if (!preview)
                         {
-                            
-                        }
+                            try
+                            {
+                                file.Delete();
+                            }
 
-                        catch (SecurityException)
-                        {
-                            
-                        }
+                            catch (IOException)
+                            {
 
-                        catch (UnauthorizedAccessException)
-                        {
-                            
+                            }
+
+                            catch (SecurityException)
+                            {
+
+                            }
+
+                            catch (UnauthorizedAccessException)
+                            {
+
+                            }
                         }
                     }
-                }     
+                }
+
+                foreach (DirectoryInfo directory in source.GetDirectories())
+                {
+                    if (!Directory.Exists(Path.Combine(target.FullName, directory.Name)))
+                    {
+                        FileInfo[] files = directory.GetFiles("*", SearchOption.AllDirectories);
+
+                        foreach (FileInfo file in files)
+                        {
+                            this.OnFileProceeded(file);
+                        }
+
+                        if (!preview)
+                        {
+                            try
+                            {
+                                directory.Delete(true);
+                                this.OnDeletedDirectory(directory);
+                            }
+
+                            catch (IOException)
+                            {
+                                this.OnDirectoryDeletionError(directory);
+                            }
+
+                            catch (System.Security.SecurityException)
+                            {
+                                this.OnDirectoryDeletionError(directory);
+                            }
+
+                            catch (UnauthorizedAccessException)
+                            {
+                                this.OnDirectoryDeletionError(directory);
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        this.CheckDeletions(directory, new DirectoryInfo(Path.Combine(target.FullName, directory.Name)), preview);
+                    }
+                }
             }
 
-            foreach (DirectoryInfo directory in source.GetDirectories())
+            catch (System.UnauthorizedAccessException)
             {
-                if (!Directory.Exists(Path.Combine(target.FullName, directory.Name)))
-                {
-                    FileInfo[] files = directory.GetFiles("*", SearchOption.AllDirectories);
-                  
-                    foreach (FileInfo file in files)
-                    {
-                        this.OnFileProceeded(file);
-                    }
-
-                    if(!preview)
-                    {
-                        try
-                        {
-                            directory.Delete(true);
-                            this.OnDeletedDirectory(directory);
-                        }
-
-                        catch (IOException)
-                        {
-                            this.OnDirectoryDeletionError(directory);
-                        }
-
-                        catch (System.Security.SecurityException)
-                        {
-                            this.OnDirectoryDeletionError(directory);
-                        }
-
-                        catch (UnauthorizedAccessException)
-                        {
-                            this.OnDirectoryDeletionError(directory);
-                        }
-                    }
-                }
-
-                else
-                {
-                    this.CheckDeletions(directory, new DirectoryInfo(Path.Combine(target.FullName, directory.Name)), preview);
-                }
+                //TODO: Add log
             }
         }
     }

@@ -25,8 +25,6 @@ namespace FlagSync.Core
         public event EventHandler<JobEventArgs> JobStarted;
         public event EventHandler<JobEventArgs> JobFinished;
         public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
-        
-        private Thread workerThread;
 
         private Job currentJob;
 

@@ -89,20 +89,28 @@ namespace FlagSync.Core
             int files = 0;
             long bytes = 0;
 
-            FileInfo[] rootFiles = root.GetFiles();
-
-            foreach(FileInfo file in rootFiles)
+            try
             {
-                files++;
-                bytes += file.Length;
+                FileInfo[] rootFiles = root.GetFiles();
+
+                foreach (FileInfo file in rootFiles)
+                {
+                    files++;
+                    bytes += file.Length;
+                }
+
+                foreach (DirectoryInfo directory in root.GetDirectories())
+                {
+                    FileCounterResults result = CountFiles(directory);
+
+                    files += result.CountedFiles;
+                    bytes += result.CountedBytes;
+                }
             }
 
-            foreach(DirectoryInfo directory in root.GetDirectories())
+            catch (System.UnauthorizedAccessException)
             {
-                FileCounterResults result = CountFiles(directory);
-
-                files += result.CountedFiles;
-                bytes += result.CountedBytes;
+                //TODO: Add log
             }
 
             return new FileCounterResults(files, bytes);
