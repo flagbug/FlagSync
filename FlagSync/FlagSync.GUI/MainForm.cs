@@ -234,7 +234,6 @@ namespace FlagSync.GUI
             this.AddLogMessage(new LogMessage(rm.GetString("FilesCounted") + ": " + this.jobWorker.FileCounterResult.CountedFiles, LogMessage.MessageType.StatusMessage));
             this.AddLogMessage(new LogMessage(rm.GetString("BytesCounted") + ": " + String.Format("{0:F2}", ((float)(jobWorker.FileCounterResult.CountedBytes * 1.0) / 1048576.0)) + " MB", LogMessage.MessageType.StatusMessage));
 
-            this.progressBar.Style = ProgressBarStyle.Blocks;
             this.progressBar.Maximum = (int)(jobWorker.FileCounterResult.CountedBytes / 1024);
         }
 
@@ -340,7 +339,6 @@ namespace FlagSync.GUI
 
             this.AddLogMessage(new LogMessage(rm.GetString("Starting") + "...", LogMessage.MessageType.StatusMessage));
             this.AddLogMessage(new LogMessage(rm.GetString("CountingFiles") + "...", LogMessage.MessageType.StatusMessage));
-            this.progressBar.Style = ProgressBarStyle.Marquee;
 
             this.Update();
 
