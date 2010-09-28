@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("FlagSync")]
 [assembly: AssemblyDescription("A simple and portable synchronization tool for two folders.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Dennis Daume")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FlagSync")]
-[assembly: AssemblyCopyright("Copyright © Dennis Daume")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

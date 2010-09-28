@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("FlagSync.Core")]
 [assembly: AssemblyDescription("Synchronization & Backup Core")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Flagbug")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FlagSync.Core")]
-[assembly: AssemblyCopyright("Copyright © Dennis Daume")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
