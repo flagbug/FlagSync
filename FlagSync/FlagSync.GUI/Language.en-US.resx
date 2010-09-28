@@ -187,7 +187,10 @@
     <value>Pause</value>
   </data>
   <data name="Paused" xml:space="preserve">
-    <value>Paused</value>
+    <value>Pausing</value>
+  </data>
+  <data name="PreviewInfo" xml:space="preserve">
+    <value>(no files will be modified, created or deleted)</value>
   </data>
   <data name="Resume" xml:space="preserve">
     <value>Resume</value>

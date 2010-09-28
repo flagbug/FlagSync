@@ -337,7 +337,14 @@ namespace FlagSync.GUI
         {
             this.InitSync();
 
-            this.AddLogMessage(new LogMessage(rm.GetString("Starting") + "...", LogMessage.MessageType.StatusMessage));
+            string startLog = rm.GetString("Starting") + "...";
+
+            if(preview)
+            {
+                startLog += " " + rm.GetString("PreviewInfo");
+            }
+
+            this.AddLogMessage(new LogMessage(startLog, LogMessage.MessageType.StatusMessage));
             this.AddLogMessage(new LogMessage(rm.GetString("CountingFiles") + "...", LogMessage.MessageType.StatusMessage));
 
             this.Update();
@@ -566,7 +573,7 @@ namespace FlagSync.GUI
             this.jobWorker.Stop();
       
             Application.DoEvents();
-
+            
             base.OnClosing(e);
         }
     }
