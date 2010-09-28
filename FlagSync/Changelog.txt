@@ -1,43 +1,53 @@
 ------------------------------ v1.3.2 ------------------------------
 
-* Improved progress-bar 
-  (now counts size of files, not number of all files)
-* Removed 64-bit version of FlagSync
-* Elapsed time counter now stops when a job gets paused
-* Window now maximizes at startup
+[ADD] Added application icon
+
+[ENH] Many UI improvements
+[ENH] Improved error handling
+
+[BUG] Fixed threading issue
+
+------------------------------ v1.3.2 ------------------------------
+
+[CHG] Removed 64-bit version of FlagSync
+[CHG] Window now maximizes at startup
+
+[ENH]Improved progress-bar (now counts size of files, not number of all files)
+[ENH] Elapsed time counter now stops when a job gets paused
 
 ------------------------------ v1.3.1 ------------------------------
 
-+ Added elapsed time
-+ Added error log, if an invalid settings file gets read
+[ADD] Added elapsed time
+[ADD] Added error log, if an invalid settings file gets read
 
-* Improved log
+[ENH] Improved log
 
 ------------------------------ v1.3.0 ------------------------------
 
-+ Program now only requires .NET Framework 2.0
+[CHG] Program now only requires .NET Framework 2.0
+[CHG] Limited log to 60,000 characters
 
-* Improved user interface
-* Improved stop function
-* Limited log to 60,000 characters
+[ENH] Improved user interface
+[ENH] Improved stop function
 
 ------------------------------ v1.2.1 ------------------------------
 
-+ Added tooltips
+[ADD] Added tooltips
 
-* Improved translations
-* New jobs are now at default checked
-* When loading the settings, they are now at default checked
+[CHG] New jobs are now at default checked
+[CHG] When loading the settings, they are now at default checked
+
+[ENH] Improved translations
 
 ------------------------------ v1.2.0 ------------------------------
 
-+ Added German translation
+[ADD] Added German translation
 
 ------------------------------ v1.1.0 ------------------------------
 
-+ Added job saving and loading
+[ADD] Added job saving and loading
 
 ------------------------------ v1.0.0 ------------------------------
 
-# Release of public version
-# Requires .NET Framework 3.5
+[RELEASE] Release of public version
+          Requires .NET Framework 3.5
