@@ -28,6 +28,11 @@ namespace FlagSync.GUI
         private TimeSpan elapsedTime = new TimeSpan();
 
         /// <summary>
+        /// The path where the application data gets stored
+        /// </summary>
+        private readonly string appDataPath;
+
+        /// <summary>
         /// An enumeration of the checked job settings
         /// </summary>
         private IEnumerable<JobSettings> CheckedJobSettings
@@ -99,6 +104,22 @@ namespace FlagSync.GUI
             this.AddNewJob();
 
             this.WindowState = FormWindowState.Maximized;
+
+            this.appDataPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FlagSync");
+            this.CreateAppDataFolder();
+        }
+
+        private void CreateAppDataFolder()
+        {
+            try
+            {
+                System.IO.Directory.CreateDirectory(this.appDataPath);
+            }
+
+            catch(Exception e)
+            {
+                this.AddLogMessage(new LogMessage(e.Message, LogMessage.MessageType.ErrorMessage));
+            }
         }
 
         void jobWorker_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
@@ -528,6 +549,7 @@ namespace FlagSync.GUI
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.jobSettingsOpenFileDialog.InitialDirectory = this.appDataPath;
             this.jobSettingsOpenFileDialog.ShowDialog();
 
             if (!String.IsNullOrEmpty(this.jobSettingsOpenFileDialog.FileName))
@@ -559,7 +581,8 @@ namespace FlagSync.GUI
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.jobSettingsSaveFileDialog.ShowDialog();
+            this.jobSettingsSaveFileDialog.InitialDirectory = this.appDataPath;
+            this.jobSettingsSaveFileDialog.ShowDialog(this);
             JobSettingSerializer.Save(this.JobSettings, this.jobSettingsSaveFileDialog.FileName);
         }
 
