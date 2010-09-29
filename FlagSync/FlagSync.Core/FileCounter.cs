@@ -110,7 +110,7 @@ namespace FlagSync.Core
 
             catch (System.UnauthorizedAccessException)
             {
-                //TODO: Add log
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + root.FullName);
             }
 
             return new FileCounterResults(files, bytes);

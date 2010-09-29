@@ -149,7 +149,8 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="file">File to copy</param>
         /// <param name="directory">Target directory</param>
-        protected void CopyFile(FileInfo file, DirectoryInfo directory)
+        /// <returns>True, if file copy has succeed, otherwise false</returns>
+        protected bool CopyFile(FileInfo file, DirectoryInfo directory)
         {
             this.CheckPause();
 
@@ -157,11 +158,17 @@ namespace FlagSync.Core
             {
                 file.CopyTo(Path.Combine(directory.FullName, file.Name), true);
                 this.writtenBytes += file.Length;
+                return true;
             }
 
-            catch (Exception)
+            catch (Exception e)
             {
+                Logger.Instance.LogError("Exception at file copy: " + file.FullName);
+                Logger.Instance.LogError(e.Message);
+
                 this.OnFileCopyError(file, directory);
+
+                return false;
             }
         }
 
@@ -184,23 +191,38 @@ namespace FlagSync.Core
                         return;
                     }
 
-                    if (!Directory.Exists(Path.Combine(target.FullName, directory.Name)))
-                    {
-                        this.OnNewDirectory(directory, target);
+                    string targetDirectory = Path.Combine(target.FullName, directory.Name);
 
-                        if (!preview)
+                    if (!Directory.Exists(targetDirectory))
+                    {
+                        if(preview)
                         {
-                            Directory.CreateDirectory(Path.Combine(target.FullName, directory.Name));
+                            this.OnNewDirectory(directory, target);
+                        }
+
+                        else
+                        {
+                            try
+                            {
+                                Directory.CreateDirectory(targetDirectory);
+                                this.OnNewDirectory(directory, target);
+                            }
+
+                            catch(Exception e)
+                            {
+                                Logger.Instance.LogError("Exception at directory creation: " + targetDirectory);
+                                Logger.Instance.LogError(e.Message);
+                            }
                         }
                     }
 
-                    this.BackupDirectories(directory, new DirectoryInfo(Path.Combine(target.FullName, directory.Name)), preview);
+                    this.BackupDirectories(directory, new DirectoryInfo(targetDirectory), preview);
                 }
             }
 
             catch (System.UnauthorizedAccessException)
             {
-                //TODO: Add log
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
             }
         }
 
@@ -224,11 +246,14 @@ namespace FlagSync.Core
                     }
 
                     //Check if fileA isn't already in target directory
-                    if (!File.Exists(Path.Combine(target.FullName, fileA.Name)))
-                    {
-                        this.OnFoundNewFile(fileA, source, target);
+                    if(!File.Exists(Path.Combine(target.FullName, fileA.Name)))
+                    {                        
+                        if(preview)
+                        {
+                            this.OnFoundNewFile(fileA, source, target);
+                        }
 
-                        if (!preview)
+                        else
                         {
                             CopyFile(fileA, target);
                         }
@@ -250,9 +275,12 @@ namespace FlagSync.Core
                             {
                                 if (this.IsFileModified(fileA, fileB))
                                 {
-                                    this.OnFoundModifiedFile(fileA, source, target);
+                                    if(preview)
+                                    {
+                                        this.OnFoundModifiedFile(fileA, source, target);
+                                    }
 
-                                    if (!preview)
+                                    else
                                     {
                                         CopyFile(fileA, target);
                                     }
@@ -267,7 +295,7 @@ namespace FlagSync.Core
 
             catch (System.UnauthorizedAccessException)
             {
-                //TODO: Add log
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
             }
         }
 

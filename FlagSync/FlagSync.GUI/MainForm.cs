@@ -469,6 +469,9 @@ namespace FlagSync.GUI
             this.startButton.Enabled = false;
             this.logTextBox.Text = "";
             this.elapsedTime = new TimeSpan();
+
+            Logger.Instance = new Logger(System.IO.Path.Combine(this.appDataPath, "log.txt"));
+
         }
 
         private void jobSettingsNameTextBox_TextChanged(object sender, EventArgs e)

@@ -12,7 +12,7 @@
 [CHG] Removed 64-bit version of FlagSync
 [CHG] Window now maximizes at startup
 
-[ENH]Improved progress-bar (now counts size of files, not number of all files)
+[ENH] Improved progress-bar (now counts size of files, not number of all files)
 [ENH] Elapsed time counter now stops when a job gets paused
 
 ------------------------------ v1.3.1 ------------------------------

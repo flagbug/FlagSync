@@ -55,9 +55,12 @@ namespace FlagSync.Core
 
                     if (!File.Exists(Path.Combine(target.FullName, file.Name)))
                     {
-                        this.OnDeletedFile(file);
+                        if(preview)
+                        {
+                            this.OnDeletedFile(file);
+                        }
 
-                        if (!preview)
+                        else
                         {
                             try
                             {
@@ -66,17 +69,20 @@ namespace FlagSync.Core
 
                             catch (IOException)
                             {
-
+                                Logger.Instance.LogError("IOException at file deletion: " + file.FullName);
+                                this.OnFileDeletionError(file);
                             }
 
                             catch (SecurityException)
                             {
-
+                                Logger.Instance.LogError("SecurityException at file deletion: " + file.FullName);
+                                this.OnFileDeletionError(file);
                             }
 
                             catch (UnauthorizedAccessException)
                             {
-
+                                Logger.Instance.LogError("UnauthorizedAccessException at file deletion: " + file.FullName);
+                                this.OnFileDeletionError(file);
                             }
                         }
                     }
@@ -93,7 +99,12 @@ namespace FlagSync.Core
                             this.OnFileProceeded(file);
                         }
 
-                        if (!preview)
+                        if(preview)
+                        {
+                            this.OnDeletedDirectory(directory);
+                        }
+
+                        else
                         {
                             try
                             {
@@ -103,16 +114,19 @@ namespace FlagSync.Core
 
                             catch (IOException)
                             {
+                                Logger.Instance.LogError("IOException at directory deletion: " + directory.FullName);
                                 this.OnDirectoryDeletionError(directory);
                             }
 
                             catch (System.Security.SecurityException)
                             {
+                                Logger.Instance.LogError("SecurityException at directory deletion: " + directory.FullName);
                                 this.OnDirectoryDeletionError(directory);
                             }
 
                             catch (UnauthorizedAccessException)
                             {
+                                Logger.Instance.LogError("UnauthorizedAccessException at directory deletion: " + directory.FullName);
                                 this.OnDirectoryDeletionError(directory);
                             }
                         }
@@ -127,7 +141,7 @@ namespace FlagSync.Core
 
             catch (System.UnauthorizedAccessException)
             {
-                //TODO: Add log
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
             }
         }
     }
