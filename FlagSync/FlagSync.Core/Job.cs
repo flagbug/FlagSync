@@ -322,6 +322,8 @@ namespace FlagSync.Core
             {
                 this.FoundNewFile.Invoke(this, new FileCopyEventArgs(file, sourceDirectory, targetDirectory));
             }
+
+            Logger.Instance.LogSucceed("Found new file: " + file.Name + " in source: " + sourceDirectory.FullName + ", copied to target: " + targetDirectory.FullName);
         }
 
         /// <summary>
@@ -336,6 +338,9 @@ namespace FlagSync.Core
             {
                 this.FoundModifiedFile.Invoke(this, new FileCopyEventArgs(file, sourceDirectory, targetDirectory));
             }
+
+            Logger.Instance.LogSucceed("Found modified file: " + file.Name + " in source: " + sourceDirectory.FullName + ", copied to target: " + targetDirectory.FullName);
+
         }
 
         /// <summary>
@@ -349,6 +354,9 @@ namespace FlagSync.Core
             {
                 this.DirectoryCreated.Invoke(this, new DirectoryCreationEventArgs(directory, targetDirectory));
             }
+
+            Logger.Instance.LogSucceed("Found new directory: " + directory.Name + " in source: " + directory.Parent.FullName + ", created in target: " + targetDirectory.FullName);
+
         }
 
         /// <summary>
@@ -361,6 +369,9 @@ namespace FlagSync.Core
             {
                 this.DirectoryDeleted.Invoke(this, new DirectoryDeletionEventArgs(directory));
             }
+
+            Logger.Instance.LogSucceed("Deleted directory: " + directory.FullName);
+
         }
 
         /// <summary>
@@ -386,6 +397,9 @@ namespace FlagSync.Core
             {
                 this.FileDeleted.Invoke(this, new FileDeletionEventArgs(file));
             }
+
+            Logger.Instance.LogSucceed("Deleted file: " + file.FullName);
+
         }
 
         /// <summary>

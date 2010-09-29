@@ -96,12 +96,16 @@ namespace FlagSync.Core
 
         private void Start()
         {
+            Logger.Instance.LogStatusMessage("Start counting files");
+
             this.FileCounterResult = this.GetFileCounterResults();
 
             if(this.FilesCounted != null)
             {
                 this.FilesCounted.Invoke(this, new EventArgs());
             }
+
+            Logger.Instance.LogStatusMessage("Finished counting files");
 
             this.DoNextJob();
         }
@@ -249,6 +253,8 @@ namespace FlagSync.Core
             {
                 this.Finished.Invoke(this, new EventArgs());
             }
+
+            Logger.Instance.LogStatusMessage("Finished work");
         }
 
         private void OnJobStarted()
@@ -257,6 +263,8 @@ namespace FlagSync.Core
             {
                 this.JobStarted.Invoke(this, new JobEventArgs(this.currentJob.Settings));
             }
+
+            Logger.Instance.LogStatusMessage("Started job: " + this.currentJob.Settings.Name);
         }
 
         private void OnJobFinished(JobSettings job)
@@ -265,6 +273,8 @@ namespace FlagSync.Core
             {
                 this.JobFinished.Invoke(this, new JobEventArgs(job));
             }
+
+            Logger.Instance.LogStatusMessage("Finished job: " + job.Name);
         }
     }
 }
