@@ -16,6 +16,8 @@ namespace FlagSync.Core
         public class FileCounterResults
         {
             private int countedFiles;
+            private long countedBytes;
+
             /// <summary>
             /// Gets the counted files
             /// </summary>
@@ -27,7 +29,6 @@ namespace FlagSync.Core
                 }
             }
 
-            private long countedBytes;
             /// <summary>
             /// Gets the counted bytes
             /// </summary>
@@ -65,14 +66,14 @@ namespace FlagSync.Core
         public FileCounterResults CountJobFiles(JobSettings settings)
         {
             this.settings = settings;
-            this.CurrentJobFiles();
+            this.CountJobFiles();
             return this.result;
         }
 
         /// <summary>
         /// Analyses directory A and directory B and adds the results
         /// </summary>
-        private void CurrentJobFiles()
+        private void CountJobFiles()
         {
             this.result = new FileCounterResults();
             this.result += this.CountFiles(new DirectoryInfo(this.settings.DirectoryA));
@@ -110,7 +111,7 @@ namespace FlagSync.Core
 
             catch (System.UnauthorizedAccessException)
             {
-                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + root.FullName);
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + root.FullName + " while counting files");
             }
 
             return new FileCounterResults(files, bytes);
