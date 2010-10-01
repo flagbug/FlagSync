@@ -150,7 +150,7 @@ namespace FlagSync.Core
         /// <param name="file">File to copy</param>
         /// <param name="directory">Target directory</param>
         /// <returns>True, if file copy has succeed, otherwise false</returns>
-        protected bool CopyFile(FileInfo file, DirectoryInfo directory)
+        protected void CopyFile(FileInfo file, DirectoryInfo directory)
         {
             this.CheckPause();
 
@@ -158,7 +158,6 @@ namespace FlagSync.Core
             {
                 file.CopyTo(Path.Combine(directory.FullName, file.Name), true);
                 this.writtenBytes += file.Length;
-                return true;
             }
 
             catch (Exception e)
@@ -168,7 +167,7 @@ namespace FlagSync.Core
 
                 this.OnFileCopyError(file, directory);
 
-                return false;
+                throw;
             }
         }
 
@@ -255,7 +254,17 @@ namespace FlagSync.Core
 
                         else
                         {
-                            CopyFile(fileA, target);
+                            try
+                            {
+                                CopyFile(fileA, target);
+                                this.OnFoundNewFile(fileA, source, target);
+                            }
+
+                            catch (Exception)
+                            {
+
+                            }
+
                         }
                     }
 
@@ -282,7 +291,16 @@ namespace FlagSync.Core
 
                                     else
                                     {
-                                        CopyFile(fileA, target);
+                                        try
+                                        {
+                                            CopyFile(fileA, target);
+                                            this.OnFoundModifiedFile(fileA, source, target);
+                                        }
+
+                                        catch (Exception)
+                                        {
+
+                                        }
                                     }
                                 }
                             }
