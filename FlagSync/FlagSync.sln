@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync.Core", "FlagSync.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync.GUI", "FlagSync.GUI\FlagSync.GUI.csproj", "{F180885D-ACDF-41DD-AB72-21C67A31FE91}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FlagSync.Setup", "FlagSync.Setup\FlagSync.Setup.vdproj", "{C16B1D43-6BE6-476D-9A51-0DDF57A54354}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,8 @@ Global
 		{F180885D-ACDF-41DD-AB72-21C67A31FE91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F180885D-ACDF-41DD-AB72-21C67A31FE91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F180885D-ACDF-41DD-AB72-21C67A31FE91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C16B1D43-6BE6-476D-9A51-0DDF57A54354}.Debug|Any CPU.ActiveCfg = Debug
+		{C16B1D43-6BE6-476D-9A51-0DDF57A54354}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
