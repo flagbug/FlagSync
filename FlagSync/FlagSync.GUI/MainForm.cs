@@ -607,6 +607,11 @@ namespace FlagSync.GUI
             JobSettingSerializer.Save(this.JobSettings, this.jobSettingsSaveFileDialog.FileName);
         }
 
+        /// <summary>
+        /// Changes the language of the GUI
+        /// </summary>
+        /// <param name="name">Name of the culture</param>
+        /// <param name="restart">True, if the application should be restarted, otherwise false</param>
         private void ChangeLanguage(string name, bool restart)
         {
             Settings.Default.Language = name;
@@ -638,6 +643,10 @@ namespace FlagSync.GUI
             this.ChangeLanguage("de", true);
         }
 
+        /// <summary>
+        /// Cahnges the checked state of the language toolstrip item
+        /// </summary>
+        /// <param name="language">Name of the culture</param>
         private void ChangeLanguageToolStrip(string language)
         {
             if (language == "de")
