@@ -471,6 +471,7 @@
             this.jobSettingsCheckedListBox.Name = "jobSettingsCheckedListBox";
             this.toolTip.SetToolTip(this.jobSettingsCheckedListBox, resources.GetString("jobSettingsCheckedListBox.ToolTip"));
             this.jobSettingsCheckedListBox.SelectedIndexChanged += new System.EventHandler(this.jobSettingsCheckedListBox_SelectedIndexChanged);
+            this.jobSettingsCheckedListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.jobSettingsCheckedListBox_KeyDown);
             // 
             // newJobButton
             // 

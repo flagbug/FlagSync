@@ -79,12 +79,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="LanguageBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LanguageBox.Designer.cs">
-      <DependentUpon>LanguageBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="LogMessage.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -110,12 +104,6 @@
     <EmbeddedResource Include="Language.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.en.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LanguageBox.de-DE.resx">
-      <DependentUpon>LanguageBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LanguageBox.resx">
-      <DependentUpon>LanguageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.de.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

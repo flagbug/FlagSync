@@ -548,14 +548,7 @@ namespace FlagSync.GUI
 
         private void deleteJobButton_Click(object sender, EventArgs e)
         {
-            this.jobSettingsCheckedListBox.Items.Remove(this.jobSettingsCheckedListBox.SelectedItem);
-            
-            if (this.jobSettingsCheckedListBox.Items.Count == 0)
-            {
-                this.AddNewJob();
-            }
-
-            this.jobSettingsCheckedListBox.SelectedIndex = this.jobSettingsCheckedListBox.Items.Count - 1;
+            DeleteSelectedJob();
         }
 
         private void syncRadioButton_Click(object sender, EventArgs e)
@@ -657,6 +650,29 @@ namespace FlagSync.GUI
             else if (language == "en")
             {
                 this.englishToolStripMenuItem.CheckState = CheckState.Checked;
+            }
+        }
+
+        /// <summary>
+        /// Deletes the currently selected job
+        /// </summary>
+        private void DeleteSelectedJob()
+        {
+            this.jobSettingsCheckedListBox.Items.Remove(this.jobSettingsCheckedListBox.SelectedItem);
+
+            if (this.jobSettingsCheckedListBox.Items.Count == 0)
+            {
+                this.AddNewJob();
+            }
+
+            this.jobSettingsCheckedListBox.SelectedIndex = this.jobSettingsCheckedListBox.Items.Count - 1;
+        }
+
+        private void jobSettingsCheckedListBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                this.DeleteSelectedJob();
             }
         }
     }

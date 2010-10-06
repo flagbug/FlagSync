@@ -127,9 +127,6 @@
   <data name="&gt;&gt;currentDirectoryBLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="settingsTabPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
   <data name="currentDirectoryALabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 35</value>
   </data>
@@ -147,6 +144,12 @@
   <data name="jobSettingsNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="backupRadioButton.ToolTip" xml:space="preserve">
+    <value>Backup mode copies new an modified files from folder A to folder B and deletes missing files in folder B.</value>
+  </data>
+  <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 20</value>
+  </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -155,6 +158,12 @@
   </data>
   <data name="&gt;&gt;previewButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="jobSettingsDirectoryATextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;pauseButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -165,8 +174,8 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="&gt;&gt;controlButtonsTableLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="stopButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>357, 3</value>
   </data>
   <data name="currentJobDirectoryBDescriptionLabel.Text" xml:space="preserve">
     <value>Directory B:</value>
@@ -198,8 +207,8 @@
   <data name="deleteJobButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 30</value>
   </data>
-  <data name="jobSettingsOpenFileDialog.Filter" xml:space="preserve">
-    <value>FlagSync-Files|*.xml</value>
+  <data name="&gt;&gt;settingsTabPage.Name" xml:space="preserve">
+    <value>settingsTabPage</value>
   </data>
   <data name="currentDirectoryBLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -222,6 +231,9 @@
   <data name="&gt;&gt;currentJobNameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="settingsPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <data name="startButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 24</value>
   </data>
@@ -237,9 +249,6 @@
   <data name="overviewTabPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="browseDirectoryAButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 48</value>
-  </data>
   <data name="settingsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>984, 668</value>
   </data>
@@ -248,6 +257,9 @@
   </data>
   <data name="&gt;&gt;pauseButton.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;currentJobSyncModeDescriptionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="currentJobSyncModeLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 65</value>
@@ -354,8 +366,11 @@
   <data name="currentJobNameDescriptionLabel.Text" xml:space="preserve">
     <value>Name:</value>
   </data>
-  <data name="&gt;&gt;germanToolStripMenuItem.Name" xml:space="preserve">
-    <value>germanToolStripMenuItem</value>
+  <data name="browseDirectoryAButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="controlButtonsTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>472, 30</value>
   </data>
   <data name="stopButton.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -363,8 +378,8 @@
   <data name="&gt;&gt;previewButton.Parent" xml:space="preserve">
     <value>controlButtonsTableLayoutPanel</value>
   </data>
-  <data name="backupRadioButton.ToolTip" xml:space="preserve">
-    <value>Backup mode copies new an modified files from folder A to folder B and deletes missing files in folder B.</value>
+  <data name="&gt;&gt;previewButton.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="splitContainer.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -414,9 +429,6 @@
   <data name="browseDirectoryBButton.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
     <value>splitContainer</value>
   </data>
@@ -441,11 +453,14 @@
   <data name="previewButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="logTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="currentJobSyncModeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;controlButtonsTableLayoutPanel.Parent" xml:space="preserve">
+    <value>controlsGroupBox</value>
   </data>
   <data name="syncRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -474,6 +489,12 @@
   <data name="&gt;&gt;currentJobDirectoryBDescriptionLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="controlButtonsTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="currentJobSyncModeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -482,9 +503,6 @@
   </data>
   <data name="currentJobSyncModeDescriptionLabel.Text" xml:space="preserve">
     <value>Mode:</value>
-  </data>
-  <data name="&gt;&gt;controlButtonsTableLayoutPanel.Parent" xml:space="preserve">
-    <value>controlsGroupBox</value>
   </data>
   <data name="currentJobNameLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>370, 16</value>
@@ -534,9 +552,6 @@
   <data name="&gt;&gt;syncRadioButton.Name" xml:space="preserve">
     <value>syncRadioButton</value>
   </data>
-  <data name="&gt;&gt;deleteJobButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;settingsTabPage.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -576,6 +591,9 @@
   <data name="&gt;&gt;currentJobDirectoryDescriptionALabel.Parent" xml:space="preserve">
     <value>currentJobOverviewGroupBox</value>
   </data>
+  <data name="pauseButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="currentJobOverviewGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
@@ -593,9 +611,6 @@
   </data>
   <data name="currentJobDirectoryBDescriptionLabel.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="&gt;&gt;currentDirectoryALabel.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="splitContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -642,8 +657,8 @@
   <data name="controlsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="mainMenuStrip.ToolTip" xml:space="preserve">
-    <value />
+  <data name="jobSettingsNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 24</value>
   </data>
   <data name="deleteJobButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 630</value>
@@ -675,20 +690,14 @@
   <data name="&gt;&gt;jobSettingsDirectoryBTextBox.Parent" xml:space="preserve">
     <value>directorySettingsGroupBox</value>
   </data>
-  <data name="&gt;&gt;settingsTabPage.Name" xml:space="preserve">
-    <value>settingsTabPage</value>
-  </data>
-  <data name="browseDirectoryAButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="currentJobOverviewGroupBox.Text" xml:space="preserve">
+    <value>Current Job Overview</value>
   </data>
   <data name="&gt;&gt;saveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="currentDirectoryALabel.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="&gt;&gt;jobSettingsSaveFileDialog.Name" xml:space="preserve">
-    <value>jobSettingsSaveFileDialog</value>
   </data>
   <data name="&gt;&gt;jobSettingsNameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -710,6 +719,9 @@
   </data>
   <data name="&gt;&gt;stopButton.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="loadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
   </data>
   <data name="&gt;&gt;overviewTabPage.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -741,6 +753,9 @@
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
     <value>helpToolStripMenuItem</value>
   </data>
+  <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>470, 23</value>
+  </data>
   <data name="&gt;&gt;settingsPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -758,9 +773,6 @@
   </data>
   <data name="&gt;&gt;jobSettingsCheckedListBox.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="controlsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 90</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1300,20 +1312,14 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="&gt;&gt;settingsPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;currentDirectoryALabel.Name" xml:space="preserve">
     <value>currentDirectoryALabel</value>
   </data>
   <data name="settingsPanel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;previewButton.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;loadToolStripMenuItem.Name" xml:space="preserve">
-    <value>loadToolStripMenuItem</value>
+  <data name="currentJobNameDescriptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;browseDirectoryBButton.Name" xml:space="preserve">
     <value>browseDirectoryBButton</value>
@@ -1339,14 +1345,14 @@
   <data name="&gt;&gt;textBoxPanel.Name" xml:space="preserve">
     <value>textBoxPanel</value>
   </data>
-  <data name="currentJobNameLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="controlButtonsTableLayoutPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="splitContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="syncRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel1.Parent" xml:space="preserve">
     <value>splitContainer</value>
@@ -1423,6 +1429,9 @@
   <data name="&gt;&gt;jobSettingsOpenFileDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
   <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -1432,8 +1441,8 @@
   <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="currentJobOverviewGroupBox.Text" xml:space="preserve">
-    <value>Current Job Overview</value>
+  <data name="jobSettingsOpenFileDialog.Filter" xml:space="preserve">
+    <value>FlagSync-Files|*.xml</value>
   </data>
   <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
     <value>tabControl</value>
@@ -1447,6 +1456,9 @@
   <data name="&gt;&gt;syncRadioButton.Parent" xml:space="preserve">
     <value>directorySettingsGroupBox</value>
   </data>
+  <data name="&gt;&gt;backupRadioButton.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
+  </data>
   <data name="&gt;&gt;browseDirectoryAButton.Name" xml:space="preserve">
     <value>browseDirectoryAButton</value>
   </data>
@@ -1455,6 +1467,9 @@
   </data>
   <data name="currentJobDirectoryDescriptionALabel.Text" xml:space="preserve">
     <value>Directory A:</value>
+  </data>
+  <data name="startButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>directorySettingsGroupBox</value>
@@ -1479,9 +1494,6 @@
   </data>
   <data name="currentDirectoryBLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;browseDirectoryBButton.Parent" xml:space="preserve">
-    <value>directorySettingsGroupBox</value>
   </data>
   <data name="programToolStripMenuItem.Text" xml:space="preserve">
     <value>Program</value>
@@ -1515,6 +1527,9 @@
   </data>
   <data name="controlButtonsTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 50</value>
+  </data>
+  <data name="jobSettingsNameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
   <data name="&gt;&gt;splitContainer.Parent" xml:space="preserve">
     <value>overviewTabPage</value>
@@ -1567,14 +1582,17 @@
   <data name="&gt;&gt;splitContainer.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="mainMenuStrip.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
   <data name="&gt;&gt;syncRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="saveToolStripMenuItem.Text" xml:space="preserve">
     <value>Save settings</value>
   </data>
-  <data name="logTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;currentJobDirectoryBDescriptionLabel.Parent" xml:space="preserve">
     <value>currentJobOverviewGroupBox</value>
@@ -1597,13 +1615,7 @@
   <data name="stopButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;englishToolStripMenuItem.Name" xml:space="preserve">
-    <value>englishToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;startButton.Name" xml:space="preserve">
-    <value>startButton</value>
-  </data>
-  <data name="&gt;&gt;textBoxPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;settingsPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;deleteJobButton.Parent" xml:space="preserve">
@@ -1612,14 +1624,11 @@
   <data name="newJobButton.Text" xml:space="preserve">
     <value>New Job</value>
   </data>
-  <data name="&gt;&gt;currentJobSyncModeDescriptionLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="currentJobNameLabel.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;currentJobSyncModeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="settingsTabPage.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;backupRadioButton.Name" xml:space="preserve">
     <value>backupRadioButton</value>
@@ -1629,9 +1638,6 @@
   </data>
   <data name="&gt;&gt;programToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="deleteJobButton.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;splitContainer.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1660,14 +1666,11 @@
   <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>984, 110</value>
   </data>
-  <data name="&gt;&gt;jobSettingsDirectoryATextBox.Name" xml:space="preserve">
-    <value>jobSettingsDirectoryATextBox</value>
-  </data>
   <data name="jobSettingsDirectoryATextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 50</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="settingsTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
   <data name="&gt;&gt;languageToolStripMenuItem.Name" xml:space="preserve">
     <value>languageToolStripMenuItem</value>
@@ -1675,8 +1678,8 @@
   <data name="pauseButton.Text" xml:space="preserve">
     <value>Pause</value>
   </data>
-  <data name="syncRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="browseDirectoryAButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 48</value>
   </data>
   <data name="newJobButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1702,8 +1705,8 @@
   <data name="loadToolStripMenuItem.Text" xml:space="preserve">
     <value>Load settings</value>
   </data>
-  <data name="loadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+  <data name="&gt;&gt;loadToolStripMenuItem.Name" xml:space="preserve">
+    <value>loadToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;mainMenuStrip.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1720,8 +1723,8 @@
   <data name="&gt;&gt;newJobButton.Parent" xml:space="preserve">
     <value>settingsPanel</value>
   </data>
-  <data name="mainMenuStrip.Text" xml:space="preserve">
-    <value>menuStrip1</value>
+  <data name="mainMenuStrip.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="startButton.Text" xml:space="preserve">
     <value>Start</value>
@@ -1744,17 +1747,20 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1008, 730</value>
   </data>
-  <data name="&gt;&gt;backupRadioButton.Parent" xml:space="preserve">
-    <value>directorySettingsGroupBox</value>
+  <data name="&gt;&gt;englishToolStripMenuItem.Name" xml:space="preserve">
+    <value>englishToolStripMenuItem</value>
   </data>
-  <data name="jobSettingsNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="&gt;&gt;deleteJobButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="jobSettingsDirectoryBTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 79</value>
   </data>
   <data name="currentJobNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;germanToolStripMenuItem.Name" xml:space="preserve">
+    <value>germanToolStripMenuItem</value>
   </data>
   <data name="currentDirectoryALabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1768,17 +1774,14 @@
   <data name="settingsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="currentJobNameDescriptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="jobSettingsCheckedListBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="deleteJobButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="stopButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 3</value>
+  <data name="&gt;&gt;controlButtonsTableLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="startButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1798,17 +1801,14 @@
   <data name="newJobButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 600</value>
   </data>
-  <data name="currentDirectoryALabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="jobSettingsNameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 24</value>
+  <data name="&gt;&gt;jobSettingsSaveFileDialog.Name" xml:space="preserve">
+    <value>jobSettingsSaveFileDialog</value>
   </data>
   <data name="directorySettingsGroupBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="startButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="controlsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>490, 90</value>
   </data>
   <data name="currentJobSyncModeDescriptionLabel.ToolTip" xml:space="preserve">
     <value />
@@ -1819,8 +1819,8 @@
   <data name="&gt;&gt;progressBar.Parent" xml:space="preserve">
     <value>controlsGroupBox</value>
   </data>
-  <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 20</value>
+  <data name="deleteJobButton.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;splitContainer.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1831,14 +1831,14 @@
   <data name="&gt;&gt;textBoxPanel.Parent" xml:space="preserve">
     <value>overviewTabPage</value>
   </data>
-  <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>470, 23</value>
+  <data name="currentDirectoryALabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="jobSettingsDirectoryATextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;startButton.Name" xml:space="preserve">
+    <value>startButton</value>
   </data>
-  <data name="settingsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;jobSettingsDirectoryATextBox.Name" xml:space="preserve">
+    <value>jobSettingsDirectoryATextBox</value>
   </data>
   <data name="&gt;&gt;mainMenuStrip.Name" xml:space="preserve">
     <value>mainMenuStrip</value>
@@ -1855,8 +1855,8 @@
   <data name="&gt;&gt;programToolStripMenuItem.Name" xml:space="preserve">
     <value>programToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;currentJobSyncModeDescriptionLabel.Parent" xml:space="preserve">
-    <value>currentJobOverviewGroupBox</value>
+  <data name="&gt;&gt;currentJobDirectoryDescriptionALabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pauseButton.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1873,17 +1873,17 @@
   <data name="currentJobSyncModeDescriptionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;currentJobDirectoryDescriptionALabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;currentJobSyncModeDescriptionLabel.Parent" xml:space="preserve">
+    <value>currentJobOverviewGroupBox</value>
   </data>
-  <data name="controlButtonsTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;currentDirectoryALabel.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="directorySettingsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="pauseButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="settingsTabPage.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;startButton.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1909,8 +1909,8 @@
   <data name="&gt;&gt;jobSettingsSaveFileDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="controlButtonsTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>472, 30</value>
+  <data name="&gt;&gt;browseDirectoryBButton.Parent" xml:space="preserve">
+    <value>directorySettingsGroupBox</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1930,14 +1930,14 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="jobSettingsSaveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>233, 17</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>46</value>
   </metadata>
   <metadata name="mainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
+  </metadata>
+  <metadata name="jobSettingsSaveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>233, 17</value>
   </metadata>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>143, 17</value>
