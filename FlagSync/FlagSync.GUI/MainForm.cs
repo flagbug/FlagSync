@@ -80,11 +80,11 @@ namespace FlagSync.GUI
 
         public MainForm()
         {
-            LanguageBox box = new LanguageBox();
-            box.ShowDialog(this);
-            this.ChangeLanguage(box.SelectedLanguage);
+            this.ChangeLanguage(Settings.Default.Language, false);
             
             InitializeComponent();
+
+            this.ChangeLanguageToolStrip(Settings.Default.Language);
             
             this.elapsedTimer.Elapsed += new System.Timers.ElapsedEventHandler(elapsedTimer_Elapsed);
             this.jobWorker.FilesCounted += new EventHandler(jobWorker_FilesCounted);
@@ -107,8 +107,12 @@ namespace FlagSync.GUI
 
             this.appDataPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FlagSync");
             this.CreateAppDataFolder();
+            
         }
 
+        /// <summary>
+        /// Creates the app-data folder
+        /// </summary>
         private void CreateAppDataFolder()
         {
             try
@@ -406,6 +410,10 @@ namespace FlagSync.GUI
             new AboutBox().ShowDialog();
         }
 
+        /// <summary>
+        /// Checks if directory A and directory B exists and wirtes a log message if not
+        /// </summary>
+        /// <returns>True if both directories exists, otherwise false</returns>
         private bool DirectoriesExist()
         {
             bool exist = true;
@@ -430,6 +438,10 @@ namespace FlagSync.GUI
             return exist;
         }
 
+        /// <summary>
+        /// Adds a log message to the logTextBox
+        /// </summary>
+        /// <param name="log">The log message</param>
         private void AddLogMessage(LogMessage log)
         {
             int lenght = this.logTextBox.TextLength;
@@ -460,6 +472,9 @@ namespace FlagSync.GUI
             this.logTextBox.ScrollToCaret();
         }
 
+        /// <summary>
+        /// Initialises the user interface for a new sync
+        /// </summary>
         private void InitSync()
         {
             this.progressBar.Maximum = 0;
@@ -485,6 +500,9 @@ namespace FlagSync.GUI
             this.AddNewJob();
         }
 
+        /// <summary>
+        /// Adds a new and empty job to the listbox
+        /// </summary>
         private void AddNewJob()
         {
             this.jobSettingsCheckedListBox.Items.Add(new JobSettings(rm.GetString("NewJob") + " " + (this.jobSettingsCheckedListBox.Items.Count + 1)));
@@ -589,9 +607,16 @@ namespace FlagSync.GUI
             JobSettingSerializer.Save(this.JobSettings, this.jobSettingsSaveFileDialog.FileName);
         }
 
-        private void ChangeLanguage(string lang)
+        private void ChangeLanguage(string name, bool restart)
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+            Settings.Default.Language = name;
+            Settings.Default.Save();
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(name);
+
+            if (restart)
+            {
+                Application.Restart();
+            }
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -601,6 +626,29 @@ namespace FlagSync.GUI
             Application.DoEvents();
             
             base.OnClosing(e);
+        }
+
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.ChangeLanguage("en", true);
+        }
+
+        private void germanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.ChangeLanguage("de", true);
+        }
+
+        private void ChangeLanguageToolStrip(string language)
+        {
+            if (language == "de")
+            {
+                this.germanToolStripMenuItem.CheckState = CheckState.Checked;
+            }
+
+            else if (language == "en")
+            {
+                this.englishToolStripMenuItem.CheckState = CheckState.Checked;
+            }
         }
     }
 }

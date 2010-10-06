@@ -4,9 +4,9 @@
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
 "ProjectName" = "8:FlagSync.Setup"
-"LanguageId" = "3:1033"
+"LanguageId" = "3:0"
 "CodePage" = "3:1252"
-"UILanguageId" = "3:1033"
+"UILanguageId" = "3:0"
 "SccProjectName" = "8:"
 "SccLocalPath" = "8:"
 "SccAuxPath" = "8:"
@@ -233,7 +233,7 @@
         }
         "MsiBootstrapper"
         {
-        "LangId" = "3:1033"
+        "LangId" = "3:0"
         "RequiresElevation" = "11:FALSE"
         }
         "Product"
@@ -241,7 +241,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FlagSync"
         "ProductCode" = "8:{77D71D76-3A89-4DCE-BFEC-43E3712E355A}"
-        "PackageCode" = "8:{51C7A44E-8295-4DA8-A28D-B2FEE7EA8029}"
+        "PackageCode" = "8:{122A0429-A203-4471-99F3-5398FF995E6F}"
         "UpgradeCode" = "8:{1D0B5DEC-81D0-4D0D-AB5A-43C542880086}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -258,7 +258,7 @@
         "Keywords" = "8:FlagSync"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_024B80FC2C0545D3BAEFDA3695AF4D14"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"

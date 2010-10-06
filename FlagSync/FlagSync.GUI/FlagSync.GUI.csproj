@@ -60,6 +60,7 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutBox.cs">
@@ -68,15 +69,15 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Language.de-DE.Designer.cs">
+    <Compile Include="Language.de.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Language.de-DE.resx</DependentUpon>
+      <DependentUpon>Language.de.resx</DependentUpon>
     </Compile>
-    <Compile Include="Language.en-US.Designer.cs">
+    <Compile Include="Language.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Language.en-US.resx</DependentUpon>
+      <DependentUpon>Language.en.resx</DependentUpon>
     </Compile>
     <Compile Include="LanguageBox.cs">
       <SubType>Form</SubType>
@@ -93,17 +94,22 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language.de-DE.resx">
+    <EmbeddedResource Include="Language.de.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Language.de-DE.Designer.cs</LastGenOutput>
+      <LastGenOutput>Language.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language.en-US.resx">
+    <EmbeddedResource Include="Language.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Language.en-US.Designer.cs</LastGenOutput>
+      <LastGenOutput>Language.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="LanguageBox.de-DE.resx">
       <DependentUpon>LanguageBox.cs</DependentUpon>
@@ -111,7 +117,10 @@
     <EmbeddedResource Include="LanguageBox.resx">
       <DependentUpon>LanguageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.de-DE.resx">
+    <EmbeddedResource Include="MainForm.de.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.en.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -128,6 +137,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -138,6 +148,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

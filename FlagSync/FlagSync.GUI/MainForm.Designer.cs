@@ -53,6 +53,9 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.germanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -98,11 +101,16 @@
             // 
             // splitContainer.Panel1
             // 
+            resources.ApplyResources(this.splitContainer.Panel1, "splitContainer.Panel1");
             this.splitContainer.Panel1.Controls.Add(this.currentJobOverviewGroupBox);
+            this.toolTip.SetToolTip(this.splitContainer.Panel1, resources.GetString("splitContainer.Panel1.ToolTip"));
             // 
             // splitContainer.Panel2
             // 
+            resources.ApplyResources(this.splitContainer.Panel2, "splitContainer.Panel2");
             this.splitContainer.Panel2.Controls.Add(this.controlsGroupBox);
+            this.toolTip.SetToolTip(this.splitContainer.Panel2, resources.GetString("splitContainer.Panel2.ToolTip"));
+            this.toolTip.SetToolTip(this.splitContainer, resources.GetString("splitContainer.ToolTip"));
             // 
             // currentJobOverviewGroupBox
             // 
@@ -117,46 +125,55 @@
             this.currentJobOverviewGroupBox.Controls.Add(this.currentJobDirectoryDescriptionALabel);
             this.currentJobOverviewGroupBox.Name = "currentJobOverviewGroupBox";
             this.currentJobOverviewGroupBox.TabStop = false;
+            this.toolTip.SetToolTip(this.currentJobOverviewGroupBox, resources.GetString("currentJobOverviewGroupBox.ToolTip"));
             // 
             // currentJobNameLabel
             // 
             resources.ApplyResources(this.currentJobNameLabel, "currentJobNameLabel");
             this.currentJobNameLabel.Name = "currentJobNameLabel";
+            this.toolTip.SetToolTip(this.currentJobNameLabel, resources.GetString("currentJobNameLabel.ToolTip"));
             // 
             // currentJobNameDescriptionLabel
             // 
             resources.ApplyResources(this.currentJobNameDescriptionLabel, "currentJobNameDescriptionLabel");
             this.currentJobNameDescriptionLabel.Name = "currentJobNameDescriptionLabel";
+            this.toolTip.SetToolTip(this.currentJobNameDescriptionLabel, resources.GetString("currentJobNameDescriptionLabel.ToolTip"));
             // 
             // currentJobSyncModeLabel
             // 
             resources.ApplyResources(this.currentJobSyncModeLabel, "currentJobSyncModeLabel");
             this.currentJobSyncModeLabel.Name = "currentJobSyncModeLabel";
+            this.toolTip.SetToolTip(this.currentJobSyncModeLabel, resources.GetString("currentJobSyncModeLabel.ToolTip"));
             // 
             // currentDirectoryBLabel
             // 
             resources.ApplyResources(this.currentDirectoryBLabel, "currentDirectoryBLabel");
             this.currentDirectoryBLabel.Name = "currentDirectoryBLabel";
+            this.toolTip.SetToolTip(this.currentDirectoryBLabel, resources.GetString("currentDirectoryBLabel.ToolTip"));
             // 
             // currentDirectoryALabel
             // 
             resources.ApplyResources(this.currentDirectoryALabel, "currentDirectoryALabel");
             this.currentDirectoryALabel.Name = "currentDirectoryALabel";
+            this.toolTip.SetToolTip(this.currentDirectoryALabel, resources.GetString("currentDirectoryALabel.ToolTip"));
             // 
             // currentJobSyncModeDescriptionLabel
             // 
             resources.ApplyResources(this.currentJobSyncModeDescriptionLabel, "currentJobSyncModeDescriptionLabel");
             this.currentJobSyncModeDescriptionLabel.Name = "currentJobSyncModeDescriptionLabel";
+            this.toolTip.SetToolTip(this.currentJobSyncModeDescriptionLabel, resources.GetString("currentJobSyncModeDescriptionLabel.ToolTip"));
             // 
             // currentJobDirectoryBDescriptionLabel
             // 
             resources.ApplyResources(this.currentJobDirectoryBDescriptionLabel, "currentJobDirectoryBDescriptionLabel");
             this.currentJobDirectoryBDescriptionLabel.Name = "currentJobDirectoryBDescriptionLabel";
+            this.toolTip.SetToolTip(this.currentJobDirectoryBDescriptionLabel, resources.GetString("currentJobDirectoryBDescriptionLabel.ToolTip"));
             // 
             // currentJobDirectoryDescriptionALabel
             // 
             resources.ApplyResources(this.currentJobDirectoryDescriptionALabel, "currentJobDirectoryDescriptionALabel");
             this.currentJobDirectoryDescriptionALabel.Name = "currentJobDirectoryDescriptionALabel";
+            this.toolTip.SetToolTip(this.currentJobDirectoryDescriptionALabel, resources.GetString("currentJobDirectoryDescriptionALabel.ToolTip"));
             // 
             // controlsGroupBox
             // 
@@ -165,6 +182,7 @@
             this.controlsGroupBox.Controls.Add(this.progressBar);
             this.controlsGroupBox.Name = "controlsGroupBox";
             this.controlsGroupBox.TabStop = false;
+            this.toolTip.SetToolTip(this.controlsGroupBox, resources.GetString("controlsGroupBox.ToolTip"));
             // 
             // controlButtonsTableLayoutPanel
             // 
@@ -175,12 +193,14 @@
             this.controlButtonsTableLayoutPanel.Controls.Add(this.previewButton, 0, 0);
             this.controlButtonsTableLayoutPanel.MaximumSize = new System.Drawing.Size(600, 30);
             this.controlButtonsTableLayoutPanel.Name = "controlButtonsTableLayoutPanel";
+            this.toolTip.SetToolTip(this.controlButtonsTableLayoutPanel, resources.GetString("controlButtonsTableLayoutPanel.ToolTip"));
             // 
             // stopButton
             // 
             resources.ApplyResources(this.stopButton, "stopButton");
             this.stopButton.MaximumSize = new System.Drawing.Size(120, 25);
             this.stopButton.Name = "stopButton";
+            this.toolTip.SetToolTip(this.stopButton, resources.GetString("stopButton.ToolTip"));
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
@@ -189,6 +209,7 @@
             resources.ApplyResources(this.pauseButton, "pauseButton");
             this.pauseButton.MaximumSize = new System.Drawing.Size(120, 25);
             this.pauseButton.Name = "pauseButton";
+            this.toolTip.SetToolTip(this.pauseButton, resources.GetString("pauseButton.ToolTip"));
             this.pauseButton.UseVisualStyleBackColor = true;
             this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
             // 
@@ -197,6 +218,7 @@
             resources.ApplyResources(this.startButton, "startButton");
             this.startButton.MaximumSize = new System.Drawing.Size(120, 25);
             this.startButton.Name = "startButton";
+            this.toolTip.SetToolTip(this.startButton, resources.GetString("startButton.ToolTip"));
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
@@ -205,6 +227,7 @@
             resources.ApplyResources(this.previewButton, "previewButton");
             this.previewButton.MaximumSize = new System.Drawing.Size(120, 25);
             this.previewButton.Name = "previewButton";
+            this.toolTip.SetToolTip(this.previewButton, resources.GetString("previewButton.ToolTip"));
             this.previewButton.UseVisualStyleBackColor = true;
             this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
             // 
@@ -213,62 +236,86 @@
             resources.ApplyResources(this.progressBar, "progressBar");
             this.progressBar.Name = "progressBar";
             this.progressBar.Step = 1;
+            this.toolTip.SetToolTip(this.progressBar, resources.GetString("progressBar.ToolTip"));
             // 
             // mainMenuStrip
             // 
+            resources.ApplyResources(this.mainMenuStrip, "mainMenuStrip");
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.programToolStripMenuItem,
             this.helpToolStripMenuItem});
-            resources.ApplyResources(this.mainMenuStrip, "mainMenuStrip");
             this.mainMenuStrip.Name = "mainMenuStrip";
+            this.toolTip.SetToolTip(this.mainMenuStrip, resources.GetString("mainMenuStrip.ToolTip"));
             // 
             // programToolStripMenuItem
             // 
+            resources.ApplyResources(this.programToolStripMenuItem, "programToolStripMenuItem");
             this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.programToolStripMenuItem.Name = "programToolStripMenuItem";
-            resources.ApplyResources(this.programToolStripMenuItem, "programToolStripMenuItem");
             // 
             // loadToolStripMenuItem
             // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             resources.ApplyResources(this.loadToolStripMenuItem, "loadToolStripMenuItem");
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             resources.ApplyResources(this.saveToolStripMenuItem, "saveToolStripMenuItem");
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.languageToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // languageToolStripMenuItem
+            // 
+            resources.ApplyResources(this.languageToolStripMenuItem, "languageToolStripMenuItem");
+            this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishToolStripMenuItem,
+            this.germanToolStripMenuItem});
+            this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+            // 
+            // englishToolStripMenuItem
+            // 
+            resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
+            // 
+            // germanToolStripMenuItem
+            // 
+            resources.ApplyResources(this.germanToolStripMenuItem, "germanToolStripMenuItem");
+            this.germanToolStripMenuItem.Name = "germanToolStripMenuItem";
+            this.germanToolStripMenuItem.Click += new System.EventHandler(this.germanToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // logTextBox
             // 
+            resources.ApplyResources(this.logTextBox, "logTextBox");
             this.logTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.logTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
-            resources.ApplyResources(this.logTextBox, "logTextBox");
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
+            this.toolTip.SetToolTip(this.logTextBox, resources.GetString("logTextBox.ToolTip"));
             // 
             // toolTip
             // 
@@ -304,13 +351,15 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.toolTip.SetToolTip(this.tabControl, resources.GetString("tabControl.ToolTip"));
             // 
             // overviewTabPage
             // 
+            resources.ApplyResources(this.overviewTabPage, "overviewTabPage");
             this.overviewTabPage.Controls.Add(this.textBoxPanel);
             this.overviewTabPage.Controls.Add(this.splitContainer);
-            resources.ApplyResources(this.overviewTabPage, "overviewTabPage");
             this.overviewTabPage.Name = "overviewTabPage";
+            this.toolTip.SetToolTip(this.overviewTabPage, resources.GetString("overviewTabPage.ToolTip"));
             this.overviewTabPage.UseVisualStyleBackColor = true;
             // 
             // textBoxPanel
@@ -318,12 +367,14 @@
             resources.ApplyResources(this.textBoxPanel, "textBoxPanel");
             this.textBoxPanel.Controls.Add(this.logTextBox);
             this.textBoxPanel.Name = "textBoxPanel";
+            this.toolTip.SetToolTip(this.textBoxPanel, resources.GetString("textBoxPanel.ToolTip"));
             // 
             // settingsTabPage
             // 
-            this.settingsTabPage.Controls.Add(this.settingsPanel);
             resources.ApplyResources(this.settingsTabPage, "settingsTabPage");
+            this.settingsTabPage.Controls.Add(this.settingsPanel);
             this.settingsTabPage.Name = "settingsTabPage";
+            this.toolTip.SetToolTip(this.settingsTabPage, resources.GetString("settingsTabPage.ToolTip"));
             this.settingsTabPage.UseVisualStyleBackColor = true;
             // 
             // settingsPanel
@@ -334,6 +385,7 @@
             this.settingsPanel.Controls.Add(this.jobSettingsCheckedListBox);
             this.settingsPanel.Controls.Add(this.newJobButton);
             this.settingsPanel.Name = "settingsPanel";
+            this.toolTip.SetToolTip(this.settingsPanel, resources.GetString("settingsPanel.ToolTip"));
             // 
             // directorySettingsGroupBox
             // 
@@ -351,28 +403,33 @@
             this.directorySettingsGroupBox.MinimumSize = new System.Drawing.Size(350, 144);
             this.directorySettingsGroupBox.Name = "directorySettingsGroupBox";
             this.directorySettingsGroupBox.TabStop = false;
+            this.toolTip.SetToolTip(this.directorySettingsGroupBox, resources.GetString("directorySettingsGroupBox.ToolTip"));
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.toolTip.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // jobSettingsNameTextBox
             // 
             resources.ApplyResources(this.jobSettingsNameTextBox, "jobSettingsNameTextBox");
             this.jobSettingsNameTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.jobSettingsNameTextBox.Name = "jobSettingsNameTextBox";
+            this.toolTip.SetToolTip(this.jobSettingsNameTextBox, resources.GetString("jobSettingsNameTextBox.ToolTip"));
             this.jobSettingsNameTextBox.TextChanged += new System.EventHandler(this.jobSettingsNameTextBox_TextChanged);
             // 
             // jobSettingsNameLabel
             // 
             resources.ApplyResources(this.jobSettingsNameLabel, "jobSettingsNameLabel");
             this.jobSettingsNameLabel.Name = "jobSettingsNameLabel";
+            this.toolTip.SetToolTip(this.jobSettingsNameLabel, resources.GetString("jobSettingsNameLabel.ToolTip"));
             // 
             // browseDirectoryBButton
             // 
             resources.ApplyResources(this.browseDirectoryBButton, "browseDirectoryBButton");
             this.browseDirectoryBButton.Name = "browseDirectoryBButton";
+            this.toolTip.SetToolTip(this.browseDirectoryBButton, resources.GetString("browseDirectoryBButton.ToolTip"));
             this.browseDirectoryBButton.UseVisualStyleBackColor = true;
             this.browseDirectoryBButton.Click += new System.EventHandler(this.browseDirectoryBButton_Click);
             // 
@@ -380,6 +437,7 @@
             // 
             resources.ApplyResources(this.browseDirectoryAButton, "browseDirectoryAButton");
             this.browseDirectoryAButton.Name = "browseDirectoryAButton";
+            this.toolTip.SetToolTip(this.browseDirectoryAButton, resources.GetString("browseDirectoryAButton.ToolTip"));
             this.browseDirectoryAButton.UseVisualStyleBackColor = true;
             this.browseDirectoryAButton.Click += new System.EventHandler(this.browseDirectoryAButton_Click);
             // 
@@ -387,6 +445,7 @@
             // 
             resources.ApplyResources(this.jobSettingsDirectoryBTextBox, "jobSettingsDirectoryBTextBox");
             this.jobSettingsDirectoryBTextBox.Name = "jobSettingsDirectoryBTextBox";
+            this.toolTip.SetToolTip(this.jobSettingsDirectoryBTextBox, resources.GetString("jobSettingsDirectoryBTextBox.ToolTip"));
             this.jobSettingsDirectoryBTextBox.TextChanged += new System.EventHandler(this.jobSettingsDirectoryBTextBox_TextChanged);
             // 
             // jobSettingsDirectoryATextBox
@@ -394,12 +453,14 @@
             resources.ApplyResources(this.jobSettingsDirectoryATextBox, "jobSettingsDirectoryATextBox");
             this.jobSettingsDirectoryATextBox.BackColor = System.Drawing.SystemColors.Window;
             this.jobSettingsDirectoryATextBox.Name = "jobSettingsDirectoryATextBox";
+            this.toolTip.SetToolTip(this.jobSettingsDirectoryATextBox, resources.GetString("jobSettingsDirectoryATextBox.ToolTip"));
             this.jobSettingsDirectoryATextBox.TextChanged += new System.EventHandler(this.jobSettingsDirectoryATextBox_TextChanged);
             // 
             // deleteJobButton
             // 
             resources.ApplyResources(this.deleteJobButton, "deleteJobButton");
             this.deleteJobButton.Name = "deleteJobButton";
+            this.toolTip.SetToolTip(this.deleteJobButton, resources.GetString("deleteJobButton.ToolTip"));
             this.deleteJobButton.UseVisualStyleBackColor = true;
             this.deleteJobButton.Click += new System.EventHandler(this.deleteJobButton_Click);
             // 
@@ -408,12 +469,14 @@
             resources.ApplyResources(this.jobSettingsCheckedListBox, "jobSettingsCheckedListBox");
             this.jobSettingsCheckedListBox.FormattingEnabled = true;
             this.jobSettingsCheckedListBox.Name = "jobSettingsCheckedListBox";
+            this.toolTip.SetToolTip(this.jobSettingsCheckedListBox, resources.GetString("jobSettingsCheckedListBox.ToolTip"));
             this.jobSettingsCheckedListBox.SelectedIndexChanged += new System.EventHandler(this.jobSettingsCheckedListBox_SelectedIndexChanged);
             // 
             // newJobButton
             // 
             resources.ApplyResources(this.newJobButton, "newJobButton");
             this.newJobButton.Name = "newJobButton";
+            this.toolTip.SetToolTip(this.newJobButton, resources.GetString("newJobButton.ToolTip"));
             this.newJobButton.UseVisualStyleBackColor = true;
             this.newJobButton.Click += new System.EventHandler(this.newJobButton_Click);
             // 
@@ -437,6 +500,7 @@
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "MainForm";
+            this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             this.splitContainer.ResumeLayout(false);
@@ -505,6 +569,9 @@
         private System.Windows.Forms.TableLayoutPanel controlButtonsTableLayoutPanel;
         private System.Windows.Forms.Label currentJobNameLabel;
         private System.Windows.Forms.Label currentJobNameDescriptionLabel;
+        private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem germanToolStripMenuItem;
     }
 }
 
