@@ -175,7 +175,7 @@
     <value>Error while loading the settings. Is the file valid?</value>
   </data>
   <data name="JobSettingsLoadSucceed" xml:space="preserve">
-    <value>Loading succesful</value>
+    <value>Loading successful</value>
   </data>
   <data name="NewJob" xml:space="preserve">
     <value>New Job</value>
