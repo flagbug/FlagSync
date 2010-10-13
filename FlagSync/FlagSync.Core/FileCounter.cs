@@ -19,8 +19,9 @@ namespace FlagSync.Core
             private long countedBytes;
 
             /// <summary>
-            /// Gets the counted files
+            /// Gets the counted files.
             /// </summary>
+            /// <value>The counted files.</value>
             public int CountedFiles
             {
                 get
@@ -30,8 +31,9 @@ namespace FlagSync.Core
             }
 
             /// <summary>
-            /// Gets the counted bytes
+            /// Gets the counted bytes.
             /// </summary>
+            /// <value>The counted bytes.</value>
             public long CountedBytes
             {
                 get
@@ -40,18 +42,32 @@ namespace FlagSync.Core
                 }
             }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="FileCounterResults"/> class.
+            /// </summary>
+            /// <param name="countedFiles">The counted files.</param>
+            /// <param name="countedBytes">The counted bytes.</param>
             public FileCounterResults(int countedFiles, long countedBytes)
             {
                 this.countedBytes = countedBytes;
                 this.countedFiles = countedFiles;
             }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="FileCounterResults"/> class.
+            /// </summary>
             public FileCounterResults()
                 : this(0, 0)
             {
 
             }
 
+            /// <summary>
+            /// Implements the operator +.
+            /// </summary>
+            /// <param name="a">The first file counter result</param>
+            /// <param name="b">The second file counter result</param>
+            /// <returns>The result of the operator.</returns>
             public static FileCounterResults operator +(FileCounterResults a, FileCounterResults b)
             {
                 return new FileCounterResults(a.CountedFiles + b.CountedFiles, a.CountedBytes + b.CountedBytes);
@@ -61,8 +77,8 @@ namespace FlagSync.Core
         /// <summary>
         /// Counts the number of files and the total size for the specifies job
         /// </summary>
-        /// <param name="settings"></param>
-        /// <returns></returns>
+        /// <param name="settings">The settings.</param>
+        /// <returns>The result</returns>
         public FileCounterResults CountJobFiles(JobSettings settings)
         {
             this.settings = settings;
@@ -84,7 +100,7 @@ namespace FlagSync.Core
         /// Analyses a single directory with its subfolders
         /// </summary>
         /// <param name="root">The directory to count</param>
-        /// <returns>The result of the counting</returns>
+        /// <returns>The result</returns>
         private FileCounterResults CountFiles(DirectoryInfo root)
         {
             int files = 0;

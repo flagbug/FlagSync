@@ -126,6 +126,11 @@ namespace FlagSync.GUI
             }
         }
 
+        /// <summary>
+        /// Handles the FileDeletionError event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileDeletionErrorEventArgs"/> instance containing the event data.</param>
         void jobWorker_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
         {
             if (this.InvokeRequired)
@@ -137,6 +142,11 @@ namespace FlagSync.GUI
             this.AddLogMessage(new LogMessage(rm.GetString("CantDeleteFile") + ": " + e.File.FullName, LogMessage.MessageType.ErrorMessage));
         }
 
+        /// <summary>
+        /// Handles the DirectoryDeletionError event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         void jobWorker_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
         {
             if (this.InvokeRequired)
@@ -148,11 +158,21 @@ namespace FlagSync.GUI
             this.AddLogMessage(new LogMessage(rm.GetString("CantDeleteDirectory") + ": " + e.Directory.FullName, LogMessage.MessageType.ErrorMessage));
         }
 
+        /// <summary>
+        /// Handles the Elapsed event of the elapsedTimer control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
         void elapsedTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             this.elapsedTime = this.elapsedTime.Add(new TimeSpan(0, 0, 1));
         }
 
+        /// <summary>
+        /// Handles the JobFinished event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
         void jobWorker_JobFinished(object sender, JobEventArgs e)
         {
             if (this.InvokeRequired)
@@ -169,6 +189,11 @@ namespace FlagSync.GUI
             this.currentJobNameLabel.Text = "";
         }
 
+        /// <summary>
+        /// Handles the JobStarted event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
         void jobWorker_JobStarted(object sender, JobEventArgs e)
         {
             if (this.InvokeRequired)
@@ -195,6 +220,11 @@ namespace FlagSync.GUI
             }
         }
 
+        /// <summary>
+        /// Handles the DirectoryDeleted event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         void jobWorker_DirectoryDeleted(object sender, DirectoryDeletionEventArgs e)
         {
             if (this.InvokeRequired)
@@ -208,6 +238,11 @@ namespace FlagSync.GUI
                 LogMessage.MessageType.SuccessMessage));
         }
 
+        /// <summary>
+        /// Handles the DirectoryCreated event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         void jobWorker_DirectoryCreated(object sender, DirectoryCreationEventArgs e)
         {
             if (this.InvokeRequired)
@@ -222,6 +257,11 @@ namespace FlagSync.GUI
                         LogMessage.MessageType.SuccessMessage));
         }
 
+        /// <summary>
+        /// Handles the FileDeleted event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
         void jobWorker_FileDeleted(object sender, FileDeletionEventArgs e)
         {
             if (this.InvokeRequired)
@@ -235,6 +275,11 @@ namespace FlagSync.GUI
                         LogMessage.MessageType.SuccessMessage));
         }
 
+        /// <summary>
+        /// Handles the FileCopyError event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyErrorEventArgs"/> instance containing the event data.</param>
         void jobWorker_FileCopyError(object sender, FileCopyErrorEventArgs e)
         {
             if (this.InvokeRequired)
@@ -248,6 +293,11 @@ namespace FlagSync.GUI
                 LogMessage.MessageType.ErrorMessage));
         }
 
+        /// <summary>
+        /// Handles the FilesCounted event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         void jobWorker_FilesCounted(object sender, EventArgs e)
         {
             if (this.InvokeRequired)
@@ -262,6 +312,11 @@ namespace FlagSync.GUI
             this.progressBar.Maximum = (int)(jobWorker.FileCounterResult.CountedBytes / 1024);
         }
 
+        /// <summary>
+        /// Handles the Finished event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         void jobWorker_Finished(object sender, EventArgs e)
         {
             if (this.InvokeRequired)
@@ -281,6 +336,11 @@ namespace FlagSync.GUI
             this.AddLogMessage(new LogMessage(rm.GetString("ElapsedTime") + ": " + this.elapsedTime.ToString(), LogMessage.MessageType.StatusMessage));
         }
 
+        /// <summary>
+        /// Handles the FileProceeded event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
         void jobWorker_FileProceeded(object sender, FileProceededEventArgs e)
         {
             if (this.InvokeRequired)
@@ -295,6 +355,11 @@ namespace FlagSync.GUI
             this.progressBar.Increment(progress);
         }
 
+        /// <summary>
+        /// Handles the FoundNewerFile event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         void jobWorker_FoundNewerFile(object sender, FileCopyEventArgs e)
         {
             if (this.InvokeRequired)
@@ -309,6 +374,11 @@ namespace FlagSync.GUI
                         LogMessage.MessageType.SuccessMessage));
         }
 
+        /// <summary>
+        /// Handles the FoundModifiedFile event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         void jobWorker_FoundModifiedFile(object sender, FileCopyEventArgs e)
         {
             if (this.InvokeRequired)
@@ -323,11 +393,21 @@ namespace FlagSync.GUI
                         LogMessage.MessageType.SuccessMessage));
         }
 
+        /// <summary>
+        /// Handles the Click event of the exitToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Handles the Click event of the browseDirectoryAButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void browseDirectoryAButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -335,6 +415,11 @@ namespace FlagSync.GUI
             this.jobSettingsDirectoryATextBox.Text = dialog.SelectedPath;
         }
 
+        /// <summary>
+        /// Handles the Click event of the browseDirectoryBButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void browseDirectoryBButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -342,6 +427,11 @@ namespace FlagSync.GUI
             this.jobSettingsDirectoryBTextBox.Text = dialog.SelectedPath;
         }
 
+        /// <summary>
+        /// Handles the Click event of the previewButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void previewButton_Click(object sender, EventArgs e)
         {
             if (this.DirectoriesExist())
@@ -350,6 +440,11 @@ namespace FlagSync.GUI
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the startButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void startButton_Click(object sender, EventArgs e)
         {
             if(this.DirectoriesExist())
@@ -358,10 +453,14 @@ namespace FlagSync.GUI
             }
         }
 
+        /// <summary>
+        /// Starts the job worker.
+        /// </summary>
+        /// <param name="preview">if set to <c>true</c>, the jobWorker performs a preview (no files will be copied, deleted oder modified).</param>
         private void StartJobWorker(bool preview)
         {
             this.InitSync();
-
+            
             string startLog = rm.GetString("Starting") + "...";
 
             if(preview)
@@ -378,6 +477,11 @@ namespace FlagSync.GUI
             this.jobWorker.Start(this.CheckedJobSettings, preview);
         }
 
+        /// <summary>
+        /// Handles the Click event of the stopButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void stopButton_Click(object sender, EventArgs e)
         {
             this.AddLogMessage(new LogMessage(rm.GetString("Stopping") + "...", LogMessage.MessageType.StatusMessage));
@@ -386,6 +490,11 @@ namespace FlagSync.GUI
             this.pauseButton.Text = rm.GetString("Pause");
         }
 
+        /// <summary>
+        /// Handles the Click event of the pauseButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void pauseButton_Click(object sender, EventArgs e)
         {
             if (!this.jobWorker.Paused)
@@ -405,15 +514,22 @@ namespace FlagSync.GUI
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the aboutToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutBox().ShowDialog();
         }
-
+        
         /// <summary>
         /// Checks if directory A and directory B exists and wirtes a log message if not
         /// </summary>
-        /// <returns>True if both directories exists, otherwise false</returns>
+        /// <returns>
+        /// True if both directories exists, otherwise false
+        /// </returns>
         private bool DirectoriesExist()
         {
             bool exist = true;
@@ -486,15 +602,24 @@ namespace FlagSync.GUI
             this.elapsedTime = new TimeSpan();
 
             Logger.Instance = new Logger(System.IO.Path.Combine(this.appDataPath, "log.txt"));
-
         }
 
+        /// <summary>
+        /// Handles the TextChanged event of the jobSettingsNameTextBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void jobSettingsNameTextBox_TextChanged(object sender, EventArgs e)
         {
             ((JobSettings)jobSettingsCheckedListBox.SelectedItem).Name = this.jobSettingsNameTextBox.Text;
             this.jobSettingsCheckedListBox.Invalidate();
         }
 
+        /// <summary>
+        /// Handles the Click event of the newJobButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void newJobButton_Click(object sender, EventArgs e)
         {
             this.AddNewJob();
@@ -510,6 +635,11 @@ namespace FlagSync.GUI
             this.jobSettingsCheckedListBox.SetItemChecked(this.jobSettingsCheckedListBox.SelectedIndex, true);
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the jobSettingsCheckedListBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void jobSettingsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             JobSettings setting = (JobSettings)this.jobSettingsCheckedListBox.SelectedItem;
@@ -536,31 +666,61 @@ namespace FlagSync.GUI
             }
         }
 
+        /// <summary>
+        /// Handles the TextChanged event of the jobSettingsDirectoryATextBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void jobSettingsDirectoryATextBox_TextChanged(object sender, EventArgs e)
         {
             ((JobSettings)this.jobSettingsCheckedListBox.SelectedItem).DirectoryA = this.jobSettingsDirectoryATextBox.Text; ;
         }
 
+        /// <summary>
+        /// Handles the TextChanged event of the jobSettingsDirectoryBTextBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void jobSettingsDirectoryBTextBox_TextChanged(object sender, EventArgs e)
         {
             ((JobSettings)this.jobSettingsCheckedListBox.SelectedItem).DirectoryB = this.jobSettingsDirectoryBTextBox.Text;
         }
 
+        /// <summary>
+        /// Handles the Click event of the deleteJobButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void deleteJobButton_Click(object sender, EventArgs e)
         {
             DeleteSelectedJob();
         }
 
+        /// <summary>
+        /// Handles the Click event of the syncRadioButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void syncRadioButton_Click(object sender, EventArgs e)
         {
             ((JobSettings)this.jobSettingsCheckedListBox.SelectedItem).SyncMode = JobWorker.SyncMode.Sync;
         }
 
+        /// <summary>
+        /// Handles the Click event of the backupRadioButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void backupRadioButton_Click(object sender, EventArgs e)
         {
             ((JobSettings)this.jobSettingsCheckedListBox.SelectedItem).SyncMode = JobWorker.SyncMode.Backup;
         }
 
+        /// <summary>
+        /// Handles the Click event of the loadToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.jobSettingsOpenFileDialog.InitialDirectory = this.appDataPath;
@@ -593,6 +753,11 @@ namespace FlagSync.GUI
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the saveToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.jobSettingsSaveFileDialog.InitialDirectory = this.appDataPath;
@@ -617,6 +782,10 @@ namespace FlagSync.GUI
             }
         }
 
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Forms.Form.Closing"/> event.
+        /// </summary>
+        /// <param name="e">A <see cref="T:System.ComponentModel.CancelEventArgs"/> that contains the event data.</param>
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             this.jobWorker.Stop();
@@ -626,18 +795,28 @@ namespace FlagSync.GUI
             base.OnClosing(e);
         }
 
+        /// <summary>
+        /// Handles the Click event of the englishToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.ChangeLanguage("en", true);
         }
 
+        /// <summary>
+        /// Handles the Click event of the germanToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void germanToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.ChangeLanguage("de", true);
         }
 
         /// <summary>
-        /// Cahnges the checked state of the language toolstrip item
+        /// Changes the checked state of the language toolstrip item
         /// </summary>
         /// <param name="language">Name of the culture</param>
         private void ChangeLanguageToolStrip(string language)
@@ -668,6 +847,11 @@ namespace FlagSync.GUI
             this.jobSettingsCheckedListBox.SelectedIndex = this.jobSettingsCheckedListBox.Items.Count - 1;
         }
 
+        /// <summary>
+        /// Handles the KeyDown event of the jobSettingsCheckedListBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Forms.KeyEventArgs"/> instance containing the event data.</param>
         private void jobSettingsCheckedListBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)

@@ -12,26 +12,26 @@ namespace FlagSync.Core
     class BackupJob : Job
     {
         /// <summary>
-        /// Creates a new backup-job
+        /// Initializes a new instance of the <see cref="BackupJob"/> class.
         /// </summary>
-        /// <param name="settings">The job-settings</param>
-        /// <param name="preview">True, if changes should get performed, otherwise false (if you want to see what will happen when you perform a backup)</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="preview">if set to <c>true</c>, no files will be deleted, copied or modified).</param>
         public BackupJob(JobSettings settings, bool preview)
             : base(settings, preview)
         {
             
         }
-
+        
         /// <summary>
-        /// Copies new and modified files from directory A to directory B and finally checks for deletions
-        /// </summary>
+        /// Starts the BackupJob, copies new and modified files from directory A to directory B and finally checks for deletions
+        /// </summary>*/
         public override void Start()
         {
             //Backup directoryA to directoryB and then check for deletions
             this.BackupDirectories(new DirectoryInfo(this.Settings.DirectoryA), new DirectoryInfo(this.Settings.DirectoryB), this.Preview);
             this.CheckDeletions(new DirectoryInfo(this.Settings.DirectoryB), new DirectoryInfo(this.Settings.DirectoryA), this.Preview);
 
-            this.OnFinished();
+            this.OnFinished(EventArgs.Empty);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="source">The source directory</param>
         /// <param name="target">The target directory</param>
-        /// <param name="preview">True, if changes should get performed, otherwise false (if you want to see what will happen when you perform a backup)</param>
+        /// <param name="preview">True, if you want to see what will happen when you perform a backup)</param>
         private void CheckDeletions(DirectoryInfo source, DirectoryInfo target, bool preview)
         {
             if (this.Stopped)
@@ -51,13 +51,13 @@ namespace FlagSync.Core
             {
                 foreach (FileInfo file in source.GetFiles())
                 {
-                    this.OnFileProceeded(file);
+                    this.OnFileProceeded(new FileProceededEventArgs(file));
 
                     if (!File.Exists(Path.Combine(target.FullName, file.Name)))
                     {
                         if(preview)
                         {
-                            this.OnDeletedFile(file);
+                            this.OnDeletedFile(new FileDeletionEventArgs(file));
                         }
 
                         else
@@ -70,19 +70,19 @@ namespace FlagSync.Core
                             catch (IOException)
                             {
                                 Logger.Instance.LogError("IOException at file deletion: " + file.FullName);
-                                this.OnFileDeletionError(file);
+                                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
                             }
 
                             catch (SecurityException)
                             {
                                 Logger.Instance.LogError("SecurityException at file deletion: " + file.FullName);
-                                this.OnFileDeletionError(file);
+                                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
                             }
 
                             catch (UnauthorizedAccessException)
                             {
                                 Logger.Instance.LogError("UnauthorizedAccessException at file deletion: " + file.FullName);
-                                this.OnFileDeletionError(file);
+                                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
                             }
                         }
                     }
@@ -96,12 +96,12 @@ namespace FlagSync.Core
 
                         foreach (FileInfo file in files)
                         {
-                            this.OnFileProceeded(file);
+                            this.OnFileProceeded(new FileProceededEventArgs(file));
                         }
 
                         if(preview)
                         {
-                            this.OnDeletedDirectory(directory);
+                            this.OnDeletedDirectory(new DirectoryDeletionEventArgs(directory));
                         }
 
                         else
@@ -109,25 +109,25 @@ namespace FlagSync.Core
                             try
                             {
                                 directory.Delete(true);
-                                this.OnDeletedDirectory(directory);
+                                this.OnDeletedDirectory(new DirectoryDeletionEventArgs(directory));
                             }
 
                             catch (IOException)
                             {
                                 Logger.Instance.LogError("IOException at directory deletion: " + directory.FullName);
-                                this.OnDirectoryDeletionError(directory);
+                                this.OnDirectoryDeletionError(new DirectoryDeletionEventArgs(directory));
                             }
 
                             catch (System.Security.SecurityException)
                             {
                                 Logger.Instance.LogError("SecurityException at directory deletion: " + directory.FullName);
-                                this.OnDirectoryDeletionError(directory);
+                                this.OnDirectoryDeletionError(new DirectoryDeletionEventArgs(directory));
                             }
 
                             catch (UnauthorizedAccessException)
                             {
                                 Logger.Instance.LogError("UnauthorizedAccessException at directory deletion: " + directory.FullName);
-                                this.OnDirectoryDeletionError(directory);
+                                this.OnDirectoryDeletionError(new DirectoryDeletionEventArgs(directory));
                             }
                         }
                     }

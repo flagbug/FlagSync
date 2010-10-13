@@ -10,7 +10,7 @@ namespace FlagSync.Core
 
         /// <summary>
         /// Singleton instance of the logger (must be manually initialized)
-        /// </summary>
+        /// </summary> 
         public static Logger Instance
         {
             get
@@ -24,9 +24,11 @@ namespace FlagSync.Core
             }
         }
 
+
         /// <summary>
-        /// Path of the log file
+        /// Gets the path of the log file.
         /// </summary>
+        /// <value>The path of the log file.</value>
         public string Path
         {
             get
@@ -36,9 +38,9 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Creates a new instance of the logger, with the given filepath
+        /// Initializes a new instance of the <see cref="Logger"/> class.
         /// </summary>
-        /// <param name="path">The path of the log file</param>
+        /// <param name="path">The path of the log file.</param>
         public Logger(string path)
         {
             this.path = path;

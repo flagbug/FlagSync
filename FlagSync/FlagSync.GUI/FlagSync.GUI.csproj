@@ -12,7 +12,7 @@
     <AssemblyName>FlagSync</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <ManifestCertificateThumbprint>ABE536C562986478AED1EE2559D92980B42A9F82</ManifestCertificateThumbprint>
     <ManifestKeyFile>FlagSync_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
