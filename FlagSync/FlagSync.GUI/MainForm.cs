@@ -134,7 +134,7 @@ namespace FlagSync.GUI
                 return;
             }
 
-            this.AddLogMessage(new LogMessage(rm.GetString("CantDeleteDFile") + ": " + e.File.FullName, LogMessage.MessageType.ErrorMessage));
+            this.AddLogMessage(new LogMessage(rm.GetString("CantDeleteFile") + ": " + e.File.FullName, LogMessage.MessageType.ErrorMessage));
         }
 
         void jobWorker_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
