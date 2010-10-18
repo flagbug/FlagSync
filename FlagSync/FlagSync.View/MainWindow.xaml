@@ -1,4 +1,4 @@
-﻿<Window x:Class="WPFTest.MainWindow"
+﻿<Window x:Class="FlagSync.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="WPF Test Window" Height="768" Width="1024" BorderThickness="0" WindowStyle="SingleBorderWindow" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico">
