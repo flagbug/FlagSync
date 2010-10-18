@@ -9,7 +9,7 @@ namespace FlagSync.Core
     /// <summary>
     /// A backup-job performs a synchronization only from directory A to directory B, but can check on deleted files
     /// </summary>
-    class BackupJob : Job
+    public class BackupJob : Job
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BackupJob"/> class.

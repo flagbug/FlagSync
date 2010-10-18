@@ -451,7 +451,6 @@ namespace FlagSync.Core
             }
 
             Logger.Instance.LogSucceed("Deleted file: " + e.File.FullName);
-
         }
 
         /// <summary>

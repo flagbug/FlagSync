@@ -98,8 +98,6 @@ namespace FlagSync.Core
                 writer = new StreamWriter(path, true);
 
                 writer.WriteLine(DateTime.Now.ToString() + " " + type + ": " + log);
-
-                writer.Close();
             }
 
             catch(IOException e)
