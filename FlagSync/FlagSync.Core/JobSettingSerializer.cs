@@ -12,7 +12,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="settings">Enumeration of job-settings</param>
         /// <param name="path">Path where the XML-file should get saved</param>
-        public static void Save(IEnumerable<JobSettings> settings, string path)
+        public static void Save(IEnumerable<JobSetting> settings, string path)
         {
             XmlSerializer serializer = new XmlSerializer(settings.GetType());
 
@@ -28,16 +28,16 @@ namespace FlagSync.Core
         /// <param name="path">Path of the XML-file</param>
         /// <returns>An enumeration of job-settings</returns>
         /// <exception cref="InvalidOperationException">Thrown, if the file can't be read</exception>
-        public static IEnumerable<JobSettings> Read(string path)
+        public static IEnumerable<JobSetting> Read(string path)
         {
-            List<JobSettings> settings = new List<JobSettings>();
+            List<JobSetting> settings = new List<JobSetting>();
 
             XmlSerializer serializer = new XmlSerializer(settings.GetType());
             TextReader reader = new StreamReader(path);
 
             try
             {
-                settings = (List<JobSettings>)serializer.Deserialize(reader);
+                settings = (List<JobSetting>)serializer.Deserialize(reader);
             }
 
             catch(InvalidOperationException)

@@ -28,7 +28,7 @@
     <Compile Include="FileCounter.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobEventArgs.cs" />
-    <Compile Include="JobSettings.cs" />
+    <Compile Include="JobSetting.cs" />
     <Compile Include="JobSettingSerializer.cs" />
     <Compile Include="JobWorker.cs" />
     <Compile Include="Logger.cs" />

@@ -1,14 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace FlagSync.Core
 {
     [Serializable]
-    public class JobSettings
+    public class JobSetting : INotifyPropertyChanged
     {
         private string directoryA = String.Empty;
         private string directoryB = String.Empty;
-        private JobWorker.SyncMode syncMode;
-        private string name = "";
+        private JobWorker.SyncMode syncMode = JobWorker.SyncMode.Backup;
+        private string name = String.Empty;
 
         /// <summary>
         /// Gets or sets the directory A.
@@ -23,7 +24,11 @@ namespace FlagSync.Core
 
             set
             {
-                this.directoryA = value;
+                if(this.directoryA != value)
+                {
+                    this.directoryA = value;
+                    this.OnPropertyChanged("DirectoryA");
+                }
             }
         }
 
@@ -40,7 +45,11 @@ namespace FlagSync.Core
 
             set
             {
-                this.directoryB = value;
+                if(this.directoryB != value)
+                {
+                    this.directoryB = value;
+                    this.OnPropertyChanged("DirectoryB");
+                }
             }
         }
 
@@ -57,7 +66,11 @@ namespace FlagSync.Core
 
             set
             {
-                this.syncMode = value;
+                if(this.syncMode != value)
+                {
+                    this.syncMode = value;
+                    this.OnPropertyChanged("SyncMode");
+                }
             }
         }
 
@@ -74,25 +87,38 @@ namespace FlagSync.Core
 
             set
             {
-                this.name = value;
+                if(this.name != value)
+                {
+                    this.name = value;
+                    this.OnPropertyChanged("Name");
+                }
             }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JobSettings"/> class.
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobSetting"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        public JobSettings(string name)
+        public JobSetting(string name)
         {
             this.name = name;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JobSettings"/> class.
+        /// Called when a property has been changed.
         /// </summary>
-        public JobSettings()
+        /// <param name="propertyName">Name of the property.</param>
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

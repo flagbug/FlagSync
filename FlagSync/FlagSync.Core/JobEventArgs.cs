@@ -30,7 +30,7 @@ namespace FlagSync.Core
         /// Gets the job.
         /// </summary>
         /// <value>The job.</value>
-        public JobSettings Job
+        public JobSetting Job
         {
             get;
             private set;
@@ -40,7 +40,7 @@ namespace FlagSync.Core
         /// Initializes a new instance of the <see cref="JobEventArgs"/> class.
         /// </summary>
         /// <param name="job">The job.</param>
-        public JobEventArgs(JobSettings job)
+        public JobEventArgs(JobSetting job)
         {
             this.Job = job;
         }

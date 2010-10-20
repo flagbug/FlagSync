@@ -5,80 +5,24 @@ namespace FlagSync.Core
 {
     public abstract class Job
     {
-
-        /// <summary>
-        /// Occurs when a file has been proceeded.
-        /// </summary>
-        public event EventHandler<FileProceededEventArgs> FileProceeded;
-
-
-        /// <summary>
-        /// Occurs when the job has finished.
-        /// </summary>
-        public event EventHandler Finished;
-
-
-        /// <summary>
-        /// Occurs when a file has been deleted.
-        /// </summary>
-        public event EventHandler<FileDeletionEventArgs> FileDeleted;
-
-
-        /// <summary>
-        /// Occurs when a new file has been found.
-        /// </summary>
-        public event EventHandler<FileCopyEventArgs> FoundNewFile;
-
-        /// <summary>
-        /// Occurs when a modified file has been found.
-        /// </summary>
-        public event EventHandler<FileCopyEventArgs> FoundModifiedFile;
-
-
-        /// <summary>
-        /// Occurs when a file copy error has been catched.
-        /// </summary>
-        public event EventHandler<FileCopyErrorEventArgs> FileCopyError;
-
-
-        /// <summary>
-        /// Occurs when a file deletion error has been catched.
-        /// </summary>
-        public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
-
-
-        /// <summary>
-        /// Occurs when a directory has been created.
-        /// </summary>
-        public event EventHandler<DirectoryCreationEventArgs> DirectoryCreated;
-
-
-        /// <summary>
-        /// Occurs when a directory has been deleted.
-        /// </summary>
-        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeleted;
-
-
-        /// <summary>
-        /// Occurs when a directory deletion error has been catched.
-        /// </summary>
-        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
-
-        private JobSettings settings = new JobSettings();
+        #region Members
+        private JobSetting setting;
         private bool paused;
         private bool preview;
         private bool stopped;
         private long writtenBytes;
+        #endregion
 
+        #region Properties
         /// <summary>
         /// Gets the job settings.
         /// </summary>
         /// <value>The job settings.</value>
-        public JobSettings Settings
+        public JobSetting Settings
         {
             get
             {
-                return this.settings;
+                return this.setting;
             }
         }
   
@@ -105,8 +49,7 @@ namespace FlagSync.Core
                 return this.preview;
             }
         }
-
-        
+   
         /// <summary>
         /// Gets a value indicating whether this <see cref="Job"/> is stopped.
         /// </summary>
@@ -119,7 +62,6 @@ namespace FlagSync.Core
             }
         }
 
-
         /// <summary>
         /// Gets the written bytes.
         /// </summary>
@@ -131,22 +73,78 @@ namespace FlagSync.Core
                 return this.writtenBytes;
             }
         }
+        #endregion
+
+        #region Events
+        /// <summary>
+        /// Occurs when a file has been proceeded.
+        /// </summary>
+        public event EventHandler<FileProceededEventArgs> FileProceeded;
 
         /// <summary>
-        /// Starts the job.
+        /// Occurs when the job has finished.
         /// </summary>
-        public abstract void Start();
+        public event EventHandler Finished;
 
+        /// <summary>
+        /// Occurs when a file has been deleted.
+        /// </summary>
+        public event EventHandler<FileDeletionEventArgs> FileDeleted;
+
+        /// <summary>
+        /// Occurs when a new file has been found.
+        /// </summary>
+        public event EventHandler<FileCopyEventArgs> FoundNewFile;
+
+        /// <summary>
+        /// Occurs when a modified file has been found.
+        /// </summary>
+        public event EventHandler<FileCopyEventArgs> FoundModifiedFile;
+
+        /// <summary>
+        /// Occurs when a file copy error has been catched.
+        /// </summary>
+        public event EventHandler<FileCopyErrorEventArgs> FileCopyError;
+
+        /// <summary>
+        /// Occurs when a file deletion error has been catched.
+        /// </summary>
+        public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
+
+        /// <summary>
+        /// Occurs when a directory has been created.
+        /// </summary>
+        public event EventHandler<DirectoryCreationEventArgs> DirectoryCreated;
+
+        /// <summary>
+        /// Occurs when a directory has been deleted.
+        /// </summary>
+        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeleted;
+
+        /// <summary>
+        /// Occurs when a directory deletion error has been catched.
+        /// </summary>
+        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
+        #endregion
+
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="Job"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <param name="preview">if set to true no files will be deleted, mofified or copied.</param>
-        protected Job(JobSettings settings, bool preview)
+        protected Job(JobSetting setting, bool preview)
         {
             this.preview = preview;
-            this.settings = settings;
+            this.setting = setting;
         }
+        #endregion
+
+        #region Public methods
+        /// <summary>
+        /// Starts the job.
+        /// </summary>
+        public abstract void Start();
 
         /// <summary>
         /// Pauses the job
@@ -172,7 +170,9 @@ namespace FlagSync.Core
             this.paused = false;
             this.stopped = true;
         }
+        #endregion
 
+        #region Protected methods
         /// <summary>
         /// Checks the if the job is paused. If true, a loop will be enabled, till the jab gets continued
         /// </summary>
@@ -255,98 +255,6 @@ namespace FlagSync.Core
                     }
 
                     this.BackupDirectories(directory, new DirectoryInfo(targetDirectory), preview);
-                }
-            }
-
-            catch (System.UnauthorizedAccessException)
-            {
-                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
-            }
-        }
-
-        /// <summary>
-        /// Backups a single directory, without sub folders
-        /// </summary>
-        /// <param name="source">The source directory</param>
-        /// <param name="target">The target directory</param>
-        /// <param name="preview">True, if changes should get performed, otherwise false (if you want to see what will happen when you perform a backup)</param>
-        private void BackupDirectory(DirectoryInfo source, DirectoryInfo target, bool preview)
-        {
-            this.CheckPause();
-
-            try
-            {
-                foreach (FileInfo fileA in source.GetFiles())
-                {
-                    if (this.stopped)
-                    {
-                        return;
-                    }
-
-                    //Check if fileA isn't already in target directory
-                    if(!File.Exists(Path.Combine(target.FullName, fileA.Name)))
-                    {                        
-                        if(preview)
-                        {
-                            this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
-                        }
-
-                        else
-                        {
-                            try
-                            {
-                                CopyFile(fileA, target);
-                                this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
-                            }
-
-                            catch (Exception)
-                            {
-
-                            }
-
-                        }
-                    }
-
-                    if (target.Exists)
-                    {
-                        foreach (FileInfo fileB in target.GetFiles())
-                        {
-                            if (this.stopped)
-                            {
-                                return;
-                            }
-
-                            this.CheckPause();
-
-                            //Check on modified file
-                            if (fileA.Name.Equals(fileB.Name, StringComparison.OrdinalIgnoreCase))
-                            {
-                                if (this.IsFileModified(fileA, fileB))
-                                {
-                                    if(preview)
-                                    {
-                                        this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
-                                    }
-
-                                    else
-                                    {
-                                        try
-                                        {
-                                            CopyFile(fileA, target);
-                                            this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
-                                        }
-
-                                        catch (Exception)
-                                        {
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    this.OnFileProceeded(new FileProceededEventArgs(fileA));
                 }
             }
 
@@ -500,5 +408,100 @@ namespace FlagSync.Core
                 this.FileDeletionError.Invoke(this, e);
             }
         }
+        #endregion
+
+        #region Private methods
+        /// <summary>
+        /// Backups a single directory, without sub folders
+        /// </summary>
+        /// <param name="source">The source directory</param>
+        /// <param name="target">The target directory</param>
+        /// <param name="preview">True, if changes should get performed, otherwise false (if you want to see what will happen when you perform a backup)</param>
+        private void BackupDirectory(DirectoryInfo source, DirectoryInfo target, bool preview)
+        {
+            this.CheckPause();
+
+            try
+            {
+                foreach (FileInfo fileA in source.GetFiles())
+                {
+                    if (this.stopped)
+                    {
+                        return;
+                    }
+
+                    //Check if fileA isn't already in target directory
+                    if(!File.Exists(Path.Combine(target.FullName, fileA.Name)))
+                    {                        
+                        if(preview)
+                        {
+                            this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
+                        }
+
+                        else
+                        {
+                            try
+                            {
+                                CopyFile(fileA, target);
+                                this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
+                            }
+
+                            catch (Exception)
+                            {
+
+                            }
+
+                        }
+                    }
+
+                    if (target.Exists)
+                    {
+                        foreach (FileInfo fileB in target.GetFiles())
+                        {
+                            if (this.stopped)
+                            {
+                                return;
+                            }
+
+                            this.CheckPause();
+
+                            //Check on modified file
+                            if (fileA.Name.Equals(fileB.Name, StringComparison.OrdinalIgnoreCase))
+                            {
+                                if (this.IsFileModified(fileA, fileB))
+                                {
+                                    if(preview)
+                                    {
+                                        this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
+                                    }
+
+                                    else
+                                    {
+                                        try
+                                        {
+                                            CopyFile(fileA, target);
+                                            this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
+                                        }
+
+                                        catch (Exception)
+                                        {
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    this.OnFileProceeded(new FileProceededEventArgs(fileA));
+                }
+            }
+
+            catch (System.UnauthorizedAccessException)
+            {
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
+            }
+        }
+        #endregion
     }
 }

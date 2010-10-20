@@ -55,6 +55,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="JobListBoxViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -86,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ApplicationIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlagSync.Core\FlagSync.Core.csproj">
+      <Project>{1149F3C5-DBFE-4CFD-98F6-DB396343E647}</Project>
+      <Name>FlagSync.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

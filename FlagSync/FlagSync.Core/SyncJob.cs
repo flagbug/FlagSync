@@ -9,7 +9,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <param name="preview">if set to true no files will be deleted, mofified or copied.</param>
-        public SyncJob(JobSettings settings, bool preview)
+        public SyncJob(JobSetting settings, bool preview)
             : base(settings, preview)
         {
 

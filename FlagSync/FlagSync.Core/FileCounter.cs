@@ -7,7 +7,7 @@ namespace FlagSync.Core
     /// </summary>
     public class FileCounter
     {
-        private JobSettings settings;
+        private JobSetting settings;
         private FileCounterResults result;
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <returns>The result</returns>
-        public FileCounterResults CountJobFiles(JobSettings settings)
+        public FileCounterResults CountJobFiles(JobSetting settings)
         {
             this.settings = settings;
             this.CountJobFiles();

@@ -207,7 +207,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="jobs">The jobs.</param>
         /// <param name="preview">if set to true, a preview will be performed.</param>
-        public void Start(IEnumerable<JobSettings> jobs, bool preview)
+        public void Start(IEnumerable<JobSetting> jobs, bool preview)
         {
             this.totalWrittenBytes = 0;
 
@@ -221,9 +221,9 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="jobs">The jobs.</param>
         /// <param name="preview">if set to true, a preview will be performed.</param>
-        private void QueueJobs(IEnumerable<JobSettings> jobs, bool preview)
+        private void QueueJobs(IEnumerable<JobSetting> jobs, bool preview)
         {
-            foreach (JobSettings job in jobs)
+            foreach (JobSetting job in jobs)
             {
                 switch (job.SyncMode)
                 {
