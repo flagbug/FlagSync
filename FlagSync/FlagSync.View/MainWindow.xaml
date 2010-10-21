@@ -32,7 +32,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox Name="jobListBox" Grid.Row="0" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, ElementName=mainViewModel}" SelectedItem="{Binding Path=SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="jobListBox_SelectionChanged" />
+                        <ListBox Name="jobSettingsListBox" Grid.Row="0" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=mainViewModel}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding ElementName=mainViewModel, Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=LostFocus}" />
                         <Button Name="newJobButton" Content="New Job" Height="25" Grid.Row="1" Click="newJobButton_Click" />
                         <Button Name="deleteJobButton" Content="Delete Job" Height="25" Grid.Row="2" Click="deleteJobButton_Click" />
                     </Grid>
