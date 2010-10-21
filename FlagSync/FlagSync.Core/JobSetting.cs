@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 
 namespace FlagSync.Core
 {
     [Serializable]
-    public class JobSetting : INotifyPropertyChanged
+    public class JobSetting
     {
         private string directoryA = String.Empty;
         private string directoryB = String.Empty;
@@ -24,11 +25,7 @@ namespace FlagSync.Core
 
             set
             {
-                if(this.directoryA != value)
-                {
-                    this.directoryA = value;
-                    this.OnPropertyChanged("DirectoryA");
-                }
+                this.directoryA = value;
             }
         }
 
@@ -45,11 +42,7 @@ namespace FlagSync.Core
 
             set
             {
-                if(this.directoryB != value)
-                {
-                    this.directoryB = value;
-                    this.OnPropertyChanged("DirectoryB");
-                }
+                this.directoryB = value;
             }
         }
 
@@ -66,11 +59,7 @@ namespace FlagSync.Core
 
             set
             {
-                if(this.syncMode != value)
-                {
-                    this.syncMode = value;
-                    this.OnPropertyChanged("SyncMode");
-                }
+                this.syncMode = value;
             }
         }
 
@@ -87,18 +76,9 @@ namespace FlagSync.Core
 
             set
             {
-                if(this.name != value)
-                {
-                    this.name = value;
-                    this.OnPropertyChanged("Name");
-                }
+                this.name = value;
             }
         }
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JobSetting"/> class.
@@ -107,18 +87,6 @@ namespace FlagSync.Core
         public JobSetting(string name)
         {
             this.name = name;
-        }
-
-        /// <summary>
-        /// Called when a property has been changed.
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if(PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         /// <summary>

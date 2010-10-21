@@ -55,7 +55,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ByteToKiloByteConverter.cs" />
     <Compile Include="JobSettingsViewModel.cs" />
+    <Compile Include="JobSettingViewModel.cs" />
     <Compile Include="JobWorkerViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">

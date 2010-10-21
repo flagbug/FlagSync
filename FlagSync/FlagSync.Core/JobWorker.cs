@@ -89,6 +89,7 @@ namespace FlagSync.Core
         private Job currentJob;
         private Queue<Job> jobQueue = new Queue<Job>();
         private long totalWrittenBytes;
+        private int proceededFiles;
         private FileCounter.FileCounterResults fileCounterResult;
         private volatile bool paused;
 
@@ -101,6 +102,18 @@ namespace FlagSync.Core
             get
             {
                 return this.totalWrittenBytes;
+            }
+        }
+
+        /// <summary>
+        /// Gets the proceeded files.
+        /// </summary>
+        /// <value>The proceeded files.</value>
+        public int ProceededFiles
+        {
+            get
+            {
+                return this.proceededFiles;
             }
         }
 
@@ -348,6 +361,8 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
         void currentJob_FileProceeded(object sender, FileProceededEventArgs e)
         {
+            this.proceededFiles++;
+
             if (this.FileProceeded != null)
             {
                 this.FileProceeded.Invoke(this, e);

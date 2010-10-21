@@ -6,6 +6,9 @@
     <Window.DataContext>
         <local:MainViewModel x:Name="mainViewModel" />
     </Window.DataContext>
+    <Window.Resources>
+        <local:ByteToKiloByteConverter x:Key="ByteToKiloByteConverter"/>
+    </Window.Resources>
     <Grid Name="mainGrid" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -55,9 +58,9 @@
                                 <TextBlock Text="Name:" HorizontalAlignment="Right" Name="jobSettingsNameTextBlock" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="jobNameTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.Name, Mode=TwoWay, ElementName=mainViewModel}" />
                                 <Button Margin="5, 5, 5, 5" Content="Directory A" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryATextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, ElementName=mainViewModel, Mode=TwoWay}" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryATextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, ElementName=mainViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                                 <Button Margin="5, 5, 5, 5" Content="Directory B" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, ElementName=mainViewModel, Mode=TwoWay}" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, ElementName=mainViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
@@ -123,7 +126,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ProgressBar Height="25" HorizontalAlignment="Stretch" Name="progressBar" VerticalAlignment="Top" Width="Auto" Grid.Row="0" />
+                    <ProgressBar Height="25" HorizontalAlignment="Stretch" Name="progressBar" VerticalAlignment="Top" Width="Auto" Grid.Row="0" Maximum="{Binding ElementName=mainViewModel, Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, Mode=OneWay}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, ElementName=mainViewModel, Converter={StaticResource ByteToKiloByteConverter}}" IsIndeterminate="{Binding Path=JobWorkerViewModel, ElementName=mainViewModel.IsCounting, Mode=OneWay}" Minimum="0" />
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -131,7 +134,7 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Content="Preview" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0"></Button>
+                        <Button Content="Preview" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click"></Button>
                         <Button Content="Start" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" />
                         <Button Content="Pause" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" />
                         <Button Content="Stop" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" Name="stopButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" />

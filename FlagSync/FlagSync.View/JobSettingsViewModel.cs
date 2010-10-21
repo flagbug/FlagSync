@@ -1,19 +1,21 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using FlagSync.Core;
+using System.Collections.Generic;
 
 namespace FlagSync.View
 {
     public class JobSettingsViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<JobSetting> jobSettings = new ObservableCollection<JobSetting>();
-        private JobSetting selectedJobSetting;
+        private ObservableCollection<JobSettingViewModel> jobSettings = new ObservableCollection<JobSettingViewModel>();
+        private JobSettingViewModel selectedJobSetting;
 
         /// <summary>
         /// Gets the job settings.
         /// </summary>
         /// <value>The job settings.</value>
-        public ObservableCollection<JobSetting> JobSettings
+        public ObservableCollection<JobSettingViewModel> JobSettings
         {
             get
             {
@@ -22,10 +24,25 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Gets the inter job settings.
+        /// </summary>
+        /// <value>The inter job settings.</value>
+        public IEnumerable<JobSetting> InternJobSettings
+        {
+            get
+            {
+                foreach (JobSettingViewModel setting in this.JobSettings)
+                {
+                    yield return setting.Intern;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the selected job setting.
         /// </summary>
         /// <value>The selected job setting.</value>
-        public JobSetting SelectedJobSetting
+        public JobSettingViewModel SelectedJobSetting
         {
             get
             {
@@ -47,7 +64,7 @@ namespace FlagSync.View
         /// </summary>
         public void AddNewJobSetting()
         {
-            this.JobSettings.Add(new JobSetting("New Job " + (this.JobSettings.Count + 1)));
+            this.JobSettings.Add(new JobSettingViewModel("New Job " + (this.JobSettings.Count + 1)));
         }
 
         /// <summary>

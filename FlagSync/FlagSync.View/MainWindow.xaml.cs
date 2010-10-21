@@ -25,6 +25,9 @@ namespace FlagSync.View
         public MainWindow()
         {
             InitializeComponent();
+
+            this.progressBar.Maximum = 1;
+            this.progressBar.Value = 0;
         }
 
         /// <summary>
@@ -97,6 +100,27 @@ namespace FlagSync.View
         private void deleteJobButton_Click(object sender, RoutedEventArgs e)
         {
             this.mainViewModel.JobSettingsViewModel.DeleteSelectedJobSetting();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the previewButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void previewButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.InitializeJobWorker();
+
+            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.InternJobSettings, true);
+        }
+
+        /// <summary>
+        /// Initializes the job worker.
+        /// </summary>
+        private void InitializeJobWorker()
+        {
+            Logger.Instance = new Logger(this.mainViewModel.LogFilePath);
+            this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
         }
     }
 }
