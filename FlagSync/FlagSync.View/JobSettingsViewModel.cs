@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections.ObjectModel;
-using FlagSync.Core;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using FlagSync.Core;
 
 namespace FlagSync.View
 {
-    public class JobListBoxViewModel : INotifyPropertyChanged
+    public class JobSettingsViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<JobSetting> jobSettings = new ObservableCollection<JobSetting>();
         private JobSetting selectedJobSetting;
 
+        /// <summary>
+        /// Gets the job settings.
+        /// </summary>
+        /// <value>The job settings.</value>
         public ObservableCollection<JobSetting> JobSettings
         {
             get
@@ -20,6 +21,10 @@ namespace FlagSync.View
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected job setting.
+        /// </summary>
+        /// <value>The selected job setting.</value>
         public JobSetting SelectedJobSetting
         {
             get
@@ -37,11 +42,17 @@ namespace FlagSync.View
             }
         }
 
+        /// <summary>
+        /// Adds the new job setting.
+        /// </summary>
         public void AddNewJobSetting()
         {
             this.JobSettings.Add(new JobSetting("New Job " + (this.JobSettings.Count + 1)));
         }
 
+        /// <summary>
+        /// Deletes the selected job setting.
+        /// </summary>
         public void DeleteSelectedJobSetting()
         {
             this.jobSettings.Remove(this.SelectedJobSetting);

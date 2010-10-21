@@ -18,7 +18,7 @@ namespace FlagSync.Core
             /// <summary>
             /// Synchronization mode
             /// </summary>
-            Sync
+            Synchronization
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace FlagSync.Core
                         this.jobQueue.Enqueue(new BackupJob(job, preview));
                         break;
 
-                    case SyncMode.Sync:
+                    case SyncMode.Synchronization:
                         this.jobQueue.Enqueue(new SyncJob(job, preview));
                         break;
                 }

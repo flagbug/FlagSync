@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FlagSync.View"
-        Title="WPF Test Window" Height="768" Width="1024" BorderThickness="0" WindowStyle="SingleBorderWindow" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico">
+        Title="FlagSync" Height="768" Width="1024" BorderThickness="0" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico" WindowState="Maximized">
     <Window.DataContext>
-        <local:JobListBoxViewModel x:Name="jobListBoxViewModel" />
+        <local:MainViewModel x:Name="mainViewModel" />
     </Window.DataContext>
     <Grid Name="mainGrid" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -32,7 +32,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox Name="jobListBox" Grid.Row="0" ItemsSource="{Binding Path=JobSettings, ElementName=jobListBoxViewModel}" SelectedItem="{Binding Path=SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="jobListBox_SelectionChanged" />
+                        <ListBox Name="jobListBox" Grid.Row="0" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, ElementName=mainViewModel}" SelectedItem="{Binding Path=SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="jobListBox_SelectionChanged" />
                         <Button Name="newJobButton" Content="New Job" Height="25" Grid.Row="1" Click="newJobButton_Click" />
                         <Button Name="deleteJobButton" Content="Delete Job" Height="25" Grid.Row="2" Click="deleteJobButton_Click" />
                     </Grid>
@@ -52,12 +52,12 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Label Content="Name:" HorizontalAlignment="Right" Name="jobSettingsNameLabel" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="jobNameTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedJobSetting.Name, ElementName=jobListBoxViewModel, Mode=TwoWay}" />
+                                <TextBlock Text="Name:" HorizontalAlignment="Right" Name="jobSettingsNameTextBlock" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="jobNameTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.Name, Mode=TwoWay, ElementName=mainViewModel}" />
                                 <Button Margin="5, 5, 5, 5" Content="Directory A" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryATextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedJobSetting.DirectoryA, ElementName=jobListBoxViewModel, Mode=TwoWay}" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryATextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, ElementName=mainViewModel, Mode=TwoWay}" />
                                 <Button Margin="5, 5, 5, 5" Content="Directory B" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedJobSetting.DirectoryB, ElementName=jobListBoxViewModel, Mode=TwoWay}" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, ElementName=mainViewModel, Mode=TwoWay}" />
                             </Grid>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
@@ -107,10 +107,14 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Label Content="Name:" Height="Auto" HorizontalAlignment="Left" Name="jobNameLabel" VerticalAlignment="Top" Grid.Row="0" Padding="0" />
-                    <Label Content="Directory A:" Height="Auto" HorizontalAlignment="Left" Name="jobDirectoryALabel" VerticalAlignment="Top" Grid.Row="1" Padding="0" />
-                    <Label Content="Directory B:" Height="Auto" HorizontalAlignment="Left" Name="jobDirectoryBLabel" VerticalAlignment="Top" Grid.Row="2" Padding="0" />
-                    <Label Content="Mode:" Height="Auto" HorizontalAlignment="Left" Width="Auto" Name="jobModeLabel" VerticalAlignment="Top" Grid.Row="3" Padding="0" />
+                    <TextBlock Text="Name:" Height="Auto" HorizontalAlignment="Left" Name="currentJobNameDescriptionLabel" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Padding="0" />
+                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobNameViewLabel" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" IsEnabled="True" Padding="0" Text="{Binding ElementName=mainViewModel, Path=JobWorkerViewModel.CurrentJobSettings.Name}" />
+                    <TextBlock Text="Directory A:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryADescriptionLabel" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Padding="0" />
+                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryAViewLabel" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Padding="0" Style="{Binding ElementName=mainViewModel, Path=JobWorkerViewModel.CurrentJobSettings.DirectoryA}" />
+                    <TextBlock Text="Directory B:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryBDescriptionLabel" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" Padding="0" />
+                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryBViewLabel" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1" Padding="0" Style="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryB, ElementName=mainViewModel}" />
+                    <TextBlock Text="Mode:" Height="Auto" HorizontalAlignment="Left" Width="Auto" Name="currentJobModeDescriptionLabel" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0" Padding="0" />
+                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDescriptionViewLabel" VerticalAlignment="Stretch" Grid.Row="3" Grid.Column="1" Padding="0" />
                 </Grid>
             </GroupBox>
             <GroupBox Name="controlGroupBox" Header="Control" Height="Auto" Width="Auto" Grid.Column="1" Padding="5">

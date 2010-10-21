@@ -19,6 +19,8 @@ namespace FlagSync.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private JobSettingsViewModel jobSettingsViewModel = new JobSettingsViewModel();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
@@ -44,7 +46,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void newJobButton_Click(object sender, RoutedEventArgs e)
         {
-            this.jobListBoxViewModel.AddNewJobSetting();
+            this.jobSettingsViewModel.AddNewJobSetting();
         }
 
         /// <summary>
@@ -54,7 +56,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void jobSettingsBackupModeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            this.jobListBoxViewModel.SelectedJobSetting.SyncMode = JobWorker.SyncMode.Backup;
+            this.jobSettingsViewModel.SelectedJobSetting.SyncMode = JobWorker.SyncMode.Backup;
         }
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void jobSettingsSyncModeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            this.jobListBoxViewModel.SelectedJobSetting.SyncMode = JobWorker.SyncMode.Sync;
+            this.jobSettingsViewModel.SelectedJobSetting.SyncMode = JobWorker.SyncMode.Synchronization;
         }
 
         /// <summary>
@@ -74,16 +76,16 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.Controls.SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void jobListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(this.jobListBoxViewModel.SelectedJobSetting == null)
+            if(this.jobSettingsViewModel.SelectedJobSetting == null)
                 return;
 
-            switch(this.jobListBoxViewModel.SelectedJobSetting.SyncMode)
+            switch(this.jobSettingsViewModel.SelectedJobSetting.SyncMode)
             {
                 case JobWorker.SyncMode.Backup:
                     this.jobSettingsBackupModeRadioButton.IsChecked = true;
                     break;
 
-                case JobWorker.SyncMode.Sync:
+                case JobWorker.SyncMode.Synchronization:
                     this.jobSettingsSyncModeRadioButton.IsChecked = true;
                     break;
             }
@@ -96,7 +98,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void deleteJobButton_Click(object sender, RoutedEventArgs e)
         {
-            this.jobListBoxViewModel.DeleteSelectedJobSetting();
+            this.jobSettingsViewModel.DeleteSelectedJobSetting();
         }
     }
 }
