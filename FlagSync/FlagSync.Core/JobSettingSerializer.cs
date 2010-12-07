@@ -40,7 +40,7 @@ namespace FlagSync.Core
                 settings = (List<JobSetting>)serializer.Deserialize(reader);
             }
 
-            catch(InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 throw;
             }

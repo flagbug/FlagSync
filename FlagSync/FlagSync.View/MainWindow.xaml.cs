@@ -47,7 +47,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void jobSettingsBackupModeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            this.mainViewModel.JobSettingsViewModel.SelectedJobSetting.SyncMode = JobWorker.SyncMode.Backup;
+            this.mainViewModel.JobSettingsViewModel.SelectedJobSetting.SyncMode = SyncMode.Backup;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void jobSettingsSyncModeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            this.mainViewModel.JobSettingsViewModel.SelectedJobSetting.SyncMode = JobWorker.SyncMode.Synchronization;
+            this.mainViewModel.JobSettingsViewModel.SelectedJobSetting.SyncMode = SyncMode.Synchronization;
         }
 
         /// <summary>
@@ -72,11 +72,11 @@ namespace FlagSync.View
 
             switch (this.mainViewModel.JobSettingsViewModel.SelectedJobSetting.SyncMode)
             {
-                case JobWorker.SyncMode.Backup:
+                case SyncMode.Backup:
                     this.jobSettingsBackupModeRadioButton.IsChecked = true;
                     break;
 
-                case JobWorker.SyncMode.Synchronization:
+                case SyncMode.Synchronization:
                     this.jobSettingsSyncModeRadioButton.IsChecked = true;
                     break;
             }
@@ -99,18 +99,42 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void previewButton_Click(object sender, RoutedEventArgs e)
         {
-            this.InitializeJobWorker();
+            this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
 
             this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.InternJobSettings, true);
         }
 
         /// <summary>
-        /// Initializes the job worker.
+        /// Handles the Click event of the directoryAButton control.
         /// </summary>
-        private void InitializeJobWorker()
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void directoryAButton_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance = new Logger(this.mainViewModel.LogFilePath);
-            this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the loadJobsButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void loadJobsButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// Handles the Click event of the saveJobsButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void saveJobsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var saveJobSettingsDialog = new System.Windows.Forms.SaveFileDialog();
+            saveJobSettingsDialog.AddExtension = true;
+            saveJobSettingsDialog.DefaultExt = "xml";
+            saveJobSettingsDialog.FileName = "NewJobSettings";
+            saveJobSettingsDialog.InitialDirectory = this.mainViewModel.AppDataFolderPath;
+            saveJobSettingsDialog.ShowDialog();
         }
     }
 }

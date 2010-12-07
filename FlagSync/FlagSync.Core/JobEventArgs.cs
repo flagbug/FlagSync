@@ -224,5 +224,5 @@ namespace FlagSync.Core
         {
             this.Directory = directory;
         }
-    } 
+    }
 }

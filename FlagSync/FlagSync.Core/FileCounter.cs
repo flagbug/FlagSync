@@ -59,7 +59,6 @@ namespace FlagSync.Core
             public FileCounterResults()
                 : this(0, 0)
             {
-
             }
 
             /// <summary>

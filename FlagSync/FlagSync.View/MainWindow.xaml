@@ -24,22 +24,40 @@
         </Menu>
         <TabControl Name="mainTabControl" Grid.Row="2" Height="Auto" Margin="5, 0, 5, 10">
             <TabItem Header="Settings" Name="settingsTabItem">
-                <Grid>
+                <Grid Margin="0, 10, 0, 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListBox Name="jobSettingsListBox" Grid.Row="0" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=mainViewModel}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding ElementName=mainViewModel, Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=LostFocus}" />
-                        <Button Name="newJobButton" Content="New Job" Height="25" Grid.Row="1" Click="newJobButton_Click" />
-                        <Button Name="deleteJobButton" Content="Delete Job" Height="25" Grid.Row="2" Click="deleteJobButton_Click" />
+                        <Button Name="loadJobsButton" Content="Load Jobs" Height="25" Grid.Row="0" Click="loadJobsButton_Click" />
+                        <Button Name="saveJobsButton" Content="Save Jobs" Height="25" Grid.Row="1" Click="saveJobsButton_Click" />
+                        <ListBox Name="jobSettingsListBox" Margin="0, 5, 0, 5" Grid.Row="2" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=mainViewModel}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding ElementName=mainViewModel, Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox
+                                            Name="checkedListBoxItem"
+                                            IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem} }, Path=IsSelected, Mode=TwoWay}"
+                                            />
+                                        <ContentPresenter Margin="5, 0, 0, 0"
+                                            Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, UpdateSourceTrigger=PropertyChanged}"
+                                            />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button Name="newJobButton" Content="New Job" Height="25" Grid.Row="3" Click="newJobButton_Click" />
+                        <Button Name="deleteJobButton" Content="Delete Job" Height="25" Grid.Row="4" Click="deleteJobButton_Click" />
                     </Grid>
-                    <GroupBox Header="Common Settings" Height="Auto" HorizontalAlignment="Left" Margin="5,5,0,0" Name="commonJobSettingsGroupBox" VerticalAlignment="Top" Width="400" Grid.Column="1">
+                    <GroupBox Header="Common Settings" Height="Auto" HorizontalAlignment="Left" Margin="5,0,0,0" Name="commonJobSettingsGroupBox" VerticalAlignment="Top" Width="400" Grid.Column="1">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -57,7 +75,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Name:" HorizontalAlignment="Right" Name="jobSettingsNameTextBlock" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="jobNameTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.Name, Mode=TwoWay, ElementName=mainViewModel}" />
-                                <Button Margin="5, 5, 5, 5" Content="Directory A" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" />
+                                <Button Margin="5, 5, 5, 5" Content="Directory A" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click" />
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryATextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, ElementName=mainViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                                 <Button Margin="5, 5, 5, 5" Content="Directory B" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" />
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, ElementName=mainViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
@@ -145,4 +163,3 @@
         <StatusBar Name="statusBar" Width="Auto" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" />
     </Grid>
 </Window>
-

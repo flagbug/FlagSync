@@ -6,14 +6,17 @@ namespace FlagSync.Core
     public abstract class Job
     {
         #region Members
+
         private JobSetting setting;
         private bool paused;
         private bool preview;
         private bool stopped;
         private long writtenBytes;
-        #endregion
+
+        #endregion Members
 
         #region Properties
+
         /// <summary>
         /// Gets the job settings.
         /// </summary>
@@ -25,7 +28,7 @@ namespace FlagSync.Core
                 return this.setting;
             }
         }
-  
+
         /// <summary>
         /// Gets a value indicating whether this <see cref="Job"/> is paused.
         /// </summary>
@@ -49,7 +52,7 @@ namespace FlagSync.Core
                 return this.preview;
             }
         }
-   
+
         /// <summary>
         /// Gets a value indicating whether this <see cref="Job"/> is stopped.
         /// </summary>
@@ -73,9 +76,11 @@ namespace FlagSync.Core
                 return this.writtenBytes;
             }
         }
-        #endregion
+
+        #endregion Properties
 
         #region Events
+
         /// <summary>
         /// Occurs when a file has been proceeded.
         /// </summary>
@@ -125,9 +130,11 @@ namespace FlagSync.Core
         /// Occurs when a directory deletion error has been catched.
         /// </summary>
         public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
-        #endregion
+
+        #endregion Events
 
         #region Constructor
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Job"/> class.
         /// </summary>
@@ -138,9 +145,11 @@ namespace FlagSync.Core
             this.preview = preview;
             this.setting = setting;
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Public methods
+
         /// <summary>
         /// Starts the job.
         /// </summary>
@@ -170,9 +179,11 @@ namespace FlagSync.Core
             this.paused = false;
             this.stopped = true;
         }
-        #endregion
+
+        #endregion Public methods
 
         #region Protected methods
+
         /// <summary>
         /// Checks the if the job is paused. If true, a loop will be enabled, till the jab gets continued
         /// </summary>
@@ -233,7 +244,7 @@ namespace FlagSync.Core
 
                     if (!Directory.Exists(targetDirectory))
                     {
-                        if(preview)
+                        if (preview)
                         {
                             this.OnNewDirectory(new DirectoryCreationEventArgs(directory, target));
                         }
@@ -246,7 +257,7 @@ namespace FlagSync.Core
                                 this.OnNewDirectory(new DirectoryCreationEventArgs(directory, target));
                             }
 
-                            catch(Exception e)
+                            catch (Exception e)
                             {
                                 Logger.Instance.LogError("Exception at directory creation: " + targetDirectory);
                                 Logger.Instance.LogError(e.Message);
@@ -317,7 +328,6 @@ namespace FlagSync.Core
             }
 
             Logger.Instance.LogSucceed("Found new directory: " + e.Directory.Name + " in source: " + e.Directory.Parent.FullName + ", created in target: " + e.TargetDirectory.FullName);
-
         }
 
         /// <summary>
@@ -332,7 +342,6 @@ namespace FlagSync.Core
             }
 
             Logger.Instance.LogSucceed("Deleted directory: " + e.Directory.FullName);
-
         }
 
         /// <summary>
@@ -408,9 +417,11 @@ namespace FlagSync.Core
                 this.FileDeletionError.Invoke(this, e);
             }
         }
-        #endregion
+
+        #endregion Protected methods
 
         #region Private methods
+
         /// <summary>
         /// Backups a single directory, without sub folders
         /// </summary>
@@ -431,9 +442,9 @@ namespace FlagSync.Core
                     }
 
                     //Check if fileA isn't already in target directory
-                    if(!File.Exists(Path.Combine(target.FullName, fileA.Name)))
-                    {                        
-                        if(preview)
+                    if (!File.Exists(Path.Combine(target.FullName, fileA.Name)))
+                    {
+                        if (preview)
                         {
                             this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
                         }
@@ -448,9 +459,7 @@ namespace FlagSync.Core
 
                             catch (Exception)
                             {
-
                             }
-
                         }
                     }
 
@@ -470,7 +479,7 @@ namespace FlagSync.Core
                             {
                                 if (this.IsFileModified(fileA, fileB))
                                 {
-                                    if(preview)
+                                    if (preview)
                                     {
                                         this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
                                     }
@@ -485,7 +494,6 @@ namespace FlagSync.Core
 
                                         catch (Exception)
                                         {
-
                                         }
                                     }
                                 }
@@ -502,6 +510,7 @@ namespace FlagSync.Core
                 Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
             }
         }
-        #endregion
+
+        #endregion Private methods
     }
 }

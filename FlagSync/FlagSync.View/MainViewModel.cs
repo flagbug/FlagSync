@@ -1,27 +1,34 @@
 ﻿using System;
 using System.IO;
+using FlagSync.Core;
 
 namespace FlagSync.View
 {
     public class MainViewModel
     {
-        #region Members
+        #region Fields
+
         private JobSettingsViewModel jobSettingsViewModel = new JobSettingsViewModel();
         private JobWorkerViewModel jobWorkerViewModel = new JobWorkerViewModel();
         private string appDataFolderPath;
         private string logFilePath;
-        #endregion
+
+        #endregion Fields
 
         #region Constructor
+
         public MainViewModel()
         {
-            this.appDataFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FlagSync";
+            this.appDataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FlagSync");
             this.CreateAppDatafolder();
-            this.logFilePath = this.appDataFolderPath + "\\log.txt";
+            this.logFilePath = Path.Combine(this.appDataFolderPath, "log.txt");
+            Logger.Instance = new Logger(this.LogFilePath);
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Properties
+
         /// <summary>
         /// Gets the job settings view model.
         /// </summary>
@@ -69,13 +76,16 @@ namespace FlagSync.View
                 return this.logFilePath;
             }
         }
-        #endregion
 
-        #region Public methods
-        public void CreateAppDatafolder()
+        #endregion Properties
+
+        #region Private methods
+
+        private void CreateAppDatafolder()
         {
             Directory.CreateDirectory(this.AppDataFolderPath);
         }
-        #endregion
+
+        #endregion Private methods
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using FlagSync.Core;
 
 namespace FlagSync.View
@@ -23,17 +24,26 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Gets the inter job settings.
+        /// Gets the intern job settings.
         /// </summary>
-        /// <value>The inter job settings.</value>
+        /// <value>The intern job settings.</value>
         public IEnumerable<JobSetting> InternJobSettings
         {
             get
             {
-                foreach (JobSettingViewModel setting in this.JobSettings)
-                {
-                    yield return setting.Intern;
-                }
+                return this.jobSettings.Select(setting => setting.InternJobSetting);
+            }
+        }
+
+        /// <summary>
+        /// Gets the included intern job settings.
+        /// </summary>
+        /// <value>The included intern job settings.</value>
+        public IEnumerable<JobSetting> IncludedInternJobSettings
+        {
+            get
+            {
+                return this.InternJobSettings.Where(setting => setting.IsIncluded);
             }
         }
 
@@ -50,7 +60,7 @@ namespace FlagSync.View
 
             set
             {
-                if(this.SelectedJobSetting != value)
+                if (this.SelectedJobSetting != value)
                 {
                     this.selectedJobSetting = value;
                     this.OnPropertyChanged("SelectedJobSetting");
@@ -59,7 +69,7 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Adds the new job setting.
+        /// Adds a new job setting.
         /// </summary>
         public void AddNewJobSetting()
         {
@@ -73,12 +83,37 @@ namespace FlagSync.View
         {
             this.jobSettings.Remove(this.SelectedJobSetting);
 
-            if(this.JobSettings.Count == 0)
+            if (this.JobSettings.Count == 0)
             {
                 this.AddNewJobSetting();
             }
 
             this.SelectedJobSetting = this.JobSettings[this.JobSettings.Count - 1];
+        }
+
+        /// <summary>
+        /// Saves the job settings.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        public void SaveJobSettings(string path)
+        {
+            JobSettingSerializer.Save(this.InternJobSettings, path);
+        }
+
+        /// <summary>
+        /// Loads the job settings.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        public void LoadJobSettings(string path)
+        {
+            this.JobSettings.Clear();
+
+            IEnumerable<JobSetting> settings = JobSettingSerializer.Read(path);
+
+            foreach (JobSetting setting in settings)
+            {
+                this.JobSettings.Add(new JobSettingViewModel(setting));
+            }
         }
 
         /// <summary>
@@ -92,7 +127,7 @@ namespace FlagSync.View
         /// <param name="propertyName">Name of the property.</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }

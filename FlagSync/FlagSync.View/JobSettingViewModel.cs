@@ -6,11 +6,35 @@ namespace FlagSync.View
 {
     public class JobSettingViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
-        #region Members
-        private JobSetting intern;
-        #endregion
+        #region Fields
+
+        private JobSetting internJobSetting;
+
+        #endregion Fields
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is included for syncing.
+        /// </summary>
+        /// <value>true if this instance is included for syncing; otherwise, false.</value>
+        public bool IsIncluded
+        {
+            get
+            {
+                return this.internJobSetting.IsIncluded;
+            }
+
+            set
+            {
+                if (this.IsIncluded != value)
+                {
+                    this.internJobSetting.IsIncluded = value;
+                    this.OnPropertyChanged("IsIncluded");
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the directory A.
         /// </summary>
@@ -19,14 +43,14 @@ namespace FlagSync.View
         {
             get
             {
-                return this.intern.DirectoryA;
+                return this.internJobSetting.DirectoryA;
             }
 
             set
             {
                 if (this.DirectoryA != value)
                 {
-                    this.intern.DirectoryA = value;
+                    this.internJobSetting.DirectoryA = value;
                     this.OnPropertyChanged("DirectoryA");
                 }
             }
@@ -40,14 +64,14 @@ namespace FlagSync.View
         {
             get
             {
-                return intern.DirectoryB;
+                return internJobSetting.DirectoryB;
             }
 
             set
             {
                 if (this.DirectoryB != value)
                 {
-                    this.intern.DirectoryB = value;
+                    this.internJobSetting.DirectoryB = value;
                     this.OnPropertyChanged("DirectoryB");
                 }
             }
@@ -61,14 +85,14 @@ namespace FlagSync.View
         {
             get
             {
-                return this.intern.Name;
+                return this.internJobSetting.Name;
             }
 
             set
             {
                 if (this.Name != value)
                 {
-                    this.intern.Name = value;
+                    this.internJobSetting.Name = value;
                     this.OnPropertyChanged("Name");
                 }
             }
@@ -78,18 +102,18 @@ namespace FlagSync.View
         /// Gets or sets the sync mode.
         /// </summary>
         /// <value>The sync mode.</value>
-        public JobWorker.SyncMode SyncMode
+        public SyncMode SyncMode
         {
             get
             {
-                return this.intern.SyncMode;
+                return this.internJobSetting.SyncMode;
             }
 
             set
             {
                 if (this.SyncMode != value)
                 {
-                    this.intern.SyncMode = value;
+                    this.internJobSetting.SyncMode = value;
                     this.OnPropertyChanged("SyncMode");
                 }
             }
@@ -98,7 +122,7 @@ namespace FlagSync.View
         /// <summary>
         /// Gets an error message indicating what is wrong with this object.
         /// </summary>
-        /// <value></value>
+        /// <value>The error message</value>
         /// <returns>
         /// An error message indicating what is wrong with this object. The default is an empty string ("").
         /// </returns>
@@ -129,38 +153,62 @@ namespace FlagSync.View
             }
         }
 
-        public JobSetting Intern
+        /// <summary>
+        /// Gets the intern job setting.
+        /// </summary>
+        /// <value>The intern job setting.</value>
+        public JobSetting InternJobSetting
         {
             get
             {
-                return this.intern;
+                return this.internJobSetting;
             }
         }
-        #endregion
+
+        #endregion Properties
 
         #region Events
+
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
+
+        #endregion Events
 
         #region Constructor
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobSettingViewModel"/> class.
+        /// </summary>
+        /// <param name="name">The name.</param>
         public JobSettingViewModel(string name)
         {
-            this.intern = new JobSetting(name);
-            this.Name = name;
+            this.internJobSetting = new JobSetting(name);
         }
-        #endregion
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobSettingViewModel"/> class.
+        /// </summary>
+        /// <param name="internJobSetting">The intern job setting.</param>
+        public JobSettingViewModel(JobSetting internJobSetting)
+        {
+            this.internJobSetting = internJobSetting;
+        }
+
+        #endregion Constructor
 
         #region Public methods
+
         public override string ToString()
         {
-            return this.intern.ToString();
+            return this.internJobSetting.ToString();
         }
-        #endregion
+
+        #endregion Public methods
 
         #region Protected methods
+
         /// <summary>
         /// Called when a property has been changed.
         /// </summary>
@@ -173,5 +221,6 @@ namespace FlagSync.View
             }
         }
     }
-        #endregion
+
+        #endregion Protected methods
 }

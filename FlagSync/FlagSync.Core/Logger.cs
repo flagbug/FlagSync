@@ -10,7 +10,7 @@ namespace FlagSync.Core
 
         /// <summary>
         /// Singleton instance of the logger (must be manually initialized)
-        /// </summary> 
+        /// </summary>
         public static Logger Instance
         {
             get
@@ -23,7 +23,6 @@ namespace FlagSync.Core
                 Logger.instance = value;
             }
         }
-
 
         /// <summary>
         /// Gets the path of the log file.
@@ -50,7 +49,7 @@ namespace FlagSync.Core
                 File.Create(path);
             }
 
-            catch(DirectoryNotFoundException e)
+            catch (DirectoryNotFoundException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
                 throw;
@@ -100,14 +99,14 @@ namespace FlagSync.Core
                 writer.WriteLine(DateTime.Now.ToString() + " " + type + ": " + log);
             }
 
-            catch(IOException e)
+            catch (IOException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
 
             finally
             {
-                if(writer != null)
+                if (writer != null)
                 {
                     writer.Close();
                 }
@@ -115,4 +114,3 @@ namespace FlagSync.Core
         }
     }
 }
-

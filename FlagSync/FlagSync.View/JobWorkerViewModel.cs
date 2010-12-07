@@ -8,6 +8,7 @@ namespace FlagSync.View
     public class JobWorkerViewModel : INotifyPropertyChanged
     {
         #region Members
+
         private JobWorker jobWorker;
         private JobSetting currentJobSetting;
         private long countedBytes;
@@ -15,9 +16,11 @@ namespace FlagSync.View
         private int countedFiles;
         private int proceededFiles;
         private bool isCounting;
-        #endregion
+
+        #endregion Members
 
         #region Properties
+
         /// <summary>
         /// Gets a value indicating whether the job worker is counting.
         /// </summary>
@@ -38,6 +41,7 @@ namespace FlagSync.View
                 }
             }
         }
+
         /// <summary>
         /// Gets the counted bytes.
         /// </summary>
@@ -135,23 +139,27 @@ namespace FlagSync.View
 
             private set
             {
-                if(this.CurrentJobSettings != value)
+                if (this.CurrentJobSettings != value)
                 {
                     this.currentJobSetting = value;
                     this.OnPropertyChanged("CurrentJobSettings");
                 }
             }
         }
-        #endregion
+
+        #endregion Properties
 
         #region Events
+
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
+
+        #endregion Events
 
         #region Constructor
+
         /// <summary>
         /// Jobs the worker view model.
         /// </summary>
@@ -159,9 +167,11 @@ namespace FlagSync.View
         {
             this.ResetJobWorker();
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Public methods
+
         /// <summary>
         /// Resets the job worker.
         /// </summary>
@@ -183,23 +193,27 @@ namespace FlagSync.View
             this.jobWorker.Start(jobSettings, preview);
             this.IsCounting = true;
         }
-        #endregion
+
+        #endregion Public methods
 
         #region Protected methods
+
         /// <summary>
         /// Called when a property has been changed.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        #endregion
+
+        #endregion Protected methods
 
         #region Private methods
+
         /// <summary>
         /// Handles the JobStarted event of the jobWorker control.
         /// </summary>
@@ -221,12 +235,18 @@ namespace FlagSync.View
             this.ProceededBytes += e.File.Length;
         }
 
+        /// <summary>
+        /// Handles the FilesCounted event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void jobWorker_FilesCounted(object sender, EventArgs e)
         {
             this.IsCounting = false;
             this.CountedBytes = this.jobWorker.FileCounterResult.CountedBytes;
             this.CountedFiles = this.jobWorker.FileCounterResult.CountedFiles;
         }
-        #endregion
+
+        #endregion Private methods
     }
 }

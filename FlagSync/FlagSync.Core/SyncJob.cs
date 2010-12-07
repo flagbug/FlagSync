@@ -12,7 +12,6 @@ namespace FlagSync.Core
         public SyncJob(JobSetting settings, bool preview)
             : base(settings, preview)
         {
-
         }
 
         /// <summary>

@@ -7,21 +7,6 @@ namespace FlagSync.Core
     public class JobWorker
     {
         /// <summary>
-        /// Sync mode of a job
-        /// </summary>
-        public enum SyncMode
-        {
-            /// <summary>
-            /// Backup mode
-            /// </summary>
-            Backup,
-            /// <summary>
-            /// Synchronization mode
-            /// </summary>
-            Synchronization
-        }
-
-        /// <summary>
         /// Occurs when the files had been counted.
         /// </summary>
         public event EventHandler FilesCounted;
@@ -182,12 +167,12 @@ namespace FlagSync.Core
         /// </summary>
         private void DoNextJob()
         {
-            if(this.jobQueue.Count > 0)
+            if (this.jobQueue.Count > 0)
             {
                 this.currentJob = this.jobQueue.Dequeue();
                 this.InitializeEvents();
                 this.OnJobStarted(new JobEventArgs(this.currentJob.Settings));
-                this.currentJob.Start();   
+                this.currentJob.Start();
             }
 
             else
@@ -205,7 +190,7 @@ namespace FlagSync.Core
 
             this.fileCounterResult = this.GetFileCounterResults();
 
-            if(this.FilesCounted != null)
+            if (this.FilesCounted != null)
             {
                 this.FilesCounted.Invoke(this, new EventArgs());
             }
@@ -265,7 +250,7 @@ namespace FlagSync.Core
             {
                 result += counter.CountJobFiles(job.Settings);
             }
-            
+
             return result;
         }
 
@@ -441,7 +426,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
         private void OnJobStarted(JobEventArgs e)
         {
-            if(this.JobStarted != null)
+            if (this.JobStarted != null)
             {
                 this.JobStarted.Invoke(this, e);
             }
@@ -451,7 +436,7 @@ namespace FlagSync.Core
 
         private void OnJobFinished(JobEventArgs e)
         {
-            if(this.JobFinished != null)
+            if (this.JobFinished != null)
             {
                 this.JobFinished.Invoke(this, e);
             }

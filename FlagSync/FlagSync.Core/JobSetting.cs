@@ -2,13 +2,29 @@
 
 namespace FlagSync.Core
 {
+    /// <summary>
+    /// Sync mode of a job
+    /// </summary>
+    public enum SyncMode
+    {
+        /// <summary>
+        /// Backup mode
+        /// </summary>
+        Backup,
+        /// <summary>
+        /// Synchronization mode
+        /// </summary>
+        Synchronization
+    }
+
     [Serializable]
     public class JobSetting
     {
         private string directoryA = String.Empty;
         private string directoryB = String.Empty;
-        private JobWorker.SyncMode syncMode = JobWorker.SyncMode.Backup;
+        private SyncMode syncMode = SyncMode.Backup;
         private string name = String.Empty;
+        private bool isIncluded = true;
 
         /// <summary>
         /// Gets or sets the directory A.
@@ -48,7 +64,7 @@ namespace FlagSync.Core
         /// Gets or sets the sync mode.
         /// </summary>
         /// <value>The sync mode.</value>
-        public JobWorker.SyncMode SyncMode
+        public SyncMode SyncMode
         {
             get
             {
@@ -75,6 +91,23 @@ namespace FlagSync.Core
             set
             {
                 this.name = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is included.
+        /// </summary>
+        /// <value>true if this instance is included; otherwise, false.</value>
+        public bool IsIncluded
+        {
+            get
+            {
+                return this.isIncluded;
+            }
+
+            set
+            {
+                this.isIncluded = value;
             }
         }
 

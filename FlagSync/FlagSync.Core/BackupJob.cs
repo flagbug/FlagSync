@@ -17,9 +17,8 @@ namespace FlagSync.Core
         public BackupJob(JobSetting settings, bool preview)
             : base(settings, preview)
         {
-            
         }
-        
+
         /// <summary>
         /// Starts the BackupJob, copies new and modified files from directory A to directory B and finally checks for deletions
         /// </summary>*/
@@ -53,7 +52,7 @@ namespace FlagSync.Core
 
                     if (!File.Exists(Path.Combine(target.FullName, file.Name)))
                     {
-                        if(preview)
+                        if (preview)
                         {
                             this.OnDeletedFile(new FileDeletionEventArgs(file));
                         }
@@ -97,7 +96,7 @@ namespace FlagSync.Core
                             this.OnFileProceeded(new FileProceededEventArgs(file));
                         }
 
-                        if(preview)
+                        if (preview)
                         {
                             this.OnDeletedDirectory(new DirectoryDeletionEventArgs(directory));
                         }

@@ -10,8 +10,6 @@
 
 namespace FlagSync.View.Properties
 {
-
-
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -24,7 +22,6 @@ namespace FlagSync.View.Properties
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources
     {
-
         private static global::System.Resources.ResourceManager resourceMan;
 
         private static global::System.Globalization.CultureInfo resourceCulture;
@@ -42,7 +39,7 @@ namespace FlagSync.View.Properties
         {
             get
             {
-                if ((resourceMan == null))
+                if (object.ReferenceEquals(resourceMan, null))
                 {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FlagSync.View.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
