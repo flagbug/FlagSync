@@ -97,7 +97,7 @@ namespace FlagSync.View
         /// <param name="path">The path.</param>
         public void SaveJobSettings(string path)
         {
-            JobSettingSerializer.Save(this.InternJobSettings, path);
+            JobSettingSerializer.Save(this.InternJobSettings.ToList(), path);
         }
 
         /// <summary>

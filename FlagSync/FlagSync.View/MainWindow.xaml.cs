@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using FlagSync.Core;
 
@@ -105,21 +106,20 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Handles the Click event of the directoryAButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void directoryAButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        /// <summary>
         /// Handles the Click event of the loadJobsButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void loadJobsButton_Click(object sender, RoutedEventArgs e)
         {
+            using (var dialog = new System.Windows.Forms.OpenFileDialog())
+            {
+                dialog.Filter = "|*.xml";
+                dialog.InitialDirectory = this.mainViewModel.AppDataFolderPath;
+                dialog.Multiselect = false;
+                dialog.ShowDialog();
+                this.mainViewModel.JobSettingsViewModel.LoadJobSettings(dialog.FileName);
+            }
         }
 
         /// <summary>
@@ -129,12 +129,52 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void saveJobsButton_Click(object sender, RoutedEventArgs e)
         {
-            var saveJobSettingsDialog = new System.Windows.Forms.SaveFileDialog();
-            saveJobSettingsDialog.AddExtension = true;
-            saveJobSettingsDialog.DefaultExt = "xml";
-            saveJobSettingsDialog.FileName = "NewJobSettings";
-            saveJobSettingsDialog.InitialDirectory = this.mainViewModel.AppDataFolderPath;
-            saveJobSettingsDialog.ShowDialog();
+            using (var dialog = new System.Windows.Forms.SaveFileDialog())
+            {
+                dialog.AddExtension = true;
+                dialog.DefaultExt = ".xml";
+                dialog.FileName = "NewJobSettings";
+                dialog.InitialDirectory = this.mainViewModel.AppDataFolderPath;
+                dialog.ShowDialog();
+                this.mainViewModel.JobSettingsViewModel.SaveJobSettings(dialog.FileName);
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the directoryAButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void directoryAButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.mainViewModel.JobSettingsViewModel.SelectedJobSetting.DirectoryA = this.ShowFolderDialog();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the directoryBButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void directoryBButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.mainViewModel.JobSettingsViewModel.SelectedJobSetting.DirectoryB = this.ShowFolderDialog();
+        }
+
+        /// <summary>
+        /// Shows a folder dialog.
+        /// </summary>
+        /// <returns>The selected folder</returns>
+        private string ShowFolderDialog()
+        {
+            string selectedFolder = String.Empty;
+
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                dialog.ShowDialog();
+                selectedFolder = dialog.SelectedPath;
+            }
+
+            return selectedFolder;
         }
     }
 }

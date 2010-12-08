@@ -39,7 +39,7 @@
                         </Grid.RowDefinitions>
                         <Button Name="loadJobsButton" Content="Load Jobs" Height="25" Grid.Row="0" Click="loadJobsButton_Click" />
                         <Button Name="saveJobsButton" Content="Save Jobs" Height="25" Grid.Row="1" Click="saveJobsButton_Click" />
-                        <ListBox Name="jobSettingsListBox" Margin="0, 5, 0, 5" Grid.Row="2" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=mainViewModel}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding ElementName=mainViewModel, Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox Name="jobSettingsListBox" Margin="0, 5, 0, 5" Grid.Row="2" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -74,11 +74,11 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Name:" HorizontalAlignment="Right" Name="jobSettingsNameTextBlock" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="jobNameTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.Name, Mode=TwoWay, ElementName=mainViewModel}" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="jobNameTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.Name, Mode=TwoWay}" />
                                 <Button Margin="5, 5, 5, 5" Content="Directory A" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryATextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, ElementName=mainViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
-                                <Button Margin="5, 5, 5, 5" Content="Directory B" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, ElementName=mainViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryATextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                                <Button Margin="5, 5, 5, 5" Content="Directory B" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryBButton_Click" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
@@ -129,11 +129,11 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock Text="Name:" Height="Auto" HorizontalAlignment="Left" Name="currentJobNameDescriptionLabel" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Padding="0" />
-                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobNameViewLabel" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" IsEnabled="True" Padding="0" Text="{Binding ElementName=mainViewModel, Path=JobWorkerViewModel.CurrentJobSettings.Name}" />
+                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobNameViewLabel" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" IsEnabled="True" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.Name}" />
                     <TextBlock Text="Directory A:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryADescriptionLabel" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Padding="0" />
-                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryAViewLabel" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Padding="0" Style="{Binding ElementName=mainViewModel, Path=JobWorkerViewModel.CurrentJobSettings.DirectoryA}" />
+                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryAViewLabel" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Padding="0" Style="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryA}" />
                     <TextBlock Text="Directory B:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryBDescriptionLabel" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" Padding="0" />
-                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryBViewLabel" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1" Padding="0" Style="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryB, ElementName=mainViewModel}" />
+                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryBViewLabel" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1" Padding="0" Style="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryB}" />
                     <TextBlock Text="Mode:" Height="Auto" HorizontalAlignment="Left" Width="Auto" Name="currentJobModeDescriptionLabel" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0" Padding="0" />
                     <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDescriptionViewLabel" VerticalAlignment="Stretch" Grid.Row="3" Grid.Column="1" Padding="0" />
                 </Grid>
@@ -144,7 +144,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ProgressBar Height="25" HorizontalAlignment="Stretch" Name="progressBar" VerticalAlignment="Top" Width="Auto" Grid.Row="0" Maximum="{Binding ElementName=mainViewModel, Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, Mode=OneWay}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, ElementName=mainViewModel, Converter={StaticResource ByteToKiloByteConverter}}" IsIndeterminate="{Binding Path=JobWorkerViewModel, ElementName=mainViewModel.IsCounting, Mode=OneWay}" Minimum="0" />
+                    <ProgressBar Height="25" HorizontalAlignment="Stretch" Name="progressBar" VerticalAlignment="Top" Width="Auto" Grid.Row="0" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, Mode=OneWay}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, Mode=OneWay}" Minimum="0" />
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
