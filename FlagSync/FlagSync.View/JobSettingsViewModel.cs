@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using FlagLib.Patterns
-using FlagSync.Core;:
+using FlagLib.Patterns;
+using FlagSync.Core;
 
 namespace FlagSync.View
 {
