@@ -43,13 +43,8 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox
-                                            Name="checkedListBoxItem"
-                                            IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem} }, Path=IsSelected, Mode=TwoWay}"
-                                            />
-                                        <ContentPresenter Margin="5, 0, 0, 0"
-                                            Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, UpdateSourceTrigger=PropertyChanged}"
-                                            />
+                                        <CheckBox Margin="0, 2, 0, 0" IsChecked="{Binding Path=IsIncluded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        <ContentPresenter Margin="5, 0, 0, 0" Content="{Binding Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

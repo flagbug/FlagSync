@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using FlagSync.Core;
+using FlagLib.Patterns
+using FlagSync.Core;:
 
 namespace FlagSync.View
 {
-    public class JobSettingsViewModel : INotifyPropertyChanged
+    public class JobSettingsViewModel : ViewModelBase<JobSettingsViewModel>
     {
         private ObservableCollection<JobSettingViewModel> jobSettings = new ObservableCollection<JobSettingViewModel>();
         private JobSettingViewModel selectedJobSetting;
@@ -63,7 +63,7 @@ namespace FlagSync.View
                 if (this.SelectedJobSetting != value)
                 {
                     this.selectedJobSetting = value;
-                    this.OnPropertyChanged("SelectedJobSetting");
+                    this.OnPropertyChanged(view => view.SelectedJobSetting);
                 }
             }
         }
@@ -113,23 +113,6 @@ namespace FlagSync.View
             foreach (JobSetting setting in settings)
             {
                 this.JobSettings.Add(new JobSettingViewModel(setting));
-            }
-        }
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Called when a property has been changed.
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

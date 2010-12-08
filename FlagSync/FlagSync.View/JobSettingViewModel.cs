@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 using System.IO;
+using FlagLib.Patterns;
 using FlagSync.Core;
 
 namespace FlagSync.View
 {
-    public class JobSettingViewModel : INotifyPropertyChanged, IDataErrorInfo
+    public class JobSettingViewModel : ViewModelBase<JobSettingViewModel>, IDataErrorInfo
     {
         #region Fields
 
@@ -30,7 +31,7 @@ namespace FlagSync.View
                 if (this.IsIncluded != value)
                 {
                     this.internJobSetting.IsIncluded = value;
-                    this.OnPropertyChanged("IsIncluded");
+                    this.OnPropertyChanged(view => view.IsIncluded);
                 }
             }
         }
@@ -51,7 +52,7 @@ namespace FlagSync.View
                 if (this.DirectoryA != value)
                 {
                     this.internJobSetting.DirectoryA = value;
-                    this.OnPropertyChanged("DirectoryA");
+                    this.OnPropertyChanged(view => view.DirectoryA);
                 }
             }
         }
@@ -72,7 +73,7 @@ namespace FlagSync.View
                 if (this.DirectoryB != value)
                 {
                     this.internJobSetting.DirectoryB = value;
-                    this.OnPropertyChanged("DirectoryB");
+                    this.OnPropertyChanged(view => view.DirectoryB);
                 }
             }
         }
@@ -93,7 +94,7 @@ namespace FlagSync.View
                 if (this.Name != value)
                 {
                     this.internJobSetting.Name = value;
-                    this.OnPropertyChanged("Name");
+                    this.OnPropertyChanged(view => view.Name);
                 }
             }
         }
@@ -114,7 +115,7 @@ namespace FlagSync.View
                 if (this.SyncMode != value)
                 {
                     this.internJobSetting.SyncMode = value;
-                    this.OnPropertyChanged("SyncMode");
+                    this.OnPropertyChanged(view => view.SyncMode);
                 }
             }
         }
@@ -167,15 +168,6 @@ namespace FlagSync.View
 
         #endregion Properties
 
-        #region Events
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Events
-
         #region Constructor
 
         /// <summary>
@@ -206,21 +198,5 @@ namespace FlagSync.View
         }
 
         #endregion Public methods
-
-        #region Protected methods
-
-        /// <summary>
-        /// Called when a property has been changed.
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
-
-        #endregion Protected methods
 }

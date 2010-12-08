@@ -17,6 +17,9 @@ namespace FlagSync.View
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+        /// </summary>
         public MainViewModel()
         {
             this.appDataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FlagSync");
@@ -81,6 +84,9 @@ namespace FlagSync.View
 
         #region Private methods
 
+        /// <summary>
+        /// Creates the app datafolder.
+        /// </summary>
         private void CreateAppDatafolder()
         {
             Directory.CreateDirectory(this.AppDataFolderPath);
