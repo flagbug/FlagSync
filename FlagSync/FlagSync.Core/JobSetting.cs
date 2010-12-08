@@ -2,21 +2,6 @@
 
 namespace FlagSync.Core
 {
-    /// <summary>
-    /// Sync mode of a job
-    /// </summary>
-    public enum SyncMode
-    {
-        /// <summary>
-        /// Backup mode
-        /// </summary>
-        Backup,
-        /// <summary>
-        /// Synchronization mode
-        /// </summary>
-        Synchronization
-    }
-
     [Serializable]
     public class JobSetting
     {
@@ -55,10 +40,14 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="name">The name.</param>
         public JobSetting(string name)
+            : this()
         {
             this.Name = name;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobSetting"/> class.
+        /// </summary>
         public JobSetting()
         {
             this.IsIncluded = true;

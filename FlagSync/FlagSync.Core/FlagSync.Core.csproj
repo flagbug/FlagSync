@@ -25,6 +25,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BackupJob.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="FileCounter.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobEventArgs.cs" />
