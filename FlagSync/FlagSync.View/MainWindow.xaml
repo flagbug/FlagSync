@@ -39,14 +39,14 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Name:" Height="Auto" HorizontalAlignment="Left" Name="currentJobNameDescriptionLabel" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Padding="0" />
-                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobNameViewLabel" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" IsEnabled="True" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.Name}" />
-                    <TextBlock Text="Directory A:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryADescriptionLabel" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Padding="0" />
-                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryAViewLabel" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Padding="0" Style="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryA}" />
-                    <TextBlock Text="Directory B:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryBDescriptionLabel" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" Padding="0" />
-                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryBViewLabel" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1" Padding="0" Style="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryB}" />
-                    <TextBlock Text="Mode:" Height="Auto" HorizontalAlignment="Left" Width="Auto" Name="currentJobModeDescriptionLabel" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0" Padding="0" />
-                    <TextBlock Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDescriptionViewLabel" VerticalAlignment="Stretch" Grid.Row="3" Grid.Column="1" Padding="0" />
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="Name:" Height="Auto" HorizontalAlignment="Left" Name="currentJobNameDescriptionLabel" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobNameViewLabel" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.Name}" Margin="5,0,0,0" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Directory A:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryADescriptionLabel" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryAViewLabel" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryA}" Margin="5,0,0,0" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Directory B:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryBDescriptionLabel" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryBViewLabel" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryB}" Margin="5,0,0,0" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Mode:" Height="Auto" HorizontalAlignment="Left" Width="Auto" Name="currentJobModeDescriptionLabel" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDescriptionViewLabel" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.SyncMode}" Margin="5,0,0,0" />
                 </Grid>
             </GroupBox>
             <GroupBox Name="controlGroupBox" Header="Control" Height="Auto" Width="Auto" Grid.Column="1" Padding="5">
