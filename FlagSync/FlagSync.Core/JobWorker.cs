@@ -7,14 +7,19 @@ namespace FlagSync.Core
     public class JobWorker
     {
         /// <summary>
-        /// Occurs when the files had been counted.
+        /// Occurs when the job worker starts;
         /// </summary>
-        public event EventHandler FilesCounted;
+        public event EventHandler Starting;
 
         /// <summary>
         /// Occurs when the job worker has finished.
         /// </summary>
         public event EventHandler Finished;
+
+        /// <summary>
+        /// Occurs when the files had been counted.
+        /// </summary>
+        public event EventHandler FilesCounted;
 
         /// <summary>
         /// Occurs when a file has been proceeded.
@@ -187,6 +192,11 @@ namespace FlagSync.Core
         private void Start()
         {
             Logger.Instance.LogStatusMessage("Start counting files");
+
+            if (this.Starting != null)
+            {
+                this.Starting(this, EventArgs.Empty);
+            }
 
             this.fileCounterResult = this.GetFileCounterResults();
 
