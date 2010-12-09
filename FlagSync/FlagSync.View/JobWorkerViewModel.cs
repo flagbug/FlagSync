@@ -18,7 +18,8 @@ namespace FlagSync.View
         private int countedFiles;
         private int proceededFiles;
         private bool isCounting;
-        private string statusMessage = String.Empty;
+        private string statusMessages = String.Empty;
+        private string lastStatusMessage = String.Empty;
 
         #endregion Members
 
@@ -162,14 +163,28 @@ namespace FlagSync.View
         /// <value>The status messages.</value>
         public string StatusMessages
         {
-            get { return this.statusMessage; }
+            get { return this.statusMessages; }
             private set
             {
-                if (this.statusMessage != value)
+                if (this.statusMessages != value)
                 {
-                    this.statusMessage = value;
+                    this.statusMessages = value;
                     this.OnPropertyChanged(view => view.StatusMessages);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets the last status message.
+        /// </summary>
+        /// <value>The last status message.</value>
+        public string LastStatusMessage
+        {
+            get { return this.lastStatusMessage; }
+            private set
+            {
+                this.lastStatusMessage = value;
+                this.OnPropertyChanged(view => view.LastStatusMessage);
             }
         }
 
@@ -207,6 +222,7 @@ namespace FlagSync.View
             this.jobWorker.FoundNewerFile += new EventHandler<FileCopyEventArgs>(jobWorker_FoundNewerFile);
             this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
             this.jobWorker.Starting += new EventHandler(jobWorker_Starting);
+            this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
 
             this.LogMessages.Clear();
         }
@@ -233,6 +249,17 @@ namespace FlagSync.View
         private void AddStatusMessage(string message)
         {
             this.StatusMessages += message + Environment.NewLine;
+            this.LastStatusMessage = message;
+        }
+
+        /// <summary>
+        /// Handles the Finished event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void jobWorker_Finished(object sender, EventArgs e)
+        {
+            this.AddStatusMessage("Finished all jobs.");
         }
 
         /// <summary>
@@ -240,7 +267,7 @@ namespace FlagSync.View
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        void jobWorker_Starting(object sender, EventArgs e)
+        private void jobWorker_Starting(object sender, EventArgs e)
         {
             this.AddStatusMessage("Starting jobs.");
             this.AddStatusMessage("Counting files...");
@@ -264,7 +291,7 @@ namespace FlagSync.View
         private void jobWorker_JobStarted(object sender, JobEventArgs e)
         {
             this.CurrentJobSettings = e.Job;
-            this.AddStatusMessage("Starting job: " + e.Job.Name + "...");
+            this.AddStatusMessage("Proceeding job: " + e.Job.Name + "...");
         }
 
         /// <summary>

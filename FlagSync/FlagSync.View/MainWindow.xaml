@@ -146,11 +146,11 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBox Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch" Text="{Binding Path=JobWorkerViewModel.StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Cursor="Arrow" />
-                    <ListView Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}">
+                    <ListView ScrollViewer.CanContentScroll="True" Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}" />
                                 <GridViewColumn Header="Action" DisplayMemberBinding="{Binding Path=Action}" />
+                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}" />
                                 <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Path=SourcePath}" />
                                 <GridViewColumn Header="Target" DisplayMemberBinding="{Binding Path=TargetPath}" />
                             </GridView>
@@ -159,6 +159,8 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <StatusBar Name="statusBar" Width="Auto" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" />
+        <StatusBar Name="statusBar" Width="Auto" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
+            <StatusBarItem Content="{Binding Path=JobWorkerViewModel.LastStatusMessage}" />
+        </StatusBar>
     </Grid>
 </Window>
