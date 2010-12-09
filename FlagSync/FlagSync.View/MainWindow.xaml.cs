@@ -103,6 +103,7 @@ namespace FlagSync.View
             this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
 
             this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.InternJobSettings, true);
+            this.mainTabControl.SelectedIndex = 1;
         }
 
         /// <summary>

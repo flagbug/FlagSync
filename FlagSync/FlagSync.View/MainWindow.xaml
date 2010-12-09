@@ -141,7 +141,12 @@
             </TabItem>
             <TabItem Header="Log" Name="overviewTabItem">
                 <Grid>
-                    <ListView Height="Auto" HorizontalAlignment="Stretch" Name="logListView" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch" Text="{Binding Path=JobWorkerViewModel.StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Cursor="Arrow" />
+                    <ListView Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}" />

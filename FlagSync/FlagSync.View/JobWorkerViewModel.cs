@@ -18,6 +18,7 @@ namespace FlagSync.View
         private int countedFiles;
         private int proceededFiles;
         private bool isCounting;
+        private string statusMessage = String.Empty;
 
         #endregion Members
 
@@ -149,7 +150,28 @@ namespace FlagSync.View
             }
         }
 
+        /// <summary>
+        /// Gets the log messages.
+        /// </summary>
+        /// <value>The log messages.</value>
         public ThreadSafeObservableCollection<LogMessageViewModel> LogMessages { get; private set; }
+
+        /// <summary>
+        /// Gets the status messages.
+        /// </summary>
+        /// <value>The status messages.</value>
+        public string StatusMessages
+        {
+            get { return this.statusMessage; }
+            private set
+            {
+                if (this.statusMessage != value)
+                {
+                    this.statusMessage = value;
+                    this.OnPropertyChanged(view => view.StatusMessages);
+                }
+            }
+        }
 
         #endregion Properties
 
@@ -161,6 +183,7 @@ namespace FlagSync.View
         public JobWorkerViewModel()
         {
             this.LogMessages = new ThreadSafeObservableCollection<LogMessageViewModel>();
+
             this.ResetJobWorker();
         }
 
@@ -182,38 +205,9 @@ namespace FlagSync.View
             this.jobWorker.FileDeleted += new EventHandler<FileDeletionEventArgs>(jobWorker_FileDeleted);
             this.jobWorker.FoundModifiedFile += new EventHandler<FileCopyEventArgs>(jobWorker_FoundModifiedFile);
             this.jobWorker.FoundNewerFile += new EventHandler<FileCopyEventArgs>(jobWorker_FoundNewerFile);
+            this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
 
             this.LogMessages.Clear();
-        }
-
-        void jobWorker_FoundNewerFile(object sender, FileCopyEventArgs e)
-        {
-            this.LogMessages.Add(
-                new LogMessageViewModel("File", "Created", e.File.FullName, e.TargetDirectory.FullName));
-        }
-
-        void jobWorker_FoundModifiedFile(object sender, FileCopyEventArgs e)
-        {
-            this.LogMessages.Add(
-                new LogMessageViewModel("File", "Modified", e.File.FullName, Path.Combine(e.TargetDirectory.FullName, e.File.Name)));
-        }
-
-        void jobWorker_FileDeleted(object sender, FileDeletionEventArgs e)
-        {
-            this.LogMessages.Add(
-                new LogMessageViewModel("File", "Deleted", e.File.FullName, String.Empty));
-        }
-
-        void jobWorker_DirectoryDeleted(object sender, DirectoryDeletionEventArgs e)
-        {
-            this.LogMessages.Add(
-                    new LogMessageViewModel("Directory", "Deleted", e.Directory.FullName, String.Empty));
-        }
-
-        void jobWorker_DirectoryCreated(object sender, DirectoryCreationEventArgs e)
-        {
-            this.LogMessages.Add(
-                new LogMessageViewModel("Directory", "Created", e.Directory.FullName, e.TargetDirectory.FullName));
         }
 
         /// <summary>
@@ -232,6 +226,25 @@ namespace FlagSync.View
         #region Private methods
 
         /// <summary>
+        /// Adds a status message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        private void AddStatusMessage(string message)
+        {
+            this.StatusMessages += message + Environment.NewLine;
+        }
+
+        /// <summary>
+        /// Handles the JobFinished event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_JobFinished(object sender, JobEventArgs e)
+        {
+            this.AddStatusMessage("Finished job: " + e.Job.Name);
+        }
+
+        /// <summary>
         /// Handles the JobStarted event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -239,6 +252,7 @@ namespace FlagSync.View
         private void jobWorker_JobStarted(object sender, JobEventArgs e)
         {
             this.CurrentJobSettings = e.Job;
+            this.AddStatusMessage("Starting job: " + e.Job.Name);
         }
 
         /// <summary>
@@ -262,6 +276,63 @@ namespace FlagSync.View
             this.IsCounting = false;
             this.CountedBytes = this.jobWorker.FileCounterResult.CountedBytes;
             this.CountedFiles = this.jobWorker.FileCounterResult.CountedFiles;
+
+            this.AddStatusMessage("Finished file counting.");
+        }
+
+        /// <summary>
+        /// Handles the FoundNewerFile event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        void jobWorker_FoundNewerFile(object sender, FileCopyEventArgs e)
+        {
+            this.LogMessages.Add(
+                new LogMessageViewModel("File", "Created", e.File.FullName, e.TargetDirectory.FullName));
+        }
+
+        /// <summary>
+        /// Handles the FoundModifiedFile event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        void jobWorker_FoundModifiedFile(object sender, FileCopyEventArgs e)
+        {
+            this.LogMessages.Add(
+                new LogMessageViewModel("File", "Modified", e.File.FullName, Path.Combine(e.TargetDirectory.FullName, e.File.Name)));
+        }
+
+        /// <summary>
+        /// Handles the FileDeleted event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
+        void jobWorker_FileDeleted(object sender, FileDeletionEventArgs e)
+        {
+            this.LogMessages.Add(
+                new LogMessageViewModel("File", "Deleted", e.File.FullName, String.Empty));
+        }
+
+        /// <summary>
+        /// Handles the DirectoryDeleted event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
+        void jobWorker_DirectoryDeleted(object sender, DirectoryDeletionEventArgs e)
+        {
+            this.LogMessages.Add(
+                    new LogMessageViewModel("Directory", "Deleted", e.Directory.FullName, String.Empty));
+        }
+
+        /// <summary>
+        /// Handles the DirectoryCreated event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        void jobWorker_DirectoryCreated(object sender, DirectoryCreationEventArgs e)
+        {
+            this.LogMessages.Add(
+                new LogMessageViewModel("Directory", "Created", e.Directory.FullName, e.TargetDirectory.FullName));
         }
 
         #endregion Private methods
