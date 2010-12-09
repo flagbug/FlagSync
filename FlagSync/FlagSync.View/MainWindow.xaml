@@ -141,14 +141,13 @@
             </TabItem>
             <TabItem Header="Log" Name="overviewTabItem">
                 <Grid>
-                    <ListView Height="Auto" HorizontalAlignment="Stretch" Name="logListView" VerticalAlignment="Stretch" Width="Auto">
+                    <ListView Height="Auto" HorizontalAlignment="Stretch" Name="logListView" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="" />
-                                <GridViewColumn Header="Mode" />
-                                <GridViewColumn Header="Name" />
-                                <GridViewColumn Header="Source path" />
-                                <GridViewColumn Header="Target path" />
+                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}" />
+                                <GridViewColumn Header="Action" DisplayMemberBinding="{Binding Path=Action}" />
+                                <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Path=SourcePath}" />
+                                <GridViewColumn Header="Target" DisplayMemberBinding="{Binding Path=TargetPath}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

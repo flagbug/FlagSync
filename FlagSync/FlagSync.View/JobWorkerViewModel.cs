@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using FlagLib.Collections;
 using FlagLib.Patterns;
 using FlagSync.Core;
 
@@ -147,6 +149,8 @@ namespace FlagSync.View
             }
         }
 
+        public ThreadSafeObservableCollection<LogMessageViewModel> LogMessages { get; private set; }
+
         #endregion Properties
 
         #region Constructor
@@ -156,6 +160,7 @@ namespace FlagSync.View
         /// </summary>
         public JobWorkerViewModel()
         {
+            this.LogMessages = new ThreadSafeObservableCollection<LogMessageViewModel>();
             this.ResetJobWorker();
         }
 
@@ -172,6 +177,43 @@ namespace FlagSync.View
             this.jobWorker.JobStarted += new EventHandler<JobEventArgs>(jobWorker_JobStarted);
             this.jobWorker.FileProceeded += new EventHandler<FileProceededEventArgs>(jobWorker_FileProceeded);
             this.jobWorker.FilesCounted += new EventHandler(jobWorker_FilesCounted);
+            this.jobWorker.DirectoryCreated += new EventHandler<DirectoryCreationEventArgs>(jobWorker_DirectoryCreated);
+            this.jobWorker.DirectoryDeleted += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeleted);
+            this.jobWorker.FileDeleted += new EventHandler<FileDeletionEventArgs>(jobWorker_FileDeleted);
+            this.jobWorker.FoundModifiedFile += new EventHandler<FileCopyEventArgs>(jobWorker_FoundModifiedFile);
+            this.jobWorker.FoundNewerFile += new EventHandler<FileCopyEventArgs>(jobWorker_FoundNewerFile);
+
+            this.LogMessages.Clear();
+        }
+
+        void jobWorker_FoundNewerFile(object sender, FileCopyEventArgs e)
+        {
+            this.LogMessages.Add(
+                new LogMessageViewModel("File", "Created", e.File.FullName, e.TargetDirectory.FullName));
+        }
+
+        void jobWorker_FoundModifiedFile(object sender, FileCopyEventArgs e)
+        {
+            this.LogMessages.Add(
+                new LogMessageViewModel("File", "Modified", e.File.FullName, Path.Combine(e.TargetDirectory.FullName, e.File.Name)));
+        }
+
+        void jobWorker_FileDeleted(object sender, FileDeletionEventArgs e)
+        {
+            this.LogMessages.Add(
+                new LogMessageViewModel("File", "Deleted", e.File.FullName, String.Empty));
+        }
+
+        void jobWorker_DirectoryDeleted(object sender, DirectoryDeletionEventArgs e)
+        {
+            this.LogMessages.Add(
+                    new LogMessageViewModel("Directory", "Deleted", e.Directory.FullName, String.Empty));
+        }
+
+        void jobWorker_DirectoryCreated(object sender, DirectoryCreationEventArgs e)
+        {
+            this.LogMessages.Add(
+                new LogMessageViewModel("Directory", "Created", e.Directory.FullName, e.TargetDirectory.FullName));
         }
 
         /// <summary>
