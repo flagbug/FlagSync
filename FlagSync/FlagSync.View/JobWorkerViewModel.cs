@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using FlagLib.Patterns;
 using FlagSync.Core;
 
 namespace FlagSync.View
 {
-    public class JobWorkerViewModel : INotifyPropertyChanged
+    public class JobWorkerViewModel : ViewModelBase<JobWorkerViewModel>
     {
         #region Members
 
@@ -37,7 +37,7 @@ namespace FlagSync.View
                 if (this.IsCounting != value)
                 {
                     this.isCounting = value;
-                    this.OnPropertyChanged("IsCounting");
+                    this.OnPropertyChanged(view => view.IsCounting);
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace FlagSync.View
                 if (this.CountedBytes != value)
                 {
                     this.countedBytes = value;
-                    this.OnPropertyChanged("CountedBytes");
+                    this.OnPropertyChanged(view => view.CountedBytes);
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace FlagSync.View
                 if (this.ProceededBytes != value)
                 {
                     this.proceededBytes = value;
-                    this.OnPropertyChanged("ProceededBytes");
+                    this.OnPropertyChanged(view => view.ProceededBytes);
                 }
             }
         }
@@ -100,7 +100,7 @@ namespace FlagSync.View
                 if (this.CountedFiles != value)
                 {
                     this.countedFiles = value;
-                    this.OnPropertyChanged("CountedFiles");
+                    this.OnPropertyChanged(view => view.CountedFiles);
                 }
             }
         }
@@ -121,7 +121,7 @@ namespace FlagSync.View
                 if (this.ProceededFiles != value)
                 {
                     this.proceededFiles = value;
-                    this.OnPropertyChanged("ProceededFiles");
+                    this.OnPropertyChanged(view => view.ProceededFiles);
                 }
             }
         }
@@ -142,21 +142,12 @@ namespace FlagSync.View
                 if (this.CurrentJobSettings != value)
                 {
                     this.currentJobSetting = value;
-                    this.OnPropertyChanged("CurrentJobSettings");
+                    this.OnPropertyChanged(view => view.CurrentJobSettings);
                 }
             }
         }
 
         #endregion Properties
-
-        #region Events
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Events
 
         #region Constructor
 
@@ -195,22 +186,6 @@ namespace FlagSync.View
         }
 
         #endregion Public methods
-
-        #region Protected methods
-
-        /// <summary>
-        /// Called when a property has been changed.
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion Protected methods
 
         #region Private methods
 
