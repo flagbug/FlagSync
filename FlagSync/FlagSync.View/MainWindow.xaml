@@ -2,12 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FlagSync.View"
+        xmlns:flaglibconverters="clr-namespace:FlagLib.ValueConverters;assembly=FlagLib"
         Title="FlagSync" Height="768" Width="1024" BorderThickness="0" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico" WindowState="Maximized">
     <Window.DataContext>
         <local:MainViewModel x:Name="mainViewModel" />
     </Window.DataContext>
     <Window.Resources>
         <local:ByteToKiloByteConverter x:Key="ByteToKiloByteConverter"/>
+        <flaglibconverters:BoolNegationValueConverter x:Key="BoolNegationConverter" />
     </Window.Resources>
     <Grid Name="mainGrid" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -63,10 +65,10 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Content="Preview" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click"></Button>
-                        <Button Content="Start" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" />
-                        <Button Content="Pause" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" />
-                        <Button Content="Stop" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" Name="stopButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" />
+                        <Button Content="Preview" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}"></Button>
+                        <Button Content="Start" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Click="startButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
+                        <Button Content="Pause" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Click="pauseButton_Click" />
+                        <Button Content="Stop" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" Name="stopButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Click="stopButton_Click" />
                     </Grid>
                 </Grid>
             </GroupBox>

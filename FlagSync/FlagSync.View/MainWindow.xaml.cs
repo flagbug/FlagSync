@@ -91,19 +91,6 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Handles the Click event of the previewButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void previewButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
-
-            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.IncludedInternJobSettings, true);
-            this.mainTabControl.SelectedIndex = 1;
-        }
-
-        /// <summary>
         /// Handles the Click event of the loadJobsButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -173,6 +160,52 @@ namespace FlagSync.View
             }
 
             return selectedFolder;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the previewButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void previewButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
+
+            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.IncludedInternJobSettings, true);
+            this.mainTabControl.SelectedIndex = 1;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the startButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void startButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
+
+            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.IncludedInternJobSettings, false);
+            this.mainTabControl.SelectedIndex = 1;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the pauseButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void pauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.mainViewModel.JobWorkerViewModel.PauseJobWorker();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the stopButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void stopButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.mainViewModel.JobWorkerViewModel.StopJobWorker();
         }
     }
 }

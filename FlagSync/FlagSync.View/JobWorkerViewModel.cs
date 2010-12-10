@@ -18,6 +18,7 @@ namespace FlagSync.View
         private int countedFiles;
         private int proceededFiles;
         private bool isCounting;
+        private bool isRunning;
         private string statusMessages = String.Empty;
         private string lastStatusMessage = String.Empty;
 
@@ -38,6 +39,23 @@ namespace FlagSync.View
                 {
                     this.isCounting = value;
                     this.OnPropertyChanged(view => view.IsCounting);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whetherthe job worker is started.
+        /// </summary>
+        /// <value>true if the job worker is started; otherwise, false.</value>
+        public bool IsRunning
+        {
+            get { return this.isRunning; }
+            set
+            {
+                if (this.IsRunning != value)
+                {
+                    this.isRunning = value;
+                    this.OnPropertyChanged(view => view.IsRunning);
                 }
             }
         }
@@ -199,14 +217,8 @@ namespace FlagSync.View
             this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
             this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
 
-            //Clear all messages
-            this.LogMessages.Clear();
-            this.StatusMessages = String.Empty;
-            this.lastStatusMessage = String.Empty;
-
-            //Set values, to avoid that the statusbar is filled at the beginning
-            this.ProceededBytes = 0;
-            this.CountedBytes = 1024;
+            this.ResetMessages();
+            this.ResetBytes();
         }
 
         /// <summary>
@@ -218,13 +230,65 @@ namespace FlagSync.View
         {
             this.jobWorker.Start(jobSettings, preview);
             this.IsCounting = true;
+            this.IsRunning = true;
             this.AddStatusMessage("Starting jobs.");
             this.AddStatusMessage("Counting files...");
+        }
+
+        /// <summary>
+        /// Pauses the job worker.
+        /// </summary>
+        public void PauseJobWorker()
+        {
+            this.jobWorker.Pause();
+            this.IsRunning = false;
+            this.AddStatusMessage("Paused jobs.");
+        }
+
+        /// <summary>
+        /// Continues the job worker.
+        /// </summary>
+        public void ContinueJobWorker()
+        {
+            this.jobWorker.Continue();
+            this.IsRunning = true;
+            this.AddStatusMessage("Continue jobs.");
+            this.AddStatusMessage("Proceeding job: " + this.CurrentJobSettings.Name + "...");
+        }
+
+        /// <summary>
+        /// Stops the job worker.
+        /// </summary>
+        public void StopJobWorker()
+        {
+            this.jobWorker.Stop();
+            this.IsRunning = false;
+            this.ResetBytes();
+            this.AddStatusMessage("Stopped all jobs.");
         }
 
         #endregion Public methods
 
         #region Private methods
+
+        /// <summary>
+        /// Resets the proceeded and counted bytes to avoid that the statusbar is filled at the beginning.
+        /// </summary>
+        private void ResetBytes()
+        {
+            this.ProceededBytes = 0;
+            this.CountedBytes = 1024;
+        }
+
+        /// <summary>
+        /// Resets the status and log messages.
+        /// </summary>
+        private void ResetMessages()
+        {
+            this.LogMessages.Clear();
+            this.StatusMessages = String.Empty;
+            this.lastStatusMessage = String.Empty;
+        }
 
         /// <summary>
         /// Adds a status message.
@@ -243,6 +307,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void jobWorker_Finished(object sender, EventArgs e)
         {
+            this.IsRunning = false;
             this.AddStatusMessage("Finished all jobs.");
         }
 
