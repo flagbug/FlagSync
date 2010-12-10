@@ -31,11 +31,7 @@ namespace FlagSync.View
         /// <value>true if the job worker is counting; otherwise, false.</value>
         public bool IsCounting
         {
-            get
-            {
-                return this.isCounting;
-            }
-
+            get { return this.isCounting; }
             private set
             {
                 if (this.IsCounting != value)
@@ -52,11 +48,7 @@ namespace FlagSync.View
         /// <value>The counted bytes.</value>
         public long CountedBytes
         {
-            get
-            {
-                return this.countedBytes;
-            }
-
+            get { return this.countedBytes; }
             private set
             {
                 if (this.CountedBytes != value)
@@ -73,11 +65,7 @@ namespace FlagSync.View
         /// <value>The proceeded bytes.</value>
         public long ProceededBytes
         {
-            get
-            {
-                return this.proceededBytes;
-            }
-
+            get { return this.proceededBytes; }
             private set
             {
                 if (this.ProceededBytes != value)
@@ -94,11 +82,7 @@ namespace FlagSync.View
         /// <value>The counted files.</value>
         public int CountedFiles
         {
-            get
-            {
-                return this.countedFiles;
-            }
-
+            get { return this.countedFiles; }
             private set
             {
                 if (this.CountedFiles != value)
@@ -115,11 +99,7 @@ namespace FlagSync.View
         /// <value>The proceeded files.</value>
         public int ProceededFiles
         {
-            get
-            {
-                return this.proceededFiles;
-            }
-
+            get { return this.proceededFiles; }
             private set
             {
                 if (this.ProceededFiles != value)
@@ -136,11 +116,7 @@ namespace FlagSync.View
         /// <value>The job settings of the current running job.</value>
         public JobSetting CurrentJobSettings
         {
-            get
-            {
-                return this.currentJobSetting;
-            }
-
+            get { return this.currentJobSetting; }
             private set
             {
                 if (this.CurrentJobSettings != value)
@@ -224,7 +200,14 @@ namespace FlagSync.View
             this.jobWorker.Starting += new EventHandler(jobWorker_Starting);
             this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
 
+            //Clear all messages
             this.LogMessages.Clear();
+            this.StatusMessages = String.Empty;
+            this.lastStatusMessage = String.Empty;
+
+            //Set values, to avoid that the statusbar is filled at the beginning
+            this.ProceededBytes = 0;
+            this.CountedBytes = 1024;
         }
 
         /// <summary>

@@ -16,9 +16,6 @@ namespace FlagSync.View
         public MainWindow()
         {
             InitializeComponent();
-
-            this.progressBar.Maximum = 1;
-            this.progressBar.Value = 0;
         }
 
         /// <summary>
@@ -102,7 +99,7 @@ namespace FlagSync.View
         {
             this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
 
-            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.InternJobSettings, true);
+            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.IncludedInternJobSettings, true);
             this.mainTabControl.SelectedIndex = 1;
         }
 
