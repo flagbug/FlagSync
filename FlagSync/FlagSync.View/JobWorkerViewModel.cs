@@ -197,7 +197,6 @@ namespace FlagSync.View
             this.jobWorker.FoundModifiedFile += new EventHandler<FileCopyEventArgs>(jobWorker_FoundModifiedFile);
             this.jobWorker.FoundNewerFile += new EventHandler<FileCopyEventArgs>(jobWorker_FoundNewerFile);
             this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
-            this.jobWorker.Starting += new EventHandler(jobWorker_Starting);
             this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
 
             //Clear all messages
@@ -219,6 +218,8 @@ namespace FlagSync.View
         {
             this.jobWorker.Start(jobSettings, preview);
             this.IsCounting = true;
+            this.AddStatusMessage("Starting jobs.");
+            this.AddStatusMessage("Counting files...");
         }
 
         #endregion Public methods
@@ -243,17 +244,6 @@ namespace FlagSync.View
         private void jobWorker_Finished(object sender, EventArgs e)
         {
             this.AddStatusMessage("Finished all jobs.");
-        }
-
-        /// <summary>
-        /// Handles the Starting event of the jobWorker control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void jobWorker_Starting(object sender, EventArgs e)
-        {
-            this.AddStatusMessage("Starting jobs.");
-            this.AddStatusMessage("Counting files...");
         }
 
         /// <summary>

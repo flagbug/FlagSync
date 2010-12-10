@@ -4,13 +4,8 @@ using System.Threading;
 
 namespace FlagSync.Core
 {
-    public class JobWorker
+    public sealed class JobWorker
     {
-        /// <summary>
-        /// Occurs when the job worker starts;
-        /// </summary>
-        public event EventHandler Starting;
-
         /// <summary>
         /// Occurs when the job worker has finished.
         /// </summary>
@@ -193,11 +188,6 @@ namespace FlagSync.Core
         {
             Logger.Instance.LogStatusMessage("Start counting files");
 
-            if (this.Starting != null)
-            {
-                this.Starting(this, EventArgs.Empty);
-            }
-
             this.fileCounterResult = this.GetFileCounterResults();
 
             if (this.FilesCounted != null)
@@ -286,7 +276,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionErrorEventArgs"/> instance containing the event data.</param>
-        void currentJob_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
+        private void currentJob_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
         {
             if (this.FileDeletionError != null)
             {
@@ -299,7 +289,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
-        void currentJob_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
+        private void currentJob_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
         {
             if (this.DirectoryDeletionError != null)
             {
@@ -312,7 +302,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
-        void currentJob_FoundNewerFile(object sender, FileCopyEventArgs e)
+        private void currentJob_FoundNewerFile(object sender, FileCopyEventArgs e)
         {
             if (this.FoundNewerFile != null)
             {
@@ -325,7 +315,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
-        void currentJob_FoundModifiedFile(object sender, FileCopyEventArgs e)
+        private void currentJob_FoundModifiedFile(object sender, FileCopyEventArgs e)
         {
             if (this.FoundModifiedFile != null)
             {
@@ -338,7 +328,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        void currentJob_Finished(object sender, EventArgs e)
+        private void currentJob_Finished(object sender, EventArgs e)
         {
             Job job = (Job)sender;
 
@@ -354,7 +344,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
-        void currentJob_FileProceeded(object sender, FileProceededEventArgs e)
+        private void currentJob_FileProceeded(object sender, FileProceededEventArgs e)
         {
             this.proceededFiles++;
 
@@ -369,7 +359,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
-        void currentJob_FileDeleted(object sender, FileDeletionEventArgs e)
+        private void currentJob_FileDeleted(object sender, FileDeletionEventArgs e)
         {
             if (this.FileDeleted != null)
             {
@@ -382,7 +372,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyErrorEventArgs"/> instance containing the event data.</param>
-        void currentJob_FileCopyError(object sender, FileCopyErrorEventArgs e)
+        private void currentJob_FileCopyError(object sender, FileCopyErrorEventArgs e)
         {
             if (this.FileCopyError != null)
             {
@@ -395,7 +385,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
-        void currentJob_DirectoryDeleted(object sender, DirectoryDeletionEventArgs e)
+        private void currentJob_DirectoryDeleted(object sender, DirectoryDeletionEventArgs e)
         {
             if (this.DirectoryDeleted != null)
             {
@@ -408,7 +398,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
-        void currentJob_DirectoryCreated(object sender, DirectoryCreationEventArgs e)
+        private void currentJob_DirectoryCreated(object sender, DirectoryCreationEventArgs e)
         {
             if (this.DirectoryCreated != null)
             {
