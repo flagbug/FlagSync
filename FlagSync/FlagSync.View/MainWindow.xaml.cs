@@ -16,6 +16,8 @@ namespace FlagSync.View
         public MainWindow()
         {
             InitializeComponent();
+
+            this.mainViewModel.JobSettingsViewModel.SelectedJobSetting = this.mainViewModel.JobSettingsViewModel.JobSettings[0];
         }
 
         /// <summary>

@@ -69,6 +69,14 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="JobSettingsViewModel"/> class.
+        /// </summary>
+        public JobSettingsViewModel()
+        {
+            this.AddNewJobSetting();
+        }
+
+        /// <summary>
         /// Adds a new job setting.
         /// </summary>
         public void AddNewJobSetting()

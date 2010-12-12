@@ -185,7 +185,7 @@ namespace FlagSync.Core
         #region Protected methods
 
         /// <summary>
-        /// Checks the if the job is paused. If true, a loop will be enabled, till the jab gets continued
+        /// Checks the if the job is paused. If true, a loop will be enabled, till the job gets continued
         /// </summary>
         protected void CheckPause()
         {
@@ -273,19 +273,6 @@ namespace FlagSync.Core
             {
                 Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
             }
-        }
-
-        /// <summary>
-        /// Checks if file A is newer than file B
-        /// </summary>
-        /// <param name="fileA">File A</param>
-        /// <param name="fileB">File B</param>
-        /// <returns>
-        /// True, if file A is newer, otherwise false
-        /// </returns>
-        protected bool IsFileModified(FileInfo fileA, FileInfo fileB)
-        {
-            return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
         }
 
         /// <summary>
@@ -421,6 +408,19 @@ namespace FlagSync.Core
         #endregion Protected methods
 
         #region Private methods
+
+        /// <summary>
+        /// Checks if file A is newer than file B
+        /// </summary>
+        /// <param name="fileA">File A</param>
+        /// <param name="fileB">File B</param>
+        /// <returns>
+        /// True, if file A is newer, otherwise false
+        /// </returns>
+        private bool IsFileModified(FileInfo fileA, FileInfo fileB)
+        {
+            return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
+        }
 
         /// <summary>
         /// Backups a single directory, without sub folders
