@@ -65,7 +65,7 @@
     <Compile Include="JobSettingsViewModel.cs" />
     <Compile Include="JobSettingViewModel.cs" />
     <Compile Include="JobWorkerViewModel.cs" />
-    <Compile Include="LogMessageViewModel.cs" />
+    <Compile Include="LogMessage.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

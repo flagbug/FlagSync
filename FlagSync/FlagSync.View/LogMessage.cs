@@ -1,6 +1,6 @@
 ﻿namespace FlagSync.View
 {
-    public class LogMessageViewModel
+    public class LogMessage
     {
         /// <summary>
         /// Gets or sets the type (file or directory).
@@ -27,13 +27,13 @@
         public string TargetPath { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LogMessageViewModel"></see> class.
+        /// Initializes a new instance of the <see cref="LogMessage"></see> class.
         /// </summary>
         /// <param name="type"></param>
         /// <param name="action">The action.</param>
         /// <param name="sourcePath">The source path.</param>
         /// <param name="targetPath">The target path.</param>
-        public LogMessageViewModel(string type, string action, string sourcePath, string targetPath)
+        public LogMessage(string type, string action, string sourcePath, string targetPath)
         {
             this.Type = type;
             this.Action = action;
