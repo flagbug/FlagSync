@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using FlagLib.Patterns;
+using FlagLib.Serialization;
 using FlagSync.Core;
 
 namespace FlagSync.View
@@ -105,7 +106,7 @@ namespace FlagSync.View
         /// <param name="path">The path.</param>
         public void SaveJobSettings(string path)
         {
-            JobSettingSerializer.Save(this.InternJobSettings.ToList(), path);
+            GenericXmlSerializer.SaveEnumerable<JobSetting>(this.InternJobSettings.ToList(), path);
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace FlagSync.View
         {
             this.JobSettings.Clear();
 
-            IEnumerable<JobSetting> settings = JobSettingSerializer.Read(path);
+            IEnumerable<JobSetting> settings = GenericXmlSerializer.ReadEnumerable<JobSetting>(path);
 
             foreach (JobSetting setting in settings)
             {

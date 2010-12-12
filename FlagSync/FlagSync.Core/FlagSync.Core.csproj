@@ -30,7 +30,6 @@
     <Compile Include="Job.cs" />
     <Compile Include="JobEventArgs.cs" />
     <Compile Include="JobSetting.cs" />
-    <Compile Include="JobSettingSerializer.cs" />
     <Compile Include="JobWorker.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
