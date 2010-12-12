@@ -115,7 +115,7 @@ namespace FlagSync.Core
                                 this.OnDirectoryDeletionError(new DirectoryDeletionEventArgs(directory));
                             }
 
-                            catch (System.Security.SecurityException)
+                            catch (SecurityException)
                             {
                                 Logger.Instance.LogError("SecurityException at directory deletion: " + directory.FullName);
                                 this.OnDirectoryDeletionError(new DirectoryDeletionEventArgs(directory));

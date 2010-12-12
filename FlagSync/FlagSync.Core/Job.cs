@@ -5,77 +5,37 @@ namespace FlagSync.Core
 {
     public abstract class Job
     {
-        #region Members
-
-        private JobSetting setting;
-        private bool paused;
-        private bool preview;
-        private bool stopped;
-        private long writtenBytes;
-
-        #endregion Members
-
         #region Properties
 
         /// <summary>
-        /// Gets the job settings.
+        /// Gets the settings of the job.
         /// </summary>
         /// <value>The job settings.</value>
-        public JobSetting Settings
-        {
-            get
-            {
-                return this.setting;
-            }
-        }
+        public JobSetting Settings { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="Job"/> is paused.
+        /// Gets a value indicating whether the <see cref="Job"/> is paused.
         /// </summary>
         /// <value>true if paused; otherwise, false.</value>
-        public bool Paused
-        {
-            get
-            {
-                return this.paused;
-            }
-        }
+        public bool Paused { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="Job"/> is previewed.
+        /// Gets a value indicating whether the <see cref="Job"/> is previewed.
         /// </summary>
         /// <value>true if preview; otherwise, false.</value>
-        public bool Preview
-        {
-            get
-            {
-                return this.preview;
-            }
-        }
+        public bool Preview { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="Job"/> is stopped.
+        /// Gets a value indicating whether the <see cref="Job"/> is stopped.
         /// </summary>
         /// <value>true if stopped; otherwise, false.</value>
-        public bool Stopped
-        {
-            get
-            {
-                return this.stopped;
-            }
-        }
+        public bool Stopped { get; private set; }
 
         /// <summary>
         /// Gets the written bytes.
         /// </summary>
         /// <value>The written bytes.</value>
-        public long WrittenBytes
-        {
-            get
-            {
-                return this.writtenBytes;
-            }
-        }
+        public long WrittenBytes { get; private set; }
 
         #endregion Properties
 
@@ -140,10 +100,10 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <param name="preview">if set to true no files will be deleted, mofified or copied.</param>
-        protected Job(JobSetting setting, bool preview)
+        protected Job(JobSetting settings, bool preview)
         {
-            this.preview = preview;
-            this.setting = setting;
+            this.Preview = preview;
+            this.Settings = settings;
         }
 
         #endregion Constructor
@@ -160,7 +120,7 @@ namespace FlagSync.Core
         /// </summary>
         public void Pause()
         {
-            this.paused = true;
+            this.Paused = true;
         }
 
         /// <summary>
@@ -168,7 +128,7 @@ namespace FlagSync.Core
         /// </summary>
         public void Continue()
         {
-            this.paused = false;
+            this.Paused = false;
         }
 
         /// <summary>
@@ -176,50 +136,13 @@ namespace FlagSync.Core
         /// </summary>
         public void Stop()
         {
-            this.paused = false;
-            this.stopped = true;
+            this.Paused = false;
+            this.Stopped = true;
         }
 
         #endregion Public methods
 
         #region Protected methods
-
-        /// <summary>
-        /// Checks the if the job is paused. If true, a loop will be enabled, till the job gets continued
-        /// </summary>
-        protected void CheckPause()
-        {
-            while (paused)
-            {
-                System.Threading.Thread.Sleep(250);
-            }
-        }
-
-        /// <summary>
-        /// Copyies a file to the specified directory
-        /// </summary>
-        /// <param name="file">File to copy</param>
-        /// <param name="directory">Target directory</param>
-        protected void CopyFile(FileInfo file, DirectoryInfo directory)
-        {
-            this.CheckPause();
-
-            try
-            {
-                file.CopyTo(Path.Combine(directory.FullName, file.Name), true);
-                this.writtenBytes += file.Length;
-            }
-
-            catch (Exception e)
-            {
-                Logger.Instance.LogError("Exception at file copy: " + file.FullName);
-                Logger.Instance.LogError(e.Message);
-
-                this.OnFileCopyError(new FileCopyErrorEventArgs(file, directory));
-
-                throw;
-            }
-        }
 
         /// <summary>
         /// Backups a directory and its sub folders
@@ -235,7 +158,7 @@ namespace FlagSync.Core
             {
                 foreach (DirectoryInfo directory in source.GetDirectories())
                 {
-                    if (this.stopped)
+                    if (this.Stopped)
                     {
                         return;
                     }
@@ -410,6 +333,43 @@ namespace FlagSync.Core
         #region Private methods
 
         /// <summary>
+        /// Checks the if the job is paused. If true, a loop will be enabled, till the job gets continued
+        /// </summary>
+        private void CheckPause()
+        {
+            while (this.Paused)
+            {
+                System.Threading.Thread.Sleep(250);
+            }
+        }
+
+        /// <summary>
+        /// Copyies a file to the specified directory
+        /// </summary>
+        /// <param name="file">File to copy</param>
+        /// <param name="directory">Target directory</param>
+        private void CopyFile(FileInfo file, DirectoryInfo directory)
+        {
+            this.CheckPause();
+
+            try
+            {
+                file.CopyTo(Path.Combine(directory.FullName, file.Name), true);
+                this.WrittenBytes += file.Length;
+            }
+
+            catch (Exception e)
+            {
+                Logger.Instance.LogError("Exception at file copy: " + file.FullName);
+                Logger.Instance.LogError(e.Message);
+
+                this.OnFileCopyError(new FileCopyErrorEventArgs(file, directory));
+
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Checks if file A is newer than file B
         /// </summary>
         /// <param name="fileA">File A</param>
@@ -436,7 +396,7 @@ namespace FlagSync.Core
             {
                 foreach (FileInfo fileA in source.GetFiles())
                 {
-                    if (this.stopped)
+                    if (this.Stopped)
                     {
                         return;
                     }
@@ -444,30 +404,19 @@ namespace FlagSync.Core
                     //Check if fileA isn't already in target directory
                     if (!File.Exists(Path.Combine(target.FullName, fileA.Name)))
                     {
-                        if (preview)
+                        if (!preview)
                         {
-                            this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
+                            CopyFile(fileA, target);
                         }
 
-                        else
-                        {
-                            try
-                            {
-                                CopyFile(fileA, target);
-                                this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
-                            }
-
-                            catch (Exception)
-                            {
-                            }
-                        }
+                        this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
                     }
 
                     if (target.Exists)
                     {
                         foreach (FileInfo fileB in target.GetFiles())
                         {
-                            if (this.stopped)
+                            if (this.Stopped)
                             {
                                 return;
                             }
@@ -479,23 +428,12 @@ namespace FlagSync.Core
                             {
                                 if (this.IsFileModified(fileA, fileB))
                                 {
-                                    if (preview)
+                                    if (!preview)
                                     {
-                                        this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
+                                        CopyFile(fileA, target);
                                     }
 
-                                    else
-                                    {
-                                        try
-                                        {
-                                            CopyFile(fileA, target);
-                                            this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
-                                        }
-
-                                        catch (Exception)
-                                        {
-                                        }
-                                    }
+                                    this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
                                 }
                             }
                         }

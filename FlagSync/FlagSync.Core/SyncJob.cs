@@ -2,7 +2,7 @@
 
 namespace FlagSync.Core
 {
-    class SyncJob : Job
+    public class SyncJob : Job
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SyncJob"/> class.
