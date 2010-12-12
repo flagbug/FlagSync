@@ -67,7 +67,7 @@
                         </Grid.ColumnDefinitions>
                         <Button Content="Preview" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}"></Button>
                         <Button Content="Start" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Click="startButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
-                        <Button Content="Pause" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Click="pauseButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
+                        <Button Content="{Binding Path=JobWorkerViewModel.PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Click="pauseButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
                         <Button Content="Stop" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" Name="stopButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Click="stopButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
                     </Grid>
                 </Grid>

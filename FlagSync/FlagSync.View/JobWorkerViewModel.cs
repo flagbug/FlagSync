@@ -38,7 +38,7 @@ namespace FlagSync.View
                 if (this.IsCounting != value)
                 {
                     this.isCounting = value;
-                    this.OnPropertyChanged(view => view.IsCounting);
+                    this.OnPropertyChanged(vm => vm.IsCounting);
                 }
             }
         }
@@ -55,9 +55,18 @@ namespace FlagSync.View
                 if (this.IsRunning != value)
                 {
                     this.isRunning = value;
-                    this.OnPropertyChanged(view => view.IsRunning);
+                    this.OnPropertyChanged(vm => vm.IsRunning);
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the job worker is paused.
+        /// </summary>
+        /// <value>true if the job worker is paused; otherwise, false.</value>
+        public bool IsPaused
+        {
+            get { return this.jobWorker.Paused; }
         }
 
         /// <summary>
@@ -72,7 +81,7 @@ namespace FlagSync.View
                 if (this.CountedBytes != value)
                 {
                     this.countedBytes = value;
-                    this.OnPropertyChanged(view => view.CountedBytes);
+                    this.OnPropertyChanged(vm => vm.CountedBytes);
                 }
             }
         }
@@ -89,7 +98,7 @@ namespace FlagSync.View
                 if (this.ProceededBytes != value)
                 {
                     this.proceededBytes = value;
-                    this.OnPropertyChanged(view => view.ProceededBytes);
+                    this.OnPropertyChanged(vm => vm.ProceededBytes);
                 }
             }
         }
@@ -106,7 +115,7 @@ namespace FlagSync.View
                 if (this.CountedFiles != value)
                 {
                     this.countedFiles = value;
-                    this.OnPropertyChanged(view => view.CountedFiles);
+                    this.OnPropertyChanged(vm => vm.CountedFiles);
                 }
             }
         }
@@ -123,7 +132,7 @@ namespace FlagSync.View
                 if (this.ProceededFiles != value)
                 {
                     this.proceededFiles = value;
-                    this.OnPropertyChanged(view => view.ProceededFiles);
+                    this.OnPropertyChanged(vm => vm.ProceededFiles);
                 }
             }
         }
@@ -140,7 +149,7 @@ namespace FlagSync.View
                 if (this.CurrentJobSettings != value)
                 {
                     this.currentJobSetting = value;
-                    this.OnPropertyChanged(view => view.CurrentJobSettings);
+                    this.OnPropertyChanged(vm => vm.CurrentJobSettings);
                 }
             }
         }
@@ -163,7 +172,7 @@ namespace FlagSync.View
                 if (this.statusMessages != value)
                 {
                     this.statusMessages = value;
-                    this.OnPropertyChanged(view => view.StatusMessages);
+                    this.OnPropertyChanged(vm => vm.StatusMessages);
                 }
             }
         }
@@ -177,9 +186,21 @@ namespace FlagSync.View
             get { return this.lastStatusMessage; }
             private set
             {
-                this.lastStatusMessage = value;
-                this.OnPropertyChanged(view => view.LastStatusMessage);
+                if (this.statusMessages != value)
+                {
+                    this.lastStatusMessage = value;
+                    this.OnPropertyChanged(vm => vm.LastStatusMessage);
+                }
             }
+        }
+
+        /// <summary>
+        /// Gets the pause or continue string.
+        /// </summary>
+        /// <value>The pause or continue string.</value>
+        public string PauseOrContinueString
+        {
+            get { return this.IsPaused ? "Continue" : "Pause"; }
         }
 
         #endregion Properties
@@ -241,7 +262,7 @@ namespace FlagSync.View
         public void PauseJobWorker()
         {
             this.jobWorker.Pause();
-            this.IsRunning = false;
+            this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage("Paused jobs.");
         }
 
@@ -251,7 +272,7 @@ namespace FlagSync.View
         public void ContinueJobWorker()
         {
             this.jobWorker.Continue();
-            this.IsRunning = true;
+            this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage("Continue jobs.");
             this.AddStatusMessage("Proceeding job: " + this.CurrentJobSettings.Name + "...");
         }
@@ -308,6 +329,7 @@ namespace FlagSync.View
         private void jobWorker_Finished(object sender, EventArgs e)
         {
             this.IsRunning = false;
+            this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage("Finished all jobs.");
         }
 

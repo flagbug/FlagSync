@@ -197,7 +197,17 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void pauseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.mainViewModel.JobWorkerViewModel.PauseJobWorker();
+            bool isJobWorkerPaused = this.mainViewModel.JobWorkerViewModel.IsPaused;
+
+            if (isJobWorkerPaused)
+            {
+                this.mainViewModel.JobWorkerViewModel.ContinueJobWorker();
+            }
+
+            else
+            {
+                this.mainViewModel.JobWorkerViewModel.PauseJobWorker();
+            }
         }
 
         /// <summary>
