@@ -92,6 +92,11 @@ namespace FlagSync.Core
         /// </summary>
         public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
 
+        /// <summary>
+        /// Occurs when the file progress has changed.
+        /// </summary>
+        public event EventHandler<CopyProgressEventArgs> FileProgressChanged;
+
         #endregion Events
 
         #region Constructor
@@ -207,7 +212,7 @@ namespace FlagSync.Core
         {
             if (this.FoundNewFile != null)
             {
-                this.FoundNewFile.Invoke(this, e);
+                this.FoundNewFile(this, e);
             }
 
             Logger.Instance.LogSucceed("Found new file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
@@ -221,7 +226,7 @@ namespace FlagSync.Core
         {
             if (this.FoundModifiedFile != null)
             {
-                this.FoundModifiedFile.Invoke(this, e);
+                this.FoundModifiedFile(this, e);
             }
 
             Logger.Instance.LogSucceed("Found modified file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
@@ -235,7 +240,7 @@ namespace FlagSync.Core
         {
             if (this.DirectoryCreated != null)
             {
-                this.DirectoryCreated.Invoke(this, e);
+                this.DirectoryCreated(this, e);
             }
 
             Logger.Instance.LogSucceed("Found new directory: " + e.Directory.Name + " in source: " + e.Directory.Parent.FullName + ", created in target: " + e.TargetDirectory.FullName);
@@ -249,7 +254,7 @@ namespace FlagSync.Core
         {
             if (this.DirectoryDeleted != null)
             {
-                this.DirectoryDeleted.Invoke(this, e);
+                this.DirectoryDeleted(this, e);
             }
 
             Logger.Instance.LogSucceed("Deleted directory: " + e.Directory.FullName);
@@ -263,7 +268,7 @@ namespace FlagSync.Core
         {
             if (this.FileCopyError != null)
             {
-                this.FileCopyError.Invoke(this, e);
+                this.FileCopyError(this, e);
             }
         }
 
@@ -275,7 +280,7 @@ namespace FlagSync.Core
         {
             if (this.FileDeleted != null)
             {
-                this.FileDeleted.Invoke(this, e);
+                this.FileDeleted(this, e);
             }
 
             Logger.Instance.LogSucceed("Deleted file: " + e.File.FullName);
@@ -289,7 +294,7 @@ namespace FlagSync.Core
         {
             if (this.Finished != null)
             {
-                this.Finished.Invoke(this, e);
+                this.Finished(this, e);
             }
         }
 
@@ -301,7 +306,7 @@ namespace FlagSync.Core
         {
             if (this.FileProceeded != null)
             {
-                this.FileProceeded.Invoke(this, e);
+                this.FileProceeded(this, e);
             }
         }
 
@@ -313,7 +318,7 @@ namespace FlagSync.Core
         {
             if (this.DirectoryDeletionError != null)
             {
-                this.DirectoryDeletionError.Invoke(this, e);
+                this.DirectoryDeletionError(this, e);
             }
         }
 
@@ -325,7 +330,19 @@ namespace FlagSync.Core
         {
             if (this.FileDeletionError != null)
             {
-                this.FileDeletionError.Invoke(this, e);
+                this.FileDeletionError(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:FileProgressChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnFileProgressChanged(CopyProgressEventArgs e)
+        {
+            if (this.FileProgressChanged != null)
+            {
+                this.FileProgressChanged(this, e);
             }
         }
 
@@ -356,6 +373,7 @@ namespace FlagSync.Core
             try
             {
                 FileCopyOperation op = new FileCopyOperation();
+                op.CopyProgressUpdated += new EventHandler<CopyProgressEventArgs>(file_CopyProgressUpdated);
                 op.CopyFile(file.FullName, Path.Combine(directory.FullName, file.Name));
                 this.WrittenBytes += file.Length;
             }
@@ -369,6 +387,16 @@ namespace FlagSync.Core
 
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Handles the CopyProgressUpdated event of the file copy control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
+        private void file_CopyProgressUpdated(object sender, CopyProgressEventArgs e)
+        {
+            this.OnFileProgressChanged(e);
         }
 
         /// <summary>
@@ -406,12 +434,12 @@ namespace FlagSync.Core
                     //Check if fileA isn't already in target directory
                     if (!File.Exists(Path.Combine(target.FullName, fileA.Name)))
                     {
+                        this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
+
                         if (!preview)
                         {
                             CopyFile(fileA, target);
                         }
-
-                        this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
                     }
 
                     if (target.Exists)
@@ -430,12 +458,12 @@ namespace FlagSync.Core
                             {
                                 if (this.IsFileModified(fileA, fileB))
                                 {
+                                    this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
+
                                     if (!preview)
                                     {
                                         CopyFile(fileA, target);
                                     }
-
-                                    this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
                                 }
                             }
                         }

@@ -10,6 +10,7 @@
     <Window.Resources>
         <local:ByteToKiloByteConverter x:Key="ByteToKiloByteConverter"/>
         <flaglibconverters:BoolNegationValueConverter x:Key="BoolNegationConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
     <Grid Name="mainGrid" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -154,14 +155,14 @@
                                 <GridViewColumn Header="Action" DisplayMemberBinding="{Binding Path=Action}" />
                                 <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}" />
                                 <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Path=SourcePath}" />
-                                <GridViewColumn Header="Target" DisplayMemberBinding="{Binding Path=TargetPath}" />
                                 <GridViewColumn Header="Progress">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ProgressBar MinWidth="50" MinHeight="15" />
+                                            <ProgressBar MinWidth="50" MinHeight="15" Value="{Binding Path=Progress}" Visibility="{Binding Path=IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
+                                <GridViewColumn Header="Target" DisplayMemberBinding="{Binding Path=TargetPath}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
