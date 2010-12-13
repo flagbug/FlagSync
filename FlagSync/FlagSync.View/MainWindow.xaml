@@ -158,7 +158,11 @@
                                 <GridViewColumn Header="Progress">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ProgressBar MinWidth="50" MinHeight="15" Value="{Binding Path=Progress}" Visibility="{Binding Path=IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                            <StackPanel Orientation="Horizontal" Width="105" Visibility="{Binding Path=IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                <ProgressBar Width="75" Height="15" Value="{Binding Path=Progress}" />
+                                                <ContentPresenter Content="{Binding Path=Progress}" Margin="5, 0, 0, 0" />
+                                                <ContentPresenter Content="%" />
+                                            </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
