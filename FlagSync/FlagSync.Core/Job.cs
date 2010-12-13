@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using FlagLib.FileSystem;
 
 namespace FlagSync.Core
 {
@@ -354,7 +355,8 @@ namespace FlagSync.Core
 
             try
             {
-                file.CopyTo(Path.Combine(directory.FullName, file.Name), true);
+                FileCopyOperation op = new FileCopyOperation();
+                op.CopyFile(file.FullName, Path.Combine(directory.FullName, file.Name));
                 this.WrittenBytes += file.Length;
             }
 
