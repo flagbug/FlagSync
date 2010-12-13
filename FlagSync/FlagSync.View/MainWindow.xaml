@@ -18,18 +18,18 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Height="25" Name="mainMenu" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Background="#FFF0F0F0">
+        <Menu Grid.Row="0" Height="25" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Background="#FFF0F0F0">
             <MenuItem Header="Program" Name="programMenuItem">
                 <MenuItem Header="Exit" Name="exitMenuItem" Click="exitMenuItem_Click" />
             </MenuItem>
             <MenuItem Header="?" Name="helpMenuItem" />
         </Menu>
-        <Grid Grid.Row="1" Name="controlGrid" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="5, 10, 5, 10">
+        <Grid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="5, 10, 5, 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <GroupBox Name="jobOverviewGroupBox" Header="Current Job" Height="Auto" Width="Auto" Padding="5" Grid.Column="0">
+            <GroupBox Header="Current Job" Height="Auto" Width="Auto" Padding="5" Grid.Column="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -41,23 +41,23 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="Name:" Height="Auto" HorizontalAlignment="Left" Name="currentJobNameDescriptionLabel" VerticalAlignment="Top" Padding="0" />
-                    <TextBlock Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobNameViewLabel" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.Name}" Margin="5,0,0,0" />
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Directory A:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryADescriptionLabel" VerticalAlignment="Top" Padding="0" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryAViewLabel" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryA}" Margin="5,0,0,0" />
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Directory B:" Height="Auto" HorizontalAlignment="Left" Name="currentJobDirectoryBDescriptionLabel" VerticalAlignment="Top" Padding="0" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDirectoryBViewLabel" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryB}" Margin="5,0,0,0" />
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Mode:" Height="Auto" HorizontalAlignment="Left" Width="Auto" Name="currentJobModeDescriptionLabel" VerticalAlignment="Top" Padding="0" />
-                    <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" Name="currentJobDescriptionViewLabel" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.SyncMode}" Margin="5,0,0,0" />
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="Name:" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.Name}" Margin="5,0,0,0" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Directory A:" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryA}" Margin="5,0,0,0" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Directory B:" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryB}" Margin="5,0,0,0" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Mode:" Height="Auto" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.SyncMode}" Margin="5,0,0,0" />
                 </Grid>
             </GroupBox>
-            <GroupBox Name="controlGroupBox" Header="Control" Height="Auto" Width="Auto" Grid.Column="1" Padding="5">
+            <GroupBox Header="Control Panel" Height="Auto" Width="Auto" Grid.Column="1" Padding="5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ProgressBar Height="25" HorizontalAlignment="Stretch" Name="progressBar" VerticalAlignment="Top" Width="Auto" Grid.Row="0" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
+                    <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -74,7 +74,7 @@
             </GroupBox>
         </Grid>
         <TabControl Grid.Row="2" Name="mainTabControl"  Height="Auto" Margin="5, 0, 5, 10">
-            <TabItem Header="Settings" Name="settingsTabItem">
+            <TabItem Header="Settings">
                 <Grid Margin="0, 10, 0, 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
@@ -90,7 +90,7 @@
                         </Grid.RowDefinitions>
                         <Button Grid.Row="0" Name="newJobButton" Content="New Job" Height="25" Click="newJobButton_Click" />
                         <Button Grid.Row="1" Name="deleteJobButton" Content="Delete Job" Height="25"  Click="deleteJobButton_Click" />
-                        <ListBox Grid.Row="2" Name="jobSettingsListBox" Margin="0, 5, 0, 5" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox Grid.Row="2" Margin="0, 5, 0, 5" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -103,7 +103,7 @@
                         <Button Grid.Row="3" Name="loadJobsButton" Content="Load Jobs" Height="25" Click="loadJobsButton_Click" />
                         <Button Grid.Row="4" Name="saveJobsButton" Content="Save Jobs" Height="25"  Click="saveJobsButton_Click" />
                     </Grid>
-                    <GroupBox Header="Common Settings" Height="Auto" HorizontalAlignment="Left" Margin="5,0,0,0" Name="commonJobSettingsGroupBox" VerticalAlignment="Top" Width="400" Grid.Column="1">
+                    <GroupBox Header="Common Settings" Height="Auto" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="400" Grid.Column="1">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -119,19 +119,19 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Name:" HorizontalAlignment="Right" Name="jobSettingsNameTextBlock" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="jobNameTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+                                <TextBlock Text="Name:" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
                                 <Button Margin="5, 5, 5, 5" Content="Directory A" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryATextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                                 <Button Margin="5, 5, 5, 5" Content="Directory B" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryBButton_Click" />
-                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBTextBox" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Name="jobSettingsModeLabel" Content="Mode:" Grid.Column="0" />
+                                <Label Content="Mode:" Grid.Column="0" />
                                 <StackPanel Margin="5, 5, 5, 5" Grid.Column="1">
                                     <RadioButton Name="jobSettingsBackupModeRadioButton" GroupName="jobMode" Checked="jobSettingsBackupModeRadioButton_Checked">Backup</RadioButton>
                                     <RadioButton Name="jobSettingsSyncModeRadioButton" GroupName="jobMode" Checked="jobSettingsSyncModeRadioButton_Checked">Synchronisation</RadioButton>
@@ -141,7 +141,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Log" Name="overviewTabItem">
+            <TabItem Header="Log">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />
@@ -155,13 +155,20 @@
                                 <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}" />
                                 <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Path=SourcePath}" />
                                 <GridViewColumn Header="Target" DisplayMemberBinding="{Binding Path=TargetPath}" />
+                                <GridViewColumn Header="Progress">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ProgressBar MinWidth="50" MinHeight="15" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </Grid>
             </TabItem>
         </TabControl>
-        <StatusBar Name="statusBar" Width="Auto" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
+        <StatusBar Width="Auto" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
             <StatusBarItem Content="{Binding Path=JobWorkerViewModel.LastStatusMessage}" />
         </StatusBar>
     </Grid>
