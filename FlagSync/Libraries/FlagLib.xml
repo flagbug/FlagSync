@@ -671,6 +671,14 @@
             <param name="items">The items tho serialize.</param>
             <param name="path">The path of the file.</param>
         </member>
+        <member name="M:FlagLib.Serialization.GenericXmlSerializer.SaveCollection``1(System.Collections.Generic.ICollection{``0},System.String)">
+            <summary>
+            Saves the specified collection at the specified path.
+            </summary>
+            <typeparam name="T">Type of the items to serialize</typeparam>
+            <param name="items">The items tho serialize.</param>
+            <param name="path">The path of the file.</param>
+        </member>
         <member name="M:FlagLib.Serialization.GenericXmlSerializer.SaveSingle``1(``0,System.String)">
             <summary>
             Saves the specified item at the specified path.
@@ -1123,6 +1131,112 @@
             Gets or sets the width.
             </summary>
             <value>The width.</value>
+        </member>
+        <member name="F:FlagLib.FileSystem.FileCopyOperation.CALLBACK_CHUNK_FINISHED">
+            <summary>
+            Callback reason passed as dwCallbackReason in CopyProgressRoutine.
+            Indicates another part of the data file was copied.
+            </summary>
+        </member>
+        <member name="F:FlagLib.FileSystem.FileCopyOperation.CALLBACK_STREAM_SWITCH">
+            <summary>
+            Callback reason passed as dwCallbackReason in CopyProgressRoutine.
+            Indicates another stream was created and is about to be copied. This is the callback reason given when the callback routine is first invoked.
+            </summary>
+        </member>
+        <member name="F:FlagLib.FileSystem.FileCopyOperation.PROGRESS_CONTINUE">
+            <summary>
+            Return value of the CopyProgressRoutine.
+            Indicates continue the copy operation.
+            </summary>
+        </member>
+        <member name="F:FlagLib.FileSystem.FileCopyOperation.PROGRESS_CANCEL">
+            <summary>
+            Return value of the CopyProgressRoutine.
+            Indicates cancel the copy operation and delete the destination file.
+            </summary>
+        </member>
+        <member name="F:FlagLib.FileSystem.FileCopyOperation.PROGRESS_STOP">
+            <summary>
+            Return value of the CopyProgressRoutine.
+            Indicates stop the copy operation. It can be restarted at a later time.
+            </summary>
+        </member>
+        <member name="F:FlagLib.FileSystem.FileCopyOperation.PROGRESS_QUIET">
+            <summary>
+            Return value of the CopyProgressRoutine.
+            Indicates continue the copy operation, but stop invoking CopyProgressRoutine to report progress.
+            </summary>
+        </member>
+        <member name="M:FlagLib.FileSystem.FileCopyOperation.CopyProgressCallback(System.Int64,System.Int64,System.Int64,System.Int64,System.UInt32,System.UInt32,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            The CopyProgressRoutine delegate is an application-defined callback function used with the CopyFileEx and MoveFileWithProgress functions.
+            It is called when a portion of a copy or move operation is completed.
+            </summary>
+            <param name="TotalFileSize">Total size of the file, in bytes.</param>
+            <param name="TotalBytesTransferred">Total number of bytes transferred from the source file to the destination file since the copy operation began.</param>
+            <param name="StreamSize">Total size of the current file stream, in bytes.</param>
+            <param name="StreamBytesTransferred">Total number of bytes in the current stream that have been transferred from the source file to the destination file since the copy operation began. </param>
+            <param name="dwStreamNumber">Handle to the current stream. The first time CopyProgressRoutine is called, the stream number is 1.</param>
+            <param name="dwCallbackReason">Reason that CopyProgressRoutine was called.</param>
+            <param name="hSourceFile">Handle to the source file.</param>
+            <param name="hDestinationFile">Handle to the destination file.</param>
+            <param name="lpData">Argument passed to CopyProgressRoutine by the CopyFileEx or MoveFileWithProgress function.</param>
+            <returns>A value indicating how to proceed with the copy operation.</returns>
+        </member>
+        <member name="M:FlagLib.FileSystem.FileCopyOperation.CopyFile(System.String,System.String)">
+            <summary>
+            Copies a file.
+            </summary>
+            <param name="sourceFile">The source file.</param>
+            <param name="destinationFile">The destination file.</param>
+        </member>
+        <member name="M:FlagLib.FileSystem.FileCopyOperation.OnCopyProgress(FlagLib.FileSystem.CopyProgressEventArgs)">
+            <summary>
+            Raises the <see cref="E:CopyProgress"/> event.
+            </summary>
+            <param name="e">The <see cref="T:FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="E:FlagLib.FileSystem.FileCopyOperation.CopyProgressUpdated">
+            <summary>
+            Occurs when the copy progress has updated.
+            </summary>
+        </member>
+        <member name="T:FlagLib.FileSystem.FileCopyOperation.CopyProgressRoutine">
+            <summary>
+            The CopyProgressRoutine delegate is an application-defined callback function used with the CopyFileEx and MoveFileWithProgress functions.
+            It is called when a portion of a copy or move operation is completed.
+            </summary>
+        </member>
+        <member name="T:FlagLib.FileSystem.CopyProgressEventArgs">
+            <summary>
+            Provides data for the CopyProgress event.
+            </summary>
+        </member>
+        <member name="M:FlagLib.FileSystem.CopyProgressEventArgs.#ctor(System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the CopyProgressEventArgs class.
+            </summary>
+            <param name="totalFileSize">The total file size, in bytes.</param>
+            <param name="totalBytesTransferred">The total bytes transferred so far.</param>
+        </member>
+        <member name="P:FlagLib.FileSystem.CopyProgressEventArgs.TotalFileSize">
+            <summary>
+            Gets the total file size, in bytes, of the file being moved.
+            </summary>
+            <value>The total file size.</value>
+        </member>
+        <member name="P:FlagLib.FileSystem.CopyProgressEventArgs.TotalBytesTransferred">
+            <summary>
+            Gets the total bytes transferred so far.
+            </summary>
+            <value>The total bytes transferred.</value>
+        </member>
+        <member name="P:FlagLib.FileSystem.CopyProgressEventArgs.Cancel">
+            <summary>
+            Gets or sets a value indicating whether the event should be canceled.
+            </summary>
+            <value>True if the event should be canceled, False otherwise.</value>
         </member>
     </members>
 </doc>
