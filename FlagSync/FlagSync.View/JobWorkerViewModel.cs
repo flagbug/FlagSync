@@ -21,6 +21,7 @@ namespace FlagSync.View
         private bool isRunning;
         private string statusMessages = String.Empty;
         private string lastStatusMessage = String.Empty;
+        private int lastLogMessage;
 
         #endregion Members
 
@@ -195,6 +196,29 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Gets the index of the last log message.
+        /// </summary>
+        /// <value>The index of the last log message.</value>
+        public int LastLogMessageIndex
+        {
+            get { return this.lastLogMessage; }
+            private set
+            {
+                if (this.lastLogMessage != value)
+                {
+                    this.lastLogMessage = value;
+                    this.OnPropertyChanged(vm => vm.LastLogMessageIndex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the job worker performs a preview.
+        /// </summary>
+        /// <value>true if the job worker performs a preview; otherwise, false.</value>
+        public bool IsPreview { get; private set; }
+
+        /// <summary>
         /// Gets the pause or continue string.
         /// </summary>
         /// <value>The pause or continue string.</value>
@@ -255,6 +279,7 @@ namespace FlagSync.View
             this.jobWorker.Start(jobSettings, preview);
             this.IsCounting = true;
             this.IsRunning = true;
+            this.IsPreview = preview;
             this.AddStatusMessage("Starting jobs.");
             this.AddStatusMessage("Counting files...");
         }
@@ -336,6 +361,7 @@ namespace FlagSync.View
             LogMessage message = new LogMessage(type, action, sourcePath, targetPath, initialProgress);
             this.LogMessages.Add(message);
             this.LastLogMessage = message;
+            this.LastLogMessageIndex = this.LogMessages.Count;
         }
 
         /// <summary>

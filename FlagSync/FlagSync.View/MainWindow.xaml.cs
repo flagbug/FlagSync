@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using FlagLib.Collections;
 using FlagSync.Core;
 
 namespace FlagSync.View
@@ -218,6 +219,32 @@ namespace FlagSync.View
         private void stopButton_Click(object sender, RoutedEventArgs e)
         {
             this.mainViewModel.JobWorkerViewModel.StopJobWorker();
+        }
+
+        /// <summary>
+        /// Handles the TextChanged event of the TextBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Controls.TextChangedEventArgs"/> instance containing the event data.</param>
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((TextBox)sender).ScrollToEnd();
+        }
+
+        /// <summary>
+        /// Handles the SelectionChanged event of the ListView control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Controls.SelectionChangedEventArgs"/> instance containing the event data.</param>
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ThreadSafeObservableCollection<LogMessage> messages = this.mainViewModel.JobWorkerViewModel.LogMessages;
+            bool isPreview = this.mainViewModel.JobWorkerViewModel.IsPreview;
+
+            if (!isPreview && messages.Count > 0)
+            {
+                ((ListView)sender).ScrollIntoView(messages[messages.Count - 1]);
+            }
         }
     }
 }

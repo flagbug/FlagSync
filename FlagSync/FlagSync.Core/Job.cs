@@ -438,7 +438,7 @@ namespace FlagSync.Core
 
                         if (!preview)
                         {
-                            CopyFile(fileA, target);
+                            this.CopyFile(fileA, target);
                         }
                     }
 
@@ -462,7 +462,7 @@ namespace FlagSync.Core
 
                                     if (!preview)
                                     {
-                                        CopyFile(fileA, target);
+                                        this.CopyFile(fileA, target);
                                     }
                                 }
                             }

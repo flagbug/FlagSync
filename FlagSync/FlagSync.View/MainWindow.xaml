@@ -148,8 +148,8 @@
                         <RowDefinition Height="100" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch" Text="{Binding Path=JobWorkerViewModel.StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Cursor="Arrow" />
-                    <ListView ScrollViewer.CanContentScroll="True" Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}">
+                    <TextBox Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch" Text="{Binding Path=JobWorkerViewModel.StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Cursor="Arrow" TextChanged="TextBox_TextChanged" />
+                    <ListView Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Action" DisplayMemberBinding="{Binding Path=Action}" />
