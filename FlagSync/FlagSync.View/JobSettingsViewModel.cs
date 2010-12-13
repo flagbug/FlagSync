@@ -106,7 +106,7 @@ namespace FlagSync.View
         /// <param name="path">The path.</param>
         public void SaveJobSettings(string path)
         {
-            GenericXmlSerializer.SaveEnumerable<JobSetting>(this.InternJobSettings.ToList(), path);
+            GenericXmlSerializer.SaveCollection<JobSetting>(this.InternJobSettings.ToList(), path);
         }
 
         /// <summary>
