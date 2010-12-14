@@ -439,7 +439,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void jobWorker_FoundNewerFile(object sender, FileCopyEventArgs e)
         {
-            this.AddLogMessage("Created", "File", e.File.FullName, e.TargetDirectory.FullName, 0);
+            this.AddLogMessage("Created", "File", e.File.FullName, e.TargetDirectory.FullName, this.IsPreview ? 100 : 0);
         }
 
         /// <summary>
@@ -449,7 +449,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void jobWorker_FoundModifiedFile(object sender, FileCopyEventArgs e)
         {
-            this.AddLogMessage("Modified", "File", e.File.FullName, Path.Combine(e.TargetDirectory.FullName, e.File.Name), 0);
+            this.AddLogMessage("Modified", "File", e.File.FullName, Path.Combine(e.TargetDirectory.FullName, e.File.Name), this.IsPreview ? 100 : 0);
         }
 
         /// <summary>
