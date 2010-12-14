@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using FlagLib.Collections;
@@ -243,7 +244,7 @@ namespace FlagSync.View
 
             if (!isPreview && messages.Count > 0)
             {
-                ((ListView)sender).ScrollIntoView(messages[messages.Count - 1]);
+                ((ListView)sender).ScrollIntoView(messages.Last());
             }
         }
     }

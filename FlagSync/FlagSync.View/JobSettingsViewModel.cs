@@ -97,7 +97,7 @@ namespace FlagSync.View
                 this.AddNewJobSetting();
             }
 
-            this.SelectedJobSetting = this.JobSettings[this.JobSettings.Count - 1];
+            this.SelectedJobSetting = this.JobSettings.Last();
         }
 
         /// <summary>
@@ -123,6 +123,8 @@ namespace FlagSync.View
             {
                 this.JobSettings.Add(new JobSettingViewModel(setting));
             }
+
+            this.SelectedJobSetting = this.JobSettings.FirstOrDefault();
         }
     }
 }
