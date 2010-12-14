@@ -124,7 +124,7 @@ namespace FlagSync.View
                 this.JobSettings.Add(new JobSettingViewModel(setting));
             }
 
-            this.SelectedJobSetting = this.JobSettings.FirstOrDefault();
+            this.SelectedJobSetting = this.JobSettings.First();
         }
     }
 }

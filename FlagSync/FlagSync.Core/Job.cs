@@ -375,7 +375,6 @@ namespace FlagSync.Core
                 FileCopyOperation op = new FileCopyOperation();
                 op.CopyProgressUpdated += new EventHandler<CopyProgressEventArgs>(file_CopyProgressUpdated);
                 op.CopyFile(file.FullName, Path.Combine(directory.FullName, file.Name));
-                this.WrittenBytes += file.Length;
             }
 
             catch (Exception e)
@@ -383,9 +382,17 @@ namespace FlagSync.Core
                 Logger.Instance.LogError("Exception at file copy: " + file.FullName);
                 Logger.Instance.LogError(e.Message);
 
-                this.OnFileCopyError(new FileCopyErrorEventArgs(file, directory));
-
                 throw;
+            }
+
+            finally
+            {
+                this.WrittenBytes += file.Length;
+
+                if (file.Length == 0)
+                {
+                    this.OnFileProgressChanged(new CopyProgressEventArgs(0, 0));
+                }
             }
         }
 
@@ -438,7 +445,15 @@ namespace FlagSync.Core
 
                         if (!preview)
                         {
-                            this.CopyFile(fileA, target);
+                            try
+                            {
+                                this.CopyFile(fileA, target);
+                            }
+
+                            catch (Exception)
+                            {
+                                this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, target));
+                            }
                         }
                     }
 
@@ -462,7 +477,15 @@ namespace FlagSync.Core
 
                                     if (!preview)
                                     {
-                                        this.CopyFile(fileA, target);
+                                        try
+                                        {
+                                            this.CopyFile(fileA, target);
+                                        }
+
+                                        catch (Exception)
+                                        {
+                                            this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, target));
+                                        }
                                     }
                                 }
                             }

@@ -58,7 +58,13 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ProgressBar Grid.Row="0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
+                    <Grid>
+                        <ProgressBar Grid.Row="0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=JobWorkerViewModel.TotalProgressPercentage, StringFormat=\{0:F\}}" />
+                            <TextBlock Text="%" Background="Transparent" />
+                        </StackPanel>
+                    </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -158,10 +164,14 @@
                                 <GridViewColumn Header="Progress">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" Width="105" Visibility="{Binding Path=IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                <ProgressBar Width="75" Height="15" Value="{Binding Path=Progress}" />
-                                                <ContentPresenter Content="{Binding Path=Progress}" Margin="5, 0, 0, 0" />
-                                                <ContentPresenter Content="%" />
+                                            <StackPanel Orientation="Horizontal" Width="100" >
+                                                <Grid>
+                                                    <ProgressBar Width="100" Height="15" Value="{Binding Path=Progress}" Background="{Binding Path=MessageColor}" />
+                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Path=Progress}" Background="Transparent" />
+                                                        <TextBlock Text="%" Background="Transparent" />
+                                                    </StackPanel>
+                                                </Grid>
                                             </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>

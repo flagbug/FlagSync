@@ -241,8 +241,10 @@ namespace FlagSync.View
         {
             ThreadSafeObservableCollection<LogMessage> messages = this.mainViewModel.JobWorkerViewModel.LogMessages;
             bool isPreview = this.mainViewModel.JobWorkerViewModel.IsPreview;
+            bool isRunning = this.mainViewModel.JobWorkerViewModel.IsRunning;
+            bool isPaused = this.mainViewModel.JobWorkerViewModel.IsPaused;
 
-            if (!isPreview && messages.Count > 0)
+            if (!isPreview && messages.Count > 0 && isRunning && !isPaused)
             {
                 ((ListView)sender).ScrollIntoView(messages.Last());
             }

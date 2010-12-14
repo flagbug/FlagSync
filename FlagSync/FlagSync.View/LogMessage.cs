@@ -1,4 +1,5 @@
-﻿using FlagLib.Patterns;
+﻿using System.Windows.Media;
+using FlagLib.Patterns;
 
 namespace FlagSync.View
 {
@@ -58,19 +59,42 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LogMessage"></see> class.
+        /// Gets the color of the message.
         /// </summary>
-        /// <param name="type"></param>
+        /// <value>The color of the message.</value>
+        public Brush MessageColor
+        {
+            get
+            {
+                return this.IsErrorMessage ? Brushes.Red : Brushes.Gray;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the log message is a error message.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if the log message is a error message; otherwise, <c>false</c>.
+        /// </value>
+        private bool IsErrorMessage { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogMessage"/> class.
+        /// </summary>
+        /// <param name="type">The type.</param>
         /// <param name="action">The action.</param>
         /// <param name="sourcePath">The source path.</param>
         /// <param name="targetPath">The target path.</param>
-        public LogMessage(string type, string action, string sourcePath, string targetPath, int initialProgress)
+        /// <param name="initialProgress">The initial progress.</param>
+        /// <param name="isErrorMessage">if set to <c>true</c>, the message is a error message.</param>
+        public LogMessage(string type, string action, string sourcePath, string targetPath, int initialProgress, bool isErrorMessage)
         {
             this.Type = type;
             this.Action = action;
             this.SourcePath = sourcePath;
             this.TargetPath = targetPath;
             this.Progress = initialProgress;
+            this.IsErrorMessage = isErrorMessage;
         }
     }
 }
