@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FlagLib.Collections;
 using FlagLib.Patterns;
 using FlagSync.Core;
@@ -276,12 +277,15 @@ namespace FlagSync.View
         /// <param name="preview">if set to true, a preview will be performed.</param>
         public void StartJobWorker(IEnumerable<JobSetting> jobSettings, bool preview)
         {
-            this.jobWorker.Start(jobSettings, preview);
-            this.IsCounting = true;
-            this.IsRunning = true;
-            this.IsPreview = preview;
-            this.AddStatusMessage("Starting jobs.");
-            this.AddStatusMessage("Counting files...");
+            if (jobSettings.All(setting => this.CheckDirectoriesExist(setting)))
+            {
+                this.jobWorker.Start(jobSettings, preview);
+                this.IsCounting = true;
+                this.IsRunning = true;
+                this.IsPreview = preview;
+                this.AddStatusMessage("Starting jobs.");
+                this.AddStatusMessage("Counting files...");
+            }
         }
 
         /// <summary>
@@ -319,6 +323,25 @@ namespace FlagSync.View
         #endregion Public methods
 
         #region Private methods
+
+        private bool CheckDirectoriesExist(JobSetting jobSetting)
+        {
+            bool exist = true;
+
+            if (!Directory.Exists(jobSetting.DirectoryA))
+            {
+                this.AddStatusMessage(jobSetting.Name + ": Directory A doesn't exist!");
+                exist = false;
+            }
+
+            if (!Directory.Exists(jobSetting.DirectoryB))
+            {
+                this.AddStatusMessage(jobSetting.Name + ": Directory B doesn't exist!");
+                exist = false;
+            }
+
+            return exist;
+        }
 
         /// <summary>
         /// Resets the proceeded and counted bytes to avoid that the statusbar is filled at startup of the application.
