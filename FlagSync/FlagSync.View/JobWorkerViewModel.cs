@@ -202,7 +202,7 @@ namespace FlagSync.View
         public int LastLogMessageIndex
         {
             get { return this.lastLogMessage; }
-            private set
+            set
             {
                 if (this.lastLogMessage != value)
                 {
