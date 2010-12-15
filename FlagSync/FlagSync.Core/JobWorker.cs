@@ -8,6 +8,81 @@ namespace FlagSync.Core
     public sealed class JobWorker
     {
         /// <summary>
+        /// Occurs when a file has been proceeded.
+        /// </summary>
+        public event EventHandler<FileProceededEventArgs> ProceededFile;
+
+        /// <summary>
+        /// Occurs before a file gets deleted.
+        /// </summary>
+        public event EventHandler<FileDeletionEventArgs> DeletingFile;
+
+        /// <summary>
+        /// Occurs when a file has been deleted.
+        /// </summary>
+        public event EventHandler<FileDeletionEventArgs> DeletedFile;
+
+        /// <summary>
+        /// Occurs before a new file gets created.
+        /// </summary>
+        public event EventHandler<FileCopyEventArgs> CreatingFile;
+
+        /// <summary>
+        /// Occurs when a new file has been created.
+        /// </summary>
+        public event EventHandler<FileCopyEventArgs> CreatedFile;
+
+        /// <summary>
+        /// Occurs before a file gets modified.
+        /// </summary>
+        public event EventHandler<FileCopyEventArgs> ModifyingFile;
+
+        /// <summary>
+        /// Occurs when a file has been modified.
+        /// </summary>
+        public event EventHandler<FileCopyEventArgs> ModifiedFile;
+
+        /// <summary>
+        /// Occurs before a new directory gets created.
+        /// </summary>
+        public event EventHandler<DirectoryCreationEventArgs> CreatingDirectory;
+
+        /// <summary>
+        /// Occurs when a new directory has been created.
+        /// </summary>
+        public event EventHandler<DirectoryCreationEventArgs> CreatedDirectory;
+
+        /// <summary>
+        /// Occurs before a directory has been deleted.
+        /// </summary>
+        public event EventHandler<DirectoryDeletionEventArgs> DeletingDirectory;
+
+        /// <summary>
+        /// Occurs when a directory has been deleted.
+        /// </summary>
+        public event EventHandler<DirectoryDeletionEventArgs> DeletedDirectory;
+
+        /// <summary>
+        /// Occurs when a file copy error has occured.
+        /// </summary>
+        public event EventHandler<FileCopyErrorEventArgs> FileCopyError;
+
+        /// <summary>
+        /// Occurs when a file deletion error has occured.
+        /// </summary>
+        public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
+
+        /// <summary>
+        /// Occurs when a directory deletion error has been catched.
+        /// </summary>
+        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
+
+        /// <summary>
+        /// Occurs when the file copy progress has changed.
+        /// </summary>
+        public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
+
+        /// <summary>
         /// Occurs when the job worker has finished.
         /// </summary>
         public event EventHandler Finished;
@@ -16,46 +91,6 @@ namespace FlagSync.Core
         /// Occurs when the files had been counted.
         /// </summary>
         public event EventHandler FilesCounted;
-
-        /// <summary>
-        /// Occurs when a file has been proceeded.
-        /// </summary>
-        public event EventHandler<FileProceededEventArgs> FileProceeded;
-
-        /// <summary>
-        /// Occurs when a newer file has been found.
-        /// </summary>
-        public event EventHandler<FileCopyEventArgs> FoundNewerFile;
-
-        /// <summary>
-        /// Occurs when a file has been modified.
-        /// </summary>
-        public event EventHandler<FileCopyEventArgs> FoundModifiedFile;
-
-        /// <summary>
-        /// Occurs when a file copy error has been catched.
-        /// </summary>
-        public event EventHandler<FileCopyErrorEventArgs> FileCopyError;
-
-        /// <summary>
-        /// Occurs when file has been deleted.
-        /// </summary>
-        public event EventHandler<FileDeletionEventArgs> FileDeleted;
-
-        /// <summary>
-        /// Occurs when a directory has been created.
-        /// </summary>
-        public event EventHandler<DirectoryCreationEventArgs> DirectoryCreated;
-
-        /// <summary>
-        /// Occurs when a directory has been deleted.
-        /// </summary>
-        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeleted;
-
-        /// <summary>
-        /// Occurs when directory deletion error has been catched.
-        /// </summary>
-        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
 
         /// <summary>
         /// Occurs when a job has started.
@@ -67,19 +102,11 @@ namespace FlagSync.Core
         /// </summary>
         public event EventHandler<JobEventArgs> JobFinished;
 
-        /// <summary>
-        /// Occurs when file deletion error has been catched.
-        /// </summary>
-        public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
-
-        public event EventHandler<CopyProgressEventArgs> FileProgressChanged;
-
         private Job currentJob;
         private Queue<Job> jobQueue = new Queue<Job>();
         private long totalWrittenBytes;
         private int proceededFiles;
         private FileCounter.FileCounterResults fileCounterResult;
-        private volatile bool paused;
 
         /// <summary>
         /// Gets the total written bytes.
@@ -121,11 +148,11 @@ namespace FlagSync.Core
         /// Gets a value indicating whether this <see cref="JobWorker"/> is paused.
         /// </summary>
         /// <value>true if paused; otherwise, false.</value>
-        public bool Paused
+        public bool IsPaused
         {
             get
             {
-                return this.paused;
+                return this.currentJob.Paused;
             }
         }
 
@@ -149,7 +176,6 @@ namespace FlagSync.Core
             if (currentJob != null)
             {
                 this.currentJob.Pause();
-                this.paused = true;
             }
         }
 
@@ -161,7 +187,6 @@ namespace FlagSync.Core
             if (currentJob != null)
             {
                 this.currentJob.Continue();
-                this.paused = false;
             }
         }
 
@@ -262,29 +287,60 @@ namespace FlagSync.Core
         /// </summary>
         private void InitializeCurrentJobEvents()
         {
-            this.currentJob.DirectoryCreated += new EventHandler<DirectoryCreationEventArgs>(currentJob_DirectoryCreated);
-            this.currentJob.DirectoryDeleted += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DirectoryDeleted);
-            this.currentJob.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(currentJob_FileCopyError);
-            this.currentJob.FileDeleted += new EventHandler<FileDeletionEventArgs>(currentJob_FileDeleted);
-            this.currentJob.FileProceeded += new EventHandler<FileProceededEventArgs>(currentJob_FileProceeded);
-            this.currentJob.Finished += new EventHandler(currentJob_Finished);
-            this.currentJob.FoundModifiedFile += new EventHandler<FileCopyEventArgs>(currentJob_FoundModifiedFile);
-            this.currentJob.FoundNewFile += new EventHandler<FileCopyEventArgs>(currentJob_FoundNewerFile);
+            this.currentJob.CreatedDirectory += new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatedDirectory);
+            this.currentJob.CreatedFile += new EventHandler<FileCopyEventArgs>(currentJob_CreatedFile);
+            this.currentJob.CreatingDirectory += new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatingDirectory);
+            this.currentJob.CreatingFile += new EventHandler<FileCopyEventArgs>(currentJob_CreatingFile);
+            this.currentJob.DeletedDirectory += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletedDirectory);
+            this.currentJob.DeletedFile += new EventHandler<FileDeletionEventArgs>(currentJob_DeletedFile);
+            this.currentJob.DeletingDirectory += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletingDirectory);
+            this.currentJob.DeletingFile += new EventHandler<FileDeletionEventArgs>(currentJob_DeletingFile);
             this.currentJob.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DirectoryDeletionError);
+            this.currentJob.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(currentJob_FileCopyError);
+            this.currentJob.FileCopyProgressChanged += new EventHandler<CopyProgressEventArgs>(currentJob_FileCopyProgressChanged);
             this.currentJob.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(currentJob_FileDeletionError);
-            this.currentJob.FileProgressChanged += new EventHandler<CopyProgressEventArgs>(currentJob_FileProgressChanged);
+            this.currentJob.Finished += new EventHandler(currentJob_Finished);
+            this.currentJob.ModifiedFile += new EventHandler<FileCopyEventArgs>(currentJob_ModifiedFile);
+            this.currentJob.ModifyingFile += new EventHandler<FileCopyEventArgs>(currentJob_ModifyingFile);
+            this.currentJob.ProceededFile += new EventHandler<FileProceededEventArgs>(currentJob_ProceededFile);
         }
 
         /// <summary>
-        /// Handles the FileProgressChanged event of the currentJob control.
+        /// Handles the ProceededFile event of the currentJob control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
-        private void currentJob_FileProgressChanged(object sender, CopyProgressEventArgs e)
+        /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
+        private void currentJob_ProceededFile(object sender, FileProceededEventArgs e)
         {
-            if (this.FileProgressChanged != null)
+            if (this.ProceededFile != null)
             {
-                this.FileProgressChanged(this, e);
+                this.ProceededFile(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the ModifyingFile event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        private void currentJob_ModifyingFile(object sender, FileCopyEventArgs e)
+        {
+            if (this.ModifyingFile != null)
+            {
+                this.ModifyingFile(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the ModifiedFile event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        private void currentJob_ModifiedFile(object sender, FileCopyEventArgs e)
+        {
+            if (this.ModifiedFile != null)
+            {
+                this.ModifiedFile(this, e);
             }
         }
 
@@ -302,85 +358,15 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Handles the DirectoryDeletionError event of the currentJob control.
+        /// Handles the FileCopyProgressChanged event of the currentJob control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
-        private void currentJob_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
+        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
+        private void currentJob_FileCopyProgressChanged(object sender, CopyProgressEventArgs e)
         {
-            if (this.DirectoryDeletionError != null)
+            if (this.FileCopyProgressChanged != null)
             {
-                this.DirectoryDeletionError(this, e);
-            }
-        }
-
-        /// <summary>
-        /// Handles the FoundNewerFile event of the currentJob control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
-        private void currentJob_FoundNewerFile(object sender, FileCopyEventArgs e)
-        {
-            if (this.FoundNewerFile != null)
-            {
-                this.FoundNewerFile(this, e);
-            }
-        }
-
-        /// <summary>
-        /// Handles the FoundModifiedFile event of the currentJob control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
-        private void currentJob_FoundModifiedFile(object sender, FileCopyEventArgs e)
-        {
-            if (this.FoundModifiedFile != null)
-            {
-                this.FoundModifiedFile(this, e);
-            }
-        }
-
-        /// <summary>
-        /// Handles the Finished event of the currentJob control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void currentJob_Finished(object sender, EventArgs e)
-        {
-            Job job = (Job)sender;
-
-            this.OnJobFinished(new JobEventArgs(job.Settings));
-
-            this.totalWrittenBytes += job.WrittenBytes;
-
-            this.DoNextJob();
-        }
-
-        /// <summary>
-        /// Handles the FileProceeded event of the currentJob control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
-        private void currentJob_FileProceeded(object sender, FileProceededEventArgs e)
-        {
-            this.proceededFiles++;
-
-            if (this.FileProceeded != null)
-            {
-                this.FileProceeded(this, e);
-            }
-        }
-
-        /// <summary>
-        /// Handles the FileDeleted event of the currentJob control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
-        private void currentJob_FileDeleted(object sender, FileDeletionEventArgs e)
-        {
-            if (this.FileDeleted != null)
-            {
-                this.FileDeleted(this, e);
+                this.FileCopyProgressChanged(this, e);
             }
         }
 
@@ -398,29 +384,136 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Handles the DirectoryDeleted event of the currentJob control.
+        /// Handles the DirectoryDeletionError event of the currentJob control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
-        private void currentJob_DirectoryDeleted(object sender, DirectoryDeletionEventArgs e)
+        private void currentJob_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
         {
-            if (this.DirectoryDeleted != null)
+            if (this.DirectoryDeletionError != null)
             {
-                this.DirectoryDeleted(this, e);
+                this.DirectoryDeletionError(this, e);
             }
         }
 
         /// <summary>
-        /// Handles the DirectoryCreated event of the currentJob control.
+        /// Handles the DeletingFile event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
+        private void currentJob_DeletingFile(object sender, FileDeletionEventArgs e)
+        {
+            if (this.DeletingFile != null)
+            {
+                this.DeletingFile(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the DeletingDirectory event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
+        private void currentJob_DeletingDirectory(object sender, DirectoryDeletionEventArgs e)
+        {
+            if (this.DeletingDirectory != null)
+            {
+                this.DeletingDirectory(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the DeletedFile event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
+        private void currentJob_DeletedFile(object sender, FileDeletionEventArgs e)
+        {
+            if (this.DeletedFile != null)
+            {
+                this.DeletedFile(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the DeletedDirectory event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
+        private void currentJob_DeletedDirectory(object sender, DirectoryDeletionEventArgs e)
+        {
+            if (this.DeletedDirectory != null)
+            {
+                this.DeletedDirectory(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the CreatingFile event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        private void currentJob_CreatingFile(object sender, FileCopyEventArgs e)
+        {
+            if (this.CreatingFile != null)
+            {
+                this.CreatingFile(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the CreatingDirectory event of the currentJob control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
-        private void currentJob_DirectoryCreated(object sender, DirectoryCreationEventArgs e)
+        private void currentJob_CreatingDirectory(object sender, DirectoryCreationEventArgs e)
         {
-            if (this.DirectoryCreated != null)
+            if (this.CreatingDirectory != null)
             {
-                this.DirectoryCreated(this, e);
+                this.CreatingDirectory(this, e);
             }
+        }
+
+        /// <summary>
+        /// Handles the CreatedFile event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        private void currentJob_CreatedFile(object sender, FileCopyEventArgs e)
+        {
+            if (this.CreatedFile != null)
+            {
+                this.CreatedFile(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the CreatedDirectory event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        private void currentJob_CreatedDirectory(object sender, DirectoryCreationEventArgs e)
+        {
+            if (this.CreatedDirectory != null)
+            {
+                this.CreatedDirectory(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the Finished event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void currentJob_Finished(object sender, EventArgs e)
+        {
+            Job job = (Job)sender;
+
+            this.OnJobFinished(new JobEventArgs(job.Settings));
+
+            this.totalWrittenBytes += job.WrittenBytes;
+
+            this.DoNextJob();
         }
 
         /// <summary>

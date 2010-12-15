@@ -68,7 +68,7 @@ namespace FlagSync.View
         /// <value>true if the job worker is paused; otherwise, false.</value>
         public bool IsPaused
         {
-            get { return this.jobWorker.Paused; }
+            get { return this.jobWorker.IsPaused; }
         }
 
         /// <summary>

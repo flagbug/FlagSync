@@ -6,6 +6,12 @@ namespace FlagSync.Core
 {
     public abstract class Job
     {
+        #region Fields
+
+        FileCopyOperation fileCopyOperation = new FileCopyOperation();
+
+        #endregion Fields
+
         #region Properties
 
         /// <summary>
@@ -45,7 +51,7 @@ namespace FlagSync.Core
         /// <summary>
         /// Occurs when a file has been proceeded.
         /// </summary>
-        public event EventHandler<FileProceededEventArgs> FileProceeded;
+        public event EventHandler<FileProceededEventArgs> ProceededFile;
 
         /// <summary>
         /// Occurs when the job has finished.
@@ -53,39 +59,64 @@ namespace FlagSync.Core
         public event EventHandler Finished;
 
         /// <summary>
+        /// Occurs before a file gets deleted.
+        /// </summary>
+        public event EventHandler<FileDeletionEventArgs> DeletingFile;
+
+        /// <summary>
         /// Occurs when a file has been deleted.
         /// </summary>
-        public event EventHandler<FileDeletionEventArgs> FileDeleted;
+        public event EventHandler<FileDeletionEventArgs> DeletedFile;
 
         /// <summary>
-        /// Occurs when a new file has been found.
+        /// Occurs before a new file gets created.
         /// </summary>
-        public event EventHandler<FileCopyEventArgs> FoundNewFile;
+        public event EventHandler<FileCopyEventArgs> CreatingFile;
 
         /// <summary>
-        /// Occurs when a modified file has been found.
+        /// Occurs when a new file has been created.
         /// </summary>
-        public event EventHandler<FileCopyEventArgs> FoundModifiedFile;
+        public event EventHandler<FileCopyEventArgs> CreatedFile;
 
         /// <summary>
-        /// Occurs when a file copy error has been catched.
+        /// Occurs before a file gets modified.
         /// </summary>
-        public event EventHandler<FileCopyErrorEventArgs> FileCopyError;
+        public event EventHandler<FileCopyEventArgs> ModifyingFile;
 
         /// <summary>
-        /// Occurs when a file deletion error has been catched.
+        /// Occurs when a file has been modified.
         /// </summary>
-        public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
+        public event EventHandler<FileCopyEventArgs> ModifiedFile;
 
         /// <summary>
-        /// Occurs when a directory has been created.
+        /// Occurs before a new directory gets created.
         /// </summary>
-        public event EventHandler<DirectoryCreationEventArgs> DirectoryCreated;
+        public event EventHandler<DirectoryCreationEventArgs> CreatingDirectory;
+
+        /// <summary>
+        /// Occurs when a new directory has been created.
+        /// </summary>
+        public event EventHandler<DirectoryCreationEventArgs> CreatedDirectory;
+
+        /// <summary>
+        /// Occurs before a directory has been deleted.
+        /// </summary>
+        public event EventHandler<DirectoryDeletionEventArgs> DeletingDirectory;
 
         /// <summary>
         /// Occurs when a directory has been deleted.
         /// </summary>
-        public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeleted;
+        public event EventHandler<DirectoryDeletionEventArgs> DeletedDirectory;
+
+        /// <summary>
+        /// Occurs when a file copy error has occured.
+        /// </summary>
+        public event EventHandler<FileCopyErrorEventArgs> FileCopyError;
+
+        /// <summary>
+        /// Occurs when a file deletion error has occured.
+        /// </summary>
+        public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
 
         /// <summary>
         /// Occurs when a directory deletion error has been catched.
@@ -93,9 +124,9 @@ namespace FlagSync.Core
         public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
 
         /// <summary>
-        /// Occurs when the file progress has changed.
+        /// Occurs when the file copy progress has changed.
         /// </summary>
-        public event EventHandler<CopyProgressEventArgs> FileProgressChanged;
+        public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
 
         #endregion Events
 
@@ -108,6 +139,7 @@ namespace FlagSync.Core
         /// <param name="preview">if set to true no files will be deleted, mofified or copied.</param>
         protected Job(JobSetting settings, bool preview)
         {
+            fileCopyOperation.CopyProgressUpdated += new EventHandler<CopyProgressEventArgs>(fileCopyOperation_CopyProgressUpdated);
             this.Preview = preview;
             this.Settings = settings;
         }
@@ -153,97 +185,177 @@ namespace FlagSync.Core
         /// <summary>
         /// Backups a directory and its sub folders
         /// </summary>
-        /// <param name="source">The source directory</param>
-        /// <param name="target">The target directory</param>
+        /// <param name="sourceDirectory">The source directory</param>
+        /// <param name="targetDirectory">The target directory</param>
         /// <param name="preview">True, if changes should get performed, otherwise false (if you want to see what will happen when you perform a backup)</param>
-        protected void BackupDirectories(DirectoryInfo source, DirectoryInfo target, bool preview)
+        protected void BackupDirectories(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory, bool preview)
         {
-            this.BackupDirectory(source, target, preview);
+            this.BackupDirectory(sourceDirectory, targetDirectory, preview);
 
             try
             {
-                foreach (DirectoryInfo directory in source.GetDirectories())
+                foreach (DirectoryInfo directory in sourceDirectory.GetDirectories())
                 {
-                    if (this.Stopped)
+                    if (this.Stopped) { return; }
+
+                    string targetSubDirectory = Path.Combine(targetDirectory.FullName, directory.Name);
+
+                    if (!Directory.Exists(targetSubDirectory))
                     {
-                        return;
-                    }
+                        this.OnCreatingDirectory(new DirectoryCreationEventArgs(directory, targetDirectory));
 
-                    string targetDirectory = Path.Combine(target.FullName, directory.Name);
-
-                    if (!Directory.Exists(targetDirectory))
-                    {
-                        if (preview)
-                        {
-                            this.OnNewDirectory(new DirectoryCreationEventArgs(directory, target));
-                        }
-
-                        else
+                        if (!preview)
                         {
                             try
                             {
-                                Directory.CreateDirectory(targetDirectory);
-                                this.OnNewDirectory(new DirectoryCreationEventArgs(directory, target));
+                                Directory.CreateDirectory(targetSubDirectory);
+                                this.OnCreatedDirectory(new DirectoryCreationEventArgs(directory, targetDirectory));
                             }
 
-                            catch (Exception e)
+                            catch (UnauthorizedAccessException e)
                             {
-                                Logger.Instance.LogError("Exception at directory creation: " + targetDirectory);
+                                Logger.Instance.LogError("UnauthorizedAccessException at directory creation: " + targetSubDirectory);
+                                Logger.Instance.LogError(e.Message);
+                            }
+
+                            catch (PathTooLongException e)
+                            {
+                                Logger.Instance.LogError("PathTooLongException at directory creation: " + targetSubDirectory);
+                                Logger.Instance.LogError(e.Message);
+                            }
+
+                            catch (IOException e)
+                            {
+                                Logger.Instance.LogError("IOException at directory creation: " + targetSubDirectory);
                                 Logger.Instance.LogError(e.Message);
                             }
                         }
                     }
 
-                    this.BackupDirectories(directory, new DirectoryInfo(targetDirectory), preview);
+                    this.BackupDirectories(directory, new DirectoryInfo(targetSubDirectory), preview);
                 }
             }
 
-            catch (System.UnauthorizedAccessException)
+            catch (UnauthorizedAccessException)
             {
-                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + sourceDirectory.FullName);
             }
         }
 
         /// <summary>
-        /// Raises the <see cref="E:FoundNewFile"/> event.
+        /// Raises the <see cref="E:CreatingFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnFoundNewFile(FileCopyEventArgs e)
+        protected virtual void OnCreatingFile(FileCopyEventArgs e)
         {
-            if (this.FoundNewFile != null)
+            if (this.CreatingFile != null)
             {
-                this.FoundNewFile(this, e);
+                this.CreatingFile(this, e);
             }
-
-            Logger.Instance.LogSucceed("Found new file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:FoundModifiedFile"/> event.
+        /// Raises the <see cref="E:CreatedFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnFoundModifiedFile(FileCopyEventArgs e)
+        protected virtual void OnCreatedFile(FileCopyEventArgs e)
         {
-            if (this.FoundModifiedFile != null)
+            if (this.CreatedFile != null)
             {
-                this.FoundModifiedFile(this, e);
+                this.CreatedFile(this, e);
             }
 
-            Logger.Instance.LogSucceed("Found modified file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
+            Logger.Instance.LogSucceed("Created new file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:NewDirectory"/> event.
+        /// Raises the <see cref="E:ModifyingFile"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnModifyingFile(FileCopyEventArgs e)
+        {
+            if (this.ModifyingFile != null)
+            {
+                this.ModifyingFile(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:ModifiedFile"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnModifiedFile(FileCopyEventArgs e)
+        {
+            if (this.ModifiedFile != null)
+            {
+                this.ModifiedFile(this, e);
+            }
+
+            Logger.Instance.LogSucceed("Modified file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:DeletingFile"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnDeletingFile(FileDeletionEventArgs e)
+        {
+            if (this.DeletingFile != null)
+            {
+                this.DeletingFile(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:DeletedFile"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnDeletedFile(FileDeletionEventArgs e)
+        {
+            if (this.DeletedFile != null)
+            {
+                this.DeletedFile(this, e);
+            }
+
+            Logger.Instance.LogSucceed("Deleted file: " + e.File.FullName);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:CreatingDirectory"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnNewDirectory(DirectoryCreationEventArgs e)
+        protected virtual void OnCreatingDirectory(DirectoryCreationEventArgs e)
         {
-            if (this.DirectoryCreated != null)
+            if (this.CreatingDirectory != null)
             {
-                this.DirectoryCreated(this, e);
+                this.CreatingDirectory(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:CreatedDirectory"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnCreatedDirectory(DirectoryCreationEventArgs e)
+        {
+            if (this.CreatedDirectory != null)
+            {
+                this.CreatedDirectory(this, e);
             }
 
-            Logger.Instance.LogSucceed("Found new directory: " + e.Directory.Name + " in source: " + e.Directory.Parent.FullName + ", created in target: " + e.TargetDirectory.FullName);
+            Logger.Instance.LogSucceed("Created directory: " + e.Directory.Name + " in source: " + e.Directory.Parent.FullName + ", created in target: " + e.TargetDirectory.FullName);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:DeletingDirectory"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnDeletingDirectory(DirectoryDeletionEventArgs e)
+        {
+            if (this.DeletingDirectory != null)
+            {
+                this.DeletingDirectory(this, e);
+            }
         }
 
         /// <summary>
@@ -252,38 +364,12 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDeletedDirectory(DirectoryDeletionEventArgs e)
         {
-            if (this.DirectoryDeleted != null)
+            if (this.DeletedDirectory != null)
             {
-                this.DirectoryDeleted(this, e);
+                this.DeletedDirectory(this, e);
             }
 
             Logger.Instance.LogSucceed("Deleted directory: " + e.Directory.FullName);
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:FileCopyError"/> event.
-        /// </summary>
-        /// <param name="e">The <see cref="FlagSync.Core.FileCopyErrorEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnFileCopyError(FileCopyErrorEventArgs e)
-        {
-            if (this.FileCopyError != null)
-            {
-                this.FileCopyError(this, e);
-            }
-        }
-
-        /// <summary>
-        /// Raises the <see cref="E:DeletedFile"/> event.
-        /// </summary>
-        /// <param name="?">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnDeletedFile(FileDeletionEventArgs e)
-        {
-            if (this.FileDeleted != null)
-            {
-                this.FileDeleted(this, e);
-            }
-
-            Logger.Instance.LogSucceed("Deleted file: " + e.File.FullName);
         }
 
         /// <summary>
@@ -299,14 +385,26 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:FileProceeded"/> event.
+        /// Raises the <see cref="E:ProceededFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnFileProceeded(FileProceededEventArgs e)
+        protected virtual void OnProceededFile(FileProceededEventArgs e)
         {
-            if (this.FileProceeded != null)
+            if (this.ProceededFile != null)
             {
-                this.FileProceeded(this, e);
+                this.ProceededFile(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:FileCopyError"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyErrorEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnFileCopyError(FileCopyErrorEventArgs e)
+        {
+            if (this.FileCopyError != null)
+            {
+                this.FileCopyError(this, e);
             }
         }
 
@@ -340,9 +438,9 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileProgressChanged(CopyProgressEventArgs e)
         {
-            if (this.FileProgressChanged != null)
+            if (this.FileCopyProgressChanged != null)
             {
-                this.FileProgressChanged(this, e);
+                this.FileCopyProgressChanged(this, e);
             }
         }
 
@@ -370,38 +468,28 @@ namespace FlagSync.Core
         {
             this.CheckPause();
 
-            try
+            //try
             {
-                FileCopyOperation op = new FileCopyOperation();
-                op.CopyProgressUpdated += new EventHandler<CopyProgressEventArgs>(file_CopyProgressUpdated);
-                op.CopyFile(file.FullName, Path.Combine(directory.FullName, file.Name));
+                this.fileCopyOperation.CopyFile(file.FullName, Path.Combine(directory.FullName, file.Name));
             }
 
-            catch (Exception e)
-            {
-                Logger.Instance.LogError("Exception at file copy: " + file.FullName);
-                Logger.Instance.LogError(e.Message);
+            /*
+        catch (Exception e)
+        {
+            Logger.Instance.LogError("Exception at file copy: " + file.FullName);
+            Logger.Instance.LogError(e.Message);
 
-                throw;
-            }
-
-            finally
-            {
-                this.WrittenBytes += file.Length;
-
-                if (file.Length == 0)
-                {
-                    this.OnFileProgressChanged(new CopyProgressEventArgs(0, 0));
-                }
-            }
+            throw;
+        }
+             * */
         }
 
         /// <summary>
-        /// Handles the CopyProgressUpdated event of the file copy control.
+        /// Handles the CopyProgressUpdated event of the fileCopyOperation control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
-        private void file_CopyProgressUpdated(object sender, CopyProgressEventArgs e)
+        private void fileCopyOperation_CopyProgressUpdated(object sender, CopyProgressEventArgs e)
         {
             this.OnFileProgressChanged(e);
         }
@@ -422,83 +510,77 @@ namespace FlagSync.Core
         /// <summary>
         /// Backups a single directory, without sub folders
         /// </summary>
-        /// <param name="source">The source directory</param>
-        /// <param name="target">The target directory</param>
+        /// <param name="sourceDirectory">The source directory</param>
+        /// <param name="targetDirectory">The target directory</param>
         /// <param name="preview">True, if changes should get performed, otherwise false (if you want to see what will happen when you perform a backup)</param>
-        private void BackupDirectory(DirectoryInfo source, DirectoryInfo target, bool preview)
+        private void BackupDirectory(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory, bool preview)
         {
             this.CheckPause();
 
             try
             {
-                foreach (FileInfo fileA in source.GetFiles())
+                foreach (FileInfo fileA in sourceDirectory.GetFiles())
                 {
-                    if (this.Stopped)
-                    {
-                        return;
-                    }
+                    if (this.Stopped) { return; }
+
+                    string fileBPath = Path.Combine(targetDirectory.FullName, fileA.Name);
 
                     //Check if fileA isn't already in target directory
-                    if (!File.Exists(Path.Combine(target.FullName, fileA.Name)))
+                    if (!File.Exists(fileBPath))
                     {
-                        this.OnFoundNewFile(new FileCopyEventArgs(fileA, source, target));
+                        this.OnCreatingFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
 
                         if (!preview)
                         {
                             try
                             {
-                                this.CopyFile(fileA, target);
+                                this.CopyFile(fileA, targetDirectory);
+                                this.OnCreatedFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
                             }
 
-                            catch (Exception)
+                            catch (IOException)
                             {
-                                this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, target));
+                                this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, targetDirectory));
                             }
                         }
                     }
 
-                    if (target.Exists)
+                    else
                     {
-                        foreach (FileInfo fileB in target.GetFiles())
+                        if (this.Stopped) { return; }
+                        this.CheckPause();
+
+                        FileInfo fileB = new FileInfo(fileBPath);
+
+                        //Check for modified file
+                        if (String.Equals(fileA.Name, fileB.Name, StringComparison.OrdinalIgnoreCase)
+                            && this.IsFileModified(fileA, fileB))
                         {
-                            if (this.Stopped)
-                            {
-                                return;
-                            }
+                            this.OnModifyingFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
 
-                            this.CheckPause();
-
-                            //Check on modified file
-                            if (fileA.Name.Equals(fileB.Name, StringComparison.OrdinalIgnoreCase))
+                            if (!preview)
                             {
-                                if (this.IsFileModified(fileA, fileB))
+                                try
                                 {
-                                    this.OnFoundModifiedFile(new FileCopyEventArgs(fileA, source, target));
+                                    this.CopyFile(fileA, targetDirectory);
+                                    this.OnModifiedFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
+                                }
 
-                                    if (!preview)
-                                    {
-                                        try
-                                        {
-                                            this.CopyFile(fileA, target);
-                                        }
-
-                                        catch (Exception)
-                                        {
-                                            this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, target));
-                                        }
-                                    }
+                                catch (IOException)
+                                {
+                                    this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, targetDirectory));
                                 }
                             }
                         }
                     }
 
-                    this.OnFileProceeded(new FileProceededEventArgs(fileA));
+                    this.OnProceededFile(new FileProceededEventArgs(fileA));
                 }
             }
 
             catch (System.UnauthorizedAccessException)
             {
-                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + sourceDirectory.FullName);
             }
         }
 

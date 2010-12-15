@@ -1,18 +1,15 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace FlagSync.Core
 {
-    public class FileDeletionErrorEventArgs : System.EventArgs
+    public class FileDeletionErrorEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the file.
         /// </summary>
         /// <value>The file.</value>
-        public FileInfo File
-        {
-            get;
-            private set;
-        }
+        public FileInfo File { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileDeletionErrorEventArgs"/> class.
@@ -24,17 +21,13 @@ namespace FlagSync.Core
         }
     }
 
-    public class JobEventArgs : System.EventArgs
+    public class JobEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the job.
         /// </summary>
         /// <value>The job.</value>
-        public JobSetting Job
-        {
-            get;
-            private set;
-        }
+        public JobSetting Job { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JobEventArgs"/> class.
@@ -46,17 +39,13 @@ namespace FlagSync.Core
         }
     }
 
-    public class FileProceededEventArgs : System.EventArgs
+    public class FileProceededEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the file.
         /// </summary>
         /// <value>The file.</value>
-        public FileInfo File
-        {
-            get;
-            private set;
-        }
+        public FileInfo File { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileProceededEventArgs"/> class.
@@ -68,37 +57,25 @@ namespace FlagSync.Core
         }
     }
 
-    public class FileCopyEventArgs : System.EventArgs
+    public class FileCopyEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the file.
         /// </summary>
         /// <value>The file.</value>
-        public FileInfo File
-        {
-            get;
-            private set;
-        }
+        public FileInfo File { get; private set; }
 
         /// <summary>
         /// Gets the source directory.
         /// </summary>
         /// <value>The source directory.</value>
-        public DirectoryInfo SourceDirectory
-        {
-            get;
-            private set;
-        }
+        public DirectoryInfo SourceDirectory { get; private set; }
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
         /// <value>The target directory.</value>
-        public DirectoryInfo TargetDirectory
-        {
-            get;
-            private set;
-        }
+        public DirectoryInfo TargetDirectory { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileCopyEventArgs"/> class.
@@ -114,27 +91,19 @@ namespace FlagSync.Core
         }
     }
 
-    public class FileCopyErrorEventArgs : System.EventArgs
+    public class FileCopyErrorEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the file.
         /// </summary>
         /// <value>The file.</value>
-        public FileInfo File
-        {
-            get;
-            private set;
-        }
+        public FileInfo File { get; private set; }
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
         /// <value>The target directory.</value>
-        public DirectoryInfo TargetDirectory
-        {
-            get;
-            private set;
-        }
+        public DirectoryInfo TargetDirectory { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileCopyErrorEventArgs"/> class.
@@ -148,17 +117,13 @@ namespace FlagSync.Core
         }
     }
 
-    public class FileDeletionEventArgs : System.EventArgs
+    public class FileDeletionEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the file.
         /// </summary>
         /// <value>The file.</value>
-        public FileInfo File
-        {
-            get;
-            private set;
-        }
+        public FileInfo File { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileDeletionEventArgs"/> class.
@@ -170,27 +135,19 @@ namespace FlagSync.Core
         }
     }
 
-    public class DirectoryCreationEventArgs : System.EventArgs
+    public class DirectoryCreationEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the directory.
         /// </summary>
         /// <value>The directory.</value>
-        public DirectoryInfo Directory
-        {
-            get;
-            private set;
-        }
+        public DirectoryInfo Directory { get; private set; }
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
         /// <value>The target directory.</value>
-        public DirectoryInfo TargetDirectory
-        {
-            get;
-            private set;
-        }
+        public DirectoryInfo TargetDirectory { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectoryCreationEventArgs"/> class.
@@ -204,17 +161,13 @@ namespace FlagSync.Core
         }
     }
 
-    public class DirectoryDeletionEventArgs : System.EventArgs
+    public class DirectoryDeletionEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the directory.
         /// </summary>
         /// <value>The directory.</value>
-        public DirectoryInfo Directory
-        {
-            get;
-            private set;
-        }
+        public DirectoryInfo Directory { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectoryDeletionEventArgs"/> class.

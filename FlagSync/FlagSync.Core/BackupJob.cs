@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security;
+using FlagLib.FileSystem;
 
 namespace FlagSync.Core
 {
@@ -34,74 +35,46 @@ namespace FlagSync.Core
         /// <summary>
         /// Checks for deleted files in directory B, which aren't in directory A
         /// </summary>
-        /// <param name="source">The source directory</param>
-        /// <param name="target">The target directory</param>
+        /// <param name="sourceDirectory">The source directory</param>
+        /// <param name="targetDirectory">The target directory</param>
         /// <param name="preview">True, if you want to see what will happen when you perform a backup)</param>
-        private void CheckDeletions(DirectoryInfo source, DirectoryInfo target, bool preview)
+        private void CheckDeletions(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory, bool preview)
         {
-            if (this.Stopped)
-            {
-                return;
-            }
+            if (this.Stopped) { return; }
 
+            this.CheckFileDeletions(sourceDirectory, targetDirectory, preview);
+
+            this.CheckDirectoryDeletions(sourceDirectory, targetDirectory, preview);
+        }
+
+        /// <summary>
+        /// Checks the directory recursively for directories that are not in the source directory.
+        /// </summary>
+        /// <param name="sourceDirectory">The source directory.</param>
+        /// <param name="targetDirectory">The target directory.</param>
+        /// <param name="preview">if set to <c>true</c> a preview will be performed.</param>
+        private void CheckDirectoryDeletions(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory, bool preview)
+        {
             try
             {
-                foreach (FileInfo file in source.GetFiles())
+                foreach (DirectoryInfo directory in sourceDirectory.GetDirectories())
                 {
-                    this.OnFileProceeded(new FileProceededEventArgs(file));
-
-                    if (!File.Exists(Path.Combine(target.FullName, file.Name)))
+                    if (!Directory.Exists(Path.Combine(targetDirectory.FullName, directory.Name)))
                     {
-                        if (preview)
-                        {
-                            this.OnDeletedFile(new FileDeletionEventArgs(file));
-                        }
+                        //Set all files in the directory and it's subdirectories as proceeded,
+                        //because the whole directory gets deleted
+                        DirectoryScanner scanner = new DirectoryScanner(directory.FullName);
 
-                        else
-                        {
-                            try
+                        scanner.FileFound += (sender, e) =>
                             {
-                                file.Delete();
-                            }
+                                this.OnProceededFile(new FileProceededEventArgs(e.File));
+                            };
 
-                            catch (IOException)
-                            {
-                                Logger.Instance.LogError("IOException at file deletion: " + file.FullName);
-                                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
-                            }
+                        scanner.Start();
 
-                            catch (SecurityException)
-                            {
-                                Logger.Instance.LogError("SecurityException at file deletion: " + file.FullName);
-                                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
-                            }
+                        this.OnDeletingDirectory(new DirectoryDeletionEventArgs(directory));
 
-                            catch (UnauthorizedAccessException)
-                            {
-                                Logger.Instance.LogError("UnauthorizedAccessException at file deletion: " + file.FullName);
-                                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
-                            }
-                        }
-                    }
-                }
-
-                foreach (DirectoryInfo directory in source.GetDirectories())
-                {
-                    if (!Directory.Exists(Path.Combine(target.FullName, directory.Name)))
-                    {
-                        FileInfo[] files = directory.GetFiles("*", SearchOption.AllDirectories);
-
-                        foreach (FileInfo file in files)
-                        {
-                            this.OnFileProceeded(new FileProceededEventArgs(file));
-                        }
-
-                        if (preview)
-                        {
-                            this.OnDeletedDirectory(new DirectoryDeletionEventArgs(directory));
-                        }
-
-                        else
+                        if (!preview)
                         {
                             try
                             {
@@ -131,14 +104,68 @@ namespace FlagSync.Core
 
                     else
                     {
-                        this.CheckDeletions(directory, new DirectoryInfo(Path.Combine(target.FullName, directory.Name)), preview);
+                        this.CheckDeletions(directory, new DirectoryInfo(Path.Combine(targetDirectory.FullName, directory.Name)), preview);
                     }
                 }
             }
 
-            catch (System.UnauthorizedAccessException)
+            catch (UnauthorizedAccessException)
             {
-                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + source.FullName);
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + sourceDirectory.FullName);
+            }
+        }
+
+        /// <summary>
+        /// Checks a directory for files that are not in the source directory and deletes them.
+        /// </summary>
+        /// <param name="sourceDirectory">The source directory.</param>
+        /// <param name="targetDirectory">The target directory.</param>
+        /// <param name="preview">if set to <c>true</c> a preview will be performed.</param>
+        private void CheckFileDeletions(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory, bool preview)
+        {
+            try
+            {
+                foreach (FileInfo file in sourceDirectory.GetFiles())
+                {
+                    if (!File.Exists(Path.Combine(targetDirectory.FullName, file.Name)))
+                    {
+                        this.OnDeletingFile(new FileDeletionEventArgs(file));
+
+                        if (!preview)
+                        {
+                            try
+                            {
+                                file.Delete();
+                                this.OnDeletedFile(new FileDeletionEventArgs(file));
+                            }
+
+                            catch (IOException)
+                            {
+                                Logger.Instance.LogError("IOException at file deletion: " + file.FullName);
+                                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
+                            }
+
+                            catch (SecurityException)
+                            {
+                                Logger.Instance.LogError("SecurityException at file deletion: " + file.FullName);
+                                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
+                            }
+
+                            catch (UnauthorizedAccessException)
+                            {
+                                Logger.Instance.LogError("UnauthorizedAccessException at file deletion: " + file.FullName);
+                                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
+                            }
+                        }
+                    }
+
+                    this.OnProceededFile(new FileProceededEventArgs(file));
+                }
+            }
+
+            catch (UnauthorizedAccessException)
+            {
+                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + sourceDirectory.FullName);
             }
         }
     }
