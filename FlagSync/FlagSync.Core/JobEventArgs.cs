@@ -42,18 +42,25 @@ namespace FlagSync.Core
     public class FileProceededEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets the file.
+        /// Gets the length of the file.
         /// </summary>
-        /// <value>The file.</value>
-        public FileInfo File { get; private set; }
+        /// <value>The length of the file.</value>
+        public long FileLength { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the file.
+        /// </summary>
+        /// <value>The name of the file.</value>
+        public string FilePath { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileProceededEventArgs"/> class.
         /// </summary>
         /// <param name="file">The file.</param>
-        public FileProceededEventArgs(FileInfo file)
+        public FileProceededEventArgs(string fileName, long filePath)
         {
-            this.File = file;
+            this.FilePath = fileName;
+            this.FileLength = filePath;
         }
     }
 

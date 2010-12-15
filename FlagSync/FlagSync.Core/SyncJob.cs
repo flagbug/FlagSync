@@ -20,8 +20,8 @@ namespace FlagSync.Core
         public override void Start()
         {
             //Backup directoryA to directoryB and then otherwise
-            this.BackupDirectories(new DirectoryInfo(this.Settings.DirectoryA), new DirectoryInfo(this.Settings.DirectoryB), this.Preview);
-            this.BackupDirectories(new DirectoryInfo(this.Settings.DirectoryB), new DirectoryInfo(this.Settings.DirectoryA), this.Preview);
+            this.BackupDirectories(new DirectoryInfo(this.Settings.DirectoryA), new DirectoryInfo(this.Settings.DirectoryB), this.IsPreviewed);
+            this.BackupDirectories(new DirectoryInfo(this.Settings.DirectoryB), new DirectoryInfo(this.Settings.DirectoryA), this.IsPreviewed);
 
             this.OnFinished(System.EventArgs.Empty);
         }

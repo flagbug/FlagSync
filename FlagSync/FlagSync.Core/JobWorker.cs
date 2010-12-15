@@ -152,7 +152,7 @@ namespace FlagSync.Core
         {
             get
             {
-                return this.currentJob.Paused;
+                return this.currentJob == null ? false : this.currentJob.IsPaused;
             }
         }
 

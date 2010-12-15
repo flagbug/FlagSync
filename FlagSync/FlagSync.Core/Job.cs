@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using FlagLib.FileSystem;
 
@@ -24,25 +26,27 @@ namespace FlagSync.Core
         /// Gets a value indicating whether the <see cref="Job"/> is paused.
         /// </summary>
         /// <value>true if paused; otherwise, false.</value>
-        public bool Paused { get; private set; }
+        public bool IsPaused { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="Job"/> is previewed.
         /// </summary>
         /// <value>true if preview; otherwise, false.</value>
-        public bool Preview { get; private set; }
+        public bool IsPreviewed { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="Job"/> is stopped.
         /// </summary>
         /// <value>true if stopped; otherwise, false.</value>
-        public bool Stopped { get; private set; }
+        public bool IsStopped { get; private set; }
 
         /// <summary>
         /// Gets the written bytes.
         /// </summary>
         /// <value>The written bytes.</value>
         public long WrittenBytes { get; private set; }
+
+        private HashSet<string> proceededFilePaths = new HashSet<string>();
 
         #endregion Properties
 
@@ -140,7 +144,7 @@ namespace FlagSync.Core
         protected Job(JobSetting settings, bool preview)
         {
             fileCopyOperation.CopyProgressUpdated += new EventHandler<CopyProgressEventArgs>(fileCopyOperation_CopyProgressUpdated);
-            this.Preview = preview;
+            this.IsPreviewed = preview;
             this.Settings = settings;
         }
 
@@ -158,7 +162,7 @@ namespace FlagSync.Core
         /// </summary>
         public void Pause()
         {
-            this.Paused = true;
+            this.IsPaused = true;
         }
 
         /// <summary>
@@ -166,7 +170,7 @@ namespace FlagSync.Core
         /// </summary>
         public void Continue()
         {
-            this.Paused = false;
+            this.IsPaused = false;
         }
 
         /// <summary>
@@ -174,8 +178,8 @@ namespace FlagSync.Core
         /// </summary>
         public void Stop()
         {
-            this.Paused = false;
-            this.Stopped = true;
+            this.IsPaused = false;
+            this.IsStopped = true;
         }
 
         #endregion Public methods
@@ -196,7 +200,7 @@ namespace FlagSync.Core
             {
                 foreach (DirectoryInfo directory in sourceDirectory.GetDirectories())
                 {
-                    if (this.Stopped) { return; }
+                    if (this.IsStopped) { return; }
 
                     string targetSubDirectory = Path.Combine(targetDirectory.FullName, directory.Name);
 
@@ -390,7 +394,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
         protected virtual void OnProceededFile(FileProceededEventArgs e)
         {
-            if (this.ProceededFile != null)
+            if (this.ProceededFile != null && !this.proceededFilePaths.Contains(e.FilePath))
             {
                 this.ProceededFile(this, e);
             }
@@ -453,7 +457,7 @@ namespace FlagSync.Core
         /// </summary>
         private void CheckPause()
         {
-            while (this.Paused)
+            while (this.IsPaused)
             {
                 System.Threading.Thread.Sleep(250);
             }
@@ -468,20 +472,22 @@ namespace FlagSync.Core
         {
             this.CheckPause();
 
-            //try
+            try
             {
-                this.fileCopyOperation.CopyFile(file.FullName, Path.Combine(directory.FullName, file.Name));
+                string targetFile = Path.Combine(directory.FullName, file.Name);
+
+                this.fileCopyOperation.CopyFile(file.FullName, targetFile);
+
+                this.proceededFilePaths.Add(targetFile);
             }
 
-            /*
-        catch (Exception e)
-        {
-            Logger.Instance.LogError("Exception at file copy: " + file.FullName);
-            Logger.Instance.LogError(e.Message);
+            catch (Win32Exception e)
+            {
+                Logger.Instance.LogError("Win32Exception at file copy: " + file.FullName);
+                Logger.Instance.LogError(e.Message);
 
-            throw;
-        }
-             * */
+                throw;
+            }
         }
 
         /// <summary>
@@ -521,7 +527,7 @@ namespace FlagSync.Core
             {
                 foreach (FileInfo fileA in sourceDirectory.GetFiles())
                 {
-                    if (this.Stopped) { return; }
+                    if (this.IsStopped) { return; }
 
                     string fileBPath = Path.Combine(targetDirectory.FullName, fileA.Name);
 
@@ -538,7 +544,7 @@ namespace FlagSync.Core
                                 this.OnCreatedFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
                             }
 
-                            catch (IOException)
+                            catch (Win32Exception)
                             {
                                 this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, targetDirectory));
                             }
@@ -547,7 +553,7 @@ namespace FlagSync.Core
 
                     else
                     {
-                        if (this.Stopped) { return; }
+                        if (this.IsStopped) { return; }
                         this.CheckPause();
 
                         FileInfo fileB = new FileInfo(fileBPath);
@@ -566,7 +572,7 @@ namespace FlagSync.Core
                                     this.OnModifiedFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
                                 }
 
-                                catch (IOException)
+                                catch (Win32Exception)
                                 {
                                     this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, targetDirectory));
                                 }
@@ -574,7 +580,7 @@ namespace FlagSync.Core
                         }
                     }
 
-                    this.OnProceededFile(new FileProceededEventArgs(fileA));
+                    this.OnProceededFile(new FileProceededEventArgs(fileA.FullName, fileA.Length));
                 }
             }
 

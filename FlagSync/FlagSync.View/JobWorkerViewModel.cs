@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FlagLib.Collections;
+using FlagLib.FileSystem;
 using FlagLib.Patterns;
 using FlagSync.Core;
 
@@ -265,21 +266,25 @@ namespace FlagSync.View
         public void ResetJobWorker()
         {
             this.jobWorker = new JobWorker();
-            this.jobWorker.JobStarted += new EventHandler<JobEventArgs>(jobWorker_JobStarted);
-            this.jobWorker.FileProceeded += new EventHandler<FileProceededEventArgs>(jobWorker_FileProceeded);
-            this.jobWorker.FilesCounted += new EventHandler(jobWorker_FilesCounted);
-            this.jobWorker.DirectoryCreated += new EventHandler<DirectoryCreationEventArgs>(jobWorker_DirectoryCreated);
-            this.jobWorker.DirectoryDeleted += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeleted);
-            this.jobWorker.FileDeleted += new EventHandler<FileDeletionEventArgs>(jobWorker_FileDeleted);
-            this.jobWorker.FoundModifiedFile += new EventHandler<FileCopyEventArgs>(jobWorker_FoundModifiedFile);
-            this.jobWorker.FoundNewerFile += new EventHandler<FileCopyEventArgs>(jobWorker_FoundNewerFile);
-            this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
-            this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
-            this.jobWorker.FileProgressChanged += new EventHandler<FlagLib.FileSystem.CopyProgressEventArgs>(jobWorker_FileProgressChanged);
+            this.jobWorker.CreatedDirectory += new EventHandler<DirectoryCreationEventArgs>(jobWorker_CreatedDirectory);
+            this.jobWorker.CreatedFile += new EventHandler<FileCopyEventArgs>(jobWorker_CreatedFile);
+            this.jobWorker.CreatingDirectory += new EventHandler<DirectoryCreationEventArgs>(jobWorker_CreatingDirectory);
+            this.jobWorker.CreatingFile += new EventHandler<FileCopyEventArgs>(jobWorker_CreatingFile);
+            this.jobWorker.DeletedDirectory += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DeletedDirectory);
+            this.jobWorker.DeletedFile += new EventHandler<FileDeletionEventArgs>(jobWorker_DeletedFile);
+            this.jobWorker.DeletingDirectory += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DeletingDirectory);
+            this.jobWorker.DeletingFile += new EventHandler<FileDeletionEventArgs>(jobWorker_DeletingFile);
             this.jobWorker.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeletionError);
             this.jobWorker.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(jobWorker_FileCopyError);
+            this.jobWorker.FileCopyProgressChanged += new EventHandler<FlagLib.FileSystem.CopyProgressEventArgs>(jobWorker_FileCopyProgressChanged);
             this.jobWorker.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(jobWorker_FileDeletionError);
-
+            this.jobWorker.FilesCounted += new EventHandler(jobWorker_FilesCounted);
+            this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
+            this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
+            this.jobWorker.JobStarted += new EventHandler<JobEventArgs>(jobWorker_JobStarted);
+            this.jobWorker.ModifiedFile += new EventHandler<FileCopyEventArgs>(jobWorker_ModifiedFile);
+            this.jobWorker.ModifyingFile += new EventHandler<FileCopyEventArgs>(jobWorker_ModifyingFile);
+            this.jobWorker.ProceededFile += new EventHandler<FileProceededEventArgs>(jobWorker_ProceededFile);
             this.ResetMessages();
             this.ResetBytes();
         }
@@ -338,6 +343,11 @@ namespace FlagSync.View
 
         #region Private methods
 
+        /// <summary>
+        /// Checks if the specified the directories exist and add a status message, if not.
+        /// </summary>
+        /// <param name="jobSetting">The job setting.</param>
+        /// <returns>A value indicating whether the both directories exist.</returns>
         private bool CheckDirectoriesExist(JobSetting jobSetting)
         {
             bool exist = true;
@@ -364,6 +374,7 @@ namespace FlagSync.View
         {
             this.ProceededBytes = 0;
             this.CountedBytes = 1024;
+            this.OnPropertyChanged(vm => vm.TotalProgressPercentage);
         }
 
         /// <summary>
@@ -393,29 +404,20 @@ namespace FlagSync.View
         /// <param name="type">The type.</param>
         /// <param name="sourcePath">The source path.</param>
         /// <param name="targetPath">The target path.</param>
-        private void AddLogMessage(string action, string type, string sourcePath, string targetPath, int initialProgress, bool isErrorMessage)
+        private void AddLogMessage(string action, string type, string sourcePath, string targetPath, bool isErrorMessage)
         {
-            LogMessage message = new LogMessage(type, action, sourcePath, targetPath, initialProgress, isErrorMessage);
+            LogMessage message = new LogMessage(type, action, sourcePath, targetPath, isErrorMessage);
             this.LogMessages.Add(message);
             this.LastLogMessage = message;
             this.LastLogMessageIndex = this.LogMessages.Count;
         }
 
+        /// <summary>
+        /// Deletes the last log message.
+        /// </summary>
         private void DeleteLastLogMessage()
         {
             this.LogMessages.Remove(this.LastLogMessage);
-        }
-
-        /// <summary>
-        /// Handles the FileProgressChanged event of the jobWorker control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
-        private void jobWorker_FileProgressChanged(object sender, FlagLib.FileSystem.CopyProgressEventArgs e)
-        {
-            this.LastLogMessage.Progress = (int)(((double)e.TotalBytesTransferred / (double)e.TotalFileSize) * 100);
-
-            this.LastLogMessage.Progress = e.TotalFileSize == 0 ? 100 : this.LastLogMessage.Progress;
         }
 
         /// <summary>
@@ -452,18 +454,6 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Handles the FileProceeded event of the jobWorker control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
-        private void jobWorker_FileProceeded(object sender, FileProceededEventArgs e)
-        {
-            this.ProceededFiles++;
-            this.ProceededBytes += e.File.Length;
-            this.OnPropertyChanged(vm => vm.TotalProgressPercentage);
-        }
-
-        /// <summary>
         /// Handles the FilesCounted event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -485,7 +475,7 @@ namespace FlagSync.View
         private void jobWorker_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
         {
             this.DeleteLastLogMessage();
-            this.AddLogMessage("Deletion Error", "File", e.File.FullName, String.Empty, 0, true);
+            this.AddLogMessage("Deletion Error", "File", e.File.FullName, String.Empty, true);
         }
 
         /// <summary>
@@ -496,7 +486,7 @@ namespace FlagSync.View
         private void jobWorker_FileCopyError(object sender, FileCopyErrorEventArgs e)
         {
             this.DeleteLastLogMessage();
-            this.AddLogMessage("Copy Error", "File", e.File.FullName, e.TargetDirectory.FullName, 0, true);
+            this.AddLogMessage("Copy Error", "File", e.File.FullName, e.TargetDirectory.FullName, true);
         }
 
         /// <summary>
@@ -507,57 +497,132 @@ namespace FlagSync.View
         private void jobWorker_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
         {
             this.DeleteLastLogMessage();
-            this.AddLogMessage("Deletion Error", "Directory", e.Directory.FullName, String.Empty, 0, true);
+            this.AddLogMessage("Deletion Error", "Directory", e.Directory.FullName, String.Empty, true);
         }
 
         /// <summary>
-        /// Handles the FoundNewerFile event of the jobWorker control.
+        /// Handles the ProceededFile event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_ProceededFile(object sender, FileProceededEventArgs e)
+        {
+            if (this.IsRunning)
+            {
+                this.ProceededFiles++;
+                this.ProceededBytes += e.FileLength;
+                this.OnPropertyChanged(vm => vm.TotalProgressPercentage);
+            }
+        }
+
+        /// <summary>
+        /// Handles the ModifyingFile event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
-        private void jobWorker_FoundNewerFile(object sender, FileCopyEventArgs e)
+        private void jobWorker_ModifyingFile(object sender, FileCopyEventArgs e)
         {
-            this.AddLogMessage("Created", "File", e.File.FullName, e.TargetDirectory.FullName, 0, false);
+            this.AddLogMessage("Modifying", "File", e.File.FullName, e.TargetDirectory.FullName, false);
         }
 
         /// <summary>
-        /// Handles the FoundModifiedFile event of the jobWorker control.
+        /// Handles the ModifiedFile event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
-        private void jobWorker_FoundModifiedFile(object sender, FileCopyEventArgs e)
+        private void jobWorker_ModifiedFile(object sender, FileCopyEventArgs e)
         {
-            this.AddLogMessage("Modified", "File", e.File.FullName, Path.Combine(e.TargetDirectory.FullName, e.File.Name), 0, false);
+            this.LastLogMessage.Progress = 100;
         }
 
         /// <summary>
-        /// Handles the FileDeleted event of the jobWorker control.
+        /// Handles the FileCopyProgressChanged event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_FileCopyProgressChanged(object sender, CopyProgressEventArgs e)
+        {
+            this.LastLogMessage.Progress = (int)(((double)e.TotalBytesTransferred / (double)e.TotalFileSize) * 100);
+        }
+
+        /// <summary>
+        /// Handles the DeletingFile event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
-        private void jobWorker_FileDeleted(object sender, FileDeletionEventArgs e)
+        private void jobWorker_DeletingFile(object sender, FileDeletionEventArgs e)
         {
-            this.AddLogMessage("Deleted", "File", e.File.FullName, String.Empty, this.IsPreview ? 0 : 100, false);
+            this.AddLogMessage("Deleting", "File", e.File.FullName, String.Empty, false);
         }
 
         /// <summary>
-        /// Handles the DirectoryDeleted event of the jobWorker control.
+        /// Handles the DeletedFile event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_DeletedFile(object sender, FileDeletionEventArgs e)
+        {
+            this.LastLogMessage.Progress = 100;
+        }
+
+        /// <summary>
+        /// Handles the DeletingDirectory event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
-        private void jobWorker_DirectoryDeleted(object sender, DirectoryDeletionEventArgs e)
+        private void jobWorker_DeletingDirectory(object sender, DirectoryDeletionEventArgs e)
         {
-            this.AddLogMessage("Deleted", "Directory", e.Directory.FullName, String.Empty, this.IsPreview ? 0 : 100, false);
+            this.AddLogMessage("Deleting", "Directory", e.Directory.FullName, String.Empty, false);
         }
 
         /// <summary>
-        /// Handles the DirectoryCreated event of the jobWorker control.
+        /// Handles the DeletedDirectory event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_DeletedDirectory(object sender, DirectoryDeletionEventArgs e)
+        {
+            this.LastLogMessage.Progress = 100;
+        }
+
+        /// <summary>
+        /// Handles the CreatingFile event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_CreatingFile(object sender, FileCopyEventArgs e)
+        {
+            this.AddLogMessage("Creating", "File", e.File.FullName, e.TargetDirectory.FullName, false);
+        }
+
+        /// <summary>
+        /// Handles the CreatedFile event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_CreatedFile(object sender, FileCopyEventArgs e)
+        {
+            this.LastLogMessage.Progress = 100;
+        }
+
+        /// <summary>
+        /// Handles the CreatingDirectory event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
-        private void jobWorker_DirectoryCreated(object sender, DirectoryCreationEventArgs e)
+        private void jobWorker_CreatingDirectory(object sender, DirectoryCreationEventArgs e)
         {
-            this.AddLogMessage("Created", "Directory", e.Directory.FullName, e.TargetDirectory.FullName, this.IsPreview ? 0 : 100, false);
+            this.AddLogMessage("Creating", "Directory", e.Directory.FullName, e.TargetDirectory.FullName, false);
+        }
+
+        /// <summary>
+        /// Handles the CreatedDirectory event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_CreatedDirectory(object sender, DirectoryCreationEventArgs e)
+        {
+            this.LastLogMessage.Progress = 100;
         }
 
         #endregion Private methods

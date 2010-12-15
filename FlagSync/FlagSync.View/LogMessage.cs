@@ -87,13 +87,12 @@ namespace FlagSync.View
         /// <param name="targetPath">The target path.</param>
         /// <param name="initialProgress">The initial progress.</param>
         /// <param name="isErrorMessage">if set to <c>true</c>, the message is a error message.</param>
-        public LogMessage(string type, string action, string sourcePath, string targetPath, int initialProgress, bool isErrorMessage)
+        public LogMessage(string type, string action, string sourcePath, string targetPath, bool isErrorMessage)
         {
             this.Type = type;
             this.Action = action;
             this.SourcePath = sourcePath;
             this.TargetPath = targetPath;
-            this.Progress = initialProgress;
             this.IsErrorMessage = isErrorMessage;
         }
     }

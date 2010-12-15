@@ -26,8 +26,8 @@ namespace FlagSync.Core
         public override void Start()
         {
             //Backup directoryA to directoryB and then check for deletions
-            this.BackupDirectories(new DirectoryInfo(this.Settings.DirectoryA), new DirectoryInfo(this.Settings.DirectoryB), this.Preview);
-            this.CheckDeletions(new DirectoryInfo(this.Settings.DirectoryB), new DirectoryInfo(this.Settings.DirectoryA), this.Preview);
+            this.BackupDirectories(new DirectoryInfo(this.Settings.DirectoryA), new DirectoryInfo(this.Settings.DirectoryB), this.IsPreviewed);
+            this.CheckDeletions(new DirectoryInfo(this.Settings.DirectoryB), new DirectoryInfo(this.Settings.DirectoryA), this.IsPreviewed);
 
             this.OnFinished(EventArgs.Empty);
         }
@@ -40,7 +40,7 @@ namespace FlagSync.Core
         /// <param name="preview">True, if you want to see what will happen when you perform a backup)</param>
         private void CheckDeletions(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory, bool preview)
         {
-            if (this.Stopped) { return; }
+            if (this.IsStopped) { return; }
 
             this.CheckFileDeletions(sourceDirectory, targetDirectory, preview);
 
@@ -59,7 +59,9 @@ namespace FlagSync.Core
             {
                 foreach (DirectoryInfo directory in sourceDirectory.GetDirectories())
                 {
-                    if (!Directory.Exists(Path.Combine(targetDirectory.FullName, directory.Name)))
+                    DirectoryInfo targetSubDirectory = new DirectoryInfo(Path.Combine(targetDirectory.FullName, directory.Name));
+
+                    if (!targetSubDirectory.Exists)
                     {
                         //Set all files in the directory and it's subdirectories as proceeded,
                         //because the whole directory gets deleted
@@ -67,7 +69,7 @@ namespace FlagSync.Core
 
                         scanner.FileFound += (sender, e) =>
                             {
-                                this.OnProceededFile(new FileProceededEventArgs(e.File));
+                                this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
                             };
 
                         scanner.Start();
@@ -104,7 +106,7 @@ namespace FlagSync.Core
 
                     else
                     {
-                        this.CheckDeletions(directory, new DirectoryInfo(Path.Combine(targetDirectory.FullName, directory.Name)), preview);
+                        this.CheckDeletions(directory, targetSubDirectory, preview);
                     }
                 }
             }
@@ -127,6 +129,9 @@ namespace FlagSync.Core
             {
                 foreach (FileInfo file in sourceDirectory.GetFiles())
                 {
+                    string fileFullName = file.FullName;
+                    long fileLength = file.Length;
+
                     if (!File.Exists(Path.Combine(targetDirectory.FullName, file.Name)))
                     {
                         this.OnDeletingFile(new FileDeletionEventArgs(file));
@@ -159,7 +164,7 @@ namespace FlagSync.Core
                         }
                     }
 
-                    this.OnProceededFile(new FileProceededEventArgs(file));
+                    this.OnProceededFile(new FileProceededEventArgs(fileFullName, fileLength));
                 }
             }
 
