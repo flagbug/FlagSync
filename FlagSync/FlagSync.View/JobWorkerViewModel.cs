@@ -235,7 +235,7 @@ namespace FlagSync.View
         /// <value>The pause or continue string.</value>
         public string PauseOrContinueString
         {
-            get { return this.IsPaused ? "Continue" : "Pause"; }
+            get { return this.IsPaused ? Properties.Resources.ContinueString : Properties.Resources.PauseString; }
         }
 
         private LogMessage LastLogMessage { get; set; }
@@ -302,8 +302,8 @@ namespace FlagSync.View
                 this.IsCounting = true;
                 this.IsRunning = true;
                 this.IsPreview = preview;
-                this.AddStatusMessage("Starting jobs.");
-                this.AddStatusMessage("Counting files...");
+                this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
+                this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
             }
         }
 
@@ -314,7 +314,7 @@ namespace FlagSync.View
         {
             this.jobWorker.Pause();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
-            this.AddStatusMessage("Paused jobs.");
+            this.AddStatusMessage(Properties.Resources.PausedJobsMessage);
         }
 
         /// <summary>
@@ -324,8 +324,8 @@ namespace FlagSync.View
         {
             this.jobWorker.Continue();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
-            this.AddStatusMessage("Continue jobs.");
-            this.AddStatusMessage("Proceeding job: " + this.CurrentJobSettings.Name + "...");
+            this.AddStatusMessage(Properties.Resources.ContinuingJobsMessage);
+            this.AddStatusMessage(Properties.Resources.StartingJobsMessage + " " + this.CurrentJobSettings.Name + "...");
         }
 
         /// <summary>
@@ -336,7 +336,7 @@ namespace FlagSync.View
             this.jobWorker.Stop();
             this.IsRunning = false;
             this.ResetBytes();
-            this.AddStatusMessage("Stopped all jobs.");
+            this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
         }
 
         #endregion Public methods
@@ -354,13 +354,13 @@ namespace FlagSync.View
 
             if (!Directory.Exists(jobSetting.DirectoryA))
             {
-                this.AddStatusMessage(jobSetting.Name + ": Directory A doesn't exist!");
+                this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryADoesntExistMessage);
                 exist = false;
             }
 
             if (!Directory.Exists(jobSetting.DirectoryB))
             {
-                this.AddStatusMessage(jobSetting.Name + ": Directory B doesn't exist!");
+                this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
                 exist = false;
             }
 
@@ -429,7 +429,7 @@ namespace FlagSync.View
         {
             this.IsRunning = false;
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
-            this.AddStatusMessage("Finished all jobs.");
+            this.AddStatusMessage(Properties.Resources.FinishedAllJobsMessage);
         }
 
         /// <summary>
@@ -439,7 +439,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
         private void jobWorker_JobFinished(object sender, JobEventArgs e)
         {
-            this.AddStatusMessage("Finished job: " + e.Job.Name);
+            this.AddStatusMessage(Properties.Resources.FinishedJobMessage + " " + e.Job.Name);
         }
 
         /// <summary>
@@ -450,7 +450,7 @@ namespace FlagSync.View
         private void jobWorker_JobStarted(object sender, JobEventArgs e)
         {
             this.CurrentJobSettings = e.Job;
-            this.AddStatusMessage("Proceeding job: " + e.Job.Name + "...");
+            this.AddStatusMessage(Properties.Resources.StartingJobMessage + " " + e.Job.Name + "...");
         }
 
         /// <summary>
@@ -464,7 +464,7 @@ namespace FlagSync.View
             this.CountedBytes = this.jobWorker.FileCounterResult.CountedBytes;
             this.CountedFiles = this.jobWorker.FileCounterResult.CountedFiles;
 
-            this.AddStatusMessage("Finished file counting.");
+            this.AddStatusMessage(Properties.Resources.FinishedFileCountingMessage);
         }
 
         /// <summary>
@@ -475,7 +475,7 @@ namespace FlagSync.View
         private void jobWorker_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
         {
             this.DeleteLastLogMessage();
-            this.AddLogMessage("Deletion Error", "File", e.File.FullName, String.Empty, true);
+            this.AddLogMessage(Properties.Resources.DeletionErrorString, Properties.Resources.FileString, e.File.FullName, String.Empty, true);
         }
 
         /// <summary>
@@ -486,7 +486,7 @@ namespace FlagSync.View
         private void jobWorker_FileCopyError(object sender, FileCopyErrorEventArgs e)
         {
             this.DeleteLastLogMessage();
-            this.AddLogMessage("Copy Error", "File", e.File.FullName, e.TargetDirectory.FullName, true);
+            this.AddLogMessage(Properties.Resources.CopyErrorString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, true);
         }
 
         /// <summary>
@@ -497,7 +497,7 @@ namespace FlagSync.View
         private void jobWorker_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
         {
             this.DeleteLastLogMessage();
-            this.AddLogMessage("Deletion Error", "Directory", e.Directory.FullName, String.Empty, true);
+            this.AddLogMessage(Properties.Resources.DeletionErrorString, Properties.Resources.DirectoryString, e.Directory.FullName, String.Empty, true);
         }
 
         /// <summary>
@@ -522,7 +522,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void jobWorker_ModifyingFile(object sender, FileCopyEventArgs e)
         {
-            this.AddLogMessage("Modifying", "File", e.File.FullName, e.TargetDirectory.FullName, false);
+            this.AddLogMessage(Properties.Resources.ModifyingString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, false);
         }
 
         /// <summary>
@@ -552,7 +552,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
         private void jobWorker_DeletingFile(object sender, FileDeletionEventArgs e)
         {
-            this.AddLogMessage("Deleting", "File", e.File.FullName, String.Empty, false);
+            this.AddLogMessage(Properties.Resources.DeletingString, Properties.Resources.FileString, e.File.FullName, String.Empty, false);
         }
 
         /// <summary>
@@ -572,7 +572,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         private void jobWorker_DeletingDirectory(object sender, DirectoryDeletionEventArgs e)
         {
-            this.AddLogMessage("Deleting", "Directory", e.Directory.FullName, String.Empty, false);
+            this.AddLogMessage(Properties.Resources.DeletingString, Properties.Resources.DirectoryString, e.Directory.FullName, String.Empty, false);
         }
 
         /// <summary>
@@ -592,7 +592,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void jobWorker_CreatingFile(object sender, FileCopyEventArgs e)
         {
-            this.AddLogMessage("Creating", "File", e.File.FullName, e.TargetDirectory.FullName, false);
+            this.AddLogMessage(Properties.Resources.CreatingString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, false);
         }
 
         /// <summary>
@@ -612,7 +612,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         private void jobWorker_CreatingDirectory(object sender, DirectoryCreationEventArgs e)
         {
-            this.AddLogMessage("Creating", "Directory", e.Directory.FullName, e.TargetDirectory.FullName, false);
+            this.AddLogMessage(Properties.Resources.CreatingString, Properties.Resources.DirectoryString, e.Directory.FullName, e.TargetDirectory.FullName, false);
         }
 
         /// <summary>

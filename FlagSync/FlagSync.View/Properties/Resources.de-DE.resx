@@ -118,150 +118,150 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActionGridViewColumnText" xml:space="preserve">
-    <value>Action</value>
+    <value>Aktion</value>
   </data>
   <data name="BackupModeRadioButtonText" xml:space="preserve">
-    <value>Backup</value>
+    <value>Sicherung</value>
   </data>
   <data name="CommonSettingsGroupBoxText" xml:space="preserve">
-    <value>Common Settings</value>
+    <value>Allgemeine Einstellungen</value>
   </data>
   <data name="ContinueString" xml:space="preserve">
-    <value>Continue</value>
+    <value>Fortsetzen</value>
   </data>
   <data name="ContinuingJobsMessage" xml:space="preserve">
-    <value>Continuing jobs.</value>
+    <value>Aufgaben werden fortgesetzt.</value>
   </data>
   <data name="ControlPanelGroupBoxText" xml:space="preserve">
-    <value>Control Panel</value>
+    <value>Steuerung</value>
+  </data>
+  <data name="CopyErrorString" xml:space="preserve">
+    <value>Fehler beim kopieren</value>
   </data>
   <data name="CountingFilesMessage" xml:space="preserve">
-    <value>Counting files...</value>
+    <value>Zähle Dateien...</value>
+  </data>
+  <data name="CreatingString" xml:space="preserve">
+    <value>Erstelle</value>
   </data>
   <data name="CurrentJobGroupBoxText" xml:space="preserve">
-    <value>Current Job</value>
+    <value>Aktuelle Aufgabe</value>
   </data>
   <data name="DeleteJobButtonText" xml:space="preserve">
-    <value>Delete Job</value>
+    <value>Aufgabe löschen</value>
+  </data>
+  <data name="DeletingString" xml:space="preserve">
+    <value>Lösche</value>
+  </data>
+  <data name="DeletionErrorString" xml:space="preserve">
+    <value>Fehler beim löschen</value>
   </data>
   <data name="DirectoryAButtonText" xml:space="preserve">
-    <value>Directory A</value>
+    <value>Ordner A</value>
   </data>
   <data name="DirectoryADoesntExistMessage" xml:space="preserve">
-    <value>Directory A doesn't exist!</value>
+    <value>Ordner A existiert nicht!</value>
   </data>
   <data name="DirectoryATextBlockText" xml:space="preserve">
-    <value>Directory A:</value>
+    <value>Ordner A:</value>
   </data>
   <data name="DirectoryBButtonText" xml:space="preserve">
-    <value>Directory B</value>
+    <value>Ordner B</value>
   </data>
   <data name="DirectoryBDoesntExistMessage" xml:space="preserve">
-    <value>Directory B doesn't exist!</value>
+    <value>Ordner B existiert nicht!</value>
   </data>
   <data name="DirectoryBTextBlockText" xml:space="preserve">
-    <value>Directory B:</value>
+    <value>Ordner B:</value>
+  </data>
+  <data name="DirectoryDoesntExistMessage" xml:space="preserve">
+    <value>Ordner existier nicht!</value>
+  </data>
+  <data name="DirectoryString" xml:space="preserve">
+    <value>Ordner</value>
   </data>
   <data name="ExitMenuItemText" xml:space="preserve">
-    <value>Exit</value>
+    <value>Schließen</value>
+  </data>
+  <data name="FileString" xml:space="preserve">
+    <value>Datei</value>
   </data>
   <data name="FinishedAllJobsMessage" xml:space="preserve">
-    <value>Finished all jobs.</value>
+    <value>Alle Aufgaben wurden abgeschlossen.</value>
+  </data>
+  <data name="FinishedFileCountingMessage" xml:space="preserve">
+    <value>Dateizählung beendet.</value>
   </data>
   <data name="FinishedJobMessage" xml:space="preserve">
-    <value>Finished job:</value>
+    <value>Aufgabe beendet:</value>
   </data>
   <data name="HelpMenuItemText" xml:space="preserve">
     <value>?</value>
   </data>
   <data name="LoadJobsButtonText" xml:space="preserve">
-    <value>Load Jobs</value>
+    <value>Aufgaben laden</value>
   </data>
   <data name="ModeTextBlockText" xml:space="preserve">
-    <value>Mode:</value>
+    <value>Modus:</value>
   </data>
   <data name="NameTextBlockText" xml:space="preserve">
     <value>Name:</value>
   </data>
   <data name="NewJobButtonText" xml:space="preserve">
-    <value>New Job</value>
+    <value>Neue Aufgabe</value>
   </data>
   <data name="PausedJobsMessage" xml:space="preserve">
-    <value>Paused jobs.</value>
+    <value>Aufgaben pausiert.</value>
   </data>
   <data name="PauseString" xml:space="preserve">
     <value>Pause</value>
   </data>
   <data name="PreviewButtonText" xml:space="preserve">
-    <value>Preview</value>
+    <value>Vorschau</value>
   </data>
   <data name="ProgramMenuItemText" xml:space="preserve">
-    <value>Program</value>
+    <value>Programm</value>
   </data>
   <data name="ProgressGridViewColumnText" xml:space="preserve">
-    <value>Progress</value>
+    <value>Fortschritt</value>
   </data>
   <data name="SaveJobsButtonText" xml:space="preserve">
-    <value>Save Jobs</value>
+    <value>Aufgaben speichern</value>
   </data>
   <data name="SourceGridViewColumnText" xml:space="preserve">
-    <value>Source</value>
+    <value>Quelle</value>
   </data>
   <data name="StartButtonText" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="StartingJobMessage" xml:space="preserve">
-    <value>Starting job:</value>
+    <value>Starte Aufgabe:</value>
   </data>
   <data name="StartingJobsMessage" xml:space="preserve">
-    <value>Starting jobs.</value>
+    <value>Starte Aufgaben.</value>
   </data>
   <data name="StopButtonText" xml:space="preserve">
     <value>Stop</value>
   </data>
   <data name="StoppedAllJobsMessage" xml:space="preserve">
-    <value>Stopped all jobs.</value>
+    <value>Alle Aufgaben wurden gestoppt.</value>
   </data>
   <data name="SyncModeRadioButtonText" xml:space="preserve">
-    <value>Sychronization</value>
+    <value>Synchronisation</value>
   </data>
   <data name="TargetGridViewColumnText" xml:space="preserve">
-    <value>Target directory</value>
+    <value>Zielordner</value>
   </data>
   <data name="TypeGridViewColumnText" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="FinishedFileCountingMessage" xml:space="preserve">
-    <value>Finished file counting.</value>
-  </data>
-  <data name="DeletionErrorString" xml:space="preserve">
-    <value>Deletion Error</value>
-  </data>
-  <data name="FileString" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="CopyErrorString" xml:space="preserve">
-    <value>Copy Error</value>
-  </data>
-  <data name="DirectoryString" xml:space="preserve">
-    <value>Directory</value>
-  </data>
-  <data name="DeletingString" xml:space="preserve">
-    <value>Deleting</value>
-  </data>
-  <data name="CreatingString" xml:space="preserve">
-    <value>Creating</value>
-  </data>
-  <data name="DirectoryDoesntExistMessage" xml:space="preserve">
-    <value>Directory doesn't exist!</value>
-  </data>
-  <data name="NameFieldCantBeEmptyMessage" xml:space="preserve">
-    <value>Name field can't be empty!</value>
-  </data>
-  <data name="NewJobString" xml:space="preserve">
-    <value>New Job</value>
+    <value>Typ</value>
   </data>
   <data name="ModifyingString" xml:space="preserve">
-    <value>Modifying</value>
+    <value>Verändere</value>
+  </data>
+  <data name="NameFieldCantBeEmptyMessage" xml:space="preserve">
+    <value>Namensfeld darf nicht leer sein!</value>
+  </data>
+  <data name="NewJobString" xml:space="preserve">
+    <value>Neue Aufgabe</value>
   </data>
 </root>

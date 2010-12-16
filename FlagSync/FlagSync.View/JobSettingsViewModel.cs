@@ -82,7 +82,7 @@ namespace FlagSync.View
         /// </summary>
         public void AddNewJobSetting()
         {
-            this.JobSettings.Add(new JobSettingViewModel("New Job " + (this.JobSettings.Count + 1)));
+            this.JobSettings.Add(new JobSettingViewModel(Properties.Resources.NewJobString + " " + (this.JobSettings.Count + 1)));
         }
 
         /// <summary>

@@ -148,12 +148,12 @@ namespace FlagSync.View
 
                 if ((name == "DirectoryA" && !Directory.Exists(this.DirectoryA)) || (name == "DirectoryB" && !Directory.Exists(this.DirectoryB)))
                 {
-                    result = "Directory doesn't exist!";
+                    result = Properties.Resources.DirectoryDoesntExistMessage;
                 }
 
                 else if (name == "Name" && this.Name == String.Empty)
                 {
-                    result = "Name can't be empty!";
+                    result = Properties.Resources.NameFieldCantBeEmptyMessage;
                 }
 
                 return result;

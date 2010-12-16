@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FlagSync.View"
         xmlns:flaglibconverters="clr-namespace:FlagLib.ValueConverters;assembly=FlagLib"
+        xmlns:properties="clr-namespace:FlagSync.View.Properties"
         Title="FlagSync" Height="768" Width="1024" BorderThickness="0" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico" WindowState="Maximized">
     <Window.DataContext>
         <local:MainViewModel x:Name="mainViewModel" />
@@ -20,17 +21,17 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Height="25" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Background="#FFF0F0F0">
-            <MenuItem Header="Program" Name="programMenuItem">
-                <MenuItem Header="Exit" Name="exitMenuItem" Click="exitMenuItem_Click" />
+            <MenuItem Name="programMenuItem" Header="{x:Static properties:Resources.ProgramMenuItemText}">
+                <MenuItem Name="exitMenuItem" Header="{x:Static properties:Resources.ExitMenuItemText}" Click="exitMenuItem_Click" />
             </MenuItem>
-            <MenuItem Header="?" Name="helpMenuItem" />
+            <MenuItem Header="{x:Static properties:Resources.HelpMenuItemText}" Name="helpMenuItem" />
         </Menu>
         <Grid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="5, 10, 5, 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Current Job" Height="Auto" Width="Auto" Padding="5" Grid.Column="0">
+            <GroupBox Header="{x:Static properties:Resources.CurrentJobGroupBoxText}" Height="Auto" Width="Auto" Padding="5" Grid.Column="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -42,17 +43,17 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="Name:" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="{x:Static properties:Resources.NameTextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
                     <TextBlock Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.Name}" Margin="5,0,0,0" />
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Directory A:" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryATextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
                     <TextBlock Grid.Row="1" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryA}" Margin="5,0,0,0" />
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Directory B:" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryBTextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
                     <TextBlock Grid.Row="2" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryB}" Margin="5,0,0,0" />
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Mode:" Height="Auto" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.ModeTextBlockText}" Height="Auto" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Padding="0" />
                     <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.SyncMode}" Margin="5,0,0,0" />
                 </Grid>
             </GroupBox>
-            <GroupBox Header="Control Panel" Height="Auto" Width="Auto" Grid.Column="1" Padding="5">
+            <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.ControlPanelGroupBoxText}" Height="Auto" Width="Auto" Padding="5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -72,15 +73,15 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Content="Preview" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}"></Button>
-                        <Button Content="Start" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Click="startButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
+                        <Button Content="{x:Static properties:Resources.PreviewButtonText}" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}"></Button>
+                        <Button Content="{x:Static properties:Resources.StartButtonText}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Click="startButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
                         <Button Content="{Binding Path=JobWorkerViewModel.PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Click="pauseButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
-                        <Button Content="Stop" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" Name="stopButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Click="stopButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
+                        <Button Content="{x:Static properties:Resources.StopButtonText}" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" Name="stopButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Click="stopButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
                     </Grid>
                 </Grid>
             </GroupBox>
         </Grid>
-        <TabControl Grid.Row="2" Name="mainTabControl"  Height="Auto" Margin="5, 0, 5, 10">
+        <TabControl Grid.Row="2" Name="mainTabControl" Height="Auto" Margin="5, 0, 5, 10">
             <TabItem Header="Settings">
                 <Grid Margin="0, 10, 0, 10">
                     <Grid.ColumnDefinitions>
@@ -95,8 +96,8 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Name="newJobButton" Content="New Job" Height="25" Click="newJobButton_Click" />
-                        <Button Grid.Row="1" Name="deleteJobButton" Content="Delete Job" Height="25"  Click="deleteJobButton_Click" />
+                        <Button Grid.Row="0" Name="newJobButton" Content="{x:Static properties:Resources.NewJobButtonText}" Height="25" Click="newJobButton_Click" />
+                        <Button Grid.Row="1" Name="deleteJobButton" Content="{x:Static properties:Resources.DeleteJobButtonText}" Height="25"  Click="deleteJobButton_Click" />
                         <ListBox Grid.Row="2" Margin="0, 5, 0, 5" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -107,10 +108,10 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <Button Grid.Row="3" Name="loadJobsButton" Content="Load Jobs" Height="25" Click="loadJobsButton_Click" />
-                        <Button Grid.Row="4" Name="saveJobsButton" Content="Save Jobs" Height="25"  Click="saveJobsButton_Click" />
+                        <Button Grid.Row="3" Name="loadJobsButton" Content="{x:Static properties:Resources.LoadJobsButtonText}" Height="25" Click="loadJobsButton_Click" />
+                        <Button Grid.Row="4" Name="saveJobsButton" Content="{x:Static properties:Resources.SaveJobsButtonText}" Height="25"  Click="saveJobsButton_Click" />
                     </Grid>
-                    <GroupBox Header="Common Settings" Height="Auto" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="400" Grid.Column="1">
+                    <GroupBox Header="{x:Static properties:Resources.CommonSettingsGroupBoxText}" Height="Auto" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="400" Grid.Column="1">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -128,9 +129,9 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Name:" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                                <Button Margin="5, 5, 5, 5" Content="Directory A" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click" />
+                                <Button Margin="5, 5, 5, 5" Content="{x:Static properties:Resources.DirectoryAButtonText}" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click" />
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
-                                <Button Margin="5, 5, 5, 5" Content="Directory B" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryBButton_Click" />
+                                <Button Margin="5, 5, 5, 5" Content="{x:Static properties:Resources.DirectoryBButtonText}" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryBButton_Click" />
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                             <Grid Grid.Row="1">
@@ -140,8 +141,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Content="Mode:" Grid.Column="0" />
                                 <StackPanel Margin="5, 5, 5, 5" Grid.Column="1">
-                                    <RadioButton Name="jobSettingsBackupModeRadioButton" GroupName="jobMode" Checked="jobSettingsBackupModeRadioButton_Checked">Backup</RadioButton>
-                                    <RadioButton Name="jobSettingsSyncModeRadioButton" GroupName="jobMode" Checked="jobSettingsSyncModeRadioButton_Checked">Synchronisation</RadioButton>
+                                    <RadioButton Name="jobSettingsBackupModeRadioButton" GroupName="jobMode" Checked="jobSettingsBackupModeRadioButton_Checked" Content="{x:Static properties:Resources.BackupModeRadioButtonText}" />
+                                    <RadioButton Name="jobSettingsSyncModeRadioButton" GroupName="jobMode" Checked="jobSettingsSyncModeRadioButton_Checked" Content="{x:Static properties:Resources.SyncModeRadioButtonText}" />
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -158,10 +159,10 @@
                     <ListView Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionMode="Single">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Action" DisplayMemberBinding="{Binding Path=Action}" />
-                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path=Type}" />
-                                <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Path=SourcePath}" />
-                                <GridViewColumn Header="Progress">
+                                <GridViewColumn Header="{x:Static properties:Resources.ActionGridViewColumnText}" DisplayMemberBinding="{Binding Path=Action}" />
+                                <GridViewColumn Header="{x:Static properties:Resources.TypeGridViewColumnText}" DisplayMemberBinding="{Binding Path=Type}" />
+                                <GridViewColumn Header="{x:Static properties:Resources.SourceGridViewColumnText}" DisplayMemberBinding="{Binding Path=SourcePath}" />
+                                <GridViewColumn Header="{x:Static properties:Resources.ProgressGridViewColumnText}">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal" Width="100" >
@@ -176,7 +177,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Target" DisplayMemberBinding="{Binding Path=TargetPath}" />
+                                <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
