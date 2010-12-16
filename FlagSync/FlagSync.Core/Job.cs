@@ -46,7 +46,11 @@ namespace FlagSync.Core
         /// <value>The written bytes.</value>
         public long WrittenBytes { get; private set; }
 
-        private HashSet<string> proceededFilePaths = new HashSet<string>();
+        /// <summary>
+        /// Gets the proceeded file paths.
+        /// </summary>
+        /// <value>The proceeded file paths.</value>
+        protected HashSet<string> ProceededFilePaths { get; private set; }
 
         #endregion Properties
 
@@ -146,6 +150,7 @@ namespace FlagSync.Core
             fileCopyOperation.CopyProgressUpdated += new EventHandler<CopyProgressEventArgs>(fileCopyOperation_CopyProgressUpdated);
             this.IsPreviewed = preview;
             this.Settings = settings;
+            this.ProceededFilePaths = new HashSet<string>();
         }
 
         #endregion Constructor
@@ -394,8 +399,9 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
         protected virtual void OnProceededFile(FileProceededEventArgs e)
         {
-            if (this.ProceededFile != null && !this.proceededFilePaths.Contains(e.FilePath))
+            if (this.ProceededFile != null && !this.ProceededFilePaths.Contains(e.FilePath))
             {
+                this.ProceededFilePaths.Add(e.FilePath);
                 this.ProceededFile(this, e);
             }
         }
@@ -478,7 +484,7 @@ namespace FlagSync.Core
 
                 this.fileCopyOperation.CopyFile(file.FullName, targetFile);
 
-                this.proceededFilePaths.Add(targetFile);
+                this.ProceededFilePaths.Add(targetFile);
             }
 
             catch (Win32Exception e)
