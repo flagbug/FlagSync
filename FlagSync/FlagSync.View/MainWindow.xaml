@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:FlagSync.View"
         xmlns:flaglibconverters="clr-namespace:FlagLib.ValueConverters;assembly=FlagLib"
         xmlns:properties="clr-namespace:FlagSync.View.Properties"
-        Title="FlagSync" Height="768" Width="1024" BorderThickness="0" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico" WindowState="Maximized">
+        Title="FlagSync" Height="768" Width="1024" BorderThickness="0" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico" WindowState="Maximized" Closing="Window_Closing">
     <Window.DataContext>
         <local:MainViewModel x:Name="mainViewModel" />
     </Window.DataContext>
@@ -21,10 +21,15 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Height="25" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Background="#FFF0F0F0">
-            <MenuItem Name="programMenuItem" Header="{x:Static properties:Resources.ProgramMenuItemText}">
+            <MenuItem Header="{x:Static properties:Resources.ProgramMenuItemText}">
                 <MenuItem Name="exitMenuItem" Header="{x:Static properties:Resources.ExitMenuItemText}" Click="exitMenuItem_Click" />
             </MenuItem>
-            <MenuItem Header="{x:Static properties:Resources.HelpMenuItemText}" Name="helpMenuItem" />
+            <MenuItem Header="{x:Static properties:Resources.HelpMenuItemText}" Name="helpMenuItem">
+                <MenuItem Header="{x:Static properties:Resources.LanguageMenuItemText}">
+                    <MenuItem Name="englishMenuItem" Header="{x:Static properties:Resources.EnglishString}" Click="englishMenuItem_Click" />
+                    <MenuItem Name="germanMenuItem" Header="{x:Static properties:Resources.GermanString}" Click="germanMenuItem_Click" />
+                </MenuItem>
+            </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="5, 10, 5, 10">
             <Grid.ColumnDefinitions>
@@ -82,7 +87,7 @@
             </GroupBox>
         </Grid>
         <TabControl Grid.Row="2" Name="mainTabControl" Height="Auto" Margin="5, 0, 5, 10">
-            <TabItem Header="Settings">
+            <TabItem Header="{x:Static properties:Resources.SettingsTabItemText}">
                 <Grid Margin="0, 10, 0, 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
@@ -149,7 +154,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Log">
+            <TabItem Header="{x:Static properties:Resources.LogTabItemText}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />

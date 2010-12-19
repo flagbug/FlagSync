@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,7 @@ namespace FlagSync.View
         /// </summary>
         public MainWindow()
         {
+            Properties.Resources.Culture = Properties.Settings.Default.Language;
             InitializeComponent();
 
             this.mainViewModel.JobSettingsViewModel.SelectedJobSetting = this.mainViewModel.JobSettingsViewModel.JobSettings[0];
@@ -248,6 +250,29 @@ namespace FlagSync.View
             {
                 ((ListView)sender).ScrollIntoView(messages.Last());
             }
+        }
+
+        private void englishMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Language = new CultureInfo("en-US");
+            Restart();
+        }
+
+        private static void Restart()
+        {
+            App.Current.Shutdown();
+            System.Diagnostics.Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location);
+        }
+
+        private void germanMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Language = new CultureInfo("de-DE");
+            Restart();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
         }
     }
 }

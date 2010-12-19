@@ -250,6 +250,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string EnglishString {
+            get {
+                return ResourceManager.GetString("EnglishString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         public static string ExitMenuItemText {
@@ -295,6 +304,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to German.
+        /// </summary>
+        public static string GermanString {
+            get {
+                return ResourceManager.GetString("GermanString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ?.
         /// </summary>
         public static string HelpMenuItemText {
@@ -304,11 +322,29 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string LanguageMenuItemText {
+            get {
+                return ResourceManager.GetString("LanguageMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load Jobs.
         /// </summary>
         public static string LoadJobsButtonText {
             get {
                 return ResourceManager.GetString("LoadJobsButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log.
+        /// </summary>
+        public static string LogTabItemText {
+            get {
+                return ResourceManager.GetString("LogTabItemText", resourceCulture);
             }
         }
         
@@ -417,6 +453,15 @@ namespace FlagSync.View.Properties {
         public static string SaveJobsButtonText {
             get {
                 return ResourceManager.GetString("SaveJobsButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsTabItemText {
+            get {
+                return ResourceManager.GetString("SettingsTabItemText", resourceCulture);
             }
         }
         

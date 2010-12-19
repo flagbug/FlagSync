@@ -264,4 +264,19 @@
   <data name="NewJobString" xml:space="preserve">
     <value>Neue Aufgabe</value>
   </data>
+  <data name="EnglishString" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="GermanString" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="LanguageMenuItemText" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="LogTabItemText" xml:space="preserve">
+    <value>Protokoll</value>
+  </data>
+  <data name="SettingsTabItemText" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
 </root>
