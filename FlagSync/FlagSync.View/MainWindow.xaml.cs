@@ -252,24 +252,42 @@ namespace FlagSync.View
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the englishMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void englishMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Language = new CultureInfo("en-US");
             Restart();
         }
 
+        /// <summary>
+        /// Restarts this instance.
+        /// </summary>
         private static void Restart()
         {
             App.Current.Shutdown();
             System.Diagnostics.Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location);
         }
 
+        /// <summary>
+        /// Handles the Click event of the germanMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void germanMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Language = new CultureInfo("de-DE");
             Restart();
         }
 
+        /// <summary>
+        /// Handles the Closing event of the Window control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Properties.Settings.Default.Save();

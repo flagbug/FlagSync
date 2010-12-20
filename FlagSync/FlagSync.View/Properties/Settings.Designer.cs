@@ -25,7 +25,7 @@ namespace FlagSync.View.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(Default)")]
+        [global::System.Configuration.DefaultSettingValueAttribute("en-US")]
         public global::System.Globalization.CultureInfo Language {
             get {
                 return ((global::System.Globalization.CultureInfo)(this["Language"]));
