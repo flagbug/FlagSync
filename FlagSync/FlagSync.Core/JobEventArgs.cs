@@ -56,11 +56,12 @@ namespace FlagSync.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="FileProceededEventArgs"/> class.
         /// </summary>
-        /// <param name="file">The file.</param>
-        public FileProceededEventArgs(string fileName, long filePath)
+        /// <param name="filePath">The file path.</param>
+        /// <param name="fileLength">The file length.</param>
+        public FileProceededEventArgs(string filePath, long fileLength)
         {
-            this.FilePath = fileName;
-            this.FileLength = filePath;
+            this.FilePath = filePath;
+            this.FileLength = fileLength;
         }
     }
 
@@ -127,18 +128,18 @@ namespace FlagSync.Core
     public class FileDeletionEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets the file.
+        /// Gets the file path.
         /// </summary>
-        /// <value>The file.</value>
-        public FileInfo File { get; private set; }
+        /// <value>The file path.</value>
+        public string FilePath { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileDeletionEventArgs"/> class.
         /// </summary>
-        /// <param name="file">The file.</param>
-        public FileDeletionEventArgs(FileInfo file)
+        /// <param name="file">The file path.</param>
+        public FileDeletionEventArgs(string filePath)
         {
-            this.File = file;
+            this.FilePath = filePath;
         }
     }
 
@@ -171,18 +172,18 @@ namespace FlagSync.Core
     public class DirectoryDeletionEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets the directory.
+        /// Gets the directory path.
         /// </summary>
-        /// <value>The directory.</value>
-        public DirectoryInfo Directory { get; private set; }
+        /// <value>The directory path.</value>
+        public string DirectoryPath { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectoryDeletionEventArgs"/> class.
         /// </summary>
-        /// <param name="directory">The directory.</param>
-        public DirectoryDeletionEventArgs(DirectoryInfo directory)
+        /// <param name="directory">The directory path.</param>
+        public DirectoryDeletionEventArgs(string directoryPath)
         {
-            this.Directory = directory;
+            this.DirectoryPath = directoryPath;
         }
     }
 }

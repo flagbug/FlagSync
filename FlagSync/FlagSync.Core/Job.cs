@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using FlagLib.FileSystem;
 
 namespace FlagSync.Core
 {
-    public abstract class Job
+    internal abstract class Job
     {
-        #region Fields
-
-        FileCopyOperation fileCopyOperation = new FileCopyOperation();
-
-        #endregion Fields
-
-        #region Properties
-
         /// <summary>
         /// Gets the settings of the job.
         /// </summary>
@@ -29,12 +18,6 @@ namespace FlagSync.Core
         public bool IsPaused { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether the <see cref="Job"/> is previewed.
-        /// </summary>
-        /// <value>true if preview; otherwise, false.</value>
-        public bool IsPreviewed { get; private set; }
-
-        /// <summary>
         /// Gets a value indicating whether the <see cref="Job"/> is stopped.
         /// </summary>
         /// <value>true if stopped; otherwise, false.</value>
@@ -45,16 +28,6 @@ namespace FlagSync.Core
         /// </summary>
         /// <value>The written bytes.</value>
         public long WrittenBytes { get; private set; }
-
-        /// <summary>
-        /// Gets the proceeded file paths.
-        /// </summary>
-        /// <value>The proceeded file paths.</value>
-        protected HashSet<string> ProceededFilePaths { get; private set; }
-
-        #endregion Properties
-
-        #region Events
 
         /// <summary>
         /// Occurs when a file has been proceeded.
@@ -136,36 +109,24 @@ namespace FlagSync.Core
         /// </summary>
         public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
 
-        #endregion Events
-
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Job"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        /// <param name="preview">if set to true no files will be deleted, mofified or copied.</param>
-        protected Job(JobSetting settings, bool preview)
+        protected Job(JobSetting settings)
         {
-            fileCopyOperation.CopyProgressUpdated += new EventHandler<CopyProgressEventArgs>(fileCopyOperation_CopyProgressUpdated);
-            this.IsPreviewed = preview;
             this.Settings = settings;
-            this.ProceededFilePaths = new HashSet<string>();
         }
-
-        #endregion Constructor
-
-        #region Public methods
 
         /// <summary>
         /// Starts the job.
         /// </summary>
-        public abstract void Start();
+        public abstract void Start(bool preview);
 
         /// <summary>
         /// Pauses the job
         /// </summary>
-        public void Pause()
+        public virtual void Pause()
         {
             this.IsPaused = true;
         }
@@ -173,7 +134,7 @@ namespace FlagSync.Core
         /// <summary>
         /// Continues the job (only after pause)
         /// </summary>
-        public void Continue()
+        public virtual void Continue()
         {
             this.IsPaused = false;
         }
@@ -181,74 +142,10 @@ namespace FlagSync.Core
         /// <summary>
         /// Stops the job (can't be continued)
         /// </summary>
-        public void Stop()
+        public virtual void Stop()
         {
             this.IsPaused = false;
             this.IsStopped = true;
-        }
-
-        #endregion Public methods
-
-        #region Protected methods
-
-        /// <summary>
-        /// Backups a directory and its sub folders
-        /// </summary>
-        /// <param name="sourceDirectory">The source directory</param>
-        /// <param name="targetDirectory">The target directory</param>
-        /// <param name="preview">True, if changes should get performed, otherwise false (if you want to see what will happen when you perform a backup)</param>
-        protected void BackupDirectories(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory, bool preview)
-        {
-            this.BackupDirectory(sourceDirectory, targetDirectory, preview);
-
-            try
-            {
-                foreach (DirectoryInfo directory in sourceDirectory.GetDirectories())
-                {
-                    if (this.IsStopped) { return; }
-
-                    string targetSubDirectory = Path.Combine(targetDirectory.FullName, directory.Name);
-
-                    if (!Directory.Exists(targetSubDirectory))
-                    {
-                        this.OnCreatingDirectory(new DirectoryCreationEventArgs(directory, targetDirectory));
-
-                        if (!preview)
-                        {
-                            try
-                            {
-                                Directory.CreateDirectory(targetSubDirectory);
-                                this.OnCreatedDirectory(new DirectoryCreationEventArgs(directory, targetDirectory));
-                            }
-
-                            catch (UnauthorizedAccessException e)
-                            {
-                                Logger.Instance.LogError("UnauthorizedAccessException at directory creation: " + targetSubDirectory);
-                                Logger.Instance.LogError(e.Message);
-                            }
-
-                            catch (PathTooLongException e)
-                            {
-                                Logger.Instance.LogError("PathTooLongException at directory creation: " + targetSubDirectory);
-                                Logger.Instance.LogError(e.Message);
-                            }
-
-                            catch (IOException e)
-                            {
-                                Logger.Instance.LogError("IOException at directory creation: " + targetSubDirectory);
-                                Logger.Instance.LogError(e.Message);
-                            }
-                        }
-                    }
-
-                    this.BackupDirectories(directory, new DirectoryInfo(targetSubDirectory), preview);
-                }
-            }
-
-            catch (UnauthorizedAccessException)
-            {
-                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + sourceDirectory.FullName);
-            }
         }
 
         /// <summary>
@@ -326,7 +223,7 @@ namespace FlagSync.Core
                 this.DeletedFile(this, e);
             }
 
-            Logger.Instance.LogSucceed("Deleted file: " + e.File.FullName);
+            Logger.Instance.LogSucceed("Deleted file: " + e.FilePath);
         }
 
         /// <summary>
@@ -378,7 +275,7 @@ namespace FlagSync.Core
                 this.DeletedDirectory(this, e);
             }
 
-            Logger.Instance.LogSucceed("Deleted directory: " + e.Directory.FullName);
+            Logger.Instance.LogSucceed("Deleted directory: " + e.DirectoryPath);
         }
 
         /// <summary>
@@ -399,9 +296,8 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
         protected virtual void OnProceededFile(FileProceededEventArgs e)
         {
-            if (this.ProceededFile != null && !this.ProceededFilePaths.Contains(e.FilePath))
+            if (this.ProceededFile != null)
             {
-                this.ProceededFilePaths.Add(e.FilePath);
                 this.ProceededFile(this, e);
             }
         }
@@ -453,149 +349,5 @@ namespace FlagSync.Core
                 this.FileCopyProgressChanged(this, e);
             }
         }
-
-        #endregion Protected methods
-
-        #region Private methods
-
-        /// <summary>
-        /// Checks the if the job is paused. If true, a loop will be enabled, till the job gets continued
-        /// </summary>
-        private void CheckPause()
-        {
-            while (this.IsPaused)
-            {
-                System.Threading.Thread.Sleep(250);
-            }
-        }
-
-        /// <summary>
-        /// Copyies a file to the specified directory
-        /// </summary>
-        /// <param name="file">File to copy</param>
-        /// <param name="directory">Target directory</param>
-        private void CopyFile(FileInfo file, DirectoryInfo directory)
-        {
-            this.CheckPause();
-
-            try
-            {
-                string targetFile = Path.Combine(directory.FullName, file.Name);
-
-                this.fileCopyOperation.CopyFile(file.FullName, targetFile);
-
-                this.ProceededFilePaths.Add(targetFile);
-            }
-
-            catch (Win32Exception e)
-            {
-                Logger.Instance.LogError("Win32Exception at file copy: " + file.FullName);
-                Logger.Instance.LogError(e.Message);
-
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Handles the CopyProgressUpdated event of the fileCopyOperation control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
-        private void fileCopyOperation_CopyProgressUpdated(object sender, CopyProgressEventArgs e)
-        {
-            this.OnFileProgressChanged(e);
-        }
-
-        /// <summary>
-        /// Checks if file A is newer than file B
-        /// </summary>
-        /// <param name="fileA">File A</param>
-        /// <param name="fileB">File B</param>
-        /// <returns>
-        /// True, if file A is newer, otherwise false
-        /// </returns>
-        private bool IsFileModified(FileInfo fileA, FileInfo fileB)
-        {
-            return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
-        }
-
-        /// <summary>
-        /// Backups a single directory, without sub folders
-        /// </summary>
-        /// <param name="sourceDirectory">The source directory</param>
-        /// <param name="targetDirectory">The target directory</param>
-        /// <param name="preview">True, if changes should get performed, otherwise false (if you want to see what will happen when you perform a backup)</param>
-        private void BackupDirectory(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory, bool preview)
-        {
-            this.CheckPause();
-
-            try
-            {
-                foreach (FileInfo fileA in sourceDirectory.GetFiles())
-                {
-                    if (this.IsStopped) { return; }
-
-                    string fileBPath = Path.Combine(targetDirectory.FullName, fileA.Name);
-
-                    //Check if fileA isn't already in target directory
-                    if (!File.Exists(fileBPath))
-                    {
-                        this.OnCreatingFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
-
-                        if (!preview)
-                        {
-                            try
-                            {
-                                this.CopyFile(fileA, targetDirectory);
-                                this.OnCreatedFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
-                            }
-
-                            catch (Win32Exception)
-                            {
-                                this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, targetDirectory));
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        if (this.IsStopped) { return; }
-                        this.CheckPause();
-
-                        FileInfo fileB = new FileInfo(fileBPath);
-
-                        //Check for modified file
-                        if (String.Equals(fileA.Name, fileB.Name, StringComparison.OrdinalIgnoreCase)
-                            && this.IsFileModified(fileA, fileB))
-                        {
-                            this.OnModifyingFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
-
-                            if (!preview)
-                            {
-                                try
-                                {
-                                    this.CopyFile(fileA, targetDirectory);
-                                    this.OnModifiedFile(new FileCopyEventArgs(fileA, sourceDirectory, targetDirectory));
-                                }
-
-                                catch (Win32Exception)
-                                {
-                                    this.OnFileCopyError(new FileCopyErrorEventArgs(fileA, targetDirectory));
-                                }
-                            }
-                        }
-                    }
-
-                    this.OnProceededFile(new FileProceededEventArgs(fileA.FullName, fileA.Length));
-                }
-            }
-
-            catch (System.UnauthorizedAccessException)
-            {
-                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + sourceDirectory.FullName);
-            }
-        }
-
-        #endregion Private methods
     }
 }

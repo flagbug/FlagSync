@@ -106,7 +106,8 @@ namespace FlagSync.Core
         private Queue<Job> jobQueue = new Queue<Job>();
         private long totalWrittenBytes;
         private int proceededFiles;
-        private FileCounter.FileCounterResults fileCounterResult;
+        private FileCounterResults fileCounterResult;
+        private bool performPreview;
 
         /// <summary>
         /// Gets the total written bytes.
@@ -136,7 +137,7 @@ namespace FlagSync.Core
         /// Gets the file counter result.
         /// </summary>
         /// <value>The file counter result.</value>
-        public FileCounter.FileCounterResults FileCounterResult
+        public FileCounterResults FileCounterResult
         {
             get
             {
@@ -200,7 +201,7 @@ namespace FlagSync.Core
                 this.currentJob = this.jobQueue.Dequeue();
                 this.InitializeCurrentJobEvents();
                 this.OnJobStarted(new JobEventArgs(this.currentJob.Settings));
-                this.currentJob.Start();
+                this.currentJob.Start(this.performPreview);
             }
 
             else
@@ -212,8 +213,10 @@ namespace FlagSync.Core
         /// <summary>
         /// Starts the job worker.
         /// </summary>
-        private void Start()
+        private void Start(bool preview)
         {
+            this.performPreview = preview;
+
             Logger.Instance.LogStatusMessage("Start counting files");
 
             this.fileCounterResult = this.GetFileCounterResults();
@@ -231,15 +234,15 @@ namespace FlagSync.Core
         /// <summary>
         /// Starts the specified jobs.
         /// </summary>
-        /// <param name="jobs">The jobs.</param>
+        /// <param name="jobSettings">The job settings.</param>
         /// <param name="preview">if set to true, a preview will be performed.</param>
-        public void Start(IEnumerable<JobSetting> jobs, bool preview)
+        public void Start(IEnumerable<JobSetting> jobSettings, bool preview)
         {
             this.totalWrittenBytes = 0;
 
-            this.QueueJobs(jobs, preview);
+            this.QueueJobs(jobSettings);
 
-            ThreadPool.QueueUserWorkItem(new WaitCallback(callback => this.Start()));
+            ThreadPool.QueueUserWorkItem(new WaitCallback(callback => this.Start(preview)));
         }
 
         /// <summary>
@@ -247,18 +250,18 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="jobs">The jobs.</param>
         /// <param name="preview">if set to true, a preview will be performed.</param>
-        private void QueueJobs(IEnumerable<JobSetting> jobs, bool preview)
+        private void QueueJobs(IEnumerable<JobSetting> jobs)
         {
-            foreach (JobSetting job in jobs)
+            foreach (JobSetting jobSetting in jobs)
             {
-                switch (job.SyncMode)
+                switch (jobSetting.SyncMode)
                 {
                     case SyncMode.Backup:
-                        this.jobQueue.Enqueue(new BackupJob(job, preview));
+                        this.jobQueue.Enqueue(new BackupJob(jobSetting));
                         break;
 
                     case SyncMode.Synchronization:
-                        this.jobQueue.Enqueue(new SyncJob(job, preview));
+                        this.jobQueue.Enqueue(new SyncJob(jobSetting));
                         break;
                 }
             }
@@ -268,9 +271,9 @@ namespace FlagSync.Core
         /// Gets the file counter results.
         /// </summary>
         /// <returns></returns>
-        private FileCounter.FileCounterResults GetFileCounterResults()
+        private FileCounterResults GetFileCounterResults()
         {
-            FileCounter.FileCounterResults result = new FileCounter.FileCounterResults();
+            FileCounterResults result = new FileCounterResults();
 
             FileCounter counter = new FileCounter();
 

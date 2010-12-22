@@ -63,6 +63,12 @@
             </summary>
             <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
         </member>
+        <member name="M:FlagLib.FileSystem.DirectoryScanner.OnDirectoryProceeded(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:DirectoryProceeded"/> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
         <member name="M:FlagLib.FileSystem.DirectoryScanner.ScanDirectories(System.String)">
             <summary>
             Scans a directory recursively.
@@ -81,6 +87,12 @@
             </summary>
             <value>The directory path.</value>
         </member>
+        <member name="P:FlagLib.FileSystem.DirectoryScanner.Stop">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:FlagLib.FileSystem.DirectoryScanner"/> should stop.
+            </summary>
+            <value>true if the scanner should stop; otherwise, false.</value>
+        </member>
         <member name="E:FlagLib.FileSystem.DirectoryScanner.FileFound">
             <summary>
             Occurs when a file has been found.
@@ -94,6 +106,11 @@
         <member name="E:FlagLib.FileSystem.DirectoryScanner.DirectoryScanError">
             <summary>
             Occurs when a directory couldn't be accessed.
+            </summary>
+        </member>
+        <member name="E:FlagLib.FileSystem.DirectoryScanner.DirectoryProceeded">
+            <summary>
+            Occurs when a directory has been proceeded.
             </summary>
         </member>
         <member name="E:FlagLib.FileSystem.DirectoryScanner.Finished">
@@ -783,6 +800,18 @@
             A converted value. If the method returns null, the valid null value is used.
             </returns>
         </member>
+        <member name="M:FlagLib.FileSystem.DirectoryEventArgs.#ctor(System.IO.DirectoryInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagLib.FileSystem.DirectoryEventArgs"/> class.
+            </summary>
+            <param name="directory">The found directory.</param>
+        </member>
+        <member name="P:FlagLib.FileSystem.DirectoryEventArgs.Directory">
+            <summary>
+            Gets or found the directory.
+            </summary>
+            <value>The directory.</value>
+        </member>
         <member name="T:FlagLib.Collections.SerializableDictionary`2">
             <summary>
             Provides a serializable dictionary
@@ -1304,18 +1333,6 @@
             Adds the specified item.
             </summary>
             <param name="item">The item.</param>
-        </member>
-        <member name="M:FlagLib.FileSystem.DirectoryEventArgs.#ctor(System.IO.DirectoryInfo)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.FileSystem.DirectoryEventArgs"/> class.
-            </summary>
-            <param name="directory">The found directory.</param>
-        </member>
-        <member name="P:FlagLib.FileSystem.DirectoryEventArgs.Directory">
-            <summary>
-            Gets or found the directory.
-            </summary>
-            <value>The directory.</value>
         </member>
     </members>
 </doc>
