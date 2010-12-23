@@ -26,9 +26,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="settings">The job settings.</param>
         protected FileSystemJob(JobSetting settings)
-            : base(settings)
-        {
-        }
+            : base(settings) { }
 
         #region High level operations
 
@@ -93,9 +91,116 @@ namespace FlagSync.Core
             rootScanner.Start();
         }
 
+        /// <summary>
+        /// Checks the source directory recursively for directories and files that are not in the target directory and deletes them.
+        /// </summary>
+        /// <param name="sourceDirectoryPath">The source directory path.</param>
+        /// <param name="targetDirectoryPath">The target directory path.</param>
+        /// <param name="execute">if set to true, the modifications, creations and deletions will be executed executed.</param>
+        protected void CheckDeletionsRecursively(string sourceDirectoryPath, string targetDirectoryPath, bool execute)
+        {
+            if (!Directory.Exists(sourceDirectoryPath))
+                throw new ArgumentException("sourceDirectoryPath", "The source directory doesn't exist.");
+
+            if (!Directory.Exists(sourceDirectoryPath))
+                throw new ArgumentException("targetDirectoryPath", "The target directory doesn't exist.");
+
+            DirectoryScanner rootScanner = new DirectoryScanner(sourceDirectoryPath);
+
+            DirectoryInfo currentTargetDirectory = new DirectoryInfo(targetDirectoryPath);
+
+            rootScanner.DirectoryFound += (sender, e) =>
+            {
+                if (this.IsStopped) { return; }
+
+                string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
+
+                //Check if the directory doesn't exist in the target directory
+                if (!Directory.Exists(newTargetDirectoryPath))
+                {
+                    this.PerformDirectoryDeletionOperation(e.Directory, execute);
+                }
+
+                currentTargetDirectory = new DirectoryInfo(newTargetDirectoryPath);
+            };
+
+            rootScanner.DirectoryProceeded += (sender, e) =>
+            {
+                //When a directory has been completely preceeded, jump to the parent directory of the target directory
+                currentTargetDirectory = currentTargetDirectory.Parent;
+            };
+
+            rootScanner.FileFound += (sender, e) =>
+            {
+                if (this.IsStopped) { return; }
+
+                string targetFilePath = Path.Combine(currentTargetDirectory.FullName, e.File.Name);
+
+                //Check if the file doesn't exist in the target directory
+                if (!File.Exists(targetFilePath))
+                {
+                    this.PerformFileDeletionOperation(e.File, execute);
+                }
+            };
+
+            rootScanner.Start();
+        }
+
         #endregion High level operations
 
         #region Mid level operations
+
+        /// <summary>
+        /// Performs a file deletion (mid level operation).
+        /// </summary>
+        /// <param name="file">The file to delete.</param>
+        /// <param name="execute">if set to true, the operation gets executed.</param>
+        protected void PerformFileDeletionOperation(FileInfo file, bool execute)
+        {
+            FileDeletionEventArgs eventArgs = new FileDeletionEventArgs(file.FullName);
+
+            this.OnDeletingFile(eventArgs);
+
+            //Only delete the file, if the operation should get executed
+            bool hasPerformed = execute ?
+                this.TryDeleteFile(file) : false;
+
+            if (hasPerformed)
+            {
+                this.OnDeletedFile(eventArgs);
+            }
+
+            else if (execute)
+            {
+                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
+            }
+        }
+
+        /// <summary>
+        /// Performs a directory deletion (mid level operation).
+        /// </summary>
+        /// <param name="directory">The directory to delete.</param>
+        /// <param name="execute">if set to true, the operation gets executed.</param>
+        protected void PerformDirectoryDeletionOperation(DirectoryInfo directory, bool execute)
+        {
+            DirectoryDeletionEventArgs eventArgs = new DirectoryDeletionEventArgs(directory.FullName);
+
+            this.OnDeletingDirectory(eventArgs);
+
+            //Only delete the directory, if the operation should get executed
+            bool hasPerformed = execute ?
+                this.TryDeleteDirectory(directory) : false;
+
+            if (hasPerformed)
+            {
+                this.OnDeletedDirectory(eventArgs);
+            }
+
+            else if (execute)
+            {
+                this.OnDirectoryDeletionError(new DirectoryDeletionEventArgs(directory.FullName));
+            }
+        }
 
         /// <summary>
         /// Performs a file creation (mid level operation).
@@ -152,32 +257,6 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Performs a file deletion (mid level operation).
-        /// </summary>
-        /// <param name="file">The file to delete.</param>
-        /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformFileDeletionOperation(FileInfo file, bool execute)
-        {
-            FileDeletionEventArgs eventArgs = new FileDeletionEventArgs(file.FullName);
-
-            this.OnDeletingFile(eventArgs);
-
-            //Only delete the file, if the operation should get executed
-            bool hasPerformed = execute ?
-                this.TryDeleteFile(file) : false;
-
-            if (hasPerformed)
-            {
-                this.OnDeletedFile(eventArgs);
-            }
-
-            else if (execute)
-            {
-                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
-            }
-        }
-
-        /// <summary>
         /// Performs a directory creation (mid level operation).
         /// </summary>
         /// <param name="sourceDirectory">The source directory.</param>
@@ -201,32 +280,6 @@ namespace FlagSync.Core
             else if (execute)
             {
                 //TODO: Add error handling (OnDirectoryCreationError)
-            }
-        }
-
-        /// <summary>
-        /// Performs a directory deletion (mid level operation).
-        /// </summary>
-        /// <param name="directory">The directory to delete.</param>
-        /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformDirectoryDeletionOperation(DirectoryInfo directory, bool execute)
-        {
-            DirectoryDeletionEventArgs eventArgs = new DirectoryDeletionEventArgs(directory.FullName);
-
-            this.OnDeletedDirectory(eventArgs);
-
-            //Only delete the directory, if the operation should get executed
-            bool hasPerformed = execute ?
-                this.TryDeleteDirectory(directory) : false;
-
-            if (hasPerformed)
-            {
-                this.OnDeletedDirectory(eventArgs);
-            }
-
-            else if (execute)
-            {
-                this.OnDirectoryDeletionError(new DirectoryDeletionEventArgs(directory.FullName));
             }
         }
 
