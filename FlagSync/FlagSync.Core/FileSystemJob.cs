@@ -9,7 +9,7 @@ namespace FlagSync.Core
     internal abstract class FileSystemJob : Job
     {
         /// <summary>
-        /// Checks if file A is newer than file B
+        /// Determines if file A is newer than file B
         /// </summary>
         /// <param name="fileA">File A</param>
         /// <param name="fileB">File B</param>
@@ -21,16 +21,10 @@ namespace FlagSync.Core
             return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
         }
 
-        private string StepIntoDirectory(DirectoryInfo currentTargetDirectory, DirectoryInfo foundDirectory)
-        {
-            return Path.Combine(currentTargetDirectory.FullName, foundDirectory.Name);
-        }
-
-        private string StepOutOfDirectory(DirectoryInfo currentTargetDirectory)
-        {
-            return currentTargetDirectory.Parent.FullName;
-        }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSystemJob"/> class.
+        /// </summary>
+        /// <param name="settings">The job settings.</param>
         protected FileSystemJob(JobSetting settings)
             : base(settings)
         {
@@ -62,6 +56,7 @@ namespace FlagSync.Core
 
                     string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
 
+                    //Check if the directory doesn't exist in the target directory
                     if (!Directory.Exists(newTargetDirectoryPath))
                     {
                         this.PerformDirectoryCreationOperation(e.Directory, currentTargetDirectory, execute);
@@ -72,6 +67,7 @@ namespace FlagSync.Core
 
             rootScanner.DirectoryProceeded += (sender, e) =>
                 {
+                    //When a directory has been completely preceeded, jump to the parent directory of the target directory
                     currentTargetDirectory = currentTargetDirectory.Parent;
                 };
 
@@ -86,6 +82,7 @@ namespace FlagSync.Core
                     {
                         this.PerformFileCreationOperation(e.File, currentTargetDirectory, execute);
                     }
+
                     //Check if the source file is newer than the target file
                     else if (this.IsFileModified(e.File, new FileInfo(targetFilePath)))
                     {
@@ -94,8 +91,6 @@ namespace FlagSync.Core
                 };
 
             rootScanner.Start();
-
-            this.OnFinished(EventArgs.Empty);
         }
 
         #endregion High level operations
