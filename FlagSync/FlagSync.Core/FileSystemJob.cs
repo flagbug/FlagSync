@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Security;
@@ -8,6 +9,15 @@ namespace FlagSync.Core
 {
     internal abstract class FileSystemJob : Job
     {
+        private HashSet<string> proceededFilePaths = new HashSet<string>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSystemJob"/> class.
+        /// </summary>
+        /// <param name="settings">The job settings.</param>
+        protected FileSystemJob(JobSetting settings)
+            : base(settings) { }
+
         /// <summary>
         /// Determines if file A is newer than file B
         /// </summary>
@@ -21,12 +31,14 @@ namespace FlagSync.Core
             return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FileSystemJob"/> class.
-        /// </summary>
-        /// <param name="settings">The job settings.</param>
-        protected FileSystemJob(JobSetting settings)
-            : base(settings) { }
+        protected override void OnProceededFile(FileProceededEventArgs e)
+        {
+            if (!this.proceededFilePaths.Contains(e.FilePath))
+            {
+                //this.proceededFilePaths.Add(e.FilePath);
+                base.OnProceededFile(e);
+            }
+        }
 
         #region High level operations
 
@@ -66,7 +78,7 @@ namespace FlagSync.Core
             rootScanner.DirectoryProceeded += (sender, e) =>
                 {
                     //When a directory has been completely preceeded, jump to the parent directory of the target directory
-                    currentTargetDirectory = currentTargetDirectory.Parent;
+                    currentTargetDirectory = currentTargetDirectory.Parent; //TODO: When the scanner stops, a NullReferenceException gets thrown here
                 };
 
             rootScanner.FileFound += (sender, e) =>
@@ -79,13 +91,17 @@ namespace FlagSync.Core
                     if (!File.Exists(targetFilePath))
                     {
                         this.PerformFileCreationOperation(e.File, currentTargetDirectory, execute);
+                        this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
                     }
 
                     //Check if the source file is newer than the target file
                     else if (this.IsFileModified(e.File, new FileInfo(targetFilePath)))
                     {
                         this.PerformFileModificationOperation(e.File, currentTargetDirectory, execute);
+                        this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
                     }
+
+                    this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
                 };
 
             rootScanner.Start();
@@ -136,11 +152,18 @@ namespace FlagSync.Core
 
                 string targetFilePath = Path.Combine(currentTargetDirectory.FullName, e.File.Name);
 
+                //Save the file path and length for the case that the file gets deleted,
+                //so that the FileProceeded event can be raises properly
+                string sourceFilePath = e.File.FullName;
+                long sourceFileLength = e.File.Length;
+
                 //Check if the file doesn't exist in the target directory
                 if (!File.Exists(targetFilePath))
                 {
                     this.PerformFileDeletionOperation(e.File, execute);
                 }
+
+                this.OnProceededFile(new FileProceededEventArgs(sourceFilePath, sourceFileLength));
             };
 
             rootScanner.Start();
