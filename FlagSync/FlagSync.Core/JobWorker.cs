@@ -217,7 +217,7 @@ namespace FlagSync.Core
         {
             this.performPreview = preview;
 
-            Logger.Instance.LogStatusMessage("Start counting files");
+            Logger.Current.LogStatusMessage("Start counting files");
 
             this.fileCounterResult = this.GetFileCounterResults();
 
@@ -226,7 +226,7 @@ namespace FlagSync.Core
                 this.FilesCounted.Invoke(this, new EventArgs());
             }
 
-            Logger.Instance.LogStatusMessage("Finished counting files");
+            Logger.Current.LogStatusMessage("Finished counting files");
 
             this.DoNextJob();
         }
@@ -530,7 +530,7 @@ namespace FlagSync.Core
                 this.Finished(this, e);
             }
 
-            Logger.Instance.LogStatusMessage("Finished work");
+            Logger.Current.LogStatusMessage("Finished work");
         }
 
         /// <summary>
@@ -544,7 +544,7 @@ namespace FlagSync.Core
                 this.JobStarted(this, e);
             }
 
-            Logger.Instance.LogStatusMessage("Started job: " + e.Job.Name);
+            Logger.Current.LogStatusMessage("Started job: " + e.Job.Name);
         }
 
         /// <summary>
@@ -558,7 +558,7 @@ namespace FlagSync.Core
                 this.JobFinished(this, e);
             }
 
-            Logger.Instance.LogStatusMessage("Finished job: " + e.Job.Name);
+            Logger.Current.LogStatusMessage("Finished job: " + e.Job.Name);
         }
     }
 }

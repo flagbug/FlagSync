@@ -100,7 +100,12 @@ namespace FlagSync.Core
         public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
 
         /// <summary>
-        /// Occurs when a directory deletion error has been catched.
+        /// Occurs when a directory creation error has occured.
+        /// </summary>
+        public event EventHandler<DirectoryCreationEventArgs> DirectoryCreationError;
+
+        /// <summary>
+        /// Occurs when a directory deletion error has occured.
         /// </summary>
         public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
 
@@ -171,7 +176,7 @@ namespace FlagSync.Core
                 this.CreatedFile(this, e);
             }
 
-            Logger.Instance.LogSucceed("Created new file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
+            Logger.Current.LogSucceed("Created new file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
         }
 
         /// <summary>
@@ -197,7 +202,7 @@ namespace FlagSync.Core
                 this.ModifiedFile(this, e);
             }
 
-            Logger.Instance.LogSucceed("Modified file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
+            Logger.Current.LogSucceed("Modified file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
         }
 
         /// <summary>
@@ -223,7 +228,7 @@ namespace FlagSync.Core
                 this.DeletedFile(this, e);
             }
 
-            Logger.Instance.LogSucceed("Deleted file: " + e.FilePath);
+            Logger.Current.LogSucceed("Deleted file: " + e.FilePath);
         }
 
         /// <summary>
@@ -249,7 +254,7 @@ namespace FlagSync.Core
                 this.CreatedDirectory(this, e);
             }
 
-            Logger.Instance.LogSucceed("Created directory: " + e.Directory.Name + " in source: " + e.Directory.Parent.FullName + ", created in target: " + e.TargetDirectory.FullName);
+            Logger.Current.LogSucceed("Created directory: " + e.Directory.Name + " in source: " + e.Directory.Parent.FullName + ", created in target: " + e.TargetDirectory.FullName);
         }
 
         /// <summary>
@@ -275,7 +280,7 @@ namespace FlagSync.Core
                 this.DeletedDirectory(this, e);
             }
 
-            Logger.Instance.LogSucceed("Deleted directory: " + e.DirectoryPath);
+            Logger.Current.LogSucceed("Deleted directory: " + e.DirectoryPath);
         }
 
         /// <summary>
@@ -347,6 +352,18 @@ namespace FlagSync.Core
             if (this.FileCopyProgressChanged != null)
             {
                 this.FileCopyProgressChanged(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:DirectoryCreationError"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnDirectoryCreationError(DirectoryCreationEventArgs e)
+        {
+            if (this.DirectoryCreationError != null)
+            {
+                this.DirectoryCreationError(this, e);
             }
         }
     }

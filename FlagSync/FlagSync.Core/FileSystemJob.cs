@@ -31,11 +31,14 @@ namespace FlagSync.Core
             return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
         }
 
+        /// <summary>
+        /// Raises the <see cref="E:ProceededFile"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
         protected override void OnProceededFile(FileProceededEventArgs e)
         {
             if (!this.proceededFilePaths.Contains(e.FilePath))
             {
-                //this.proceededFilePaths.Add(e.FilePath);
                 base.OnProceededFile(e);
             }
         }
@@ -302,7 +305,7 @@ namespace FlagSync.Core
 
             else if (execute)
             {
-                //TODO: Add error handling (OnDirectoryCreationError)
+                this.OnDirectoryCreationError(new DirectoryCreationEventArgs(sourceDirectory, targetDirectory));
             }
         }
 
@@ -328,17 +331,17 @@ namespace FlagSync.Core
 
             catch (IOException)
             {
-                //TODO: Add logging
+                Logger.Current.LogError(string.Format("IOException while deleting file: {0}", file.FullName));
             }
 
             catch (SecurityException)
             {
-                //TODO: Add logging
+                Logger.Current.LogError(string.Format("SecurityException while deleting file: {0}", file.FullName));
             }
 
             catch (UnauthorizedAccessException)
             {
-                //TODO: Add logging
+                Logger.Current.LogError(string.Format("UnauthorizedAccessException while deleting file: {0}", file.FullName));
             }
 
             return succeed;
@@ -363,22 +366,30 @@ namespace FlagSync.Core
 
             catch (DirectoryNotFoundException)
             {
-                //TODO: Add logging (maybe the user deleted the directory)
+                Logger.Current.LogError(
+                    string.Format("DirectoryNotFoundException while creating directory: {0} in directory: {1}",
+                        sourceDirectory.Name, targetDirectory.FullName));
             }
 
             catch (PathTooLongException)
             {
-                //TODO: Add logging
+                Logger.Current.LogError(
+                    string.Format("PathTooLongException while creating directory: {0} in directory: {1}",
+                        sourceDirectory.Name, targetDirectory.FullName));
             }
 
             catch (IOException)
             {
-                //TODO: Add logging
+                Logger.Current.LogError(
+                    string.Format("IOException while creating directory: {0} in directory: {1}",
+                    sourceDirectory.Name, targetDirectory.FullName));
             }
 
             catch (UnauthorizedAccessException)
             {
-                //TODO: Add logging
+                Logger.Current.LogError(
+                    string.Format("UnauthorizedAccessException while creating directory: {0} in directory: {1}",
+                        sourceDirectory.Name, targetDirectory.FullName));
             }
 
             return succeed;
@@ -411,17 +422,17 @@ namespace FlagSync.Core
 
             catch (DirectoryNotFoundException)
             {
-                //TODO: Add logging (maybe the user deleted the directory)
+                Logger.Current.LogError(string.Format("DirectoryNotFoundException while deleting directory: {0}", directory.FullName));
             }
 
             catch (IOException)
             {
-                //TODO: Add logging
+                Logger.Current.LogError(string.Format("IOException while deleting directory: {0}", directory.FullName));
             }
 
             catch (UnauthorizedAccessException)
             {
-                //TODO: Add logging
+                Logger.Current.LogError(string.Format("UnauthorizedAccessException while deleting directory: {0}", directory.FullName));
             }
 
             return succeed;
@@ -457,7 +468,9 @@ namespace FlagSync.Core
 
             catch (Win32Exception)
             {
-                //TODO: Add error handling and logging
+                Logger.Current.LogError(
+                    string.Format("Win32Exception while copying file: {0} to directory: {1}",
+                        sourceFile.FullName, targetDirectory.FullName));
             }
 
             return succeed;

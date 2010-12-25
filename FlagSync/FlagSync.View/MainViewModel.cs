@@ -25,7 +25,7 @@ namespace FlagSync.View
             this.appDataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FlagSync");
             this.CreateAppDatafolder();
             this.logFilePath = Path.Combine(this.appDataFolderPath, "log.txt");
-            Logger.Instance = new Logger(this.LogFilePath);
+            Logger.Current = new Logger(this.LogFilePath);
         }
 
         #endregion Constructor

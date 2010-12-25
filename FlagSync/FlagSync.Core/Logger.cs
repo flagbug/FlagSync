@@ -6,21 +6,21 @@ namespace FlagSync.Core
     public class Logger
     {
         private string path = String.Empty;
-        private static Logger instance = null;
+        private static Logger current = null;
 
         /// <summary>
         /// Singleton instance of the logger (must be manually initialized)
         /// </summary>
-        public static Logger Instance
+        public static Logger Current
         {
             get
             {
-                return Logger.instance;
+                return Logger.current;
             }
 
             set
             {
-                Logger.instance = value;
+                Logger.current = value;
             }
         }
 
