@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using FlagLib.FileSystem;
 
 namespace FlagSync.Core
 {
@@ -28,8 +28,8 @@ namespace FlagSync.Core
         private void CountJobFiles()
         {
             this.result = new FileCounterResults();
-            this.result += this.CountFiles(new DirectoryInfo(this.settings.DirectoryA));
-            this.result += this.CountFiles(new DirectoryInfo(this.settings.DirectoryB));
+            this.result += this.CountFiles(this.settings.DirectoryA);
+            this.result += this.CountFiles(this.settings.DirectoryB);
         }
 
         /// <summary>
@@ -37,34 +37,20 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="root">The directory to count</param>
         /// <returns>The result</returns>
-        private FileCounterResults CountFiles(DirectoryInfo root)
+        private FileCounterResults CountFiles(string path)
         {
             int files = 0;
             long bytes = 0;
 
-            try
-            {
-                FileInfo[] rootFiles = root.GetFiles();
+            DirectoryScanner scanner = new DirectoryScanner(path);
 
-                foreach (FileInfo file in rootFiles)
+            scanner.FileFound += (sender, e) =>
                 {
                     files++;
-                    bytes += file.Length;
-                }
+                    bytes += e.File.Length;
+                };
 
-                foreach (DirectoryInfo directory in root.GetDirectories())
-                {
-                    FileCounterResults result = CountFiles(directory);
-
-                    files += result.CountedFiles;
-                    bytes += result.CountedBytes;
-                }
-            }
-
-            catch (System.UnauthorizedAccessException)
-            {
-                Logger.Instance.LogError("UnauthorizedAccessException at directory: " + root.FullName + " while counting files");
-            }
+            scanner.Start();
 
             return new FileCounterResults(files, bytes);
         }
