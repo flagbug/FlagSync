@@ -65,7 +65,11 @@ namespace FlagSync.Core
 
             rootScanner.DirectoryFound += (sender, e) =>
                 {
-                    if (this.IsStopped) { return; }
+                    if (this.IsStopped)
+                    {
+                        rootScanner.Stop();
+                        return;
+                    }
 
                     string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
 
@@ -79,14 +83,24 @@ namespace FlagSync.Core
                 };
 
             rootScanner.DirectoryProceeded += (sender, e) =>
+            {
+                if (this.IsStopped)
                 {
-                    //When a directory has been completely preceeded, jump to the parent directory of the target directory
-                    currentTargetDirectory = currentTargetDirectory.Parent; //TODO: When the scanner stops, a NullReferenceException gets thrown here
-                };
+                    rootScanner.Stop();
+                    return;
+                }
+
+                //When a directory has been completely preceeded, jump to the parent directory of the target directory
+                currentTargetDirectory = currentTargetDirectory.Parent;
+            };
 
             rootScanner.FileFound += (sender, e) =>
                 {
-                    if (this.IsStopped) { return; }
+                    if (this.IsStopped)
+                    {
+                        rootScanner.Stop();
+                        return;
+                    }
 
                     string targetFilePath = Path.Combine(currentTargetDirectory.FullName, e.File.Name);
 
@@ -130,7 +144,11 @@ namespace FlagSync.Core
 
             rootScanner.DirectoryFound += (sender, e) =>
             {
-                if (this.IsStopped) { return; }
+                if (this.IsStopped)
+                {
+                    rootScanner.Stop();
+                    return;
+                }
 
                 string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
 
@@ -145,13 +163,23 @@ namespace FlagSync.Core
 
             rootScanner.DirectoryProceeded += (sender, e) =>
             {
+                if (this.IsStopped)
+                {
+                    rootScanner.Stop();
+                    return;
+                }
+
                 //When a directory has been completely preceeded, jump to the parent directory of the target directory
                 currentTargetDirectory = currentTargetDirectory.Parent;
             };
 
             rootScanner.FileFound += (sender, e) =>
             {
-                if (this.IsStopped) { return; }
+                if (this.IsStopped)
+                {
+                    rootScanner.Stop();
+                    return;
+                }
 
                 string targetFilePath = Path.Combine(currentTargetDirectory.FullName, e.File.Name);
 
