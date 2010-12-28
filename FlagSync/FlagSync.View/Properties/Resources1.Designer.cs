@@ -250,6 +250,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Elapsed time:.
+        /// </summary>
+        public static string ElapsedTimeMessage {
+            get {
+                return ResourceManager.GetString("ElapsedTimeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string EnglishString {

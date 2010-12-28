@@ -279,4 +279,7 @@
   <data name="SettingsTabItemText" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="ElapsedTimeMessage" xml:space="preserve">
+    <value>Elapsed time:</value>
+  </data>
 </root>
