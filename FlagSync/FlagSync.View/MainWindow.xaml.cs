@@ -108,8 +108,13 @@ namespace FlagSync.View
                 dialog.Filter = "|*.xml";
                 dialog.InitialDirectory = this.mainViewModel.AppDataFolderPath;
                 dialog.Multiselect = false;
+
+                dialog.FileOk += (dialogSender, dialogEventArgs) =>
+                {
+                    this.mainViewModel.JobSettingsViewModel.LoadJobSettings(dialog.FileName);
+                };
+
                 dialog.ShowDialog();
-                this.mainViewModel.JobSettingsViewModel.LoadJobSettings(dialog.FileName);
             }
         }
 
@@ -126,8 +131,13 @@ namespace FlagSync.View
                 dialog.DefaultExt = ".xml";
                 dialog.FileName = "NewJobSettings";
                 dialog.InitialDirectory = this.mainViewModel.AppDataFolderPath;
+
+                dialog.FileOk += (dialogSender, dialogEventArgs) =>
+                    {
+                        this.mainViewModel.JobSettingsViewModel.SaveJobSettings(dialog.FileName);
+                    };
+
                 dialog.ShowDialog();
-                this.mainViewModel.JobSettingsViewModel.SaveJobSettings(dialog.FileName);
             }
         }
 
