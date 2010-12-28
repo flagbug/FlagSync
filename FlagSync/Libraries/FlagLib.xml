@@ -39,6 +39,11 @@
             Starts the directory scanner.
             </summary>
         </member>
+        <member name="M:FlagLib.FileSystem.DirectoryScanner.Stop">
+            <summary>
+            Stops the directory scanner.
+            </summary>
+        </member>
         <member name="M:FlagLib.FileSystem.DirectoryScanner.OnFileFound(FlagLib.FileSystem.FileEventArgs)">
             <summary>
             Raises the <see cref="E:FileFound"/> event.
@@ -87,11 +92,11 @@
             </summary>
             <value>The directory path.</value>
         </member>
-        <member name="P:FlagLib.FileSystem.DirectoryScanner.Stop">
+        <member name="P:FlagLib.FileSystem.DirectoryScanner.IsStopped">
             <summary>
-            Gets or sets a value indicating whether this <see cref="T:FlagLib.FileSystem.DirectoryScanner"/> should stop.
+            Gets or sets a value indicating whether the scanner is stopped.
             </summary>
-            <value>true if the scanner should stop; otherwise, false.</value>
+            <value>true if the scanner is stopped; otherwise, false.</value>
         </member>
         <member name="E:FlagLib.FileSystem.DirectoryScanner.FileFound">
             <summary>
