@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Threading;
 using FlagLib.FileSystem;
 
 namespace FlagSync.Core
 {
     internal abstract class Job
     {
+        private volatile bool isPaused;
+        private volatile bool isStopped;
+
         /// <summary>
         /// Gets the settings of the job.
         /// </summary>
@@ -15,13 +19,21 @@ namespace FlagSync.Core
         /// Gets a value indicating whether the <see cref="Job"/> is paused.
         /// </summary>
         /// <value>true if paused; otherwise, false.</value>
-        public bool IsPaused { get; private set; }
+        public bool IsPaused
+        {
+            get { return this.isPaused; }
+            private set { this.isPaused = value; }
+        }
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="Job"/> is stopped.
         /// </summary>
         /// <value>true if stopped; otherwise, false.</value>
-        public bool IsStopped { get; private set; }
+        public bool IsStopped
+        {
+            get { return this.isStopped; }
+            private set { this.isPaused = value; }
+        }
 
         /// <summary>
         /// Gets the written bytes.
@@ -151,6 +163,18 @@ namespace FlagSync.Core
         {
             this.IsPaused = false;
             this.IsStopped = true;
+        }
+
+        /// <summary>
+        /// Checks if the job is paused, when true,
+        /// a loop will be enabled which causes the thread to sleep till the job gets continued
+        /// </summary>
+        protected void CheckPause()
+        {
+            while (this.IsPaused)
+            {
+                Thread.Sleep(500);
+            }
         }
 
         /// <summary>

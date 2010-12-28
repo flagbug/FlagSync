@@ -65,6 +65,7 @@ namespace FlagSync.Core
 
             rootScanner.DirectoryFound += (sender, e) =>
                 {
+                    this.CheckPause();
                     if (this.IsStopped)
                     {
                         rootScanner.Stop();
@@ -84,6 +85,7 @@ namespace FlagSync.Core
 
             rootScanner.DirectoryProceeded += (sender, e) =>
             {
+                this.CheckPause();
                 if (this.IsStopped)
                 {
                     rootScanner.Stop();
@@ -96,6 +98,7 @@ namespace FlagSync.Core
 
             rootScanner.FileFound += (sender, e) =>
                 {
+                    this.CheckPause();
                     if (this.IsStopped)
                     {
                         rootScanner.Stop();
@@ -144,6 +147,7 @@ namespace FlagSync.Core
 
             rootScanner.DirectoryFound += (sender, e) =>
             {
+                this.CheckPause();
                 if (this.IsStopped)
                 {
                     rootScanner.Stop();
@@ -163,6 +167,7 @@ namespace FlagSync.Core
 
             rootScanner.DirectoryProceeded += (sender, e) =>
             {
+                this.CheckPause();
                 if (this.IsStopped)
                 {
                     rootScanner.Stop();
@@ -175,6 +180,7 @@ namespace FlagSync.Core
 
             rootScanner.FileFound += (sender, e) =>
             {
+                this.CheckPause();
                 if (this.IsStopped)
                 {
                     rootScanner.Stop();
