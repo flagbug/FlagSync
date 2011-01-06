@@ -22,13 +22,14 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Height="25" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Background="#FFF0F0F0">
             <MenuItem Header="{x:Static properties:Resources.ProgramMenuItemText}">
-                <MenuItem Name="exitMenuItem" Header="{x:Static properties:Resources.ExitMenuItemText}" Click="exitMenuItem_Click" />
-            </MenuItem>
-            <MenuItem Header="{x:Static properties:Resources.HelpMenuItemText}" Name="helpMenuItem">
                 <MenuItem Header="{x:Static properties:Resources.LanguageMenuItemText}">
                     <MenuItem Name="englishMenuItem" Header="{x:Static properties:Resources.EnglishString}" Click="englishMenuItem_Click" />
                     <MenuItem Name="germanMenuItem" Header="{x:Static properties:Resources.GermanString}" Click="germanMenuItem_Click" />
                 </MenuItem>
+                <MenuItem Name="exitMenuItem" Header="{x:Static properties:Resources.ExitMenuItemText}" Click="exitMenuItem_Click" />
+            </MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.HelpMenuItemText}">
+                <MenuItem Name="aboutMenuItem" Header="{x:Static properties:Resources.AboutString}" Click="aboutMenuItem_Click" />
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="5, 10, 5, 10">

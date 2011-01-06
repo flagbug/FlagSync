@@ -61,11 +61,29 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string AboutString {
+            get {
+                return ResourceManager.GetString("AboutString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action.
         /// </summary>
         public static string ActionGridViewColumnText {
             get {
                 return ResourceManager.GetString("ActionGridViewColumnText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Author:.
+        /// </summary>
+        public static string AuthorTextBlockText {
+            get {
+                return ResourceManager.GetString("AuthorTextBlockText", resourceCulture);
             }
         }
         
@@ -547,11 +565,29 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Titel:.
+        /// </summary>
+        public static string TitleTextBlockText {
+            get {
+                return ResourceManager.GetString("TitleTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         public static string TypeGridViewColumnText {
             get {
                 return ResourceManager.GetString("TypeGridViewColumnText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version:.
+        /// </summary>
+        public static string VersionTextBlockText {
+            get {
+                return ResourceManager.GetString("VersionTextBlockText", resourceCulture);
             }
         }
     }

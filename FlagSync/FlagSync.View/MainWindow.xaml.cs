@@ -302,5 +302,16 @@ namespace FlagSync.View
         {
             Properties.Settings.Default.Save();
         }
+
+        /// <summary>
+        /// Handles the Click event of the aboutMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void aboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.ShowDialog();
+        }
     }
 }

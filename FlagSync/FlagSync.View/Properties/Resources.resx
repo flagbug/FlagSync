@@ -282,4 +282,16 @@
   <data name="ElapsedTimeMessage" xml:space="preserve">
     <value>Elapsed time:</value>
   </data>
+  <data name="AboutString" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AuthorTextBlockText" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="TitleTextBlockText" xml:space="preserve">
+    <value>Titel:</value>
+  </data>
+  <data name="VersionTextBlockText" xml:space="preserve">
+    <value>Version:</value>
+  </data>
 </root>
