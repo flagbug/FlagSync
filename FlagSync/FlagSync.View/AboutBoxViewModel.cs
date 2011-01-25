@@ -4,17 +4,34 @@ namespace FlagSync.View
 {
     public class AboutBoxViewModel
     {
-        public string Version { get; private set; }
-        public string Author { get; private set; }
-        public string Title { get; private set; }
-
-        public AboutBoxViewModel()
+        /// <summary>
+        /// Gets the application version.
+        /// </summary>
+        /// <value>The application version.</value>
+        public string Version
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
+            get
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
 
-            this.Version = assembly.GetName().Version.ToString();
-            this.Author = "Dennis Daume";
-            this.Title = "FlagSync";
+        /// <summary>
+        /// Gets the author of the application
+        /// </summary>
+        /// <value>The author of the application.</value>
+        public string Author
+        {
+            get { return "Dennis Daume"; }
+        }
+
+        /// <summary>
+        /// Gets the title of the application.
+        /// </summary>
+        /// <value>The title of the application.</value>
+        public string Title
+        {
+            get { return "FlagSync"; }
         }
     }
 }

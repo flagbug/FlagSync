@@ -49,7 +49,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="{x:Static properties:Resources.NameTextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.NameTextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
                     <TextBlock Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.Name}" Margin="5,0,0,0" />
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryATextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
                     <TextBlock Grid.Row="1" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryA}" Margin="5,0,0,0" />
