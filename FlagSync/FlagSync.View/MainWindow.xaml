@@ -81,9 +81,7 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button ToolTip="{x:Static properties:Resources.PreviewButtonText}" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}">
-                            <Image Source="/FlagSync.View;component/Images/Preview.png" />
-                        </Button>
+                        <Button Content="{x:Static properties:Resources.PreviewButtonText}" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
                         <Button Content="{x:Static properties:Resources.StartButtonText}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Click="startButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
                         <Button Content="{Binding Path=JobWorkerViewModel.PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Click="pauseButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
                         <Button Content="{x:Static properties:Resources.StopButtonText}" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" Name="stopButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Click="stopButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
