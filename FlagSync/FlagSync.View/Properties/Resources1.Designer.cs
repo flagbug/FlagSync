@@ -22,7 +22,7 @@ namespace FlagSync.View.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace FlagSync.View.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FlagSync.View.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace FlagSync.View.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
-        public static string AboutString {
+        internal static string AboutString {
             get {
                 return ResourceManager.GetString("AboutString", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Action.
         /// </summary>
-        public static string ActionGridViewColumnText {
+        internal static string ActionGridViewColumnText {
             get {
                 return ResourceManager.GetString("ActionGridViewColumnText", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Author:.
         /// </summary>
-        public static string AuthorTextBlockText {
+        internal static string AuthorTextBlockText {
             get {
                 return ResourceManager.GetString("AuthorTextBlockText", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Backup.
         /// </summary>
-        public static string BackupModeRadioButtonText {
+        internal static string BackupModeRadioButtonText {
             get {
                 return ResourceManager.GetString("BackupModeRadioButtonText", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Common Settings.
         /// </summary>
-        public static string CommonSettingsGroupBoxText {
+        internal static string CommonSettingsGroupBoxText {
             get {
                 return ResourceManager.GetString("CommonSettingsGroupBoxText", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Continue.
         /// </summary>
-        public static string ContinueString {
+        internal static string ContinueString {
             get {
                 return ResourceManager.GetString("ContinueString", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Continuing jobs..
         /// </summary>
-        public static string ContinuingJobsMessage {
+        internal static string ContinuingJobsMessage {
             get {
                 return ResourceManager.GetString("ContinuingJobsMessage", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Control Panel.
         /// </summary>
-        public static string ControlPanelGroupBoxText {
+        internal static string ControlPanelGroupBoxText {
             get {
                 return ResourceManager.GetString("ControlPanelGroupBoxText", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Copy Error.
         /// </summary>
-        public static string CopyErrorString {
+        internal static string CopyErrorString {
             get {
                 return ResourceManager.GetString("CopyErrorString", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Counting files....
         /// </summary>
-        public static string CountingFilesMessage {
+        internal static string CountingFilesMessage {
             get {
                 return ResourceManager.GetString("CountingFilesMessage", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Creating.
         /// </summary>
-        public static string CreatingString {
+        internal static string CreatingString {
             get {
                 return ResourceManager.GetString("CreatingString", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Current Job.
         /// </summary>
-        public static string CurrentJobGroupBoxText {
+        internal static string CurrentJobGroupBoxText {
             get {
                 return ResourceManager.GetString("CurrentJobGroupBoxText", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Delete Job.
         /// </summary>
-        public static string DeleteJobButtonText {
+        internal static string DeleteJobButtonText {
             get {
                 return ResourceManager.GetString("DeleteJobButtonText", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Deleting.
         /// </summary>
-        public static string DeletingString {
+        internal static string DeletingString {
             get {
                 return ResourceManager.GetString("DeletingString", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Deletion Error.
         /// </summary>
-        public static string DeletionErrorString {
+        internal static string DeletionErrorString {
             get {
                 return ResourceManager.GetString("DeletionErrorString", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Directory A.
         /// </summary>
-        public static string DirectoryAButtonText {
+        internal static string DirectoryAButtonText {
             get {
                 return ResourceManager.GetString("DirectoryAButtonText", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Directory A doesn&apos;t exist!.
         /// </summary>
-        public static string DirectoryADoesntExistMessage {
+        internal static string DirectoryADoesntExistMessage {
             get {
                 return ResourceManager.GetString("DirectoryADoesntExistMessage", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Directory A:.
         /// </summary>
-        public static string DirectoryATextBlockText {
+        internal static string DirectoryATextBlockText {
             get {
                 return ResourceManager.GetString("DirectoryATextBlockText", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Directory B.
         /// </summary>
-        public static string DirectoryBButtonText {
+        internal static string DirectoryBButtonText {
             get {
                 return ResourceManager.GetString("DirectoryBButtonText", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Directory B doesn&apos;t exist!.
         /// </summary>
-        public static string DirectoryBDoesntExistMessage {
+        internal static string DirectoryBDoesntExistMessage {
             get {
                 return ResourceManager.GetString("DirectoryBDoesntExistMessage", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Directory B:.
         /// </summary>
-        public static string DirectoryBTextBlockText {
+        internal static string DirectoryBTextBlockText {
             get {
                 return ResourceManager.GetString("DirectoryBTextBlockText", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Directory doesn&apos;t exist!.
         /// </summary>
-        public static string DirectoryDoesntExistMessage {
+        internal static string DirectoryDoesntExistMessage {
             get {
                 return ResourceManager.GetString("DirectoryDoesntExistMessage", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Directory.
         /// </summary>
-        public static string DirectoryString {
+        internal static string DirectoryString {
             get {
                 return ResourceManager.GetString("DirectoryString", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Elapsed time:.
         /// </summary>
-        public static string ElapsedTimeMessage {
+        internal static string ElapsedTimeMessage {
             get {
                 return ResourceManager.GetString("ElapsedTimeMessage", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
-        public static string EnglishString {
+        internal static string EnglishString {
             get {
                 return ResourceManager.GetString("EnglishString", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
-        public static string ExitMenuItemText {
+        internal static string ExitMenuItemText {
             get {
                 return ResourceManager.GetString("ExitMenuItemText", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
-        public static string FileString {
+        internal static string FileString {
             get {
                 return ResourceManager.GetString("FileString", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Finished all jobs..
         /// </summary>
-        public static string FinishedAllJobsMessage {
+        internal static string FinishedAllJobsMessage {
             get {
                 return ResourceManager.GetString("FinishedAllJobsMessage", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Finished file counting..
         /// </summary>
-        public static string FinishedFileCountingMessage {
+        internal static string FinishedFileCountingMessage {
             get {
                 return ResourceManager.GetString("FinishedFileCountingMessage", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Finished job:.
         /// </summary>
-        public static string FinishedJobMessage {
+        internal static string FinishedJobMessage {
             get {
                 return ResourceManager.GetString("FinishedJobMessage", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to German.
         /// </summary>
-        public static string GermanString {
+        internal static string GermanString {
             get {
                 return ResourceManager.GetString("GermanString", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ?.
         /// </summary>
-        public static string HelpMenuItemText {
+        internal static string HelpMenuItemText {
             get {
                 return ResourceManager.GetString("HelpMenuItemText", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
-        public static string LanguageMenuItemText {
+        internal static string LanguageMenuItemText {
             get {
                 return ResourceManager.GetString("LanguageMenuItemText", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Load Jobs.
         /// </summary>
-        public static string LoadJobsButtonText {
+        internal static string LoadJobsButtonText {
             get {
                 return ResourceManager.GetString("LoadJobsButtonText", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Log.
         /// </summary>
-        public static string LogTabItemText {
+        internal static string LogTabItemText {
             get {
                 return ResourceManager.GetString("LogTabItemText", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Mode:.
         /// </summary>
-        public static string ModeTextBlockText {
+        internal static string ModeTextBlockText {
             get {
                 return ResourceManager.GetString("ModeTextBlockText", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Modifying.
         /// </summary>
-        public static string ModifyingString {
+        internal static string ModifyingString {
             get {
                 return ResourceManager.GetString("ModifyingString", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Name field can&apos;t be empty!.
         /// </summary>
-        public static string NameFieldCantBeEmptyMessage {
+        internal static string NameFieldCantBeEmptyMessage {
             get {
                 return ResourceManager.GetString("NameFieldCantBeEmptyMessage", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Name:.
         /// </summary>
-        public static string NameTextBlockText {
+        internal static string NameTextBlockText {
             get {
                 return ResourceManager.GetString("NameTextBlockText", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to New Job.
         /// </summary>
-        public static string NewJobButtonText {
+        internal static string NewJobButtonText {
             get {
                 return ResourceManager.GetString("NewJobButtonText", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to New Job.
         /// </summary>
-        public static string NewJobString {
+        internal static string NewJobString {
             get {
                 return ResourceManager.GetString("NewJobString", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Paused jobs..
         /// </summary>
-        public static string PausedJobsMessage {
+        internal static string PausedJobsMessage {
             get {
                 return ResourceManager.GetString("PausedJobsMessage", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Pause.
         /// </summary>
-        public static string PauseString {
+        internal static string PauseString {
             get {
                 return ResourceManager.GetString("PauseString", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Preview.
         /// </summary>
-        public static string PreviewButtonText {
+        internal static string PreviewButtonText {
             get {
                 return ResourceManager.GetString("PreviewButtonText", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Program.
         /// </summary>
-        public static string ProgramMenuItemText {
+        internal static string ProgramMenuItemText {
             get {
                 return ResourceManager.GetString("ProgramMenuItemText", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Progress.
         /// </summary>
-        public static string ProgressGridViewColumnText {
+        internal static string ProgressGridViewColumnText {
             get {
                 return ResourceManager.GetString("ProgressGridViewColumnText", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Save Jobs.
         /// </summary>
-        public static string SaveJobsButtonText {
+        internal static string SaveJobsButtonText {
             get {
                 return ResourceManager.GetString("SaveJobsButtonText", resourceCulture);
             }
@@ -486,7 +486,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string SettingsTabItemText {
+        internal static string SettingsTabItemText {
             get {
                 return ResourceManager.GetString("SettingsTabItemText", resourceCulture);
             }
@@ -495,7 +495,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Source.
         /// </summary>
-        public static string SourceGridViewColumnText {
+        internal static string SourceGridViewColumnText {
             get {
                 return ResourceManager.GetString("SourceGridViewColumnText", resourceCulture);
             }
@@ -504,7 +504,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
-        public static string StartButtonText {
+        internal static string StartButtonText {
             get {
                 return ResourceManager.GetString("StartButtonText", resourceCulture);
             }
@@ -513,7 +513,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Starting job:.
         /// </summary>
-        public static string StartingJobMessage {
+        internal static string StartingJobMessage {
             get {
                 return ResourceManager.GetString("StartingJobMessage", resourceCulture);
             }
@@ -522,7 +522,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Starting jobs..
         /// </summary>
-        public static string StartingJobsMessage {
+        internal static string StartingJobsMessage {
             get {
                 return ResourceManager.GetString("StartingJobsMessage", resourceCulture);
             }
@@ -531,7 +531,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Stop.
         /// </summary>
-        public static string StopButtonText {
+        internal static string StopButtonText {
             get {
                 return ResourceManager.GetString("StopButtonText", resourceCulture);
             }
@@ -540,7 +540,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Stopped all jobs..
         /// </summary>
-        public static string StoppedAllJobsMessage {
+        internal static string StoppedAllJobsMessage {
             get {
                 return ResourceManager.GetString("StoppedAllJobsMessage", resourceCulture);
             }
@@ -549,7 +549,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Sychronization.
         /// </summary>
-        public static string SyncModeRadioButtonText {
+        internal static string SyncModeRadioButtonText {
             get {
                 return ResourceManager.GetString("SyncModeRadioButtonText", resourceCulture);
             }
@@ -558,7 +558,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Target directory.
         /// </summary>
-        public static string TargetGridViewColumnText {
+        internal static string TargetGridViewColumnText {
             get {
                 return ResourceManager.GetString("TargetGridViewColumnText", resourceCulture);
             }
@@ -567,7 +567,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Titel:.
         /// </summary>
-        public static string TitleTextBlockText {
+        internal static string TitleTextBlockText {
             get {
                 return ResourceManager.GetString("TitleTextBlockText", resourceCulture);
             }
@@ -576,7 +576,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
-        public static string TypeGridViewColumnText {
+        internal static string TypeGridViewColumnText {
             get {
                 return ResourceManager.GetString("TypeGridViewColumnText", resourceCulture);
             }
@@ -585,7 +585,7 @@ namespace FlagSync.View.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Version:.
         /// </summary>
-        public static string VersionTextBlockText {
+        internal static string VersionTextBlockText {
             get {
                 return ResourceManager.GetString("VersionTextBlockText", resourceCulture);
             }

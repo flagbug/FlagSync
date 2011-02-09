@@ -175,7 +175,7 @@
     <value>Ordner B:</value>
   </data>
   <data name="DirectoryDoesntExistMessage" xml:space="preserve">
-    <value>Ordner existier nicht!</value>
+    <value>Ordner existiert nicht!</value>
   </data>
   <data name="DirectoryString" xml:space="preserve">
     <value>Ordner</value>
