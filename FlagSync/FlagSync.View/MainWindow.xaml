@@ -4,7 +4,9 @@
         xmlns:local="clr-namespace:FlagSync.View"
         xmlns:flaglibconverters="clr-namespace:FlagLib.ValueConverters;assembly=FlagLib"
         xmlns:properties="clr-namespace:FlagSync.View.Properties"
-        Title="FlagSync" Height="768" Width="1024" BorderThickness="0" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico" WindowState="Maximized" Closing="Window_Closing">
+        Title="FlagSync" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico"
+        WindowState="Maximized" Closing="Window_Closing"
+        MinWidth="800" MinHeight="600">
     <Window.DataContext>
         <local:MainViewModel x:Name="mainViewModel" />
     </Window.DataContext>
@@ -97,7 +99,7 @@
                         <ContentPresenter Content="{x:Static properties:Resources.SettingsTabItemText}" Margin="5,0,0,0" />
                     </StackPanel>
                 </TabItem.Header>
-                <Grid Margin="0, 10, 0, 10">
+                <Grid Margin="0,10,0,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="*" />
@@ -204,10 +206,10 @@
                     <ListView Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionMode="Single">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="{x:Static properties:Resources.ActionGridViewColumnText}" DisplayMemberBinding="{Binding Path=Action}" />
-                                <GridViewColumn Header="{x:Static properties:Resources.TypeGridViewColumnText}" DisplayMemberBinding="{Binding Path=Type}" />
-                                <GridViewColumn Header="{x:Static properties:Resources.SourceGridViewColumnText}" DisplayMemberBinding="{Binding Path=SourcePath}" />
-                                <GridViewColumn Header="{x:Static properties:Resources.ProgressGridViewColumnText}">
+                                <GridViewColumn Header="{x:Static properties:Resources.ActionGridViewColumnText}" DisplayMemberBinding="{Binding Path=Action}" Width="75" />
+                                <GridViewColumn Header="{x:Static properties:Resources.TypeGridViewColumnText}" DisplayMemberBinding="{Binding Path=Type}" Width="75" />
+                                <GridViewColumn Header="{x:Static properties:Resources.SourceGridViewColumnText}" DisplayMemberBinding="{Binding Path=SourcePath}" Width="225" />
+                                <GridViewColumn Header="{x:Static properties:Resources.ProgressGridViewColumnText}" Width="125">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal" Width="100" >
@@ -222,7 +224,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" />
+                                <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" Width="225" />
                             </GridView>
                         </ListView.View>
                     </ListView>
