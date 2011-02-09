@@ -4,6 +4,8 @@
         xmlns:local="clr-namespace:FlagSync.View"
         xmlns:flaglibconverters="clr-namespace:FlagLib.ValueConverters;assembly=FlagLib"
         xmlns:properties="clr-namespace:FlagSync.View.Properties"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        d:DesignHeight="768" d:DesignWidth="1024"
         Title="FlagSync" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico"
         WindowState="Maximized" Closing="Window_Closing"
         MinWidth="800" MinHeight="600">
