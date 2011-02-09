@@ -136,7 +136,7 @@
     <value>Steuerung</value>
   </data>
   <data name="CopyErrorString" xml:space="preserve">
-    <value>Fehler beim kopieren</value>
+    <value>Fehler beim Kopieren</value>
   </data>
   <data name="CountingFilesMessage" xml:space="preserve">
     <value>Zähle Dateien...</value>
@@ -154,7 +154,7 @@
     <value>Lösche</value>
   </data>
   <data name="DeletionErrorString" xml:space="preserve">
-    <value>Fehler beim löschen</value>
+    <value>Fehler beim Löschen</value>
   </data>
   <data name="DirectoryAButtonText" xml:space="preserve">
     <value>Ordner A</value>
