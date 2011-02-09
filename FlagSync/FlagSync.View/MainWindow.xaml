@@ -79,7 +79,9 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Content="{x:Static properties:Resources.PreviewButtonText}" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}"></Button>
+                        <Button ToolTip="{x:Static properties:Resources.PreviewButtonText}" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}">
+                            <Image Source="/FlagSync.View;component/Images/Preview.png" />
+                        </Button>
                         <Button Content="{x:Static properties:Resources.StartButtonText}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Click="startButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
                         <Button Content="{Binding Path=JobWorkerViewModel.PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Click="pauseButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
                         <Button Content="{x:Static properties:Resources.StopButtonText}" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" Name="stopButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Click="stopButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
@@ -88,7 +90,13 @@
             </GroupBox>
         </Grid>
         <TabControl Grid.Row="2" Name="mainTabControl" Height="Auto" Margin="5, 0, 5, 10">
-            <TabItem Header="{x:Static properties:Resources.SettingsTabItemText}">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/FlagSync.View;component/Images/Settings.png" Width="20" Height="20" />
+                        <ContentPresenter Content="{x:Static properties:Resources.SettingsTabItemText}" Margin="5,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid Margin="0, 10, 0, 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
@@ -97,14 +105,31 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Name="newJobButton" Content="{x:Static properties:Resources.NewJobButtonText}" Height="25" Click="newJobButton_Click" />
-                        <Button Grid.Row="1" Name="deleteJobButton" Content="{x:Static properties:Resources.DeleteJobButtonText}" Height="25"  Click="deleteJobButton_Click" />
-                        <ListBox Grid.Row="2" Margin="0, 5, 0, 5" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}">
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Name="newJobButton" ToolTip="{x:Static properties:Resources.NewJobButtonText}" Click="newJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                                <Image Source="/FlagSync.View;component/Images/Add.png" />
+                            </Button>
+                            <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" Click="deleteJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                                <Image Source="/FlagSync.View;component/Images/Remove.png" />
+                            </Button>
+                            <Button Grid.Column="2" Name="loadJobsButton" ToolTip="{x:Static properties:Resources.LoadJobsButtonText}" Click="loadJobsButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                                <Image Source="/FlagSync.View;component/Images/Load.png" />
+                            </Button>
+                            <Button Grid.Column="3" Name="saveJobsButton" ToolTip="{x:Static properties:Resources.SaveJobsButtonText}" Click="saveJobsButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                                <Image Source="/FlagSync.View;component/Images/Save.png" />
+                            </Button>
+                        </Grid>
+                        <ListBox Grid.Row="1" Margin="0, 5, 0, 5" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="jobListBox_SelectionChanged" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -114,8 +139,6 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <Button Grid.Row="3" Name="loadJobsButton" Content="{x:Static properties:Resources.LoadJobsButtonText}" Height="25" Click="loadJobsButton_Click" />
-                        <Button Grid.Row="4" Name="saveJobsButton" Content="{x:Static properties:Resources.SaveJobsButtonText}" Height="25"  Click="saveJobsButton_Click" />
                     </Grid>
                     <GroupBox Header="{x:Static properties:Resources.CommonSettingsGroupBoxText}" Height="Auto" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="400" Grid.Column="1">
                         <Grid>
@@ -135,9 +158,19 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Name:" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                                <Button Margin="5, 5, 5, 5" Content="{x:Static properties:Resources.DirectoryAButtonText}" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click" />
+                                <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
+                                        <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryAButtonText}" />
+                                    </StackPanel>
+                                </Button>
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
-                                <Button Margin="5, 5, 5, 5" Content="{x:Static properties:Resources.DirectoryBButtonText}" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryBButton_Click" />
+                                <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryBButton_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
+                                        <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryBButtonText}" />
+                                    </StackPanel>
+                                </Button>
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                             <Grid Grid.Row="1">
@@ -155,7 +188,13 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static properties:Resources.LogTabItemText}">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/FlagSync.View;component/Images/Log.png" Width="20" Height="20" />
+                        <ContentPresenter Content="{x:Static properties:Resources.LogTabItemText}" Margin="5,0,0,0" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />
