@@ -143,9 +143,7 @@
     <Resource Include="Images\Save.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Backup.png" />
     <Resource Include="Images\Load.png" />
-    <Resource Include="Images\Synchronize.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

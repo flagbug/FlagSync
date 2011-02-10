@@ -477,7 +477,6 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <exception cref="System.ComponentModel.Win32Exception">Gets thrown when the file copy fails.</exception>
         private bool TryCopyFile(FileInfo sourceFile, DirectoryInfo targetDirectory)
         {
             bool succeed = false;

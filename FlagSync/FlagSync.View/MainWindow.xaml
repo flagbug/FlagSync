@@ -98,7 +98,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/FlagSync.View;component/Images/Settings.png" Width="20" Height="20" />
-                        <ContentPresenter Content="{x:Static properties:Resources.SettingsTabItemText}" Margin="5,0,0,0" />
+                        <ContentPresenter Content="{x:Static properties:Resources.SettingsTabItemText}" Margin="5,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Margin="0,10,0,5">
@@ -165,14 +165,14 @@
                                 <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
-                                        <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryAButtonText}" />
+                                        <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryAButtonText}" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </Button>
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryA, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                                 <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryBButton_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
-                                        <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryBButtonText}" />
+                                        <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryBButtonText}" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </Button>
                                 <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSettingsViewModel.SelectedJobSetting.DirectoryB, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
@@ -196,7 +196,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/FlagSync.View;component/Images/Log.png" Width="20" Height="20" />
-                        <ContentPresenter Content="{x:Static properties:Resources.LogTabItemText}" Margin="5,0,0,0" />
+                        <ContentPresenter Content="{x:Static properties:Resources.LogTabItemText}" Margin="5,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>

@@ -32,7 +32,7 @@ namespace FlagSync.Core
         public bool IsStopped
         {
             get { return this.isStopped; }
-            private set { this.isPaused = value; }
+            private set { this.isStopped = value; }
         }
 
         /// <summary>

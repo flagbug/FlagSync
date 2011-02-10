@@ -319,6 +319,8 @@ namespace FlagSync.Core
             {
                 this.ProceededFile(this, e);
             }
+
+            this.proceededFiles++;
         }
 
         /// <summary>
