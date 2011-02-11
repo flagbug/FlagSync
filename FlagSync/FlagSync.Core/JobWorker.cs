@@ -115,10 +115,7 @@ namespace FlagSync.Core
         /// <value>The total written bytes.</value>
         public long TotalWrittenBytes
         {
-            get
-            {
-                return this.totalWrittenBytes;
-            }
+            get { return this.totalWrittenBytes; }
         }
 
         /// <summary>
@@ -127,10 +124,7 @@ namespace FlagSync.Core
         /// <value>The proceeded files.</value>
         public int ProceededFiles
         {
-            get
-            {
-                return this.proceededFiles;
-            }
+            get { return this.proceededFiles; }
         }
 
         /// <summary>
@@ -139,10 +133,7 @@ namespace FlagSync.Core
         /// <value>The file counter result.</value>
         public FileCounterResults FileCounterResult
         {
-            get
-            {
-                return this.fileCounterResult;
-            }
+            get { return this.fileCounterResult; }
         }
 
         /// <summary>
@@ -151,10 +142,7 @@ namespace FlagSync.Core
         /// <value>true if paused; otherwise, false.</value>
         public bool IsPaused
         {
-            get
-            {
-                return this.currentJob == null ? false : this.currentJob.IsPaused;
-            }
+            get { return this.currentJob == null ? false : this.currentJob.IsPaused; }
         }
 
         /// <summary>

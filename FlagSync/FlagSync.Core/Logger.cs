@@ -5,36 +5,16 @@ namespace FlagSync.Core
 {
     public class Logger
     {
-        private string path = String.Empty;
-        private static Logger current = null;
-
         /// <summary>
         /// Singleton instance of the logger (must be manually initialized)
         /// </summary>
-        public static Logger Current
-        {
-            get
-            {
-                return Logger.current;
-            }
-
-            set
-            {
-                Logger.current = value;
-            }
-        }
+        public static Logger Current { get; set; }
 
         /// <summary>
         /// Gets the path of the log file.
         /// </summary>
         /// <value>The path of the log file.</value>
-        public string Path
-        {
-            get
-            {
-                return this.path;
-            }
-        }
+        public string Path { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class.
@@ -42,7 +22,7 @@ namespace FlagSync.Core
         /// <param name="path">The path of the log file.</param>
         public Logger(string path)
         {
-            this.path = path;
+            this.Path = path;
 
             try
             {
@@ -94,7 +74,7 @@ namespace FlagSync.Core
 
             try
             {
-                writer = new StreamWriter(path, true);
+                writer = new StreamWriter(this.Path, true);
 
                 writer.WriteLine(DateTime.Now.ToString() + " " + type + ": " + log);
             }

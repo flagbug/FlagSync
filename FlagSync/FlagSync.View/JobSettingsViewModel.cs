@@ -9,20 +9,13 @@ namespace FlagSync.View
 {
     public class JobSettingsViewModel : ViewModelBase<JobSettingsViewModel>
     {
-        private ObservableCollection<JobSettingViewModel> jobSettings = new ObservableCollection<JobSettingViewModel>();
         private JobSettingViewModel selectedJobSetting;
 
         /// <summary>
         /// Gets the job settings.
         /// </summary>
         /// <value>The job settings.</value>
-        public ObservableCollection<JobSettingViewModel> JobSettings
-        {
-            get
-            {
-                return this.jobSettings;
-            }
-        }
+        public ObservableCollection<JobSettingViewModel> JobSettings { get; private set; }
 
         /// <summary>
         /// Gets the intern job settings.
@@ -30,10 +23,7 @@ namespace FlagSync.View
         /// <value>The intern job settings.</value>
         public IEnumerable<JobSetting> InternJobSettings
         {
-            get
-            {
-                return this.jobSettings.Select(setting => setting.InternJobSetting);
-            }
+            get { return this.JobSettings.Select(setting => setting.InternJobSetting); }
         }
 
         /// <summary>
@@ -42,10 +32,7 @@ namespace FlagSync.View
         /// <value>The included intern job settings.</value>
         public IEnumerable<JobSetting> IncludedInternJobSettings
         {
-            get
-            {
-                return this.InternJobSettings.Where(setting => setting.IsIncluded);
-            }
+            get { return this.InternJobSettings.Where(setting => setting.IsIncluded); }
         }
 
         /// <summary>
@@ -54,11 +41,7 @@ namespace FlagSync.View
         /// <value>The selected job setting.</value>
         public JobSettingViewModel SelectedJobSetting
         {
-            get
-            {
-                return this.selectedJobSetting;
-            }
-
+            get { return this.selectedJobSetting; }
             set
             {
                 if (this.SelectedJobSetting != value)
@@ -74,6 +57,7 @@ namespace FlagSync.View
         /// </summary>
         public JobSettingsViewModel()
         {
+            this.JobSettings = new ObservableCollection<JobSettingViewModel>();
             this.AddNewJobSetting();
         }
 
@@ -90,7 +74,7 @@ namespace FlagSync.View
         /// </summary>
         public void DeleteSelectedJobSetting()
         {
-            this.jobSettings.Remove(this.SelectedJobSetting);
+            this.JobSettings.Remove(this.SelectedJobSetting);
 
             if (this.JobSettings.Count == 0)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Timers;
@@ -118,7 +119,13 @@ namespace FlagSync.View
             get { return this.proceededBytes; }
             private set
             {
-                if (this.ProceededBytes != value)
+                if (this.ProceededBytes > this.CountedBytes)
+                {
+                    Debug.WriteLine(string.Format("Proceeded bytes exceeding range! {0} of maximum {1}", value, this.CountedBytes));
+                    this.ProceededBytes = this.CountedBytes;
+                }
+
+                else if (this.ProceededBytes != value)
                 {
                     this.proceededBytes = value;
                     this.OnPropertyChanged(vm => vm.ProceededBytes);

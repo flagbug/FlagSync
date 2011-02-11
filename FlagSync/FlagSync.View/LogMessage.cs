@@ -64,10 +64,7 @@ namespace FlagSync.View
         /// <value>The color of the message.</value>
         public Brush MessageColor
         {
-            get
-            {
-                return this.IsErrorMessage ? Brushes.Red : Brushes.Gray;
-            }
+            get { return this.IsErrorMessage ? Brushes.Red : Brushes.Gray; }
         }
 
         /// <summary>
