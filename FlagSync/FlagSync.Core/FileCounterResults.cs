@@ -5,32 +5,17 @@
     /// </summary>
     public class FileCounterResults
     {
-        private int countedFiles;
-        private long countedBytes;
-
         /// <summary>
         /// Gets the counted files.
         /// </summary>
         /// <value>The counted files.</value>
-        public int CountedFiles
-        {
-            get
-            {
-                return this.countedFiles;
-            }
-        }
+        public int CountedFiles { get; private set; }
 
         /// <summary>
         /// Gets the counted bytes.
         /// </summary>
         /// <value>The counted bytes.</value>
-        public long CountedBytes
-        {
-            get
-            {
-                return this.countedBytes;
-            }
-        }
+        public long CountedBytes { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileCounterResults"/> class.
@@ -39,8 +24,8 @@
         /// <param name="countedBytes">The counted bytes.</param>
         public FileCounterResults(int countedFiles, long countedBytes)
         {
-            this.countedBytes = countedBytes;
-            this.countedFiles = countedFiles;
+            this.CountedBytes = countedBytes;
+            this.CountedFiles = countedFiles;
         }
 
         /// <summary>

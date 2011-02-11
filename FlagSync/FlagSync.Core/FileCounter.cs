@@ -3,7 +3,7 @@
 namespace FlagSync.Core
 {
     /// <summary>
-    /// Counts the number of files in a folder an also counts the size of the folder
+    /// Counts the number and size of the files in a folder
     /// </summary>
     internal class FileCounter
     {

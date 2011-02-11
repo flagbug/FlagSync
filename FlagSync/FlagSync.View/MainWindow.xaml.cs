@@ -185,10 +185,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void previewButton_Click(object sender, RoutedEventArgs e)
         {
-            this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
-
-            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.IncludedInternJobSettings, true);
-            this.mainTabControl.SelectedIndex = 1;
+            this.StartJobWorker(true);
         }
 
         /// <summary>
@@ -198,9 +195,18 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
+            StartJobWorker(false);
+        }
+
+        /// <summary>
+        /// Starts the job worker.
+        /// </summary>
+        /// <param name="preview">if set to true a preview will be performed.</param>
+        private void StartJobWorker(bool preview)
+        {
             this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
 
-            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.IncludedInternJobSettings, false);
+            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.IncludedInternJobSettings, preview);
             this.mainTabControl.SelectedIndex = 1;
         }
 

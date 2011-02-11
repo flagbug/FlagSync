@@ -72,9 +72,10 @@ namespace FlagSync.Core
                         return;
                     }
 
+                    //Assemble the path of the new target directory
                     string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
 
-                    //Check if the directory doesn't exist in the target directory
+                    //Check if the new target directory exists and if not, create it
                     if (!Directory.Exists(newTargetDirectoryPath))
                     {
                         this.PerformDirectoryCreationOperation(e.Directory, currentTargetDirectory, execute);
@@ -105,12 +106,15 @@ namespace FlagSync.Core
                         return;
                     }
 
+                    //Assemble the path of the target file
                     string targetFilePath = Path.Combine(currentTargetDirectory.FullName, e.File.Name);
 
-                    //Check if the file doesn't exist in the target directory
+                    //Check if the target file exists in the target directory and if not, create it
                     if (!File.Exists(targetFilePath))
                     {
                         this.PerformFileCreationOperation(e.File, currentTargetDirectory, execute);
+
+                        //Add the created file to the proceeded files, to avoid a double-counting
                         this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
                     }
 
@@ -198,6 +202,10 @@ namespace FlagSync.Core
                 if (!File.Exists(targetFilePath))
                 {
                     this.PerformFileDeletionOperation(e.File, execute);
+
+                    //Add the deleted file to the proceeded files, to avoid a double-counting
+                    //(this can happen when the deletion of the file fails)
+                    this.proceededFilePaths.Add(e.File.Name);
                 }
 
                 this.OnProceededFile(new FileProceededEventArgs(sourceFilePath, sourceFileLength));
