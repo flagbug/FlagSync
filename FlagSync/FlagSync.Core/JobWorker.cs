@@ -196,10 +196,16 @@ namespace FlagSync.Core
         /// </summary>
         private void DoNextJob()
         {
+            //Release the events of the current job to avoid memory leaks
+            if (this.currentJob != null)
+            {
+                this.ReleaseJobEvents(this.currentJob);
+            }
+
             if (this.jobQueue.Count > 0)
             {
                 this.currentJob = this.jobQueue.Dequeue();
-                this.InitializeCurrentJobEvents();
+                this.InitializeJobEvents(this.currentJob);
                 this.OnJobStarted(new JobEventArgs(this.currentJob.Settings));
                 this.currentJob.Start(this.performPreview);
             }
@@ -286,26 +292,51 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Initializes the current job events.
+        /// Initializes the  job events.
         /// </summary>
-        private void InitializeCurrentJobEvents()
+        /// <param name="job">The job.</param>
+        private void InitializeJobEvents(Job job)
         {
-            this.currentJob.CreatedDirectory += new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatedDirectory);
-            this.currentJob.CreatedFile += new EventHandler<FileCopyEventArgs>(currentJob_CreatedFile);
-            this.currentJob.CreatingDirectory += new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatingDirectory);
-            this.currentJob.CreatingFile += new EventHandler<FileCopyEventArgs>(currentJob_CreatingFile);
-            this.currentJob.DeletedDirectory += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletedDirectory);
-            this.currentJob.DeletedFile += new EventHandler<FileDeletionEventArgs>(currentJob_DeletedFile);
-            this.currentJob.DeletingDirectory += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletingDirectory);
-            this.currentJob.DeletingFile += new EventHandler<FileDeletionEventArgs>(currentJob_DeletingFile);
-            this.currentJob.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DirectoryDeletionError);
-            this.currentJob.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(currentJob_FileCopyError);
-            this.currentJob.FileCopyProgressChanged += new EventHandler<CopyProgressEventArgs>(currentJob_FileCopyProgressChanged);
-            this.currentJob.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(currentJob_FileDeletionError);
-            this.currentJob.Finished += new EventHandler(currentJob_Finished);
-            this.currentJob.ModifiedFile += new EventHandler<FileCopyEventArgs>(currentJob_ModifiedFile);
-            this.currentJob.ModifyingFile += new EventHandler<FileCopyEventArgs>(currentJob_ModifyingFile);
-            this.currentJob.ProceededFile += new EventHandler<FileProceededEventArgs>(currentJob_ProceededFile);
+            job.CreatedDirectory += new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatedDirectory);
+            job.CreatedFile += new EventHandler<FileCopyEventArgs>(currentJob_CreatedFile);
+            job.CreatingDirectory += new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatingDirectory);
+            job.CreatingFile += new EventHandler<FileCopyEventArgs>(currentJob_CreatingFile);
+            job.DeletedDirectory += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletedDirectory);
+            job.DeletedFile += new EventHandler<FileDeletionEventArgs>(currentJob_DeletedFile);
+            job.DeletingDirectory += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletingDirectory);
+            job.DeletingFile += new EventHandler<FileDeletionEventArgs>(currentJob_DeletingFile);
+            job.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DirectoryDeletionError);
+            job.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(currentJob_FileCopyError);
+            job.FileCopyProgressChanged += new EventHandler<CopyProgressEventArgs>(currentJob_FileCopyProgressChanged);
+            job.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(currentJob_FileDeletionError);
+            job.Finished += new EventHandler(currentJob_Finished);
+            job.ModifiedFile += new EventHandler<FileCopyEventArgs>(currentJob_ModifiedFile);
+            job.ModifyingFile += new EventHandler<FileCopyEventArgs>(currentJob_ModifyingFile);
+            job.ProceededFile += new EventHandler<FileProceededEventArgs>(currentJob_ProceededFile);
+        }
+
+        /// <summary>
+        /// Releases the job events.
+        /// </summary>
+        /// <param name="job">The job.</param>
+        private void ReleaseJobEvents(Job job)
+        {
+            job.CreatedDirectory -= new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatedDirectory);
+            job.CreatedFile -= new EventHandler<FileCopyEventArgs>(currentJob_CreatedFile);
+            job.CreatingDirectory -= new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatingDirectory);
+            job.CreatingFile -= new EventHandler<FileCopyEventArgs>(currentJob_CreatingFile);
+            job.DeletedDirectory -= new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletedDirectory);
+            job.DeletedFile -= new EventHandler<FileDeletionEventArgs>(currentJob_DeletedFile);
+            job.DeletingDirectory -= new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletingDirectory);
+            job.DeletingFile -= new EventHandler<FileDeletionEventArgs>(currentJob_DeletingFile);
+            job.DirectoryDeletionError -= new EventHandler<DirectoryDeletionEventArgs>(currentJob_DirectoryDeletionError);
+            job.FileCopyError -= new EventHandler<FileCopyErrorEventArgs>(currentJob_FileCopyError);
+            job.FileCopyProgressChanged -= new EventHandler<CopyProgressEventArgs>(currentJob_FileCopyProgressChanged);
+            job.FileDeletionError -= new EventHandler<FileDeletionErrorEventArgs>(currentJob_FileDeletionError);
+            job.Finished -= new EventHandler(currentJob_Finished);
+            job.ModifiedFile -= new EventHandler<FileCopyEventArgs>(currentJob_ModifiedFile);
+            job.ModifyingFile -= new EventHandler<FileCopyEventArgs>(currentJob_ModifyingFile);
+            job.ProceededFile -= new EventHandler<FileProceededEventArgs>(currentJob_ProceededFile);
         }
 
         /// <summary>
