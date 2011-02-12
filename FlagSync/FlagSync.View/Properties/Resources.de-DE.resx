@@ -294,4 +294,10 @@
   <data name="VersionTextBlockText" xml:space="preserve">
     <value>Version:</value>
   </data>
+  <data name="ApplicationRestartMessageBoxCaption" xml:space="preserve">
+    <value>Die Anwendung muss neu starten.</value>
+  </data>
+  <data name="ApplicationRestartMessageBoxText" xml:space="preserve">
+    <value>Die Anwendung muss neu starten. Wollen Sie fortfahren?</value>
+  </data>
 </root>

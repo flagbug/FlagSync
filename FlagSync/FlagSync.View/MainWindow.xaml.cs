@@ -110,9 +110,9 @@ namespace FlagSync.View
                 dialog.Multiselect = false;
 
                 dialog.FileOk += (dialogSender, dialogEventArgs) =>
-                {
-                    this.mainViewModel.JobSettingsViewModel.LoadJobSettings(dialog.FileName);
-                };
+                    {
+                        this.mainViewModel.JobSettingsViewModel.LoadJobSettings(dialog.FileName);
+                    };
 
                 dialog.ShowDialog();
             }
@@ -195,7 +195,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            StartJobWorker(false);
+            this.StartJobWorker(false);
         }
 
         /// <summary>
@@ -276,16 +276,7 @@ namespace FlagSync.View
         private void englishMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Language = new CultureInfo("en-US");
-            Restart();
-        }
-
-        /// <summary>
-        /// Restarts this instance.
-        /// </summary>
-        private static void Restart()
-        {
-            App.Current.Shutdown();
-            System.Diagnostics.Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location);
+            this.Restart();
         }
 
         /// <summary>
@@ -297,6 +288,23 @@ namespace FlagSync.View
         {
             Properties.Settings.Default.Language = new CultureInfo("de-DE");
             Restart();
+        }
+
+        /// <summary>
+        /// Restarts this instance.
+        /// </summary>
+        private void Restart()
+        {
+            MessageBoxResult result = MessageBox.Show(
+                Properties.Resources.ApplicationRestartMessageBoxText,
+                Properties.Resources.ApplicationRestartMessageBoxCaption,
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                App.Current.Shutdown();
+                System.Diagnostics.Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location);
+            }
         }
 
         /// <summary>

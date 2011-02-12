@@ -79,6 +79,24 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The application needs to restart..
+        /// </summary>
+        public static string ApplicationRestartMessageBoxCaption {
+            get {
+                return ResourceManager.GetString("ApplicationRestartMessageBoxCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application needs to restart. Do you wish to continue?.
+        /// </summary>
+        public static string ApplicationRestartMessageBoxText {
+            get {
+                return ResourceManager.GetString("ApplicationRestartMessageBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author:.
         /// </summary>
         public static string AuthorTextBlockText {
