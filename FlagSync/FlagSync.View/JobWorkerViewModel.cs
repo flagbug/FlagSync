@@ -505,7 +505,10 @@ namespace FlagSync.View
         private void jobWorker_FilesCounted(object sender, EventArgs e)
         {
             this.IsCounting = false;
+
             this.CountedBytes = this.jobWorker.FileCounterResult.CountedBytes;
+
+            this.ProceededFiles = 0;
             this.CountedFiles = this.jobWorker.FileCounterResult.CountedFiles;
 
             this.AddStatusMessage(Properties.Resources.FinishedFileCountingMessage);
