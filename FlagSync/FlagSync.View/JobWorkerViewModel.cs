@@ -425,7 +425,7 @@ namespace FlagSync.View
         /// <param name="message">The message.</param>
         private void AddStatusMessage(string message)
         {
-            this.StatusMessages += message + Environment.NewLine;
+            this.StatusMessages += DateTime.Now.ToString("HH:mm:ss") + ": " + message + Environment.NewLine;
             this.LastStatusMessage = message;
         }
 

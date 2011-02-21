@@ -300,4 +300,10 @@
   <data name="ApplicationRestartMessageBoxText" xml:space="preserve">
     <value>Die Anwendung muss neu starten. Wollen Sie fortfahren?</value>
   </data>
+  <data name="ErrorString" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="LoadSettingsErrorMessage" xml:space="preserve">
+    <value>Fehler beim Laden der Aufgaben! Möglicherweise ist die Datei beschädigt.</value>
+  </data>
 </root>

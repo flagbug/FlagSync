@@ -300,4 +300,10 @@
   <data name="ApplicationRestartMessageBoxText" xml:space="preserve">
     <value>The application needs to restart. Do you wish to continue?</value>
   </data>
+  <data name="ErrorString" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="LoadSettingsErrorMessage" xml:space="preserve">
+    <value>Error while loading the jobs! Maybe the file is corrupt.</value>
+  </data>
 </root>

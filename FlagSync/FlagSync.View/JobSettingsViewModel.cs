@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using FlagLib.Patterns;
@@ -97,11 +98,21 @@ namespace FlagSync.View
         /// Loads the job settings.
         /// </summary>
         /// <param name="path">The path.</param>
-        public void LoadJobSettings(string path)
+        public bool TryLoadJobSettings(string path)
         {
             this.JobSettings.Clear();
 
-            IEnumerable<JobSetting> settings = GenericXmlSerializer.ReadEnumerable<JobSetting>(path);
+            IEnumerable<JobSetting> settings;
+
+            try
+            {
+                settings = GenericXmlSerializer.ReadEnumerable<JobSetting>(path);
+            }
+
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
 
             foreach (JobSetting setting in settings)
             {
@@ -109,6 +120,8 @@ namespace FlagSync.View
             }
 
             this.SelectedJobSetting = this.JobSettings.First();
+
+            return true;
         }
     }
 }

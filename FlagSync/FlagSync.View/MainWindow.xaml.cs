@@ -111,7 +111,15 @@ namespace FlagSync.View
 
                 dialog.FileOk += (dialogSender, dialogEventArgs) =>
                     {
-                        this.mainViewModel.JobSettingsViewModel.LoadJobSettings(dialog.FileName);
+                        var vm = this.mainViewModel.JobSettingsViewModel;
+
+                        if (!vm.TryLoadJobSettings(dialog.FileName))
+                        {
+                            MessageBox.Show(Properties.Resources.LoadSettingsErrorMessage,
+                                            Properties.Resources.ErrorString,
+                                            MessageBoxButton.OK,
+                                            MessageBoxImage.Error);
+                        }
                     };
 
                 dialog.ShowDialog();

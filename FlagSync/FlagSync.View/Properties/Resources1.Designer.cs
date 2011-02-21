@@ -304,6 +304,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string ErrorString {
+            get {
+                return ResourceManager.GetString("ErrorString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         public static string ExitMenuItemText {
@@ -381,6 +390,15 @@ namespace FlagSync.View.Properties {
         public static string LoadJobsButtonText {
             get {
                 return ResourceManager.GetString("LoadJobsButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while loading the jobs! Maybe the file is corrupt..
+        /// </summary>
+        public static string LoadSettingsErrorMessage {
+            get {
+                return ResourceManager.GetString("LoadSettingsErrorMessage", resourceCulture);
             }
         }
         
