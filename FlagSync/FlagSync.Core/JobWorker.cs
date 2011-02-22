@@ -185,12 +185,6 @@ namespace FlagSync.Core
         /// </summary>
         private void DoNextJob()
         {
-            //Release the events of the current job to avoid memory leaks
-            if (this.currentJob != null)
-            {
-                this.ReleaseJobEvents(this.currentJob);
-            }
-
             if (this.jobQueue.Count > 0)
             {
                 this.currentJob = this.jobQueue.Dequeue();
@@ -301,30 +295,6 @@ namespace FlagSync.Core
             job.ModifiedFile += new EventHandler<FileCopyEventArgs>(currentJob_ModifiedFile);
             job.ModifyingFile += new EventHandler<FileCopyEventArgs>(currentJob_ModifyingFile);
             job.ProceededFile += new EventHandler<FileProceededEventArgs>(currentJob_ProceededFile);
-        }
-
-        /// <summary>
-        /// Releases the job events.
-        /// </summary>
-        /// <param name="job">The job.</param>
-        private void ReleaseJobEvents(Job job)
-        {
-            job.CreatedDirectory -= new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatedDirectory);
-            job.CreatedFile -= new EventHandler<FileCopyEventArgs>(currentJob_CreatedFile);
-            job.CreatingDirectory -= new EventHandler<DirectoryCreationEventArgs>(currentJob_CreatingDirectory);
-            job.CreatingFile -= new EventHandler<FileCopyEventArgs>(currentJob_CreatingFile);
-            job.DeletedDirectory -= new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletedDirectory);
-            job.DeletedFile -= new EventHandler<FileDeletionEventArgs>(currentJob_DeletedFile);
-            job.DeletingDirectory -= new EventHandler<DirectoryDeletionEventArgs>(currentJob_DeletingDirectory);
-            job.DeletingFile -= new EventHandler<FileDeletionEventArgs>(currentJob_DeletingFile);
-            job.DirectoryDeletionError -= new EventHandler<DirectoryDeletionEventArgs>(currentJob_DirectoryDeletionError);
-            job.FileCopyError -= new EventHandler<FileCopyErrorEventArgs>(currentJob_FileCopyError);
-            job.FileCopyProgressChanged -= new EventHandler<CopyProgressEventArgs>(currentJob_FileCopyProgressChanged);
-            job.FileDeletionError -= new EventHandler<FileDeletionErrorEventArgs>(currentJob_FileDeletionError);
-            job.Finished -= new EventHandler(currentJob_Finished);
-            job.ModifiedFile -= new EventHandler<FileCopyEventArgs>(currentJob_ModifiedFile);
-            job.ModifyingFile -= new EventHandler<FileCopyEventArgs>(currentJob_ModifyingFile);
-            job.ProceededFile -= new EventHandler<FileProceededEventArgs>(currentJob_ProceededFile);
         }
 
         /// <summary>
