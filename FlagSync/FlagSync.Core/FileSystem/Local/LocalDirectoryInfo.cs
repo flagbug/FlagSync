@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using FlagSync.Core.AbstractFileSystem;
+using FlagSync.Core.FileSystem.Abstract;
 
-namespace FlagSync.Core.LocalFileSystem
+namespace FlagSync.Core.FileSystem.Local
 {
     public class LocalDirectoryInfo : IDirectoryInfo
     {

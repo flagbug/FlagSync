@@ -1,7 +1,7 @@
 ﻿using System;
 using FlagLib.FileSystem;
 
-namespace FlagSync.Core.AbstractFileSystem
+namespace FlagSync.Core.FileSystem.Abstract
 {
     internal interface IFileSystem
     {

@@ -1,4 +1,4 @@
-﻿namespace FlagSync.Core.AbstractFileSystem
+﻿namespace FlagSync.Core.FileSystem.Abstract
 {
     public interface IDirectoryInfo : IFileSystemInfo
     {

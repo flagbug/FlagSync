@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using FlagLib.FileSystem;
-using FlagSync.Core.AbstractFileSystem;
+using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core
 {

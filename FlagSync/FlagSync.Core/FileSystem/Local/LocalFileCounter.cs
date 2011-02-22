@@ -1,7 +1,7 @@
 ﻿using FlagLib.FileSystem;
-using FlagSync.Core.AbstractFileSystem;
+using FlagSync.Core.FileSystem.Abstract;
 
-namespace FlagSync.Core.LocalFileSystem
+namespace FlagSync.Core.FileSystem.Local
 {
     internal class LocalFileCounter : IFileCounter
     {
