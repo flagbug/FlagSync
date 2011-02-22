@@ -1,4 +1,6 @@
-﻿namespace FlagSync.Core
+﻿using FlagSync.Core.AbstractFileSystem;
+
+namespace FlagSync.Core
 {
     internal class SyncJob : FileSystemJob
     {
@@ -7,8 +9,8 @@
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <param name="preview">if set to true no files will be deleted, mofified or copied.</param>
-        public SyncJob(JobSetting settings)
-            : base(settings) { }
+        public SyncJob(JobSetting settings, IFileSystem fileSystem)
+            : base(settings, fileSystem) { }
 
         /// <summary>
         /// Starts the job, opies new and modified files from directory A to directory B and then switches the direction

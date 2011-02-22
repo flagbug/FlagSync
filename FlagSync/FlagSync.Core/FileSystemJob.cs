@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Security;
 using FlagLib.FileSystem;
+using FlagSync.Core.AbstractFileSystem;
 
 namespace FlagSync.Core
 {
@@ -15,8 +14,8 @@ namespace FlagSync.Core
         /// Initializes a new instance of the <see cref="FileSystemJob"/> class.
         /// </summary>
         /// <param name="settings">The job settings.</param>
-        protected FileSystemJob(JobSetting settings)
-            : base(settings) { }
+        protected FileSystemJob(JobSetting settings, IFileSystem fileSystem)
+            : base(settings, fileSystem) { }
 
         /// <summary>
         /// Determines if file A is newer than file B
@@ -26,7 +25,7 @@ namespace FlagSync.Core
         /// <returns>
         /// True, if file A is newer, otherwise false
         /// </returns>
-        protected bool IsFileModified(FileInfo fileA, FileInfo fileB)
+        protected bool IsFileModified(IFileInfo fileA, IFileInfo fileB)
         {
             return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
         }
@@ -53,15 +52,17 @@ namespace FlagSync.Core
         /// <param name="execute">if set to true, the modifications, creations and deletions will be executed executed.</param>
         protected void BackupDirectoryRecursively(string sourceDirectoryPath, string targetDirectoryPath, bool execute)
         {
-            if (!Directory.Exists(sourceDirectoryPath))
+            if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
                 throw new ArgumentException("sourceDirectoryPath", "The source directory doesn't exist.");
 
-            if (!Directory.Exists(sourceDirectoryPath))
+            if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
                 throw new ArgumentException("targetDirectoryPath", "The target directory doesn't exist.");
 
-            DirectoryScanner rootScanner = new DirectoryScanner(sourceDirectoryPath);
+            IFileSystemScanner rootScanner =
+                this.FileSystem.CreateFileSystemScanner(sourceDirectoryPath);
 
-            DirectoryInfo currentTargetDirectory = new DirectoryInfo(targetDirectoryPath);
+            IDirectoryInfo currentTargetDirectory =
+                this.FileSystem.CreateDirectoryInfo(targetDirectoryPath);
 
             rootScanner.DirectoryFound += (sender, e) =>
                 {
@@ -76,12 +77,12 @@ namespace FlagSync.Core
                     string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
 
                     //Check if the new target directory exists and if not, create it
-                    if (!Directory.Exists(newTargetDirectoryPath))
+                    if (!this.FileSystem.DirectoryExists(newTargetDirectoryPath))
                     {
                         this.PerformDirectoryCreationOperation(e.Directory, currentTargetDirectory, execute);
                     }
 
-                    currentTargetDirectory = new DirectoryInfo(newTargetDirectoryPath);
+                    currentTargetDirectory = this.FileSystem.CreateDirectoryInfo(newTargetDirectoryPath);
                 };
 
             rootScanner.DirectoryProceeded += (sender, e) =>
@@ -119,7 +120,7 @@ namespace FlagSync.Core
                     }
 
                     //Check if the source file is newer than the target file
-                    else if (this.IsFileModified(e.File, new FileInfo(targetFilePath)))
+                    else if (this.IsFileModified(e.File, this.FileSystem.CreateFileInfo(targetFilePath)))
                     {
                         this.PerformFileModificationOperation(e.File, currentTargetDirectory, execute);
                         this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
@@ -139,15 +140,16 @@ namespace FlagSync.Core
         /// <param name="execute">if set to true, the modifications, creations and deletions will be executed executed.</param>
         protected void CheckDeletionsRecursively(string sourceDirectoryPath, string targetDirectoryPath, bool execute)
         {
-            if (!Directory.Exists(sourceDirectoryPath))
+            if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
                 throw new ArgumentException("sourceDirectoryPath", "The source directory doesn't exist.");
 
-            if (!Directory.Exists(sourceDirectoryPath))
+            if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
                 throw new ArgumentException("targetDirectoryPath", "The target directory doesn't exist.");
 
-            DirectoryScanner rootScanner = new DirectoryScanner(sourceDirectoryPath);
+            IFileSystemScanner rootScanner =
+                this.FileSystem.CreateFileSystemScanner(sourceDirectoryPath);
 
-            DirectoryInfo currentTargetDirectory = new DirectoryInfo(targetDirectoryPath);
+            IDirectoryInfo currentTargetDirectory = this.FileSystem.CreateDirectoryInfo(targetDirectoryPath);
 
             rootScanner.DirectoryFound += (sender, e) =>
             {
@@ -166,7 +168,7 @@ namespace FlagSync.Core
                     this.PerformDirectoryDeletionOperation(e.Directory, execute);
                 }
 
-                currentTargetDirectory = new DirectoryInfo(newTargetDirectoryPath);
+                currentTargetDirectory = this.FileSystem.CreateDirectoryInfo(newTargetDirectoryPath);
             };
 
             rootScanner.DirectoryProceeded += (sender, e) =>
@@ -178,7 +180,7 @@ namespace FlagSync.Core
                     return;
                 }
 
-                //When a directory has been completely preceeded, jump to the parent directory of the target directory
+                //When a directory has been completely proceeded, jump to the parent directory of the target directory
                 currentTargetDirectory = currentTargetDirectory.Parent;
             };
 
@@ -223,7 +225,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="file">The file to delete.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformFileDeletionOperation(FileInfo file, bool execute)
+        protected void PerformFileDeletionOperation(IFileInfo file, bool execute)
         {
             FileDeletionEventArgs eventArgs = new FileDeletionEventArgs(file.FullName);
 
@@ -231,7 +233,7 @@ namespace FlagSync.Core
 
             //Only delete the file, if the operation should get executed
             bool hasPerformed = execute ?
-                this.TryDeleteFile(file) : false;
+                this.FileSystem.TryDeleteFile(file) : false;
 
             if (hasPerformed)
             {
@@ -249,15 +251,24 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformDirectoryDeletionOperation(DirectoryInfo directory, bool execute)
+        protected void PerformDirectoryDeletionOperation(IDirectoryInfo directory, bool execute)
         {
             DirectoryDeletionEventArgs eventArgs = new DirectoryDeletionEventArgs(directory.FullName);
 
             this.OnDeletingDirectory(eventArgs);
 
+            DirectoryScanner directoryScanner = new DirectoryScanner(directory.FullName);
+
+            directoryScanner.FileFound += (sender, e) =>
+            {
+                this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
+            };
+
+            directoryScanner.Start();
+
             //Only delete the directory, if the operation should get executed
             bool hasPerformed = execute ?
-                this.TryDeleteDirectory(directory) : false;
+                this.FileSystem.TryDeleteDirectory(directory) : false;
 
             if (hasPerformed)
             {
@@ -276,7 +287,7 @@ namespace FlagSync.Core
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformFileCreationOperation(FileInfo sourceFile, DirectoryInfo targetDirectory, bool execute)
+        protected void PerformFileCreationOperation(IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
         {
             FileCopyEventArgs eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
 
@@ -284,7 +295,7 @@ namespace FlagSync.Core
 
             //Only copy the file, if the operation should get executed
             bool hasPerformed = execute ?
-                this.TryCopyFile(sourceFile, targetDirectory) : false;
+                this.FileSystem.TryCopyFile(sourceFile, targetDirectory) : false;
 
             if (hasPerformed)
             {
@@ -303,15 +314,26 @@ namespace FlagSync.Core
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformFileModificationOperation(FileInfo sourceFile, DirectoryInfo targetDirectory, bool execute)
+        protected void PerformFileModificationOperation(IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
         {
             FileCopyEventArgs eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
 
             this.OnModifyingFile(eventArgs);
 
+            EventHandler<CopyProgressEventArgs> handler = (sender, e) =>
+            {
+                e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
+
+                this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalFileSize, e.TotalBytesTransferred));
+            };
+
+            this.FileSystem.FileCopyProgressChanged += handler;
+
             //Only copy the file, if the operation should get executed
             bool hasPerformed = execute ?
-                this.TryCopyFile(sourceFile, targetDirectory) : false;
+                this.FileSystem.TryCopyFile(sourceFile, targetDirectory) : false;
+
+            this.FileSystem.FileCopyProgressChanged -= handler;
 
             if (hasPerformed)
             {
@@ -330,7 +352,7 @@ namespace FlagSync.Core
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformDirectoryCreationOperation(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory, bool execute)
+        protected void PerformDirectoryCreationOperation(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool execute)
         {
             DirectoryCreationEventArgs eventArgs = new DirectoryCreationEventArgs(sourceDirectory, targetDirectory);
 
@@ -338,7 +360,7 @@ namespace FlagSync.Core
 
             //Only create the directory, if the operation should get executed
             bool hasPerformed = execute ?
-                this.TryCreateDirectory(sourceDirectory, targetDirectory) : false;
+                this.FileSystem.TryCreateDirectory(sourceDirectory, targetDirectory) : false;
 
             if (hasPerformed)
             {
@@ -352,171 +374,5 @@ namespace FlagSync.Core
         }
 
         #endregion Mid level operations
-
-        #region Low level operations
-
-        /// <summary>
-        /// Tries to delete a file.
-        /// </summary>
-        /// <param name="file">The file to delete.</param>
-        /// <returns>A value indicating whether the file deletion has succeed</returns>
-        private bool TryDeleteFile(FileInfo file)
-        {
-            bool succeed = false;
-
-            try
-            {
-                file.Delete();
-
-                succeed = true;
-            }
-
-            catch (IOException)
-            {
-                Logger.Current.LogError(string.Format("IOException while deleting file: {0}", file.FullName));
-            }
-
-            catch (SecurityException)
-            {
-                Logger.Current.LogError(string.Format("SecurityException while deleting file: {0}", file.FullName));
-            }
-
-            catch (UnauthorizedAccessException)
-            {
-                Logger.Current.LogError(string.Format("UnauthorizedAccessException while deleting file: {0}", file.FullName));
-            }
-
-            return succeed;
-        }
-
-        /// <summary>
-        /// Tries to create a directory in the specified directory (low level operation).
-        /// </summary>
-        /// <param name="sourceDirectory">The source directory.</param>
-        /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>Returns a value indicating whether the directory creation has succeed</returns>
-        private bool TryCreateDirectory(DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory)
-        {
-            bool succeed = false;
-
-            try
-            {
-                Directory.CreateDirectory(Path.Combine(targetDirectory.FullName, sourceDirectory.Name));
-
-                succeed = true;
-            }
-
-            catch (DirectoryNotFoundException)
-            {
-                Logger.Current.LogError(
-                    string.Format("DirectoryNotFoundException while creating directory: {0} in directory: {1}",
-                        sourceDirectory.Name, targetDirectory.FullName));
-            }
-
-            catch (PathTooLongException)
-            {
-                Logger.Current.LogError(
-                    string.Format("PathTooLongException while creating directory: {0} in directory: {1}",
-                        sourceDirectory.Name, targetDirectory.FullName));
-            }
-
-            catch (IOException)
-            {
-                Logger.Current.LogError(
-                    string.Format("IOException while creating directory: {0} in directory: {1}",
-                    sourceDirectory.Name, targetDirectory.FullName));
-            }
-
-            catch (UnauthorizedAccessException)
-            {
-                Logger.Current.LogError(
-                    string.Format("UnauthorizedAccessException while creating directory: {0} in directory: {1}",
-                        sourceDirectory.Name, targetDirectory.FullName));
-            }
-
-            return succeed;
-        }
-
-        /// <summary>
-        /// Tries to delete a directory (low level operation).
-        /// </summary>
-        /// <param name="directory">The directory to delete.</param>
-        /// <returns>A value indicating whether the deletion has succeed.</returns>
-        private bool TryDeleteDirectory(DirectoryInfo directory)
-        {
-            bool succeed = false;
-
-            DirectoryScanner directoryScanner = new DirectoryScanner(directory.FullName);
-
-            directoryScanner.FileFound += (sender, e) =>
-                {
-                    this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
-                };
-
-            directoryScanner.Start();
-
-            try
-            {
-                directory.Delete(true);
-
-                succeed = true;
-            }
-
-            catch (DirectoryNotFoundException)
-            {
-                Logger.Current.LogError(string.Format("DirectoryNotFoundException while deleting directory: {0}", directory.FullName));
-            }
-
-            catch (IOException)
-            {
-                Logger.Current.LogError(string.Format("IOException while deleting directory: {0}", directory.FullName));
-            }
-
-            catch (UnauthorizedAccessException)
-            {
-                Logger.Current.LogError(string.Format("UnauthorizedAccessException while deleting directory: {0}", directory.FullName));
-            }
-
-            return succeed;
-        }
-
-        /// <summary>
-        /// Tries to copy a file to specified directory (low level operation).
-        /// </summary>
-        /// <param name="sourceFile">The source file.</param>
-        /// <param name="targetDirectory">The target directory.</param>
-        private bool TryCopyFile(FileInfo sourceFile, DirectoryInfo targetDirectory)
-        {
-            bool succeed = false;
-
-            FileCopyOperation fileCopyOperation = new FileCopyOperation();
-
-            fileCopyOperation.CopyProgressUpdated += (sender, e) =>
-            {
-                e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
-
-                this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalFileSize, e.TotalBytesTransferred));
-            };
-
-            try
-            {
-                string targetFilePath = Path.Combine(targetDirectory.FullName, sourceFile.Name);
-
-                fileCopyOperation.CopyFile(sourceFile.FullName, targetFilePath);
-
-                succeed = true;
-            }
-
-            catch (Win32Exception)
-            {
-                Logger.Current.LogError(
-                    string.Format("Win32Exception while copying file: {0} to directory: {1}",
-                        sourceFile.FullName, targetDirectory.FullName));
-            }
-
-            return succeed;
-        }
-
-        #endregion Low level operations
     }
 }

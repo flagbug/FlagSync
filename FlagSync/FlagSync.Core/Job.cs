@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using FlagLib.FileSystem;
+using FlagSync.Core.AbstractFileSystem;
 
 namespace FlagSync.Core
 {
@@ -14,6 +15,8 @@ namespace FlagSync.Core
         /// </summary>
         /// <value>The job settings.</value>
         public JobSetting Settings { get; private set; }
+
+        public IFileSystem FileSystem { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="Job"/> is paused.
@@ -130,9 +133,11 @@ namespace FlagSync.Core
         /// Initializes a new instance of the <see cref="Job"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        protected Job(JobSetting settings)
+        /// <param name="fileSystem">The file system.</param>
+        protected Job(JobSetting settings, IFileSystem fileSystem)
         {
             this.Settings = settings;
+            this.FileSystem = fileSystem;
         }
 
         /// <summary>

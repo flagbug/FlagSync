@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+using FlagSync.Core.AbstractFileSystem;
 
 namespace FlagSync.Core
 {
@@ -9,13 +9,13 @@ namespace FlagSync.Core
         /// Gets the file.
         /// </summary>
         /// <value>The file.</value>
-        public FileInfo File { get; private set; }
+        public IFileInfo File { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileDeletionErrorEventArgs"/> class.
         /// </summary>
         /// <param name="file">The file.</param>
-        public FileDeletionErrorEventArgs(FileInfo file)
+        public FileDeletionErrorEventArgs(IFileInfo file)
         {
             this.File = file;
         }
@@ -71,19 +71,19 @@ namespace FlagSync.Core
         /// Gets the file.
         /// </summary>
         /// <value>The file.</value>
-        public FileInfo File { get; private set; }
+        public IFileInfo File { get; private set; }
 
         /// <summary>
         /// Gets the source directory.
         /// </summary>
         /// <value>The source directory.</value>
-        public DirectoryInfo SourceDirectory { get; private set; }
+        public IDirectoryInfo SourceDirectory { get; private set; }
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
         /// <value>The target directory.</value>
-        public DirectoryInfo TargetDirectory { get; private set; }
+        public IDirectoryInfo TargetDirectory { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileCopyEventArgs"/> class.
@@ -91,7 +91,7 @@ namespace FlagSync.Core
         /// <param name="file">The file.</param>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        public FileCopyEventArgs(FileInfo file, DirectoryInfo sourceDirectory, DirectoryInfo targetDirectory)
+        public FileCopyEventArgs(IFileInfo file, IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
             this.File = file;
             this.SourceDirectory = sourceDirectory;
@@ -105,20 +105,20 @@ namespace FlagSync.Core
         /// Gets the file.
         /// </summary>
         /// <value>The file.</value>
-        public FileInfo File { get; private set; }
+        public IFileInfo File { get; private set; }
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
         /// <value>The target directory.</value>
-        public DirectoryInfo TargetDirectory { get; private set; }
+        public IDirectoryInfo TargetDirectory { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileCopyErrorEventArgs"/> class.
         /// </summary>
         /// <param name="file">The file.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        public FileCopyErrorEventArgs(FileInfo file, DirectoryInfo targetDirectory)
+        public FileCopyErrorEventArgs(IFileInfo file, IDirectoryInfo targetDirectory)
         {
             this.File = file;
             this.TargetDirectory = targetDirectory;
@@ -149,20 +149,20 @@ namespace FlagSync.Core
         /// Gets the directory.
         /// </summary>
         /// <value>The directory.</value>
-        public DirectoryInfo Directory { get; private set; }
+        public IDirectoryInfo Directory { get; private set; }
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
         /// <value>The target directory.</value>
-        public DirectoryInfo TargetDirectory { get; private set; }
+        public IDirectoryInfo TargetDirectory { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectoryCreationEventArgs"/> class.
         /// </summary>
         /// <param name="directory">The directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        public DirectoryCreationEventArgs(DirectoryInfo directory, DirectoryInfo targetDirectory)
+        public DirectoryCreationEventArgs(IDirectoryInfo directory, IDirectoryInfo targetDirectory)
         {
             this.Directory = directory;
             this.TargetDirectory = targetDirectory;

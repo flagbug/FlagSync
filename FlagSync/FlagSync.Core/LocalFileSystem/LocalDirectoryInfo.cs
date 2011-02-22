@@ -1,0 +1,46 @@
+﻿using System.IO;
+using FlagSync.Core.AbstractFileSystem;
+
+namespace FlagSync.Core.LocalFileSystem
+{
+    public class LocalDirectoryInfo : IDirectoryInfo
+    {
+        private DirectoryInfo directoryInfo;
+
+        /// <summary>
+        /// Gets the parent directory.
+        /// </summary>
+        /// <value>The parent directory.</value>
+        public IDirectoryInfo Parent
+        {
+            get { return new LocalDirectoryInfo(this.directoryInfo.Parent); }
+        }
+
+        /// <summary>
+        /// Gets the full name.
+        /// </summary>
+        /// <value>The full name.</value>
+        public string FullName
+        {
+            get { return this.directoryInfo.FullName; }
+        }
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        public string Name
+        {
+            get { return this.directoryInfo.Name; }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LocalDirectoryInfo"/> class.
+        /// </summary>
+        /// <param name="directoryInfo">The directory info to wrap.</param>
+        public LocalDirectoryInfo(DirectoryInfo directoryInfo)
+        {
+            this.directoryInfo = directoryInfo;
+        }
+    }
+}

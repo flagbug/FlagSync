@@ -119,7 +119,7 @@ namespace FlagSync.View
             get { return this.proceededBytes; }
             private set
             {
-                if (this.ProceededBytes > this.CountedBytes)
+                if (value > this.CountedBytes)
                 {
                     Debug.WriteLine(string.Format("Proceeded bytes exceeding range! {0} of maximum {1}", value, this.CountedBytes));
                     this.ProceededBytes = this.CountedBytes;

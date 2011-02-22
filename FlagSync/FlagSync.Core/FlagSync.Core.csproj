@@ -40,15 +40,27 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AbstractFileSystem\IFileCounter.cs" />
     <Compile Include="BackupJob.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="FileCounter.cs" />
     <Compile Include="FileCounterResults.cs" />
     <Compile Include="FileSystemJob.cs" />
+    <Compile Include="AbstractFileSystem\DirectoryFoundEventArgs.cs" />
+    <Compile Include="AbstractFileSystem\FileFoundEventArgs.cs" />
+    <Compile Include="AbstractFileSystem\IDirectoryInfo.cs" />
+    <Compile Include="AbstractFileSystem\IFileInfo.cs" />
+    <Compile Include="AbstractFileSystem\IFileSystem.cs" />
+    <Compile Include="AbstractFileSystem\IFileSystemInfo.cs" />
+    <Compile Include="AbstractFileSystem\IFileSystemScanner.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobEventArgs.cs" />
     <Compile Include="JobSetting.cs" />
     <Compile Include="JobWorker.cs" />
+    <Compile Include="LocalFileSystem\LocalDirectoryInfo.cs" />
+    <Compile Include="LocalFileSystem\LocalFileCounter.cs" />
+    <Compile Include="LocalFileSystem\LocalFileInfo.cs" />
+    <Compile Include="LocalFileSystem\LocalFileSystem.cs" />
+    <Compile Include="LocalFileSystem\LocalFileSystemScanner.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncJob.cs" />

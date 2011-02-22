@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using FlagLib.FileSystem;
+using FlagSync.Core.AbstractFileSystem;
 
 namespace FlagSync.Core
 {
@@ -251,11 +252,11 @@ namespace FlagSync.Core
                 switch (jobSetting.SyncMode)
                 {
                     case SyncMode.Backup:
-                        this.jobQueue.Enqueue(new BackupJob(jobSetting));
+                        this.jobQueue.Enqueue(new BackupJob(jobSetting, new LocalFileSystem.LocalFileSystem()));
                         break;
 
                     case SyncMode.Synchronization:
-                        this.jobQueue.Enqueue(new SyncJob(jobSetting));
+                        this.jobQueue.Enqueue(new SyncJob(jobSetting, new LocalFileSystem.LocalFileSystem()));
                         break;
                 }
             }
@@ -269,10 +270,9 @@ namespace FlagSync.Core
         {
             FileCounterResults result = new FileCounterResults();
 
-            FileCounter counter = new FileCounter();
-
             foreach (Job job in this.jobQueue)
             {
+                IFileCounter counter = job.FileSystem.CreateFileCounter();
                 result += counter.CountJobFiles(job.Settings);
             }
 
