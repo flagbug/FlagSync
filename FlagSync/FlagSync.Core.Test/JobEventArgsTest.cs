@@ -88,7 +88,6 @@ namespace FlagSync.Core.Test
         ///A test for Job
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("FlagSync.Core.dll")]
         public void JobTest()
         {
             JobSetting setting = new JobSetting("TestSetting");

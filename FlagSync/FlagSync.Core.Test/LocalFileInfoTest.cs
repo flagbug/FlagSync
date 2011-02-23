@@ -69,9 +69,13 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void LocalFileInfoConstructorTest()
         {
-            FileInfo fileInfo = new FileInfo(@"C:\SomeFolder\SomeFile.txt");
+            string path = @"C:\SomeFolder\SomeFile.txt";
+            FileInfo fileInfo = new FileInfo(path);
 
             LocalFileInfo target = new LocalFileInfo(fileInfo);
+
+            Assert.AreEqual(path, target.FullName);
+            Assert.AreEqual(Path.GetFileName(path), target.Name);
 
             try
             {

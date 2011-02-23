@@ -57,7 +57,7 @@ namespace FlagSync.Core.Test
         //}
         //
 
-        #endregion
+        #endregion Additional test attributes
 
         /// <summary>
         ///A test for FileCounterResults Constructor
@@ -66,7 +66,9 @@ namespace FlagSync.Core.Test
         public void FileCounterResultsConstructorTest()
         {
             FileCounterResults target = new FileCounterResults();
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            Assert.AreEqual(0, target.CountedBytes);
+            Assert.AreEqual(0, target.CountedFiles);
         }
 
         /// <summary>
@@ -75,10 +77,12 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void FileCounterResultsConstructorTest1()
         {
-            int countedFiles = 0; // TODO: Initialize to an appropriate value
-            long countedBytes = 0; // TODO: Initialize to an appropriate value
+            int countedFiles = 50;
+            long countedBytes = 2048;
             FileCounterResults target = new FileCounterResults(countedFiles, countedBytes);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            Assert.AreEqual(countedFiles, target.CountedBytes);
+            Assert.AreEqual(countedBytes, target.CountedBytes);
         }
 
         /// <summary>
@@ -87,13 +91,13 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void op_AdditionTest()
         {
-            FileCounterResults a = null; // TODO: Initialize to an appropriate value
-            FileCounterResults b = null; // TODO: Initialize to an appropriate value
-            FileCounterResults expected = null; // TODO: Initialize to an appropriate value
-            FileCounterResults actual;
-            actual = (a + b);
+            FileCounterResults a = new FileCounterResults(50, 2048);
+            FileCounterResults b = new FileCounterResults(10, 1024);
+
+            FileCounterResults expected = new FileCounterResults(60, 3072);
+            FileCounterResults actual = (a + b);
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -103,13 +107,12 @@ namespace FlagSync.Core.Test
         [DeploymentItem("FlagSync.Core.dll")]
         public void CountedBytesTest()
         {
-            FileCounterResults_Accessor target = new FileCounterResults_Accessor(); // TODO: Initialize to an appropriate value
-            long expected = 0; // TODO: Initialize to an appropriate value
-            long actual;
-            target.CountedBytes = expected;
-            actual = target.CountedBytes;
+            FileCounterResults target = new FileCounterResults(50, 2048);
+
+            long expected = 2048;
+            long actual = target.CountedBytes;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -119,13 +122,12 @@ namespace FlagSync.Core.Test
         [DeploymentItem("FlagSync.Core.dll")]
         public void CountedFilesTest()
         {
-            FileCounterResults_Accessor target = new FileCounterResults_Accessor(); // TODO: Initialize to an appropriate value
-            int expected = 0; // TODO: Initialize to an appropriate value
-            int actual;
-            target.CountedFiles = expected;
-            actual = target.CountedFiles;
+            FileCounterResults target = new FileCounterResults(50, 2048);
+
+            int expected = 50;
+            int actual = target.CountedFiles;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagSync.Core.Test
 {
@@ -57,7 +58,7 @@ namespace FlagSync.Core.Test
         //}
         //
 
-        #endregion
+        #endregion Additional test attributes
 
         /// <summary>
         ///A test for FileProceededEventArgs Constructor
@@ -65,44 +66,55 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void FileProceededEventArgsConstructorTest()
         {
-            string filePath = string.Empty; // TODO: Initialize to an appropriate value
-            long fileLength = 0; // TODO: Initialize to an appropriate value
+            string filePath = @"C:\SomeDirectory\SomeFile.txt";
+            long fileLength = 2048;
             FileProceededEventArgs target = new FileProceededEventArgs(filePath, fileLength);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            Assert.AreEqual(filePath, target.FilePath);
+            Assert.AreEqual(fileLength, target.FileLength);
+
+            try
+            {
+                target = new FileProceededEventArgs(null, 0);
+
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
         }
 
         /// <summary>
         ///A test for FileLength
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("FlagSync.Core.dll")]
         public void FileLengthTest()
         {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            FileProceededEventArgs_Accessor target = new FileProceededEventArgs_Accessor(param0); // TODO: Initialize to an appropriate value
-            long expected = 0; // TODO: Initialize to an appropriate value
-            long actual;
-            target.FileLength = expected;
-            actual = target.FileLength;
+            long size = 2048;
+            FileProceededEventArgs target = new FileProceededEventArgs(@"C:\SomePath\SomeFile.txt", size);
+
+            long expected = size;
+            long actual = target.FileLength;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
         ///A test for FilePath
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("FlagSync.Core.dll")]
         public void FilePathTest()
         {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            FileProceededEventArgs_Accessor target = new FileProceededEventArgs_Accessor(param0); // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
-            string actual;
-            target.FilePath = expected;
-            actual = target.FilePath;
+            string path = @"C:\SomePath\SomeFile.txt";
+            FileProceededEventArgs target = new FileProceededEventArgs(path, 2048);
+
+            string expected = path;
+            string actual = target.FilePath;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }

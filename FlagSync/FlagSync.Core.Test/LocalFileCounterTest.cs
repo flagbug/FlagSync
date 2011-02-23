@@ -74,7 +74,6 @@ namespace FlagSync.Core.Test
         ///A test for CountFiles
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("FlagSync.Core.dll")]
         public void CountFilesTest()
         {
             LocalFileCounter_Accessor target = new LocalFileCounter_Accessor(); // TODO: Initialize to an appropriate value
