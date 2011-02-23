@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using FlagSync.Core.FileSystem.Abstract;
 using FlagSync.Core.FileSystem.Local;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -68,9 +69,17 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void LocalDirectoryInfoConstructorTest()
         {
-            DirectoryInfo directoryInfo = null; // TODO: Initialize to an appropriate value
+            DirectoryInfo directoryInfo = new DirectoryInfo("C://SomeFolder//SomeOtherFolder");
             LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            try
+            {
+                target = new LocalDirectoryInfo(null);
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException)
+            { }
         }
 
         /// <summary>
@@ -79,11 +88,12 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void FullNameTest()
         {
-            DirectoryInfo directoryInfo = null; // TODO: Initialize to an appropriate value
-            LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.FullName;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            DirectoryInfo directoryInfo = new DirectoryInfo("C://SomeFolder//SomeOtherFolder");
+            LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo);
+
+            string actual = target.FullName;
+
+            Assert.AreEqual(@"C:\SomeFolder\SomeOtherFolder", actual);
         }
 
         /// <summary>
@@ -92,11 +102,12 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void NameTest()
         {
-            DirectoryInfo directoryInfo = null; // TODO: Initialize to an appropriate value
-            LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.Name;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            DirectoryInfo directoryInfo = new DirectoryInfo("C://SomeFolder//SomeOtherFolder");
+            LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo);
+
+            string actual = target.Name;
+
+            Assert.AreEqual("SomeOtherFolder", actual);
         }
 
         /// <summary>
@@ -105,11 +116,12 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void ParentTest()
         {
-            DirectoryInfo directoryInfo = null; // TODO: Initialize to an appropriate value
-            LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo); // TODO: Initialize to an appropriate value
-            IDirectoryInfo actual;
-            actual = target.Parent;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            DirectoryInfo directoryInfo = new DirectoryInfo("C://SomeFolder//SomeOtherFolder");
+            LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo);
+
+            IDirectoryInfo actual = target.Parent;
+
+            Assert.AreEqual(directoryInfo.Parent.FullName, actual.FullName);
         }
     }
 }

@@ -61,12 +61,6 @@
     <Compile Include="FileFoundEventArgsTest.cs" />
     <Compile Include="FileProceededEventArgsTest.cs" />
     <Compile Include="FileSystemJobTest.cs" />
-    <Compile Include="IDirectoryInfoTest.cs" />
-    <Compile Include="IFileCounterTest.cs" />
-    <Compile Include="IFileInfoTest.cs" />
-    <Compile Include="IFileSystemInfoTest.cs" />
-    <Compile Include="IFileSystemScannerTest.cs" />
-    <Compile Include="IFileSystemTest.cs" />
     <Compile Include="JobEventArgsTest.cs" />
     <Compile Include="JobSettingTest.cs" />
     <Compile Include="JobTest.cs" />
