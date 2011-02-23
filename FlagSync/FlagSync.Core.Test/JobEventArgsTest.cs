@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagSync.Core.Test
 {
@@ -57,7 +58,7 @@ namespace FlagSync.Core.Test
         //}
         //
 
-        #endregion
+        #endregion Additional test attributes
 
         /// <summary>
         ///A test for JobEventArgs Constructor
@@ -65,9 +66,22 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void JobEventArgsConstructorTest()
         {
-            JobSetting job = null; // TODO: Initialize to an appropriate value
+            JobSetting job = new JobSetting();
+
             JobEventArgs target = new JobEventArgs(job);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            try
+            {
+                target = new JobEventArgs(null);
+
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
         }
 
         /// <summary>
@@ -77,14 +91,13 @@ namespace FlagSync.Core.Test
         [DeploymentItem("FlagSync.Core.dll")]
         public void JobTest()
         {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            JobEventArgs_Accessor target = new JobEventArgs_Accessor(param0); // TODO: Initialize to an appropriate value
-            JobSetting expected = null; // TODO: Initialize to an appropriate value
-            JobSetting actual;
-            target.Job = expected;
-            actual = target.Job;
+            JobSetting setting = new JobSetting("TestSetting");
+            JobEventArgs target = new JobEventArgs(setting);
+
+            JobSetting expected = setting;
+            JobSetting actual = target.Job;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }

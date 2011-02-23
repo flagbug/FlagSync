@@ -69,17 +69,22 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void LocalDirectoryInfoConstructorTest()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo("C://SomeFolder//SomeOtherFolder");
+            DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\SomeFolder\SomeOtherFolder");
+
             LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo);
 
             try
             {
                 target = new LocalDirectoryInfo(null);
+
                 Assert.Fail("Constructor must throw argument null exception");
             }
 
-            catch (ArgumentNullException)
-            { }
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
         }
 
         /// <summary>
@@ -88,7 +93,7 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void FullNameTest()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo("C://SomeFolder//SomeOtherFolder");
+            DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\SomeFolder\SomeOtherFolder");
             LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo);
 
             string actual = target.FullName;
@@ -102,7 +107,7 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void NameTest()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo("C://SomeFolder//SomeOtherFolder");
+            DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\SomeFolder\SomeOtherFolder");
             LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo);
 
             string actual = target.Name;
@@ -116,7 +121,7 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void ParentTest()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo("C://SomeFolder//SomeOtherFolder");
+            DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\SomeFolder\SomeOtherFolder");
             LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo);
 
             IDirectoryInfo actual = target.Parent;

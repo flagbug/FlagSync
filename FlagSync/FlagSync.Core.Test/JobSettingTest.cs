@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagSync.Core.Test
 {
@@ -57,7 +58,7 @@ namespace FlagSync.Core.Test
         //}
         //
 
-        #endregion
+        #endregion Additional test attributes
 
         /// <summary>
         ///A test for JobSetting Constructor
@@ -66,7 +67,6 @@ namespace FlagSync.Core.Test
         public void JobSettingConstructorTest()
         {
             JobSetting target = new JobSetting();
-            Assert.Inconclusive("TODO: Implement code to verify target");
         }
 
         /// <summary>
@@ -75,9 +75,24 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void JobSettingConstructorTest1()
         {
-            string name = string.Empty; // TODO: Initialize to an appropriate value
+            string name = "TestSetting";
+
             JobSetting target = new JobSetting(name);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            Assert.AreEqual(name, target.Name);
+
+            try
+            {
+                target = new JobSetting(null);
+
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
         }
 
         /// <summary>
@@ -86,12 +101,12 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void ToStringTest()
         {
-            JobSetting target = new JobSetting(); // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.ToString();
+            JobSetting target = new JobSetting("TestSetting");
+
+            string expected = "TestSetting";
+            string actual = target.ToString();
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -100,13 +115,15 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void DirectoryATest()
         {
-            JobSetting target = new JobSetting(); // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
+            JobSetting target = new JobSetting();
+
+            string expected = @"C:\SomeFolderA\SomeSubFolderA";
             string actual;
+
             target.DirectoryA = expected;
             actual = target.DirectoryA;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -115,13 +132,15 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void DirectoryBTest()
         {
-            JobSetting target = new JobSetting(); // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
+            JobSetting target = new JobSetting();
+
+            string expected = @"C:\SomeFolderB\SomeSubFolderB";
             string actual;
+
             target.DirectoryB = expected;
             actual = target.DirectoryB;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -130,13 +149,15 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void IsIncludedTest()
         {
-            JobSetting target = new JobSetting(); // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
+            JobSetting target = new JobSetting();
+
+            bool expected = true;
             bool actual;
+
             target.IsIncluded = expected;
             actual = target.IsIncluded;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -145,13 +166,15 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void NameTest()
         {
-            JobSetting target = new JobSetting(); // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
+            JobSetting target = new JobSetting();
+
+            string expected = "TestJobSetting";
             string actual;
+
             target.Name = expected;
             actual = target.Name;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -160,13 +183,15 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void SyncModeTest()
         {
-            JobSetting target = new JobSetting(); // TODO: Initialize to an appropriate value
-            SyncMode expected = new SyncMode(); // TODO: Initialize to an appropriate value
+            JobSetting target = new JobSetting();
+
+            SyncMode expected = SyncMode.Synchronization;
             SyncMode actual;
+
             target.SyncMode = expected;
             actual = target.SyncMode;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }

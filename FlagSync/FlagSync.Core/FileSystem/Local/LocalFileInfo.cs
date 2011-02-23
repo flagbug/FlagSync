@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
@@ -13,10 +14,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// <value>The last write time.</value>
         public System.DateTime LastWriteTime
         {
-            get
-            {
-                return this.fileInfo.LastWriteTime;
-            }
+            get { return this.fileInfo.LastWriteTime; }
         }
 
         /// <summary>
@@ -61,6 +59,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <param name="fileInfo">The file info to wrap.</param>
         public LocalFileInfo(FileInfo fileInfo)
         {
+            if (fileInfo == null)
+                throw new ArgumentNullException("fileInfo");
+
             this.fileInfo = fileInfo;
         }
     }

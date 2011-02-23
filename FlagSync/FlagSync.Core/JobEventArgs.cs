@@ -17,6 +17,9 @@ namespace FlagSync.Core
         /// <param name="file">The file.</param>
         public FileDeletionErrorEventArgs(IFileInfo file)
         {
+            if (file == null)
+                throw new ArgumentNullException("file");
+
             this.File = file;
         }
     }
@@ -35,6 +38,9 @@ namespace FlagSync.Core
         /// <param name="job">The job.</param>
         public JobEventArgs(JobSetting job)
         {
+            if (job == null)
+                throw new ArgumentNullException("job");
+
             this.Job = job;
         }
     }
@@ -60,6 +66,9 @@ namespace FlagSync.Core
         /// <param name="fileLength">The file length.</param>
         public FileProceededEventArgs(string filePath, long fileLength)
         {
+            if (filePath == null)
+                throw new ArgumentNullException("filePath");
+
             this.FilePath = filePath;
             this.FileLength = fileLength;
         }
@@ -93,6 +102,15 @@ namespace FlagSync.Core
         /// <param name="targetDirectory">The target directory.</param>
         public FileCopyEventArgs(IFileInfo file, IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
+            if (file == null)
+                throw new ArgumentNullException("file");
+
+            if (sourceDirectory == null)
+                throw new ArgumentNullException("sourceDirectory");
+
+            if (targetDirectory == null)
+                throw new ArgumentNullException("targetDirectory");
+
             this.File = file;
             this.SourceDirectory = sourceDirectory;
             this.TargetDirectory = targetDirectory;

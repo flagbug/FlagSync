@@ -69,9 +69,22 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void LocalFileInfoConstructorTest()
         {
-            FileInfo fileInfo = null; // TODO: Initialize to an appropriate value
+            FileInfo fileInfo = new FileInfo(@"C:\SomeFolder\SomeFile.txt");
+
             LocalFileInfo target = new LocalFileInfo(fileInfo);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            try
+            {
+                target = new LocalFileInfo(null);
+
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
         }
 
         /// <summary>
@@ -80,11 +93,12 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void DirectoryTest()
         {
-            FileInfo fileInfo = null; // TODO: Initialize to an appropriate value
-            LocalFileInfo target = new LocalFileInfo(fileInfo); // TODO: Initialize to an appropriate value
-            IDirectoryInfo actual;
-            actual = target.Directory;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            FileInfo fileInfo = new FileInfo(@"C:\SomeFolder\SomeFile.txt");
+
+            LocalFileInfo target = new LocalFileInfo(fileInfo);
+            IDirectoryInfo actual = target.Directory;
+
+            Assert.AreEqual(@"C:\SomeFolder", actual.FullName);
         }
 
         /// <summary>
@@ -93,11 +107,12 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void FullNameTest()
         {
-            FileInfo fileInfo = null; // TODO: Initialize to an appropriate value
-            LocalFileInfo target = new LocalFileInfo(fileInfo); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.FullName;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            FileInfo fileInfo = new FileInfo(@"C:\SomeFolder\SomeFile.txt");
+            LocalFileInfo target = new LocalFileInfo(fileInfo);
+
+            string actual = target.FullName;
+
+            Assert.AreEqual(@"C:\SomeFolder\SomeFile.txt", actual);
         }
 
         /// <summary>
@@ -106,11 +121,12 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void LastWriteTimeTest()
         {
-            FileInfo fileInfo = null; // TODO: Initialize to an appropriate value
-            LocalFileInfo target = new LocalFileInfo(fileInfo); // TODO: Initialize to an appropriate value
-            DateTime actual;
-            actual = target.LastWriteTime;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            FileInfo fileInfo = new FileInfo(@"C:\SomeFolder\SomeFile.txt");
+            LocalFileInfo target = new LocalFileInfo(fileInfo);
+
+            DateTime actual = target.LastWriteTime;
+
+            Assert.AreEqual(fileInfo.LastWriteTime, actual);
         }
 
         /// <summary>
@@ -119,10 +135,10 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void LengthTest()
         {
-            FileInfo fileInfo = null; // TODO: Initialize to an appropriate value
-            LocalFileInfo target = new LocalFileInfo(fileInfo); // TODO: Initialize to an appropriate value
-            long actual;
-            actual = target.Length;
+            FileInfo fileInfo = new FileInfo(@"C:\SomeFolder\SomeFile.txt");
+            LocalFileInfo target = new LocalFileInfo(fileInfo);
+
+            long actual = target.Length;
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
@@ -132,11 +148,12 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void NameTest()
         {
-            FileInfo fileInfo = null; // TODO: Initialize to an appropriate value
-            LocalFileInfo target = new LocalFileInfo(fileInfo); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.Name;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            FileInfo fileInfo = new FileInfo(@"C:\SomeFolder\SomeFile.txt");
+            LocalFileInfo target = new LocalFileInfo(fileInfo);
+
+            string actual = target.Name;
+
+            Assert.AreEqual("SomeFile.txt", actual);
         }
     }
 }
