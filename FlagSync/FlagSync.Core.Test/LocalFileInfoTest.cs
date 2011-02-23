@@ -74,9 +74,6 @@ namespace FlagSync.Core.Test
 
             LocalFileInfo target = new LocalFileInfo(fileInfo);
 
-            Assert.AreEqual(path, target.FullName);
-            Assert.AreEqual(Path.GetFileName(path), target.Name);
-
             try
             {
                 target = new LocalFileInfo(null);

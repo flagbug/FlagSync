@@ -80,9 +80,6 @@ namespace FlagSync.Core.Test
             int countedFiles = 50;
             long countedBytes = 2048;
             FileCounterResults target = new FileCounterResults(countedFiles, countedBytes);
-
-            Assert.AreEqual(countedFiles, target.CountedBytes);
-            Assert.AreEqual(countedBytes, target.CountedBytes);
         }
 
         /// <summary>

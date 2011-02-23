@@ -69,7 +69,8 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void LocalDirectoryInfoConstructorTest()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\SomeFolder\SomeOtherFolder");
+            string path = @"C:\SomeFolder\SomeOtherFolder";
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
 
             LocalDirectoryInfo target = new LocalDirectoryInfo(directoryInfo);
 
