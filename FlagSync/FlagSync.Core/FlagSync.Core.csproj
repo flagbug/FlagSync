@@ -40,13 +40,12 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FileSystem\Abstract\IFileCounter.cs" />
     <Compile Include="BackupJob.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FileCounterResults.cs" />
     <Compile Include="FileSystemJob.cs" />
-    <Compile Include="FileSystem\Abstract\DirectoryFoundEventArgs.cs" />
-    <Compile Include="FileSystem\Abstract\FileFoundEventArgs.cs" />
+    <Compile Include="FileSystem\DirectoryFoundEventArgs.cs" />
+    <Compile Include="FileSystem\FileFoundEventArgs.cs" />
     <Compile Include="FileSystem\Abstract\IDirectoryInfo.cs" />
     <Compile Include="FileSystem\Abstract\IFileInfo.cs" />
     <Compile Include="FileSystem\Abstract\IFileSystem.cs" />
@@ -57,7 +56,7 @@
     <Compile Include="JobSetting.cs" />
     <Compile Include="JobWorker.cs" />
     <Compile Include="FileSystem\Local\LocalDirectoryInfo.cs" />
-    <Compile Include="FileSystem\Local\LocalFileCounter.cs" />
+    <Compile Include="FileSystem\FileCounter.cs" />
     <Compile Include="FileSystem\Local\LocalFileInfo.cs" />
     <Compile Include="FileSystem\Local\LocalFileSystem.cs" />
     <Compile Include="Logger.cs" />

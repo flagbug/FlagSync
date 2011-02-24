@@ -1,4 +1,5 @@
-﻿using FlagSync.Core.FileSystem.Abstract;
+﻿using FlagSync.Core.FileSystem;
+using FlagSync.Core.FileSystem.Abstract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagSync.Core.Test

@@ -1,6 +1,7 @@
 ﻿using System;
+using FlagSync.Core.FileSystem.Abstract;
 
-namespace FlagSync.Core.FileSystem.Abstract
+namespace FlagSync.Core.FileSystem
 {
     public class DirectoryFoundEventArgs : EventArgs
     {

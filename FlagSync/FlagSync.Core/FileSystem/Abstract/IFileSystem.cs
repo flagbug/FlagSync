@@ -54,12 +54,6 @@ namespace FlagSync.Core.FileSystem.Abstract
         IDirectoryInfo GetDirectoryInfo(string path);
 
         /// <summary>
-        /// Creates the file counter which counts the files of a directory in the current file system.
-        /// </summary>
-        /// <returns></returns>
-        IFileCounter CreateFileCounter();
-
-        /// <summary>
         /// Checks if the file at the specified path exists.
         /// </summary>
         /// <param name="path">The path.</param>

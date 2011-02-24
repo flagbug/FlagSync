@@ -30,7 +30,12 @@ namespace FlagSync.Core.Test.VirtualFileSystem
             VirtualDirectoryInfo parent =
                 (VirtualDirectoryInfo)this.GetDirectoryInfo(Path.GetDirectoryName(file.FullName));
 
-            this.fileSystemInfos.Remove(file);
+            if (!parent.IsLocked)
+            {
+                this.fileSystemInfos.Remove(file);
+            }
+
+            else { throw new UnauthorizedAccessException("The parent directory is locked!"); }
 
             return true;
         }
@@ -63,7 +68,7 @@ namespace FlagSync.Core.Test.VirtualFileSystem
                         sourceDirectory.Name, parent, false, true));
                 }
 
-                else { throw new UnauthorizedAccessException("The target directory is locked!"); }
+                else { throw new UnauthorizedAccessException("The parent directory is locked!"); }
             }
 
             return true;
@@ -81,7 +86,12 @@ namespace FlagSync.Core.Test.VirtualFileSystem
             if (directory == null)
                 throw new ArgumentNullException("directory");
 
-            this.fileSystemInfos.Remove(directory);
+            if (!((VirtualDirectoryInfo)directory.Parent).IsLocked)
+            {
+                this.fileSystemInfos.Remove(directory);
+            }
+
+            else { throw new UnauthorizedAccessException("The parent directory is locked!"); }
 
             return true;
         }
@@ -94,7 +104,24 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// <returns></returns>
         public bool TryCopyFile(IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
-            throw new NotImplementedException();
+            if (sourceFile == null)
+                throw new ArgumentNullException("sourceFile");
+
+            if (targetDirectory == null)
+                throw new ArgumentNullException("targetDirectory");
+
+            VirtualDirectoryInfo tarDir = (VirtualDirectoryInfo)targetDirectory;
+
+            if (!tarDir.IsLocked)
+            {
+                string newFilePath = Path.Combine(targetDirectory.FullName, sourceFile.Name);
+
+                this.fileSystemInfos.Add(new VirtualFileInfo(newFilePath, sourceFile.Length, DateTime.Now, tarDir));
+            }
+
+            else { throw new UnauthorizedAccessException("The parent directory is locked!"); }
+
+            return true;
         }
 
         /// <summary>
@@ -104,7 +131,21 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// <returns></returns>
         public IFileInfo GetFileInfo(string path)
         {
-            return null;
+            path = Path.GetFullPath(path);
+
+            IFileSystemInfo file =
+                this.fileSystemInfos.FirstOrDefault(f => f.FullName == path);
+
+            if (file != null)
+            {
+                return (IFileInfo)file;
+            }
+
+            else
+            {
+                return new VirtualFileInfo(path, 0, DateTime.MinValue,
+                    (VirtualDirectoryInfo)this.GetDirectoryInfo(Path.GetDirectoryName(path)));
+            }
         }
 
         /// <summary>
@@ -114,7 +155,11 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// <returns></returns>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             path = Path.GetFullPath(path);
+
             IFileSystemInfo directory =
                 this.fileSystemInfos.FirstOrDefault(dir => dir.FullName == path);
 

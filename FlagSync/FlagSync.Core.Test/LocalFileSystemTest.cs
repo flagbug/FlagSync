@@ -87,20 +87,6 @@ namespace FlagSync.Core.Test
         }
 
         /// <summary>
-        ///A test for CreateFileCounter
-        ///</summary>
-        [TestMethod()]
-        public void CreateFileCounterTest()
-        {
-            LocalFileSystem target = new LocalFileSystem(); // TODO: Initialize to an appropriate value
-            IFileCounter expected = null; // TODO: Initialize to an appropriate value
-            IFileCounter actual;
-            actual = target.CreateFileCounter();
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
         ///A test for CreateFileInfo
         ///</summary>
         [TestMethod()]

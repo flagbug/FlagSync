@@ -211,14 +211,5 @@ namespace FlagSync.Core.FileSystem.Local
         {
             return Directory.Exists(path);
         }
-
-        /// <summary>
-        /// Creates the file counter which counts the files of a directory in the current file system.
-        /// </summary>
-        /// <returns></returns>
-        public IFileCounter CreateFileCounter()
-        {
-            return new LocalFileCounter();
-        }
     }
 }

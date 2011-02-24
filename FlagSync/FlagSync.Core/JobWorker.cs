@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using FlagLib.FileSystem;
-using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem;
+using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
@@ -266,8 +268,12 @@ namespace FlagSync.Core
 
             foreach (Job job in this.jobQueue)
             {
-                IFileCounter counter = job.FileSystem.CreateFileCounter();
-                result += counter.CountJobFiles(job.Settings);
+                //TODO: Make generic for all settings
+                FileCounter counter = new FileCounter();
+                result += counter.CountFiles(
+                    new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryA)));
+                result += counter.CountFiles(
+                    new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryB)));
             }
 
             return result;
