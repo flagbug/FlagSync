@@ -81,7 +81,7 @@ namespace FlagSync.Core.Test
             string path = string.Empty; // TODO: Initialize to an appropriate value
             IDirectoryInfo expected = null; // TODO: Initialize to an appropriate value
             IDirectoryInfo actual;
-            actual = target.CreateDirectoryInfo(path);
+            actual = target.GetDirectoryInfo(path);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
@@ -110,22 +110,7 @@ namespace FlagSync.Core.Test
             string path = string.Empty; // TODO: Initialize to an appropriate value
             IFileInfo expected = null; // TODO: Initialize to an appropriate value
             IFileInfo actual;
-            actual = target.CreateFileInfo(path);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for CreateFileSystemScanner
-        ///</summary>
-        [TestMethod()]
-        public void CreateFileSystemScannerTest()
-        {
-            LocalFileSystem target = new LocalFileSystem(); // TODO: Initialize to an appropriate value
-            string path = string.Empty; // TODO: Initialize to an appropriate value
-            IFileSystemScanner expected = null; // TODO: Initialize to an appropriate value
-            IFileSystemScanner actual;
-            actual = target.CreateFileSystemScanner(path);
+            actual = target.GetFileInfo(path);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }

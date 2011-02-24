@@ -32,6 +32,6 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <exception cref="System.UnauthorizedAccessException">
         /// The exception that is thrown if the directory is locked
         /// </exception>
-        public IEnumerable<IDirectoryInfo> GetDirectories();
+        IEnumerable<IDirectoryInfo> GetDirectories();
     }
 }

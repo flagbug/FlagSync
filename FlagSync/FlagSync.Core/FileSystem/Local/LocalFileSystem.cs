@@ -177,7 +177,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
-        public IFileInfo CreateFileInfo(string path)
+        public IFileInfo GetFileInfo(string path)
         {
             return new LocalFileInfo(new FileInfo(path));
         }
@@ -187,19 +187,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
-        public IDirectoryInfo CreateDirectoryInfo(string path)
+        public IDirectoryInfo GetDirectoryInfo(string path)
         {
             return new LocalDirectoryInfo(new DirectoryInfo(path));
-        }
-
-        /// <summary>
-        /// Creates a file scanner which searches in the specified directory.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public IFileSystemScanner CreateFileSystemScanner(string path)
-        {
-            return new LocalFileSystemScanner(path);
         }
 
         /// <summary>

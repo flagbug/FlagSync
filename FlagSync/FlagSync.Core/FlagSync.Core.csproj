@@ -51,7 +51,6 @@
     <Compile Include="FileSystem\Abstract\IFileInfo.cs" />
     <Compile Include="FileSystem\Abstract\IFileSystem.cs" />
     <Compile Include="FileSystem\Abstract\IFileSystemInfo.cs" />
-    <Compile Include="FileSystem\Abstract\IFileSystemScanner.cs" />
     <Compile Include="FileSystem\FileSystemScanner.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobEventArgs.cs" />
@@ -61,7 +60,6 @@
     <Compile Include="FileSystem\Local\LocalFileCounter.cs" />
     <Compile Include="FileSystem\Local\LocalFileInfo.cs" />
     <Compile Include="FileSystem\Local\LocalFileSystem.cs" />
-    <Compile Include="FileSystem\Local\LocalFileSystemScanner.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncJob.cs" />

@@ -68,16 +68,13 @@
     <Compile Include="LocalDirectoryInfoTest.cs" />
     <Compile Include="LocalFileCounterTest.cs" />
     <Compile Include="LocalFileInfoTest.cs" />
-    <Compile Include="LocalFileSystemScannerTest.cs" />
     <Compile Include="LocalFileSystemTest.cs" />
     <Compile Include="LoggerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncJobTest.cs" />
     <Compile Include="VirtualFileSystem\VirtualDirectoryInfo.cs" />
-    <Compile Include="VirtualFileSystem\VirtualFileCollection.cs" />
     <Compile Include="VirtualFileSystem\VirtualFileInfo.cs" />
     <Compile Include="VirtualFileSystem\VirtualFileSystem.cs" />
-    <Compile Include="VirtualFileSystem\VirtualFileSystemScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlagSync.Core\FlagSync.Core.csproj">

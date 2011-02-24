@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.Test.VirtualFileSystem
 {
     class VirtualFileSystem : IFileSystem
     {
-        private VirtualDirectoryInfo rootDirectory = new VirtualDirectoryInfo(@"root:\");
+        private List<IFileSystemInfo> fileSystemInfos;
 
         /// <summary>
         /// Occurs when the file copy progress has changed.
@@ -21,7 +24,15 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// </returns>
         public bool TryDeleteFile(IFileSystemInfo file)
         {
-            throw new NotImplementedException();
+            if (file == null)
+                throw new ArgumentNullException("file");
+
+            VirtualDirectoryInfo parent =
+                (VirtualDirectoryInfo)this.GetDirectoryInfo(Path.GetDirectoryName(file.FullName));
+
+            this.fileSystemInfos.Remove(file);
+
+            return true;
         }
 
         /// <summary>
@@ -34,7 +45,28 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// </returns>
         public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
-            throw new NotImplementedException();
+            if (sourceDirectory == null)
+                throw new ArgumentNullException("sourceDirectory");
+
+            if (targetDirectory == null)
+                throw new ArgumentNullException("targetDirectory");
+
+            string newDirectoryPath = Path.Combine(targetDirectory.FullName, sourceDirectory.Name);
+
+            if (!this.DirectoryExists(newDirectoryPath))
+            {
+                VirtualDirectoryInfo parent = (VirtualDirectoryInfo)this.GetDirectoryInfo(targetDirectory.FullName);
+
+                if (!parent.IsLocked)
+                {
+                    this.fileSystemInfos.Add(new VirtualDirectoryInfo(
+                        sourceDirectory.Name, parent, false, true));
+                }
+
+                else { throw new UnauthorizedAccessException("The target directory is locked!"); }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -46,7 +78,12 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// </returns>
         public bool TryDeleteDirectory(IDirectoryInfo directory)
         {
-            throw new NotImplementedException();
+            if (directory == null)
+                throw new ArgumentNullException("directory");
+
+            this.fileSystemInfos.Remove(directory);
+
+            return true;
         }
 
         /// <summary>
@@ -61,42 +98,37 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         }
 
         /// <summary>
-        /// Creates a new file info at the specified path.
+        /// Creates a new file info with specified path.
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
-        public IFileInfo CreateFileInfo(string path)
+        public IFileInfo GetFileInfo(string path)
         {
-            return new VirtualFileInfo(path, 0, DateTime.Now);
+            return null;
         }
 
         /// <summary>
-        /// Creates a new directory info at the specified path.
+        /// Creates a new directory info with specified path.
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
-        public IDirectoryInfo CreateDirectoryInfo(string path)
+        public IDirectoryInfo GetDirectoryInfo(string path)
         {
-            return new VirtualDirectoryInfo(path);
-        }
+            path = Path.GetFullPath(path);
+            IFileSystemInfo directory =
+                this.fileSystemInfos.FirstOrDefault(dir => dir.FullName == path);
 
-        /// <summary>
-        /// Creates a file scanner which searches in the specified directory.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public IFileSystemScanner CreateFileSystemScanner(string path)
-        {
-            throw new NotImplementedException();
-        }
+            if (directory != null)
+            {
+                return (IDirectoryInfo)directory;
+            }
 
-        /// <summary>
-        /// Creates the file counter which counts the files of a directory in the current file system.
-        /// </summary>
-        /// <returns></returns>
-        public IFileCounter CreateFileCounter()
-        {
-            throw new NotImplementedException();
+            else
+            {
+                return new VirtualDirectoryInfo(Path.GetFileName(path),
+                    (VirtualDirectoryInfo)this.GetDirectoryInfo(Path.GetDirectoryName(path)),
+                    false, false);
+            }
         }
 
         /// <summary>
@@ -106,7 +138,9 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// <returns></returns>
         public bool FileExists(string path)
         {
-            throw new NotImplementedException();
+            path = Path.GetFullPath(path);
+
+            return this.fileSystemInfos.Any(file => file.FullName == path);
         }
 
         /// <summary>
@@ -116,7 +150,17 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// <returns></returns>
         public bool DirectoryExists(string path)
         {
-            throw new NotImplementedException();
+            path = Path.GetFullPath(path);
+
+            return this.fileSystemInfos.Any(directory => directory.FullName == path);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VirtualFileSystem"/> class.
+        /// </summary>
+        public VirtualFileSystem()
+        {
+            this.fileSystemInfos = new List<IFileSystemInfo>();
         }
     }
 }

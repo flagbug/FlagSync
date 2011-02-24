@@ -5,7 +5,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem
 {
-    class FileSystemScanner : IFileSystemScanner
+    class FileSystemScanner
     {
         private IDirectoryInfo rootDirectory;
 
@@ -50,6 +50,9 @@ namespace FlagSync.Core.FileSystem
         /// Initializes a new instance of the <see cref="FileSystemScanner"/> class.
         /// </summary>
         /// <param name="rootDirectory">The root directory.</param>
+        /// <exception cref="System.ArgumentException">
+        /// The exception that is thrown, if the root directory doesn't exists
+        /// </exception>
         public FileSystemScanner(IDirectoryInfo rootDirectory)
         {
             if (rootDirectory == null)
@@ -57,6 +60,8 @@ namespace FlagSync.Core.FileSystem
 
             if (!rootDirectory.Exists)
                 throw new ArgumentException("The root directory must exist!");
+
+            this.rootDirectory = rootDirectory;
         }
 
         /// <summary>

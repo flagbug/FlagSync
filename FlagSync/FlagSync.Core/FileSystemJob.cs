@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using FlagLib.FileSystem;
+using FlagSync.Core.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core
@@ -58,11 +59,11 @@ namespace FlagSync.Core
             if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
                 throw new ArgumentException("targetDirectoryPath", "The target directory doesn't exist.");
 
-            IFileSystemScanner rootScanner =
-                this.FileSystem.CreateFileSystemScanner(sourceDirectoryPath);
+            FileSystemScanner rootScanner =
+                new FileSystemScanner(this.FileSystem.GetDirectoryInfo(sourceDirectoryPath));
 
             IDirectoryInfo currentTargetDirectory =
-                this.FileSystem.CreateDirectoryInfo(targetDirectoryPath);
+                this.FileSystem.GetDirectoryInfo(targetDirectoryPath);
 
             rootScanner.DirectoryFound += (sender, e) =>
                 {
@@ -82,7 +83,7 @@ namespace FlagSync.Core
                         this.PerformDirectoryCreationOperation(e.Directory, currentTargetDirectory, execute);
                     }
 
-                    currentTargetDirectory = this.FileSystem.CreateDirectoryInfo(newTargetDirectoryPath);
+                    currentTargetDirectory = this.FileSystem.GetDirectoryInfo(newTargetDirectoryPath);
                 };
 
             rootScanner.DirectoryProceeded += (sender, e) =>
@@ -120,7 +121,7 @@ namespace FlagSync.Core
                     }
 
                     //Check if the source file is newer than the target file
-                    else if (this.IsFileModified(e.File, this.FileSystem.CreateFileInfo(targetFilePath)))
+                    else if (this.IsFileModified(e.File, this.FileSystem.GetFileInfo(targetFilePath)))
                     {
                         this.PerformFileModificationOperation(e.File, currentTargetDirectory, execute);
                         this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
@@ -146,10 +147,10 @@ namespace FlagSync.Core
             if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
                 throw new ArgumentException("targetDirectoryPath", "The target directory doesn't exist.");
 
-            IFileSystemScanner rootScanner =
-                this.FileSystem.CreateFileSystemScanner(sourceDirectoryPath);
+            FileSystemScanner rootScanner =
+                new FileSystemScanner(this.FileSystem.GetDirectoryInfo(sourceDirectoryPath));
 
-            IDirectoryInfo currentTargetDirectory = this.FileSystem.CreateDirectoryInfo(targetDirectoryPath);
+            IDirectoryInfo currentTargetDirectory = this.FileSystem.GetDirectoryInfo(targetDirectoryPath);
 
             rootScanner.DirectoryFound += (sender, e) =>
             {
@@ -168,7 +169,7 @@ namespace FlagSync.Core
                     this.PerformDirectoryDeletionOperation(e.Directory, execute);
                 }
 
-                currentTargetDirectory = this.FileSystem.CreateDirectoryInfo(newTargetDirectoryPath);
+                currentTargetDirectory = this.FileSystem.GetDirectoryInfo(newTargetDirectoryPath);
             };
 
             rootScanner.DirectoryProceeded += (sender, e) =>

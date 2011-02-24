@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
@@ -54,6 +56,32 @@ namespace FlagSync.Core.FileSystem.Local
                 throw new ArgumentNullException("directoryInfo");
 
             this.directoryInfo = directoryInfo;
+        }
+
+        /// <summary>
+        /// Return the files in the directory.
+        /// </summary>
+        /// <returns>The files in the directory</returns>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The exception that is thrown if the directory is locked
+        /// </exception>
+        public IEnumerable<IFileInfo> GetFiles()
+        {
+            return this.directoryInfo.GetFiles().
+                Select(file => (IFileInfo)new LocalFileInfo(file));
+        }
+
+        /// <summary>
+        /// Return the directories in the directory.
+        /// </summary>
+        /// <returns>The directories in the directory</returns>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The exception that is thrown if the directory is locked
+        /// </exception>
+        public IEnumerable<IDirectoryInfo> GetDirectories()
+        {
+            return this.directoryInfo.GetDirectories().
+                Select(directory => (IDirectoryInfo)new LocalDirectoryInfo(directory));
         }
     }
 }

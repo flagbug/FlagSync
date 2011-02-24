@@ -73,7 +73,7 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// <exception cref="System.UnauthorizedAccessException">
         /// The exception that is thrown if the directory is locked
         /// </exception>
-        IEnumerable<IFileInfo> IDirectoryInfo.GetFiles()
+        public IEnumerable<IFileInfo> GetFiles()
         {
             if (this.IsLocked)
                 throw new UnauthorizedAccessException("The directory is locked.");
@@ -88,7 +88,7 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// <exception cref="System.UnauthorizedAccessException">
         /// The exception that is thrown if the directory is locked
         /// </exception>
-        IEnumerable<IDirectoryInfo> IDirectoryInfo.GetDirectories()
+        public IEnumerable<IDirectoryInfo> GetDirectories()
         {
             if (this.IsLocked)
                 throw new UnauthorizedAccessException("The directory is locked.");

@@ -40,25 +40,18 @@ namespace FlagSync.Core.FileSystem.Abstract
         bool TryCopyFile(IFileInfo sourceFile, IDirectoryInfo targetDirectory);
 
         /// <summary>
-        /// Creates a new file info at the specified path.
+        /// Gets the file info at the specified path.
         /// </summary>
-        /// <param name="path">The path.</param>
+        /// <param name="path">The path of the file.</param>
         /// <returns></returns>
-        IFileInfo CreateFileInfo(string path);
+        IFileInfo GetFileInfo(string path);
 
         /// <summary>
-        /// Creates a new directory info at the specified path.
+        /// Gets the directory info at the specified path.
         /// </summary>
-        /// <param name="path">The path.</param>
+        /// <param name="path">The path of the directory.</param>
         /// <returns></returns>
-        IDirectoryInfo CreateDirectoryInfo(string path);
-
-        /// <summary>
-        /// Creates a file scanner which searches in the specified directory.
-        /// </summary>
-        /// <param name="directory">The directory to search.</param>
-        /// <returns></returns>
-        IFileSystemScanner CreateFileSystemScanner(string path);
+        IDirectoryInfo GetDirectoryInfo(string path);
 
         /// <summary>
         /// Creates the file counter which counts the files of a directory in the current file system.

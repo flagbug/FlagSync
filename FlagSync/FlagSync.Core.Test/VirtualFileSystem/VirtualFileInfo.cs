@@ -22,10 +22,7 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// Gets the directory of the file.
         /// </summary>
         /// <value>The directory of the file.</value>
-        public IDirectoryInfo Directory
-        {
-            get { return new VirtualDirectoryInfo(Path.GetDirectoryName(this.FullName)); }
-        }
+        public IDirectoryInfo Directory { get; private set; }
 
         /// <summary>
         /// Gets or sets the full name.
@@ -48,7 +45,7 @@ namespace FlagSync.Core.Test.VirtualFileSystem
         /// <param name="path">The path.</param>
         /// <param name="length">The length.</param>
         /// <param name="lastWriteTime">The last write time.</param>
-        public VirtualFileInfo(string path, long length, DateTime lastWriteTime)
+        public VirtualFileInfo(string path, long length, DateTime lastWriteTime, VirtualDirectoryInfo directory)
         {
             if (path == null)
                 throw new ArgumentNullException("path");
@@ -56,12 +53,16 @@ namespace FlagSync.Core.Test.VirtualFileSystem
             if (lastWriteTime == null)
                 throw new ArgumentNullException("lastWriteTime");
 
+            if (directory == null)
+                throw new ArgumentNullException("directory");
+
             //This checks wether the path is valid and throws an exception if not
-            FileInfo directory = new FileInfo(path);
+            FileInfo testDirectory = new FileInfo(path);
 
             this.FullName = path;
             this.Length = length;
             this.LastWriteTime = lastWriteTime;
+            this.Directory = directory;
         }
     }
 }
