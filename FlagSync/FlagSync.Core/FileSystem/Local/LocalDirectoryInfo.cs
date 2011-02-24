@@ -36,6 +36,15 @@ namespace FlagSync.Core.FileSystem.Local
         }
 
         /// <summary>
+        /// Gets a value indicating whether the directory exists.
+        /// </summary>
+        /// <value><c>true</c> if the directory exists; otherwise, <c>false</c>.</value>
+        public bool Exists
+        {
+            get { return this.directoryInfo.Exists; }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="LocalDirectoryInfo"/> class.
         /// </summary>
         /// <param name="directoryInfo">The directory info to wrap.</param>

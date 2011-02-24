@@ -1,4 +1,6 @@
-﻿namespace FlagSync.Core.FileSystem.Abstract
+﻿using System.Collections.Generic;
+
+namespace FlagSync.Core.FileSystem.Abstract
 {
     public interface IDirectoryInfo : IFileSystemInfo
     {
@@ -7,5 +9,29 @@
         /// </summary>
         /// <value>The parent directory.</value>
         IDirectoryInfo Parent { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the directory exists.
+        /// </summary>
+        /// <value><c>true</c> if the directory exists; otherwise, <c>false</c>.</value>
+        bool Exists { get; }
+
+        /// <summary>
+        /// Return the files in the directory.
+        /// </summary>
+        /// <returns>The files in the directory</returns>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The exception that is thrown if the directory is locked
+        /// </exception>
+        IEnumerable<IFileInfo> GetFiles();
+
+        /// <summary>
+        /// Return the directories in the directory.
+        /// </summary>
+        /// <returns>The directories in the directory</returns>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The exception that is thrown if the directory is locked
+        /// </exception>
+        public IEnumerable<IDirectoryInfo> GetDirectories();
     }
 }
