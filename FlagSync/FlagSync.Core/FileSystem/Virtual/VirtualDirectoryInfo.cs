@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FlagSync.Core.FileSystem.Abstract;
 
-namespace FlagSync.Core.Test.VirtualFileSystem
+namespace FlagSync.Core.FileSystem.Virtual
 {
     class VirtualDirectoryInfo : IDirectoryInfo
     {
@@ -78,7 +79,7 @@ namespace FlagSync.Core.Test.VirtualFileSystem
             if (this.IsLocked)
                 throw new UnauthorizedAccessException("The directory is locked.");
 
-            return this.files.AsReadOnly();
+            return this.files.Cast<IFileInfo>();
         }
 
         /// <summary>
@@ -93,7 +94,7 @@ namespace FlagSync.Core.Test.VirtualFileSystem
             if (this.IsLocked)
                 throw new UnauthorizedAccessException("The directory is locked.");
 
-            return this.directories.AsReadOnly();
+            return this.directories.Cast<IDirectoryInfo>();
         }
     }
 }

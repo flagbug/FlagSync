@@ -2,7 +2,7 @@
 using System.IO;
 using FlagSync.Core.FileSystem.Abstract;
 
-namespace FlagSync.Core.Test.VirtualFileSystem
+namespace FlagSync.Core.FileSystem.Virtual
 {
     class VirtualFileInfo : IFileInfo
     {

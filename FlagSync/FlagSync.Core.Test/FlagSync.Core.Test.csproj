@@ -71,9 +71,6 @@
     <Compile Include="LoggerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncJobTest.cs" />
-    <Compile Include="VirtualFileSystem\VirtualDirectoryInfo.cs" />
-    <Compile Include="VirtualFileSystem\VirtualFileInfo.cs" />
-    <Compile Include="VirtualFileSystem\VirtualFileSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlagSync.Core\FlagSync.Core.csproj">

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using FlagSync.Core.FileSystem.Abstract;
 
-namespace FlagSync.Core.Test.VirtualFileSystem
+namespace FlagSync.Core.FileSystem.Virtual
 {
     class VirtualFileSystem : IFileSystem
     {
