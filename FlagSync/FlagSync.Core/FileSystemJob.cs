@@ -43,8 +43,6 @@ namespace FlagSync.Core
             }
         }
 
-        #region High level operations
-
         /// <summary>
         /// Backups a directory recursively to another directory (without deletions).
         /// </summary>
@@ -217,10 +215,6 @@ namespace FlagSync.Core
             rootScanner.Start();
         }
 
-        #endregion High level operations
-
-        #region Mid level operations
-
         /// <summary>
         /// Performs a file deletion (mid level operation).
         /// </summary>
@@ -373,7 +367,5 @@ namespace FlagSync.Core
                 this.OnDirectoryCreationError(new DirectoryCreationEventArgs(sourceDirectory, targetDirectory));
             }
         }
-
-        #endregion Mid level operations
     }
 }

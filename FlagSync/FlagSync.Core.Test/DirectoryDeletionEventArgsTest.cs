@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagSync.Core.Test
 {
@@ -57,7 +58,7 @@ namespace FlagSync.Core.Test
         //}
         //
 
-        #endregion
+        #endregion Additional test attributes
 
         /// <summary>
         ///A test for DirectoryDeletionEventArgs Constructor
@@ -65,26 +66,37 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void DirectoryDeletionEventArgsConstructorTest()
         {
-            string directoryPath = string.Empty; // TODO: Initialize to an appropriate value
+            string directoryPath = @"C:\TestDirectory";
             DirectoryDeletionEventArgs target = new DirectoryDeletionEventArgs(directoryPath);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            try
+            {
+                target = new DirectoryDeletionEventArgs(null);
+
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
         }
 
         /// <summary>
         ///A test for DirectoryPath
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("FlagSync.Core.dll")]
         public void DirectoryPathTest()
         {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            DirectoryDeletionEventArgs_Accessor target = new DirectoryDeletionEventArgs_Accessor(param0); // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
-            string actual;
-            target.DirectoryPath = expected;
-            actual = target.DirectoryPath;
+            string directoryPath = @"C:\TestDirectory";
+
+            DirectoryDeletionEventArgs target = new DirectoryDeletionEventArgs(directoryPath);
+
+            string expected = @"C:\TestDirectory";
+            string actual = target.DirectoryPath;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }

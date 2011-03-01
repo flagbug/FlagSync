@@ -1,19 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Virtual
 {
     class VirtualFileSystem : IFileSystem
     {
-        private List<IFileSystemInfo> fileSystemInfos;
+        public VirtualDirectoryInfo RootDirectory { get; private set; }
 
         /// <summary>
         /// Occurs when the file copy progress has changed.
         /// </summary>
         public event EventHandler<FlagLib.FileSystem.CopyProgressEventArgs> FileCopyProgressChanged;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VirtualFileSystem"/> class.
+        /// </summary>
+        public VirtualFileSystem()
+        {
+            this.RootDirectory = new VirtualDirectoryInfo("C://", null, false, true);
+        }
 
         /// <summary>
         /// Tries to delete a file.
@@ -32,7 +38,7 @@ namespace FlagSync.Core.FileSystem.Virtual
 
             if (!parent.IsLocked)
             {
-                this.fileSystemInfos.Remove(file);
+                parent.UnRegisterFile((VirtualFileInfo)file);
             }
 
             else { throw new UnauthorizedAccessException("The parent directory is locked!"); }
@@ -64,8 +70,7 @@ namespace FlagSync.Core.FileSystem.Virtual
 
                 if (!parent.IsLocked)
                 {
-                    this.fileSystemInfos.Add(new VirtualDirectoryInfo(
-                        sourceDirectory.Name, parent, false, true));
+                    parent.RegisterDirectory(new VirtualDirectoryInfo(sourceDirectory.Name, parent, false, true));
                 }
 
                 else { throw new UnauthorizedAccessException("The parent directory is locked!"); }
@@ -86,9 +91,10 @@ namespace FlagSync.Core.FileSystem.Virtual
             if (directory == null)
                 throw new ArgumentNullException("directory");
 
-            if (!((VirtualDirectoryInfo)directory.Parent).IsLocked)
+            VirtualDirectoryInfo parent = (VirtualDirectoryInfo)directory.Parent;
+            if (!parent.IsLocked)
             {
-                this.fileSystemInfos.Remove(directory);
+                parent.UnRegisterDirectory((VirtualDirectoryInfo)directory);
             }
 
             else { throw new UnauthorizedAccessException("The parent directory is locked!"); }
@@ -116,7 +122,7 @@ namespace FlagSync.Core.FileSystem.Virtual
             {
                 string newFilePath = Path.Combine(targetDirectory.FullName, sourceFile.Name);
 
-                this.fileSystemInfos.Add(new VirtualFileInfo(newFilePath, sourceFile.Length, DateTime.Now, tarDir));
+                //this.fileSystemInfos.Add(new VirtualFileInfo(newFilePath, sourceFile.Length, DateTime.Now, tarDir));
             }
 
             else { throw new UnauthorizedAccessException("The parent directory is locked!"); }
@@ -133,8 +139,8 @@ namespace FlagSync.Core.FileSystem.Virtual
         {
             path = Path.GetFullPath(path);
 
-            IFileSystemInfo file =
-                this.fileSystemInfos.FirstOrDefault(f => f.FullName == path);
+            IFileSystemInfo file = null;
+            //this.fileSystemInfos.FirstOrDefault(f => f.FullName == path);
 
             if (file != null)
             {
@@ -160,8 +166,8 @@ namespace FlagSync.Core.FileSystem.Virtual
 
             path = Path.GetFullPath(path);
 
-            IFileSystemInfo directory =
-                this.fileSystemInfos.FirstOrDefault(dir => dir.FullName == path);
+            IFileSystemInfo directory = null;
+            //this.fileSystemInfos.FirstOrDefault(dir => dir.FullName == path);
 
             if (directory != null)
             {
@@ -184,8 +190,8 @@ namespace FlagSync.Core.FileSystem.Virtual
         public bool FileExists(string path)
         {
             path = Path.GetFullPath(path);
-
-            return this.fileSystemInfos.Any(file => file.FullName == path);
+            return false;
+            //return this.fileSystemInfos.Any(file => file.FullName == path);
         }
 
         /// <summary>
@@ -196,16 +202,8 @@ namespace FlagSync.Core.FileSystem.Virtual
         public bool DirectoryExists(string path)
         {
             path = Path.GetFullPath(path);
-
-            return this.fileSystemInfos.Any(directory => directory.FullName == path);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VirtualFileSystem"/> class.
-        /// </summary>
-        public VirtualFileSystem()
-        {
-            this.fileSystemInfos = new List<IFileSystemInfo>();
+            return false;
+            //return this.fileSystemInfos.Any(directory => directory.FullName == path);
         }
     }
 }

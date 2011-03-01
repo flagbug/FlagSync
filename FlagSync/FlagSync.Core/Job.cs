@@ -136,6 +136,12 @@ namespace FlagSync.Core
         /// <param name="fileSystem">The file system.</param>
         protected Job(JobSetting settings, IFileSystem fileSystem)
         {
+            if (settings == null)
+                throw new ArgumentNullException("settings");
+
+            if (fileSystem == null)
+                throw new ArgumentNullException("fileSystem");
+
             this.Settings = settings;
             this.FileSystem = fileSystem;
         }

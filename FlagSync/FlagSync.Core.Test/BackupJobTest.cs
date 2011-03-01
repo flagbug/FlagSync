@@ -1,4 +1,6 @@
-﻿using FlagSync.Core.FileSystem.Abstract;
+﻿using System;
+using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Virtual;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagSync.Core.Test
@@ -66,10 +68,33 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void BackupJobConstructorTest()
         {
-            JobSetting settings = null; // TODO: Initialize to an appropriate value
-            IFileSystem fileSystem = null; // TODO: Initialize to an appropriate value
+            JobSetting settings = new JobSetting();
+            IFileSystem fileSystem = new VirtualFileSystem();
             BackupJob target = new BackupJob(settings, fileSystem);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            try
+            {
+                target = new BackupJob(null, fileSystem);
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
+
+            try
+            {
+                target = new BackupJob(settings, null);
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
         }
 
         /// <summary>

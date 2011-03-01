@@ -8,8 +8,7 @@ namespace FlagSync.Core.FileSystem.Virtual
 {
     class VirtualDirectoryInfo : IDirectoryInfo
     {
-        private List<VirtualFileInfo> files;
-        private List<VirtualDirectoryInfo> directories;
+        private List<IFileSystemInfo> fileSystemInfos;
 
         /// <summary>
         /// Gets the parent directory.
@@ -53,7 +52,17 @@ namespace FlagSync.Core.FileSystem.Virtual
             if (name == null)
                 throw new ArgumentNullException("path");
 
-            string path = Path.Combine(parentDirectory.FullName, name);
+            string path;
+
+            if (parentDirectory != null)
+            {
+                path = Path.Combine(parentDirectory.FullName, name);
+            }
+
+            else
+            {
+                path = Path.GetFullPath(name);
+            }
 
             //This checks wether the path is valid and throws an exception if not
             DirectoryInfo directory = new DirectoryInfo(path);
@@ -63,8 +72,7 @@ namespace FlagSync.Core.FileSystem.Virtual
             this.IsLocked = isLocked;
             this.Exists = exists;
 
-            this.files = new List<VirtualFileInfo>();
-            this.directories = new List<VirtualDirectoryInfo>();
+            this.fileSystemInfos = new List<IFileSystemInfo>();
         }
 
         /// <summary>
@@ -76,10 +84,23 @@ namespace FlagSync.Core.FileSystem.Virtual
         /// </exception>
         public IEnumerable<IFileInfo> GetFiles()
         {
-            if (this.IsLocked)
+            return this.GetFiles(false);
+        }
+
+        /// <summary>
+        /// Return the files in the directory.
+        /// </summary>
+        /// <param name="ignoreLock">if set to <c>true</c> ignore the lock that the directory has.</param>
+        /// <returns>The files in the directory</returns>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The exception that is thrown if the directory is locked
+        /// </exception>
+        public IEnumerable<IFileInfo> GetFiles(bool ignoreLock)
+        {
+            if (this.IsLocked && !ignoreLock)
                 throw new UnauthorizedAccessException("The directory is locked.");
 
-            return this.files.Cast<IFileInfo>();
+            return this.fileSystemInfos.OfType<IFileInfo>();
         }
 
         /// <summary>
@@ -91,10 +112,65 @@ namespace FlagSync.Core.FileSystem.Virtual
         /// </exception>
         public IEnumerable<IDirectoryInfo> GetDirectories()
         {
-            if (this.IsLocked)
+            return this.GetDirectories(false);
+        }
+
+        /// <summary>
+        /// Return the directories in the directory.
+        /// </summary>
+        /// <param name="ignoreLock">if set to <c>true</c> ignore the lock that the directory has.</param>
+        /// <returns>The directories in the directory</returns>
+        /// <exception cref="System.UnauthorizedAccessException">
+        /// The exception that is thrown if the directory is locked
+        /// </exception>
+        public IEnumerable<IDirectoryInfo> GetDirectories(bool ignoreLock)
+        {
+            if (this.IsLocked && !ignoreLock)
                 throw new UnauthorizedAccessException("The directory is locked.");
 
-            return this.directories.Cast<IDirectoryInfo>();
+            return this.fileSystemInfos.OfType<IDirectoryInfo>();
+        }
+
+        /// <summary>
+        /// Registers the directory.
+        /// </summary>
+        /// <param name="directory">The directory.</param>
+        public void RegisterDirectory(VirtualDirectoryInfo directory)
+        {
+            if (!this.fileSystemInfos.Any(dir => dir.FullName == directory.FullName))
+            {
+                this.fileSystemInfos.Add(directory);
+            }
+        }
+
+        /// <summary>
+        /// Registers the file.
+        /// </summary>
+        /// <param name="directory">The file.</param>
+        public void RegisterFile(VirtualFileInfo file)
+        {
+            if (!this.fileSystemInfos.Any(f => f.FullName == file.FullName))
+            {
+                this.fileSystemInfos.Add(file);
+            }
+        }
+
+        /// <summary>
+        /// Unregisters the directory.
+        /// </summary>
+        /// <param name="directory">The directory to unregister.</param>
+        public void UnRegisterDirectory(VirtualDirectoryInfo directory)
+        {
+            this.fileSystemInfos.Remove(directory);
+        }
+
+        /// <summary>
+        /// Unregisters the file.
+        /// </summary>
+        /// <param name="directory">The file to unregister.</param>
+        public void UnRegisterFile(VirtualFileInfo file)
+        {
+            this.fileSystemInfos.Remove(file);
         }
     }
 }

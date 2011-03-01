@@ -1,4 +1,6 @@
-﻿using FlagSync.Core.FileSystem.Abstract;
+﻿using System;
+using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Virtual;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagSync.Core.Test
@@ -66,44 +68,70 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void DirectoryCreationEventArgsConstructorTest()
         {
-            IDirectoryInfo directory = null; // TODO: Initialize to an appropriate value
-            IDirectoryInfo targetDirectory = null; // TODO: Initialize to an appropriate value
+            IDirectoryInfo directory = new VirtualDirectoryInfo("TestDirectory", null, false, true);
+            IDirectoryInfo targetDirectory = new VirtualDirectoryInfo("TestTarget", null, false, true);
+
             DirectoryCreationEventArgs target = new DirectoryCreationEventArgs(directory, targetDirectory);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            try
+            {
+                target = new DirectoryCreationEventArgs(null, targetDirectory);
+
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
+
+            try
+            {
+                target = new DirectoryCreationEventArgs(directory, null);
+
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
         }
 
         /// <summary>
         ///A test for Directory
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("FlagSync.Core.dll")]
         public void DirectoryTest()
         {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            DirectoryCreationEventArgs_Accessor target = new DirectoryCreationEventArgs_Accessor(param0); // TODO: Initialize to an appropriate value
-            IDirectoryInfo expected = null; // TODO: Initialize to an appropriate value
-            IDirectoryInfo actual;
-            target.Directory = expected;
-            actual = target.Directory;
+            IDirectoryInfo directory = new VirtualDirectoryInfo("TestDirectory", null, false, true);
+            IDirectoryInfo targetDirectory = new VirtualDirectoryInfo("TestTarget", null, false, true);
+
+            DirectoryCreationEventArgs target = new DirectoryCreationEventArgs(directory, targetDirectory);
+
+            IDirectoryInfo expected = directory;
+            IDirectoryInfo actual = target.Directory;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
         ///A test for TargetDirectory
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("FlagSync.Core.dll")]
         public void TargetDirectoryTest()
         {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            DirectoryCreationEventArgs_Accessor target = new DirectoryCreationEventArgs_Accessor(param0); // TODO: Initialize to an appropriate value
-            IDirectoryInfo expected = null; // TODO: Initialize to an appropriate value
-            IDirectoryInfo actual;
-            target.TargetDirectory = expected;
-            actual = target.TargetDirectory;
+            IDirectoryInfo directory = new VirtualDirectoryInfo("TestDirectory", null, false, true);
+            IDirectoryInfo targetDirectory = new VirtualDirectoryInfo("TestTarget", null, false, true);
+
+            DirectoryCreationEventArgs target = new DirectoryCreationEventArgs(directory, targetDirectory);
+
+            IDirectoryInfo expected = targetDirectory;
+            IDirectoryInfo actual = target.TargetDirectory;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }
