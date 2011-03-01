@@ -306,4 +306,16 @@
   <data name="LoadSettingsErrorMessage" xml:space="preserve">
     <value>Error while loading the jobs! Maybe the file is corrupt.</value>
   </data>
+  <data name="DeleteString" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="LoadString" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="NewString" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="SaveString" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

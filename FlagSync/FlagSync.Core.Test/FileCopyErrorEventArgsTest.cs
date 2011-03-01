@@ -1,4 +1,6 @@
-﻿using FlagSync.Core.FileSystem.Abstract;
+﻿using System;
+using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Virtual;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagSync.Core.Test
@@ -66,27 +68,55 @@ namespace FlagSync.Core.Test
         [TestMethod()]
         public void FileCopyErrorEventArgsConstructorTest()
         {
-            IFileInfo file = null; // TODO: Initialize to an appropriate value
-            IDirectoryInfo targetDirectory = null; // TODO: Initialize to an appropriate value
+            VirtualDirectoryInfo rootDirectory = new VirtualDirectoryInfo("Root", null, false, true);
+            IFileInfo file = new VirtualFileInfo("TestFile", 1024, DateTime.Now, rootDirectory);
+            IDirectoryInfo targetDirectory = new VirtualDirectoryInfo("TestDirectory", null, false, true);
+
             FileCopyErrorEventArgs target = new FileCopyErrorEventArgs(file, targetDirectory);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+
+            try
+            {
+                target = new FileCopyErrorEventArgs(null, targetDirectory);
+
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
+
+            try
+            {
+                target = new FileCopyErrorEventArgs(file, null);
+
+                Assert.Fail("Constructor must throw argument null exception");
+            }
+
+            catch (ArgumentNullException) { }
+            catch (Exception e)
+            {
+                Assert.Fail("A wrong exception has been thrown: " + e.ToString());
+            }
         }
 
         /// <summary>
         ///A test for File
         ///</summary>
         [TestMethod()]
-        [DeploymentItem("FlagSync.Core.dll")]
         public void FileTest()
         {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            FileCopyErrorEventArgs_Accessor target = new FileCopyErrorEventArgs_Accessor(param0); // TODO: Initialize to an appropriate value
-            IFileInfo expected = null; // TODO: Initialize to an appropriate value
-            IFileInfo actual;
-            target.File = expected;
-            actual = target.File;
+            VirtualDirectoryInfo rootDirectory = new VirtualDirectoryInfo("Root", null, false, true);
+            IFileInfo file = new VirtualFileInfo("TestFile", 1024, DateTime.Now, rootDirectory);
+            IDirectoryInfo targetDirectory = new VirtualDirectoryInfo("TestDirectory", null, false, true);
+
+            FileCopyErrorEventArgs target = new FileCopyErrorEventArgs(file, targetDirectory);
+
+            IFileInfo expected = file;
+            IFileInfo actual = target.File;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -96,14 +126,16 @@ namespace FlagSync.Core.Test
         [DeploymentItem("FlagSync.Core.dll")]
         public void TargetDirectoryTest()
         {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            FileCopyErrorEventArgs_Accessor target = new FileCopyErrorEventArgs_Accessor(param0); // TODO: Initialize to an appropriate value
-            IDirectoryInfo expected = null; // TODO: Initialize to an appropriate value
-            IDirectoryInfo actual;
-            target.TargetDirectory = expected;
-            actual = target.TargetDirectory;
+            VirtualDirectoryInfo rootDirectory = new VirtualDirectoryInfo("Root", null, false, true);
+            IFileInfo file = new VirtualFileInfo("TestFile", 1024, DateTime.Now, rootDirectory);
+            IDirectoryInfo targetDirectory = new VirtualDirectoryInfo("TestDirectory", null, false, true);
+
+            FileCopyErrorEventArgs target = new FileCopyErrorEventArgs(file, targetDirectory);
+
+            IDirectoryInfo expected = targetDirectory;
+            IDirectoryInfo actual = target.TargetDirectory;
+
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }

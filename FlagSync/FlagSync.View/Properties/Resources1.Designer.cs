@@ -196,6 +196,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DeleteString {
+            get {
+                return ResourceManager.GetString("DeleteString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleting.
         /// </summary>
         public static string DeletingString {
@@ -403,6 +412,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load.
+        /// </summary>
+        public static string LoadString {
+            get {
+                return ResourceManager.GetString("LoadString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log.
         /// </summary>
         public static string LogTabItemText {
@@ -466,6 +484,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string NewString {
+            get {
+                return ResourceManager.GetString("NewString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paused jobs..
         /// </summary>
         public static string PausedJobsMessage {
@@ -516,6 +543,15 @@ namespace FlagSync.View.Properties {
         public static string SaveJobsButtonText {
             get {
                 return ResourceManager.GetString("SaveJobsButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SaveString {
+            get {
+                return ResourceManager.GetString("SaveString", resourceCulture);
             }
         }
         
