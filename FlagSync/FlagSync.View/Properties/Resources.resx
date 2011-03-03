@@ -318,4 +318,19 @@
   <data name="SaveString" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="BackupString" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="NoActiveJobText" xml:space="preserve">
+    <value>No active job</value>
+  </data>
+  <data name="SynchronizationString" xml:space="preserve">
+    <value>Synchronization</value>
+  </data>
+  <data name="ListBoxItemJobNameText" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="ListBoxItemJobTypeText" xml:space="preserve">
+    <value>Type:</value>
+  </data>
 </root>

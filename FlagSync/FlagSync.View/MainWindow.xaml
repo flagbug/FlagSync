@@ -104,7 +104,7 @@
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.ModeTextBlockText}" Height="Auto" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Padding="0" />
                         <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.SyncMode}" Margin="5,0,0,0" />
                     </Grid>
-                    <TextBlock FontWeight="Bold" Text="No active job" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.NoActiveJobText}" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock.Style>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
                                 <Style.Triggers>
@@ -214,10 +214,10 @@
                                                 <RowDefinition Height="*" />
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <TextBlock Grid.Column="0" Grid.Row="0" Text="Name:" FontWeight="Bold" Foreground="Green" />
-                                            <TextBlock Grid.Column="0" Grid.Row="1" Text="Type:" FontWeight="Bold" />
+                                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Static properties:Resources.ListBoxItemJobNameText}" FontWeight="Bold" Foreground="Green" />
+                                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{x:Static properties:Resources.ListBoxItemJobTypeText}" FontWeight="Bold" />
                                             <TextBlock Grid.Column="1" Margin="5, 0, 0, 0" Grid.Row="0" Text="{Binding Path=Name}" Foreground="#FFFF6700" FontWeight="Bold" />
-                                            <TextBlock Grid.Column="1" Margin="5, 0, 0, 0" Grid.Row="1" Text="{Binding Path=SyncMode}" />
+                                            <TextBlock Grid.Column="1" Margin="5, 0, 0, 0" Grid.Row="1" Text="{Binding Path=SyncModeString}" />
                                         </Grid>
                                     </StackPanel>
                                 </DataTemplate>

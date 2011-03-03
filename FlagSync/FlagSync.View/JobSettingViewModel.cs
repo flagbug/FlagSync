@@ -8,8 +8,6 @@ namespace FlagSync.View
 {
     public class JobSettingViewModel : ViewModelBase<JobSettingViewModel>, IDataErrorInfo
     {
-        #region Properties
-
         /// <summary>
         /// Gets or sets a value indicating whether this instance is included for syncing.
         /// </summary>
@@ -96,6 +94,31 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        public string SyncModeString
+        {
+            get
+            {
+                string syncMode = string.Empty;
+
+                switch (this.SyncMode)
+                {
+                    case Core.SyncMode.Backup:
+                        syncMode = Properties.Resources.BackupString;
+                        break;
+
+                    case Core.SyncMode.Synchronization:
+                        syncMode = Properties.Resources.SynchronizationString;
+                        break;
+                }
+
+                return syncMode;
+            }
+        }
+
+        /// <summary>
         /// Gets an error message indicating what is wrong with this object.
         /// </summary>
         /// <value>The error message</value>
@@ -137,10 +160,6 @@ namespace FlagSync.View
         /// <value>The intern job setting.</value>
         public JobSetting InternJobSetting { get; private set; }
 
-        #endregion Properties
-
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="JobSettingViewModel"/> class.
         /// </summary>
@@ -159,10 +178,6 @@ namespace FlagSync.View
             this.InternJobSetting = internJobSetting;
         }
 
-        #endregion Constructor
-
-        #region Public methods
-
         /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.
         /// </summary>
@@ -173,7 +188,5 @@ namespace FlagSync.View
         {
             return this.InternJobSetting.ToString();
         }
-
-        #endregion Public methods
     }
 }

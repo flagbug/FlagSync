@@ -118,7 +118,10 @@ namespace FlagSync.Core.FileSystem
                     {
                         if (this.IsStopped) { return; }
 
-                        this.OnFileFound(new FileFoundEventArgs(file));
+                        if (file.Exists)
+                        {
+                            this.OnFileFound(new FileFoundEventArgs(file));
+                        }
                     }
 
                     IEnumerable<IDirectoryInfo> directories = rootDirectory.GetDirectories();

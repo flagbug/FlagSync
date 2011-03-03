@@ -54,6 +54,15 @@ namespace FlagSync.Core.FileSystem.Local
         }
 
         /// <summary>
+        /// Gets a value indicating whether the file exists.
+        /// </summary>
+        /// <value>true if the file exists; otherwise, false.</value>
+        public bool Exists
+        {
+            get { return this.fileInfo.Exists; }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="LocalFileInfo"/> class.
         /// </summary>
         /// <param name="fileInfo">The file info to wrap.</param>

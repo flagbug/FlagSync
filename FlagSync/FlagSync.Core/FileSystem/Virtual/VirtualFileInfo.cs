@@ -40,6 +40,15 @@ namespace FlagSync.Core.FileSystem.Virtual
         }
 
         /// <summary>
+        /// Gets a value indicating whether the file exists.
+        /// </summary>
+        /// <value>true if the file exists; otherwise, false.</value>
+        public bool Exists
+        {
+            get { return true; }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="VirtualFileInfo"/> class.
         /// </summary>
         /// <param name="path">The path.</param>

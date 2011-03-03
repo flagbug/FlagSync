@@ -21,5 +21,11 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <value>The directory of the file.</value>
         IDirectoryInfo Directory { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the file exists.
+        /// </summary>
+        /// <value>true if the file exists; otherwise, false.</value>
+        bool Exists { get; }
     }
 }

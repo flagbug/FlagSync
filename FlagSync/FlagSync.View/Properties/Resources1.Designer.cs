@@ -115,6 +115,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        public static string BackupString {
+            get {
+                return ResourceManager.GetString("BackupString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Common Settings.
         /// </summary>
         public static string CommonSettingsGroupBoxText {
@@ -394,6 +403,24 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        public static string ListBoxItemJobNameText {
+            get {
+                return ResourceManager.GetString("ListBoxItemJobNameText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type:.
+        /// </summary>
+        public static string ListBoxItemJobTypeText {
+            get {
+                return ResourceManager.GetString("ListBoxItemJobTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load Jobs.
         /// </summary>
         public static string LoadJobsButtonText {
@@ -489,6 +516,15 @@ namespace FlagSync.View.Properties {
         public static string NewString {
             get {
                 return ResourceManager.GetString("NewString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No active job.
+        /// </summary>
+        public static string NoActiveJobText {
+            get {
+                return ResourceManager.GetString("NoActiveJobText", resourceCulture);
             }
         }
         
@@ -615,6 +651,15 @@ namespace FlagSync.View.Properties {
         public static string StoppedAllJobsMessage {
             get {
                 return ResourceManager.GetString("StoppedAllJobsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronization.
+        /// </summary>
+        public static string SynchronizationString {
+            get {
+                return ResourceManager.GetString("SynchronizationString", resourceCulture);
             }
         }
         
