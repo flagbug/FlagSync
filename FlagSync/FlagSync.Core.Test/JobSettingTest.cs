@@ -185,7 +185,7 @@ namespace FlagSync.Core.Test
         {
             JobSetting target = new JobSetting();
 
-            SyncMode expected = SyncMode.Synchronization;
+            SyncMode expected = SyncMode.LocalSynchronization;
             SyncMode actual;
 
             target.SyncMode = expected;

@@ -36,6 +36,18 @@ namespace FlagSync.Core
         public bool IsIncluded { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the FTP server user.
+        /// </summary>
+        /// <value>The name of the FTP user.</value>
+        public string FtpUserName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the FTP server password.
+        /// </summary>
+        /// <value>The FTP server password.</value>
+        public string FtpPassword { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="JobSetting"/> class.
         /// </summary>
         /// <param name="name">The name.</param>

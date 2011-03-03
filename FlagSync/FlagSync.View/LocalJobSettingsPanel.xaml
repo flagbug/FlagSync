@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="FlagSync.View.LocalJobSettingsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FlagSync.View"
+             xmlns:properties="clr-namespace:FlagSync.View.Properties"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <Grid>
+        <GroupBox Header="{x:Static properties:Resources.CommonSettingsGroupBoxText}" Margin="5,0,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Name:" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
+                    <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+                    <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryAButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
+                            <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryAButtonText}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=DirectoryA, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" Name="directoryBButton" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryBButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
+                            <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryBButtonText}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=DirectoryB, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Mode:" Grid.Column="0" />
+                    <StackPanel Margin="5, 5, 5, 5" Grid.Column="1">
+                        <RadioButton Name="jobSettingsBackupModeRadioButton" GroupName="jobMode" Checked="jobSettingsBackupModeRadioButton_Checked" Content="{x:Static properties:Resources.BackupModeRadioButtonText}" />
+                        <RadioButton Name="jobSettingsSyncModeRadioButton" GroupName="jobMode" Checked="jobSettingsSyncModeRadioButton_Checked" Content="{x:Static properties:Resources.SyncModeRadioButtonText}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

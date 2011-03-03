@@ -247,11 +247,11 @@ namespace FlagSync.Core
             {
                 switch (jobSetting.SyncMode)
                 {
-                    case SyncMode.Backup:
+                    case SyncMode.LocalBackup:
                         this.jobQueue.Enqueue(new BackupJob(jobSetting, new FileSystem.Local.LocalFileSystem()));
                         break;
 
-                    case SyncMode.Synchronization:
+                    case SyncMode.LocalSynchronization:
                         this.jobQueue.Enqueue(new SyncJob(jobSetting, new FileSystem.Local.LocalFileSystem()));
                         break;
                 }

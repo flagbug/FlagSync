@@ -6,12 +6,27 @@
     public enum SyncMode
     {
         /// <summary>
-        /// Backup mode
+        /// Backup on the local file system
         /// </summary>
-        Backup,
+        LocalBackup,
         /// <summary>
-        /// Synchronization mode
+        /// Synchronization on the local file System
         /// </summary>
-        Synchronization
+        LocalSynchronization,
+
+        /// <summary>
+        /// Backup on a FTP server
+        /// </summary>
+        FtpBackup,
+
+        /// <summary>
+        /// Synchronization on a FTP server
+        /// </summary>
+        FtpSynchronization,
+
+        /// <summary>
+        /// Synchronization of an extern media device with iTunes
+        /// </summary>
+        ITunes
     }
 }

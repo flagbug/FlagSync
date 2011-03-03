@@ -105,11 +105,11 @@ namespace FlagSync.View
 
                 switch (this.SyncMode)
                 {
-                    case Core.SyncMode.Backup:
+                    case Core.SyncMode.LocalBackup:
                         syncMode = Properties.Resources.BackupString;
                         break;
 
-                    case Core.SyncMode.Synchronization:
+                    case Core.SyncMode.LocalSynchronization:
                         syncMode = Properties.Resources.SynchronizationString;
                         break;
                 }
@@ -165,8 +165,8 @@ namespace FlagSync.View
         /// </summary>
         /// <param name="name">The name.</param>
         public JobSettingViewModel(string name)
+            : this(new JobSetting(name))
         {
-            this.InternJobSetting = new JobSetting(name);
         }
 
         /// <summary>
