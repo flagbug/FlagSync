@@ -185,7 +185,7 @@ namespace FlagSync.Core.Test
         public void TryDeleteFileTest()
         {
             LocalFileSystem target = new LocalFileSystem(); // TODO: Initialize to an appropriate value
-            IFileSystemInfo file = null; // TODO: Initialize to an appropriate value
+            IFileInfo file = null; // TODO: Initialize to an appropriate value
             bool expected = false; // TODO: Initialize to an appropriate value
             bool actual;
             actual = target.TryDeleteFile(file);

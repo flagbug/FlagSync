@@ -214,7 +214,7 @@ namespace FlagSync.View
         private void germanMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Language = new CultureInfo("de-DE");
-            Restart();
+            this.Restart();
         }
 
         /// <summary>

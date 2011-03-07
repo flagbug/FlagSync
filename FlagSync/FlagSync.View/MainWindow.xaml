@@ -35,7 +35,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="true">
                                 <Setter Property="BorderThickness" TargetName="Border" Value="0" />
-                                <Setter Property="Background" TargetName="Border" Value="LightBlue" />
+                                <Setter Property="Background" TargetName="Border" Value="SkyBlue" />
                             </Trigger>
                             <Trigger Property="IsSelected" Value="false">
                                 <Setter Property="BorderThickness" TargetName="Border" Value="0" />
@@ -46,7 +46,7 @@
                                     <Condition Property="IsSelected" Value="true" />
                                     <Condition Property="Selector.IsSelectionActive" Value="false" />
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="Border" Value="LightBlue" />
+                                <Setter Property="Background" TargetName="Border" Value="SkyBlue" />
                                 <Setter Property="BorderBrush" TargetName="Border" Value="Blue" />
                             </MultiTrigger>
                             <Trigger Property="IsEnabled" Value="false">
@@ -158,7 +158,7 @@
                 </TabItem.Header>
                 <Grid Margin="0,10,0,5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="230" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid>
@@ -177,30 +177,30 @@
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" Name="newJobButton" ToolTip="{x:Static properties:Resources.NewJobButtonText}" Click="newJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                                 <StackPanel Orientation="Vertical">
-                                    <Image Source="/FlagSync.View;component/Images/Add.png" />
+                                    <Image Source="/FlagSync.View;component/Images/Add.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.NewString}" HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Button>
                             <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" Click="deleteJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                                 <StackPanel Orientation="Vertical">
-                                    <Image Source="/FlagSync.View;component/Images/Remove.png" />
+                                    <Image Source="/FlagSync.View;component/Images/Remove.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.DeleteString}" HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Button>
                             <Button Grid.Column="2" Name="loadJobsButton" ToolTip="{x:Static properties:Resources.LoadJobsButtonText}" Click="loadJobsButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                                 <StackPanel Orientation="Vertical">
-                                    <Image Source="/FlagSync.View;component/Images/Load.png" />
+                                    <Image Source="/FlagSync.View;component/Images/Load.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.LoadString}" HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Button>
                             <Button Grid.Column="3" Name="saveJobsButton" ToolTip="{x:Static properties:Resources.SaveJobsButtonText}" Click="saveJobsButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                                 <StackPanel Orientation="Vertical">
-                                    <Image Source="/FlagSync.View;component/Images/Save.png" />
+                                    <Image Source="/FlagSync.View;component/Images/Save.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.SaveString}" HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Button>
                         </Grid>
-                        <ListBox Grid.Row="1" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,0">
+                        <ListBox Grid.Row="1" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,0" MaxWidth="225">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="5, 5, 5, 5" Orientation="Horizontal">

@@ -18,7 +18,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// <returns>
         /// A value indicating whether the file deletion has succeed
         /// </returns>
-        public bool TryDeleteFile(IFileSystemInfo file)
+        public bool TryDeleteFile(IFileInfo file)
         {
             bool succeed = false;
 

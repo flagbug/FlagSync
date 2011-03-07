@@ -28,7 +28,7 @@ namespace FlagSync.Core.FileSystem.Virtual
         /// <returns>
         /// A value indicating whether the file deletion has succeed
         /// </returns>
-        public bool TryDeleteFile(IFileSystemInfo file)
+        public bool TryDeleteFile(IFileInfo file)
         {
             if (file == null)
                 throw new ArgumentNullException("file");

@@ -15,7 +15,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="file">The file to delete.</param>
         /// <returns>A value indicating whether the file deletion has succeed</returns>
-        bool TryDeleteFile(IFileSystemInfo file);
+        bool TryDeleteFile(IFileInfo file);
 
         /// <summary>
         /// Tries to create a directory in the specified directory (low level operation).

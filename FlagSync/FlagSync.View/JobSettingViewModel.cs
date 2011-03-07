@@ -88,7 +88,8 @@ namespace FlagSync.View
                 if (this.SyncMode != value)
                 {
                     this.InternJobSetting.SyncMode = value;
-                    this.OnPropertyChanged(view => view.SyncMode);
+                    this.OnPropertyChanged(vm => vm.SyncMode);
+                    this.OnPropertyChanged(vm => vm.SyncModeString);
                 }
             }
         }
@@ -140,12 +141,19 @@ namespace FlagSync.View
             {
                 string result = null;
 
-                if ((name == "DirectoryA" && !Directory.Exists(this.DirectoryA)) || (name == "DirectoryB" && !Directory.Exists(this.DirectoryB)))
+                switch (this.SyncMode)
                 {
-                    result = Properties.Resources.DirectoryDoesntExistMessage;
+                    case Core.SyncMode.LocalBackup:
+                    case Core.SyncMode.LocalSynchronization:
+                        if ((name == "DirectoryA" && !Directory.Exists(this.DirectoryA)) || (name == "DirectoryB" && !Directory.Exists(this.DirectoryB)))
+                        {
+                            result = Properties.Resources.DirectoryDoesntExistMessage;
+                        }
+
+                        break;
                 }
 
-                else if (name == "Name" && this.Name == String.Empty)
+                if (name == "Name" && this.Name == String.Empty)
                 {
                     result = Properties.Resources.NameFieldCantBeEmptyMessage;
                 }

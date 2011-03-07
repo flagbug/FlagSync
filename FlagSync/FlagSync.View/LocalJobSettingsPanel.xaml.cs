@@ -9,13 +9,22 @@ namespace FlagSync.View
     /// </summary>
     public partial class LocalJobSettingsPanel : UserControl
     {
-        private JobSettingViewModel jobSettingViewModel;
-
         public LocalJobSettingsPanel(JobSettingViewModel viewModel)
         {
             InitializeComponent();
-            this.jobSettingViewModel = viewModel;
-            this.DataContext = viewModel;
+
+            this.viewModel.JobSetting = viewModel;
+
+            switch (viewModel.SyncMode)
+            {
+                case SyncMode.LocalBackup:
+                    this.jobSettingsBackupModeRadioButton.IsChecked = true;
+                    break;
+
+                case SyncMode.LocalSynchronization:
+                    this.jobSettingsSyncModeRadioButton.IsChecked = true;
+                    break;
+            }
         }
 
         /// <summary>
@@ -25,7 +34,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void jobSettingsBackupModeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            this.jobSettingViewModel.SyncMode = SyncMode.LocalBackup;
+            this.viewModel.JobSetting.SyncMode = SyncMode.LocalBackup;
         }
 
         /// <summary>
@@ -35,7 +44,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void jobSettingsSyncModeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            this.jobSettingViewModel.SyncMode = SyncMode.LocalSynchronization;
+            this.viewModel.JobSetting.SyncMode = SyncMode.LocalSynchronization;
         }
 
         /// <summary>
@@ -45,7 +54,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void directoryAButton_Click(object sender, RoutedEventArgs e)
         {
-            this.jobSettingViewModel.DirectoryA = this.ShowFolderDialog();
+            this.viewModel.JobSetting.DirectoryA = this.ShowFolderDialog();
         }
 
         /// <summary>
@@ -55,7 +64,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void directoryBButton_Click(object sender, RoutedEventArgs e)
         {
-            this.jobSettingViewModel.DirectoryB = this.ShowFolderDialog();
+            this.viewModel.JobSetting.DirectoryB = this.ShowFolderDialog();
         }
 
         /// <summary>
