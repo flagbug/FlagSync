@@ -106,16 +106,143 @@ namespace FlagSync.View
 
                 switch (this.SyncMode)
                 {
+                    case Core.SyncMode.FtpBackup:
+                        syncMode = Properties.Resources.FtpServerBackupString;
+                        break;
+
+                    case Core.SyncMode.FtpSynchronization:
+                        syncMode = Properties.Resources.FtpServerSynchronizationString;
+                        break;
+
                     case Core.SyncMode.LocalBackup:
-                        syncMode = Properties.Resources.BackupString;
+                        syncMode = Properties.Resources.LocalBackupString;
                         break;
 
                     case Core.SyncMode.LocalSynchronization:
-                        syncMode = Properties.Resources.SynchronizationString;
+                        syncMode = Properties.Resources.LocalSynchronizationString;
                         break;
                 }
 
                 return syncMode;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the FTP server address.
+        /// </summary>
+        /// <value>The FTP server address.</value>
+        public string FtpAddress
+        {
+            get { return this.InternJobSetting.FtpAddress; }
+            set
+            {
+                if (this.FtpAddress != value)
+                {
+                    this.InternJobSetting.FtpAddress = value;
+                    this.OnPropertyChanged(vm => vm.FtpAddress);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the login name of the FTP server user.
+        /// </summary>
+        /// <value>The login name of the FTP user.</value>
+        public string FtpUserName
+        {
+            get { return this.InternJobSetting.FtpUserName; }
+            set
+            {
+                if (this.FtpUserName != value)
+                {
+                    this.InternJobSetting.FtpUserName = value;
+                    this.OnPropertyChanged(vm => vm.FtpUserName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the FTP server password.
+        /// </summary>
+        /// <value>The FTP server password.</value>
+        public string FtpPassword
+        {
+            get { return this.InternJobSetting.FtpPassword; }
+            set
+            {
+                if (this.FtpPassword != value)
+                {
+                    this.InternJobSetting.FtpPassword = value;
+                    this.OnPropertyChanged(vm => vm.FtpPassword);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the proxy server address.
+        /// </summary>
+        /// <value>The proxy server address.</value>
+        public string ProxyAddress
+        {
+            get { return this.InternJobSetting.ProxyAddress; }
+            set
+            {
+                if (this.ProxyAddress != value)
+                {
+                    this.InternJobSetting.ProxyAddress = value;
+                    this.OnPropertyChanged(vm => vm.ProxyAddress);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the proxy server port.
+        /// </summary>
+        /// <value>The proxy server port.</value>
+        public int ProxyPort
+        {
+            get { return this.InternJobSetting.ProxyPort; }
+            set
+            {
+                if (this.ProxyPort != value)
+                {
+                    this.InternJobSetting.ProxyPort = value;
+                    this.OnPropertyChanged(vm => vm.ProxyPort);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the user name for the proxy server.
+        /// </summary>
+        /// <value>The user name for the proxy server.</value>
+        public string ProxyUserName
+        {
+            get { return this.InternJobSetting.ProxyUserName; }
+            set
+            {
+                if (this.ProxyUserName != value)
+                {
+                    this.InternJobSetting.ProxyUserName = value;
+                    this.OnPropertyChanged(vm => vm.ProxyUserName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the proxy server password.
+        /// </summary>
+        /// <value>The proxy server password.</value>
+        public string ProxyPassword
+        {
+            get { return this.InternJobSetting.ProxyPassword; }
+            set
+            {
+                if (this.ProxyPassword != value)
+                {
+                    this.InternJobSetting.ProxyPassword = value;
+                    this.OnPropertyChanged(vm => vm.ProxyPassword);
+                }
             }
         }
 

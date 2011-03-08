@@ -65,6 +65,11 @@ namespace FlagSync.View
                         case SyncMode.LocalSynchronization:
                             this.CurrentJobSettingsPanel.Add(new LocalJobSettingsPanel(value));
                             break;
+
+                        case SyncMode.FtpBackup:
+                        case SyncMode.FtpSynchronization:
+                            this.CurrentJobSettingsPanel.Add(new FtpJobSettingsPanel(value));
+                            break;
                     }
                 }
             }
@@ -77,15 +82,19 @@ namespace FlagSync.View
         {
             this.JobSettings = new ObservableCollection<JobSettingViewModel>();
             this.CurrentJobSettingsPanel = new ObservableCollection<UserControl>();
-            this.AddNewJobSetting();
+            this.AddNewJobSetting(SyncMode.LocalBackup);
         }
 
         /// <summary>
-        /// Adds a new job setting.
+        /// Adds a new job setting with the specified mode.
         /// </summary>
-        public void AddNewJobSetting()
+        /// <param name="mode">The mode.</param>
+        public void AddNewJobSetting(SyncMode mode)
         {
-            this.JobSettings.Add(new JobSettingViewModel(Properties.Resources.NewJobString + " " + (this.JobSettings.Count + 1)));
+            JobSettingViewModel setting = new JobSettingViewModel(Properties.Resources.NewJobString + " " + (this.JobSettings.Count + 1));
+            setting.SyncMode = mode;
+
+            this.JobSettings.Add(setting);
         }
 
         /// <summary>
@@ -97,7 +106,7 @@ namespace FlagSync.View
 
             if (this.JobSettings.Count == 0)
             {
-                this.AddNewJobSetting();
+                this.AddNewJobSetting(SyncMode.LocalBackup);
             }
 
             this.SelectedJobSetting = this.JobSettings.Last();

@@ -36,6 +36,12 @@ namespace FlagSync.Core
         public bool IsIncluded { get; set; }
 
         /// <summary>
+        /// Gets or sets the FTP server address.
+        /// </summary>
+        /// <value>The FTP server address.</value>
+        public string FtpAddress { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the FTP server user.
         /// </summary>
         /// <value>The name of the FTP user.</value>
@@ -46,6 +52,30 @@ namespace FlagSync.Core
         /// </summary>
         /// <value>The FTP server password.</value>
         public string FtpPassword { get; set; }
+
+        /// <summary>
+        /// Gets or sets the proxy server address.
+        /// </summary>
+        /// <value>The proxy server address.</value>
+        public string ProxyAddress { get; set; }
+
+        /// <summary>
+        /// Gets or sets the proxy server port.
+        /// </summary>
+        /// <value>The proxy server port.</value>
+        public int ProxyPort { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user name for the proxy server.
+        /// </summary>
+        /// <value>The user name for the proxy server.</value>
+        public string ProxyUserName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the proxy server password.
+        /// </summary>
+        /// <value>The proxy server password.</value>
+        public string ProxyPassword { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JobSetting"/> class.

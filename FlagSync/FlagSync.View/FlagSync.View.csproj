@@ -60,6 +60,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FtpJobSettingsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LocalJobSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +81,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ByteToKiloByteConverter.cs" />
+    <Compile Include="FtpJobSettingsPanel.xaml.cs">
+      <DependentUpon>FtpJobSettingsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FtpJobSettingsPanelViewModel.cs" />
     <Compile Include="JobSettingsViewModel.cs" />
     <Compile Include="JobSettingViewModel.cs" />
     <Compile Include="JobWorkerViewModel.cs" />
@@ -92,6 +100,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PasswordHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -152,6 +161,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Load.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Local.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FTPServer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\iTunes.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

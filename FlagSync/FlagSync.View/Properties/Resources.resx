@@ -318,19 +318,64 @@
   <data name="SaveString" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="BackupString" xml:space="preserve">
-    <value>Backup</value>
+  <data name="LocalBackupString" xml:space="preserve">
+    <value>Local backup</value>
   </data>
   <data name="NoActiveJobText" xml:space="preserve">
     <value>No active job</value>
   </data>
-  <data name="SynchronizationString" xml:space="preserve">
-    <value>Synchronization</value>
+  <data name="LocalSynchronizationString" xml:space="preserve">
+    <value>Local synchronization</value>
   </data>
   <data name="ListBoxItemJobNameText" xml:space="preserve">
     <value>Name:</value>
   </data>
   <data name="ListBoxItemJobTypeText" xml:space="preserve">
     <value>Type:</value>
+  </data>
+  <data name="FtpServerBackupString" xml:space="preserve">
+    <value>FTP backup</value>
+  </data>
+  <data name="FtpServerSynchronizationString" xml:space="preserve">
+    <value>FTP Synchronization</value>
+  </data>
+  <data name="FtpServerAddressJobSettingsTextBlockText" xml:space="preserve">
+    <value>FTP-Server Adress:</value>
+  </data>
+  <data name="FtpServerPasswordJobSettingsTextBlockText" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="FtpServerUserNameJobSettingsTextBlockText" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="NameJobSettingsTextBlockText" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="FtpServerProxySettingsGroupBoxText" xml:space="preserve">
+    <value>Proxy settings</value>
+  </data>
+  <data name="ProxyAddressTextBlockText" xml:space="preserve">
+    <value>Address:</value>
+  </data>
+  <data name="ProxyPasswordTextBlockText" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="ProxyPortTextBlockText" xml:space="preserve">
+    <value>Port:</value>
+  </data>
+  <data name="ProxyUserNameTextBlockText" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="FTPString" xml:space="preserve">
+    <value>FTP</value>
+  </data>
+  <data name="iTunesString" xml:space="preserve">
+    <value>iTunes</value>
+  </data>
+  <data name="LocalString" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="TestConnectionButtonText" xml:space="preserve">
+    <value>Test connection</value>
   </data>
 </root>

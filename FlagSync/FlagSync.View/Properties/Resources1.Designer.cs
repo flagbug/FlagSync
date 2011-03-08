@@ -115,15 +115,6 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Backup.
-        /// </summary>
-        public static string BackupString {
-            get {
-                return ResourceManager.GetString("BackupString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Common Settings.
         /// </summary>
         public static string CommonSettingsGroupBoxText {
@@ -376,6 +367,69 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FTP-Server Adress:.
+        /// </summary>
+        public static string FtpServerAddressJobSettingsTextBlockText {
+            get {
+                return ResourceManager.GetString("FtpServerAddressJobSettingsTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FTP backup.
+        /// </summary>
+        public static string FtpServerBackupString {
+            get {
+                return ResourceManager.GetString("FtpServerBackupString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        public static string FtpServerPasswordJobSettingsTextBlockText {
+            get {
+                return ResourceManager.GetString("FtpServerPasswordJobSettingsTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proxy settings.
+        /// </summary>
+        public static string FtpServerProxySettingsGroupBoxText {
+            get {
+                return ResourceManager.GetString("FtpServerProxySettingsGroupBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FTP Synchronization.
+        /// </summary>
+        public static string FtpServerSynchronizationString {
+            get {
+                return ResourceManager.GetString("FtpServerSynchronizationString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username:.
+        /// </summary>
+        public static string FtpServerUserNameJobSettingsTextBlockText {
+            get {
+                return ResourceManager.GetString("FtpServerUserNameJobSettingsTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FTP.
+        /// </summary>
+        public static string FTPString {
+            get {
+                return ResourceManager.GetString("FTPString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to German.
         /// </summary>
         public static string GermanString {
@@ -390,6 +444,15 @@ namespace FlagSync.View.Properties {
         public static string HelpMenuItemText {
             get {
                 return ResourceManager.GetString("HelpMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to iTunes.
+        /// </summary>
+        public static string iTunesString {
+            get {
+                return ResourceManager.GetString("iTunesString", resourceCulture);
             }
         }
         
@@ -448,6 +511,33 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Local backup.
+        /// </summary>
+        public static string LocalBackupString {
+            get {
+                return ResourceManager.GetString("LocalBackupString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local.
+        /// </summary>
+        public static string LocalString {
+            get {
+                return ResourceManager.GetString("LocalString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local synchronization.
+        /// </summary>
+        public static string LocalSynchronizationString {
+            get {
+                return ResourceManager.GetString("LocalSynchronizationString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log.
         /// </summary>
         public static string LogTabItemText {
@@ -480,6 +570,15 @@ namespace FlagSync.View.Properties {
         public static string NameFieldCantBeEmptyMessage {
             get {
                 return ResourceManager.GetString("NameFieldCantBeEmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        public static string NameJobSettingsTextBlockText {
+            get {
+                return ResourceManager.GetString("NameJobSettingsTextBlockText", resourceCulture);
             }
         }
         
@@ -574,6 +673,42 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address:.
+        /// </summary>
+        public static string ProxyAddressTextBlockText {
+            get {
+                return ResourceManager.GetString("ProxyAddressTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        public static string ProxyPasswordTextBlockText {
+            get {
+                return ResourceManager.GetString("ProxyPasswordTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port:.
+        /// </summary>
+        public static string ProxyPortTextBlockText {
+            get {
+                return ResourceManager.GetString("ProxyPortTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username:.
+        /// </summary>
+        public static string ProxyUserNameTextBlockText {
+            get {
+                return ResourceManager.GetString("ProxyUserNameTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Jobs.
         /// </summary>
         public static string SaveJobsButtonText {
@@ -655,15 +790,6 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Synchronization.
-        /// </summary>
-        public static string SynchronizationString {
-            get {
-                return ResourceManager.GetString("SynchronizationString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Sychronization.
         /// </summary>
         public static string SyncModeRadioButtonText {
@@ -678,6 +804,15 @@ namespace FlagSync.View.Properties {
         public static string TargetGridViewColumnText {
             get {
                 return ResourceManager.GetString("TargetGridViewColumnText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test connection.
+        /// </summary>
+        public static string TestConnectionButtonText {
+            get {
+                return ResourceManager.GetString("TestConnectionButtonText", resourceCulture);
             }
         }
         
