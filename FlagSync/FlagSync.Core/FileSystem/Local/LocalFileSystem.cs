@@ -9,6 +9,9 @@ namespace FlagSync.Core.FileSystem.Local
 {
     internal class LocalFileSystem : IFileSystem
     {
+        /// <summary>
+        /// Occurs when the file copy progress has changed.
+        /// </summary>
         public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
 
         /// <summary>
