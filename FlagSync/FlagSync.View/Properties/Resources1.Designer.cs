@@ -394,7 +394,7 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Proxy settings.
+        ///   Looks up a localized string similar to Use Proxy Server.
         /// </summary>
         public static string FtpServerProxySettingsGroupBoxText {
             get {

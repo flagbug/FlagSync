@@ -352,7 +352,7 @@
     <value>Name:</value>
   </data>
   <data name="FtpServerProxySettingsGroupBoxText" xml:space="preserve">
-    <value>Proxy Einstellungen</value>
+    <value>Verwende Proxy Server</value>
   </data>
   <data name="ProxyAddressTextBlockText" xml:space="preserve">
     <value>Addresse:</value>

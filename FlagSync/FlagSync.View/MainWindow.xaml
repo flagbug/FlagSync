@@ -31,7 +31,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="SkyBlue" />
+                                <Setter TargetName="Border" Property="Background" Value="LightBlue" />
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
                                 <Setter TargetName="Border" Property="Background" Value="White" />
@@ -42,10 +42,6 @@
             </Setter>
         </Style>
         <Style TargetType="{x:Type ListBoxItem}">
-            <Style.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightBlue"/>
-            </Style.Resources>
             <Setter Property="Margin" Value="5" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -79,6 +75,14 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+        <Style x:Key="MouseOverButtonStyle" TargetType="Button">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid Name="mainGrid" HorizontalAlignment="Stretch">
@@ -171,7 +175,7 @@
                 </Grid>
             </GroupBox>
         </Grid>
-        <TabControl Grid.Row="2" Name="mainTabControl" Height="Auto" Margin="5, 0, 5, 10">
+        <TabControl Grid.Row="2" Name="mainTabControl" Margin="5, 0, 5, 10">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -198,7 +202,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Name="newJobButton" ToolTip="{x:Static properties:Resources.NewJobButtonText}" Click="newJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                            <Button Grid.Column="0" Name="newJobButton" ToolTip="{x:Static properties:Resources.NewJobButtonText}" Click="newJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}">
                                 <Button.Content>
                                     <StackPanel Orientation="Vertical">
                                         <Image Source="/FlagSync.View;component/Images/Add.png" Width="50" Height="50" />
@@ -210,19 +214,19 @@
                                         <ContextMenu.Template>
                                             <ControlTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Height="75" Width="75" Click="newLocalJobButton_Click">
+                                                    <Button Height="75" Width="75" Background="White" Click="newLocalJobButton_Click">
                                                         <StackPanel Orientation="Vertical">
                                                             <Image Source="/FlagSync.View;component/Images/Local.png" Width="50" Height="50" />
                                                             <ContentPresenter Content="{x:Static properties:Resources.LocalString}" HorizontalAlignment="Center" />
                                                         </StackPanel>
                                                     </Button>
-                                                    <Button Height="75" Width="75" Click="newFtpJobButton_Click">
+                                                    <Button Height="75" Width="75" Background="White" Click="newFtpJobButton_Click">
                                                         <StackPanel Orientation="Vertical">
                                                             <Image Source="/FlagSync.View;component/Images/FTPServer.png" Width="50" Height="50" />
                                                             <ContentPresenter Content="{x:Static properties:Resources.FTPString}" HorizontalAlignment="Center" />
                                                         </StackPanel>
                                                     </Button>
-                                                    <Button Height="75" Width="75" Click="newITunesJobButton_Click">
+                                                    <Button Height="75" Width="75" Background="White" Click="newITunesJobButton_Click">
                                                         <StackPanel Orientation="Vertical">
                                                             <Image Source="/FlagSync.View;component/Images/iTunes.png" Width="50" Height="50" />
                                                             <ContentPresenter Content="{x:Static properties:Resources.iTunesString}" HorizontalAlignment="Center" />
@@ -234,19 +238,19 @@
                                     </ContextMenu>
                                 </Button.ContextMenu>
                             </Button>
-                            <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" Click="deleteJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                            <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" Click="deleteJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="/FlagSync.View;component/Images/Remove.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.DeleteString}" HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Button>
-                            <Button Grid.Column="2" Name="loadJobsButton" ToolTip="{x:Static properties:Resources.LoadJobsButtonText}" Click="loadJobsButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                            <Button Grid.Column="2" Name="loadJobsButton" ToolTip="{x:Static properties:Resources.LoadJobsButtonText}" Click="loadJobsButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="/FlagSync.View;component/Images/Load.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.LoadString}" HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Button>
-                            <Button Grid.Column="3" Name="saveJobsButton" ToolTip="{x:Static properties:Resources.SaveJobsButtonText}" Click="saveJobsButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                            <Button Grid.Column="3" Name="saveJobsButton" ToolTip="{x:Static properties:Resources.SaveJobsButtonText}" Click="saveJobsButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="/FlagSync.View;component/Images/Save.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.SaveString}" HorizontalAlignment="Center" />

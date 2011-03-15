@@ -78,6 +78,12 @@ namespace FlagSync.Core
         public string ProxyPassword { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the proxy server is enabled.
+        /// </summary>
+        /// <value><c>true</c> if the proxy server is enabled; otherwise, <c>false</c>.</value>
+        public bool EnableProxyServer { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="JobSetting"/> class.
         /// </summary>
         /// <param name="name">The name.</param>

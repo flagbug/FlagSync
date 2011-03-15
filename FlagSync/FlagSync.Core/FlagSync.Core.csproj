@@ -51,6 +51,10 @@
     <Compile Include="FileSystem\Abstract\IFileSystem.cs" />
     <Compile Include="FileSystem\Abstract\IFileSystemInfo.cs" />
     <Compile Include="FileSystem\FileSystemScanner.cs" />
+    <Compile Include="FileSystem\Ftp\FtpConnectionInfo.cs" />
+    <Compile Include="FileSystem\Ftp\FtpDirectoryInfo.cs" />
+    <Compile Include="FileSystem\Ftp\FtpFileInfo.cs" />
+    <Compile Include="FileSystem\Ftp\FtpFileSystem.cs" />
     <Compile Include="FileSystem\Virtual\VirtualDirectoryInfo.cs" />
     <Compile Include="FileSystem\Virtual\VirtualFileInfo.cs" />
     <Compile Include="FileSystem\Virtual\VirtualFileSystem.cs" />

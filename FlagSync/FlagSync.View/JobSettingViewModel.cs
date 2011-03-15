@@ -247,6 +247,23 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the proxy server is enabled.
+        /// </summary>
+        /// <value><c>true</c> if the proxy server is enabled; otherwise, <c>false</c>.</value>
+        public bool EnableProxyServer
+        {
+            get { return this.InternJobSetting.EnableProxyServer; }
+            set
+            {
+                if (this.EnableProxyServer != value)
+                {
+                    this.InternJobSetting.EnableProxyServer = value;
+                    this.OnPropertyChanged(vm => vm.EnableProxyServer);
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets an error message indicating what is wrong with this object.
         /// </summary>
         /// <value>The error message</value>
