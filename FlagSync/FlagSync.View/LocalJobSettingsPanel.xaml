@@ -26,22 +26,22 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Name:" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
-                    <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSetting.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+                    <TextBlock Text="{x:Static properties:Resources.NameJobSettingsTextBlockText}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
+                    <TextBox Margin="5, 5, 5, 5" Height="25" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSetting.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
                     <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="1" Click="directoryAButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
                             <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryAButtonText}" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>
-                    <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSetting.DirectoryA, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Margin="5, 5, 5, 5" Height="25" Grid.Column="1" Grid.Row="1" Text="{Binding Path=JobSetting.DirectoryA, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                     <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryBButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
                             <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryBButtonText}" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>
-                    <TextBox Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSetting.DirectoryB, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Margin="5, 5, 5, 5" Height="25" Grid.Column="1" Grid.Row="2" Text="{Binding Path=JobSetting.DirectoryB, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>

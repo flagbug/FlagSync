@@ -277,6 +277,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Directory.
+        /// </summary>
+        public static string DirectoryButtonText {
+            get {
+                return ResourceManager.GetString("DirectoryButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Directory doesn&apos;t exist!.
         /// </summary>
         public static string DirectoryDoesntExistMessage {
@@ -646,6 +655,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Playlist:.
+        /// </summary>
+        public static string PlaylistJobSettingTextBlockText {
+            get {
+                return ResourceManager.GetString("PlaylistJobSettingTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preview.
         /// </summary>
         public static string PreviewButtonText {
@@ -723,6 +741,15 @@ namespace FlagSync.View.Properties {
         public static string SaveString {
             get {
                 return ResourceManager.GetString("SaveString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have to select a playlist!.
+        /// </summary>
+        public static string SelectPlaylistErrorMessage {
+            get {
+                return ResourceManager.GetString("SelectPlaylistErrorMessage", resourceCulture);
             }
         }
         

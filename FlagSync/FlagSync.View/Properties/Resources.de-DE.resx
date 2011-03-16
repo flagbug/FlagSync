@@ -378,4 +378,13 @@
   <data name="TestConnectionButtonText" xml:space="preserve">
     <value>Verbindung testen</value>
   </data>
+  <data name="SelectPlaylistErrorMessage" xml:space="preserve">
+    <value>Sie müssen eine Wiedergabeliste auswählen!</value>
+  </data>
+  <data name="DirectoryButtonText" xml:space="preserve">
+    <value>Ordner</value>
+  </data>
+  <data name="PlaylistJobSettingTextBlockText" xml:space="preserve">
+    <value>Wiedergabeliste:</value>
+  </data>
 </root>

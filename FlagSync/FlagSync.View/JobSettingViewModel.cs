@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using FlagLib.Patterns;
 using FlagSync.Core;
+using iTunesLib;
 
 namespace FlagSync.View
 {
@@ -120,6 +123,10 @@ namespace FlagSync.View
 
                     case Core.SyncMode.LocalSynchronization:
                         syncMode = Properties.Resources.LocalSynchronizationString;
+                        break;
+
+                    case Core.SyncMode.ITunes:
+                        syncMode = Properties.Resources.iTunesString;
                         break;
                 }
 
@@ -264,6 +271,39 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Gets or sets the iTunes playlist.
+        /// </summary>
+        /// <value>The iTunes playlist.</value>
+        public string ITunesPlaylist
+        {
+            get { return this.InternJobSetting.ITunesPlaylist; }
+            set
+            {
+                if (this.ITunesPlaylist != value)
+                {
+                    this.InternJobSetting.ITunesPlaylist = value;
+                    this.OnPropertyChanged(vm => vm.ITunesPlaylist);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the playlists from iTunes.
+        /// </summary>
+        /// <value>The playlists from iTunes.</value>
+        public IEnumerable<string> ITunesPlaylists
+        {
+            get
+            {
+                iTunesApp iTunes = new iTunesApp();
+                return iTunes.LibrarySource.Playlists
+                    .Cast<IITPlaylist>()
+                    .Where(pl => pl.Kind == ITPlaylistKind.ITPlaylistKindUser)
+                    .Select(pl => pl.Name);
+            }
+        }
+
+        /// <summary>
         /// Gets an error message indicating what is wrong with this object.
         /// </summary>
         /// <value>The error message</value>
@@ -294,6 +334,13 @@ namespace FlagSync.View
                             result = Properties.Resources.DirectoryDoesntExistMessage;
                         }
 
+                        break;
+
+                    case Core.SyncMode.ITunes:
+                        if (name == "ITunesPlaylist" && string.IsNullOrEmpty(this.ITunesPlaylist))
+                        {
+                            result = Properties.Resources.SelectPlaylistErrorMessage;
+                        }
                         break;
                 }
 

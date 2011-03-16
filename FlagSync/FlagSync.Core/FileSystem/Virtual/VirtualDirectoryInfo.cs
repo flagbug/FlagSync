@@ -50,7 +50,7 @@ namespace FlagSync.Core.FileSystem.Virtual
         public VirtualDirectoryInfo(string name, VirtualDirectoryInfo parentDirectory, bool isLocked, bool exists)
         {
             if (name == null)
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException("name");
 
             string path;
 

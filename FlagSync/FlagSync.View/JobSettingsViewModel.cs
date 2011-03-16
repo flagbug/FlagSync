@@ -70,6 +70,10 @@ namespace FlagSync.View
                         case SyncMode.FtpSynchronization:
                             this.CurrentJobSettingsPanel.Add(new FtpJobSettingsPanel(value));
                             break;
+
+                        case SyncMode.ITunes:
+                            this.CurrentJobSettingsPanel.Add(new ITunesJobSettingsPanel(value));
+                            break;
                     }
                 }
             }

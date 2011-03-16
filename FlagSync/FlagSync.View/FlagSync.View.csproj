@@ -64,6 +64,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ITunesJobSettingsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LocalJobSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,6 +89,10 @@
       <DependentUpon>FtpJobSettingsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="FtpJobSettingsPanelViewModel.cs" />
+    <Compile Include="ITunesJobSettingsPanel.xaml.cs">
+      <DependentUpon>ITunesJobSettingsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ITunesJobSettingsViewModel.cs" />
     <Compile Include="JobSettingsViewModel.cs" />
     <Compile Include="JobSettingViewModel.cs" />
     <Compile Include="JobWorkerViewModel.cs" />
@@ -170,6 +178,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\iTunes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="iTunesLib">
+      <Guid>{9E93C96F-CF0D-43F6-8BA8-B807A3370712}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>13</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

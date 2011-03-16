@@ -84,6 +84,12 @@ namespace FlagSync.Core
         public bool EnableProxyServer { get; set; }
 
         /// <summary>
+        /// Gets or sets the iTunes playlist.
+        /// </summary>
+        /// <value>The iTunes playlist.</value>
+        public string ITunesPlaylist { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="JobSetting"/> class.
         /// </summary>
         /// <param name="name">The name.</param>

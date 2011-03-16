@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace FlagSync.Core
@@ -26,12 +27,13 @@ namespace FlagSync.Core
 
             try
             {
-                File.Create(path);
+                using (File.Create(path))
+                { }
             }
 
             catch (DirectoryNotFoundException e)
             {
-                System.Diagnostics.Debug.WriteLine(e.Message);
+                Debug.WriteLine(e.Message);
                 throw;
             }
         }
@@ -70,26 +72,17 @@ namespace FlagSync.Core
         /// <param name="type">The message type, e.g "ERROR" or "SUCCEED"</param>
         private void Log(string log, string type)
         {
-            StreamWriter writer = null;
-
             try
             {
-                writer = new StreamWriter(this.Path, true);
-
-                writer.WriteLine(DateTime.Now.ToString() + " " + type + ": " + log);
+                using (StreamWriter writer = new StreamWriter(this.Path, true))
+                {
+                    writer.WriteLine(DateTime.Now.ToString() + " " + type + ": " + log);
+                }
             }
 
             catch (IOException e)
             {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-
-            finally
-            {
-                if (writer != null)
-                {
-                    writer.Close();
-                }
+                Debug.WriteLine(e.Message);
             }
         }
     }

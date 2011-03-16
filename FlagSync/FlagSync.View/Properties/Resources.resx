@@ -378,4 +378,13 @@
   <data name="TestConnectionButtonText" xml:space="preserve">
     <value>Test connection</value>
   </data>
+  <data name="SelectPlaylistErrorMessage" xml:space="preserve">
+    <value>You have to select a playlist!</value>
+  </data>
+  <data name="DirectoryButtonText" xml:space="preserve">
+    <value>Directory</value>
+  </data>
+  <data name="PlaylistJobSettingTextBlockText" xml:space="preserve">
+    <value>Playlist:</value>
+  </data>
 </root>

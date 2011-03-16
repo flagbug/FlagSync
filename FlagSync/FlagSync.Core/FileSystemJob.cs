@@ -52,10 +52,10 @@ namespace FlagSync.Core
         protected void BackupDirectoryRecursively(string sourceDirectoryPath, string targetDirectoryPath, bool execute)
         {
             if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
-                throw new ArgumentException("sourceDirectoryPath", "The source directory doesn't exist.");
+                throw new ArgumentException("The source directory doesn't exist.", "sourceDirectoryPath");
 
-            if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
-                throw new ArgumentException("targetDirectoryPath", "The target directory doesn't exist.");
+            if (!this.FileSystem.DirectoryExists(targetDirectoryPath))
+                throw new ArgumentException("The target directory doesn't exist.", "targetDirectoryPath");
 
             FileSystemScanner rootScanner =
                 new FileSystemScanner(this.FileSystem.GetDirectoryInfo(sourceDirectoryPath));
@@ -140,10 +140,10 @@ namespace FlagSync.Core
         protected void CheckDeletionsRecursively(string sourceDirectoryPath, string targetDirectoryPath, bool execute)
         {
             if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
-                throw new ArgumentException("sourceDirectoryPath", "The source directory doesn't exist.");
+                throw new ArgumentException("The source directory doesn't exist.", "sourceDirectoryPath");
 
-            if (!this.FileSystem.DirectoryExists(sourceDirectoryPath))
-                throw new ArgumentException("targetDirectoryPath", "The target directory doesn't exist.");
+            if (!this.FileSystem.DirectoryExists(targetDirectoryPath))
+                throw new ArgumentException("The target directory doesn't exist.", "targetDirectoryPath");
 
             FileSystemScanner rootScanner =
                 new FileSystemScanner(this.FileSystem.GetDirectoryInfo(sourceDirectoryPath));
