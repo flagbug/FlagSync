@@ -7,14 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync.View", "FlagSync.V
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FlagSync.Setup", "FlagSync.Setup\FlagSync.Setup.vdproj", "{F1E3BF8E-9B77-404F-ADB2-FC2F8CFFB577}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync.Core.Test", "FlagSync.Core.Test\FlagSync.Core.Test.csproj", "{C9449B1D-E517-468F-87B7-425324EE0D60}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{52DA57E2-16E0-4C64-9849-5EB9390CD8ED}"
-	ProjectSection(SolutionItems) = preProject
-		FlagSync.vsmdi = FlagSync.vsmdi
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{498E6108-DF8A-4B44-A0D7-913EABBD4A2B}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -36,10 +31,6 @@ Global
 		{F1E3BF8E-9B77-404F-ADB2-FC2F8CFFB577}.Debug|x86.ActiveCfg = Debug
 		{F1E3BF8E-9B77-404F-ADB2-FC2F8CFFB577}.Release|x86.ActiveCfg = Release
 		{F1E3BF8E-9B77-404F-ADB2-FC2F8CFFB577}.Release|x86.Build.0 = Release
-		{C9449B1D-E517-468F-87B7-425324EE0D60}.Debug|x86.ActiveCfg = Debug|x86
-		{C9449B1D-E517-468F-87B7-425324EE0D60}.Debug|x86.Build.0 = Debug|x86
-		{C9449B1D-E517-468F-87B7-425324EE0D60}.Release|x86.ActiveCfg = Release|x86
-		{C9449B1D-E517-468F-87B7-425324EE0D60}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
