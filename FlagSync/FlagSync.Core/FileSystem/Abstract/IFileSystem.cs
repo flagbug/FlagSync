@@ -3,11 +3,16 @@ using FlagLib.FileSystem;
 
 namespace FlagSync.Core.FileSystem.Abstract
 {
+    /// <summary>
+    /// The base interface for all file systems
+    /// </summary>
+    /// <remarks></remarks>
     internal interface IFileSystem
     {
         /// <summary>
         /// Occurs when the file copy progress has changed.
         /// </summary>
+        /// <remarks></remarks>
         event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
 
         /// <summary>
@@ -15,6 +20,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="file">The file to delete.</param>
         /// <returns>A value indicating whether the file deletion has succeed</returns>
+        /// <remarks></remarks>
         bool TryDeleteFile(IFileInfo file);
 
         /// <summary>
@@ -23,6 +29,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <returns>Returns a value indicating whether the directory creation has succeed</returns>
+        /// <remarks></remarks>
         bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory);
 
         /// <summary>
@@ -30,6 +37,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
         /// <returns>A value indicating whether the deletion has succeed.</returns>
+        /// <remarks></remarks>
         bool TryDeleteDirectory(IDirectoryInfo directory);
 
         /// <summary>
@@ -37,6 +45,8 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
+        /// <returns>True, if the copy operation has succeed; otherwise, false</returns>
+        /// <remarks></remarks>
         bool TryCopyFile(IFileInfo sourceFile, IDirectoryInfo targetDirectory);
 
         /// <summary>
@@ -44,6 +54,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="path">The path of the file.</param>
         /// <returns></returns>
+        /// <remarks></remarks>
         IFileInfo GetFileInfo(string path);
 
         /// <summary>
@@ -51,20 +62,23 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="path">The path of the directory.</param>
         /// <returns></returns>
+        /// <remarks></remarks>
         IDirectoryInfo GetDirectoryInfo(string path);
 
         /// <summary>
         /// Checks if the file at the specified path exists.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <returns></returns>
+        /// <returns>True, if the file exists; otherwise, false</returns>
+        /// <remarks></remarks>
         bool FileExists(string path);
 
         /// <summary>
         /// Checks if the directory at the specified path exists.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <returns></returns>
+        /// <returns>True, if the directory exists; otherwise, false</returns>
+        /// <remarks></remarks>
         bool DirectoryExists(string path);
     }
 }

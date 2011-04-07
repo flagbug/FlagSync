@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security;
-using System.Timers;
+using System.Threading;
 using FlagLib.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
 
@@ -104,9 +104,8 @@ namespace FlagSync.Core.FileSystem.Local
         /// Tries to delete a directory (low level operation).
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
-        /// <returns>
-        /// A value indicating whether the deletion has succeed.
-        /// </returns>
+        /// <returns>A value indicating whether the deletion has succeed.</returns>
+        /// <remarks></remarks>
         public bool TryDeleteDirectory(IDirectoryInfo directory)
         {
             bool succeed = false;
@@ -141,7 +140,8 @@ namespace FlagSync.Core.FileSystem.Local
         /// </summary>
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns></returns>
+        /// <returns>True, if the copy operation has succeed; otherwise, false</returns>
+        /// <remarks></remarks>
         public bool TryCopyFile(IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
             bool succeed = false;
@@ -164,28 +164,34 @@ namespace FlagSync.Core.FileSystem.Local
                 {
                     using (FileStream targetStream = File.Create(targetFilePath))
                     {
-                        using (Timer timer = new Timer(500))
+                        using (System.Timers.Timer timer = new System.Timers.Timer(250))
                         {
+                            object timerLocker = new object();
+                            ManualResetEvent timerDead = new ManualResetEvent(false);
+
                             timer.Elapsed += (sender, e) =>
                                 {
-                                    if (this.FileCopyProgressChanged != null)
+                                    lock (timerLocker)
                                     {
-                                        this.FileCopyProgressChanged(this,
-                                            new CopyProgressEventArgs(
-                                                sourceStream.Length,
-                                                targetStream.Length));
+                                        if (this.FileCopyProgressChanged != null
+                                            && timerDead.WaitOne())
+                                        {
+                                            this.FileCopyProgressChanged(this,
+                                                new CopyProgressEventArgs(
+                                                    sourceStream.Length,
+                                                    targetStream.Length));
+                                        }
                                     }
                                 };
 
                             timer.Start();
 
-                            try
-                            {
-                                sourceStream.CopyTo(targetStream);
-                            }
+                            sourceStream.CopyTo(targetStream);
 
-                            catch (Exception e)
+                            lock (timerLocker)
                             {
+                                timerDead.Set();
+                                timer.Stop();
                             }
                         }
                     }

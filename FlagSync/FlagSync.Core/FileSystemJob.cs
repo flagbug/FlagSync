@@ -288,9 +288,20 @@ namespace FlagSync.Core
 
             this.OnCreatingFile(eventArgs);
 
+            EventHandler<CopyProgressEventArgs> handler = (sender, e) =>
+            {
+                e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
+
+                this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalFileSize, e.TotalBytesTransferred));
+            };
+
+            this.FileSystem.FileCopyProgressChanged += handler;
+
             //Only copy the file, if the operation should get executed
             bool hasPerformed = execute ?
                 this.FileSystem.TryCopyFile(sourceFile, targetDirectory) : false;
+
+            this.FileSystem.FileCopyProgressChanged -= handler;
 
             if (hasPerformed)
             {
