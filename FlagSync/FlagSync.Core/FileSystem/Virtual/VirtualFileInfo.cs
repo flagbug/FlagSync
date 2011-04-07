@@ -73,5 +73,10 @@ namespace FlagSync.Core.FileSystem.Virtual
             this.LastWriteTime = lastWriteTime;
             this.Directory = directory;
         }
+
+        public FileStream Open()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

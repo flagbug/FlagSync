@@ -34,5 +34,10 @@ namespace FlagSync.Core.FileSystem.ITunes
         {
             get { throw new NotImplementedException(); }
         }
+
+        public System.IO.FileStream Open()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

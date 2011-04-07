@@ -71,6 +71,7 @@
     <Compile Include="FileSystem\Local\LocalFileSystem.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StreamExtensions.cs" />
     <Compile Include="SyncJob.cs" />
   </ItemGroup>
   <ItemGroup>

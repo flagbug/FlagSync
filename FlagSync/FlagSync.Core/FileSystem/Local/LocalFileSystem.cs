@@ -1,7 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using System.Security;
+using System.Timers;
 using FlagLib.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
 
@@ -160,16 +160,56 @@ namespace FlagSync.Core.FileSystem.Local
             {
                 string targetFilePath = Path.Combine(targetDirectory.FullName, sourceFile.Name);
 
-                fileCopyOperation.CopyFile(sourceFile.FullName, targetFilePath);
+                using (FileStream sourceStream = sourceFile.Open())
+                {
+                    using (FileStream targetStream = File.Create(targetFilePath))
+                    {
+                        using (Timer timer = new Timer(500))
+                        {
+                            timer.Elapsed += (sender, e) =>
+                                {
+                                    if (this.FileCopyProgressChanged != null)
+                                    {
+                                        this.FileCopyProgressChanged(this,
+                                            new CopyProgressEventArgs(
+                                                sourceStream.Length,
+                                                targetStream.Length));
+                                    }
+                                };
+
+                            timer.Start();
+
+                            try
+                            {
+                                sourceStream.CopyTo(targetStream);
+                            }
+
+                            catch (Exception e)
+                            {
+                            }
+                        }
+                    }
+                }
 
                 succeed = true;
             }
 
-            catch (Win32Exception)
+            catch (UnauthorizedAccessException ex)
             {
                 Logger.Current.LogError(
-                    string.Format("Win32Exception while copying file: {0} to directory: {1}",
+                    string.Format("UnauthorizedAccessException while copying file: {0} to directory: {1}",
                         sourceFile.FullName, targetDirectory.FullName));
+
+                succeed = false;
+            }
+
+            catch (SecurityException ex)
+            {
+                Logger.Current.LogError(
+                    string.Format("SecurityException while copying file: {0} to directory: {1}",
+                    sourceFile.FullName, targetDirectory.FullName));
+
+                succeed = false;
             }
 
             return succeed;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace FlagSync.Core.FileSystem.Abstract
 {
@@ -27,5 +28,11 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <value>true if the file exists; otherwise, false.</value>
         bool Exists { get; }
+
+        /// <summary>
+        /// Opens the stream of the file.
+        /// </summary>
+        /// <returns>The stream of the file.</returns>
+        FileStream Open();
     }
 }

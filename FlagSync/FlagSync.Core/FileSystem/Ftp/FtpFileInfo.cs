@@ -33,5 +33,10 @@ namespace FlagSync.Core.FileSystem.Ftp
         {
             get { throw new System.NotImplementedException(); }
         }
+
+        public System.IO.FileStream Open()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// Gets the last write time.
         /// </summary>
         /// <value>The last write time.</value>
-        public System.DateTime LastWriteTime
+        public DateTime LastWriteTime
         {
             get { return this.fileInfo.LastWriteTime; }
         }
@@ -72,6 +72,16 @@ namespace FlagSync.Core.FileSystem.Local
                 throw new ArgumentNullException("fileInfo");
 
             this.fileInfo = fileInfo;
+        }
+
+        /// <summary>
+        /// Opens the stream of the file.
+        /// </summary>
+        /// <returns>The stream of the file.</returns>
+        /// <remarks></remarks>
+        public FileStream Open()
+        {
+            return this.fileInfo.Open(FileMode.Open, FileAccess.Read);
         }
     }
 }
