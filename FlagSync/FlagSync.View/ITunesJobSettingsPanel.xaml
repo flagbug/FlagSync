@@ -30,7 +30,7 @@
                     <TextBlock Text="{x:Static properties:Resources.NameJobSettingsTextBlockText}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="0" />
                     <TextBox Margin="5, 5, 5, 5" Height="25" Grid.Column="1" Grid.Row="0" Text="{Binding Path=JobSetting.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
                     <TextBlock Text="{x:Static properties:Resources.PlaylistJobSettingTextBlockText}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" Grid.Column="0" Grid.Row="1" />
-                    <ComboBox Margin="5, 5, 5, 5" Height="25" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=JobSetting.ITunesPlaylists}" SelectedItem="{Binding Path=JobSetting.ITunesPlaylist, ValidatesOnDataErrors=True, NotifyOnValidationError=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <ComboBox Margin="5, 5, 5, 5" Height="25" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=ITunesPlaylists}" SelectedItem="{Binding Path=JobSetting.ITunesPlaylist, ValidatesOnDataErrors=True, NotifyOnValidationError=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />

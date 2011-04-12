@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using FlagLib.Patterns;
 using FlagSync.Core;
-using iTunesLib;
 
 namespace FlagSync.View
 {
@@ -284,22 +281,6 @@ namespace FlagSync.View
                     this.InternJobSetting.ITunesPlaylist = value;
                     this.OnPropertyChanged(vm => vm.ITunesPlaylist);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Gets the playlists from iTunes.
-        /// </summary>
-        /// <value>The playlists from iTunes.</value>
-        public IEnumerable<string> ITunesPlaylists
-        {
-            get
-            {
-                iTunesApp iTunes = new iTunesApp();
-                return iTunes.LibrarySource.Playlists
-                    .Cast<IITPlaylist>()
-                    .Where(pl => pl.Kind == ITPlaylistKind.ITPlaylistKindUser)
-                    .Select(pl => pl.Name);
             }
         }
 

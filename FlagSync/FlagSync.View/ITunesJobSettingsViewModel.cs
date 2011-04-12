@@ -1,8 +1,11 @@
-﻿using FlagLib.Patterns;
+﻿using System.Collections.Generic;
+using System.Linq;
+using FlagLib.Patterns;
+using iTunesLib;
 
 namespace FlagSync.View
 {
-    class ITunesJobSettingsViewModel : ViewModelBase<ITunesJobSettingsViewModel>
+    internal class ITunesJobSettingsViewModel : ViewModelBase<ITunesJobSettingsViewModel>
     {
         private JobSettingViewModel jobSetting;
 
@@ -20,6 +23,22 @@ namespace FlagSync.View
                     this.jobSetting = value;
                     this.OnPropertyChanged(vm => vm.JobSetting);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets the playlists from iTunes.
+        /// </summary>
+        /// <value>The playlists from iTunes.</value>
+        public IEnumerable<string> ITunesPlaylists
+        {
+            get
+            {
+                iTunesApp iTunes = new iTunesApp();
+                return iTunes.LibrarySource.Playlists
+                    .Cast<IITPlaylist>()
+                    .Where(pl => pl.Kind == ITPlaylistKind.ITPlaylistKindUser)
+                    .Select(pl => pl.Name);
             }
         }
     }

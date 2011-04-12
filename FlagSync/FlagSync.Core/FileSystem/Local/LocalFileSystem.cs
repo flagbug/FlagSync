@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Security;
-using System.Threading;
 using FlagLib.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
 
@@ -146,16 +145,6 @@ namespace FlagSync.Core.FileSystem.Local
         {
             bool succeed = false;
 
-            FileCopyOperation fileCopyOperation = new FileCopyOperation();
-
-            fileCopyOperation.CopyProgressUpdated += (sender, e) =>
-            {
-                if (this.FileCopyProgressChanged != null)
-                {
-                    this.FileCopyProgressChanged(this, e);
-                }
-            };
-
             try
             {
                 string targetFilePath = Path.Combine(targetDirectory.FullName, sourceFile.Name);
@@ -164,35 +153,17 @@ namespace FlagSync.Core.FileSystem.Local
                 {
                     using (FileStream targetStream = File.Create(targetFilePath))
                     {
-                        using (System.Timers.Timer timer = new System.Timers.Timer(250))
+                        long bytesTotal = sourceStream.Length;
+                        long bytesCurrent = 0;
+                        var buffer = new byte[32 * 1024];
+                        int bytes;
+
+                        while ((bytes = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
                         {
-                            object timerLocker = new object();
-                            ManualResetEvent timerDead = new ManualResetEvent(false);
-
-                            timer.Elapsed += (sender, e) =>
-                                {
-                                    lock (timerLocker)
-                                    {
-                                        if (this.FileCopyProgressChanged != null
-                                            && timerDead.WaitOne())
-                                        {
-                                            this.FileCopyProgressChanged(this,
-                                                new CopyProgressEventArgs(
-                                                    sourceStream.Length,
-                                                    targetStream.Length));
-                                        }
-                                    }
-                                };
-
-                            timer.Start();
-
-                            sourceStream.CopyTo(targetStream);
-
-                            lock (timerLocker)
-                            {
-                                timerDead.Set();
-                                timer.Stop();
-                            }
+                            targetStream.Write(buffer, 0, bytes);
+                            bytesCurrent += bytes;
+                            FileCopyProgressChanged(this,
+                                new CopyProgressEventArgs(bytesTotal, bytesCurrent));
                         }
                     }
                 }
@@ -203,7 +174,9 @@ namespace FlagSync.Core.FileSystem.Local
             catch (UnauthorizedAccessException ex)
             {
                 Logger.Current.LogError(
+
                     string.Format("UnauthorizedAccessException while copying file: {0} to directory: {1}",
+
                         sourceFile.FullName, targetDirectory.FullName));
 
                 succeed = false;
@@ -213,6 +186,15 @@ namespace FlagSync.Core.FileSystem.Local
             {
                 Logger.Current.LogError(
                     string.Format("SecurityException while copying file: {0} to directory: {1}",
+                    sourceFile.FullName, targetDirectory.FullName));
+
+                succeed = false;
+            }
+
+            catch (IOException ex)
+            {
+                Logger.Current.LogError(
+                    string.Format("IOException while copying file: {0} to directory: {1}",
                     sourceFile.FullName, targetDirectory.FullName));
 
                 succeed = false;
