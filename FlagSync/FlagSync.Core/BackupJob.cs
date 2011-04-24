@@ -13,8 +13,8 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <param name="preview">if set to <c>true</c>, no files will be deleted, copied or modified).</param>
-        public BackupJob(JobSetting settings, IFileSystem fileSystem)
-            : base(settings, fileSystem) { }
+        public BackupJob(JobSetting settings, IFileSystem sourceFileSystem, IFileSystem targetFileSystem)
+            : base(settings, sourceFileSystem, targetFileSystem) { }
 
         /// <summary>
         /// Starts the BackupJob, copies new and modified files from directory A to directory B and finally checks for deletions

@@ -14,14 +14,26 @@ namespace FlagSync.Core
         /// Gets the settings of the job.
         /// </summary>
         /// <value>The job settings.</value>
+        /// <remarks></remarks>
         public JobSetting Settings { get; private set; }
 
-        public IFileSystem FileSystem { get; private set; }
+        /// <summary>
+        /// Gets the source file system.
+        /// </summary>
+        /// <remarks></remarks>
+        public IFileSystem SourceFileSystem { get; private set; }
+
+        /// <summary>
+        /// Gets the target file system.
+        /// </summary>
+        /// <remarks></remarks>
+        public IFileSystem TargetFileSystem { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="Job"/> is paused.
         /// </summary>
         /// <value>true if paused; otherwise, false.</value>
+        /// <remarks></remarks>
         public bool IsPaused
         {
             get { return this.isPaused; }
@@ -32,6 +44,7 @@ namespace FlagSync.Core
         /// Gets a value indicating whether the <see cref="Job"/> is stopped.
         /// </summary>
         /// <value>true if stopped; otherwise, false.</value>
+        /// <remarks></remarks>
         public bool IsStopped
         {
             get { return this.isStopped; }
@@ -42,91 +55,109 @@ namespace FlagSync.Core
         /// Gets the written bytes.
         /// </summary>
         /// <value>The written bytes.</value>
+        /// <remarks></remarks>
         public long WrittenBytes { get; private set; }
 
         /// <summary>
         /// Occurs when a file has been proceeded.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<FileProceededEventArgs> ProceededFile;
 
         /// <summary>
         /// Occurs when the job has finished.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler Finished;
 
         /// <summary>
         /// Occurs before a file gets deleted.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<FileDeletionEventArgs> DeletingFile;
 
         /// <summary>
         /// Occurs when a file has been deleted.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<FileDeletionEventArgs> DeletedFile;
 
         /// <summary>
         /// Occurs before a new file gets created.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<FileCopyEventArgs> CreatingFile;
 
         /// <summary>
         /// Occurs when a new file has been created.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<FileCopyEventArgs> CreatedFile;
 
         /// <summary>
         /// Occurs before a file gets modified.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<FileCopyEventArgs> ModifyingFile;
 
         /// <summary>
         /// Occurs when a file has been modified.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<FileCopyEventArgs> ModifiedFile;
 
         /// <summary>
         /// Occurs before a new directory gets created.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<DirectoryCreationEventArgs> CreatingDirectory;
 
         /// <summary>
         /// Occurs when a new directory has been created.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<DirectoryCreationEventArgs> CreatedDirectory;
 
         /// <summary>
         /// Occurs before a directory has been deleted.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<DirectoryDeletionEventArgs> DeletingDirectory;
 
         /// <summary>
         /// Occurs when a directory has been deleted.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<DirectoryDeletionEventArgs> DeletedDirectory;
 
         /// <summary>
         /// Occurs when a file copy error has occured.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<FileCopyErrorEventArgs> FileCopyError;
 
         /// <summary>
         /// Occurs when a file deletion error has occured.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
 
         /// <summary>
         /// Occurs when a directory creation error has occured.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<DirectoryCreationEventArgs> DirectoryCreationError;
 
         /// <summary>
         /// Occurs when a directory deletion error has occured.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
 
         /// <summary>
         /// Occurs when the file copy progress has changed.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
 
         /// <summary>
@@ -134,26 +165,34 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <param name="fileSystem">The file system.</param>
-        protected Job(JobSetting settings, IFileSystem fileSystem)
+        /// <remarks></remarks>
+        protected Job(JobSetting settings, IFileSystem sourceFileSystem, IFileSystem targetFileSystem)
         {
             if (settings == null)
                 throw new ArgumentNullException("settings");
 
-            if (fileSystem == null)
-                throw new ArgumentNullException("fileSystem");
+            if (sourceFileSystem == null)
+                throw new ArgumentNullException("sourceFileSystem");
+
+            if (targetFileSystem == null)
+                throw new ArgumentNullException("targtFileSystem");
 
             this.Settings = settings;
-            this.FileSystem = fileSystem;
+            this.SourceFileSystem = sourceFileSystem;
+            this.TargetFileSystem = targetFileSystem;
         }
 
         /// <summary>
         /// Starts the job.
         /// </summary>
+        /// <param name="preview">if set to <c>true</c> [preview].</param>
+        /// <remarks></remarks>
         public abstract void Start(bool preview);
 
         /// <summary>
         /// Pauses the job
         /// </summary>
+        /// <remarks></remarks>
         public virtual void Pause()
         {
             this.IsPaused = true;
@@ -162,6 +201,7 @@ namespace FlagSync.Core
         /// <summary>
         /// Continues the job (only after pause)
         /// </summary>
+        /// <remarks></remarks>
         public virtual void Continue()
         {
             this.IsPaused = false;
@@ -170,6 +210,7 @@ namespace FlagSync.Core
         /// <summary>
         /// Stops the job (can't be continued)
         /// </summary>
+        /// <remarks></remarks>
         public virtual void Stop()
         {
             this.IsPaused = false;
@@ -180,6 +221,7 @@ namespace FlagSync.Core
         /// Checks if the job is paused, when true,
         /// a loop will be enabled which causes the thread to sleep till the job gets continued
         /// </summary>
+        /// <remarks></remarks>
         protected void CheckPause()
         {
             while (this.IsPaused)
@@ -192,6 +234,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:CreatingFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnCreatingFile(FileCopyEventArgs e)
         {
             if (this.CreatingFile != null)
@@ -204,6 +247,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:CreatedFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnCreatedFile(FileCopyEventArgs e)
         {
             if (this.CreatedFile != null)
@@ -218,6 +262,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:ModifyingFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnModifyingFile(FileCopyEventArgs e)
         {
             if (this.ModifyingFile != null)
@@ -230,6 +275,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:ModifiedFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnModifiedFile(FileCopyEventArgs e)
         {
             if (this.ModifiedFile != null)
@@ -244,6 +290,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:DeletingFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnDeletingFile(FileDeletionEventArgs e)
         {
             if (this.DeletingFile != null)
@@ -256,6 +303,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:DeletedFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnDeletedFile(FileDeletionEventArgs e)
         {
             if (this.DeletedFile != null)
@@ -270,6 +318,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:CreatingDirectory"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnCreatingDirectory(DirectoryCreationEventArgs e)
         {
             if (this.CreatingDirectory != null)
@@ -282,6 +331,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:CreatedDirectory"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnCreatedDirectory(DirectoryCreationEventArgs e)
         {
             if (this.CreatedDirectory != null)
@@ -296,6 +346,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:DeletingDirectory"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnDeletingDirectory(DirectoryDeletionEventArgs e)
         {
             if (this.DeletingDirectory != null)
@@ -308,6 +359,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:DeletedDirectory"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnDeletedDirectory(DirectoryDeletionEventArgs e)
         {
             if (this.DeletedDirectory != null)
@@ -322,6 +374,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:Finished"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnFinished(EventArgs e)
         {
             if (this.Finished != null)
@@ -334,6 +387,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:ProceededFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnProceededFile(FileProceededEventArgs e)
         {
             if (this.ProceededFile != null)
@@ -346,6 +400,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:FileCopyError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyErrorEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnFileCopyError(FileCopyErrorEventArgs e)
         {
             if (this.FileCopyError != null)
@@ -358,6 +413,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:DirectoryDeletionError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnDirectoryDeletionError(DirectoryDeletionEventArgs e)
         {
             if (this.DirectoryDeletionError != null)
@@ -370,6 +426,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:FileDeletionError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionErrorEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnFileDeletionError(FileDeletionErrorEventArgs e)
         {
             if (this.FileDeletionError != null)
@@ -382,6 +439,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:FileProgressChanged"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnFileProgressChanged(CopyProgressEventArgs e)
         {
             if (this.FileCopyProgressChanged != null)
@@ -394,6 +452,7 @@ namespace FlagSync.Core
         /// Raises the <see cref="E:DirectoryCreationError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        /// <remarks></remarks>
         protected virtual void OnDirectoryCreationError(DirectoryCreationEventArgs e)
         {
             if (this.DirectoryCreationError != null)

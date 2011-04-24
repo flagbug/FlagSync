@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 using FlagLib.Patterns;
 
 namespace FlagSync.View
@@ -40,6 +41,9 @@ namespace FlagSync.View
             get { return this.progress; }
             set
             {
+                if (value < 0 || value > 100)
+                    throw new ArgumentOutOfRangeException("value", "Value mus't be from 0 to 100");
+
                 if (this.Progress != value)
                 {
                     this.progress = value;

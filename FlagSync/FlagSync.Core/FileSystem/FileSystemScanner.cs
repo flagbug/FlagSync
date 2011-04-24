@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem
 {
-    class FileSystemScanner
+    internal class FileSystemScanner
     {
         private IDirectoryInfo rootDirectory;
 
@@ -141,6 +142,10 @@ namespace FlagSync.Core.FileSystem
             }
 
             catch (SecurityException)
+            {
+            }
+
+            catch (IOException)
             {
             }
 

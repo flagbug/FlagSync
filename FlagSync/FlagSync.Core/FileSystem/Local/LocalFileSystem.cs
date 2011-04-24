@@ -6,20 +6,20 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
 {
-    internal class LocalFileSystem : IFileSystem
+    public class LocalFileSystem : IFileSystem
     {
         /// <summary>
         /// Occurs when the file copy progress has changed.
         /// </summary>
+        /// <remarks></remarks>
         public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
 
         /// <summary>
         /// Tries to delete a file.
         /// </summary>
         /// <param name="file">The file to delete.</param>
-        /// <returns>
-        /// A value indicating whether the file deletion has succeed
-        /// </returns>
+        /// <returns>A value indicating whether the file deletion has succeed</returns>
+        /// <remarks></remarks>
         public bool TryDeleteFile(IFileInfo file)
         {
             bool succeed = false;
@@ -31,17 +31,17 @@ namespace FlagSync.Core.FileSystem.Local
                 succeed = true;
             }
 
-            catch (IOException)
+            catch (IOException ex)
             {
                 Logger.Current.LogError(string.Format("IOException while deleting file: {0}", file.FullName));
             }
 
-            catch (SecurityException)
+            catch (SecurityException ex)
             {
                 Logger.Current.LogError(string.Format("SecurityException while deleting file: {0}", file.FullName));
             }
 
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
                 Logger.Current.LogError(string.Format("UnauthorizedAccessException while deleting file: {0}", file.FullName));
             }
@@ -54,9 +54,8 @@ namespace FlagSync.Core.FileSystem.Local
         /// </summary>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>
-        /// Returns a value indicating whether the directory creation has succeed
-        /// </returns>
+        /// <returns>Returns a value indicating whether the directory creation has succeed</returns>
+        /// <remarks></remarks>
         public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
             bool succeed = false;
@@ -68,28 +67,28 @@ namespace FlagSync.Core.FileSystem.Local
                 succeed = true;
             }
 
-            catch (DirectoryNotFoundException)
+            catch (DirectoryNotFoundException ex)
             {
                 Logger.Current.LogError(
                     string.Format("DirectoryNotFoundException while creating directory: {0} in directory: {1}",
                         sourceDirectory.Name, targetDirectory.FullName));
             }
 
-            catch (PathTooLongException)
+            catch (PathTooLongException ex)
             {
                 Logger.Current.LogError(
                     string.Format("PathTooLongException while creating directory: {0} in directory: {1}",
                         sourceDirectory.Name, targetDirectory.FullName));
             }
 
-            catch (IOException)
+            catch (IOException ex)
             {
                 Logger.Current.LogError(
                     string.Format("IOException while creating directory: {0} in directory: {1}",
                     sourceDirectory.Name, targetDirectory.FullName));
             }
 
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
                 Logger.Current.LogError(
                     string.Format("UnauthorizedAccessException while creating directory: {0} in directory: {1}",
@@ -116,17 +115,17 @@ namespace FlagSync.Core.FileSystem.Local
                 succeed = true;
             }
 
-            catch (DirectoryNotFoundException)
+            catch (DirectoryNotFoundException ex)
             {
                 Logger.Current.LogError(string.Format("DirectoryNotFoundException while deleting directory: {0}", directory.FullName));
             }
 
-            catch (IOException)
+            catch (IOException ex)
             {
                 Logger.Current.LogError(string.Format("IOException while deleting directory: {0}", directory.FullName));
             }
 
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
                 Logger.Current.LogError(string.Format("UnauthorizedAccessException while deleting directory: {0}", directory.FullName));
             }
@@ -208,6 +207,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
+        /// <remarks></remarks>
         public IFileInfo GetFileInfo(string path)
         {
             return new LocalFileInfo(new FileInfo(path));
@@ -218,6 +218,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
+        /// <remarks></remarks>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
             return new LocalDirectoryInfo(new DirectoryInfo(path));
@@ -227,7 +228,8 @@ namespace FlagSync.Core.FileSystem.Local
         /// Checks if the file at the specified path exists.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <returns></returns>
+        /// <returns>True, if the file exists; otherwise, false</returns>
+        /// <remarks></remarks>
         public bool FileExists(string path)
         {
             return File.Exists(path);
@@ -237,7 +239,8 @@ namespace FlagSync.Core.FileSystem.Local
         /// Checks if the directory at the specified path exists.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <returns></returns>
+        /// <returns>True, if the directory exists; otherwise, false</returns>
+        /// <remarks></remarks>
         public bool DirectoryExists(string path)
         {
             return Directory.Exists(path);

@@ -13,6 +13,7 @@ namespace FlagSync.View
         /// Gets or sets the job setting.
         /// </summary>
         /// <value>The job setting.</value>
+        /// <remarks></remarks>
         public JobSettingViewModel JobSetting
         {
             get { return this.jobSetting; }
@@ -30,6 +31,7 @@ namespace FlagSync.View
         /// Gets the playlists from iTunes.
         /// </summary>
         /// <value>The playlists from iTunes.</value>
+        /// <remarks></remarks>
         public IEnumerable<string> ITunesPlaylists
         {
             get
@@ -38,7 +40,8 @@ namespace FlagSync.View
                 return iTunes.LibrarySource.Playlists
                     .Cast<IITPlaylist>()
                     .Where(pl => pl.Kind == ITPlaylistKind.ITPlaylistKindUser)
-                    .Select(pl => pl.Name);
+                    .Select(pl => pl.Name)
+                    .OrderBy(name => name);
             }
         }
     }

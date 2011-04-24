@@ -55,7 +55,7 @@
     <Compile Include="FileSystem\Ftp\FtpDirectoryInfo.cs" />
     <Compile Include="FileSystem\Ftp\FtpFileInfo.cs" />
     <Compile Include="FileSystem\Ftp\FtpFileSystem.cs" />
-    <Compile Include="FileSystem\ITunes\ITunesDirectoryInfo.cs" />
+    <Compile Include="FileSystem\ITunes\ITunesPlaylist.cs" />
     <Compile Include="FileSystem\ITunes\ITunesFileInfo.cs" />
     <Compile Include="FileSystem\ITunes\ITunesFileSystem.cs" />
     <Compile Include="FileSystem\Virtual\VirtualDirectoryInfo.cs" />
