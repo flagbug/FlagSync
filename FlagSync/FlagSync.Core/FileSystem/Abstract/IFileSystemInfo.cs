@@ -2,13 +2,17 @@
 {
     public interface IFileSystemInfo
     {
-        //Gets the full name.
+        /// <summary>
+        /// Gets the full name.
+        /// </summary>
+        /// <remarks></remarks>
         string FullName { get; }
 
         /// <summary>
         /// Gets the name.
         /// </summary>
         /// <value>The name.</value>
+        /// <remarks></remarks>
         string Name { get; }
     }
 }
