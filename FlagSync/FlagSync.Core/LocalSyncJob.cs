@@ -3,14 +3,14 @@ using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
-    internal class SyncJob : FileSystemJob
+    internal class LocalSyncJob : FileSystemJob
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SyncJob"/> class.
+        /// Initializes a new instance of the <see cref="LocalSyncJob"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <remarks></remarks>
-        public SyncJob(JobSetting settings)
+        public LocalSyncJob(JobSetting settings)
             : base(settings, new LocalFileSystem(), new LocalFileSystem()) { }
 
         /// <summary>

@@ -250,11 +250,11 @@ namespace FlagSync.Core
                 switch (jobSetting.SyncMode)
                 {
                     case SyncMode.LocalBackup:
-                        this.jobQueue.Enqueue(new BackupJob(jobSetting));
+                        this.jobQueue.Enqueue(new LocalBackupJob(jobSetting));
                         break;
 
                     case SyncMode.LocalSynchronization:
-                        this.jobQueue.Enqueue(new SyncJob(jobSetting));
+                        this.jobQueue.Enqueue(new LocalSyncJob(jobSetting));
                         break;
 
                     case SyncMode.ITunes:
