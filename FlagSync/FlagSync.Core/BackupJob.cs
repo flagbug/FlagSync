@@ -1,28 +1,36 @@
 ﻿using System;
-using FlagSync.Core.FileSystem.Abstract;
+using System.IO;
+using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
     /// <summary>
     /// A backup-job performs a synchronization only from directory A to directory B, but can delete files
     /// </summary>
+    /// <remarks></remarks>
     internal class BackupJob : FileSystemJob
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BackupJob"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        /// <param name="preview">if set to <c>true</c>, no files will be deleted, copied or modified).</param>
-        public BackupJob(JobSetting settings, IFileSystem sourceFileSystem, IFileSystem targetFileSystem)
-            : base(settings, sourceFileSystem, targetFileSystem) { }
+        /// <remarks></remarks>
+        public BackupJob(JobSetting settings)
+            : base(settings, new LocalFileSystem(), new LocalFileSystem()) { }
 
         /// <summary>
         /// Starts the BackupJob, copies new and modified files from directory A to directory B and finally checks for deletions
-        /// </summary>*/
+        /// </summary>
+        /// <param name="preview">if set to <c>true</c> a preview will be performed.</param>
+        /// <remarks></remarks>
         public override void Start(bool preview)
         {
-            this.BackupDirectoryRecursively(Settings.DirectoryA, Settings.DirectoryB, !preview);
-            this.CheckDeletionsRecursively(Settings.DirectoryB, Settings.DirectoryA, !preview);
+            this.BackupDirectoryRecursively(new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryA)),
+                new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)), !preview);
+
+            this.CheckDeletionsRecursively(new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)),
+                new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryA)), !preview);
+
             this.OnFinished(EventArgs.Empty);
         }
     }

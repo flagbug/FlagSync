@@ -61,6 +61,7 @@
     <Compile Include="FileSystem\Virtual\VirtualDirectoryInfo.cs" />
     <Compile Include="FileSystem\Virtual\VirtualFileInfo.cs" />
     <Compile Include="FileSystem\Virtual\VirtualFileSystem.cs" />
+    <Compile Include="ITunesJob.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobEventArgs.cs" />
     <Compile Include="JobSetting.cs" />

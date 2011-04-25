@@ -4,6 +4,8 @@ using System.IO;
 using System.Threading;
 using FlagLib.FileSystem;
 using FlagSync.Core.FileSystem;
+using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.ITunes;
 using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
@@ -248,11 +250,15 @@ namespace FlagSync.Core
                 switch (jobSetting.SyncMode)
                 {
                     case SyncMode.LocalBackup:
-                        this.jobQueue.Enqueue(new BackupJob(jobSetting, new LocalFileSystem(), new LocalFileSystem()));
+                        this.jobQueue.Enqueue(new BackupJob(jobSetting));
                         break;
 
                     case SyncMode.LocalSynchronization:
-                        this.jobQueue.Enqueue(new SyncJob(jobSetting, new LocalFileSystem(), new LocalFileSystem()));
+                        this.jobQueue.Enqueue(new SyncJob(jobSetting));
+                        break;
+
+                    case SyncMode.ITunes:
+                        this.jobQueue.Enqueue(new ITunesJob(jobSetting));
                         break;
                 }
             }
@@ -270,10 +276,26 @@ namespace FlagSync.Core
             {
                 //TODO: Make generic for all settings
                 FileCounter counter = new FileCounter();
-                result += counter.CountFiles(
-                    new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryA)));
-                result += counter.CountFiles(
-                    new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryB)));
+
+                IDirectoryInfo directoryA = null;
+                IDirectoryInfo directoryB = null;
+
+                switch (job.Settings.SyncMode)
+                {
+                    case SyncMode.LocalBackup:
+                    case SyncMode.LocalSynchronization:
+                        directoryA = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryA));
+                        directoryB = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryB));
+                        break;
+
+                    case SyncMode.ITunes:
+                        directoryA = new ITunesDirectoryInfo(job.Settings.ITunesPlaylist);
+                        directoryB = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryB));
+                        break;
+                }
+
+                result += counter.CountFiles(directoryA);
+                result += counter.CountFiles(directoryB);
             }
 
             return result;

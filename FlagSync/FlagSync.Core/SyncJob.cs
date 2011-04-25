@@ -1,4 +1,5 @@
-﻿using FlagSync.Core.FileSystem.Abstract;
+﻿using System.IO;
+using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
@@ -8,17 +9,22 @@ namespace FlagSync.Core
         /// Initializes a new instance of the <see cref="SyncJob"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        /// <param name="preview">if set to true no files will be deleted, mofified or copied.</param>
-        public SyncJob(JobSetting settings, IFileSystem sourceFileSystem, IFileSystem targetFileSystem)
-            : base(settings, sourceFileSystem, targetFileSystem) { }
+        /// <remarks></remarks>
+        public SyncJob(JobSetting settings)
+            : base(settings, new LocalFileSystem(), new LocalFileSystem()) { }
 
         /// <summary>
         /// Starts the job, opies new and modified files from directory A to directory B and then switches the direction
         /// </summary>
+        /// <param name="preview">if set to <c>true</c> [preview].</param>
+        /// <remarks></remarks>
         public override void Start(bool preview)
         {
-            this.BackupDirectoryRecursively(Settings.DirectoryA, Settings.DirectoryB, !preview);
-            this.BackupDirectoryRecursively(Settings.DirectoryB, Settings.DirectoryA, !preview);
+            this.BackupDirectoryRecursively(new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryA)),
+                new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)), !preview);
+
+            this.BackupDirectoryRecursively(new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)),
+                new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryA)), !preview);
 
             this.OnFinished(System.EventArgs.Empty);
         }

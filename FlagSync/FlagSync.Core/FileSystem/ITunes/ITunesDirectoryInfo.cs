@@ -36,7 +36,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public bool Exists
         {
-            get { throw new NotImplementedException(); }
+            get { return true; }
         }
 
         /// <summary>

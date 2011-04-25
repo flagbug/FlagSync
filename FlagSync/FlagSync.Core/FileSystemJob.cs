@@ -14,7 +14,10 @@ namespace FlagSync.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="FileSystemJob"/> class.
         /// </summary>
-        /// <param name="settings">The job settings.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="sourceFileSystem">The source file system.</param>
+        /// <param name="targetFileSystem">The target file system.</param>
+        /// <remarks></remarks>
         protected FileSystemJob(JobSetting settings, IFileSystem sourceFileSystem, IFileSystem targetFileSystem)
             : base(settings, sourceFileSystem, targetFileSystem) { }
 
@@ -49,19 +52,17 @@ namespace FlagSync.Core
         /// <param name="sourceDirectoryPath">The source directory path.</param>
         /// <param name="targetDirectoryPath">The target directory path.</param>
         /// <param name="execute">if set to true, the modifications, creations and deletions will be executed executed.</param>
-        protected void BackupDirectoryRecursively(string sourceDirectoryPath, string targetDirectoryPath, bool execute)
+        protected void BackupDirectoryRecursively(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool execute)
         {
-            if (!this.SourceFileSystem.DirectoryExists(sourceDirectoryPath))
+            if (!sourceDirectory.Exists)
                 throw new ArgumentException("The source directory doesn't exist.", "sourceDirectoryPath");
 
-            if (!this.TargetFileSystem.DirectoryExists(targetDirectoryPath))
+            if (!targetDirectory.Exists)
                 throw new ArgumentException("The target directory doesn't exist.", "targetDirectoryPath");
 
-            FileSystemScanner rootScanner =
-                new FileSystemScanner(this.SourceFileSystem.GetDirectoryInfo(sourceDirectoryPath));
+            FileSystemScanner rootScanner = new FileSystemScanner(sourceDirectory);
 
-            IDirectoryInfo currentTargetDirectory =
-                this.TargetFileSystem.GetDirectoryInfo(targetDirectoryPath);
+            IDirectoryInfo currentTargetDirectory = targetDirectory;
 
             rootScanner.DirectoryFound += (sender, e) =>
                 {
@@ -139,18 +140,17 @@ namespace FlagSync.Core
         /// <param name="sourceDirectoryPath">The source directory path.</param>
         /// <param name="targetDirectoryPath">The target directory path.</param>
         /// <param name="execute">if set to true, the modifications, creations and deletions will be executed executed.</param>
-        protected void CheckDeletionsRecursively(string sourceDirectoryPath, string targetDirectoryPath, bool execute)
+        protected void CheckDeletionsRecursively(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool execute)
         {
-            if (!this.SourceFileSystem.DirectoryExists(sourceDirectoryPath))
+            if (!sourceDirectory.Exists)
                 throw new ArgumentException("The source directory doesn't exist.", "sourceDirectoryPath");
 
-            if (!this.TargetFileSystem.DirectoryExists(targetDirectoryPath))
+            if (!targetDirectory.Exists)
                 throw new ArgumentException("The target directory doesn't exist.", "targetDirectoryPath");
 
-            FileSystemScanner rootScanner =
-                new FileSystemScanner(this.SourceFileSystem.GetDirectoryInfo(sourceDirectoryPath));
+            FileSystemScanner rootScanner = new FileSystemScanner(sourceDirectory);
 
-            IDirectoryInfo currentTargetDirectory = this.TargetFileSystem.GetDirectoryInfo(targetDirectoryPath);
+            IDirectoryInfo currentTargetDirectory = targetDirectory;
 
             rootScanner.DirectoryFound += (sender, e) =>
             {

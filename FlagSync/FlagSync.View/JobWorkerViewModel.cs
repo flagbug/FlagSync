@@ -384,16 +384,22 @@ namespace FlagSync.View
         {
             bool exist = true;
 
-            if (!Directory.Exists(jobSetting.DirectoryA))
+            switch (jobSetting.SyncMode)
             {
-                this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryADoesntExistMessage);
-                exist = false;
-            }
+                case SyncMode.LocalBackup:
+                case SyncMode.LocalSynchronization:
+                    if (!Directory.Exists(jobSetting.DirectoryA))
+                    {
+                        this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryADoesntExistMessage);
+                        exist = false;
+                    }
 
-            if (!Directory.Exists(jobSetting.DirectoryB))
-            {
-                this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
-                exist = false;
+                    if (!Directory.Exists(jobSetting.DirectoryB))
+                    {
+                        this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
+                        exist = false;
+                    }
+                    break;
             }
 
             return exist;
