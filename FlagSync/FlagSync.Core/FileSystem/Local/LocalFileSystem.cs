@@ -154,7 +154,7 @@ namespace FlagSync.Core.FileSystem.Local
                     {
                         long bytesTotal = sourceStream.Length;
                         long bytesCurrent = 0;
-                        var buffer = new byte[32 * 1024];
+                        var buffer = new byte[128 * 1024];
                         int bytes;
 
                         while ((bytes = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
