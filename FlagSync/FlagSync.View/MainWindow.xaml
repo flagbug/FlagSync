@@ -10,7 +10,8 @@
         d:DesignHeight="768" d:DesignWidth="1024"
         Title="FlagSync" Name="Window" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico"
         WindowState="Maximized" Closing="Window_Closing"
-        MinWidth="800" MinHeight="600">
+        MinWidth="800" MinHeight="600"
+        Loaded="Window_Loaded">
     <Window.DataContext>
         <local:MainViewModel x:Name="mainViewModel" />
     </Window.DataContext>
@@ -129,7 +130,7 @@
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryBTextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
                         <TextBlock Grid.Row="2" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.DirectoryB}" Margin="5,0,0,0" />
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.ModeTextBlockText}" Height="Auto" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Padding="0" />
-                        <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.SyncMode}" Margin="5,0,0,0" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJobSettings.SyncModeString}" Margin="5,0,0,0" />
                     </Grid>
                     <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.NoActiveJobText}" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock.Style>

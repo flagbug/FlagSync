@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,40 @@ namespace FlagSync.View
             InitializeComponent();
 
             this.mainViewModel.JobSettingsViewModel.SelectedJobSetting = this.mainViewModel.JobSettingsViewModel.JobSettings[0];
+        }
+
+        /// <summary>
+        /// Handles the Loaded event of the Window control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            string[] args = Environment.GetCommandLineArgs();
+
+            if (args.Length == 2)
+            {
+                this.WindowState = WindowState.Minimized;
+
+                var vm = this.mainViewModel.JobSettingsViewModel;
+
+                if (!vm.TryLoadJobSettings(args[1]))
+                {
+                    this.WindowState = WindowState.Maximized;
+
+                    MessageBox.Show(Properties.Resources.LoadSettingsErrorMessage,
+                                    Properties.Resources.ErrorString,
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+
+                    Application.Current.Shutdown();
+                }
+
+                else
+                {
+                    this.StartJobWorker(false);
+                }
+            }
         }
 
         /// <summary>
