@@ -140,7 +140,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// <param name="targetDirectory">The target directory.</param>
         /// <returns>True, if the copy operation has succeed; otherwise, false</returns>
         /// <remarks></remarks>
-        public bool TryCopyFile(IFileInfo sourceFile, IDirectoryInfo targetDirectory)
+        public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
             bool succeed = false;
 
@@ -148,7 +148,7 @@ namespace FlagSync.Core.FileSystem.Local
             {
                 string targetFilePath = Path.Combine(targetDirectory.FullName, sourceFile.Name);
 
-                using (FileStream sourceStream = sourceFile.Open())
+                using (Stream sourceStream = sourceFileSystem.OpenFileStream(sourceFile))
                 {
                     using (FileStream targetStream = File.Create(targetFilePath))
                     {
@@ -244,6 +244,16 @@ namespace FlagSync.Core.FileSystem.Local
         public bool DirectoryExists(string path)
         {
             return Directory.Exists(path);
+        }
+
+        /// <summary>
+        /// Opens the stream of the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
+        public Stream OpenFileStream(IFileInfo file)
+        {
+            return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
         }
     }
 }

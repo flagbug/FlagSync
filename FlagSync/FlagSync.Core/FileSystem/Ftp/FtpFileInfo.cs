@@ -1,10 +1,11 @@
-﻿using FlagSync.Core.FileSystem.Abstract;
+﻿using System;
+using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
 {
-    class FtpFileInfo : IFileInfo
+    internal class FtpFileInfo : IFileInfo
     {
-        public System.DateTime LastWriteTime
+        public DateTime LastWriteTime
         {
             get { throw new System.NotImplementedException(); }
         }
@@ -32,11 +33,6 @@ namespace FlagSync.Core.FileSystem.Ftp
         public string Name
         {
             get { throw new System.NotImplementedException(); }
-        }
-
-        public System.IO.FileStream Open()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

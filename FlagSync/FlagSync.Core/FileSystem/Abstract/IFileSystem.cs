@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using FlagLib.FileSystem;
 
 namespace FlagSync.Core.FileSystem.Abstract
@@ -7,7 +8,7 @@ namespace FlagSync.Core.FileSystem.Abstract
     /// The base interface for all file systems
     /// </summary>
     /// <remarks></remarks>
-    internal interface IFileSystem
+    public interface IFileSystem
     {
         /// <summary>
         /// Occurs when the file copy progress has changed.
@@ -43,11 +44,13 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <summary>
         /// Tries to copy a file to specified directory (low level operation).
         /// </summary>
+        /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>True, if the copy operation has succeed; otherwise, false</returns>
-        /// <remarks></remarks>
-        bool TryCopyFile(IFileInfo sourceFile, IDirectoryInfo targetDirectory);
+        /// <returns>
+        /// True, if the copy operation has succeed; otherwise, false
+        /// </returns>
+        bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory);
 
         /// <summary>
         /// Gets the file info at the specified path.
@@ -80,5 +83,12 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <returns>True, if the directory exists; otherwise, false</returns>
         /// <remarks></remarks>
         bool DirectoryExists(string path);
+
+        /// <summary>
+        /// Opens the stream of the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
+        Stream OpenFileStream(IFileInfo file);
     }
 }

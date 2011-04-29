@@ -4,7 +4,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
 {
-    class LocalFileInfo : IFileInfo
+    internal class LocalFileInfo : IFileInfo
     {
         private FileInfo fileInfo;
 
@@ -72,16 +72,6 @@ namespace FlagSync.Core.FileSystem.Local
                 throw new ArgumentNullException("fileInfo");
 
             this.fileInfo = fileInfo;
-        }
-
-        /// <summary>
-        /// Opens the stream of the file.
-        /// </summary>
-        /// <returns>The stream of the file.</returns>
-        /// <remarks></remarks>
-        public FileStream Open()
-        {
-            return this.fileInfo.Open(FileMode.Open, FileAccess.Read);
         }
     }
 }

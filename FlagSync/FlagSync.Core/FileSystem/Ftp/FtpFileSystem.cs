@@ -4,7 +4,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
 {
-    class FtpFileSystem : IFileSystem
+    internal class FtpFileSystem : IFileSystem
     {
         public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
 
@@ -23,7 +23,7 @@ namespace FlagSync.Core.FileSystem.Ftp
             throw new NotImplementedException();
         }
 
-        public bool TryCopyFile(IFileInfo sourceFile, IDirectoryInfo targetDirectory)
+        public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
             throw new NotImplementedException();
         }
@@ -44,6 +44,11 @@ namespace FlagSync.Core.FileSystem.Ftp
         }
 
         public bool DirectoryExists(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.IO.Stream OpenFileStream(IFileInfo file)
         {
             throw new NotImplementedException();
         }

@@ -4,7 +4,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Virtual
 {
-    class VirtualFileSystem : IFileSystem
+    internal class VirtualFileSystem : IFileSystem
     {
         public VirtualDirectoryInfo RootDirectory { get; private set; }
 
@@ -108,7 +108,7 @@ namespace FlagSync.Core.FileSystem.Virtual
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <returns></returns>
-        public bool TryCopyFile(IFileInfo sourceFile, IDirectoryInfo targetDirectory)
+        public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
             if (sourceFile == null)
                 throw new ArgumentNullException("sourceFile");
@@ -204,6 +204,16 @@ namespace FlagSync.Core.FileSystem.Virtual
             path = Path.GetFullPath(path);
             return false;
             //return this.fileSystemInfos.Any(directory => directory.FullName == path);
+        }
+
+        /// <summary>
+        /// Opens the stream of the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
+        public Stream OpenFileStream(IFileInfo file)
+        {
+            throw new NotImplementedException();
         }
     }
 }

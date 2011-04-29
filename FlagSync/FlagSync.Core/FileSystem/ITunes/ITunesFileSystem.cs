@@ -1,18 +1,16 @@
 ﻿using System;
+using System.IO;
 using FlagLib.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.ITunes
 {
     /// <summary>
-    ///
+    /// Represents the file system of an iTunes playlist
     /// </summary>
     /// <remarks></remarks>
     internal class ITunesFileSystem : IFileSystem
     {
-        /// <summary>
-        ///
-        /// </summary>
         private string playlist;
 
         /// <summary>
@@ -62,7 +60,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <param name="targetDirectory">The target directory.</param>
         /// <returns>True, if the copy operation has succeed; otherwise, false</returns>
         /// <remarks></remarks>
-        public bool TryCopyFile(IFileInfo sourceFile, IDirectoryInfo targetDirectory)
+        public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
             throw new NotSupportedException();
         }
@@ -125,6 +123,11 @@ namespace FlagSync.Core.FileSystem.ITunes
                 throw new ArgumentException("The playlist name cannot be empty", "playlist");
 
             this.playlist = playlist;
+        }
+
+        public Stream OpenFileStream(IFileInfo file)
+        {
+            throw new NotSupportedException();
         }
     }
 }

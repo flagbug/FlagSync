@@ -12,6 +12,7 @@ namespace FlagSync.View
         /// Gets or sets a value indicating whether this instance is included for syncing.
         /// </summary>
         /// <value>true if this instance is included for syncing; otherwise, false.</value>
+        /// <remarks></remarks>
         public bool IsIncluded
         {
             get { return this.InternJobSetting.IsIncluded; }
@@ -29,6 +30,7 @@ namespace FlagSync.View
         /// Gets or sets the directory A.
         /// </summary>
         /// <value>The directory A.</value>
+        /// <remarks></remarks>
         public string DirectoryA
         {
             get { return this.InternJobSetting.DirectoryA; }
@@ -46,6 +48,7 @@ namespace FlagSync.View
         /// Gets or sets the directory B.
         /// </summary>
         /// <value>The directory B.</value>
+        /// <remarks></remarks>
         public string DirectoryB
         {
             get { return InternJobSetting.DirectoryB; }
@@ -63,6 +66,7 @@ namespace FlagSync.View
         /// Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
+        /// <remarks></remarks>
         public string Name
         {
             get { return this.InternJobSetting.Name; }
@@ -80,6 +84,7 @@ namespace FlagSync.View
         /// Gets or sets the sync mode.
         /// </summary>
         /// <value>The sync mode.</value>
+        /// <remarks></remarks>
         public SyncMode SyncMode
         {
             get { return this.InternJobSetting.SyncMode; }
@@ -98,6 +103,7 @@ namespace FlagSync.View
         /// Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
+        /// <remarks></remarks>
         public string SyncModeString
         {
             get
@@ -135,6 +141,7 @@ namespace FlagSync.View
         /// Gets or sets the FTP server address.
         /// </summary>
         /// <value>The FTP server address.</value>
+        /// <remarks></remarks>
         public string FtpAddress
         {
             get { return this.InternJobSetting.FtpAddress; }
@@ -152,6 +159,7 @@ namespace FlagSync.View
         /// Gets or sets the login name of the FTP server user.
         /// </summary>
         /// <value>The login name of the FTP user.</value>
+        /// <remarks></remarks>
         public string FtpUserName
         {
             get { return this.InternJobSetting.FtpUserName; }
@@ -169,6 +177,7 @@ namespace FlagSync.View
         /// Gets or sets the FTP server password.
         /// </summary>
         /// <value>The FTP server password.</value>
+        /// <remarks></remarks>
         public string FtpPassword
         {
             get { return this.InternJobSetting.FtpPassword; }
@@ -186,6 +195,7 @@ namespace FlagSync.View
         /// Gets or sets the proxy server address.
         /// </summary>
         /// <value>The proxy server address.</value>
+        /// <remarks></remarks>
         public string ProxyAddress
         {
             get { return this.InternJobSetting.ProxyAddress; }
@@ -203,6 +213,7 @@ namespace FlagSync.View
         /// Gets or sets the proxy server port.
         /// </summary>
         /// <value>The proxy server port.</value>
+        /// <remarks></remarks>
         public int ProxyPort
         {
             get { return this.InternJobSetting.ProxyPort; }
@@ -220,6 +231,7 @@ namespace FlagSync.View
         /// Gets or sets the user name for the proxy server.
         /// </summary>
         /// <value>The user name for the proxy server.</value>
+        /// <remarks></remarks>
         public string ProxyUserName
         {
             get { return this.InternJobSetting.ProxyUserName; }
@@ -237,6 +249,7 @@ namespace FlagSync.View
         /// Gets or sets the proxy server password.
         /// </summary>
         /// <value>The proxy server password.</value>
+        /// <remarks></remarks>
         public string ProxyPassword
         {
             get { return this.InternJobSetting.ProxyPassword; }
@@ -254,6 +267,7 @@ namespace FlagSync.View
         /// Gets or sets a value indicating whether the proxy server is enabled.
         /// </summary>
         /// <value><c>true</c> if the proxy server is enabled; otherwise, <c>false</c>.</value>
+        /// <remarks></remarks>
         public bool EnableProxyServer
         {
             get { return this.InternJobSetting.EnableProxyServer; }
@@ -271,6 +285,7 @@ namespace FlagSync.View
         /// Gets or sets the iTunes playlist.
         /// </summary>
         /// <value>The iTunes playlist.</value>
+        /// <remarks></remarks>
         public string ITunesPlaylist
         {
             get { return this.InternJobSetting.ITunesPlaylist; }
@@ -290,7 +305,8 @@ namespace FlagSync.View
         /// <value>The error message</value>
         /// <returns>
         /// An error message indicating what is wrong with this object. The default is an empty string ("").
-        /// </returns>
+        ///   </returns>
+        /// <remarks></remarks>
         public string Error
         {
             get { return null; }
@@ -299,7 +315,10 @@ namespace FlagSync.View
         /// <summary>
         /// Gets the <see cref="System.String"/> with the specified name.
         /// </summary>
-        /// <value></value>
+        /// <returns>
+        /// The error message for the property. The default is an empty string ("").
+        ///   </returns>
+        /// <remarks></remarks>
         public string this[string name]
         {
             get
@@ -338,12 +357,14 @@ namespace FlagSync.View
         /// Gets the intern job setting.
         /// </summary>
         /// <value>The intern job setting.</value>
+        /// <remarks></remarks>
         public JobSetting InternJobSetting { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JobSettingViewModel"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
+        /// <remarks></remarks>
         public JobSettingViewModel(string name)
             : this(new JobSetting(name))
         {
@@ -353,6 +374,7 @@ namespace FlagSync.View
         /// Initializes a new instance of the <see cref="JobSettingViewModel"/> class.
         /// </summary>
         /// <param name="internJobSetting">The intern job setting.</param>
+        /// <remarks></remarks>
         public JobSettingViewModel(JobSetting internJobSetting)
         {
             this.InternJobSetting = internJobSetting;
@@ -361,9 +383,8 @@ namespace FlagSync.View
         /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.
         /// </summary>
-        /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
-        /// </returns>
+        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
+        /// <remarks></remarks>
         public override string ToString()
         {
             return this.InternJobSetting.ToString();

@@ -113,7 +113,7 @@ namespace FlagSync.Core
                     //Check if the target file exists in the target directory and if not, create it
                     if (!File.Exists(targetFilePath))
                     {
-                        this.PerformFileCreationOperation(this.TargetFileSystem, e.File, currentTargetDirectory, execute);
+                        this.PerformFileCreationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
 
                         //Add the created file to the proceeded files, to avoid a double-counting
                         this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
@@ -122,7 +122,7 @@ namespace FlagSync.Core
                     //Check if the source file is newer than the target file
                     else if (this.IsFileModified(e.File, this.TargetFileSystem.GetFileInfo(targetFilePath)))
                     {
-                        this.PerformFileModificationOperation(this.TargetFileSystem, e.File, currentTargetDirectory, execute);
+                        this.PerformFileModificationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
 
                         //Add the created file to the proceeded files, to avoid a double-counting
                         this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
@@ -282,7 +282,7 @@ namespace FlagSync.Core
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformFileCreationOperation(IFileSystem fileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
+        protected void PerformFileCreationOperation(IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
         {
             FileCopyEventArgs eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
 
@@ -295,12 +295,12 @@ namespace FlagSync.Core
                 this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalFileSize, e.TotalBytesTransferred));
             };
 
-            fileSystem.FileCopyProgressChanged += handler;
+            targetFileSystem.FileCopyProgressChanged += handler;
 
             //Only copy the file, if the operation should get executed
-            bool hasPerformed = execute ? fileSystem.TryCopyFile(sourceFile, targetDirectory) : false;
+            bool hasPerformed = execute ? targetFileSystem.TryCopyFile(sourceFileSystem, sourceFile, targetDirectory) : false;
 
-            fileSystem.FileCopyProgressChanged -= handler;
+            targetFileSystem.FileCopyProgressChanged -= handler;
 
             if (hasPerformed)
             {
@@ -319,7 +319,7 @@ namespace FlagSync.Core
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformFileModificationOperation(IFileSystem fileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
+        protected void PerformFileModificationOperation(IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
         {
             FileCopyEventArgs eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
 
@@ -332,12 +332,12 @@ namespace FlagSync.Core
                 this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalFileSize, e.TotalBytesTransferred));
             };
 
-            fileSystem.FileCopyProgressChanged += handler;
+            targetFileSystem.FileCopyProgressChanged += handler;
 
             //Only copy the file, if the operation should get executed
-            bool hasPerformed = execute ? fileSystem.TryCopyFile(sourceFile, targetDirectory) : false;
+            bool hasPerformed = execute ? targetFileSystem.TryCopyFile(sourceFileSystem, sourceFile, targetDirectory) : false;
 
-            fileSystem.FileCopyProgressChanged -= handler;
+            targetFileSystem.FileCopyProgressChanged -= handler;
 
             if (hasPerformed)
             {
