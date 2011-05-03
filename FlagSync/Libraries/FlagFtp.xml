@@ -1,0 +1,529 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FlagFtp</name>
+    </assembly>
+    <members>
+        <member name="M:FlagFtp.FtpFileSystemInfo.#ctor(System.Uri,FlagFtp.FtpFileSystemInfoType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagFtp.FtpFileSystemInfo"/> class.
+            </summary>
+            <param name="uri">The URI.</param>
+            <param name="type">The type.</param>
+        </member>
+        <member name="P:FlagFtp.FtpFileSystemInfo.FullName">
+            <summary>
+            Gets the full name.
+            </summary>
+        </member>
+        <member name="P:FlagFtp.FtpFileSystemInfo.Uri">
+            <summary>
+            Gets the URI.
+            </summary>
+        </member>
+        <member name="P:FlagFtp.FtpFileSystemInfo.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="P:FlagFtp.FtpFileSystemInfo.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="M:FlagFtp.FtpClient.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagFtp.FtpClient"/> class.
+            </summary>
+            <param name="host">The host.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetDirectories(System.Uri)">
+            <summary>
+            Gets the directories that are contained in the specified directory.
+            </summary>
+            <param name="directory">The directory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetFiles(System.Uri)">
+            <summary>
+            Gets the files that are contained in the specified directory.
+            </summary>
+            <param name="directory">The directory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.OpenRead(FlagFtp.FtpFileInfo)">
+            <summary>
+            Opens the specified file for read access.
+            </summary>
+            <param name="file">The file to open.</param>
+            <returns>An FTP stream to read from the file.</returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.OpenRead(System.Uri)">
+            <summary>
+            Opens the specified file for read access.
+            </summary>
+            <param name="file">The URI of the file to open.</param>
+            <returns>An FTP stream to read from the file.</returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.DeleteFile(FlagFtp.FtpFileInfo)">
+            <summary>
+            Deletes the specified FTP file.
+            </summary>
+            <param name="file">The file to delete.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.DeleteFile(System.Uri)">
+            <summary>
+            Deletes the specified file.
+            </summary>
+            <param name="file">The URI of the file to delete.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.DeleteDirectory(FlagFtp.FtpDirectoryInfo)">
+            <summary>
+            Deletes the specified FTP directory.
+            </summary>
+            <param name="directory">The directory to delete.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.DeleteDirectory(System.Uri)">
+            <summary>
+            Deletes the specified directory.
+            </summary>
+            <param name="directory">The URI of the directory to delete.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetFileSystemInfos(System.Uri,FlagFtp.FtpFileSystemInfoType)">
+            <summary>
+            Gets the files or directories from the specified directory.
+            </summary>
+            <param name="directory">The directory.</param>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetTimeStamp(System.Uri)">
+            <summary>
+            Gets the time stamp for the specified file.
+            </summary>
+            <param name="file">The file.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetFileSize(System.Uri)">
+            <summary>
+            Gets the size of the specified file.
+            </summary>
+            <param name="file">The file uri.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FlagFtp.FtpClient.Host">
+            <summary>
+            Gets the host.
+            </summary>
+        </member>
+        <member name="P:FlagFtp.FtpClient.Credentials">
+            <summary>
+            Gets or sets the credentials.
+            </summary>
+            <value>
+            The credentials.
+            </value>
+        </member>
+        <member name="T:FlagFtp.FtpStream">
+            <summary>
+            Represents a stream of a file from an FTP server which supports the read of the length property
+            </summary>
+        </member>
+        <member name="M:FlagFtp.FtpStream.Flush">
+            <summary>
+            When overridden in a derived class, clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+            </summary>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurs.
+              </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.Read(System.Byte[],System.Int32,System.Int32)">
+             <summary>
+             When overridden in a derived class, reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+             </summary>
+             <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between <paramref name="offset"/> and (<paramref name="offset"/> + <paramref name="count"/> - 1) replaced by the bytes read from the current source.</param>
+             <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin storing the data read from the current stream.</param>
+             <param name="count">The maximum number of bytes to be read from the current stream.</param>
+             <returns>
+             The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.
+             </returns>
+             <exception cref="T:System.ArgumentException">
+             The sum of <paramref name="offset"/> and <paramref name="count"/> is larger than the buffer length.
+               </exception>
+            
+             <exception cref="T:System.ArgumentNullException">
+               <paramref name="buffer"/> is null.
+               </exception>
+            
+             <exception cref="T:System.ArgumentOutOfRangeException">
+               <paramref name="offset"/> or <paramref name="count"/> is negative.
+               </exception>
+            
+             <exception cref="T:System.IO.IOException">
+             An I/O error occurs.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The stream does not support reading.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.Seek(System.Int64,System.IO.SeekOrigin)">
+             <summary>
+             When overridden in a derived class, sets the position within the current stream.
+             </summary>
+             <param name="offset">A byte offset relative to the <paramref name="origin"/> parameter.</param>
+             <param name="origin">A value of type <see cref="T:System.IO.SeekOrigin"/> indicating the reference point used to obtain the new position.</param>
+             <returns>
+             The new position within the current stream.
+             </returns>
+             <exception cref="T:System.IO.IOException">
+             An I/O error occurs.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The stream does not support seeking, such as if the stream is constructed from a pipe or console output.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.SetLength(System.Int64)">
+             <summary>
+             When overridden in a derived class, sets the length of the current stream.
+             </summary>
+             <param name="value">The desired length of the current stream in bytes.</param>
+             <exception cref="T:System.IO.IOException">
+             An I/O error occurs.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The stream does not support both writing and seeking, such as if the stream is constructed from a pipe or console output.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.Write(System.Byte[],System.Int32,System.Int32)">
+             <summary>
+             When overridden in a derived class, writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+             </summary>
+             <param name="buffer">An array of bytes. This method copies <paramref name="count"/> bytes from <paramref name="buffer"/> to the current stream.</param>
+             <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying bytes to the current stream.</param>
+             <param name="count">The number of bytes to be written to the current stream.</param>
+             <exception cref="T:System.ArgumentException">
+             The sum of <paramref name="offset"/> and <paramref name="count"/> is greater than the buffer length.
+               </exception>
+            
+             <exception cref="T:System.ArgumentNullException">
+               <paramref name="buffer"/> is null.
+               </exception>
+            
+             <exception cref="T:System.ArgumentOutOfRangeException">
+               <paramref name="offset"/> or <paramref name="count"/> is negative.
+               </exception>
+            
+             <exception cref="T:System.IO.IOException">
+             An I/O error occurs.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The stream does not support writing.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)">
+             <summary>
+             Begins an asynchronous read operation.
+             </summary>
+             <param name="buffer">The buffer to read the data into.</param>
+             <param name="offset">The byte offset in <paramref name="buffer"/> at which to begin writing data read from the stream.</param>
+             <param name="count">The maximum number of bytes to read.</param>
+             <param name="callback">An optional asynchronous callback, to be called when the read is complete.</param>
+             <param name="state">A user-provided object that distinguishes this particular asynchronous read request from other requests.</param>
+             <returns>
+             An <see cref="T:System.IAsyncResult"/> that represents the asynchronous read, which could still be pending.
+             </returns>
+             <exception cref="T:System.IO.IOException">
+             Attempted an asynchronous read past the end of the stream, or a disk error occurs.
+               </exception>
+            
+             <exception cref="T:System.ArgumentException">
+             One or more of the arguments is invalid.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The current Stream implementation does not support the read operation.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)">
+             <summary>
+             Begins an asynchronous write operation.
+             </summary>
+             <param name="buffer">The buffer to write data from.</param>
+             <param name="offset">The byte offset in <paramref name="buffer"/> from which to begin writing.</param>
+             <param name="count">The maximum number of bytes to write.</param>
+             <param name="callback">An optional asynchronous callback, to be called when the write is complete.</param>
+             <param name="state">A user-provided object that distinguishes this particular asynchronous write request from other requests.</param>
+             <returns>
+             An IAsyncResult that represents the asynchronous write, which could still be pending.
+             </returns>
+             <exception cref="T:System.IO.IOException">
+             Attempted an asynchronous write past the end of the stream, or a disk error occurs.
+               </exception>
+            
+             <exception cref="T:System.ArgumentException">
+             One or more of the arguments is invalid.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The current Stream implementation does not support the write operation.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.Close">
+            <summary>
+            Closes the current stream and releases any resources (such as sockets and file handles) associated with the current stream.
+            </summary>
+        </member>
+        <member name="M:FlagFtp.FtpStream.CreateObjRef(System.Type)">
+             <summary>
+             Creates an object that contains all the relevant information required to generate a proxy used to communicate with a remote object.
+             </summary>
+             <param name="requestedType">The <see cref="T:System.Type"/> of the object that the new <see cref="T:System.Runtime.Remoting.ObjRef"/> will reference.</param>
+             <returns>
+             Information required to generate a proxy.
+             </returns>
+             <exception cref="T:System.Runtime.Remoting.RemotingException">
+             This instance is not a valid remoting object.
+               </exception>
+            
+             <exception cref="T:System.Security.SecurityException">
+             The immediate caller does not have infrastructure permission.
+               </exception>
+            
+             <PermissionSet>
+               <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="Infrastructure"/>
+               </PermissionSet>
+        </member>
+        <member name="M:FlagFtp.FtpStream.EndRead(System.IAsyncResult)">
+             <summary>
+             Waits for the pending asynchronous read to complete.
+             </summary>
+             <param name="asyncResult">The reference to the pending asynchronous request to finish.</param>
+             <returns>
+             The number of bytes read from the stream, between zero (0) and the number of bytes you requested. Streams return zero (0) only at the end of the stream, otherwise, they should block until at least one byte is available.
+             </returns>
+             <exception cref="T:System.ArgumentNullException">
+               <paramref name="asyncResult"/> is null.
+               </exception>
+            
+             <exception cref="T:System.ArgumentException">
+               <paramref name="asyncResult"/> did not originate from a <see cref="M:System.IO.Stream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)"/> method on the current stream.
+               </exception>
+            
+             <exception cref="T:System.IO.IOException">
+             The stream is closed or an internal error has occurred.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.EndWrite(System.IAsyncResult)">
+             <summary>
+             Ends an asynchronous write operation.
+             </summary>
+             <param name="asyncResult">A reference to the outstanding asynchronous I/O request.</param>
+             <exception cref="T:System.ArgumentNullException">
+               <paramref name="asyncResult"/> is null.
+               </exception>
+            
+             <exception cref="T:System.ArgumentException">
+               <paramref name="asyncResult"/> did not originate from a <see cref="M:System.IO.Stream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)"/> method on the current stream.
+               </exception>
+            
+             <exception cref="T:System.IO.IOException">
+             The stream is closed or an internal error has occurred.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.InitializeLifetimeService">
+             <summary>
+             Obtains a lifetime service object to control the lifetime policy for this instance.
+             </summary>
+             <returns>
+             An object of type <see cref="T:System.Runtime.Remoting.Lifetime.ILease"/> used to control the lifetime policy for this instance. This is the current lifetime service object for this instance if one exists; otherwise, a new lifetime service object initialized to the value of the <see cref="P:System.Runtime.Remoting.Lifetime.LifetimeServices.LeaseManagerPollTime"/> property.
+             </returns>
+             <exception cref="T:System.Security.SecurityException">
+             The immediate caller does not have infrastructure permission.
+               </exception>
+            
+             <PermissionSet>
+               <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="RemotingConfiguration, Infrastructure"/>
+               </PermissionSet>
+        </member>
+        <member name="M:FlagFtp.FtpStream.ReadByte">
+             <summary>
+             Reads a byte from the stream and advances the position within the stream by one byte, or returns -1 if at the end of the stream.
+             </summary>
+             <returns>
+             The unsigned byte cast to an Int32, or -1 if at the end of the stream.
+             </returns>
+             <exception cref="T:System.NotSupportedException">
+             The stream does not support reading.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.WriteByte(System.Byte)">
+             <summary>
+             Writes a byte to the current position in the stream and advances the position within the stream by one byte.
+             </summary>
+             <param name="value">The byte to write to the stream.</param>
+             <exception cref="T:System.IO.IOException">
+             An I/O error occurs.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The stream does not support writing, or the stream is already closed.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpStream.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.IO.Stream"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:FlagFtp.FtpStream.#ctor(System.IO.Stream,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagFtp.FtpStream"/> class.
+            </summary>
+            <param name="baseStream">The base stream.</param>
+            <param name="length">The length of teh stream.</param>
+        </member>
+        <member name="P:FlagFtp.FtpStream.CanRead">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports reading.
+            </summary>
+            <returns>true if the stream supports reading; otherwise, false.
+              </returns>
+        </member>
+        <member name="P:FlagFtp.FtpStream.CanSeek">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports seeking.
+            </summary>
+            <returns>true if the stream supports seeking; otherwise, false.
+              </returns>
+        </member>
+        <member name="P:FlagFtp.FtpStream.CanWrite">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports writing.
+            </summary>
+            <returns>true if the stream supports writing; otherwise, false.
+              </returns>
+        </member>
+        <member name="P:FlagFtp.FtpStream.Length">
+             <summary>
+             When overridden in a derived class, gets the length in bytes of the stream.
+             </summary>
+             <returns>
+             A long value representing the length of the stream in bytes.
+               </returns>
+            
+             <exception cref="T:System.NotSupportedException">
+             A class derived from Stream does not support seeking.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+        </member>
+        <member name="P:FlagFtp.FtpStream.Position">
+             <summary>
+             When overridden in a derived class, gets or sets the position within the current stream.
+             </summary>
+             <returns>
+             The current position within the stream.
+               </returns>
+            
+             <exception cref="T:System.IO.IOException">
+             An I/O error occurs.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The stream does not support seeking.
+               </exception>
+            
+             <exception cref="T:System.ObjectDisposedException">
+             Methods were called after the stream was closed.
+               </exception>
+        </member>
+        <member name="P:FlagFtp.FtpStream.CanTimeout">
+            <summary>
+            Gets a value that determines whether the current stream can time out.
+            </summary>
+            <returns>
+            A value that determines whether the current stream can time out.
+              </returns>
+        </member>
+        <member name="P:FlagFtp.FtpStream.ReadTimeout">
+             <summary>
+             Gets or sets a value, in miliseconds, that determines how long the stream will attempt to read before timing out.
+             </summary>
+             <returns>
+             A value, in miliseconds, that determines how long the stream will attempt to read before timing out.
+               </returns>
+            
+             <exception cref="T:System.InvalidOperationException">
+             The <see cref="P:System.IO.Stream.ReadTimeout"/> method always throws an <see cref="T:System.InvalidOperationException"/>.
+               </exception>
+        </member>
+        <member name="P:FlagFtp.FtpStream.WriteTimeout">
+             <summary>
+             Gets or sets a value, in miliseconds, that determines how long the stream will attempt to write before timing out.
+             </summary>
+             <returns>
+             A value, in miliseconds, that determines how long the stream will attempt to write before timing out.
+               </returns>
+            
+             <exception cref="T:System.InvalidOperationException">
+             The <see cref="P:System.IO.Stream.WriteTimeout"/> method always throws an <see cref="T:System.InvalidOperationException"/>.
+               </exception>
+        </member>
+        <member name="M:FlagFtp.FtpFileInfo.#ctor(System.Uri,System.DateTime,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagFtp.FtpFileInfo"/> class.
+            </summary>
+            <param name="path">The path of the file.</param>
+            <param name="lastWriteTime">The last write time.</param>
+            <param name="length">The file length.</param>
+        </member>
+        <member name="P:FlagFtp.FtpFileInfo.LastWriteTime">
+            <summary>
+            Gets the last write time.
+            </summary>
+        </member>
+        <member name="P:FlagFtp.FtpFileInfo.Length">
+            <summary>
+            Gets the length.
+            </summary>
+        </member>
+    </members>
+</doc>
