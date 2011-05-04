@@ -4,6 +4,26 @@
         <name>FlagFtp</name>
     </assembly>
     <members>
+        <member name="T:FlagFtp.FtpFileSystemInfoType">
+            <summary>
+            Specifies the type of a file system info
+            </summary>
+        </member>
+        <member name="F:FlagFtp.FtpFileSystemInfoType.File">
+            <summary>
+            A normal file
+            </summary>
+        </member>
+        <member name="F:FlagFtp.FtpFileSystemInfoType.Directory">
+            <summary>
+            A directory
+            </summary>
+        </member>
+        <member name="T:FlagFtp.FtpFileSystemInfo">
+            <summary>
+            The base class for FTPFileInfo and FTPDirectoryInfo
+            </summary>
+        </member>
         <member name="M:FlagFtp.FtpFileSystemInfo.#ctor(System.Uri,FlagFtp.FtpFileSystemInfoType)">
             <summary>
             Initializes a new instance of the <see cref="T:FlagFtp.FtpFileSystemInfo"/> class.
@@ -30,99 +50,6 @@
             <summary>
             Gets the type.
             </summary>
-        </member>
-        <member name="M:FlagFtp.FtpClient.#ctor(System.Uri)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagFtp.FtpClient"/> class.
-            </summary>
-            <param name="host">The host.</param>
-        </member>
-        <member name="M:FlagFtp.FtpClient.GetDirectories(System.Uri)">
-            <summary>
-            Gets the directories that are contained in the specified directory.
-            </summary>
-            <param name="directory">The directory.</param>
-            <returns></returns>
-        </member>
-        <member name="M:FlagFtp.FtpClient.GetFiles(System.Uri)">
-            <summary>
-            Gets the files that are contained in the specified directory.
-            </summary>
-            <param name="directory">The directory.</param>
-            <returns></returns>
-        </member>
-        <member name="M:FlagFtp.FtpClient.OpenRead(FlagFtp.FtpFileInfo)">
-            <summary>
-            Opens the specified file for read access.
-            </summary>
-            <param name="file">The file to open.</param>
-            <returns>An FTP stream to read from the file.</returns>
-        </member>
-        <member name="M:FlagFtp.FtpClient.OpenRead(System.Uri)">
-            <summary>
-            Opens the specified file for read access.
-            </summary>
-            <param name="file">The URI of the file to open.</param>
-            <returns>An FTP stream to read from the file.</returns>
-        </member>
-        <member name="M:FlagFtp.FtpClient.DeleteFile(FlagFtp.FtpFileInfo)">
-            <summary>
-            Deletes the specified FTP file.
-            </summary>
-            <param name="file">The file to delete.</param>
-        </member>
-        <member name="M:FlagFtp.FtpClient.DeleteFile(System.Uri)">
-            <summary>
-            Deletes the specified file.
-            </summary>
-            <param name="file">The URI of the file to delete.</param>
-        </member>
-        <member name="M:FlagFtp.FtpClient.DeleteDirectory(FlagFtp.FtpDirectoryInfo)">
-            <summary>
-            Deletes the specified FTP directory.
-            </summary>
-            <param name="directory">The directory to delete.</param>
-        </member>
-        <member name="M:FlagFtp.FtpClient.DeleteDirectory(System.Uri)">
-            <summary>
-            Deletes the specified directory.
-            </summary>
-            <param name="directory">The URI of the directory to delete.</param>
-        </member>
-        <member name="M:FlagFtp.FtpClient.GetFileSystemInfos(System.Uri,FlagFtp.FtpFileSystemInfoType)">
-            <summary>
-            Gets the files or directories from the specified directory.
-            </summary>
-            <param name="directory">The directory.</param>
-            <param name="type">The type.</param>
-            <returns></returns>
-        </member>
-        <member name="M:FlagFtp.FtpClient.GetTimeStamp(System.Uri)">
-            <summary>
-            Gets the time stamp for the specified file.
-            </summary>
-            <param name="file">The file.</param>
-            <returns></returns>
-        </member>
-        <member name="M:FlagFtp.FtpClient.GetFileSize(System.Uri)">
-            <summary>
-            Gets the size of the specified file.
-            </summary>
-            <param name="file">The file uri.</param>
-            <returns></returns>
-        </member>
-        <member name="P:FlagFtp.FtpClient.Host">
-            <summary>
-            Gets the host.
-            </summary>
-        </member>
-        <member name="P:FlagFtp.FtpClient.Credentials">
-            <summary>
-            Gets or sets the credentials.
-            </summary>
-            <value>
-            The credentials.
-            </value>
         </member>
         <member name="T:FlagFtp.FtpStream">
             <summary>
@@ -507,6 +434,11 @@
              The <see cref="P:System.IO.Stream.WriteTimeout"/> method always throws an <see cref="T:System.InvalidOperationException"/>.
                </exception>
         </member>
+        <member name="T:FlagFtp.FtpFileInfo">
+            <summary>
+            Represents a file on a FTP-server
+            </summary>
+        </member>
         <member name="M:FlagFtp.FtpFileInfo.#ctor(System.Uri,System.DateTime,System.Int64)">
             <summary>
             Initializes a new instance of the <see cref="T:FlagFtp.FtpFileInfo"/> class.
@@ -524,6 +456,149 @@
             <summary>
             Gets the length.
             </summary>
+        </member>
+        <member name="T:FlagFtp.FtpDirectoryInfo">
+            <summary>
+            Represents a directory on a FTP-server
+            </summary>
+        </member>
+        <member name="M:FlagFtp.FtpDirectoryInfo.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagFtp.FtpDirectoryInfo"/> class.
+            </summary>
+            <param name="path">The path of the directory.</param>
+        </member>
+        <member name="T:FlagFtp.FtpClient">
+            <summary>
+            Provides methods for acting on a FTP-server
+            </summary>
+        </member>
+        <member name="M:FlagFtp.FtpClient.#ctor(System.Net.NetworkCredential)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagFtp.FtpClient"/> class.
+            </summary>
+            <param name="credentials">The credentials.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetDirectories(System.Uri)">
+            <summary>
+            Gets the directories that are contained in the specified directory.
+            </summary>
+            <param name="directory">The directory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetFiles(System.Uri)">
+            <summary>
+            Gets the files that are contained in the specified directory.
+            </summary>
+            <param name="directory">The directory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.OpenRead(FlagFtp.FtpFileInfo)">
+            <summary>
+            Opens the specified file for read access.
+            </summary>
+            <param name="file">The file to open.</param>
+            <returns>
+            An FTP stream to read from the file.
+            </returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.OpenRead(System.Uri)">
+            <summary>
+            Opens the specified file for read access.
+            </summary>
+            <param name="file">The URI of the file to open.</param>
+            <returns>A FTP stream to read from the file.</returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.OpenWrite(System.Uri)">
+            <summary>
+            Opens the specified file for write access.
+            </summary>
+            <param name="file">The URI of the file to open.</param>
+            <returns>A stream to write to the file.</returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.DeleteFile(FlagFtp.FtpFileInfo)">
+            <summary>
+            Deletes the specified FTP file.
+            </summary>
+            <param name="file">The file to delete.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.DeleteFile(System.Uri)">
+            <summary>
+            Deletes the specified file.
+            </summary>
+            <param name="file">The URI of the file to delete.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.CreateDirectory(System.Uri)">
+            <summary>
+            Creates the specified directory on the FTP server.
+            </summary>
+            <param name="directory">The URI of the directory to create.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.DeleteDirectory(FlagFtp.FtpDirectoryInfo)">
+            <summary>
+            Deletes the specified FTP directory.
+            </summary>
+            <param name="directory">The directory to delete.</param>
+        </member>
+        <member name="M:FlagFtp.FtpClient.DeleteDirectory(System.Uri)">
+            <summary>
+            Deletes the specified directory.
+            </summary>
+            <param name="directory">The URI of the directory to delete.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:FlagFtp.FtpClient.GetFileInfo(System.Uri)" -->
+        <member name="M:FlagFtp.FtpClient.GetDirectoryInfo(System.Uri)">
+            <summary>
+            Gets the <see cref="T:FlagFtp.FtpDirectoryInfo"/> for the specified URI.
+            </summary>
+            <param name="directory">The URI of the directory.</param>
+            <returns>
+            A <see cref="T:FlagFtp.FtpDirectoryInfo"/> that contains informations about the directory.
+            </returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.FileExists(System.Uri)">
+            <summary>
+            Determines if the specified file exists on the FTP server.
+            </summary>
+            <param name="file">The URI of the file.</param>
+            <returns>True, if the file exists; otherwise false.</returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.DirectoryExists(System.Uri)">
+            <summary>
+            Determines if the specified directory exists on the FTP server.
+            </summary>
+            <param name="file">The URI of the directory.</param>
+            <returns>True, if the directory exists; otherwise false.</returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetFileSystemInfos(System.Uri,FlagFtp.FtpFileSystemInfoType)">
+            <summary>
+            Gets the files or directories from the specified directory.
+            </summary>
+            <param name="directory">The directory.</param>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetTimeStamp(System.Uri)">
+            <summary>
+            Gets the time stamp for the specified file.
+            </summary>
+            <param name="file">The file.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.GetFileSize(System.Uri)">
+            <summary>
+            Gets the size of the specified file.
+            </summary>
+            <param name="file">The file uri.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FlagFtp.FtpClient.Credentials">
+            <summary>
+            Gets or sets the credentials.
+            </summary>
+            <value>
+            The credentials.
+            </value>
         </member>
     </members>
 </doc>

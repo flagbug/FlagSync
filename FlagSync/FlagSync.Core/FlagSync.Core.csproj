@@ -74,6 +74,9 @@
     <Compile Include="LocalSyncJob.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FlagFtp">
+      <HintPath>..\Libraries\FlagFtp.dll</HintPath>
+    </Reference>
     <Reference Include="FlagLib">
       <HintPath>..\Libraries\FlagLib.dll</HintPath>
     </Reference>
