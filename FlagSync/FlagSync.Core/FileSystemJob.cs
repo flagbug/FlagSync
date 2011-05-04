@@ -111,7 +111,7 @@ namespace FlagSync.Core
                     string targetFilePath = Path.Combine(currentTargetDirectory.FullName, e.File.Name);
 
                     //Check if the target file exists in the target directory and if not, create it
-                    if (!File.Exists(targetFilePath))
+                    if (!this.TargetFileSystem.FileExists(targetFilePath))
                     {
                         this.PerformFileCreationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
 

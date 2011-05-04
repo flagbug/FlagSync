@@ -131,9 +131,6 @@ namespace FlagSync.Core.FileSystem.ITunes
         public ITunesDirectoryInfo(string playlistName)
         {
             this.playlistName = playlistName;
-            this.isRoot = isRoot;
-            this.directories = directories;
-            this.files = files;
         }
     }
 }
