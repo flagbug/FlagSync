@@ -1,38 +1,86 @@
 ﻿using System;
+using System.IO;
+using FlagFtp;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
 {
     internal class FtpFileInfo : IFileInfo
     {
-        public DateTime LastWriteTime
-        {
-            get { throw new System.NotImplementedException(); }
-        }
+        private FtpClient client;
 
-        public long Length
-        {
-            get { throw new System.NotImplementedException(); }
-        }
+        /// <summary>
+        /// Gets the last write time.
+        /// </summary>
+        /// <value>
+        /// The last write time.
+        /// </value>
+        public DateTime LastWriteTime { get; private set; }
 
+        /// <summary>
+        /// Gets the length of the file.
+        /// </summary>
+        /// <value>
+        /// The length of the file.
+        /// </value>
+        public long Length { get; private set; }
+
+        /// <summary>
+        /// Gets the directory of the file.
+        /// </summary>
+        /// <value>
+        /// The directory of the file.
+        /// </value>
         public IDirectoryInfo Directory
         {
-            get { throw new System.NotImplementedException(); }
+            get
+            {
+                FlagFtp.FtpDirectoryInfo directory =
+                    this.client.GetDirectoryInfo(new Uri(Path.GetDirectoryName(this.FullName)));
+
+                return new FtpDirectoryInfo(directory.FullName, this.client);
+            }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the file exists.
+        /// </summary>
+        /// <value>
+        /// true if the file exists; otherwise, false.
+        /// </value>
         public bool Exists
         {
-            get { throw new System.NotImplementedException(); }
+            get { return true; }
         }
 
-        public string FullName
-        {
-            get { throw new System.NotImplementedException(); }
-        }
+        /// <summary>
+        /// Gets the full name.
+        /// </summary>
+        public string FullName { get; private set; }
 
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
         public string Name
         {
-            get { throw new System.NotImplementedException(); }
+            get { return Path.GetFileName(this.FullName); }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FtpFileInfo"/> class.
+        /// </summary>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="lastWriteTime">The last write time.</param>
+        /// <param name="length">The length.</param>
+        internal FtpFileInfo(string fullName, DateTime lastWriteTime, long length, FtpClient client)
+        {
+            this.FullName = fullName;
+            this.LastWriteTime = lastWriteTime;
+            this.Length = length;
+            this.client = client;
         }
     }
 }
