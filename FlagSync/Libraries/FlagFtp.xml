@@ -477,21 +477,25 @@
             <summary>
             Initializes a new instance of the <see cref="T:FlagFtp.FtpClient"/> class.
             </summary>
-            <param name="credentials">The credentials.</param>
+            <param name="credentials">The login credentials.</param>
         </member>
         <member name="M:FlagFtp.FtpClient.GetDirectories(System.Uri)">
             <summary>
             Gets the directories that are contained in the specified directory.
             </summary>
             <param name="directory">The directory.</param>
-            <returns></returns>
+            <returns>
+            An enumeration of <see cref="T:FlagFtp.FtpDirectoryInfo"/>.
+            </returns>
         </member>
         <member name="M:FlagFtp.FtpClient.GetFiles(System.Uri)">
             <summary>
             Gets the files that are contained in the specified directory.
             </summary>
             <param name="directory">The directory.</param>
-            <returns></returns>
+            <returns>
+            An enumeration of <see cref="T:FlagFtp.FtpFileInfo"/>.
+            </returns>
         </member>
         <member name="M:FlagFtp.FtpClient.OpenRead(FlagFtp.FtpFileInfo)">
             <summary>
@@ -507,14 +511,27 @@
             Opens the specified file for read access.
             </summary>
             <param name="file">The URI of the file to open.</param>
-            <returns>A FTP stream to read from the file.</returns>
+            <returns>
+            A <see cref="T:FlagFtp.FtpStream"/> to read from the file.
+            </returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.OpenWrite(FlagFtp.FtpFileInfo)">
+            <summary>
+            Opens the specified file for write access.
+            </summary>
+            <param name="file">The file to open.</param>
+            <returns>
+            A <see cref="T:System.IO.Stream"/> to write to the file.
+            </returns>
         </member>
         <member name="M:FlagFtp.FtpClient.OpenWrite(System.Uri)">
             <summary>
             Opens the specified file for write access.
             </summary>
             <param name="file">The URI of the file to open.</param>
-            <returns>A stream to write to the file.</returns>
+            <returns>
+            A <see cref="T:System.IO.Stream"/> to write to the file.
+            </returns>
         </member>
         <member name="M:FlagFtp.FtpClient.DeleteFile(FlagFtp.FtpFileInfo)">
             <summary>
@@ -546,7 +563,15 @@
             </summary>
             <param name="directory">The URI of the directory to delete.</param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:FlagFtp.FtpClient.GetFileInfo(System.Uri)" -->
+        <member name="M:FlagFtp.FtpClient.GetFileInfo(System.Uri)">
+            <summary>
+            Gets the <see cref="T:FlagFtp.FtpFileInfo"/> for the specified URI.
+            </summary>
+            <param name="file">The URI of the file.</param>
+            <returns>
+            A <see cref="T:FlagFtp.FtpFileInfo"/> that contains informations about the file.
+            </returns>
+        </member>
         <member name="M:FlagFtp.FtpClient.GetDirectoryInfo(System.Uri)">
             <summary>
             Gets the <see cref="T:FlagFtp.FtpDirectoryInfo"/> for the specified URI.
@@ -561,14 +586,18 @@
             Determines if the specified file exists on the FTP server.
             </summary>
             <param name="file">The URI of the file.</param>
-            <returns>True, if the file exists; otherwise false.</returns>
+            <returns>
+            True, if the file exists; otherwise false.
+            </returns>
         </member>
         <member name="M:FlagFtp.FtpClient.DirectoryExists(System.Uri)">
             <summary>
             Determines if the specified directory exists on the FTP server.
             </summary>
-            <param name="file">The URI of the directory.</param>
-            <returns>True, if the directory exists; otherwise false.</returns>
+            <param name="directory">The directory.</param>
+            <returns>
+            True, if the directory exists; otherwise false.
+            </returns>
         </member>
         <member name="M:FlagFtp.FtpClient.GetFileSystemInfos(System.Uri,FlagFtp.FtpFileSystemInfoType)">
             <summary>
@@ -576,21 +605,55 @@
             </summary>
             <param name="directory">The directory.</param>
             <param name="type">The type.</param>
-            <returns></returns>
+            <returns>
+            An enumeration of <see cref="T:FlagFtp.FtpFileSystemInfo"/> with the type of the specified type argument.
+            </returns>
         </member>
         <member name="M:FlagFtp.FtpClient.GetTimeStamp(System.Uri)">
             <summary>
             Gets the time stamp for the specified file.
             </summary>
             <param name="file">The file.</param>
-            <returns></returns>
+            <returns>
+            A <see cref="T:System.DateTime"/> object the represents the last write time of the file.
+            </returns>
         </member>
         <member name="M:FlagFtp.FtpClient.GetFileSize(System.Uri)">
             <summary>
-            Gets the size of the specified file.
+            Gets the size of the specified file in bytes.
             </summary>
-            <param name="file">The file uri.</param>
-            <returns></returns>
+            <param name="file">The file URI.</param>
+            <returns>
+            The file size in bytes.
+            </returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.CreateResponse(System.Uri,System.String)">
+            <summary>
+            Creates a <see cref="T:System.Net.FtpWebResponse"/> from the specified request URI, request method and the necessary credentials.
+            </summary>
+            <param name="requestUri">The request URI.</param>
+            <param name="requestMethod">The request method.</param>
+            <returns>
+            A <see cref="T:System.Net.FtpWebRequest"/> with the specified request uri, request method and the necessary credentuials.
+            </returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.CreateRequest(System.Uri,System.String)">
+            <summary>
+            Creates a <see cref="T:System.Net.FtpWebRequest"/> from the specified request URI, request method and the necessary credentials.
+            </summary>
+            <param name="requestUri">The request URI.</param>
+            <param name="requestMethod">The request method.</param>
+            <returns>
+            A <see cref="T:System.Net.FtpWebRequest"/> with the specified request uri, request method and the necessary credentuials.
+            </returns>
+        </member>
+        <member name="M:FlagFtp.FtpClient.CreateClient">
+            <summary>
+            Creates a <see cref="T:System.Net.WebClient"/> with the necessary credentials.
+            </summary>
+            <returns>
+            A <see cref="T:System.Net.WebClient"/> with the necessary credentials
+            </returns>
         </member>
         <member name="P:FlagFtp.FtpClient.Credentials">
             <summary>
