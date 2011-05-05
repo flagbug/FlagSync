@@ -6,7 +6,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
 {
-    public class LocalDirectoryInfo : IDirectoryInfo
+    internal class LocalDirectoryInfo : IDirectoryInfo
     {
         private DirectoryInfo directoryInfo;
 

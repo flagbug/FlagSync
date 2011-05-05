@@ -85,8 +85,12 @@ namespace FlagSync.Core.FileSystem.Ftp
                     {
                         targetStream.Write(buffer, 0, bytes);
                         bytesCurrent += bytes;
-                        FileCopyProgressChanged(this,
-                            new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+
+                        if (this.FileCopyProgressChanged != null)
+                        {
+                            FileCopyProgressChanged(this,
+                                new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+                        }
                     }
                 }
             }

@@ -6,7 +6,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
 {
-    public class LocalFileSystem : IFileSystem
+    internal class LocalFileSystem : IFileSystem
     {
         /// <summary>
         /// Occurs when the file copy progress has changed.
@@ -161,8 +161,12 @@ namespace FlagSync.Core.FileSystem.Local
                         {
                             targetStream.Write(buffer, 0, bytes);
                             bytesCurrent += bytes;
-                            FileCopyProgressChanged(this,
-                                new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+
+                            if (this.FileCopyProgressChanged != null)
+                            {
+                                this.FileCopyProgressChanged(this,
+                                    new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+                            }
                         }
                     }
                 }

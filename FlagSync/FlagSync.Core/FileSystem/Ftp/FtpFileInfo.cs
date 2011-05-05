@@ -75,7 +75,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <param name="fullName">The full name.</param>
         /// <param name="lastWriteTime">The last write time.</param>
         /// <param name="length">The length.</param>
-        internal FtpFileInfo(string fullName, DateTime lastWriteTime, long length, FtpClient client)
+        public FtpFileInfo(string fullName, DateTime lastWriteTime, long length, FtpClient client)
         {
             this.FullName = fullName;
             this.LastWriteTime = lastWriteTime;

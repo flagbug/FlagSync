@@ -92,7 +92,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </summary>
         /// <param name="fullName">The full name.</param>
         /// <param name="client">The client.</param>
-        internal FtpDirectoryInfo(string fullName, FtpClient client)
+        public FtpDirectoryInfo(string fullName, FtpClient client)
         {
             this.FullName = fullName;
             this.client = client;
