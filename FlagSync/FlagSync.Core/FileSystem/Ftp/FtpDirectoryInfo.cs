@@ -37,8 +37,10 @@ namespace FlagSync.Core.FileSystem.Ftp
         {
             get
             {
-                FlagFtp.FtpDirectoryInfo directory =
-                    this.client.GetDirectoryInfo(new Uri(Path.GetDirectoryName(this.FullName)));
+                string parentDirectoryName = Path.GetDirectoryName(this.FullName).Replace("\\", "//");
+                Uri parentDirectoryUri = new Uri(parentDirectoryName);
+
+                FlagFtp.FtpDirectoryInfo directory = this.client.GetDirectoryInfo(parentDirectoryUri);
 
                 return new FtpDirectoryInfo(directory.FullName, this.client);
             }

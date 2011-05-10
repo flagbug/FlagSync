@@ -17,6 +17,17 @@ namespace FlagSync.Core.FileSystem.Ftp
         public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="FtpFileSystem"/> class.
+        /// </summary>
+        /// <param name="serverAddress">The server address.</param>
+        /// <param name="credentials">The credentials.</param>
+        public FtpFileSystem(Uri serverAddress, NetworkCredential credentials)
+        {
+            this.client = new FtpClient(credentials);
+            this.client.Credentials = credentials;
+        }
+
+        /// <summary>
         /// Tries to delete a file.
         /// </summary>
         /// <param name="file">The file to delete.</param>
@@ -105,9 +116,10 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         public IFileInfo GetFileInfo(string path)
         {
+            path = FtpFileSystem.NormalizePath(path);
             FlagFtp.FtpFileInfo file = this.client.GetFileInfo(new Uri(path));
 
-            throw new NotImplementedException();
+            return new FtpFileInfo(file.FullName, file.LastWriteTime, file.Length, this.client);
         }
 
         /// <summary>
@@ -117,7 +129,10 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
-            throw new NotImplementedException();
+            path = FtpFileSystem.NormalizePath(path);
+            FlagFtp.FtpDirectoryInfo directory = this.client.GetDirectoryInfo(new Uri(path));
+
+            return new FtpDirectoryInfo(directory.FullName.Replace("%20", " "), this.client);
         }
 
         /// <summary>
@@ -129,6 +144,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool FileExists(string path)
         {
+            path = FtpFileSystem.NormalizePath(path);
             return this.client.FileExists(new Uri(path));
         }
 
@@ -141,6 +157,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool DirectoryExists(string path)
         {
+            path = FtpFileSystem.NormalizePath(path);
             return this.client.DirectoryExists(new Uri(path));
         }
 
@@ -155,14 +172,13 @@ namespace FlagSync.Core.FileSystem.Ftp
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FtpFileSystem"/> class.
+        /// Normalizes the path.
         /// </summary>
-        /// <param name="serverAddress">The server address.</param>
-        /// <param name="credentials">The credentials.</param>
-        public FtpFileSystem(Uri serverAddress, NetworkCredential credentials)
+        /// <param name="path">The path.</param>
+        /// <returns></returns>
+        private static string NormalizePath(string path)
         {
-            this.client = new FtpClient(credentials);
-            this.client.Credentials = credentials;
+            return path.Replace("\\", "//");
         }
     }
 }

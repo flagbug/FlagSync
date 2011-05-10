@@ -185,8 +185,11 @@ namespace FlagSync.Core
         /// <summary>
         /// Starts the job.
         /// </summary>
-        /// <param name="preview">if set to <c>true</c> [preview].</param>
-        /// <remarks></remarks>
+        /// <param name="preview">if set to <c>true</c>, a preview will be performed.</param>
+        /// <remarks>
+        /// This is the main entry point of every job.
+        /// The start method starts all actions that are necessary to perform the job.
+        /// </remarks>
         public abstract void Start(bool preview);
 
         /// <summary>

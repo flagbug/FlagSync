@@ -13,8 +13,6 @@ namespace FlagSync.View
 {
     public class JobWorkerViewModel : ViewModelBase<JobWorkerViewModel>
     {
-        #region Members
-
         private JobWorker jobWorker;
         private JobSetting currentJobSetting;
         private Timer elapsedTimeTimer;
@@ -28,10 +26,6 @@ namespace FlagSync.View
         private string statusMessages = String.Empty;
         private string lastStatusMessage = String.Empty;
         private int lastLogMessageIndex;
-
-        #endregion Members
-
-        #region Properties
 
         /// <summary>
         /// Gets the elapsed time since the jobworker has been started.
@@ -267,14 +261,8 @@ namespace FlagSync.View
 
         private LogMessage LastLogMessage { get; set; }
 
-        //private int Files { get { return this.jobWorker.FileCounterResult.CountedFiles; } }
-
-        #endregion Properties
-
-        #region Constructor
-
         /// <summary>
-        /// Jobs the worker view model.
+        /// Initializes a new instance of the <see cref="JobWorkerViewModel"/> class.
         /// </summary>
         public JobWorkerViewModel()
         {
@@ -285,10 +273,6 @@ namespace FlagSync.View
 
             this.ResetJobWorker();
         }
-
-        #endregion Constructor
-
-        #region Public methods
 
         /// <summary>
         /// Resets the job worker.
@@ -371,10 +355,6 @@ namespace FlagSync.View
             this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
         }
 
-        #endregion Public methods
-
-        #region Private methods
-
         /// <summary>
         /// Checks if the specified the directories exist and add a status message, if not.
         /// </summary>
@@ -384,6 +364,7 @@ namespace FlagSync.View
         {
             bool exist = true;
 
+            //TODO: Add existance checks
             switch (jobSetting.SyncMode)
             {
                 case SyncMode.LocalBackup:
@@ -677,7 +658,5 @@ namespace FlagSync.View
         {
             this.LastLogMessage.Progress = 100;
         }
-
-        #endregion Private methods
     }
 }

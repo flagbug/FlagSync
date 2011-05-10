@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Threading;
 using FlagLib.FileSystem;
 using FlagSync.Core.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Ftp;
 using FlagSync.Core.FileSystem.ITunes;
 using FlagSync.Core.FileSystem.Local;
 
@@ -260,6 +262,10 @@ namespace FlagSync.Core
                     case SyncMode.ITunes:
                         this.jobQueue.Enqueue(new ITunesJob(jobSetting));
                         break;
+
+                    case SyncMode.FtpBackup:
+                        this.jobQueue.Enqueue(new FtpBackupJob(jobSetting));
+                        break;
                 }
             }
         }
@@ -292,9 +298,15 @@ namespace FlagSync.Core
                         directoryA = new ITunesDirectoryInfo(job.Settings.ITunesPlaylist);
                         directoryB = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryB));
                         break;
+
+                    case SyncMode.FtpBackup:
+                        //directoryA = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryA));
+                        directoryB = new FtpDirectoryInfo(job.Settings.FtpAddress,
+                            new FlagFtp.FtpClient(new NetworkCredential(job.Settings.FtpUserName, job.Settings.FtpPassword)));
+                        break;
                 }
 
-                result += counter.CountFiles(directoryA);
+                //result += counter.CountFiles(directoryA);
                 result += counter.CountFiles(directoryB);
             }
 
