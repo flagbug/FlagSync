@@ -266,6 +266,10 @@ namespace FlagSync.Core
                     case SyncMode.FtpBackup:
                         this.jobQueue.Enqueue(new FtpBackupJob(jobSetting));
                         break;
+
+                    case SyncMode.FtpSynchronization:
+                        this.jobQueue.Enqueue(new FtpSyncJob(jobSetting));
+                        break;
                 }
             }
         }
@@ -300,13 +304,14 @@ namespace FlagSync.Core
                         break;
 
                     case SyncMode.FtpBackup:
-                        //directoryA = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryA));
+                    case SyncMode.FtpSynchronization:
+                        directoryA = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryB));
                         directoryB = new FtpDirectoryInfo(job.Settings.FtpAddress,
                             new FlagFtp.FtpClient(new NetworkCredential(job.Settings.FtpUserName, job.Settings.FtpPassword)));
                         break;
                 }
 
-                //result += counter.CountFiles(directoryA);
+                result += counter.CountFiles(directoryA);
                 result += counter.CountFiles(directoryB);
             }
 

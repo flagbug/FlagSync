@@ -41,6 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FtpBackupJob.cs" />
+    <Compile Include="FtpSyncJob.cs" />
     <Compile Include="LocalBackupJob.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FileCounterResults.cs" />

@@ -28,6 +28,8 @@ namespace FlagSync.Core
                 new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)),
                 new FtpDirectoryInfo(this.Settings.FtpAddress,
                     new FlagFtp.FtpClient(new NetworkCredential(this.Settings.FtpUserName, this.Settings.FtpPassword))), !preview);
+
+            this.OnFinished(EventArgs.Empty);
         }
     }
 }
