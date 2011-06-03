@@ -146,28 +146,39 @@ namespace FlagSync.Core.FileSystem.Local
 
             try
             {
-                string targetFilePath = Path.Combine(targetDirectory.FullName, sourceFile.Name);
-
                 using (Stream sourceStream = sourceFileSystem.OpenFileStream(sourceFile))
                 {
-                    using (FileStream targetStream = File.Create(targetFilePath))
+                    string targetFilePath = Path.Combine(targetDirectory.FullName, sourceFile.Name);
+
+                    try
                     {
-                        long bytesTotal = sourceStream.Length;
-                        long bytesCurrent = 0;
-                        var buffer = new byte[128 * 1024];
-                        int bytes;
-
-                        while ((bytes = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
+                        using (FileStream targetStream = File.Create(targetFilePath))
                         {
-                            targetStream.Write(buffer, 0, bytes);
-                            bytesCurrent += bytes;
+                            long bytesTotal = sourceStream.Length;
+                            long bytesCurrent = 0;
+                            var buffer = new byte[256 * 1024];
+                            int bytes;
 
-                            if (this.FileCopyProgressChanged != null)
+                            while ((bytes = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
                             {
-                                this.FileCopyProgressChanged(this,
-                                    new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+                                targetStream.Write(buffer, 0, bytes);
+
+                                bytesCurrent += bytes;
+
+                                if (this.FileCopyProgressChanged != null)
+                                {
+                                    this.FileCopyProgressChanged(this,
+                                        new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+                                }
                             }
                         }
+                    }
+
+                    catch (IOException ex)
+                    {
+                        File.Delete(targetFilePath);
+
+                        throw;
                     }
                 }
 
