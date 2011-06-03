@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FlagLib.FileSystem;
 using FlagSync.Core.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
@@ -9,7 +10,8 @@ namespace FlagSync.Core
 {
     internal abstract class FileSystemJob : Job
     {
-        private HashSet<string> proceededFilePaths = new HashSet<string>();
+        private HashSet<string> proceededFilePaths;
+        private HashSet<string> excludedPaths;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileSystemJob"/> class.
@@ -19,7 +21,11 @@ namespace FlagSync.Core
         /// <param name="targetFileSystem">The target file system.</param>
         /// <remarks></remarks>
         protected FileSystemJob(JobSetting settings, IFileSystem sourceFileSystem, IFileSystem targetFileSystem)
-            : base(settings, sourceFileSystem, targetFileSystem) { }
+            : base(settings, sourceFileSystem, targetFileSystem)
+        {
+            this.proceededFilePaths = new HashSet<string>();
+            this.excludedPaths = new HashSet<string>();
+        }
 
         /// <summary>
         /// Determines if file A is newer than file B
@@ -79,7 +85,10 @@ namespace FlagSync.Core
                     //Check if the new target directory exists and if not, create it
                     if (!this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath))
                     {
-                        this.PerformDirectoryCreationOperation(this.TargetFileSystem, e.Directory, currentTargetDirectory, execute);
+                        if (!this.excludedPaths.Any(path => newTargetDirectoryPath.StartsWith(path)))
+                        {
+                            this.PerformDirectoryCreationOperation(this.TargetFileSystem, e.Directory, currentTargetDirectory, execute);
+                        }
                     }
 
                     currentTargetDirectory = this.TargetFileSystem.GetDirectoryInfo(newTargetDirectoryPath);
@@ -372,6 +381,7 @@ namespace FlagSync.Core
 
             else if (execute)
             {
+                this.excludedPaths.Add(targetDirectory.FullName);
                 this.OnDirectoryCreationError(new DirectoryCreationEventArgs(sourceDirectory, targetDirectory));
             }
         }
