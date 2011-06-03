@@ -51,7 +51,17 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
-            this.client.CreateDirectory(new Uri(new Uri(targetDirectory.FullName), sourceDirectory.Name));
+            Uri newDirectory = (new Uri(new Uri(targetDirectory.FullName + "/"), sourceDirectory.Name));
+
+            try
+            {
+                this.client.CreateDirectory(newDirectory);
+            }
+
+            catch (WebException)
+            {
+                return false;
+            }
 
             return true;
         }
