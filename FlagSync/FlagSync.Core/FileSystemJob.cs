@@ -173,7 +173,7 @@ namespace FlagSync.Core
                 string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
 
                 //Check if the directory doesn't exist in the target directory
-                if (!Directory.Exists(newTargetDirectoryPath))
+                if (!this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath))
                 {
                     this.PerformDirectoryDeletionOperation(this.TargetFileSystem, e.Directory, execute);
                 }
