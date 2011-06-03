@@ -54,40 +54,18 @@ namespace FlagSync.Core
         public string FtpPassword { get; set; }
 
         /// <summary>
-        /// Gets or sets the proxy server address.
-        /// </summary>
-        /// <value>The proxy server address.</value>
-        public string ProxyAddress { get; set; }
-
-        /// <summary>
-        /// Gets or sets the proxy server port.
-        /// </summary>
-        /// <value>The proxy server port.</value>
-        public int ProxyPort { get; set; }
-
-        /// <summary>
-        /// Gets or sets the user name for the proxy server.
-        /// </summary>
-        /// <value>The user name for the proxy server.</value>
-        public string ProxyUserName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the proxy server password.
-        /// </summary>
-        /// <value>The proxy server password.</value>
-        public string ProxyPassword { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the proxy server is enabled.
-        /// </summary>
-        /// <value><c>true</c> if the proxy server is enabled; otherwise, <c>false</c>.</value>
-        public bool EnableProxyServer { get; set; }
-
-        /// <summary>
         /// Gets or sets the iTunes playlist.
         /// </summary>
         /// <value>The iTunes playlist.</value>
         public string ITunesPlaylist { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether scheduling is enabled.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if scheduling is enabled; otherwise, <c>false</c>.
+        /// </value>
+        public bool EnableScheduling { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JobSetting"/> class.

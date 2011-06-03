@@ -176,8 +176,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets the FTP server password.
         /// </summary>
-        /// <value>The FTP server password.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The FTP server password.
+        /// </value>
         public string FtpPassword
         {
             get { return this.InternJobSetting.FtpPassword; }
@@ -192,100 +193,11 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Gets or sets the proxy server address.
-        /// </summary>
-        /// <value>The proxy server address.</value>
-        /// <remarks></remarks>
-        public string ProxyAddress
-        {
-            get { return this.InternJobSetting.ProxyAddress; }
-            set
-            {
-                if (this.ProxyAddress != value)
-                {
-                    this.InternJobSetting.ProxyAddress = value;
-                    this.OnPropertyChanged(vm => vm.ProxyAddress);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the proxy server port.
-        /// </summary>
-        /// <value>The proxy server port.</value>
-        /// <remarks></remarks>
-        public int ProxyPort
-        {
-            get { return this.InternJobSetting.ProxyPort; }
-            set
-            {
-                if (this.ProxyPort != value)
-                {
-                    this.InternJobSetting.ProxyPort = value;
-                    this.OnPropertyChanged(vm => vm.ProxyPort);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the user name for the proxy server.
-        /// </summary>
-        /// <value>The user name for the proxy server.</value>
-        /// <remarks></remarks>
-        public string ProxyUserName
-        {
-            get { return this.InternJobSetting.ProxyUserName; }
-            set
-            {
-                if (this.ProxyUserName != value)
-                {
-                    this.InternJobSetting.ProxyUserName = value;
-                    this.OnPropertyChanged(vm => vm.ProxyUserName);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the proxy server password.
-        /// </summary>
-        /// <value>The proxy server password.</value>
-        /// <remarks></remarks>
-        public string ProxyPassword
-        {
-            get { return this.InternJobSetting.ProxyPassword; }
-            set
-            {
-                if (this.ProxyPassword != value)
-                {
-                    this.InternJobSetting.ProxyPassword = value;
-                    this.OnPropertyChanged(vm => vm.ProxyPassword);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the proxy server is enabled.
-        /// </summary>
-        /// <value><c>true</c> if the proxy server is enabled; otherwise, <c>false</c>.</value>
-        /// <remarks></remarks>
-        public bool EnableProxyServer
-        {
-            get { return this.InternJobSetting.EnableProxyServer; }
-            set
-            {
-                if (this.EnableProxyServer != value)
-                {
-                    this.InternJobSetting.EnableProxyServer = value;
-                    this.OnPropertyChanged(vm => vm.EnableProxyServer);
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the iTunes playlist.
         /// </summary>
-        /// <value>The iTunes playlist.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The iTunes playlist.
+        /// </value>
         public string ITunesPlaylist
         {
             get { return this.InternJobSetting.ITunesPlaylist; }
@@ -295,6 +207,25 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.ITunesPlaylist = value;
                     this.OnPropertyChanged(vm => vm.ITunesPlaylist);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether scheduling is enabled.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if scheduling is enabled; otherwise, <c>false</c>.
+        /// </value>
+        public bool EnableScheduling
+        {
+            get { return this.InternJobSetting.EnableScheduling; }
+            set
+            {
+                if (this.EnableScheduling != value)
+                {
+                    this.InternJobSetting.EnableScheduling = value;
+                    this.OnPropertyChanged(vm => vm.EnableScheduling);
                 }
             }
         }
