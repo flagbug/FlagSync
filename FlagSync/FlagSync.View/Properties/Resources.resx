@@ -387,4 +387,7 @@
   <data name="PlaylistJobSettingTextBlockText" xml:space="preserve">
     <value>Playlist:</value>
   </data>
+  <data name="EnableSchedulingGroupboxHeaderText" xml:space="preserve">
+    <value>Enable Scheduling</value>
+  </data>
 </root>
