@@ -461,6 +461,10 @@ namespace FlagSync.View
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.FinishedAllJobsMessage);
             this.AddStatusMessage(Properties.Resources.ElapsedTimeMessage + " " + string.Format("{0:hh\\:mm\\:ss}", this.ElapsedTime));
+
+            //HACK:
+            this.ProceededBytes = this.CountedBytes;
+            this.OnPropertyChanged(vm => vm.TotalProgressPercentage);
         }
 
         /// <summary>
