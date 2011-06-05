@@ -85,7 +85,8 @@ namespace FlagSync.Core
                     //Check if the new target directory exists and if not, create it
                     if (!this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath))
                     {
-                        if (!this.excludedPaths.Any(path => newTargetDirectoryPath.StartsWith(path)))
+                        //The directory must not be a subdirectory of any excluded path
+                        if (!this.excludedPaths.Any(path => this.NormalizePath(newTargetDirectoryPath).StartsWith(path)))
                         {
                             this.PerformDirectoryCreationOperation(this.TargetFileSystem, e.Directory, currentTargetDirectory, execute);
                         }
@@ -119,25 +120,29 @@ namespace FlagSync.Core
                     //Assemble the path of the target file
                     string targetFilePath = Path.Combine(currentTargetDirectory.FullName, e.File.Name);
 
-                    //Check if the target file exists in the target directory and if not, create it
-                    if (!this.TargetFileSystem.FileExists(targetFilePath))
+                    //The file must not be a contained in any subfolder of the excluded folders
+                    if (!this.excludedPaths.Any(path => this.NormalizePath(targetFilePath).StartsWith(path)))
                     {
-                        this.PerformFileCreationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
+                        //Check if the target file exists in the target directory and if not, create it
+                        if (!this.TargetFileSystem.FileExists(targetFilePath))
+                        {
+                            this.PerformFileCreationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
 
-                        //Add the created file to the proceeded files, to avoid a double-counting
-                        this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
+                            //Add the created file to the proceeded files, to avoid a double-counting
+                            this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
+                        }
+
+                        //Check if the source file is newer than the target file
+                        else if (this.IsFileModified(e.File, this.TargetFileSystem.GetFileInfo(targetFilePath)))
+                        {
+                            this.PerformFileModificationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
+
+                            //Add the created file to the proceeded files, to avoid a double-counting
+                            this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
+                        }
+
+                        this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
                     }
-
-                    //Check if the source file is newer than the target file
-                    else if (this.IsFileModified(e.File, this.TargetFileSystem.GetFileInfo(targetFilePath)))
-                    {
-                        this.PerformFileModificationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
-
-                        //Add the created file to the proceeded files, to avoid a double-counting
-                        this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
-                    }
-
-                    this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
                 };
 
             rootScanner.Start();
@@ -381,9 +386,14 @@ namespace FlagSync.Core
 
             else if (execute)
             {
-                this.excludedPaths.Add(targetDirectory.FullName);
+                this.excludedPaths.Add(this.NormalizePath(targetDirectory.FullName));
                 this.OnDirectoryCreationError(new DirectoryCreationEventArgs(sourceDirectory, targetDirectory));
             }
+        }
+
+        private string NormalizePath(string path)
+        {
+            return path.Replace("\\", "/").Replace("//", "/");
         }
     }
 }

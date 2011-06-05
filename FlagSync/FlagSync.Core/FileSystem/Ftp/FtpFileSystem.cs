@@ -51,7 +51,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
-            Uri newDirectory = (new Uri(new Uri(targetDirectory.FullName + "/"), sourceDirectory.Name));
+            Uri newDirectory = (new Uri(new Uri(targetDirectory.FullName + "//"), sourceDirectory.Name));
 
             try
             {
@@ -91,29 +91,37 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
-            Uri targetFilePath = new Uri(new Uri(targetDirectory.FullName), sourceFile.Name);
+            Uri targetFilePath = new Uri(new Uri(targetDirectory.FullName + "//"), sourceFile.Name);
 
-            using (Stream sourceStream = sourceFileSystem.OpenFileStream(sourceFile))
+            try
             {
-                using (Stream targetStream = this.client.OpenWrite(targetFilePath))
+                using (Stream sourceStream = sourceFileSystem.OpenFileStream(sourceFile))
                 {
-                    long bytesTotal = sourceStream.Length;
-                    long bytesCurrent = 0;
-                    var buffer = new byte[128 * 1024];
-                    int bytes;
-
-                    while ((bytes = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
+                    using (Stream targetStream = this.client.OpenWrite(targetFilePath))
                     {
-                        targetStream.Write(buffer, 0, bytes);
-                        bytesCurrent += bytes;
+                        long bytesTotal = sourceStream.Length;
+                        long bytesCurrent = 0;
+                        var buffer = new byte[128 * 1024];
+                        int bytes;
 
-                        if (this.FileCopyProgressChanged != null)
+                        while ((bytes = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
                         {
-                            FileCopyProgressChanged(this,
-                                new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+                            targetStream.Write(buffer, 0, bytes);
+                            bytesCurrent += bytes;
+
+                            if (this.FileCopyProgressChanged != null)
+                            {
+                                FileCopyProgressChanged(this,
+                                    new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+                            }
                         }
                     }
                 }
+            }
+
+            catch (WebException ex)
+            {
+                return false;
             }
 
             return true;
@@ -188,7 +196,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         private static string NormalizePath(string path)
         {
-            return path.Replace("\\", "//");
+            return path.Replace("//", "/").Replace("/", "//").Replace("\\", "//");
         }
     }
 }
