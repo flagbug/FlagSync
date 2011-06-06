@@ -69,6 +69,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         public IEnumerable<IFileInfo> GetFiles()
         {
             return this.client.GetFiles(new Uri(this.FullName))
+                .Where(file => file.Name != ".ftpquota")
                 .Select(file => new FtpFileInfo(file.FullName, file.LastWriteTime, file.Length, this.client))
                 .Cast<IFileInfo>();
         }

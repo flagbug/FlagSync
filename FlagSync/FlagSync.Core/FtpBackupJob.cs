@@ -29,6 +29,11 @@ namespace FlagSync.Core
                 new FtpDirectoryInfo(this.Settings.FtpAddress,
                     new FlagFtp.FtpClient(new NetworkCredential(this.Settings.FtpUserName, this.Settings.FtpPassword))), !preview);
 
+            this.CheckDeletionsRecursively(
+                new FtpDirectoryInfo(this.Settings.FtpAddress,
+                    new FlagFtp.FtpClient(new NetworkCredential(this.Settings.FtpUserName, this.Settings.FtpPassword))),
+                    new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)), !preview);
+
             this.OnFinished(EventArgs.Empty);
         }
     }

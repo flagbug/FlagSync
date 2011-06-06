@@ -178,7 +178,7 @@ namespace FlagSync.Core
                 string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
 
                 //Check if the directory doesn't exist in the target directory
-                if (!this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath))
+                if (!this.SourceFileSystem.DirectoryExists(newTargetDirectoryPath))
                 {
                     this.PerformDirectoryDeletionOperation(this.TargetFileSystem, e.Directory, execute);
                 }
@@ -216,7 +216,7 @@ namespace FlagSync.Core
                 long sourceFileLength = e.File.Length;
 
                 //Check if the file doesn't exist in the target directory
-                if (!File.Exists(targetFilePath))
+                if (!this.SourceFileSystem.FileExists(targetFilePath))
                 {
                     this.PerformFileDeletionOperation(this.TargetFileSystem, e.File, execute);
 
@@ -267,7 +267,7 @@ namespace FlagSync.Core
 
             this.OnDeletingDirectory(eventArgs);
 
-            DirectoryScanner directoryScanner = new DirectoryScanner(directory.FullName);
+            FileSystemScanner directoryScanner = new FileSystemScanner(directory);
 
             directoryScanner.FileFound += (sender, e) =>
             {

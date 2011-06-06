@@ -75,7 +75,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryDeleteDirectory(IDirectoryInfo directory)
         {
-            this.client.DeleteDirectory(new Uri(directory.FullName));
+            this.client.DeleteDirectory(new Uri(directory.FullName + "/"));
 
             return true;
         }
@@ -196,7 +196,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         private static string NormalizePath(string path)
         {
-            return path.Replace("//", "/").Replace("/", "//").Replace("\\", "//");
+            return path.Replace("//", "/").Replace("/", "//").Replace("\\", "//").Replace("%20", " ");
         }
     }
 }
