@@ -45,7 +45,7 @@
                     <PasswordBox Grid.Column="1" Grid.Row="3" local:PasswordHelper.Attach="True" local:PasswordHelper.Password="{Binding Text, ElementName=JobSetting.FtpPassword, Mode=TwoWay}" Height="25" Margin="5" PasswordChanged="PasswordBox_PasswordChanged" />
                     <Button Grid.Column="0" Grid.Row="4" Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Click="directoryButton_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
+                            <Image Source="/FlagSync;component/Images/OpenFolder.png" />
                             <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryButtonText}" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>

@@ -33,7 +33,7 @@
                     <ComboBox Margin="5, 5, 5, 5" Height="25" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=ITunesPlaylists}" SelectedItem="{Binding Path=JobSetting.ITunesPlaylist, ValidatesOnDataErrors=True, NotifyOnValidationError=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <Button Margin="5, 5, 5, 5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Grid.Column="0" Grid.Row="2" Click="directoryButton_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/FlagSync.View;component/Images/OpenFolder.png" />
+                            <Image Source="/FlagSync;component/Images/OpenFolder.png" />
                             <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryButtonText}" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>
