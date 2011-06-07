@@ -105,7 +105,10 @@ namespace FlagSync.Core
                 }
 
                 //When a directory has been completely proceeded, jump to the parent directory of the target directory
-                currentTargetDirectory = currentTargetDirectory.Parent;
+                if (currentTargetDirectory.Parent != null)
+                {
+                    currentTargetDirectory = currentTargetDirectory.Parent;
+                }
             };
 
             rootScanner.FileFound += (sender, e) =>

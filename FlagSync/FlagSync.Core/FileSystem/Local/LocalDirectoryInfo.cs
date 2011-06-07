@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FlagSync.Core.FileSystem.Abstract;
@@ -52,8 +51,10 @@ namespace FlagSync.Core.FileSystem.Local
         /// <param name="directoryInfo">The directory info to wrap.</param>
         public LocalDirectoryInfo(DirectoryInfo directoryInfo)
         {
+            /*
             if (directoryInfo == null)
                 throw new ArgumentNullException("directoryInfo");
+             */
 
             this.directoryInfo = directoryInfo;
         }
