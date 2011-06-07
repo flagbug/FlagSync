@@ -36,7 +36,15 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryDeleteFile(IFileInfo file)
         {
-            this.client.DeleteFile(new Uri(file.FullName));
+            try
+            {
+                this.client.DeleteFile(new Uri(file.FullName));
+            }
+
+            catch (WebException ex)
+            {
+                return false;
+            }
 
             return true;
         }
@@ -58,7 +66,7 @@ namespace FlagSync.Core.FileSystem.Ftp
                 this.client.CreateDirectory(newDirectory);
             }
 
-            catch (WebException)
+            catch (WebException ex)
             {
                 return false;
             }
@@ -75,7 +83,15 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryDeleteDirectory(IDirectoryInfo directory)
         {
-            this.client.DeleteDirectory(new Uri(directory.FullName + "/"));
+            try
+            {
+                this.client.DeleteDirectory(new Uri(directory.FullName + "/"));
+            }
+
+            catch (WebException ex)
+            {
+                return false;
+            }
 
             return true;
         }
