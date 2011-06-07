@@ -43,6 +43,9 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                Logger.Current.LogError(
+                    string.Format("WebException while deleting file: {0}", file.FullName));
+
                 return false;
             }
 
@@ -68,6 +71,10 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                Logger.Current.LogError(
+                    string.Format("WebException creating directory: {0} in directory: {1}",
+                    sourceDirectory.FullName, targetDirectory.FullName));
+
                 return false;
             }
 
@@ -90,6 +97,9 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                Logger.Current.LogError(
+                    string.Format("WebException while deleting directory: {0}", directory.FullName));
+
                 return false;
             }
 
@@ -137,6 +147,10 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                Logger.Current.LogError(
+                    string.Format("WebException while copying file: {0} to directory: {1}",
+                    sourceFile.FullName, targetDirectory.FullName));
+
                 return false;
             }
 

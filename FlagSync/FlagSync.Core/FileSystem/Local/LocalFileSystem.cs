@@ -188,9 +188,7 @@ namespace FlagSync.Core.FileSystem.Local
             catch (UnauthorizedAccessException ex)
             {
                 Logger.Current.LogError(
-
                     string.Format("UnauthorizedAccessException while copying file: {0} to directory: {1}",
-
                         sourceFile.FullName, targetDirectory.FullName));
 
                 succeed = false;
