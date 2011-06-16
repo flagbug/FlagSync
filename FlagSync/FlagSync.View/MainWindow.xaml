@@ -281,26 +281,6 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <Grid Grid.Row="2">
-                            <GroupBox Margin="0, 5, 0, 0" Padding="5">
-                                <GroupBox.Header>
-                                    <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding Path=JobSettingsViewModel.SelectedJobSetting.EnableScheduling}" />
-                                        <TextBlock Text="{x:Static properties:Resources.EnableSchedulingGroupboxHeaderText}" Margin="5, 0, 0, 0" />
-                                    </StackPanel>
-                                </GroupBox.Header>
-                                <Grid IsEnabled="{Binding Path=JobSettingsViewModel.SelectedJobSetting.EnableScheduling}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <ComboBox Grid.Row="0" />
-                                    <StackPanel Grid.Row="1">
-
-                                    </StackPanel>
-                                </Grid>
-                            </GroupBox>
-                        </Grid>
                     </Grid>
                     <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=JobSettingsViewModel.CurrentJobSettingsPanel, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>

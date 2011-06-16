@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FlagSync.View"
         xmlns:properties="clr-namespace:FlagSync.View.Properties"
-        Title="About" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Icon="/FlagSync.View;component/Images/ApplicationIcon.ico" ShowInTaskbar="False">
+        Title="About" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Icon="/FlagSync;component/Images/ApplicationIcon.ico" ShowInTaskbar="False">
     <Window.DataContext>
         <local:AboutBoxViewModel />
     </Window.DataContext>
