@@ -125,9 +125,14 @@ namespace FlagSync.Core.FileSystem.ITunes
             this.playlist = playlist;
         }
 
+        /// <summary>
+        /// Opens the stream of the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
         public Stream OpenFileStream(IFileInfo file)
         {
-            throw new NotSupportedException();
+            return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
         }
     }
 }
