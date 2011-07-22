@@ -14,10 +14,10 @@ namespace FlagSync.Core.FileSystem.ITunes
     /// <remarks></remarks>
     internal class ITunesDirectoryInfo : IDirectoryInfo
     {
-        private string playlistName;
+        private string name;
         private bool isRoot;
         private IEnumerable<ITunesDirectoryInfo> directories;
-        private IEnumerable<LocalFileInfo> files;
+        private IEnumerable<IFileInfo> files;
 
         /// <summary>
         /// Gets the parent directory.
@@ -26,7 +26,8 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public IDirectoryInfo Parent
         {
-            get { throw new NotSupportedException(); }
+            get;
+            set;
         }
 
         /// <summary>
@@ -49,51 +50,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public IEnumerable<IFileInfo> GetFiles()
         {
-            /*
-            if (this.isRoot)
-            {
-                iTunesAppClass iTunes = new iTunesAppClass();
-
-                var list = iTunes.LibrarySource.Playlists
-                        .Cast<IITPlaylist>()
-                        .Single(playlist => playlist.Name == this.playlistName);
-
-                var tracks = list.Tracks.Cast<IITTrack>();
-
-                List<ITunesDirectoryInfo> dirs = new List<ITunesDirectoryInfo>();
-
-                var groupedByArtist = tracks.GroupBy(track => track.Artist);
-
-                foreach (var group in groupedByArtist)
-                {
-                    var groupByAlbum = group.GroupBy(g => g.Album);
-
-                    List<IDirectoryInfo> albumDirectories = new List<IDirectoryInfo>();
-
-                    foreach (var album in groupByAlbum)
-                    {
-                        var trackFiles = album.Select(track => new LocalFileInfo(new FileInfo(((IITFileOrCDTrack)track).Location)));
-
-                        albumDirectories.Add(new ITunesDirectoryInfo(null, false, new List<ITunesDirectoryInfo>(), trackFiles));
-                    }
-                }
-            }
-
-            else
-            {
-                return this.files.Cast<IFileInfo>();
-            }
-             * */
-
-            return new iTunesAppClass()
-                .LibrarySource
-                .Playlists
-                .Cast<IITPlaylist>()
-                .Single(playlist => playlist.Name == this.playlistName)
-                .Tracks
-                .Cast<IITFileOrCDTrack>()
-                .Select(track => new LocalFileInfo(new FileInfo(track.Location)))
-                .Cast<IFileInfo>();
+            return this.files;
         }
 
         /// <summary>
@@ -106,7 +63,54 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public IEnumerable<IDirectoryInfo> GetDirectories()
         {
-            return new List<IDirectoryInfo>();
+            if (this.isRoot)
+            {
+                var files = new iTunesAppClass()
+                    .LibrarySource
+                    .Playlists
+                    .Cast<IITPlaylist>()
+                    .Single(playlist => playlist.Name == this.name)
+                    .Tracks
+                    .Cast<IITFileOrCDTrack>();
+
+                var tracksByArtist = files
+                    .GroupBy(file => file.Artist);
+
+                List<ITunesDirectoryInfo> artistDirectories = new List<ITunesDirectoryInfo>();
+
+                foreach (var artistGroup in tracksByArtist)
+                {
+                    var albumGroups = artistGroup.GroupBy(track => track.Album);
+
+                    List<ITunesDirectoryInfo> albumDirectories = new List<ITunesDirectoryInfo>();
+
+                    foreach (var album in albumGroups)
+                    {
+                        albumDirectories.Add
+                            (
+                                new ITunesDirectoryInfo
+                                    (
+                                        this.NormalizeArtistOrAlbumName(album.Key),
+                                        album.Select(track => new LocalFileInfo(new FileInfo(track.Location))).Cast<IFileInfo>(),
+                                        null
+                                    )
+                            );
+                    }
+
+                    ITunesDirectoryInfo artistDirectory = new ITunesDirectoryInfo(this.NormalizeArtistOrAlbumName(artistGroup.Key), albumDirectories, this);
+
+                    foreach (ITunesDirectoryInfo albumDirectory in artistDirectory.GetDirectories())
+                    {
+                        albumDirectory.Parent = artistDirectory;
+                    }
+
+                    artistDirectories.Add(artistDirectory);
+                }
+
+                return artistDirectories.Cast<IDirectoryInfo>();
+            }
+
+            return this.directories.Cast<IDirectoryInfo>();
         }
 
         /// <summary>
@@ -115,7 +119,18 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public string FullName
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                if (this.isRoot)
+                {
+                    return Path.GetFullPath(this.Name);
+                }
+
+                else
+                {
+                    return Path.Combine(this.Parent.FullName, this.Name);
+                }
+            }
         }
 
         /// <summary>
@@ -125,12 +140,85 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public string Name
         {
-            get { throw new NotImplementedException(); }
+            get { return this.name; }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ITunesDirectoryInfo"/> class.
+        /// The directory will be the root directory an a playlist.
+        /// </summary>
+        /// <param name="playlistName">The name of the playlist.</param>
         public ITunesDirectoryInfo(string playlistName)
+            : this((ITunesDirectoryInfo)null)
         {
-            this.playlistName = playlistName;
+            if (playlistName == null)
+                throw new ArgumentNullException("playlistName");
+
+            this.name = playlistName;
+            this.isRoot = true;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ITunesDirectoryInfo"/> class.
+        /// The directory will be the last level of the directory structure and contains the files.
+        /// </summary>
+        /// <param name="name">The name of the album.</param>
+        /// <param name="files">The files that are contained in this directory.</param>
+        public ITunesDirectoryInfo(string albumName, IEnumerable<IFileInfo> files, ITunesDirectoryInfo parent)
+            : this(parent)
+        {
+            if (albumName == null)
+                throw new ArgumentNullException("albumName");
+
+            if (files == null)
+                throw new ArgumentNullException("files");
+
+            this.name = albumName;
+            this.files = files;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ITunesDirectoryInfo"/> class.
+        /// The directory will be the middle level of the directory structure and contains the album directories.
+        /// </summary>
+        /// <param name="name">The name of the artist.</param>
+        /// <param name="directories">The directories that are contained in this directory.</param>
+        public ITunesDirectoryInfo(string artistName, IEnumerable<ITunesDirectoryInfo> directories, ITunesDirectoryInfo parent)
+            : this(parent)
+        {
+            if (artistName == null)
+                throw new ArgumentNullException("artistName");
+
+            if (directories == null)
+                throw new ArgumentNullException("directories");
+
+            this.name = artistName;
+            this.directories = directories;
+        }
+
+        /// <summary>
+        /// Prevents a default instance of the <see cref="ITunesDirectoryInfo"/> class from being created.
+        /// </summary>
+        private ITunesDirectoryInfo(ITunesDirectoryInfo parent)
+        {
+            this.Parent = parent;
+            this.files = Enumerable.Empty<IFileInfo>();
+            this.directories = Enumerable.Empty<ITunesDirectoryInfo>();
+        }
+
+        /// <summary>
+        /// Normalizes the name of the artist or album.
+        /// </summary>
+        /// <param name="artistOrAlbumName">Name of the artist or album.</param>
+        /// <returns></returns>
+        private string NormalizeArtistOrAlbumName(string artistOrAlbumName)
+        {
+            foreach (char invalidCharacter in Path.GetInvalidPathChars().Concat(Path.GetInvalidFileNameChars()).Distinct())
+            {
+                artistOrAlbumName = artistOrAlbumName.Replace(invalidCharacter.ToString(), string.Empty);
+            }
+
+            return artistOrAlbumName;
         }
     }
 }
