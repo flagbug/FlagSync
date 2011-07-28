@@ -186,7 +186,7 @@ namespace FlagSync.Core
                     this.PerformDirectoryDeletionOperation(this.TargetFileSystem, e.Directory, execute);
                 }
 
-                currentTargetDirectory = this.TargetFileSystem.GetDirectoryInfo(newTargetDirectoryPath);
+                currentTargetDirectory = this.SourceFileSystem.GetDirectoryInfo(newTargetDirectoryPath);
             };
 
             rootScanner.DirectoryProceeded += (sender, e) =>
