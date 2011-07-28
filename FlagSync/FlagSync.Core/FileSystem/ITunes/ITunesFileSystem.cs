@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FlagLib.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Local;
+using iTunesLib;
 
 namespace FlagSync.Core.FileSystem.ITunes
 {
@@ -73,7 +77,23 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public IFileInfo GetFileInfo(string path)
         {
-            throw new NotImplementedException();
+            string[] split = path.Split(Path.DirectorySeparatorChar);
+
+            string playlist = split[0];
+            string artist = split[1];
+            string album = split[2];
+            string title = split[3];
+
+            var root = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+
+            IFileInfo fileInfo = root
+                .Single(dir => dir.Name == artist)
+                .GetDirectories()
+                .Single(albumDir => albumDir.Name == album)
+                .GetFiles()
+                .Single(file => file.Name == title);
+
+            return fileInfo;
         }
 
         /// <summary>
@@ -84,7 +104,28 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
-            throw new NotImplementedException();
+            string[] split = path.Split(Path.DirectorySeparatorChar);
+
+            string playlist = split[0];
+            string artist = split[1];
+
+            string album = null;
+
+            if (split.Length > 2)
+            {
+                album = split[2];
+            }
+
+            var root = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+
+            IDirectoryInfo directoryInfo = root.Single(dir => dir.Name == artist);
+
+            if (album != null)
+            {
+                directoryInfo = directoryInfo.GetDirectories().Single(albumDir => albumDir.Name == album);
+            }
+
+            return directoryInfo;
         }
 
         /// <summary>
@@ -95,7 +136,26 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public bool FileExists(string path)
         {
-            throw new NotSupportedException();
+            string[] split = path.Split(Path.DirectorySeparatorChar);
+
+            if (split.Length < 3)
+                return false;
+
+            string playlist = split[0];
+            string artist = split[1];
+            string album = split[2];
+            string title = split[3];
+
+            var root = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+
+            bool exists = root
+                .Single(dir => dir.Name == artist)
+                .GetDirectories()
+                .Single(albumDir => albumDir.Name == album)
+                .GetFiles()
+                .Any(file => file.Name == title);
+
+            return exists;
         }
 
         /// <summary>
@@ -106,7 +166,29 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public bool DirectoryExists(string path)
         {
-            throw new NotSupportedException();
+            string[] split = path.Split(Path.DirectorySeparatorChar);
+
+            string playlist = split[0];
+            string artist = split[1];
+
+            string album = null;
+
+            if (split.Length > 3)
+            {
+                album = split[2];
+            }
+
+            var root = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+
+            if (album == null)
+            {
+                return root.Any(artistDir => artistDir.Name == artist);
+            }
+
+            return root
+                .Single(artistDir => artistDir.Name == artist)
+                .GetDirectories()
+                .Any(albumDir => albumDir.Name == album);
         }
 
         /// <summary>
@@ -133,6 +215,85 @@ namespace FlagSync.Core.FileSystem.ITunes
         public Stream OpenFileStream(IFileInfo file)
         {
             return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
+        }
+
+        /// <summary>
+        /// Maps the specified iTunes playlist to a directory structure.
+        /// </summary>
+        /// <param name="playlist">The playlist.</param>
+        /// <returns>A directory structure which represents the specified iTunes playlist</returns>
+        public static IEnumerable<ITunesDirectoryInfo> MapPlaylistToDirectoryStructure(string playlist)
+        {
+            ITunesDirectoryInfo root = new ITunesDirectoryInfo(playlist);
+
+            var files = new iTunesAppClass()
+                .LibrarySource
+                .Playlists
+                .Cast<IITPlaylist>()
+                .Single(pl => pl.Name == playlist)
+                .Tracks
+                .Cast<IITFileOrCDTrack>();
+
+            var tracksByArtist = files
+                .GroupBy(file => file.Artist)
+                .OrderBy(group => group.Key);
+
+            List<ITunesDirectoryInfo> artistDirectories = new List<ITunesDirectoryInfo>();
+
+            foreach (var artistGroup in tracksByArtist)
+            {
+                var albumGroups = artistGroup
+                    .GroupBy(track => track.Album);
+
+                string artistName = ITunesFileSystem.NormalizeArtistOrAlbumName(artistGroup.Key);
+
+                List<ITunesDirectoryInfo> albumDirectories = new List<ITunesDirectoryInfo>();
+
+                foreach (var album in albumGroups)
+                {
+                    string albumName = ITunesFileSystem.NormalizeArtistOrAlbumName(album.Key);
+                    albumDirectories.Add
+                        (
+                            new ITunesDirectoryInfo
+                                (
+                                    albumName,
+                                    album.Where(track => track.Location != null)
+                                        .Select(track => new LocalFileInfo(new FileInfo(track.Location)))
+                                        .Cast<IFileInfo>(),
+                                    null
+                                )
+                        );
+                }
+
+                ITunesDirectoryInfo artistDirectory =
+                    new ITunesDirectoryInfo(artistName, albumDirectories, root);
+
+                foreach (ITunesDirectoryInfo albumDirectory in artistDirectory.GetDirectories())
+                {
+                    albumDirectory.Parent = artistDirectory;
+                }
+
+                artistDirectories.Add(artistDirectory);
+            }
+
+            return artistDirectories;
+        }
+
+        /// <summary>
+        /// Normalizes the name of the artist or album.
+        /// </summary>
+        /// <param name="artistOrAlbumName">Name of the artist or album.</param>
+        /// <returns>A normalized form of the artist or album string</returns>
+        private static string NormalizeArtistOrAlbumName(string artistOrAlbumName)
+        {
+            var invalidCharacters = Path.GetInvalidPathChars().Concat(Path.GetInvalidFileNameChars()).Distinct();
+
+            foreach (char invalidCharacter in invalidCharacters)
+            {
+                artistOrAlbumName = artistOrAlbumName.Replace(invalidCharacter.ToString(), string.Empty);
+            }
+
+            return artistOrAlbumName;
         }
     }
 }

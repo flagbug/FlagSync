@@ -24,9 +24,9 @@ namespace FlagSync.Core
         {
             this.BackupDirectoryRecursively(new ITunesDirectoryInfo(this.Settings.ITunesPlaylist),
                 new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)), !preview);
-            /*
+
             this.CheckDeletionsRecursively(new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)),
-                new ITunesDirectoryInfo(this.Settings.ITunesPlaylist), !preview);*/
+                new ITunesDirectoryInfo(this.Settings.ITunesPlaylist), !preview);
 
             this.OnFinished(EventArgs.Empty);
         }

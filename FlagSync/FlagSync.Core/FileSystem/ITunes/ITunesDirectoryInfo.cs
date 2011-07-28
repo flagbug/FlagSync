@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FlagSync.Core.FileSystem.Abstract;
-using FlagSync.Core.FileSystem.Local;
-using iTunesLib;
 
 namespace FlagSync.Core.FileSystem.ITunes
 {
@@ -65,49 +63,8 @@ namespace FlagSync.Core.FileSystem.ITunes
         {
             if (this.isRoot)
             {
-                var files = new iTunesAppClass()
-                    .LibrarySource
-                    .Playlists
-                    .Cast<IITPlaylist>()
-                    .Single(playlist => playlist.Name == this.name)
-                    .Tracks
-                    .Cast<IITFileOrCDTrack>();
-
-                var tracksByArtist = files
-                    .GroupBy(file => file.Artist);
-
-                List<ITunesDirectoryInfo> artistDirectories = new List<ITunesDirectoryInfo>();
-
-                foreach (var artistGroup in tracksByArtist)
-                {
-                    var albumGroups = artistGroup.GroupBy(track => track.Album);
-
-                    List<ITunesDirectoryInfo> albumDirectories = new List<ITunesDirectoryInfo>();
-
-                    foreach (var album in albumGroups)
-                    {
-                        albumDirectories.Add
-                            (
-                                new ITunesDirectoryInfo
-                                    (
-                                        this.NormalizeArtistOrAlbumName(album.Key),
-                                        album.Select(track => new LocalFileInfo(new FileInfo(track.Location))).Cast<IFileInfo>(),
-                                        null
-                                    )
-                            );
-                    }
-
-                    ITunesDirectoryInfo artistDirectory = new ITunesDirectoryInfo(this.NormalizeArtistOrAlbumName(artistGroup.Key), albumDirectories, this);
-
-                    foreach (ITunesDirectoryInfo albumDirectory in artistDirectory.GetDirectories())
-                    {
-                        albumDirectory.Parent = artistDirectory;
-                    }
-
-                    artistDirectories.Add(artistDirectory);
-                }
-
-                return artistDirectories.Cast<IDirectoryInfo>();
+                return ITunesFileSystem.MapPlaylistToDirectoryStructure(this.name)
+                    .Cast<IDirectoryInfo>();
             }
 
             return this.directories.Cast<IDirectoryInfo>();
@@ -123,7 +80,7 @@ namespace FlagSync.Core.FileSystem.ITunes
             {
                 if (this.isRoot)
                 {
-                    return Path.GetFullPath(this.Name);
+                    return this.name;
                 }
 
                 else
@@ -204,21 +161,6 @@ namespace FlagSync.Core.FileSystem.ITunes
             this.Parent = parent;
             this.files = Enumerable.Empty<IFileInfo>();
             this.directories = Enumerable.Empty<ITunesDirectoryInfo>();
-        }
-
-        /// <summary>
-        /// Normalizes the name of the artist or album.
-        /// </summary>
-        /// <param name="artistOrAlbumName">Name of the artist or album.</param>
-        /// <returns></returns>
-        private string NormalizeArtistOrAlbumName(string artistOrAlbumName)
-        {
-            foreach (char invalidCharacter in Path.GetInvalidPathChars().Concat(Path.GetInvalidFileNameChars()).Distinct())
-            {
-                artistOrAlbumName = artistOrAlbumName.Replace(invalidCharacter.ToString(), string.Empty);
-            }
-
-            return artistOrAlbumName;
         }
     }
 }
