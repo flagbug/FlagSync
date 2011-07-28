@@ -17,6 +17,8 @@ namespace FlagSync.Core.FileSystem.ITunes
     {
         private string playlist;
 
+        private IEnumerable<ITunesDirectoryInfo> playlistStructureChache;
+
         /// <summary>
         /// Occurs when the file copy progress has changed.
         /// </summary>
@@ -84,7 +86,7 @@ namespace FlagSync.Core.FileSystem.ITunes
             string album = split[2];
             string title = split[3];
 
-            var root = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+            var root = this.GetPlaylistStructure(playlist);
 
             IFileInfo fileInfo = root
                 .Single(dir => dir.Name == artist)
@@ -116,7 +118,7 @@ namespace FlagSync.Core.FileSystem.ITunes
                 album = split[2];
             }
 
-            var root = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+            var root = this.GetPlaylistStructure(playlist);
 
             IDirectoryInfo directoryInfo = root.Single(dir => dir.Name == artist);
 
@@ -146,7 +148,7 @@ namespace FlagSync.Core.FileSystem.ITunes
             string album = split[2];
             string title = split[3];
 
-            var root = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+            var root = this.GetPlaylistStructure(playlist);
 
             bool exists = root
                 .Single(dir => dir.Name == artist)
@@ -178,7 +180,7 @@ namespace FlagSync.Core.FileSystem.ITunes
                 album = split[2];
             }
 
-            var root = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+            var root = this.GetPlaylistStructure(playlist);
 
             if (album == null)
             {
@@ -294,6 +296,21 @@ namespace FlagSync.Core.FileSystem.ITunes
             }
 
             return artistOrAlbumName;
+        }
+
+        /// <summary>
+        /// Gets the structure of the specified playlist.
+        /// </summary>
+        /// <param name="playlist">The playlist.</param>
+        /// <returns></returns>
+        private IEnumerable<ITunesDirectoryInfo> GetPlaylistStructure(string playlist)
+        {
+            if (this.playlistStructureChache == null)
+            {
+                this.playlistStructureChache = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+            }
+
+            return playlistStructureChache;
         }
     }
 }
