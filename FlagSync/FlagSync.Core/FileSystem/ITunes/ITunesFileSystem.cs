@@ -140,9 +140,6 @@ namespace FlagSync.Core.FileSystem.ITunes
         {
             string[] split = path.Split(Path.DirectorySeparatorChar);
 
-            if (split.Length < 3)
-                return false;
-
             string playlist = split[0];
             string artist = split[1];
             string album = split[2];
@@ -175,7 +172,7 @@ namespace FlagSync.Core.FileSystem.ITunes
 
             string album = null;
 
-            if (split.Length > 3)
+            if (split.Length > 2)
             {
                 album = split[2];
             }
