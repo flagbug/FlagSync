@@ -22,21 +22,14 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// </summary>
         /// <value>The parent directory.</value>
         /// <remarks></remarks>
-        public IDirectoryInfo Parent
-        {
-            get;
-            set;
-        }
+        public IDirectoryInfo Parent { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the directory exists.
         /// </summary>
         /// <value><c>true</c> if the directory exists; otherwise, <c>false</c>.</value>
         /// <remarks></remarks>
-        public bool Exists
-        {
-            get { return true; }
-        }
+        public bool Exists { get; private set; }
 
         /// <summary>
         /// Return the files in the directory.
@@ -161,6 +154,22 @@ namespace FlagSync.Core.FileSystem.ITunes
             this.Parent = parent;
             this.files = Enumerable.Empty<IFileInfo>();
             this.directories = Enumerable.Empty<ITunesDirectoryInfo>();
+            this.Exists = true;
+        }
+
+        /// <summary>
+        /// Creates an iTunes directory info which does not exist.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="parent">The parent directory.</param>
+        /// <returns></returns>
+        public static ITunesDirectoryInfo CreateNonExistantDirectoryInfo(string name, ITunesDirectoryInfo parent)
+        {
+            ITunesDirectoryInfo directory = new ITunesDirectoryInfo(parent);
+            directory.name = name;
+            directory.Exists = false;
+
+            return directory;
         }
     }
 }

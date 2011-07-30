@@ -106,28 +106,51 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
+            if (!this.DirectoryExists(path))
+            {
+                return ITunesDirectoryInfo
+                    .CreateNonExistantDirectoryInfo(Path.GetFileName(path), (ITunesDirectoryInfo)this.GetDirectoryInfo(Path.GetDirectoryName(path)));
+            }
+
             string[] split = path.Split(Path.DirectorySeparatorChar);
 
             string playlist = split[0];
-            string artist = split[1];
-
+            string artist = null;
             string album = null;
 
-            if (split.Length > 2)
+            if (split.Length > 1)
             {
-                album = split[2];
+                artist = split[1];
+
+                if (split.Length > 2)
+                {
+                    album = split[2];
+                }
+
+                var root = this.GetPlaylistStructure(playlist);
+
+                IDirectoryInfo directoryInfo = root.SingleOrDefault(dir => dir.Name == artist);
+
+                if (directoryInfo == null)
+                {
+                    directoryInfo = ITunesDirectoryInfo
+                        .CreateNonExistantDirectoryInfo(album ?? artist, (ITunesDirectoryInfo)this.GetDirectoryInfo(Path.GetDirectoryName(path)));
+                }
+
+                else if (album != null)
+                {
+                    directoryInfo = directoryInfo
+                        .GetDirectories()
+                        .Single(albumDir => albumDir.Name == album);
+                }
+
+                return directoryInfo;
             }
 
-            var root = this.GetPlaylistStructure(playlist);
-
-            IDirectoryInfo directoryInfo = root.Single(dir => dir.Name == artist);
-
-            if (album != null)
+            else
             {
-                directoryInfo = directoryInfo.GetDirectories().Single(albumDir => albumDir.Name == album);
+                return new ITunesDirectoryInfo(playlist);
             }
-
-            return directoryInfo;
         }
 
         /// <summary>
@@ -147,14 +170,23 @@ namespace FlagSync.Core.FileSystem.ITunes
 
             var root = this.GetPlaylistStructure(playlist);
 
-            bool exists = root
-                .Single(dir => dir.Name == artist)
-                .GetDirectories()
-                .Single(albumDir => albumDir.Name == album)
-                .GetFiles()
-                .Any(file => file.Name == title);
+            var artistDirectory = root.SingleOrDefault(dir => dir.Name == artist);
 
-            return exists;
+            if (artistDirectory != null)
+            {
+                var albumDirectory = artistDirectory
+                    .GetDirectories()
+                    .SingleOrDefault(albumDir => albumDir.Name == album);
+
+                if (albumDirectory != null)
+                {
+                    return albumDirectory
+                        .GetFiles()
+                        .Any(file => file.Name == title);
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -166,6 +198,12 @@ namespace FlagSync.Core.FileSystem.ITunes
         public bool DirectoryExists(string path)
         {
             string[] split = path.Split(Path.DirectorySeparatorChar);
+
+            //HACK: The case that the path is only the playlist name should also be checked
+            if (split.Length == 1)
+            {
+                return true;
+            }
 
             string playlist = split[0];
             string artist = split[1];
@@ -184,10 +222,19 @@ namespace FlagSync.Core.FileSystem.ITunes
                 return root.Any(artistDir => artistDir.Name == artist);
             }
 
-            return root
-                .Single(artistDir => artistDir.Name == artist)
-                .GetDirectories()
-                .Any(albumDir => albumDir.Name == album);
+            var artistDirectory = root.SingleOrDefault(artistDir => artistDir.Name == artist);
+
+            if (artistDirectory != null)
+            {
+                return artistDirectory
+                    .GetDirectories()
+                    .Any(albumDir => albumDir.Name == album);
+            }
+
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>

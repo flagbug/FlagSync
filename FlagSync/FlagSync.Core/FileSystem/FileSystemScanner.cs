@@ -129,7 +129,10 @@ namespace FlagSync.Core.FileSystem
 
                     foreach (IDirectoryInfo directory in directories)
                     {
-                        if (this.IsStopped) { return; }
+                        if (this.IsStopped || !directory.Exists)
+                        {
+                            return;
+                        }
 
                         this.OnDirectoryFound(new DirectoryFoundEventArgs(directory));
                         this.ScanDirectories(directory);
