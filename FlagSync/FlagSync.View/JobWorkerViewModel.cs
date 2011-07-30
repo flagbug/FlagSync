@@ -14,7 +14,7 @@ namespace FlagSync.View
     public class JobWorkerViewModel : ViewModelBase<JobWorkerViewModel>
     {
         private JobWorker jobWorker;
-        private JobSetting currentJobSetting;
+        private JobSettingViewModel currentJobSetting;
         private Timer elapsedTimeTimer;
         private TimeSpan elapsedTime;
         private long countedBytes;
@@ -174,15 +174,15 @@ namespace FlagSync.View
         /// Gets the job settings of the current running job.
         /// </summary>
         /// <value>The job settings of the current running job.</value>
-        public JobSetting CurrentJobSettings
+        public JobSettingViewModel CurrentJobSetting
         {
             get { return this.currentJobSetting; }
             private set
             {
-                if (this.CurrentJobSettings != value)
+                if (this.CurrentJobSetting != value)
                 {
                     this.currentJobSetting = value;
-                    this.OnPropertyChanged(vm => vm.CurrentJobSettings);
+                    this.OnPropertyChanged(vm => vm.CurrentJobSetting);
                 }
             }
         }
@@ -341,7 +341,7 @@ namespace FlagSync.View
             this.jobWorker.Continue();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.ContinuingJobsMessage);
-            this.AddStatusMessage(Properties.Resources.StartingJobsMessage + " " + this.CurrentJobSettings.Name + "...");
+            this.AddStatusMessage(Properties.Resources.StartingJobsMessage + " " + this.CurrentJobSetting.Name + "...");
         }
 
         /// <summary>
@@ -484,7 +484,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
         private void jobWorker_JobStarted(object sender, JobEventArgs e)
         {
-            this.CurrentJobSettings = e.Job;
+            this.CurrentJobSetting = new JobSettingViewModel(e.Job);
             this.AddStatusMessage(Properties.Resources.StartingJobMessage + " " + e.Job.Name + "...");
         }
 

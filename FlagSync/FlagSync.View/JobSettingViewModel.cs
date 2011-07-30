@@ -33,7 +33,20 @@ namespace FlagSync.View
         /// <remarks></remarks>
         public string DirectoryA
         {
-            get { return this.InternJobSetting.DirectoryA; }
+            get
+            {
+                switch (this.SyncMode)
+                {
+                    case Core.SyncMode.FtpBackup:
+                    case Core.SyncMode.FtpSynchronization:
+                        return this.FtpAddress;
+
+                    case Core.SyncMode.ITunes:
+                        return this.ITunesPlaylist;
+                }
+
+                return this.InternJobSetting.DirectoryA;
+            }
             set
             {
                 if (this.DirectoryA != value)
