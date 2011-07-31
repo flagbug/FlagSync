@@ -1,3 +1,14 @@
+------------------------------ v2.0.0 ------------------------------
+
+The application has been completely rewritten
+
+[ADD] Added synchronisation and backup for FTP servers
+[ADD] The application can now synchronize an iTunes playlist with a 
+      folder (useful for MP3-Players)
+[ADD] The copy progress for each separate file is now visible
+
+[ENH] Complete new user interface
+
 ------------------------------ v1.3.3 ------------------------------
 
 [ADD] Added application icon
