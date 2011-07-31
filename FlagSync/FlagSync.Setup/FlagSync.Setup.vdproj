@@ -261,7 +261,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -466,7 +466,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FlagSync"
         "ProductCode" = "8:{AE8EBE62-3A8B-413C-9213-CBF355CE9687}"
-        "PackageCode" = "8:{0E5C24C2-FD0C-4F13-AFDB-E16752195ED4}"
+        "PackageCode" = "8:{2D43636A-1891-4F50-BD8D-CD5504E407A8}"
         "UpgradeCode" = "8:{07340905-EA7B-48F6-A0A6-0A6A57833948}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
