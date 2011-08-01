@@ -6,7 +6,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Virtual
 {
-    class VirtualDirectoryInfo : IDirectoryInfo
+    internal class VirtualDirectoryInfo : IDirectoryInfo
     {
         private List<IFileSystemInfo> fileSystemInfos;
 

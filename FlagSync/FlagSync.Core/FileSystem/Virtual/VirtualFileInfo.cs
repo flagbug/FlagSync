@@ -4,7 +4,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Virtual
 {
-    class VirtualFileInfo : IFileInfo
+    internal class VirtualFileInfo : IFileInfo
     {
         /// <summary>
         /// Gets the last write time.

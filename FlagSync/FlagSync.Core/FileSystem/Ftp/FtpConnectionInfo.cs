@@ -3,7 +3,7 @@ using System.Net;
 
 namespace FlagSync.Core.FileSystem.Ftp
 {
-    public class FtpConnectionInfo
+    internal class FtpConnectionInfo
     {
         /// <summary>
         /// Gets or sets the FTP server address.
