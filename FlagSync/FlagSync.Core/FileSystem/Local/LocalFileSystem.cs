@@ -32,6 +32,7 @@ namespace FlagSync.Core.FileSystem.Local
 
             try
             {
+                File.SetAttributes(file.FullName, FileAttributes.Normal);
                 File.Delete(file.FullName);
 
                 succeed = true;
