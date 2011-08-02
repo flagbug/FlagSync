@@ -68,8 +68,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// </exception>
         public IEnumerable<IFileInfo> GetFiles()
         {
-            return this.directoryInfo.GetFiles().
-                Select(file => (IFileInfo)new LocalFileInfo(file));
+            return this.directoryInfo
+                .GetFiles()
+                .Select(file => (IFileInfo)new LocalFileInfo(file));
         }
 
         /// <summary>
@@ -81,8 +82,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// </exception>
         public IEnumerable<IDirectoryInfo> GetDirectories()
         {
-            return this.directoryInfo.GetDirectories().
-                Select(directory => (IDirectoryInfo)new LocalDirectoryInfo(directory));
+            return this.directoryInfo
+                .GetDirectories()
+                .Select(directory => (IDirectoryInfo)new LocalDirectoryInfo(directory));
         }
     }
 }

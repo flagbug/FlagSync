@@ -28,19 +28,6 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Determines if file A is newer than file B
-        /// </summary>
-        /// <param name="fileA">File A</param>
-        /// <param name="fileB">File B</param>
-        /// <returns>
-        /// True, if file A is newer, otherwise false
-        /// </returns>
-        protected bool IsFileModified(IFileInfo fileA, IFileInfo fileB)
-        {
-            return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
-        }
-
-        /// <summary>
         /// Raises the <see cref="E:ProceededFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
@@ -239,7 +226,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="file">The file to delete.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformFileDeletionOperation(IFileSystem fileSystem, IFileInfo file, bool execute)
+        private void PerformFileDeletionOperation(IFileSystem fileSystem, IFileInfo file, bool execute)
         {
             FileDeletionEventArgs eventArgs = new FileDeletionEventArgs(file.FullName);
 
@@ -264,7 +251,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformDirectoryDeletionOperation(IFileSystem fileSystem, IDirectoryInfo directory, bool execute)
+        private void PerformDirectoryDeletionOperation(IFileSystem fileSystem, IDirectoryInfo directory, bool execute)
         {
             DirectoryDeletionEventArgs eventArgs = new DirectoryDeletionEventArgs(directory.FullName);
 
@@ -299,7 +286,7 @@ namespace FlagSync.Core
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformFileCreationOperation(IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
+        private void PerformFileCreationOperation(IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
         {
             FileCopyEventArgs eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
 
@@ -336,7 +323,7 @@ namespace FlagSync.Core
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformFileModificationOperation(IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
+        private void PerformFileModificationOperation(IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
         {
             FileCopyEventArgs eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
 
@@ -373,7 +360,7 @@ namespace FlagSync.Core
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
-        protected void PerformDirectoryCreationOperation(IFileSystem fileSystem, IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool execute)
+        private void PerformDirectoryCreationOperation(IFileSystem fileSystem, IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool execute)
         {
             DirectoryCreationEventArgs eventArgs = new DirectoryCreationEventArgs(sourceDirectory, targetDirectory);
 
@@ -392,6 +379,19 @@ namespace FlagSync.Core
                 this.excludedPaths.Add(this.NormalizePath(targetDirectory.FullName));
                 this.OnDirectoryCreationError(new DirectoryCreationEventArgs(sourceDirectory, targetDirectory));
             }
+        }
+
+        /// <summary>
+        /// Determines if file A is newer than file B
+        /// </summary>
+        /// <param name="fileA">File A</param>
+        /// <param name="fileB">File B</param>
+        /// <returns>
+        /// True, if file A is newer, otherwise false
+        /// </returns>
+        private bool IsFileModified(IFileInfo fileA, IFileInfo fileB)
+        {
+            return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
         }
 
         private string NormalizePath(string path)

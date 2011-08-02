@@ -187,6 +187,20 @@ namespace FlagSync.Core
         }
 
         /// <summary>
+        /// Starts the specified jobs.
+        /// </summary>
+        /// <param name="jobSettings">The job settings.</param>
+        /// <param name="preview">if set to true, a preview will be performed.</param>
+        public void Start(IEnumerable<JobSetting> jobSettings, bool preview)
+        {
+            this.totalWrittenBytes = 0;
+
+            this.QueueJobs(jobSettings);
+
+            ThreadPool.QueueUserWorkItem(new WaitCallback(callback => this.Start(preview)));
+        }
+
+        /// <summary>
         /// Does the next job.
         /// </summary>
         private void DoNextJob()
@@ -224,20 +238,6 @@ namespace FlagSync.Core
             Logger.Current.LogStatusMessage("Finished counting files");
 
             this.DoNextJob();
-        }
-
-        /// <summary>
-        /// Starts the specified jobs.
-        /// </summary>
-        /// <param name="jobSettings">The job settings.</param>
-        /// <param name="preview">if set to true, a preview will be performed.</param>
-        public void Start(IEnumerable<JobSetting> jobSettings, bool preview)
-        {
-            this.totalWrittenBytes = 0;
-
-            this.QueueJobs(jobSettings);
-
-            ThreadPool.QueueUserWorkItem(new WaitCallback(callback => this.Start(preview)));
         }
 
         /// <summary>

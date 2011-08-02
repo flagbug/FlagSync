@@ -79,7 +79,13 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public IFileInfo GetFileInfo(string path)
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             string[] split = path.Split(Path.DirectorySeparatorChar);
+
+            if (split.Length < 4)
+                throw new ArgumentException("The path is not valid.", "path");
 
             string playlist = split[0];
             string artist = split[1];
@@ -106,6 +112,9 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             if (!this.DirectoryExists(path))
             {
                 return ITunesDirectoryInfo
@@ -161,7 +170,13 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public bool FileExists(string path)
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             string[] split = path.Split(Path.DirectorySeparatorChar);
+
+            if (split.Length < 4)
+                throw new ArgumentException("The path is not valid.", "path");
 
             string playlist = split[0];
             string artist = split[1];
@@ -197,6 +212,9 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <remarks></remarks>
         public bool DirectoryExists(string path)
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             string[] split = path.Split(Path.DirectorySeparatorChar);
 
             //HACK: The case that the path is only the playlist name should also be checked
@@ -260,6 +278,9 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <returns></returns>
         public Stream OpenFileStream(IFileInfo file)
         {
+            if (file == null)
+                throw new ArgumentNullException("file");
+
             return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
         }
 
@@ -270,6 +291,12 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <returns>A directory structure which represents the specified iTunes playlist</returns>
         public static IEnumerable<ITunesDirectoryInfo> MapPlaylistToDirectoryStructure(string playlist)
         {
+            if (playlist == null)
+                throw new ArgumentNullException("playlist");
+
+            if (playlist == string.Empty)
+                throw new ArgumentException("The playlist name cannot be empty", "playlist");
+
             ITunesDirectoryInfo root = new ITunesDirectoryInfo(playlist);
 
             var files = new iTunesAppClass()
@@ -332,6 +359,9 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <returns>A normalized form of the artist or album string</returns>
         private static string NormalizeArtistOrAlbumName(string artistOrAlbumName)
         {
+            if (artistOrAlbumName == null)
+                throw new ArgumentNullException("artistOrAlbumName");
+
             var invalidCharacters = Path.GetInvalidPathChars().Concat(Path.GetInvalidFileNameChars()).Distinct();
 
             foreach (char invalidCharacter in invalidCharacters)
@@ -349,6 +379,12 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <returns></returns>
         private IEnumerable<ITunesDirectoryInfo> GetPlaylistStructure(string playlist)
         {
+            if (playlist == null)
+                throw new ArgumentNullException("playlist");
+
+            if (playlist == string.Empty)
+                throw new ArgumentException("The playlist name cannot be empty", "playlist");
+
             if (this.playlistStructureChache == null)
             {
                 this.playlistStructureChache = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);

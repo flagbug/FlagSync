@@ -97,6 +97,12 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <param name="client">The client.</param>
         public FtpDirectoryInfo(string fullName, FtpClient client)
         {
+            if (fullName == null)
+                throw new ArgumentNullException("fullName");
+
+            if (client == null)
+                throw new ArgumentNullException("client");
+
             this.FullName = fullName;
             this.client = client;
         }

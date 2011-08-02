@@ -22,6 +22,12 @@ namespace FlagSync.Core.FileSystem.Local
         /// <remarks></remarks>
         public bool TryDeleteFile(IFileInfo file)
         {
+            if (file == null)
+                throw new ArgumentNullException("file");
+
+            if (!(file is LocalFileInfo))
+                throw new ArgumentException("The file must be of type LocalFileInfo.", "file");
+
             bool succeed = false;
 
             try
@@ -58,6 +64,12 @@ namespace FlagSync.Core.FileSystem.Local
         /// <remarks></remarks>
         public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
+            if (sourceDirectory == null)
+                throw new ArgumentNullException("sourceDirectory");
+
+            if (targetDirectory == null)
+                throw new ArgumentNullException("targetDirectory");
+
             bool succeed = false;
 
             try
@@ -106,6 +118,12 @@ namespace FlagSync.Core.FileSystem.Local
         /// <remarks></remarks>
         public bool TryDeleteDirectory(IDirectoryInfo directory)
         {
+            if (directory == null)
+                throw new ArgumentNullException("directory");
+
+            if (!(directory is LocalDirectoryInfo))
+                throw new ArgumentException("The directory must be of type LocalDirectoryInfo.", "directory");
+
             bool succeed = false;
 
             try
@@ -142,6 +160,18 @@ namespace FlagSync.Core.FileSystem.Local
         /// <remarks></remarks>
         public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
+            if (sourceFileSystem == null)
+                throw new ArgumentNullException("sourceFileSystem");
+
+            if (sourceFile == null)
+                throw new ArgumentNullException("sourceFile");
+
+            if (targetDirectory == null)
+                throw new ArgumentNullException("targetDirectory");
+
+            if (!(targetDirectory is LocalDirectoryInfo))
+                throw new ArgumentException("The target directory must be of type LocalDirectoryInfo.", "targetDirectory");
+
             bool succeed = false;
 
             try
@@ -223,6 +253,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <remarks></remarks>
         public IFileInfo GetFileInfo(string path)
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             return new LocalFileInfo(new FileInfo(path));
         }
 
@@ -234,6 +267,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <remarks></remarks>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             return new LocalDirectoryInfo(new DirectoryInfo(path));
         }
 
@@ -245,6 +281,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <remarks></remarks>
         public bool FileExists(string path)
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             return File.Exists(path);
         }
 
@@ -256,6 +295,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <remarks></remarks>
         public bool DirectoryExists(string path)
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             return Directory.Exists(path);
         }
 
@@ -266,6 +308,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <returns></returns>
         public Stream OpenFileStream(IFileInfo file)
         {
+            if (file == null)
+                throw new ArgumentNullException("file");
+
             return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
         }
     }

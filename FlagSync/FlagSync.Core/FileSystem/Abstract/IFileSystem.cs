@@ -25,7 +25,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         bool TryDeleteFile(IFileInfo file);
 
         /// <summary>
-        /// Tries to create a directory in the specified directory (low level operation).
+        /// Tries to create a directory in the specified directory.
         /// </summary>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
@@ -34,7 +34,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory);
 
         /// <summary>
-        /// Tries to delete a directory (low level operation).
+        /// Tries to delete a directory.
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
         /// <returns>A value indicating whether the deletion has succeed.</returns>
@@ -42,7 +42,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         bool TryDeleteDirectory(IDirectoryInfo directory);
 
         /// <summary>
-        /// Tries to copy a file to specified directory (low level operation).
+        /// Tries to copy a file to specified directory.
         /// </summary>
         /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="sourceFile">The source file.</param>

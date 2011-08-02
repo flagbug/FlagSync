@@ -165,6 +165,12 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <returns></returns>
         public static ITunesDirectoryInfo CreateNonExistantDirectoryInfo(string name, ITunesDirectoryInfo parent)
         {
+            if (name == null)
+                throw new ArgumentNullException("name");
+
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+
             ITunesDirectoryInfo directory = new ITunesDirectoryInfo(parent);
             directory.name = name;
             directory.Exists = false;

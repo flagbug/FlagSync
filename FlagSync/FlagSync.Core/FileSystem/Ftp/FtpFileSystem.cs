@@ -23,6 +23,12 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <param name="credentials">The credentials.</param>
         public FtpFileSystem(Uri serverAddress, NetworkCredential credentials)
         {
+            if (serverAddress == null)
+                throw new ArgumentNullException("serverAddress");
+
+            if (credentials == null)
+                throw new ArgumentNullException("credentials");
+
             this.client = new FtpClient(credentials);
             this.client.Credentials = credentials;
         }
@@ -36,6 +42,12 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryDeleteFile(IFileInfo file)
         {
+            if (file == null)
+                throw new ArgumentNullException("file");
+
+            if (!(file is FtpFileInfo))
+                throw new ArgumentException("The file must be of type FtpFileInfo.", "file");
+
             try
             {
                 this.client.DeleteFile(new Uri(file.FullName));
@@ -62,6 +74,12 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
+            if (sourceDirectory == null)
+                throw new ArgumentNullException("sourceDirectory");
+
+            if (targetDirectory == null)
+                throw new ArgumentNullException("targetDirectory");
+
             Uri newDirectory = (new Uri(new Uri(targetDirectory.FullName + "//"), sourceDirectory.Name));
 
             try
@@ -82,7 +100,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         }
 
         /// <summary>
-        /// Tries to delete a directory (low level operation).
+        /// Tries to delete a directory.
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
         /// <returns>
@@ -90,6 +108,11 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryDeleteDirectory(IDirectoryInfo directory)
         {
+            if (directory == null)
+                throw new ArgumentNullException("null");
+
+            if (!(directory is FtpDirectoryInfo))
+                throw new ArgumentException("The directory must be of type FtpDirectoryInfo.", "directory");
             try
             {
                 this.client.DeleteDirectory(new Uri(directory.FullName + "/"));
@@ -107,7 +130,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         }
 
         /// <summary>
-        /// Tries to copy a file to specified directory (low level operation).
+        /// Tries to copy a file to specified directory.
         /// </summary>
         /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="sourceFile">The source file.</param>
@@ -117,6 +140,18 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
+            if (sourceFileSystem == null)
+                throw new ArgumentNullException("sourceFileSystem");
+
+            if (sourceFile == null)
+                throw new ArgumentNullException("sourceFile");
+
+            if (targetDirectory == null)
+                throw new ArgumentNullException("targetDirectory");
+
+            if (!(targetDirectory is FtpDirectoryInfo))
+                throw new ArgumentException("The target directory must be of type FtpDirectoryInfo.", "targetDirectory");
+
             Uri targetFilePath = new Uri(new Uri(targetDirectory.FullName + "//"), sourceFile.Name);
 
             try
@@ -164,6 +199,9 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         public IFileInfo GetFileInfo(string path)
         {
+            if (path == null)
+                throw new ArgumentException("path");
+
             path = FtpFileSystem.NormalizePath(path);
             FlagFtp.FtpFileInfo file = this.client.GetFileInfo(new Uri(path));
 
@@ -177,6 +215,9 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
+            if (path == null)
+                throw new ArgumentException("path");
+
             path = FtpFileSystem.NormalizePath(path);
             FlagFtp.FtpDirectoryInfo directory = this.client.GetDirectoryInfo(new Uri(path));
 
@@ -192,6 +233,9 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool FileExists(string path)
         {
+            if (path == null)
+                throw new ArgumentException("path");
+
             path = FtpFileSystem.NormalizePath(path);
             return this.client.FileExists(new Uri(path));
         }
@@ -205,6 +249,9 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool DirectoryExists(string path)
         {
+            if (path == null)
+                throw new ArgumentException("path");
+
             path = FtpFileSystem.NormalizePath(path);
             return this.client.DirectoryExists(new Uri(path));
         }
@@ -216,6 +263,9 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         public Stream OpenFileStream(IFileInfo file)
         {
+            if (file == null)
+                throw new ArgumentException("file");
+
             return this.client.OpenRead(new Uri(file.FullName));
         }
 
@@ -226,6 +276,9 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         private static string NormalizePath(string path)
         {
+            if (path == null)
+                throw new ArgumentException("path");
+
             return path.Replace("//", "/").Replace("/", "//").Replace("\\", "//").Replace("%20", " ");
         }
     }

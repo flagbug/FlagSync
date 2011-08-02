@@ -77,6 +77,15 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <param name="length">The length.</param>
         public FtpFileInfo(string fullName, DateTime lastWriteTime, long length, FtpClient client)
         {
+            if (fullName == null)
+                throw new ArgumentNullException("fullName");
+
+            if (lastWriteTime == null)
+                throw new ArgumentNullException("lastWriteTime");
+
+            if (client == null)
+                throw new ArgumentNullException("client");
+
             this.FullName = fullName;
             this.LastWriteTime = lastWriteTime;
             this.Length = length;
