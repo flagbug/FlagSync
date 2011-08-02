@@ -308,7 +308,7 @@
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal" Width="100" >
-                                                <Grid>
+                                                <Grid Visibility="{Binding Path=IsProgressBarVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                                                     <ProgressBar Width="100" Height="15" Value="{Binding Path=Progress}" Background="{Binding Path=MessageColor}" />
                                                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                                         <TextBlock Text="{Binding Path=Progress}" Background="Transparent" />
