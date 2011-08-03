@@ -129,9 +129,14 @@ namespace FlagSync.Core.FileSystem
 
                     foreach (IDirectoryInfo directory in directories)
                     {
-                        if (this.IsStopped || !directory.Exists)
+                        if (this.IsStopped)
                         {
                             return;
+                        }
+
+                        if (directory.Name == "$RECYCLE.BIN" || !directory.Exists)
+                        {
+                            continue;
                         }
 
                         this.OnDirectoryFound(new DirectoryFoundEventArgs(directory));
