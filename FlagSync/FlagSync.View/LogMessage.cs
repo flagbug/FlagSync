@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using FlagLib.Patterns;
 
 namespace FlagSync.View
@@ -50,6 +51,7 @@ namespace FlagSync.View
                     this.OnPropertyChanged(vm => vm.Progress);
                     this.OnPropertyChanged(vm => vm.IsInProgress);
                     this.OnPropertyChanged(vm => vm.IsProgressBarVisible);
+                    this.OnPropertyChanged(vm => vm.Image);
                 }
             }
         }
@@ -71,7 +73,7 @@ namespace FlagSync.View
         /// </value>
         public bool IsProgressBarVisible
         {
-            get { return this.IsInProgress || this.IsErrorMessage; }
+            get { return this.IsInProgress && !this.IsErrorMessage; }
         }
 
         /// <summary>
@@ -84,12 +86,34 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the log message is a error message.
+        /// Gets the image for the log message.
+        /// </summary>
+        public ImageSource Image
+        {
+            get
+            {
+                if (IsInProgress && !IsErrorMessage)
+                    return null;
+
+                string successImagePath = "pack://application:,,,/FlagSync;component/Images/Success.png";
+                string errorImagePath = "pack://application:,,,/FlagSync;component/Images/Error.png";
+                BitmapImage logo = new BitmapImage();
+                logo.BeginInit();
+                logo.UriSource = new Uri(this.IsErrorMessage ? errorImagePath : successImagePath);
+                logo.EndInit();
+                logo.Freeze();
+
+                return logo;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the log message is a error message.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if the log message is a error message; otherwise, <c>false</c>.
         /// </value>
-        private bool IsErrorMessage { get; set; }
+        public bool IsErrorMessage { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LogMessage"/> class.
