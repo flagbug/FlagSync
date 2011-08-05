@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Timers;
 using FlagLib.Collections;
 using FlagLib.FileSystem;
 using FlagLib.Patterns;
@@ -15,8 +14,7 @@ namespace FlagSync.View
     {
         private JobWorker jobWorker;
         private JobSettingViewModel currentJobSetting;
-        private Timer elapsedTimeTimer;
-        private TimeSpan elapsedTime;
+        private DateTime startTime;
         private long countedBytes;
         private long proceededBytes;
         private int countedFiles;
@@ -26,23 +24,6 @@ namespace FlagSync.View
         private string statusMessages = String.Empty;
         private string lastStatusMessage = String.Empty;
         private int lastLogMessageIndex;
-
-        /// <summary>
-        /// Gets the elapsed time since the jobworker has been started.
-        /// </summary>
-        /// <value>The elapsed time since the jobworker has been started.</value>
-        public TimeSpan ElapsedTime
-        {
-            get { return this.elapsedTime; }
-            private set
-            {
-                if (this.ElapsedTime != value)
-                {
-                    this.elapsedTime = value;
-                    this.OnPropertyChanged(vm => vm.ElapsedTime);
-                }
-            }
-        }
 
         /// <summary>
         /// Gets a value indicating whether the job worker is counting.
@@ -267,10 +248,6 @@ namespace FlagSync.View
         public JobWorkerViewModel()
         {
             this.LogMessages = new ThreadSafeObservableCollection<LogMessage>();
-            this.elapsedTimeTimer = new Timer(1000);
-            this.elapsedTimeTimer.AutoReset = true;
-            this.elapsedTimeTimer.Elapsed += new ElapsedEventHandler(elapsedTimeTimer_Elapsed);
-
             this.ResetJobWorker();
         }
 
@@ -301,7 +278,6 @@ namespace FlagSync.View
             this.jobWorker.ProceededFile += new EventHandler<FileProceededEventArgs>(jobWorker_ProceededFile);
             this.ResetMessages();
             this.ResetBytes();
-            this.elapsedTime = new TimeSpan();
         }
 
         /// <summary>
@@ -317,7 +293,7 @@ namespace FlagSync.View
                 this.IsCounting = true;
                 this.IsRunning = true;
                 this.IsPreview = preview;
-                this.elapsedTimeTimer.Start();
+                this.startTime = DateTime.Now;
                 this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
                 this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
             }
@@ -440,16 +416,6 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Handles the Elapsed event of the elapsedTimeTimer control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
-        private void elapsedTimeTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            this.ElapsedTime = this.ElapsedTime.Add(new TimeSpan(0, 0, 1));
-        }
-
-        /// <summary>
         /// Handles the Finished event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -457,10 +423,9 @@ namespace FlagSync.View
         private void jobWorker_Finished(object sender, EventArgs e)
         {
             this.IsRunning = false;
-            this.elapsedTimeTimer.Stop();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.FinishedAllJobsMessage);
-            this.AddStatusMessage(Properties.Resources.ElapsedTimeMessage + " " + string.Format("{0:hh\\:mm\\:ss}", this.ElapsedTime));
+            this.AddStatusMessage(Properties.Resources.ElapsedTimeMessage + " " + new DateTime((DateTime.Now - this.startTime).Ticks).ToString("HH:mm:ss"));
 
             //HACK:
             this.ProceededBytes = this.CountedBytes;
