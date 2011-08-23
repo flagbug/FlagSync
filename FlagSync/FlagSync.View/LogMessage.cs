@@ -97,7 +97,9 @@ namespace FlagSync.View
 
                 string successImagePath = "pack://application:,,,/FlagSync;component/Images/Success.png";
                 string errorImagePath = "pack://application:,,,/FlagSync;component/Images/Error.png";
+
                 BitmapImage logo = new BitmapImage();
+
                 logo.BeginInit();
                 logo.UriSource = new Uri(this.IsErrorMessage ? errorImagePath : successImagePath);
                 logo.EndInit();

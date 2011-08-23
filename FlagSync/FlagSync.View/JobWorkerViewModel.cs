@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Timers;
 using FlagLib.Collections;
 using FlagLib.FileSystem;
 using FlagLib.Patterns;
@@ -17,6 +19,7 @@ namespace FlagSync.View
         private DateTime startTime;
         private long countedBytes;
         private long proceededBytes;
+        private long copiedBytes;
         private int countedFiles;
         private int proceededFiles;
         private bool isCounting;
@@ -24,6 +27,9 @@ namespace FlagSync.View
         private string statusMessages = String.Empty;
         private string lastStatusMessage = String.Empty;
         private int lastLogMessageIndex;
+        private Timer updateTimer;
+        private DateTime lastCopyBegin;
+        private TimeSpan effectiveCopyTime;
 
         /// <summary>
         /// Gets a value indicating whether the job worker is counting.
@@ -105,6 +111,20 @@ namespace FlagSync.View
                     this.proceededBytes = value;
                     this.OnPropertyChanged(vm => vm.ProceededBytes);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets the average speed in Megabytes per second.
+        /// </summary>
+        public string AverageSpeed
+        {
+            get
+            {
+                double MB = this.copiedBytes / 1024.0 / 1024.0;
+                double average = MB / this.effectiveCopyTime.TotalSeconds;
+
+                return average.ToString("#0.00", CultureInfo.InvariantCulture) + " MB/s";
             }
         }
 
@@ -248,6 +268,8 @@ namespace FlagSync.View
         public JobWorkerViewModel()
         {
             this.LogMessages = new ThreadSafeObservableCollection<LogMessage>();
+            this.updateTimer = new Timer(1000);
+            this.updateTimer.Elapsed += new ElapsedEventHandler(updateTimer_Elapsed);
             this.ResetJobWorker();
         }
 
@@ -278,6 +300,7 @@ namespace FlagSync.View
             this.jobWorker.ProceededFile += new EventHandler<FileProceededEventArgs>(jobWorker_ProceededFile);
             this.ResetMessages();
             this.ResetBytes();
+            this.effectiveCopyTime = new TimeSpan();
         }
 
         /// <summary>
@@ -294,6 +317,7 @@ namespace FlagSync.View
                 this.IsRunning = true;
                 this.IsPreview = preview;
                 this.startTime = DateTime.Now;
+                this.updateTimer.Start();
                 this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
                 this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
             }
@@ -329,6 +353,16 @@ namespace FlagSync.View
             this.IsRunning = false;
             this.ResetBytes();
             this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
+        }
+
+        /// <summary>
+        /// Handles the Elapsed event of the updateTimer control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
+        private void updateTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            this.OnPropertyChanged(vm => vm.AverageSpeed);
         }
 
         /// <summary>
@@ -526,6 +560,7 @@ namespace FlagSync.View
         private void jobWorker_ModifyingFile(object sender, FileCopyEventArgs e)
         {
             this.AddLogMessage(Properties.Resources.ModifyingString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, false);
+            this.lastCopyBegin = DateTime.Now;
         }
 
         /// <summary>
@@ -535,6 +570,8 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void jobWorker_ModifiedFile(object sender, FileCopyEventArgs e)
         {
+            this.copiedBytes += e.File.Length;
+            this.effectiveCopyTime += DateTime.Now - this.lastCopyBegin;
             this.LastLogMessage.Progress = 100;
         }
 
@@ -596,6 +633,7 @@ namespace FlagSync.View
         private void jobWorker_CreatingFile(object sender, FileCopyEventArgs e)
         {
             this.AddLogMessage(Properties.Resources.CreatingString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, false);
+            this.lastCopyBegin = DateTime.Now;
         }
 
         /// <summary>
@@ -605,6 +643,8 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void jobWorker_CreatedFile(object sender, FileCopyEventArgs e)
         {
+            this.copiedBytes += e.File.Length;
+            this.effectiveCopyTime += DateTime.Now - this.lastCopyBegin;
             this.LastLogMessage.Progress = 100;
         }
 

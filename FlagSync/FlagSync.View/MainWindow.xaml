@@ -159,7 +159,8 @@
                         <ProgressBar Grid.Row="0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{Binding Path=JobWorkerViewModel.TotalProgressPercentage, StringFormat=\{0:F\}}" />
-                            <TextBlock Text="%" Background="Transparent" />
+                            <TextBlock Text="% " Background="Transparent" />
+                            <TextBlock Text="{Binding Path=JobWorkerViewModel.AverageSpeed}" Visibility="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
