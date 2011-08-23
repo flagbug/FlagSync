@@ -260,7 +260,13 @@ namespace FlagSync.View
             get { return this.IsPaused ? Properties.Resources.ContinueString : Properties.Resources.PauseString; }
         }
 
-        private LogMessage LastLogMessage { get; set; }
+        /// <summary>
+        /// Gets or sets the current log message.
+        /// </summary>
+        /// <value>
+        /// The current log message.
+        /// </value>
+        public LogMessage LastLogMessage { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JobWorkerViewModel"/> class.
@@ -439,6 +445,8 @@ namespace FlagSync.View
             this.LogMessages.Add(message);
             this.LastLogMessage = message;
             this.LastLogMessageIndex = this.LogMessages.Count;
+
+            this.OnPropertyChanged(vm => vm.LastLogMessage);
         }
 
         /// <summary>

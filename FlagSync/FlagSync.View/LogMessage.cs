@@ -77,15 +77,6 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Gets the color of the message.
-        /// </summary>
-        /// <value>The color of the message.</value>
-        public Brush MessageColor
-        {
-            get { return this.IsErrorMessage ? Brushes.Red : Brushes.Gray; }
-        }
-
-        /// <summary>
         /// Gets the image for the log message.
         /// </summary>
         public ImageSource Image

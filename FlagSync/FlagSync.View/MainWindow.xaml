@@ -106,12 +106,12 @@
                 <MenuItem Name="aboutMenuItem" Header="{x:Static properties:Resources.AboutString}" Click="aboutMenuItem_Click" />
             </MenuItem>
         </Menu>
-        <Grid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="5, 10, 5, 10" MinHeight="100">
+        <Grid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="5, 10, 5, 5" MinHeight="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <GroupBox Header="{x:Static properties:Resources.CurrentJobGroupBoxText}" Height="Auto" Width="Auto" Padding="5" Grid.Column="0">
+            <GroupBox Header="{x:Static properties:Resources.CurrentJobGroupBoxText}" Height="Auto" Width="Auto" Padding="3" Grid.Column="0">
                 <Grid>
                     <Grid Visibility="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
@@ -149,21 +149,31 @@
                     </TextBlock>
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.ControlPanelGroupBoxText}" Height="Auto" Width="Auto" Padding="5">
+            <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.ControlPanelGroupBoxText}" Height="Auto" Width="Auto" Padding="3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid>
-                        <ProgressBar Grid.Row="0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Grid Grid.Row="0">
+                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
+                        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="Overall progress: "/>
                             <TextBlock Text="{Binding Path=JobWorkerViewModel.TotalProgressPercentage, StringFormat=\{0:F\}}" />
-                            <TextBlock Text="% " Background="Transparent" />
+                            <TextBlock Text="% "/>
                             <TextBlock Text="{Binding Path=JobWorkerViewModel.AverageSpeed}" Visibility="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" Margin="0,3">
+                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Value="{Binding Path=JobWorkerViewModel.LastLogMessage.Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="Current progress: "/>
+                            <TextBlock Text="{Binding Path=JobWorkerViewModel.LastLogMessage.Progress, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}" />
+                            <TextBlock Text="% " />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -178,7 +188,7 @@
                 </Grid>
             </GroupBox>
         </Grid>
-        <TabControl Grid.Row="2" Name="mainTabControl" Margin="5, 0, 5, 10">
+        <TabControl Grid.Row="2" Name="mainTabControl" Margin="5,0,5,5">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -299,9 +309,9 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBox Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch" Text="{Binding Path=JobWorkerViewModel.StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Cursor="Arrow" TextChanged="TextBox_TextChanged" />
-                    <ListView Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionMode="Single">
+                    <ListView Grid.Row="1" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionMode="Single">
                         <ListView.View>
-                            <GridView>
+                            <GridView AllowsColumnReorder="False">
                                 <GridViewColumn Width="30">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -312,21 +322,6 @@
                                 <GridViewColumn Header="{x:Static properties:Resources.ActionGridViewColumnText}" DisplayMemberBinding="{Binding Path=Action}" Width="75" />
                                 <GridViewColumn Header="{x:Static properties:Resources.TypeGridViewColumnText}" DisplayMemberBinding="{Binding Path=Type}" Width="75" />
                                 <GridViewColumn Header="{x:Static properties:Resources.SourceGridViewColumnText}" DisplayMemberBinding="{Binding Path=SourcePath}" Width="225" />
-                                <GridViewColumn Header="{x:Static properties:Resources.ProgressGridViewColumnText}" Width="125">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" Width="100" >
-                                                <Grid Visibility="{Binding Path=IsProgressBarVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                    <ProgressBar Width="100" Height="15" Value="{Binding Path=Progress}" Background="{Binding Path=MessageColor}" />
-                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                                        <TextBlock Text="{Binding Path=Progress}" Background="Transparent" />
-                                                        <TextBlock Text="%" Background="Transparent" />
-                                                    </StackPanel>
-                                                </Grid>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
                                 <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" Width="225" />
                             </GridView>
                         </ListView.View>
