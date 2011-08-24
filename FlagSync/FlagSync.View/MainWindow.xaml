@@ -159,7 +159,8 @@
                     <Grid Grid.Row="0">
                         <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
                         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-                            <TextBlock Text="Overall progress: "/>
+                            <TextBlock Text="{x:Static properties:Resources.TotalProgressText}"/>
+                            <TextBlock Text=" " />
                             <TextBlock Text="{Binding Path=JobWorkerViewModel.TotalProgressPercentage, StringFormat=\{0:F\}}" />
                             <TextBlock Text="% "/>
                             <TextBlock Text="{Binding Path=JobWorkerViewModel.AverageSpeed}" Visibility="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -168,7 +169,8 @@
                     <Grid Grid.Row="1" Margin="0,3">
                         <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Value="{Binding Path=JobWorkerViewModel.LastLogMessage.Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-                            <TextBlock Text="Current progress: "/>
+                            <TextBlock Text="{x:Static properties:Resources.CurrentProgressText}"/>
+                            <TextBlock Text=" " />
                             <TextBlock Text="{Binding Path=JobWorkerViewModel.LastLogMessage.Progress, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}" />
                             <TextBlock Text="% " />
                         </StackPanel>

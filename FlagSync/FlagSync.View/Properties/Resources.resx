@@ -390,4 +390,10 @@
   <data name="EnableSchedulingGroupboxHeaderText" xml:space="preserve">
     <value>Enable Scheduling</value>
   </data>
+  <data name="CurrentProgressText" xml:space="preserve">
+    <value>Current progress:</value>
+  </data>
+  <data name="TotalProgressText" xml:space="preserve">
+    <value>Total progress:</value>
+  </data>
 </root>

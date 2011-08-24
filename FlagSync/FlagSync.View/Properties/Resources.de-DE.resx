@@ -390,4 +390,10 @@
   <data name="EnableSchedulingGroupboxHeaderText" xml:space="preserve">
     <value>Zeitplan aktivieren</value>
   </data>
+  <data name="CurrentProgressText" xml:space="preserve">
+    <value>Derzeitiger Fortschritt:</value>
+  </data>
+  <data name="TotalProgressText" xml:space="preserve">
+    <value>Totaler Fortschritt::</value>
+  </data>
 </root>
