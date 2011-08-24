@@ -121,10 +121,10 @@ namespace FlagSync.View
         {
             get
             {
-                double MB = this.copiedBytes / 1024.0 / 1024.0;
-                double average = MB / this.effectiveCopyTime.TotalSeconds;
+                double copiedMB = this.copiedBytes / 1024.0 / 1024.0;
+                double averageSpeed = copiedMB / this.effectiveCopyTime.TotalSeconds;
 
-                return average.ToString("#0.00", CultureInfo.InvariantCulture) + " MB/s";
+                return averageSpeed.ToString("#0.00", CultureInfo.InvariantCulture) + " MB/s";
             }
         }
 
@@ -369,6 +369,7 @@ namespace FlagSync.View
         private void updateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             this.OnPropertyChanged(vm => vm.AverageSpeed);
+            this.OnPropertyChanged(vm => vm.TimeLeft);
         }
 
         /// <summary>

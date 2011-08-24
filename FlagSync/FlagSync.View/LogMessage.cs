@@ -43,14 +43,13 @@ namespace FlagSync.View
             set
             {
                 if (value < 0 || value > 100)
-                    throw new ArgumentOutOfRangeException("value", "Value mus't be from 0 to 100");
+                    throw new ArgumentOutOfRangeException("value", "Value must be between 0 and 100");
 
                 if (this.Progress != value)
                 {
                     this.progress = value;
                     this.OnPropertyChanged(vm => vm.Progress);
                     this.OnPropertyChanged(vm => vm.IsInProgress);
-                    this.OnPropertyChanged(vm => vm.IsProgressBarVisible);
                     this.OnPropertyChanged(vm => vm.Image);
                 }
             }
@@ -63,17 +62,6 @@ namespace FlagSync.View
         public bool IsInProgress
         {
             get { return this.Progress != 100; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the progress bar of this log message should be visible.
-        /// </summary>
-        /// <value>
-        /// true if the progress bar of this log message should be visible; otherwise, false.
-        /// </value>
-        public bool IsProgressBarVisible
-        {
-            get { return this.IsInProgress && !this.IsErrorMessage; }
         }
 
         /// <summary>
