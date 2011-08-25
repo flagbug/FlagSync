@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading;
-using FlagLib.FileSystem;
+using FlagLib.IO;
 using FlagSync.Core.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
 using FlagSync.Core.FileSystem.Ftp;

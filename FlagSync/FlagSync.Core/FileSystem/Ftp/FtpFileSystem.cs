@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using FlagFtp;
-using FlagLib.FileSystem;
+using FlagLib.IO;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
@@ -179,7 +179,7 @@ namespace FlagSync.Core.FileSystem.Ftp
                             if (this.FileCopyProgressChanged != null)
                             {
                                 FileCopyProgressChanged(this,
-                                    new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+                                    new CopyProgressEventArgs(bytesTotal, bytesCurrent, 0));
                             }
                         }
                     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FlagLib.FileSystem;
+using FlagLib.IO;
 using FlagSync.Core.FileSystem;
 using FlagSync.Core.FileSystem.Abstract;
 
@@ -296,7 +296,7 @@ namespace FlagSync.Core
             {
                 e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
 
-                this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalFileSize, e.TotalBytesTransferred));
+                this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalBytes, e.TotalCopiedBytes, e.AverageSpeed));
             };
 
             targetFileSystem.FileCopyProgressChanged += handler;
@@ -333,7 +333,7 @@ namespace FlagSync.Core
             {
                 e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
 
-                this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalFileSize, e.TotalBytesTransferred));
+                this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalBytes, e.TotalCopiedBytes, e.AverageSpeed));
             };
 
             targetFileSystem.FileCopyProgressChanged += handler;

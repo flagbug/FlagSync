@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using FlagLib.FileSystem;
+using FlagLib.IO;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core

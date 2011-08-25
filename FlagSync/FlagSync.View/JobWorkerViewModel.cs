@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Timers;
 using FlagLib.Collections;
-using FlagLib.FileSystem;
+using FlagLib.IO;
 using FlagLib.Patterns;
 using FlagSync.Core;
 
@@ -295,7 +295,7 @@ namespace FlagSync.View
             this.jobWorker.DeletingFile += new EventHandler<FileDeletionEventArgs>(jobWorker_DeletingFile);
             this.jobWorker.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeletionError);
             this.jobWorker.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(jobWorker_FileCopyError);
-            this.jobWorker.FileCopyProgressChanged += new EventHandler<FlagLib.FileSystem.CopyProgressEventArgs>(jobWorker_FileCopyProgressChanged);
+            this.jobWorker.FileCopyProgressChanged += new EventHandler<CopyProgressEventArgs>(jobWorker_FileCopyProgressChanged);
             this.jobWorker.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(jobWorker_FileDeletionError);
             this.jobWorker.FilesCounted += new EventHandler(jobWorker_FilesCounted);
             this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
@@ -590,7 +590,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
         private void jobWorker_FileCopyProgressChanged(object sender, CopyProgressEventArgs e)
         {
-            this.LastLogMessage.Progress = (int)(((double)e.TotalBytesTransferred / (double)e.TotalFileSize) * 100);
+            this.LastLogMessage.Progress = (int)(((double)e.TotalCopiedBytes / (double)e.TotalBytes) * 100);
         }
 
         /// <summary>

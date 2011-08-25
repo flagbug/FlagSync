@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using FlagLib.IO;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Virtual
@@ -11,7 +12,7 @@ namespace FlagSync.Core.FileSystem.Virtual
         /// <summary>
         /// Occurs when the file copy progress has changed.
         /// </summary>
-        public event EventHandler<FlagLib.FileSystem.CopyProgressEventArgs> FileCopyProgressChanged;
+        public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VirtualFileSystem"/> class.

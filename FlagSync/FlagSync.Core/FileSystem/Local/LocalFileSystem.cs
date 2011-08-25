@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Security;
-using FlagLib.FileSystem;
+using FlagLib.IO;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
@@ -210,7 +210,7 @@ namespace FlagSync.Core.FileSystem.Local
                                 if (this.FileCopyProgressChanged != null)
                                 {
                                     this.FileCopyProgressChanged(this,
-                                        new CopyProgressEventArgs(bytesTotal, bytesCurrent));
+                                        new CopyProgressEventArgs(bytesTotal, bytesCurrent, 0));
                                 }
                             }
                         }

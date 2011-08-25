@@ -122,7 +122,7 @@ namespace FlagSync.View
         /// <param name="path">The path.</param>
         public void SaveJobSettings(string path)
         {
-            GenericXmlSerializer.SaveCollection<JobSetting>(this.InternJobSettings.ToList(), path);
+            GenericXmlSerializer.SerializeCollection<JobSetting>(this.InternJobSettings.ToList(), path);
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace FlagSync.View
 
             try
             {
-                settings = GenericXmlSerializer.ReadEnumerable<JobSetting>(path);
+                settings = GenericXmlSerializer.DeserializeCollection<JobSetting>(path);
             }
 
             catch (InvalidOperationException)
