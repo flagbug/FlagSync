@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using FlagFtp;
@@ -55,6 +56,7 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("WebException while deleting file: {0}", file.FullName));
 
@@ -89,6 +91,7 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("WebException creating directory: {0} in directory: {1}",
                     sourceDirectory.FullName, targetDirectory.FullName));
@@ -120,6 +123,7 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("WebException while deleting directory: {0}", directory.FullName));
 
@@ -152,6 +156,8 @@ namespace FlagSync.Core.FileSystem.Ftp
             if (!(targetDirectory is FtpDirectoryInfo))
                 throw new ArgumentException("The target directory must be of type FtpDirectoryInfo.", "targetDirectory");
 
+            bool succeed = false;
+
             Uri targetFilePath = new Uri(new Uri(targetDirectory.FullName + "//"), sourceFile.Name);
 
             try
@@ -178,18 +184,19 @@ namespace FlagSync.Core.FileSystem.Ftp
                         }
                     }
                 }
+
+                succeed = true;
             }
 
             catch (WebException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("WebException while copying file: {0} to directory: {1}",
                     sourceFile.FullName, targetDirectory.FullName));
-
-                return false;
             }
 
-            return true;
+            return succeed;
         }
 
         /// <summary>

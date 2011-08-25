@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Security;
 using FlagLib.FileSystem;
@@ -40,16 +41,19 @@ namespace FlagSync.Core.FileSystem.Local
 
             catch (IOException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(string.Format("IOException while deleting file: {0}", file.FullName));
             }
 
             catch (SecurityException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(string.Format("SecurityException while deleting file: {0}", file.FullName));
             }
 
             catch (UnauthorizedAccessException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(string.Format("UnauthorizedAccessException while deleting file: {0}", file.FullName));
             }
 
@@ -82,6 +86,7 @@ namespace FlagSync.Core.FileSystem.Local
 
             catch (DirectoryNotFoundException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("DirectoryNotFoundException while creating directory: {0} in directory: {1}",
                         sourceDirectory.Name, targetDirectory.FullName));
@@ -89,6 +94,7 @@ namespace FlagSync.Core.FileSystem.Local
 
             catch (PathTooLongException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("PathTooLongException while creating directory: {0} in directory: {1}",
                         sourceDirectory.Name, targetDirectory.FullName));
@@ -96,6 +102,7 @@ namespace FlagSync.Core.FileSystem.Local
 
             catch (IOException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("IOException while creating directory: {0} in directory: {1}",
                     sourceDirectory.Name, targetDirectory.FullName));
@@ -103,6 +110,7 @@ namespace FlagSync.Core.FileSystem.Local
 
             catch (UnauthorizedAccessException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("UnauthorizedAccessException while creating directory: {0} in directory: {1}",
                         sourceDirectory.Name, targetDirectory.FullName));
@@ -136,16 +144,19 @@ namespace FlagSync.Core.FileSystem.Local
 
             catch (DirectoryNotFoundException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(string.Format("DirectoryNotFoundException while deleting directory: {0}", directory.FullName));
             }
 
             catch (IOException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(string.Format("IOException while deleting directory: {0}", directory.FullName));
             }
 
             catch (UnauthorizedAccessException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(string.Format("UnauthorizedAccessException while deleting directory: {0}", directory.FullName));
             }
 
@@ -203,44 +214,42 @@ namespace FlagSync.Core.FileSystem.Local
                                 }
                             }
                         }
+
+                        succeed = true;
                     }
 
                     catch (IOException ex)
                     {
+                        Debug.WriteLine(ex.Message);
                         File.Delete(targetFilePath);
 
                         throw;
                     }
                 }
-
-                succeed = true;
             }
 
             catch (UnauthorizedAccessException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("UnauthorizedAccessException while copying file: {0} to directory: {1}",
                         sourceFile.FullName, targetDirectory.FullName));
-
-                succeed = false;
             }
 
             catch (SecurityException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("SecurityException while copying file: {0} to directory: {1}",
                     sourceFile.FullName, targetDirectory.FullName));
-
-                succeed = false;
             }
 
             catch (IOException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Logger.Current.LogError(
                     string.Format("IOException while copying file: {0} to directory: {1}",
                     sourceFile.FullName, targetDirectory.FullName));
-
-                succeed = false;
             }
 
             return succeed;

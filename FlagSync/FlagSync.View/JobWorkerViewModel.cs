@@ -369,7 +369,6 @@ namespace FlagSync.View
         private void updateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             this.OnPropertyChanged(vm => vm.AverageSpeed);
-            this.OnPropertyChanged(vm => vm.TimeLeft);
         }
 
         /// <summary>
