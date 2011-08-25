@@ -27,7 +27,8 @@ namespace FlagSync.View
         private string lastStatusMessage = String.Empty;
         private int lastLogMessageIndex;
         private Timer updateTimer;
-        private int averageSpeed;
+        private long averageSpeedTotal;
+        private int averageSpeedCounts;
 
         /// <summary>
         /// Gets a value indicating whether the job worker is counting.
@@ -119,7 +120,7 @@ namespace FlagSync.View
         {
             get
             {
-                double averageSpeed = this.averageSpeed / 1024.0 / 1024.0;
+                double averageSpeed = (this.averageSpeedTotal / this.averageSpeedCounts) / 1024.0 / 1024.0;
 
                 return averageSpeed.ToString("#0.00", CultureInfo.InvariantCulture) + " MB/s";
             }
@@ -303,6 +304,8 @@ namespace FlagSync.View
             this.jobWorker.ProceededFile += new EventHandler<FileProceededEventArgs>(jobWorker_ProceededFile);
             this.ResetMessages();
             this.ResetBytes();
+            this.averageSpeedCounts = 0;
+            this.averageSpeedTotal = 0;
         }
 
         /// <summary>
@@ -364,7 +367,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
         private void updateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //this.OnPropertyChanged(vm => vm.AverageSpeed);
+            this.OnPropertyChanged(vm => vm.AverageSpeed);
         }
 
         /// <summary>
@@ -584,8 +587,9 @@ namespace FlagSync.View
         private void jobWorker_FileCopyProgressChanged(object sender, CopyProgressEventArgs e)
         {
             this.LastLogMessage.Progress = (int)(((double)e.TotalCopiedBytes / (double)e.TotalBytes) * 100);
-            this.averageSpeed = e.AverageSpeed;
-            this.OnPropertyChanged(vm => vm.AverageSpeed);
+
+            this.averageSpeedTotal += e.AverageSpeed;
+            this.averageSpeedCounts++;
         }
 
         /// <summary>
