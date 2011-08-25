@@ -196,23 +196,17 @@ namespace FlagSync.Core.FileSystem.Local
                     {
                         using (FileStream targetStream = File.Create(targetFilePath))
                         {
-                            long bytesTotal = sourceStream.Length;
-                            long bytesCurrent = 0;
-                            var buffer = new byte[256 * 1024];
-                            int bytes;
+                            StreamCopyOperation copyOperation = new StreamCopyOperation(sourceStream, targetStream, 256 * 1024, true);
 
-                            while ((bytes = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
-                            {
-                                targetStream.Write(buffer, 0, bytes);
-
-                                bytesCurrent += bytes;
-
-                                if (this.FileCopyProgressChanged != null)
+                            copyOperation.CopyProgressChanged += (sender, e) =>
                                 {
-                                    this.FileCopyProgressChanged(this,
-                                        new CopyProgressEventArgs(bytesTotal, bytesCurrent, 0));
-                                }
-                            }
+                                    if (this.FileCopyProgressChanged != null)
+                                    {
+                                        this.FileCopyProgressChanged(this, e);
+                                    }
+                                };
+
+                            copyOperation.Execute();
                         }
 
                         succeed = true;
