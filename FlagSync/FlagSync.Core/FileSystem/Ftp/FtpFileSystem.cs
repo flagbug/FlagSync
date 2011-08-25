@@ -162,30 +162,29 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             try
             {
+                bool canceled = false;
+
                 using (Stream sourceStream = sourceFileSystem.OpenFileStream(sourceFile))
                 {
                     using (Stream targetStream = this.client.OpenWrite(targetFilePath))
                     {
-                        long bytesTotal = sourceStream.Length;
-                        long bytesCurrent = 0;
-                        var buffer = new byte[128 * 1024];
-                        int bytes;
+                        StreamCopyOperation copyOperation = new StreamCopyOperation(sourceStream, targetStream, 128 * 1024, true);
 
-                        while ((bytes = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
+                        copyOperation.CopyProgressChanged += (sender, e) =>
                         {
-                            targetStream.Write(buffer, 0, bytes);
-                            bytesCurrent += bytes;
-
                             if (this.FileCopyProgressChanged != null)
                             {
-                                FileCopyProgressChanged(this,
-                                    new CopyProgressEventArgs(bytesTotal, bytesCurrent, 0));
+                                this.FileCopyProgressChanged(this, e);
+
+                                canceled = e.Cancel;
                             }
-                        }
+                        };
+
+                        copyOperation.Execute();
                     }
                 }
 
-                succeed = true;
+                succeed = !canceled;
             }
 
             catch (WebException ex)
