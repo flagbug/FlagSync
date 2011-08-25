@@ -586,6 +586,9 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
         private void jobWorker_FileCopyProgressChanged(object sender, CopyProgressEventArgs e)
         {
+            if (e.TotalBytes == 0)
+                return;
+
             this.LastLogMessage.Progress = (int)(((double)e.TotalCopiedBytes / (double)e.TotalBytes) * 100);
 
             this.averageSpeedTotal += e.AverageSpeed;
