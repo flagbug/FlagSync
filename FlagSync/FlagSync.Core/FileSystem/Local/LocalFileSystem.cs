@@ -194,6 +194,8 @@ namespace FlagSync.Core.FileSystem.Local
 
                     try
                     {
+                        bool canceled = false;
+
                         using (FileStream targetStream = File.Create(targetFilePath))
                         {
                             StreamCopyOperation copyOperation = new StreamCopyOperation(sourceStream, targetStream, 256 * 1024, true);
@@ -203,13 +205,15 @@ namespace FlagSync.Core.FileSystem.Local
                                     if (this.FileCopyProgressChanged != null)
                                     {
                                         this.FileCopyProgressChanged(this, e);
+
+                                        canceled = e.Cancel;
                                     }
                                 };
 
                             copyOperation.Execute();
                         }
 
-                        succeed = true;
+                        succeed = !canceled;
                     }
 
                     catch (IOException ex)
