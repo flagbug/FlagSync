@@ -168,7 +168,7 @@ namespace FlagSync.Core.FileSystem.Ftp
                 {
                     using (Stream targetStream = this.client.OpenWrite(targetFilePath))
                     {
-                        StreamCopyOperation copyOperation = new StreamCopyOperation(sourceStream, targetStream, 128 * 1024, true);
+                        StreamCopyOperation copyOperation = new StreamCopyOperation(sourceStream, targetStream, 8 * 1024, true);
 
                         copyOperation.CopyProgressChanged += (sender, e) =>
                         {
