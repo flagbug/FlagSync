@@ -88,7 +88,9 @@ namespace FlagSync.View
 
                 try
                 {
+                    Debug.WriteLine("Checking for newer version...");
                     versionString = client.DownloadString("http://flagbug.bitbucket.org/flagsyncversion");
+                    Debug.WriteLine("Version on server is " + versionString);
                 }
 
                 catch (WebException)
@@ -101,7 +103,13 @@ namespace FlagSync.View
 
                 Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-                return webVersion > currentVersion;
+                Debug.WriteLine("Current version is " + currentVersion.ToString());
+
+                bool newVersionAvailable = webVersion > currentVersion;
+
+                Debug.WriteLine("New version available: " + newVersionAvailable);
+
+                return newVersionAvailable;
             }
         }
 
