@@ -6,16 +6,10 @@ namespace FlagSync.View
 {
     public class MainViewModel
     {
-        #region Fields
-
         private JobSettingsViewModel jobSettingsViewModel = new JobSettingsViewModel();
         private JobWorkerViewModel jobWorkerViewModel = new JobWorkerViewModel();
         private string appDataFolderPath;
         private string logFilePath;
-
-        #endregion Fields
-
-        #region Constructor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
@@ -27,10 +21,6 @@ namespace FlagSync.View
             this.logFilePath = Path.Combine(this.appDataFolderPath, "log.txt");
             Logger.Current = new Logger(this.LogFilePath);
         }
-
-        #endregion Constructor
-
-        #region Properties
 
         /// <summary>
         /// Gets the job settings view model.
@@ -80,10 +70,6 @@ namespace FlagSync.View
             }
         }
 
-        #endregion Properties
-
-        #region Private methods
-
         /// <summary>
         /// Creates the app datafolder.
         /// </summary>
@@ -91,7 +77,5 @@ namespace FlagSync.View
         {
             Directory.CreateDirectory(this.AppDataFolderPath);
         }
-
-        #endregion Private methods
     }
 }
