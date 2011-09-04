@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Reflection;
 using FlagSync.Core;
 
 namespace FlagSync.View
@@ -67,6 +70,38 @@ namespace FlagSync.View
             get
             {
                 return this.logFilePath;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether a new version of this application is available.
+        /// </summary>
+        /// <value>
+        /// true if a new version of this application is available; otherwise, false.
+        /// </value>
+        public bool IsNewVersionAvailable
+        {
+            get
+            {
+                WebClient client = new WebClient();
+                string versionString;
+
+                try
+                {
+                    versionString = client.DownloadString("http://flagbug.bitbucket.org/flagsyncversion");
+                }
+
+                catch (WebException)
+                {
+                    Debug.WriteLine("Exception while retrieving the new version.");
+                    return false;
+                }
+
+                Version webVersion = new Version(versionString);
+
+                Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+
+                return webVersion > currentVersion;
             }
         }
 
