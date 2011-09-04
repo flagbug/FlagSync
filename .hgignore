@@ -1,0 +1,7 @@
+syntax: glob
+*.suo
+FlagSync/FlagSync.View/obj
+FlagSync/FlagSync.Core/bin
+FlagSync/FlagSync.Core/obj
+FlagSync/FlagSync.Setup/Release
+FlagSync/FlagSync.View/bin
