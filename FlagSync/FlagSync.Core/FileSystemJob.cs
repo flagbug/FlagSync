@@ -296,7 +296,7 @@ namespace FlagSync.Core
             {
                 e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
 
-                this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalBytes, e.TotalCopiedBytes, e.AverageSpeed));
+                this.OnFileProgressChanged(e);
             };
 
             targetFileSystem.FileCopyProgressChanged += handler;
@@ -333,7 +333,7 @@ namespace FlagSync.Core
             {
                 e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
 
-                this.OnFileProgressChanged(new CopyProgressEventArgs(e.TotalBytes, e.TotalCopiedBytes, e.AverageSpeed));
+                this.OnFileProgressChanged(e);
             };
 
             targetFileSystem.FileCopyProgressChanged += handler;
