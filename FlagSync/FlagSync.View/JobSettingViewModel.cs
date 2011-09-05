@@ -285,6 +285,18 @@ namespace FlagSync.View
                         {
                             result = Properties.Resources.SelectPlaylistErrorMessage;
                         }
+                        if (name == "DirectoryB" && !Directory.Exists(this.DirectoryB))
+                        {
+                            result = Properties.Resources.DirectoryDoesntExistMessage;
+                        }
+                        break;
+
+                    case Core.SyncMode.FtpBackup:
+                    case Core.SyncMode.FtpSynchronization:
+                        if (name == "DirectoryB" && !Directory.Exists(this.DirectoryB))
+                        {
+                            result = Properties.Resources.DirectoryDoesntExistMessage;
+                        }
                         break;
                 }
 
