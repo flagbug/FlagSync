@@ -394,7 +394,7 @@
     <value>Derzeitiger Fortschritt:</value>
   </data>
   <data name="TotalProgressText" xml:space="preserve">
-    <value>Totaler Fortschritt::</value>
+    <value>Gesamter Fortschritt:</value>
   </data>
   <data name="UpdateAvailableText" xml:space="preserve">
     <value>Eine neuere Version ist verfügbar!</value>
