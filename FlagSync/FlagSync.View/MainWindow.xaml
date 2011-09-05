@@ -167,11 +167,11 @@
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1" Margin="0,3">
-                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Value="{Binding Path=JobWorkerViewModel.LastLogMessage.Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Value="{Binding Path=JobWorkerViewModel.CurrentProgress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{x:Static properties:Resources.CurrentProgressText}"/>
                             <TextBlock Text=" " />
-                            <TextBlock Text="{Binding Path=JobWorkerViewModel.LastLogMessage.Progress, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}" />
+                            <TextBlock Text="{Binding Path=JobWorkerViewModel.CurrentProgress, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}" />
                             <TextBlock Text="% " />
                         </StackPanel>
                     </Grid>

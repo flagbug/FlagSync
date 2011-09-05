@@ -244,6 +244,14 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Gets the progress of the current file.
+        /// </summary>
+        public int CurrentProgress
+        {
+            get { return this.LastLogMessage.Progress; }
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the job worker performs a preview.
         /// </summary>
         /// <value>true if the job worker performs a preview; otherwise, false.</value>
@@ -590,6 +598,7 @@ namespace FlagSync.View
                 return;
 
             this.LastLogMessage.Progress = (int)(((double)e.TotalCopiedBytes / (double)e.TotalBytes) * 100);
+            this.OnPropertyChanged(vm => vm.CurrentProgress);
 
             this.averageSpeedTotal += e.AverageSpeed;
             this.averageSpeedCounts++;
