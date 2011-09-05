@@ -22,7 +22,12 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void directoryButton_Click(object sender, RoutedEventArgs e)
         {
-            this.viewModel.JobSetting.DirectoryB = this.ShowFolderDialog();
+            string result = this.ShowFolderDialog();
+
+            if (result != null)
+            {
+                this.viewModel.JobSetting.DirectoryB = result;
+            }
         }
 
         /// <summary>
@@ -31,12 +36,16 @@ namespace FlagSync.View
         /// <returns>The selected folder</returns>
         private string ShowFolderDialog()
         {
-            string selectedFolder = string.Empty;
+            string selectedFolder = null;
 
             using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
-                dialog.ShowDialog();
-                selectedFolder = dialog.SelectedPath;
+                var result = dialog.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    selectedFolder = dialog.SelectedPath;
+                }
             }
 
             return selectedFolder;
