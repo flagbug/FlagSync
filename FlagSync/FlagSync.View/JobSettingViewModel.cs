@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using FlagLib.Patterns;
+using FlagLib.Reflection;
 using FlagSync.Core;
 
 namespace FlagSync.View
@@ -273,7 +274,7 @@ namespace FlagSync.View
                 {
                     case Core.SyncMode.LocalBackup:
                     case Core.SyncMode.LocalSynchronization:
-                        if ((name == "DirectoryA" && !Directory.Exists(this.DirectoryA)) || (name == "DirectoryB" && !Directory.Exists(this.DirectoryB)))
+                        if ((name == ReflectionUtilities.GetMemberName(() => this.DirectoryA) && !Directory.Exists(this.DirectoryA)))
                         {
                             result = Properties.Resources.DirectoryDoesntExistMessage;
                         }
@@ -281,26 +282,19 @@ namespace FlagSync.View
                         break;
 
                     case Core.SyncMode.ITunes:
-                        if (name == "ITunesPlaylist" && string.IsNullOrEmpty(this.ITunesPlaylist))
+                        if (name == ReflectionUtilities.GetMemberName(() => this.ITunesPlaylist) && string.IsNullOrEmpty(this.ITunesPlaylist))
                         {
                             result = Properties.Resources.SelectPlaylistErrorMessage;
-                        }
-                        if (name == "DirectoryB" && !Directory.Exists(this.DirectoryB))
-                        {
-                            result = Properties.Resources.DirectoryDoesntExistMessage;
-                        }
-                        break;
-
-                    case Core.SyncMode.FtpBackup:
-                    case Core.SyncMode.FtpSynchronization:
-                        if (name == "DirectoryB" && !Directory.Exists(this.DirectoryB))
-                        {
-                            result = Properties.Resources.DirectoryDoesntExistMessage;
                         }
                         break;
                 }
 
-                if (name == "Name" && this.Name == String.Empty)
+                if (name == ReflectionUtilities.GetMemberName(() => this.DirectoryB) && !Directory.Exists(this.DirectoryB))
+                {
+                    result = Properties.Resources.DirectoryDoesntExistMessage;
+                }
+
+                if (name == ReflectionUtilities.GetMemberName(() => this.Name) && this.Name == String.Empty)
                 {
                     result = Properties.Resources.NameFieldCantBeEmptyMessage;
                 }
