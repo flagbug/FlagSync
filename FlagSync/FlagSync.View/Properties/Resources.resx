@@ -396,4 +396,7 @@
   <data name="TotalProgressText" xml:space="preserve">
     <value>Total progress:</value>
   </data>
+  <data name="UpdateAvailableText" xml:space="preserve">
+    <value>A newer version is available!</value>
+  </data>
 </root>

@@ -889,6 +889,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A newer version is available!.
+        /// </summary>
+        public static string UpdateAvailableText {
+            get {
+                return ResourceManager.GetString("UpdateAvailableText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version:.
         /// </summary>
         public static string VersionTextBlockText {

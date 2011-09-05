@@ -352,7 +352,7 @@
             <StatusBarItem Content="{Binding Path=JobWorkerViewModel.LastStatusMessage}" />
             <StatusBarItem Visibility="{Binding Path=IsNewVersionAvailable, Converter={StaticResource BooleanToVisibilityConverter}, IsAsync=True, Mode=OneTime, FallbackValue=Hidden}" HorizontalAlignment="Right">
                 <Hyperlink NavigateUri="http://bitbucket.org/Flagbug/flagsync/downloads" RequestNavigate="Hyperlink_RequestNavigate">
-                    <TextBlock Text="A newer version is available!" />
+                    <TextBlock Text="{x:Static properties:Resources.UpdateAvailableText}" />
                 </Hyperlink>
             </StatusBarItem>
         </StatusBar>
