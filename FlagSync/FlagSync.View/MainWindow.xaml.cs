@@ -22,8 +22,6 @@ namespace FlagSync.View
         {
             Properties.Resources.Culture = Properties.Settings.Default.Language;
             InitializeComponent();
-
-            this.mainViewModel.JobSettingsViewModel.SelectedJobSetting = this.mainViewModel.JobSettingsViewModel.JobSettings[0];
         }
 
         /// <summary>

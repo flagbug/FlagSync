@@ -87,6 +87,7 @@ namespace FlagSync.View
             this.JobSettings = new ObservableCollection<JobSettingViewModel>();
             this.CurrentJobSettingsPanel = new ObservableCollection<UserControl>();
             this.AddNewJobSetting(SyncMode.LocalBackup);
+            this.SelectedJobSetting = this.JobSettings[0];
         }
 
         /// <summary>
