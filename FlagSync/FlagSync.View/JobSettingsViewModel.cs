@@ -147,7 +147,7 @@ namespace FlagSync.View
                 return false;
             }
 
-            if (settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !MainViewModel.IsITunesInstalled)
+            if (settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !MainViewModel.IsITunesOpened)
             {
                 MessageBox.Show(
                     Properties.Resources.iTunesErrorMessageBoxText,

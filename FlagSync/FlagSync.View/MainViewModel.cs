@@ -33,7 +33,7 @@ namespace FlagSync.View
         /// <value>
         /// true if iTunes is installed on the computer; otherwise, false.
         /// </value>
-        public static bool IsITunesInstalled
+        public static bool IsITunesOpened
         {
             get
             {

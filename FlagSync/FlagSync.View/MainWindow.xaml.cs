@@ -324,7 +324,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void newITunesJobButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MainViewModel.IsITunesInstalled)
+            if (MainViewModel.IsITunesOpened)
             {
                 this.mainViewModel.JobSettingsViewModel.AddNewJobSetting(SyncMode.ITunes);
                 this.CloseNewJobButtonContextMenu();
