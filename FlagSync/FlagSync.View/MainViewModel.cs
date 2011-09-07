@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using FlagSync.Core;
+using iTunesLib;
 
 namespace FlagSync.View
 {
@@ -23,6 +25,30 @@ namespace FlagSync.View
             this.CreateAppDatafolder();
             this.logFilePath = Path.Combine(this.appDataFolderPath, "log.txt");
             Logger.Current = new Logger(this.LogFilePath);
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether iTunes is installed on the computer.
+        /// </summary>
+        /// <value>
+        /// true if iTunes is installed on the computer; otherwise, false.
+        /// </value>
+        public static bool IsITunesInstalled
+        {
+            get
+            {
+                try
+                {
+                    iTunesApp app = new iTunesApp();
+                }
+
+                catch (COMException)
+                {
+                    return false;
+                }
+
+                return true;
+            }
         }
 
         /// <summary>

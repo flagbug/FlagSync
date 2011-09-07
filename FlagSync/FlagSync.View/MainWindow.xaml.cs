@@ -324,8 +324,20 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void newITunesJobButton_Click(object sender, RoutedEventArgs e)
         {
-            this.mainViewModel.JobSettingsViewModel.AddNewJobSetting(SyncMode.ITunes);
-            this.CloseNewJobButtonContextMenu();
+            if (MainViewModel.IsITunesInstalled)
+            {
+                this.mainViewModel.JobSettingsViewModel.AddNewJobSetting(SyncMode.ITunes);
+                this.CloseNewJobButtonContextMenu();
+            }
+
+            else
+            {
+                MessageBox.Show(
+                    Properties.Resources.iTunesErrorMessageBoxText,
+                    Properties.Resources.iTunesErrorMessageBoxCaption,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
 
         /// <summary>

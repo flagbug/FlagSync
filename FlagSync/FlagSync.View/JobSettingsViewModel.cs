@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using FlagLib.Patterns;
 using FlagLib.Serialization;
@@ -143,6 +144,17 @@ namespace FlagSync.View
 
             catch (InvalidOperationException)
             {
+                return false;
+            }
+
+            if (settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !MainViewModel.IsITunesInstalled)
+            {
+                MessageBox.Show(
+                    Properties.Resources.iTunesErrorMessageBoxText,
+                    Properties.Resources.iTunesErrorMessageBoxCaption,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
                 return false;
             }
 

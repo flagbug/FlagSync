@@ -475,6 +475,24 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string iTunesErrorMessageBoxCaption {
+            get {
+                return ResourceManager.GetString("iTunesErrorMessageBoxCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please open iTunes first!.
+        /// </summary>
+        public static string iTunesErrorMessageBoxText {
+            get {
+                return ResourceManager.GetString("iTunesErrorMessageBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to iTunes.
         /// </summary>
         public static string iTunesString {
