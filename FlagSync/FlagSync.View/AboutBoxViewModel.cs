@@ -10,7 +10,7 @@ namespace FlagSync.View
         /// <value>The application version.</value>
         public string Version
         {
-            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(3); }
         }
 
         /// <summary>
