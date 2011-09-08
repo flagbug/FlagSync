@@ -133,8 +133,6 @@ namespace FlagSync.View
         /// <param name="path">The path.</param>
         public bool TryLoadJobSettings(string path)
         {
-            this.JobSettings.Clear();
-
             IEnumerable<JobSetting> settings;
 
             try
@@ -158,12 +156,17 @@ namespace FlagSync.View
                 return false;
             }
 
+            this.JobSettings.Clear();
+
             foreach (JobSetting setting in settings)
             {
                 this.JobSettings.Add(new JobSettingViewModel(setting));
             }
 
-            this.SelectedJobSetting = this.JobSettings.First();
+            if (settings.Any())
+            {
+                this.SelectedJobSetting = this.JobSettings.First();
+            }
 
             return true;
         }
