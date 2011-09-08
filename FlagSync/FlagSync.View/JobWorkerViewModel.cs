@@ -120,7 +120,17 @@ namespace FlagSync.View
         {
             get
             {
-                double averageSpeed = (this.averageSpeedTotal / this.averageSpeedCounts) / 1024.0 / 1024.0;
+                double averageSpeed;
+
+                if (this.averageSpeedCounts != 0)
+                {
+                    averageSpeed = (this.averageSpeedTotal / this.averageSpeedCounts) / 1024.0 / 1024.0;
+                }
+
+                else
+                {
+                    averageSpeed = 0;
+                }
 
                 return averageSpeed.ToString("#0.00", CultureInfo.InvariantCulture) + " MB/s";
             }
@@ -248,7 +258,18 @@ namespace FlagSync.View
         /// </summary>
         public int CurrentProgress
         {
-            get { return this.LastLogMessage.Progress; }
+            get
+            {
+                if (this.LastLogMessage == null)
+                {
+                    return 0;
+                }
+
+                else
+                {
+                    return this.LastLogMessage.Progress;
+                }
+            }
         }
 
         /// <summary>
