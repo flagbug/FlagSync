@@ -1,3 +1,14 @@
+------------------------------ v2.1.1 ------------------------------
+
+IMPROVEMENTS:
+- The application now displays a popup which prompts the user to 
+  open iTunes, if iTunes is not opened and the user tries to create 
+  or load an iTunes job.
+
+BUGFIXES:
+- Fixed a bug, which caused all jobs to disappear, if a corrupt 
+setting has been loaded.
+
 ------------------------------ v2.1.0 ------------------------------
 FEATURES:
 - The average speed is now displayed.

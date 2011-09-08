@@ -16,19 +16,19 @@
         "Entry"
         {
         "MsmKey" = "8:_24BAB8BB7EE79E3F809A4229E974F5CE"
-        "OwnerKey" = "8:_AA180E9EABE5A755DC604C429F642E53"
+        "OwnerKey" = "8:_A4DA053AAE1399E08F3BE872545626AD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_255D16BD27FD4B9FCAD45CF57A13576D"
+        "MsmKey" = "8:_480D511417235D85B0FE3D1538880056"
         "OwnerKey" = "8:_848C4285136F447FAE15E0E4772FE4E0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_255D16BD27FD4B9FCAD45CF57A13576D"
-        "OwnerKey" = "8:_B093DB05B541F80BF2379D6ABE1176B4"
+        "MsmKey" = "8:_480D511417235D85B0FE3D1538880056"
+        "OwnerKey" = "8:_D3A1E2534614B0DE8628223B74DECDC3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -46,7 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_8DADCB3718937394AC7ECE7DD265FA8F"
-        "OwnerKey" = "8:_B093DB05B541F80BF2379D6ABE1176B4"
+        "OwnerKey" = "8:_D3A1E2534614B0DE8628223B74DECDC3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -57,19 +57,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AA180E9EABE5A755DC604C429F642E53"
-        "OwnerKey" = "8:_B093DB05B541F80BF2379D6ABE1176B4"
+        "MsmKey" = "8:_A4DA053AAE1399E08F3BE872545626AD"
+        "OwnerKey" = "8:_D3A1E2534614B0DE8628223B74DECDC3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_AA180E9EABE5A755DC604C429F642E53"
-        "OwnerKey" = "8:_848C4285136F447FAE15E0E4772FE4E0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B093DB05B541F80BF2379D6ABE1176B4"
+        "MsmKey" = "8:_A4DA053AAE1399E08F3BE872545626AD"
         "OwnerKey" = "8:_848C4285136F447FAE15E0E4772FE4E0"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,6 +75,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D3A1E2534614B0DE8628223B74DECDC3"
+        "OwnerKey" = "8:_848C4285136F447FAE15E0E4772FE4E0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_848C4285136F447FAE15E0E4772FE4E0"
         "MsmSig" = "8:_UNDEFINED"
@@ -88,25 +88,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B093DB05B541F80BF2379D6ABE1176B4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AA180E9EABE5A755DC604C429F642E53"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_255D16BD27FD4B9FCAD45CF57A13576D"
+        "OwnerKey" = "8:_D3A1E2534614B0DE8628223B74DECDC3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_8DADCB3718937394AC7ECE7DD265FA8F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A4DA053AAE1399E08F3BE872545626AD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_480D511417235D85B0FE3D1538880056"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -234,14 +234,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_255D16BD27FD4B9FCAD45CF57A13576D"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_480D511417235D85B0FE3D1538880056"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:FlagFtp, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_255D16BD27FD4B9FCAD45CF57A13576D"
+                    "_480D511417235D85B0FE3D1538880056"
                     {
                     "Name" = "8:FlagFtp.dll"
                     "Attributes" = "3:512"
@@ -316,51 +316,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AA180E9EABE5A755DC604C429F642E53"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A4DA053AAE1399E08F3BE872545626AD"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Interop.iTunesLib, Version=1.13.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_AA180E9EABE5A755DC604C429F642E53"
+                    "_A4DA053AAE1399E08F3BE872545626AD"
                     {
                     "Name" = "8:Interop.iTunesLib.dll"
                     "Attributes" = "3:512"
                     }
                 }
             "SourcePath" = "8:Interop.iTunesLib.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9384B8247F424A46B5CBF164BE16BFFA"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B093DB05B541F80BF2379D6ABE1176B4"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FlagSync.Core, Version=2.1.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_B093DB05B541F80BF2379D6ABE1176B4"
-                    {
-                    "Name" = "8:FlagSync.Core.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:FlagSync.Core.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9384B8247F424A46B5CBF164BE16BFFA"
@@ -396,6 +365,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D3A1E2534614B0DE8628223B74DECDC3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FlagSync.Core, Version=2.1.0.0, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_D3A1E2534614B0DE8628223B74DECDC3"
+                    {
+                    "Name" = "8:FlagSync.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FlagSync.Core.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9384B8247F424A46B5CBF164BE16BFFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -465,15 +465,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FlagSync"
-        "ProductCode" = "8:{1FA581E8-86E0-4610-846E-00F1EC98EE23}"
-        "PackageCode" = "8:{ADFE1338-76B0-4FE1-BD51-A6F599DD4971}"
+        "ProductCode" = "8:{A901F333-F6E7-4EDD-9EFC-7229D087A452}"
+        "PackageCode" = "8:{7363EC4C-1A38-487C-93C0-E598199915BD}"
         "UpgradeCode" = "8:{07340905-EA7B-48F6-A0A6-0A6A57833948}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.1.0"
+        "ProductVersion" = "8:2.1.1"
         "Manufacturer" = "8:Flagbug"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1015,7 +1015,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_848C4285136F447FAE15E0E4772FE4E0"
             {
-            "SourcePath" = "8:..\\FlagSync.View\\obj\\x86\\Release\\FlagSync.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9384B8247F424A46B5CBF164BE16BFFA"
