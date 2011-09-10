@@ -22,7 +22,7 @@ CHANGES:
 IMPROVEMENTS:
 - Incresed the performance of the application drastically
 - Improved the file deletion handling.
-- The reciclye-bin of a harddrive is now excluded from the 
+- The recycle-bin of a harddrive is now excluded from the 
   synchronization and backup.
 - The current copy operations now gets aborted when the user stops 
   the job.
