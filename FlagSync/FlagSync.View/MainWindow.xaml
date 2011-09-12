@@ -351,7 +351,7 @@
         <StatusBar Width="Auto" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
             <StatusBarItem Content="{Binding Path=JobWorkerViewModel.LastStatusMessage}" />
             <StatusBarItem Visibility="{Binding Path=IsNewVersionAvailable, Converter={StaticResource BooleanToVisibilityConverter}, IsAsync=True, Mode=OneTime, FallbackValue=Hidden}" HorizontalAlignment="Right">
-                <Hyperlink NavigateUri="http://bitbucket.org/Flagbug/flagsync/downloads" RequestNavigate="Hyperlink_RequestNavigate">
+                <Hyperlink NavigateUri="http://sourceforge.net/projects/flagsync/files/" RequestNavigate="Hyperlink_RequestNavigate">
                     <TextBlock Text="{x:Static properties:Resources.UpdateAvailableText}" />
                 </Hyperlink>
             </StatusBarItem>
