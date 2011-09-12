@@ -425,6 +425,14 @@ namespace FlagSync.View
                         exist = false;
                     }
                     break;
+
+                case SyncMode.ITunes:
+                    if (!Directory.Exists(jobSetting.DirectoryB))
+                    {
+                        this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
+                        exist = false;
+                    }
+                    break;
             }
 
             return exist;
