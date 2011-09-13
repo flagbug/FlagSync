@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using FlagSync.Core;
-using iTunesLib;
 
 namespace FlagSync.View
 {
@@ -37,17 +36,7 @@ namespace FlagSync.View
         {
             get
             {
-                try
-                {
-                    iTunesApp app = new iTunesApp();
-                }
-
-                catch (COMException)
-                {
-                    return false;
-                }
-
-                return true;
+                return Process.GetProcessesByName("iTunes").Any();
             }
         }
 
