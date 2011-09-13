@@ -1,3 +1,16 @@
+------------------------------ v2.1.2 ------------------------------
+
+CHANGES:
+- Changed the URL of the update download site.
+- The about box now only displays three version fields.
+
+BUGFIXES:
+- Fixed a bug which caused the application to crash if the target 
+  directory of an iTunes job doesn't exist.
+- Fixed a bug which caused the application to crash if the target 
+  directory of a FTP job doesn't exist.
+- Fixed a bug which caused iTunes to automatically open.
+
 ------------------------------ v2.1.1 ------------------------------
 
 IMPROVEMENTS:

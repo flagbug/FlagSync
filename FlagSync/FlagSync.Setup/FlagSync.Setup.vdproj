@@ -88,13 +88,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D3A1E2534614B0DE8628223B74DECDC3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8DADCB3718937394AC7ECE7DD265FA8F"
+        "OwnerKey" = "8:_480D511417235D85B0FE3D1538880056"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +100,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_480D511417235D85B0FE3D1538880056"
+        "OwnerKey" = "8:_8DADCB3718937394AC7ECE7DD265FA8F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D3A1E2534614B0DE8628223B74DECDC3"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -241,11 +241,6 @@
             "AssemblyAsmDisplayName" = "8:FlagFtp, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_480D511417235D85B0FE3D1538880056"
-                    {
-                    "Name" = "8:FlagFtp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:FlagFtp.dll"
             "TargetName" = "8:"
@@ -292,11 +287,6 @@
             "AssemblyAsmDisplayName" = "8:FlagLib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_8DADCB3718937394AC7ECE7DD265FA8F"
-                    {
-                    "Name" = "8:FlagLib.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:FlagLib.dll"
             "TargetName" = "8:"
@@ -323,11 +313,6 @@
             "AssemblyAsmDisplayName" = "8:Interop.iTunesLib, Version=1.13.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_A4DA053AAE1399E08F3BE872545626AD"
-                    {
-                    "Name" = "8:Interop.iTunesLib.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interop.iTunesLib.dll"
             "TargetName" = "8:"
@@ -374,11 +359,6 @@
             "AssemblyAsmDisplayName" = "8:FlagSync.Core, Version=2.1.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_D3A1E2534614B0DE8628223B74DECDC3"
-                    {
-                    "Name" = "8:FlagSync.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:FlagSync.Core.dll"
             "TargetName" = "8:"
@@ -465,15 +445,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FlagSync"
-        "ProductCode" = "8:{A901F333-F6E7-4EDD-9EFC-7229D087A452}"
-        "PackageCode" = "8:{7363EC4C-1A38-487C-93C0-E598199915BD}"
+        "ProductCode" = "8:{DEEF2B2E-FA3A-4FEA-98FE-4874E411185F}"
+        "PackageCode" = "8:{6145FF90-6500-48E9-95D6-64DBA7DE1263}"
         "UpgradeCode" = "8:{07340905-EA7B-48F6-A0A6-0A6A57833948}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.1.1"
+        "ProductVersion" = "8:2.1.2"
         "Manufacturer" = "8:Flagbug"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1015,7 +995,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_848C4285136F447FAE15E0E4772FE4E0"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\FlagSync.View\\obj\\x86\\Debug\\FlagSync.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9384B8247F424A46B5CBF164BE16BFFA"
