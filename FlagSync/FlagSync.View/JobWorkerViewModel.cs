@@ -427,6 +427,8 @@ namespace FlagSync.View
                     break;
 
                 case SyncMode.ITunes:
+                case SyncMode.FtpBackup:
+                case SyncMode.FtpSynchronization:
                     if (!Directory.Exists(jobSetting.DirectoryB))
                     {
                         this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
