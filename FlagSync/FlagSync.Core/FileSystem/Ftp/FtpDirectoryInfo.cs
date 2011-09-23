@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FlagFtp;
@@ -7,6 +8,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
 {
+    [DebuggerDisplay("{FullName}")]
     internal class FtpDirectoryInfo : IDirectoryInfo
     {
         private FtpClient client;

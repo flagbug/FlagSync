@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Virtual
 {
+    [DebuggerDisplay("{FullName}")]
     internal class VirtualDirectoryInfo : IDirectoryInfo
     {
         private List<IFileSystemInfo> fileSystemInfos;

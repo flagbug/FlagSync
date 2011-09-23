@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
 {
+    [DebuggerDisplay("{FullName}")]
     internal class LocalDirectoryInfo : IDirectoryInfo
     {
         private DirectoryInfo directoryInfo;
