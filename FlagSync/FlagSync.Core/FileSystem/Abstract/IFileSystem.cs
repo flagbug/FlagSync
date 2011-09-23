@@ -90,5 +90,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <param name="file">The file.</param>
         /// <returns></returns>
         Stream OpenFileStream(IFileInfo file);
+
+        string CombinePath(string path1, string path2);
     }
 }

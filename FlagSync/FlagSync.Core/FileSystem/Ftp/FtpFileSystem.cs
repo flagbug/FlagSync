@@ -158,7 +158,9 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             bool succeed = false;
 
-            Uri targetFilePath = new Uri(new Uri(targetDirectory.FullName + "//"), sourceFile.Name);
+            var uri = new Uri(targetDirectory.FullName);
+
+            Uri targetFilePath = new Uri(this.CombinePath(targetDirectory.FullName, sourceFile.Name));
 
             try
             {
@@ -273,6 +275,11 @@ namespace FlagSync.Core.FileSystem.Ftp
                 throw new ArgumentException("file");
 
             return this.client.OpenRead(new Uri(file.FullName));
+        }
+
+        public string CombinePath(string path1, string path2)
+        {
+            return path1 + "/" + path2;
         }
 
         /// <summary>

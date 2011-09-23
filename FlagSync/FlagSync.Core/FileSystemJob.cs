@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using FlagLib.IO;
 using FlagSync.Core.FileSystem;
@@ -67,7 +66,7 @@ namespace FlagSync.Core
                     }
 
                     //Assemble the path of the new target directory
-                    string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
+                    string newTargetDirectoryPath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.Directory.Name);
 
                     //Check if the new target directory exists and if not, create it
                     if (!this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath))
@@ -108,7 +107,7 @@ namespace FlagSync.Core
                     }
 
                     //Assemble the path of the target file
-                    string targetFilePath = Path.Combine(currentTargetDirectory.FullName, e.File.Name);
+                    string targetFilePath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name);
 
                     //The file must not be a contained in any subfolder of the excluded folders
                     if (!this.excludedPaths.Any(path => this.NormalizePath(targetFilePath).StartsWith(path)))
@@ -119,7 +118,7 @@ namespace FlagSync.Core
                             this.PerformFileCreationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
 
                             //Add the created file to the proceeded files, to avoid a double-counting
-                            this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
+                            this.proceededFilePaths.Add(this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name));
                         }
 
                         //Check if the source file is newer than the target file
@@ -128,7 +127,7 @@ namespace FlagSync.Core
                             this.PerformFileModificationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
 
                             //Add the created file to the proceeded files, to avoid a double-counting
-                            this.proceededFilePaths.Add(Path.Combine(currentTargetDirectory.FullName, e.File.Name));
+                            this.proceededFilePaths.Add(this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name));
                         }
 
                         this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
@@ -165,7 +164,7 @@ namespace FlagSync.Core
                     return;
                 }
 
-                string newTargetDirectoryPath = Path.Combine(currentTargetDirectory.FullName, e.Directory.Name);
+                string newTargetDirectoryPath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.Directory.Name);
 
                 //Check if the directory doesn't exist in the target directory
                 if (!this.SourceFileSystem.DirectoryExists(newTargetDirectoryPath))
@@ -198,7 +197,7 @@ namespace FlagSync.Core
                     return;
                 }
 
-                string targetFilePath = Path.Combine(currentTargetDirectory.FullName, e.File.Name);
+                string targetFilePath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name);
 
                 //Save the file path and length for the case that the file gets deleted,
                 //so that the FileProceeded event can be raises properly

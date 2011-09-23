@@ -216,5 +216,10 @@ namespace FlagSync.Core.FileSystem.Virtual
         {
             throw new NotImplementedException();
         }
+
+        public string CombinePath(string path1, string path2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

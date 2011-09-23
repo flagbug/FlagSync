@@ -284,6 +284,11 @@ namespace FlagSync.Core.FileSystem.ITunes
             return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
         }
 
+        public string CombinePath(string path1, string path2)
+        {
+            throw new NotSupportedException();
+        }
+
         /// <summary>
         /// Maps the specified iTunes playlist to a directory structure.
         /// </summary>

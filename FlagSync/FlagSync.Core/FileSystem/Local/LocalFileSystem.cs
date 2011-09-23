@@ -79,7 +79,7 @@ namespace FlagSync.Core.FileSystem.Local
 
             try
             {
-                Directory.CreateDirectory(Path.Combine(targetDirectory.FullName, sourceDirectory.Name));
+                Directory.CreateDirectory(this.CombinePath(targetDirectory.FullName, sourceDirectory.Name));
 
                 succeed = true;
             }
@@ -190,7 +190,7 @@ namespace FlagSync.Core.FileSystem.Local
             {
                 using (Stream sourceStream = sourceFileSystem.OpenFileStream(sourceFile))
                 {
-                    string targetFilePath = Path.Combine(targetDirectory.FullName, sourceFile.Name);
+                    string targetFilePath = this.CombinePath(targetDirectory.FullName, sourceFile.Name);
 
                     try
                     {
@@ -320,6 +320,11 @@ namespace FlagSync.Core.FileSystem.Local
                 throw new ArgumentNullException("file");
 
             return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
+        }
+
+        public string CombinePath(string path1, string path2)
+        {
+            return Path.Combine(path1, path2);
         }
     }
 }
