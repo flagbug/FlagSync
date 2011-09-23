@@ -277,6 +277,12 @@ namespace FlagSync.Core.FileSystem.Ftp
             return this.client.OpenRead(new Uri(file.FullName));
         }
 
+        /// <summary>
+        /// Combines two paths for the specific file system.
+        /// </summary>
+        /// <param name="path1">The first path.</param>
+        /// <param name="path2">The second path.</param>
+        /// <returns>The combined path.</returns>
         public string CombinePath(string path1, string path2)
         {
             return path1 + "/" + path2;

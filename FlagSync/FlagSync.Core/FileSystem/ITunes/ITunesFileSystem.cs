@@ -284,6 +284,12 @@ namespace FlagSync.Core.FileSystem.ITunes
             return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
         }
 
+        /// <summary>
+        /// Combines two paths for the specific file system.
+        /// </summary>
+        /// <param name="path1">The first path.</param>
+        /// <param name="path2">The second path.</param>
+        /// <returns>The combined path.</returns>
         public string CombinePath(string path1, string path2)
         {
             throw new NotSupportedException();

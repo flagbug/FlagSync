@@ -91,6 +91,12 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <returns></returns>
         Stream OpenFileStream(IFileInfo file);
 
+        /// <summary>
+        /// Combines two paths for the specific file system.
+        /// </summary>
+        /// <param name="path1">The first path.</param>
+        /// <param name="path2">The second path.</param>
+        /// <returns></returns>
         string CombinePath(string path1, string path2);
     }
 }
