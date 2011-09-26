@@ -227,7 +227,7 @@ namespace FlagSync.Core
         /// <param name="execute">if set to true, the operation gets executed.</param>
         private void PerformFileDeletionOperation(IFileSystem fileSystem, IFileInfo file, bool execute)
         {
-            FileDeletionEventArgs eventArgs = new FileDeletionEventArgs(file.FullName);
+            FileDeletionEventArgs eventArgs = new FileDeletionEventArgs(file.FullName, file.Length);
 
             this.OnDeletingFile(eventArgs);
 

@@ -323,9 +323,9 @@
                                 </GridViewColumn>
                                 <GridViewColumn Header="{x:Static properties:Resources.ActionGridViewColumnText}" DisplayMemberBinding="{Binding Path=Action}" Width="75" />
                                 <GridViewColumn Header="{x:Static properties:Resources.TypeGridViewColumnText}" DisplayMemberBinding="{Binding Path=Type}" Width="75" />
+                                <GridViewColumn Header="{x:Static properties:Resources.FileSizeGridViewColumnText}" DisplayMemberBinding="{Binding Path=FileSize}" />
                                 <GridViewColumn Header="{x:Static properties:Resources.SourceGridViewColumnText}" DisplayMemberBinding="{Binding Path=SourcePath}"/>
-                                <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" />
-                            </GridView>
+                                <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" />                            </GridView>
                         </ListView.View>
                     </ListView>
                 </Grid>

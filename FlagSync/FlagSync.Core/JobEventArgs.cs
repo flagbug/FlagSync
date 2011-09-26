@@ -158,15 +158,24 @@ namespace FlagSync.Core
         public string FilePath { get; private set; }
 
         /// <summary>
+        /// Gets the size of the file.
+        /// </summary>
+        /// <value>
+        /// The size of the file.
+        /// </value>
+        public long FileSize { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="FileDeletionEventArgs"/> class.
         /// </summary>
         /// <param name="file">The file path.</param>
-        public FileDeletionEventArgs(string filePath)
+        public FileDeletionEventArgs(string filePath, long fileSize)
         {
             if (filePath == null)
                 throw new ArgumentNullException("filePath");
 
             this.FilePath = filePath;
+            this.FileSize = fileSize;
         }
     }
 

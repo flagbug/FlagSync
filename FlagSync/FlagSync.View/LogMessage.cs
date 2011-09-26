@@ -8,6 +8,7 @@ namespace FlagSync.View
     public class LogMessage : ViewModelBase<LogMessage>
     {
         private int progress;
+        private long? fileSize;
 
         /// <summary>
         /// Gets or sets the type (file or directory).
@@ -97,21 +98,38 @@ namespace FlagSync.View
         public bool IsErrorMessage { get; private set; }
 
         /// <summary>
+        /// Gets the size of the file.
+        /// </summary>
+        /// <value>
+        /// The size of the file.
+        /// </value>
+        public string FileSize
+        {
+            get
+            {
+                return this.fileSize.HasValue ?
+                    string.Format("{0:0.00}", this.fileSize.Value / 1024.0 / 1024.0) + " MB"
+                    : String.Empty;
+            }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="LogMessage"/> class.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="action">The action.</param>
         /// <param name="sourcePath">The source path.</param>
         /// <param name="targetPath">The target path.</param>
-        /// <param name="initialProgress">The initial progress.</param>
         /// <param name="isErrorMessage">if set to <c>true</c>, the message is a error message.</param>
-        public LogMessage(string type, string action, string sourcePath, string targetPath, bool isErrorMessage)
+        /// <param name="fileSize">Size of the file.</param>
+        public LogMessage(string type, string action, string sourcePath, string targetPath, bool isErrorMessage, long? fileSize)
         {
             this.Type = type;
             this.Action = action;
             this.SourcePath = sourcePath;
             this.TargetPath = targetPath;
             this.IsErrorMessage = isErrorMessage;
+            this.fileSize = fileSize;
         }
     }
 }

@@ -477,9 +477,9 @@ namespace FlagSync.View
         /// <param name="type">The type.</param>
         /// <param name="sourcePath">The source path.</param>
         /// <param name="targetPath">The target path.</param>
-        private void AddLogMessage(string action, string type, string sourcePath, string targetPath, bool isErrorMessage)
+        private void AddLogMessage(string action, string type, string sourcePath, string targetPath, bool isErrorMessage, long? fileSize)
         {
-            LogMessage message = new LogMessage(type, action, sourcePath, targetPath, isErrorMessage);
+            LogMessage message = new LogMessage(type, action, sourcePath, targetPath, isErrorMessage, fileSize);
             this.LogMessages.Add(message);
             this.LastLogMessage = message;
             this.LastLogMessageIndex = this.LogMessages.Count;
@@ -558,7 +558,7 @@ namespace FlagSync.View
         private void jobWorker_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
         {
             this.DeleteLastLogMessage();
-            this.AddLogMessage(Properties.Resources.DeletionErrorString, Properties.Resources.FileString, e.File.FullName, String.Empty, true);
+            this.AddLogMessage(Properties.Resources.DeletionErrorString, Properties.Resources.FileString, e.File.FullName, String.Empty, true, e.File.Length);
         }
 
         /// <summary>
@@ -569,7 +569,7 @@ namespace FlagSync.View
         private void jobWorker_FileCopyError(object sender, FileCopyErrorEventArgs e)
         {
             this.DeleteLastLogMessage();
-            this.AddLogMessage(Properties.Resources.CopyErrorString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, true);
+            this.AddLogMessage(Properties.Resources.CopyErrorString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, true, e.File.Length);
         }
 
         /// <summary>
@@ -580,7 +580,7 @@ namespace FlagSync.View
         private void jobWorker_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
         {
             this.DeleteLastLogMessage();
-            this.AddLogMessage(Properties.Resources.DeletionErrorString, Properties.Resources.DirectoryString, e.DirectoryPath, String.Empty, true);
+            this.AddLogMessage(Properties.Resources.DeletionErrorString, Properties.Resources.DirectoryString, e.DirectoryPath, String.Empty, true, null);
         }
 
         /// <summary>
@@ -605,7 +605,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void jobWorker_ModifyingFile(object sender, FileCopyEventArgs e)
         {
-            this.AddLogMessage(Properties.Resources.ModifyingString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, false);
+            this.AddLogMessage(Properties.Resources.ModifyingString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, false, e.File.Length);
         }
 
         /// <summary>
@@ -642,7 +642,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
         private void jobWorker_DeletingFile(object sender, FileDeletionEventArgs e)
         {
-            this.AddLogMessage(Properties.Resources.DeletingString, Properties.Resources.FileString, e.FilePath, String.Empty, false);
+            this.AddLogMessage(Properties.Resources.DeletingString, Properties.Resources.FileString, e.FilePath, String.Empty, false, e.FileSize);
         }
 
         /// <summary>
@@ -662,7 +662,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         private void jobWorker_DeletingDirectory(object sender, DirectoryDeletionEventArgs e)
         {
-            this.AddLogMessage(Properties.Resources.DeletingString, Properties.Resources.DirectoryString, e.DirectoryPath, String.Empty, false);
+            this.AddLogMessage(Properties.Resources.DeletingString, Properties.Resources.DirectoryString, e.DirectoryPath, String.Empty, false, null);
         }
 
         /// <summary>
@@ -682,7 +682,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void jobWorker_CreatingFile(object sender, FileCopyEventArgs e)
         {
-            this.AddLogMessage(Properties.Resources.CreatingString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, false);
+            this.AddLogMessage(Properties.Resources.CreatingString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, false, e.File.Length);
         }
 
         /// <summary>
@@ -702,7 +702,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         private void jobWorker_CreatingDirectory(object sender, DirectoryCreationEventArgs e)
         {
-            this.AddLogMessage(Properties.Resources.CreatingString, Properties.Resources.DirectoryString, e.Directory.FullName, e.TargetDirectory.FullName, false);
+            this.AddLogMessage(Properties.Resources.CreatingString, Properties.Resources.DirectoryString, e.Directory.FullName, e.TargetDirectory.FullName, false, null);
         }
 
         /// <summary>

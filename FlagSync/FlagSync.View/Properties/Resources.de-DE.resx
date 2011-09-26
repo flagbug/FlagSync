@@ -405,4 +405,7 @@
   <data name="iTunesErrorMessageBoxText" xml:space="preserve">
     <value>Bitte zuerst iTunes öffnen!</value>
   </data>
+  <data name="FileSizeGridViewColumnText" xml:space="preserve">
+    <value>Dateigröße</value>
+  </data>
 </root>
