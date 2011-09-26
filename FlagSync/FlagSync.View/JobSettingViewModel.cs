@@ -274,7 +274,7 @@ namespace FlagSync.View
                 {
                     case Core.SyncMode.LocalBackup:
                     case Core.SyncMode.LocalSynchronization:
-                        if ((name == ReflectionUtilities.GetMemberName(() => this.DirectoryA) && !Directory.Exists(this.DirectoryA)))
+                        if ((name == Reflector.GetMemberName(() => this.DirectoryA) && !Directory.Exists(this.DirectoryA)))
                         {
                             result = Properties.Resources.DirectoryDoesntExistMessage;
                         }
@@ -282,19 +282,19 @@ namespace FlagSync.View
                         break;
 
                     case Core.SyncMode.ITunes:
-                        if (name == ReflectionUtilities.GetMemberName(() => this.ITunesPlaylist) && string.IsNullOrEmpty(this.ITunesPlaylist))
+                        if (name == Reflector.GetMemberName(() => this.ITunesPlaylist) && string.IsNullOrEmpty(this.ITunesPlaylist))
                         {
                             result = Properties.Resources.SelectPlaylistErrorMessage;
                         }
                         break;
                 }
 
-                if (name == ReflectionUtilities.GetMemberName(() => this.DirectoryB) && !Directory.Exists(this.DirectoryB))
+                if (name == Reflector.GetMemberName(() => this.DirectoryB) && !Directory.Exists(this.DirectoryB))
                 {
                     result = Properties.Resources.DirectoryDoesntExistMessage;
                 }
 
-                if (name == ReflectionUtilities.GetMemberName(() => this.Name) && this.Name == String.Empty)
+                if (name == Reflector.GetMemberName(() => this.Name) && this.Name == String.Empty)
                 {
                     result = Properties.Resources.NameFieldCantBeEmptyMessage;
                 }

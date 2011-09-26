@@ -4,313 +4,6 @@
         <name>FlagLib</name>
     </assembly>
     <members>
-        <member name="T:FlagLib.Console.Drawing.Shape">
-            <summary>
-            Base class for rectangles, lines, etc...
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.Shape.#ctor(FlagLib.Measure.Position,System.Char)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Drawing.Shape"/> class.
-            </summary>
-            <param name="position">The position.</param>
-            <param name="token">The token.</param>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.Shape.Draw">
-            <summary>
-            Draws the shape.
-            </summary>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.Shape.ForegroundColor">
-            <summary>
-            Gets or sets the fore color.
-            </summary>
-            <value>The fore color.</value>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.Shape.BackgroundColor">
-            <summary>
-            Gets or sets the back color.
-            </summary>
-            <value>The back color.</value>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.Shape.Position">
-            <summary>
-            Gets or sets the position.
-            </summary>
-            <value>The position.</value>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.Shape.Token">
-            <summary>
-            Gets or sets the token.
-            </summary>
-            <value>The token.</value>
-        </member>
-        <member name="T:FlagLib.Console.Drawing.IArea">
-            <summary>
-            Represents the area of a shape
-            </summary>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.IArea.Area">
-            <summary>
-            Gets the area.
-            </summary>
-            <value>The area.</value>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.Rectangle.#ctor(FlagLib.Measure.Position,FlagLib.Measure.Size,System.Char,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Drawing.Rectangle"/> class.
-            </summary>
-            <param name="position">The position.</param>
-            <param name="size">The size.</param>
-            <param name="token">The token.</param>
-            <param name="filled">if set to <c>true</c>, the rectangle is filled.</param>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.Rectangle.Draw">
-            <summary>
-            Draws this rectangle.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.Rectangle.DrawFilledRectangle">
-            <summary>
-            Draws a filled rectangle.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.Rectangle.DrawUnfilledRectangle">
-            <summary>
-            Draws a unfilled rectangle.
-            </summary>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.Rectangle.IsFilled">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:FlagLib.Console.Drawing.Rectangle"/> is filled.
-            </summary>
-            <value><c>true</c> if filled; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.Rectangle.Size">
-            <summary>
-            Gets or sets the size.
-            </summary>
-            <value>The size.</value>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.Rectangle.Area">
-            <summary>
-            Gets the area.
-            </summary>
-            <value>The area.</value>
-        </member>
-        <member name="T:FlagLib.Console.Controls.MenuEventArgs`1">
-            <summary>
-            Provides data for the events that are raised by the <see cref="!:Menu"/> class
-            </summary>
-            <typeparam name="T">Type of the MenuItem</typeparam>
-        </member>
-        <member name="M:FlagLib.Console.Controls.MenuEventArgs`1.#ctor(FlagLib.Console.Controls.MenuItem{`0})">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Controls.MenuEventArgs`1"/> class.
-            </summary>
-            <param name="item">The item.</param>
-        </member>
-        <member name="P:FlagLib.Console.Controls.MenuEventArgs`1.Item">
-            <summary>
-            Gets the item.
-            </summary>
-            <value>The item.</value>
-        </member>
-        <member name="T:FlagLib.Console.Controls.Menu`1">
-            <summary>
-            Provides a text-based menu in the console, where the user can select an item
-            </summary>
-            <typeparam name="T">Type of the item that the user can select</typeparam>
-        </member>
-        <member name="T:FlagLib.Console.Controls.Control">
-            <summary>
-            Base class for all controls
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Control.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Controls.Control"/> class.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Control.Update">
-            <summary>
-            Updates the control if visible is set to true.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Control.Draw">
-            <summary>
-            Draws the control.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Control.Clear">
-            <summary>
-            Clears the control's area.
-            </summary>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Control.Parent">
-            <summary>
-            Gets or sets the parent control.
-            </summary>
-            <value>The parent control.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Control.Top">
-            <summary>
-            Gets the top control (the screen).
-            </summary>
-            <value>The top control.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Control.RelativePosition">
-            <summary>
-            Gets or sets the relative position to the parent container.
-            </summary>
-            <value>The relative position to the parent container.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Control.AbsolutePosition">
-            <summary>
-            Gets the absolute position to the console.
-            </summary>
-            <value>The absolute position to the console.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Control.Size">
-            <summary>
-            Gets or sets the size of the control.
-            </summary>
-            <value>The size of the control.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Control.IsVisible">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:FlagLib.Console.Controls.Control"/> is visible.
-            </summary>
-            <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="T:FlagLib.Console.Controls.IFocusable">
-            <summary>
-            Provides methods for focusable controls
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.IFocusable.Focus">
-            <summary>
-            Focuses the control and executes it's behaviour (e.g the selection of a menu or the input of a textfield)
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.IFocusable.Defocus">
-            <summary>
-            Defocuses the control and stopps it's behaviour.
-            </summary>
-        </member>
-        <member name="P:FlagLib.Console.Controls.IFocusable.IsFocused">
-            <summary>
-            Gets a value indicating whether this <see cref="T:FlagLib.Console.Controls.IFocusable"/> is focused.
-            </summary>
-            <value>true if focused; otherwise, false.</value>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Menu`1.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Controls.Menu`1"/> class.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Menu`1.Draw">
-            <summary>
-            Draws the control.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Menu`1.Focus">
-            <summary>
-            Focuses the control and executes it's behaviour (e.g the selection of a menu or the input of a textfield)
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Menu`1.Defocus">
-            <summary>
-            Defocuses the control and stopps it's behaviour.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Menu`1.ScanInput">
-            <summary>
-            Scans the input (after the item got focused).
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Menu`1.OnItemChosen(FlagLib.Console.Controls.MenuEventArgs{`0})">
-            <summary>
-            Raises the <see cref="E:ItemChosen"/> event.
-            </summary>
-            <param name="e">The <see cref="T:FlagLib.Console.Controls.MenuEventArgs`1"/> instance containing the event data.</param>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Menu`1.OnSelectionChanged(FlagLib.Console.Controls.MenuEventArgs{`0})">
-            <summary>
-            Raises the <see cref="E:SelectionChanged"/> event.
-            </summary>
-            <param name="e">The <see cref="T:FlagLib.Console.Controls.MenuEventArgs`1"/> instance containing the event data.</param>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.Items">
-            <summary>
-            Gets the items.
-            </summary>
-            <value>The items.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.SelectedIndex">
-            <summary>
-            Gets or sets the index of the selected.
-            </summary>
-            <value>The index of the selected.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.SelectedItem">
-            <summary>
-            Gets the selected item.
-            </summary>
-            <value>The selected item.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.UpKey">
-            <summary>
-            Gets or sets up key.
-            </summary>
-            <value>Up key.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.DownKey">
-            <summary>
-            Gets or sets down key.
-            </summary>
-            <value>Down key.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.ForegroundColor">
-            <summary>
-            Gets or sets the color of the foreground.
-            </summary>
-            <value>The color of the foreground.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.BackgroundColor">
-            <summary>
-            Gets or sets the color of the background.
-            </summary>
-            <value>The color of the background.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.SelectionBackgroundColor">
-            <summary>
-            Gets or sets the color of the selection background.
-            </summary>
-            <value>The color of the selection background.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.SelectionForegroundColor">
-            <summary>
-            Gets or sets the color of the selection foreground.
-            </summary>
-            <value>The color of the selection foreground.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Menu`1.IsFocused">
-            <summary>
-            Gets a value indicating whether this <see cref="T:FlagLib.Console.Controls.IFocusable"/> is focused.
-            </summary>
-            <value>true if focused; otherwise, false.</value>
-        </member>
-        <member name="E:FlagLib.Console.Controls.Menu`1.ItemChosen">
-            <summary>
-            Occurs when a item has been chosen.
-            </summary>
-        </member>
-        <member name="E:FlagLib.Console.Controls.Menu`1.SelectionChanged">
-            <summary>
-            Occurs when the selection has been changed.
-            </summary>
-        </member>
         <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/> class.
@@ -452,8 +145,17 @@
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.Collections.Grid`1"/> class.
             </summary>
-            <param name="rows">The row count.</param>
             <param name="columns">The column count.</param>
+            <param name="rows">The row count.</param>
+        </member>
+        <member name="M:FlagLib.Collections.Grid`1.Traverse(System.Action{System.Int32,System.Int32})">
+            <summary>
+            Traverses each row of the grid item per item from the origin and executes the specified action.
+            </summary>
+            <param name="action">
+            The action to execute, the first argument is the current column,
+            the second argument is the current row.
+            </param>
         </member>
         <member name="M:FlagLib.Collections.Grid`1.GetEnumerator">
             <summary>
@@ -471,15 +173,12 @@
             An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
             </returns>
         </member>
-        <member name="P:FlagLib.Collections.Grid`1.RowCount">
+        <member name="P:FlagLib.Collections.Grid`1.Rows">
             <summary>
-            Gets the total amount of rows.
+            Gets the height of the grid.
             </summary>
-            <value>
-            The total amount of rows.
-            </value>
         </member>
-        <member name="P:FlagLib.Collections.Grid`1.ColumnCount">
+        <member name="P:FlagLib.Collections.Grid`1.Columns">
             <summary>
             Gets the total amount of columns.
             </summary>
@@ -497,7 +196,7 @@
         </member>
         <member name="P:FlagLib.Collections.Grid`1.Item(System.Int32,System.Int32)">
             <summary>
-            Gets or sets the element at the specified row and column.
+            Gets or sets the element at the specified column and row.
             </summary>
         </member>
         <member name="P:FlagLib.Collections.Grid`1.Item(System.Int32)">
@@ -505,71 +204,13 @@
             Gets or sets the element at the specified index.
             </summary>
         </member>
-        <member name="T:FlagLib.Console.Controls.TextField">
+        <member name="M:FlagLib.Reflection.Reflector.GetMemberName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
             <summary>
-            Provides a text field where the user can do an input
+            Gets the name of a member which is passed via the expression.
             </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.TextField.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Controls.TextField"/> class.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.TextField.Focus">
-            <summary>
-            Focuses the control and executes it's behaviour (e.g the selection of a menu or the input of a textfield)
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.TextField.Draw">
-            <summary>
-            Draws the control.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.TextField.OnInputEntered(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:InputEntered"/> event.
-            </summary>
-            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
-        </member>
-        <member name="M:FlagLib.Console.Controls.TextField.ScanInput">
-            <summary>
-            Scans the input.
-            </summary>
-        </member>
-        <member name="P:FlagLib.Console.Controls.TextField.ForegroundColor">
-            <summary>
-            Gets or sets the color of the foreground.
-            </summary>
-            <value>The color of the foreground.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.TextField.BackgroundColor">
-            <summary>
-            Gets or sets the color of the background.
-            </summary>
-            <value>The color of the background.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.TextField.Input">
-            <summary>
-            Gets the input.
-            </summary>
-            <value>The input.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.TextField.Length">
-            <summary>
-            Gets or sets the length of the text field.
-            </summary>
-            <value>The length of the text field.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.TextField.IsFocused">
-            <summary>
-            Gets a value indicating whether this <see cref="T:FlagLib.Console.Controls.IFocusable"/> is focused.
-            </summary>
-            <value>true if focused; otherwise, false.</value>
-        </member>
-        <member name="E:FlagLib.Console.Controls.TextField.InputEntered">
-            <summary>
-            Occurs when the input has been entered.
-            </summary>
+            <typeparam name="T">Type of the member.</typeparam>
+            <param name="expression">The expression which contains the member.</param>
+            <returns>The members name.</returns>
         </member>
         <member name="T:FlagLib.ValueConverters.CombiningConverter">
             <summary>
@@ -600,7 +241,7 @@
             A converted value. If the method returns null, the valid null value is used.
             </returns>
         </member>
-        <member name="M:FlagLib.IO.DirectoryScanErrorEventArgs.#ctor(System.String,FlagLib.IO.DirectoryScanErrorEventArgs.DirectoryScanErrorType)">
+        <member name="M:FlagLib.IO.DirectoryScanErrorEventArgs.#ctor(System.String,FlagLib.IO.DirectoryScanErrorType)">
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.IO.DirectoryScanErrorEventArgs"/> class.
             </summary>
@@ -623,55 +264,13 @@
             The directory path.
             </value>
         </member>
-        <member name="M:FlagLib.Extensions.ClassExtensions.ThrowIfIsNull``1(``0,System.String)">
+        <member name="M:FlagLib.Extensions.ClassExtensions.ThrowIfNull``1(``0,System.String)">
             <summary>
             Throws an <see cref="T:System.ArgumentNullException"/> if the object is null.
             </summary>
             <typeparam name="T"></typeparam>
             <param name="object">The object.</param>
             <param name="parameterName">Name of the parameter.</param>
-        </member>
-        <member name="T:FlagLib.Console.Drawing.Line">
-            <summary>
-            Base class for lines (horizontal line and vertical line)
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.Line.#ctor(FlagLib.Measure.Position,System.Int32,System.Char)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Drawing.Line"/> class.
-            </summary>
-            <param name="position">The position.</param>
-            <param name="length">The lenght.</param>
-            <param name="token">The token.</param>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.Line.Length">
-            <summary>
-            Gets or sets the lenght.
-            </summary>
-            <value>The lenght.</value>
-        </member>
-        <member name="P:FlagLib.Console.Drawing.Line.Area">
-            <summary>
-            Gets the area.
-            </summary>
-            <value>The area.</value>
-        </member>
-        <member name="T:FlagLib.Console.Controls.ListView`1">
-            <summary>
-            Provides a list view, that displays items in a table with one column
-            </summary>
-            <typeparam name="T">Type of the item that gets displayed</typeparam>
-        </member>
-        <member name="M:FlagLib.Console.Controls.ListView`1.Draw">
-            <summary>
-            Draws the control.
-            </summary>
-        </member>
-        <member name="P:FlagLib.Console.Controls.ListView`1.Items">
-            <summary>
-            Gets the items.
-            </summary>
-            <value>The items.</value>
         </member>
         <member name="M:FlagLib.IO.FileEventArgs.#ctor(System.IO.FileInfo)">
             <summary>
@@ -687,196 +286,12 @@
             The file.
             </value>
         </member>
-        <member name="T:FlagLib.Measure.Position">
-            <summary>
-            Provides a mutable Position, which encapsulates a x and y coordinate
-            </summary>
-        </member>
-        <member name="M:FlagLib.Measure.Position.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Measure.Position"/> class with the coordinates (0|0).
-            </summary>
-        </member>
-        <member name="M:FlagLib.Measure.Position.#ctor(System.Int32,System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Measure.Position"/> class.
-            </summary>
-            <param name="x">The x coordinate</param>
-            <param name="y">The y coordinate</param>
-        </member>
-        <member name="M:FlagLib.Measure.Position.Clone">
-            <summary>
-            Creates a new object that is a copy of the current instance.
-            </summary>
-            <returns>
-            A new object that is a copy of this instance.
-            </returns>
-        </member>
-        <member name="M:FlagLib.Measure.Position.ToSystemDrawingPoint">
-            <summary>
-            Converts the <see cref="T:FlagLib.Measure.Position"/> to a <see cref="T:System.Drawing.Point"/>.
-            </summary>
-            <returns>A <see cref="T:System.Drawing.Point"/></returns>
-        </member>
-        <member name="M:FlagLib.Measure.Position.Add(FlagLib.Measure.Position)">
-            <summary>
-            Adds the specified position.
-            </summary>
-            <param name="position">The position.</param>
-            <returns></returns>
-        </member>
-        <member name="M:FlagLib.Measure.Position.op_Addition(FlagLib.Measure.Position,FlagLib.Measure.Position)">
-            <summary>
-            Implements the operator +.
-            </summary>
-            <param name="positionA">The position A.</param>
-            <param name="positionB">The position B.</param>
-            <returns>The result of the operator.</returns>
-        </member>
-        <member name="M:FlagLib.Measure.Position.op_Equality(FlagLib.Measure.Position,FlagLib.Measure.Position)">
-            <summary>
-            Implements the operator ==.
-            </summary>
-            <param name="positionA">The position A.</param>
-            <param name="positionB">The position B.</param>
-            <returns>The result of the operator.</returns>
-        </member>
-        <member name="M:FlagLib.Measure.Position.op_Inequality(FlagLib.Measure.Position,FlagLib.Measure.Position)">
-            <summary>
-            Implements the operator !=.
-            </summary>
-            <param name="positionA">The position A.</param>
-            <param name="positionB">The position B.</param>
-            <returns>The result of the operator.</returns>
-        </member>
-        <member name="M:FlagLib.Measure.Position.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
-            <returns>
-            	<c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-            </returns>
-            <exception cref="T:System.NullReferenceException">
-            The <paramref name="obj"/> parameter is null.
-            </exception>
-        </member>
-        <member name="M:FlagLib.Measure.Position.GetHashCode">
-            <summary>
-            Returns a hash code for this instance.
-            </summary>
-            <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-            </returns>
-        </member>
-        <member name="P:FlagLib.Measure.Position.X">
-            <summary>
-            Gets or sets the x coordinate
-            </summary>
-        </member>
-        <member name="P:FlagLib.Measure.Position.Y">
-            <summary>
-            Gets or sets the y coordinate
-            </summary>
-        </member>
-        <member name="T:FlagLib.Console.Drawing.VerticalLine">
-            <summary>
-            Represents a vertical line
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.VerticalLine.Draw">
-            <summary>
-            Draws the line.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.VerticalLine.#ctor(FlagLib.Measure.Position,System.Int32,System.Char)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Drawing.VerticalLine"/> class.
-            </summary>
-            <param name="position">The position.</param>
-            <param name="length">The lenght.</param>
-            <param name="token">The token.</param>
-        </member>
-        <member name="T:FlagLib.Console.Controls.Panel">
-            <summary>
-            Provides a <see cref="T:FlagLib.Console.Controls.Panel"/> that can contain controls
-            </summary>
-        </member>
-        <member name="T:FlagLib.Console.Controls.Container">
-            <summary>
-            Base class for all containers
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Container.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Controls.Container"/> class.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Container.Update">
-            <summary>
-            Updates the container and it's child controls if visible is set to true.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Container.controls_BeforeListCleared(System.Object,System.EventArgs)">
-            <summary>
-            Handles the BeforeListCleared event of the controls control.
-            </summary>
-            <param name="sender">The source of the event.</param>
-            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Container.controls_ItemRemoved(System.Object,FlagLib.Collections.EventCollectionEventArgs{FlagLib.Console.Controls.Control})">
-            <summary>
-            Handles the ItemRemoved event of the controls control.
-            </summary>
-            <param name="sender">The source of the event.</param>
-            <param name="e">The <see cref="!:FlagLib.Collections.EventCollectionEventArgs&lt;FlagLib.Console.Controls.Control&gt;"/> instance containing the event data.</param>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Container.controls_ItemAdded(System.Object,FlagLib.Collections.EventCollectionEventArgs{FlagLib.Console.Controls.Control})">
-            <summary>
-            Handles the ItemAdded event of the controls control.
-            </summary>
-            <param name="sender">The source of the event.</param>
-            <param name="e">The <see cref="!:FlagLib.Collections.EventCollectionEventArgs&lt;FlagLib.Console.Controls.Control&gt;"/> instance containing the event data.</param>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Container.Controls">
-            <summary>
-            Gets the underlying controls.
-            </summary>
-            <value>The underlying controls.</value>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Panel.Draw">
-            <summary>
-            Draws the control.
-            </summary>
-        </member>
-        <member name="T:FlagLib.Console.Controls.MenuItem`1">
-            <summary>
-            An menu item for selection
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.MenuItem`1.#ctor(System.String,`0)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Controls.MenuItem`1"/> class.
-            </summary>
-            <param name="name">The name.</param>
-            <param name="value">The value.</param>
-        </member>
-        <member name="P:FlagLib.Console.Controls.MenuItem`1.Name">
-            <summary>
-            Gets or sets the name which is displayed in the menu.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.MenuItem`1.Value">
-            <summary>
-            Value of the item, returned when the user selects an item
-            </summary>
-        </member>
         <member name="T:FlagLib.Collections.EventCollection`1">
             <summary>
-            Represents a generic <see cref="T:FlagLib.Collections.EventCollection`1"/> which raises events when items are added and deleted
+            Represents a generic <see cref="T:FlagLib.Collections.EventCollection`1"/> which raises <para/>
+            events when items are added and deleted.
             </summary>
-            <typeparam name="T">Type of the elements in the <see cref="T:FlagLib.Collections.EventCollection`1"/></typeparam>
+            <typeparam name="T">The type of the elements in the <see cref="T:FlagLib.Collections.EventCollection`1"/></typeparam>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.#ctor">
             <summary>
@@ -1091,14 +506,6 @@
             Occurs before the list has been cleared.
             </summary>
         </member>
-        <member name="M:FlagLib.Reflection.ReflectionUtilities.GetMemberName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
-            <summary>
-            Gets the name of a member which is passed via the expression.
-            </summary>
-            <typeparam name="T">Type of the member.</typeparam>
-            <param name="expression">The expression which contains the member.</param>
-            <returns>The members name.</returns>
-        </member>
         <member name="F:FlagLib.IO.FileCopyOperation.CallbackChunkFinished">
             <summary>
             Callback reason passed as dwCallbackReason in CopyProgressRoutine.
@@ -1272,7 +679,7 @@
             The deserialized item.
             </returns>
         </member>
-        <member name="M:FlagLib.Extensions.IntegerExtensions.ThrowIfIsGreaterThan(System.Int32,System.Int32,System.String)">
+        <member name="M:FlagLib.Extensions.IntegerExtensions.ThrowIfGreaterThan(System.Int32,System.Int32,System.String)">
             <summary>
             Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is greater than the limit.
             </summary>
@@ -1280,29 +687,13 @@
             <param name="limit">The limit.</param>
             <param name="parameterName">Name of the parameter.</param>
         </member>
-        <member name="M:FlagLib.Extensions.IntegerExtensions.ThrowIfIsLessThan(System.Int32,System.Int32,System.String)">
+        <member name="M:FlagLib.Extensions.IntegerExtensions.ThrowIfLessThan(System.Int32,System.Int32,System.String)">
             <summary>
             Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is less than the limit.
             </summary>
             <param name="value">The value.</param>
             <param name="limit">The limit.</param>
             <param name="parameterName">Name of the parameter.</param>
-        </member>
-        <member name="T:FlagLib.Console.Controls.Label">
-            <summary>
-            Represents a label that can show a text
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Label.Draw">
-            <summary>
-            Draws the control.
-            </summary>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Label.Text">
-            <summary>
-            Gets or sets the text.
-            </summary>
-            <value>The text.</value>
         </member>
         <member name="T:FlagLib.Collections.EventCollectionEventArgs`1">
             <summary>
@@ -1346,24 +737,6 @@
             <value>
             The found directory.
             </value>
-        </member>
-        <member name="T:FlagLib.Console.Drawing.HorizontalLine">
-            <summary>
-            Represents a horizontal line
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.HorizontalLine.Draw">
-            <summary>
-            Draws the line.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Drawing.HorizontalLine.#ctor(FlagLib.Measure.Position,System.Int32,System.Char)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Console.Drawing.HorizontalLine"/> class.
-            </summary>
-            <param name="position">The position.</param>
-            <param name="length">The lenght.</param>
-            <param name="token">The token.</param>
         </member>
         <member name="T:FlagLib.Patterns.ViewModelBase`1">
             <summary>
@@ -1457,69 +830,6 @@
             Gets the target stream.
             </summary>
         </member>
-        <member name="T:FlagLib.Measure.Size">
-            <summary>
-            Provides a mutable size, which encapsulates a width and a lenght
-            </summary>
-        </member>
-        <member name="M:FlagLib.Measure.Size.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Measure.Size"/> class.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Measure.Size.#ctor(System.Int32,System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Measure.Size"/> class.
-            </summary>
-            <param name="width">The width.</param>
-            <param name="height">The height.</param>
-        </member>
-        <member name="M:FlagLib.Measure.Size.Clone">
-            <summary>
-            Creates a new object that is a copy of the current instance.
-            </summary>
-            <returns>
-            A new object that is a copy of this instance.
-            </returns>
-        </member>
-        <member name="M:FlagLib.Measure.Size.ToSystemDrawingSize">
-            <summary>
-            Converts the <see cref="T:FlagLib.Measure.Size"/> to a <see cref="T:System.Drawing.Size"/>.
-            </summary>
-            <returns>A <see cref="T:System.Drawing.Size"/></returns>
-        </member>
-        <member name="M:FlagLib.Measure.Size.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
-            <returns>
-            	<c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-            </returns>
-            <exception cref="T:System.NullReferenceException">
-            The <paramref name="obj"/> parameter is null.
-            </exception>
-        </member>
-        <member name="M:FlagLib.Measure.Size.GetHashCode">
-            <summary>
-            Returns a hash code for this instance.
-            </summary>
-            <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-            </returns>
-        </member>
-        <member name="P:FlagLib.Measure.Size.Height">
-            <summary>
-            Gets or sets the height.
-            </summary>
-            <value>The height.</value>
-        </member>
-        <member name="P:FlagLib.Measure.Size.Width">
-            <summary>
-            Gets or sets the width.
-            </summary>
-            <value>The width.</value>
-        </member>
         <member name="T:FlagLib.IO.DirectoryScanner">
             <summary>
             Provides a directoy scanner to scan a directory recursively for files
@@ -1529,7 +839,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.IO.DirectoryScanner"/> class.
             </summary>
-            <param name="path">The path of the directory to search.</param>
+            <param name="path">The path of the directory to scan.</param>
         </member>
         <member name="M:FlagLib.IO.DirectoryScanner.Start">
             <summary>
@@ -1635,22 +945,22 @@
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.IO.CopyProgressEventArgs"/> class.
             </summary>
-            <param name="totalBytes">The total bytes.</param>
-            <param name="copiedBytes">The total copied bytes.</param>
+            <param name="totalBytes">The total number of bytes.</param>
+            <param name="copiedBytes">The number of copied bytes.</param>
         </member>
         <member name="P:FlagLib.IO.CopyProgressEventArgs.TotalBytes">
             <summary>
-            Gets the total byte number.
+            Gets the total numer of bytes.
             </summary>
         </member>
         <member name="P:FlagLib.IO.CopyProgressEventArgs.TotalCopiedBytes">
             <summary>
-            Gets the total copied bytes.
+            Gets the number of copied bytes.
             </summary>
         </member>
         <member name="P:FlagLib.IO.CopyProgressEventArgs.AverageSpeed">
             <summary>
-            Gets the average speed.
+            Gets the average speed in bytes per second.
             </summary>
         </member>
         <member name="P:FlagLib.IO.CopyProgressEventArgs.Cancel">
@@ -1691,29 +1001,6 @@
             <returns>
             	<c>true</c> if the specified value contains any of the specified items; otherwise, <c>false</c>.
             </returns>
-        </member>
-        <member name="T:FlagLib.Console.Controls.Screen">
-            <summary>
-            Top container, equals the <see cref="!:System.Windows.Forms.Form"/> class. <para/>
-            Every control and container should be placed here
-            </summary>
-        </member>
-        <member name="M:FlagLib.Console.Controls.Screen.Draw">
-            <summary>
-            Draws the control.
-            </summary>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Screen.AbsolutePosition">
-            <summary>
-            Gets the absolute position to the console.
-            </summary>
-            <value>The absolute position to the console.</value>
-        </member>
-        <member name="P:FlagLib.Console.Controls.Screen.Top">
-            <summary>
-            Gets the top control (the screen).
-            </summary>
-            <value>The top control.</value>
         </member>
         <member name="T:FlagLib.Collections.SerializableDictionary`2">
             <summary>
