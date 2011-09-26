@@ -324,23 +324,6 @@
                                 <GridViewColumn Header="{x:Static properties:Resources.ActionGridViewColumnText}" DisplayMemberBinding="{Binding Path=Action}" Width="75" />
                                 <GridViewColumn Header="{x:Static properties:Resources.TypeGridViewColumnText}" DisplayMemberBinding="{Binding Path=Type}" Width="75" />
                                 <GridViewColumn Header="{x:Static properties:Resources.SourceGridViewColumnText}" DisplayMemberBinding="{Binding Path=SourcePath}"/>
-                                <!--
-                                <GridViewColumn Header="{x:Static properties:Resources.ProgressGridViewColumnText}" Width="125">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" Width="100" >
-                                                <Grid>
-                                                    <ProgressBar Width="100" Height="15" Value="{Binding Path=Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                                        <TextBlock Text="{Binding Path=Progress}" Background="Transparent" />
-                                                        <TextBlock Text="%" Background="Transparent" />
-                                                    </StackPanel>
-                                                </Grid>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                -->
                                 <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" />
                             </GridView>
                         </ListView.View>
