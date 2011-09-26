@@ -107,9 +107,27 @@ namespace FlagSync.View
         {
             get
             {
-                return this.fileSize.HasValue ?
-                    string.Format("{0:0.00}", this.fileSize.Value / 1024.0 / 1024.0) + " MB"
-                    : String.Empty;
+                if (this.fileSize.HasValue)
+                {
+                    string[] suffix = { "B", "KB", "MB", "GB", "TB" };
+                    int i;
+                    double dblSByte = this.fileSize.Value;
+
+                    for (i = 0; (int)(this.fileSize / 1024) > 0; i++, this.fileSize /= 1024)
+                    {
+                        dblSByte = this.fileSize.Value / 1024.0;
+                    }
+
+                    //Bytes shouldn't have decimal places
+                    string format = i == 0 ? "{0} {1}" : "{0:0.00} {1}";
+
+                    return String.Format(format, dblSByte, suffix[i]);
+                }
+
+                else
+                {
+                    return String.Empty;
+                }
             }
         }
 
