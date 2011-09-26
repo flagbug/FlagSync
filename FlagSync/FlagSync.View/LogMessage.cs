@@ -109,13 +109,16 @@ namespace FlagSync.View
             {
                 if (this.fileSize.HasValue)
                 {
+                    // We have to create a temporary local variable here,
+                    // so that we can work with the value without modifying it's original
+                    long fileSize = this.fileSize.Value;
                     string[] suffix = { "B", "KB", "MB", "GB", "TB" };
                     int i;
-                    double dblSByte = this.fileSize.Value;
+                    double dblSByte = fileSize;
 
-                    for (i = 0; (int)(this.fileSize / 1024) > 0; i++, this.fileSize /= 1024)
+                    for (i = 0; (int)(fileSize / 1024) > 0; i++, fileSize /= 1024)
                     {
-                        dblSByte = this.fileSize.Value / 1024.0;
+                        dblSByte = fileSize / 1024.0;
                     }
 
                     //Bytes shouldn't have decimal places
