@@ -81,7 +81,7 @@ namespace FlagSync.View
             }
         }
 
-        public ICommand DeleteSelectedJobSetting
+        public ICommand DeleteSelectedJobSettingCommand
         {
             get
             {

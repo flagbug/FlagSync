@@ -158,26 +158,6 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Handles the Click event of the pauseButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void pauseButton_Click(object sender, RoutedEventArgs e)
-        {
-            bool isJobWorkerPaused = this.mainViewModel.JobWorkerViewModel.IsPaused;
-
-            if (isJobWorkerPaused)
-            {
-                this.mainViewModel.JobWorkerViewModel.ContinueJobWorker();
-            }
-
-            else
-            {
-                this.mainViewModel.JobWorkerViewModel.PauseJobWorker();
-            }
-        }
-
-        /// <summary>
         /// Handles the Click event of the stopButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>

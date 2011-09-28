@@ -100,7 +100,7 @@
                     <MenuItem Name="englishMenuItem" Header="{x:Static properties:Resources.EnglishString}" Click="englishMenuItem_Click" />
                     <MenuItem Name="germanMenuItem" Header="{x:Static properties:Resources.GermanString}" Click="germanMenuItem_Click" />
                 </MenuItem>
-                <MenuItem Name="exitMenuItem" Header="{x:Static properties:Resources.ExitMenuItemText}" Command="{Binding Path=ExitApplication}" />
+                <MenuItem Name="exitMenuItem" Header="{x:Static properties:Resources.ExitMenuItemText}" Command="{Binding Path=ExitApplicationCommand}" />
             </MenuItem>
             <MenuItem Header="{x:Static properties:Resources.HelpMenuItemText}">
                 <MenuItem Name="aboutMenuItem" Header="{x:Static properties:Resources.AboutString}" Click="aboutMenuItem_Click" />
@@ -184,7 +184,7 @@
                         </Grid.ColumnDefinitions>
                         <Button Content="{x:Static properties:Resources.PreviewButtonText}" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
                         <Button Content="{x:Static properties:Resources.StartButtonText}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Click="startButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
-                        <Button Content="{Binding Path=JobWorkerViewModel.PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Click="pauseButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
+                        <Button Content="{Binding Path=JobWorkerViewModel.PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Command="{Binding Path=JobWorkerViewModel.PauseOrContinueJobWorkerCommand}" />
                         <Button Content="{x:Static properties:Resources.StopButtonText}" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" Name="stopButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Click="stopButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning}" />
                     </Grid>
                 </Grid>
@@ -252,7 +252,7 @@
                                     </ContextMenu>
                                 </Button.ContextMenu>
                             </Button>
-                            <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}" Command="{Binding Path=JobSettingsViewModel.DeleteSelectedJobSetting}">
+                            <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}" Command="{Binding Path=JobSettingsViewModel.DeleteSelectedJobSettingCommand}">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="/FlagSync;component/Images/Remove.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.DeleteString}" HorizontalAlignment="Center" />

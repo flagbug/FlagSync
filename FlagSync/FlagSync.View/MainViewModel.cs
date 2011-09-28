@@ -18,16 +18,13 @@ namespace FlagSync.View
         private string appDataFolderPath;
         private string logFilePath;
 
-        public ICommand ExitApplication
+        public ICommand ExitApplicationCommand
         {
             get
             {
                 return new RelayCommand
                 (
-                    arg =>
-                    {
-                        Application.Current.Shutdown();
-                    }
+                    arg => Application.Current.Shutdown()
                 );
             }
         }

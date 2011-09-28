@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Timers;
+using System.Windows.Input;
 using FlagLib.Collections;
 using FlagLib.IO;
 using FlagLib.Patterns;
@@ -294,6 +295,32 @@ namespace FlagSync.View
         /// The current log message.
         /// </value>
         public LogMessage LastLogMessage { get; set; }
+
+        public ICommand PauseOrContinueJobWorkerCommand
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    arg =>
+                    {
+                        if (this.IsPaused)
+                        {
+                            this.ContinueJobWorker();
+                        }
+
+                        else
+                        {
+                            this.PauseJobWorker();
+                        }
+                    },
+                    arg =>
+                    {
+                        return this.IsRunning;
+                    }
+                );
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JobWorkerViewModel"/> class.
