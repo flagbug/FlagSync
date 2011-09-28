@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using FlagLib.Patterns;
 using FlagLib.Serialization;
 using FlagSync.Core;
@@ -80,6 +81,27 @@ namespace FlagSync.View
             }
         }
 
+        public ICommand DeleteSelectedJobSetting
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    arg =>
+                    {
+                        this.JobSettings.Remove(this.SelectedJobSetting);
+
+                        if (this.JobSettings.Count == 0)
+                        {
+                            this.AddNewJobSetting(SyncMode.LocalBackup);
+                        }
+
+                        this.SelectedJobSetting = this.JobSettings.Last();
+                    }
+                );
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="JobSettingsViewModel"/> class.
         /// </summary>
@@ -101,21 +123,6 @@ namespace FlagSync.View
             setting.SyncMode = mode;
 
             this.JobSettings.Add(setting);
-        }
-
-        /// <summary>
-        /// Deletes the selected job setting.
-        /// </summary>
-        public void DeleteSelectedJobSetting()
-        {
-            this.JobSettings.Remove(this.SelectedJobSetting);
-
-            if (this.JobSettings.Count == 0)
-            {
-                this.AddNewJobSetting(SyncMode.LocalBackup);
-            }
-
-            this.SelectedJobSetting = this.JobSettings.Last();
         }
 
         /// <summary>

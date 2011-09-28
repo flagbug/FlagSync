@@ -252,7 +252,7 @@
                                     </ContextMenu>
                                 </Button.ContextMenu>
                             </Button>
-                            <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" Click="deleteJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}">
+                            <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}" Command="{Binding Path=JobSettingsViewModel.DeleteSelectedJobSetting}">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="/FlagSync;component/Images/Remove.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.DeleteString}" HorizontalAlignment="Center" />
@@ -325,7 +325,8 @@
                                 <GridViewColumn Header="{x:Static properties:Resources.TypeGridViewColumnText}" DisplayMemberBinding="{Binding Path=Type}" Width="75" />
                                 <GridViewColumn Header="{x:Static properties:Resources.FileSizeGridViewColumnText}" DisplayMemberBinding="{Binding Path=FileSize}" />
                                 <GridViewColumn Header="{x:Static properties:Resources.SourceGridViewColumnText}" DisplayMemberBinding="{Binding Path=SourcePath}"/>
-                                <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" />                            </GridView>
+                                <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" />
+                            </GridView>
                         </ListView.View>
                     </ListView>
                 </Grid>

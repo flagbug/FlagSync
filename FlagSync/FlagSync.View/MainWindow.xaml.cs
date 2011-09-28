@@ -83,16 +83,6 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Handles the Click event of the deleteJobButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void deleteJobButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.mainViewModel.JobSettingsViewModel.DeleteSelectedJobSetting();
-        }
-
-        /// <summary>
         /// Handles the Click event of the loadJobsButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
