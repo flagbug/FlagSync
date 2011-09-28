@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FlagLib.Extensions;
 using FlagLib.Patterns;
 
 namespace FlagSync.View
@@ -109,22 +110,7 @@ namespace FlagSync.View
             {
                 if (this.fileSize.HasValue)
                 {
-                    // We have to create a temporary local variable here,
-                    // so that we can work with the value without modifying it's original
-                    long fileSize = this.fileSize.Value;
-                    string[] suffix = { "B", "KB", "MB", "GB", "TB" };
-                    int i;
-                    double dblSByte = fileSize;
-
-                    for (i = 0; (int)(fileSize / 1024) > 0; i++, fileSize /= 1024)
-                    {
-                        dblSByte = fileSize / 1024.0;
-                    }
-
-                    //Bytes shouldn't have decimal places
-                    string format = i == 0 ? "{0} {1}" : "{0:0.00} {1}";
-
-                    return String.Format(format, dblSByte, suffix[i]);
+                    return this.fileSize.Value.ToSizeString();
                 }
 
                 else
