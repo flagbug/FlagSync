@@ -100,7 +100,7 @@
                     <MenuItem Name="englishMenuItem" Header="{x:Static properties:Resources.EnglishString}" Click="englishMenuItem_Click" />
                     <MenuItem Name="germanMenuItem" Header="{x:Static properties:Resources.GermanString}" Click="germanMenuItem_Click" />
                 </MenuItem>
-                <MenuItem Name="exitMenuItem" Header="{x:Static properties:Resources.ExitMenuItemText}" Click="exitMenuItem_Click" />
+                <MenuItem Name="exitMenuItem" Header="{x:Static properties:Resources.ExitMenuItemText}" Command="{Binding Path=ExitApplication}" />
             </MenuItem>
             <MenuItem Header="{x:Static properties:Resources.HelpMenuItemText}">
                 <MenuItem Name="aboutMenuItem" Header="{x:Static properties:Resources.AboutString}" Click="aboutMenuItem_Click" />

@@ -59,16 +59,6 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Handles the Click event of the exitMenuItem control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void exitMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        /// <summary>
         /// Handles the Click event of the newJobButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>

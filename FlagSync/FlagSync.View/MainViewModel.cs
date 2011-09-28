@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Windows;
+using System.Windows.Input;
+using FlagLib.Patterns;
 using FlagSync.Core;
 
 namespace FlagSync.View
@@ -14,6 +17,20 @@ namespace FlagSync.View
         private JobWorkerViewModel jobWorkerViewModel = new JobWorkerViewModel();
         private string appDataFolderPath;
         private string logFilePath;
+
+        public ICommand ExitApplication
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    arg =>
+                    {
+                        Application.Current.Shutdown();
+                    }
+                );
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
