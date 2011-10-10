@@ -30,7 +30,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <returns>
-        /// Returns a value indicating whether the directory creation has succeed
+        ///   <c>true</c>, if the creation has succeed; otherwise, <c>false</c>.
         /// </returns>
         bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory);
 
@@ -39,7 +39,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
         /// <returns>
-        /// A value indicating whether the deletion has succeed.
+        ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
         /// </returns>
         bool TryDeleteDirectory(IDirectoryInfo directory);
 
@@ -73,18 +73,18 @@ namespace FlagSync.Core.FileSystem.Abstract
         IDirectoryInfo GetDirectoryInfo(string path);
 
         /// <summary>
-        /// Checks if the file at the specified path exists.
+        /// Determines if the file at the specified path exists.
         /// </summary>
-        /// <param name="path">The path.</param>
+        /// <param name="path">The path of the file.</param>
         /// <returns>
         ///   <c>true</c>, if the file exists; otherwise, <c>false</c>.
         /// </returns>
         bool FileExists(string path);
 
         /// <summary>
-        /// Checks if the directory at the specified path exists.
+        /// Determines if the directory at the specified path exists.
         /// </summary>
-        /// <param name="path">The path.</param>
+        /// <param name="path">The path of the directory.</param>
         /// <returns>
         ///   <c>true</c>, if the directory exists; otherwise, <c>false</c>.
         /// </returns>
@@ -95,7 +95,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="file">The file.</param>
         /// <returns>
-        /// A stream from from the specified file.
+        /// A stream from the specified file.
         /// </returns>
         Stream OpenFileStream(IFileInfo file);
 
@@ -105,7 +105,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <param name="path1">The first path.</param>
         /// <param name="path2">The second path.</param>
         /// <returns>
-        /// A path. which is the combination of the first and second path.
+        /// A path, which is the combination of the first and second path.
         /// </returns>
         string CombinePath(string path1, string path2);
     }
