@@ -113,7 +113,7 @@ namespace FlagSync.Core
         private Queue<Job> jobQueue = new Queue<Job>();
         private long totalWrittenBytes;
         private int proceededFiles;
-        private FileCounterResults fileCounterResult;
+        private FileCounterResult fileCounterResult;
         private bool performPreview;
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace FlagSync.Core
         /// Gets the file counter result.
         /// </summary>
         /// <value>The file counter result.</value>
-        public FileCounterResults FileCounterResult
+        public FileCounterResult FileCounterResult
         {
             get { return this.fileCounterResult; }
         }
@@ -278,9 +278,9 @@ namespace FlagSync.Core
         /// Gets the file counter results.
         /// </summary>
         /// <returns></returns>
-        private FileCounterResults GetFileCounterResults()
+        private FileCounterResult GetFileCounterResults()
         {
-            FileCounterResults result = new FileCounterResults();
+            FileCounterResult result = new FileCounterResult();
 
             foreach (Job job in this.jobQueue)
             {

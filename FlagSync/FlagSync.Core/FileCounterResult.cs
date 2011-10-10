@@ -3,7 +3,7 @@
     /// <summary>
     /// Contains the number of files counted and the total size of all files
     /// </summary>
-    public class FileCounterResults
+    public class FileCounterResult
     {
         /// <summary>
         /// Gets the counted files.
@@ -18,20 +18,20 @@
         public long CountedBytes { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileCounterResults"/> class.
+        /// Initializes a new instance of the <see cref="FileCounterResult"/> class.
         /// </summary>
         /// <param name="countedFiles">The counted files.</param>
         /// <param name="countedBytes">The counted bytes.</param>
-        public FileCounterResults(int countedFiles, long countedBytes)
+        public FileCounterResult(int countedFiles, long countedBytes)
         {
             this.CountedBytes = countedBytes;
             this.CountedFiles = countedFiles;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileCounterResults"/> class.
+        /// Initializes a new instance of the <see cref="FileCounterResult"/> class.
         /// </summary>
-        public FileCounterResults()
+        public FileCounterResult()
             : this(0, 0)
         {
         }
@@ -42,9 +42,9 @@
         /// <param name="a">The first file counter result</param>
         /// <param name="b">The second file counter result</param>
         /// <returns>The result of the operator.</returns>
-        public static FileCounterResults operator +(FileCounterResults a, FileCounterResults b)
+        public static FileCounterResult operator +(FileCounterResult a, FileCounterResult b)
         {
-            return new FileCounterResults(a.CountedFiles + b.CountedFiles, a.CountedBytes + b.CountedBytes);
+            return new FileCounterResult(a.CountedFiles + b.CountedFiles, a.CountedBytes + b.CountedBytes);
         }
     }
 }

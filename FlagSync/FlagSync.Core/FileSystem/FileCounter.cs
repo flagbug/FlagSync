@@ -4,7 +4,7 @@ namespace FlagSync.Core.FileSystem
 {
     internal class FileCounter
     {
-        public static FileCounterResults CountFiles(IDirectoryInfo rootDirectory)
+        public static FileCounterResult CountFiles(IDirectoryInfo rootDirectory)
         {
             int files = 0;
             long bytes = 0;
@@ -19,7 +19,7 @@ namespace FlagSync.Core.FileSystem
 
             scanner.Start();
 
-            return new FileCounterResults(files, bytes);
+            return new FileCounterResult(files, bytes);
         }
     }
 }
