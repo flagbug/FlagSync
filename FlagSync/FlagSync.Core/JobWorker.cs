@@ -191,11 +191,14 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="jobSettings">The job settings.</param>
         /// <param name="preview">if set to true, a preview will be performed.</param>
-        public void Start(IEnumerable<JobSetting> jobSettings, bool preview)
+        public void Start(IEnumerable<Job> jobs, bool preview)
         {
             this.totalWrittenBytes = 0;
 
-            this.QueueJobs(jobSettings);
+            foreach (Job job in jobs)
+            {
+                this.jobQueue.Enqueue(job);
+            }
 
             ThreadPool.QueueUserWorkItem(callback => this.Start(preview));
         }

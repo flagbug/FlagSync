@@ -6,14 +6,14 @@ using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
-    internal class FtpBackupJob : FileSystemJob
+    internal class FtpBackupJob : Job
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FtpBackupJob"/> class.
         /// </summary>
         /// <param name="setting">The setting.</param>
         public FtpBackupJob(JobSetting setting) :
-            base(setting, new LocalFileSystem(),
+            base(new LocalFileSystem(),
              new FtpFileSystem(new Uri(setting.FtpAddress),
                  new NetworkCredential(setting.FtpUserName, setting.FtpPassword)))
         { }

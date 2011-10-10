@@ -1,17 +1,16 @@
-﻿using System.IO;
-using FlagSync.Core.FileSystem.Local;
+﻿using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
-    internal class LocalSyncJob : FileSystemJob
+    internal class LocalSyncJob : Job
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalSyncJob"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <remarks></remarks>
-        public LocalSyncJob(JobSetting settings)
-            : base(settings, new LocalFileSystem(), new LocalFileSystem()) { }
+        public LocalSyncJob(LocalDirectoryInfo directoryA, LocalDirectoryInfo directoryB)
+            : base(new LocalFileSystem(), new LocalFileSystem(), directoryA, directoryB) { }
 
         /// <summary>
         /// Starts the job, opies new and modified files from directory A to directory B and then switches the direction
@@ -20,11 +19,9 @@ namespace FlagSync.Core
         /// <remarks></remarks>
         public override void Start(bool preview)
         {
-            this.BackupDirectoryRecursively(new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryA)),
-                new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)), !preview);
+            this.BackupDirectoryRecursively(this.DirectoryA, this.DirectoryB, !preview);
 
-            this.BackupDirectoryRecursively(new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB)),
-                new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryA)), !preview);
+            this.BackupDirectoryRecursively(this.DirectoryB, this.DirectoryA, !preview);
 
             this.OnFinished(System.EventArgs.Empty);
         }

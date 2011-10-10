@@ -8,7 +8,7 @@ namespace FlagSync.Core.FileSystem.Abstract
     /// The base interface for all file systems
     /// </summary>
     /// <remarks></remarks>
-    internal interface IFileSystem
+    public interface IFileSystem
     {
         /// <summary>
         /// Occurs when the file copy progress has changed.

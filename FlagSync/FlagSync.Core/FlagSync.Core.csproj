@@ -45,7 +45,6 @@
     <Compile Include="LocalBackupJob.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FileCounterResult.cs" />
-    <Compile Include="FileSystemJob.cs" />
     <Compile Include="FileSystem\DirectoryFoundEventArgs.cs" />
     <Compile Include="FileSystem\FileFoundEventArgs.cs" />
     <Compile Include="FileSystem\Abstract\IDirectoryInfo.cs" />
