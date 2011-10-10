@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using FlagFtp;
+using FlagLib.Extensions;
 using FlagLib.IO;
 using FlagSync.Core.FileSystem.Abstract;
 
@@ -24,11 +25,8 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <param name="credentials">The credentials.</param>
         public FtpFileSystem(Uri serverAddress, NetworkCredential credentials)
         {
-            if (serverAddress == null)
-                throw new ArgumentNullException("serverAddress");
-
-            if (credentials == null)
-                throw new ArgumentNullException("credentials");
+            serverAddress.ThrowIfNull(() => serverAddress);
+            credentials.ThrowIfNull(() => credentials);
 
             this.client = new FtpClient(credentials);
             this.client.Credentials = credentials;
@@ -43,8 +41,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryDeleteFile(IFileInfo file)
         {
-            if (file == null)
-                throw new ArgumentNullException("file");
+            file.ThrowIfNull(() => file);
 
             if (!(file is FtpFileInfo))
                 throw new ArgumentException("The file must be of type FtpFileInfo.", "file");
@@ -76,11 +73,8 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
-            if (sourceDirectory == null)
-                throw new ArgumentNullException("sourceDirectory");
-
-            if (targetDirectory == null)
-                throw new ArgumentNullException("targetDirectory");
+            sourceDirectory.ThrowIfNull(() => sourceDirectory);
+            targetDirectory.ThrowIfNull(() => targetDirectory);
 
             Uri newDirectory = (new Uri(new Uri(targetDirectory.FullName + "//"), sourceDirectory.Name));
 
@@ -111,8 +105,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryDeleteDirectory(IDirectoryInfo directory)
         {
-            if (directory == null)
-                throw new ArgumentNullException("null");
+            directory.ThrowIfNull(() => directory);
 
             if (!(directory is FtpDirectoryInfo))
                 throw new ArgumentException("The directory must be of type FtpDirectoryInfo.", "directory");
@@ -144,14 +137,9 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
-            if (sourceFileSystem == null)
-                throw new ArgumentNullException("sourceFileSystem");
-
-            if (sourceFile == null)
-                throw new ArgumentNullException("sourceFile");
-
-            if (targetDirectory == null)
-                throw new ArgumentNullException("targetDirectory");
+            sourceFileSystem.ThrowIfNull(() => sourceFileSystem);
+            sourceFile.ThrowIfNull(() => sourceFile);
+            targetDirectory.ThrowIfNull(() => targetDirectory);
 
             if (!(targetDirectory is FtpDirectoryInfo))
                 throw new ArgumentException("The target directory must be of type FtpDirectoryInfo.", "targetDirectory");
@@ -207,8 +195,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         public IFileInfo GetFileInfo(string path)
         {
-            if (path == null)
-                throw new ArgumentException("path");
+            path.ThrowIfNull(() => path);
 
             path = FtpFileSystem.NormalizePath(path);
             FlagFtp.FtpFileInfo file = this.client.GetFileInfo(new Uri(path));
@@ -223,8 +210,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
-            if (path == null)
-                throw new ArgumentException("path");
+            path.ThrowIfNull(() => path);
 
             path = FtpFileSystem.NormalizePath(path);
             FlagFtp.FtpDirectoryInfo directory = this.client.GetDirectoryInfo(new Uri(path));
@@ -241,8 +227,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool FileExists(string path)
         {
-            if (path == null)
-                throw new ArgumentException("path");
+            path.ThrowIfNull(() => path);
 
             path = FtpFileSystem.NormalizePath(path);
             return this.client.FileExists(new Uri(path));
@@ -257,8 +242,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// </returns>
         public bool DirectoryExists(string path)
         {
-            if (path == null)
-                throw new ArgumentException("path");
+            path.ThrowIfNull(() => path);
 
             path = FtpFileSystem.NormalizePath(path);
             return this.client.DirectoryExists(new Uri(path));
@@ -268,11 +252,10 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// Opens the stream of the specified file.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <returns></returns>
+        /// <returns>A </returns>
         public Stream OpenFileStream(IFileInfo file)
         {
-            if (file == null)
-                throw new ArgumentException("file");
+            file.ThrowIfNull(() => file);
 
             return this.client.OpenRead(new Uri(file.FullName));
         }
@@ -285,6 +268,9 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns>The combined path.</returns>
         public string CombinePath(string path1, string path2)
         {
+            path1.ThrowIfNull(() => path1);
+            path2.ThrowIfNull(() => path2);
+
             return path1 + "/" + path2;
         }
 
@@ -295,8 +281,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <returns></returns>
         private static string NormalizePath(string path)
         {
-            if (path == null)
-                throw new ArgumentException("path");
+            path.ThrowIfNull(() => path);
 
             return path.Replace("//", "/").Replace("/", "//").Replace("\\", "//").Replace("%20", " ");
         }
