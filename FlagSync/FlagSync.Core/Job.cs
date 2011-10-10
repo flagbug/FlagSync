@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using FlagLib.Extensions;
 using FlagLib.IO;
 using FlagSync.Core.FileSystem.Abstract;
 
@@ -168,14 +169,9 @@ namespace FlagSync.Core
         /// <remarks></remarks>
         protected Job(JobSetting settings, IFileSystem sourceFileSystem, IFileSystem targetFileSystem)
         {
-            if (settings == null)
-                throw new ArgumentNullException("settings");
-
-            if (sourceFileSystem == null)
-                throw new ArgumentNullException("sourceFileSystem");
-
-            if (targetFileSystem == null)
-                throw new ArgumentNullException("targtFileSystem");
+            settings.ThrowIfNull(() => settings);
+            sourceFileSystem.ThrowIfNull(() => sourceFileSystem);
+            targetFileSystem.ThrowIfNull(() => targetFileSystem);
 
             this.Settings = settings;
             this.SourceFileSystem = sourceFileSystem;
