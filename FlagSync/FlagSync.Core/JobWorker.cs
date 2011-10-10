@@ -197,7 +197,7 @@ namespace FlagSync.Core
 
             this.QueueJobs(jobSettings);
 
-            ThreadPool.QueueUserWorkItem(new WaitCallback(callback => this.Start(preview)));
+            ThreadPool.QueueUserWorkItem(callback => this.Start(preview));
         }
 
         /// <summary>
