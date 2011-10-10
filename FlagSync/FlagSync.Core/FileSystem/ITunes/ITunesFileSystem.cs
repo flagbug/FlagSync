@@ -23,7 +23,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// Occurs when the file copy progress has changed.
         /// </summary>
         /// <remarks></remarks>
-        public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
+        public event EventHandler<DataTransferEventArgs> FileCopyProgressChanged;
 
         /// <summary>
         /// Tries to delete a file.

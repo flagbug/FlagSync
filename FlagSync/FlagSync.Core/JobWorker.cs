@@ -87,7 +87,7 @@ namespace FlagSync.Core
         /// <summary>
         /// Occurs when the file copy progress has changed.
         /// </summary>
-        public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
+        public event EventHandler<DataTransferEventArgs> FileCopyProgressChanged;
 
         /// <summary>
         /// Occurs when the job worker has finished.
@@ -334,7 +334,7 @@ namespace FlagSync.Core
             job.DeletingFile += new EventHandler<FileDeletionEventArgs>(currentJob_DeletingFile);
             job.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(currentJob_DirectoryDeletionError);
             job.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(currentJob_FileCopyError);
-            job.FileCopyProgressChanged += new EventHandler<CopyProgressEventArgs>(currentJob_FileCopyProgressChanged);
+            job.FileCopyProgressChanged += new EventHandler<DataTransferEventArgs>(currentJob_FileCopyProgressChanged);
             job.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(currentJob_FileDeletionError);
             job.Finished += new EventHandler(currentJob_Finished);
             job.ModifiedFile += new EventHandler<FileCopyEventArgs>(currentJob_ModifiedFile);
@@ -400,8 +400,8 @@ namespace FlagSync.Core
         /// Handles the FileCopyProgressChanged event of the currentJob control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
-        private void currentJob_FileCopyProgressChanged(object sender, CopyProgressEventArgs e)
+        /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
+        private void currentJob_FileCopyProgressChanged(object sender, DataTransferEventArgs e)
         {
             if (this.FileCopyProgressChanged != null)
             {

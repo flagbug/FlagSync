@@ -4,6 +4,45 @@
         <name>FlagLib</name>
     </assembly>
     <members>
+        <member name="M:FlagLib.Patterns.MVVM.RelayCommand.#ctor(System.Action{System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagLib.Patterns.MVVM.RelayCommand"/> class.
+            </summary>
+            <param name="execute">The action to execute.</param>
+        </member>
+        <member name="M:FlagLib.Patterns.MVVM.RelayCommand.#ctor(System.Action{System.Object},System.Predicate{System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagLib.Patterns.MVVM.RelayCommand"/> class.
+            </summary>
+            <param name="execute">The action to execute.</param>
+            <param name="canExecute">The predicated, which indicates if the command can execute.</param>
+        </member>
+        <member name="M:FlagLib.Patterns.MVVM.RelayCommand.CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:FlagLib.Patterns.MVVM.RelayCommand.Execute(System.Object)">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+        </member>
+        <member name="E:FlagLib.Patterns.MVVM.RelayCommand.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>
+        </member>
+        <member name="T:FlagLib.Collections.ThreadSafeObservableCollection`1">
+            <summary>
+            Provides a thread save observable collection.
+            </summary>
+            <typeparam name="T">The type of elements in the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.</typeparam>
+        </member>
         <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/> class.
@@ -11,28 +50,28 @@
         </member>
         <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.Add(`0)">
             <summary>
-            Adds the specified item.
+            Adds an item to the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.
             </summary>
-            <param name="item">The item.</param>
+            <param name="item">The object to add to the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.</param>
             <exception cref="T:System.NotSupportedException">
-            The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            The <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/> is read-only.
               </exception>
         </member>
         <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.Clear">
             <summary>
-            Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            Removes all items from the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.
             </summary>
             <exception cref="T:System.NotSupportedException">
-            The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            The <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/> is read-only.
               </exception>
         </member>
         <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.Contains(`0)">
             <summary>
-            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
+            Determines whether the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/> contains a specific value.
             </summary>
-            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <param name="item">The object to locate in the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.</param>
             <returns>
-            true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+            true if <paramref name="item"/> is found in the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>; otherwise, false.
             </returns>
         </member>
         <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.CopyTo(`0[],System.Int32)">
@@ -44,14 +83,14 @@
         </member>
         <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.Remove(`0)">
             <summary>
-            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            Removes the first occurrence of a specific object from the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.
             </summary>
-            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <param name="item">The object to remove from the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.</param>
             <returns>
-            true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            true if <paramref name="item"/> was successfully removed from the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.
             </returns>
             <exception cref="T:System.NotSupportedException">
-            The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            The <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/> is read-only.
               </exception>
         </member>
         <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.GetEnumerator">
@@ -104,19 +143,52 @@
              The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
                </exception>
         </member>
+        <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.InternAdd(`0)">
+            <summary>
+            Executes the intern Add method.
+            </summary>
+            <param name="item">The item to add.</param>
+        </member>
+        <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.InternClear">
+            <summary>
+            Executes the intern Clear method.
+            </summary>
+        </member>
+        <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.InternRemove(`0)">
+            <summary>
+            Executes the intern Remove method
+            </summary>
+            <param name="item">The item to remove.</param>
+            <returns>
+            true if <paramref name="item"/> was successfully removed from the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.
+            </returns>
+        </member>
+        <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.InternInsert(System.Int32,`0)">
+            <summary>
+            Executes the intern Insert method.
+            </summary>
+            <param name="index">The index to insert the item.</param>
+            <param name="item">The item to insert.</param>
+        </member>
+        <member name="M:FlagLib.Collections.ThreadSafeObservableCollection`1.InternRemoveAt(System.Int32)">
+            <summary>
+            Executes the intern RemoveAt method.
+            </summary>
+            <param name="index">The index of the item to be removed.</param>
+        </member>
         <member name="P:FlagLib.Collections.ThreadSafeObservableCollection`1.Count">
             <summary>
-            Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            Gets the number of elements contained in the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.
             </summary>
             <returns>
-            The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            The number of elements contained in the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.
               </returns>
         </member>
         <member name="P:FlagLib.Collections.ThreadSafeObservableCollection`1.IsReadOnly">
             <summary>
-            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            Gets a value indicating whether the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/> is read-only.
             </summary>
-            <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
+            <returns>true if the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/> is read-only; otherwise, false.
               </returns>
         </member>
         <member name="P:FlagLib.Collections.ThreadSafeObservableCollection`1.Item(System.Int32)">
@@ -145,8 +217,8 @@
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.Collections.Grid`1"/> class.
             </summary>
-            <param name="columns">The column count.</param>
-            <param name="rows">The row count.</param>
+            <param name="columns">The number of columns.</param>
+            <param name="rows">The number of rows.</param>
         </member>
         <member name="M:FlagLib.Collections.Grid`1.Traverse(System.Action{System.Int32,System.Int32})">
             <summary>
@@ -175,24 +247,18 @@
         </member>
         <member name="P:FlagLib.Collections.Grid`1.Rows">
             <summary>
-            Gets the height of the grid.
+            Gets the number of rows.
             </summary>
         </member>
         <member name="P:FlagLib.Collections.Grid`1.Columns">
             <summary>
-            Gets the total amount of columns.
+            Gets the number of columns.
             </summary>
-            <value>
-            The total amount of columns.
-            </value>
         </member>
         <member name="P:FlagLib.Collections.Grid`1.CellCount">
             <summary>
-            Gets the total amount of cells.
+            Gets the number of cells.
             </summary>
-            <value>
-            The total amount of cells.
-            </value>
         </member>
         <member name="P:FlagLib.Collections.Grid`1.Item(System.Int32,System.Int32)">
             <summary>
@@ -212,34 +278,74 @@
             <param name="expression">The expression which contains the member.</param>
             <returns>The members name.</returns>
         </member>
-        <member name="T:FlagLib.ValueConverters.CombiningConverter">
+        <member name="T:FlagLib.IO.DataTransferEventArgs">
             <summary>
-            Combines to converters
+            Encapsulates informations of a data transfer.
             </summary>
         </member>
-        <member name="M:FlagLib.ValueConverters.CombiningConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+        <member name="M:FlagLib.IO.DataTransferEventArgs.#ctor(System.Int64,System.Int64)">
             <summary>
-            Converts a value.
+            Initializes a new instance of the <see cref="T:FlagLib.IO.DataTransferEventArgs"/> class.
             </summary>
-            <param name="value">The value produced by the binding source.</param>
-            <param name="targetType">The type of the binding target property.</param>
-            <param name="parameter">The converter parameter to use.</param>
-            <param name="culture">The culture to use in the converter.</param>
-            <returns>
-            A converted value. If the method returns null, the valid null value is used.
-            </returns>
+            <param name="totalBytes">The total number of bytes.</param>
+            <param name="copiedBytes">The number of transferred bytes.</param>
         </member>
-        <member name="M:FlagLib.ValueConverters.CombiningConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+        <member name="P:FlagLib.IO.DataTransferEventArgs.TotalBytes">
             <summary>
-            Converts a value.
+            Gets the total number of bytes.
             </summary>
-            <param name="value">The value that is produced by the binding target.</param>
-            <param name="targetType">The type to convert to.</param>
-            <param name="parameter">The converter parameter to use.</param>
-            <param name="culture">The culture to use in the converter.</param>
-            <returns>
-            A converted value. If the method returns null, the valid null value is used.
-            </returns>
+        </member>
+        <member name="P:FlagLib.IO.DataTransferEventArgs.TransferredBytes">
+            <summary>
+            Gets the number of copied bytes.
+            </summary>
+        </member>
+        <member name="P:FlagLib.IO.DataTransferEventArgs.AverageSpeed">
+            <summary>
+            Gets the average speed in bytes per second.
+            </summary>
+        </member>
+        <member name="P:FlagLib.IO.DataTransferEventArgs.Cancel">
+            <summary>
+            Gets or sets a value indicating whether the operation should be canceled.
+            </summary>
+            <value>
+            true if the operation should be canceled; otherwise, false.
+            </value>
+            <remarks>
+            Note that the caller of this class is responsible for the implementation cancelable
+            data transfer and the set of this property may not work as expected.
+            </remarks>
+        </member>
+        <member name="T:FlagLib.IO.DataTransferEventArgs`2">
+            <summary>
+            Encapsulates informations of a data transfer.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TDestination">The type of the destination.</typeparam>
+        </member>
+        <member name="M:FlagLib.IO.DataTransferEventArgs`2.#ctor(System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagLib.IO.DataTransferEventArgs"/> class.
+            </summary>
+            <param name="totalBytes">The total number of bytes.</param>
+            <param name="copiedBytes">The number of transferred bytes.</param>
+        </member>
+        <member name="P:FlagLib.IO.DataTransferEventArgs`2.Source">
+            <summary>
+            Gets or sets the source.
+            </summary>
+            <value>
+            The source.
+            </value>
+        </member>
+        <member name="P:FlagLib.IO.DataTransferEventArgs`2.Destination">
+            <summary>
+            Gets or sets the destination.
+            </summary>
+            <value>
+            The destination.
+            </value>
         </member>
         <member name="M:FlagLib.IO.DirectoryScanErrorEventArgs.#ctor(System.String,FlagLib.IO.DirectoryScanErrorType)">
             <summary>
@@ -266,25 +372,60 @@
         </member>
         <member name="M:FlagLib.Extensions.LongExtensions.ToSizeString(System.Int64)">
             <summary>
-            Formats the value to a size string.
+            Formats the value to a string, which has the appropriate size-suffix.
             </summary>
             <param name="size">The value.</param>
-            <returns>A formated string with the appropriate size-suffix.</returns>
+            <returns>
+            A formatted string with the appropriate size-suffix.
+            </returns>
+            <remarks>
+            The formatting is based on 1024-byte splitting.
+            This means, that the suffix changes every power of 1024,
+            till 1024^12 (Terabyte).
+            </remarks>
+            <example>
+            For a value of 1, the result string is "1 B".
+            For a value of 1024, the result string is "1 KB".
+            </example>
+        </member>
+        <member name="T:FlagLib.Patterns.MVVM.ViewModelBase`1">
+            <summary>
+            Provides an abstract and generic view model base class, <para/>
+            which implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> interface
+            </summary>
+            <typeparam name="T">Type of the concrete view model</typeparam>
+        </member>
+        <member name="M:FlagLib.Patterns.MVVM.ViewModelBase`1.OnPropertyChanged``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Called when a property has changed.
+            </summary>
+            <typeparam name="TValue">The type of the property.</typeparam>
+            <param name="propertySelector">The property selector.</param>
+        </member>
+        <member name="E:FlagLib.Patterns.MVVM.ViewModelBase`1.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="T:FlagLib.IO.DirectoryScanErrorType">
+            <summary>
+            Specifies which error occured during the directory scan.
+            </summary>
         </member>
         <member name="M:FlagLib.Extensions.ClassExtensions.ThrowIfNull``1(``0,System.String)">
             <summary>
             Throws an <see cref="T:System.ArgumentNullException"/> if the object is null.
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="object">The object.</param>
-            <param name="parameterName">Name of the parameter.</param>
+            <param name="object">The object to check.</param>
+            <param name="parameterName">The parameter name.</param>
         </member>
         <member name="M:FlagLib.Extensions.ClassExtensions.ThrowIfNull``1(``0,System.Linq.Expressions.Expression{System.Func{``0}})">
             <summary>
             Throws an <see cref="T:System.ArgumentNullException"/> if the object is null.
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="object">The object.</param>
+            <param name="object">The object to check.</param>
             <param name="parameterName">The expression, which resolves to the parameter name.</param>
         </member>
         <member name="M:FlagLib.IO.FileEventArgs.#ctor(System.IO.FileInfo)">
@@ -306,7 +447,7 @@
             Represents a generic <see cref="T:FlagLib.Collections.EventCollection`1"/> which raises <para/>
             events when items are added and deleted.
             </summary>
-            <typeparam name="T">The type of the elements in the <see cref="T:FlagLib.Collections.EventCollection`1"/></typeparam>
+            <typeparam name="T">The type of elements in the <see cref="T:FlagLib.Collections.EventCollection`1"/></typeparam>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.#ctor">
             <summary>
@@ -327,11 +468,11 @@
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.Add(`0)">
             <summary>
-            Adds the specified item to the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
+            Adds an item to the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
             </summary>
-            <param name="item">The item to add.</param>
+            <param name="item">The object to add to the <see cref="T:FlagLib.Collections.EventCollection`1"/>.</param>
             <exception cref="T:System.NotSupportedException">
-            The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            The <see cref="T:FlagLib.Collections.EventCollection`1"/> is read-only.
               </exception>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
@@ -343,40 +484,40 @@
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.Clear">
             <summary>
-            Removes all elements from the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
+            Removes all items from the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
             </summary>
             <exception cref="T:System.NotSupportedException">
-            The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            The <see cref="T:FlagLib.Collections.EventCollection`1"/> is read-only.
               </exception>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.Contains(`0)">
             <summary>
-            Determines whether the <see cref="T:FlagLib.Collections.EventCollection`1"/> contains the specified item.
+            Determines whether the <see cref="T:FlagLib.Collections.EventCollection`1"/> contains a specific value.
             </summary>
-            <param name="item">The item.</param>
+            <param name="item">The object to locate in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.</param>
             <returns>
-              <c>true</c> if the <see cref="T:FlagLib.Collections.EventCollection`1"/> contains the specified item; otherwise, <c>false</c>.
+            true if <paramref name="item"/> is found in the <see cref="T:FlagLib.Collections.EventCollection`1"/>; otherwise, false.
             </returns>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.IndexOf(`0)">
             <summary>
-            Returns the index of the specified item.
+            Determines the index of a specific item in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
             </summary>
-            <param name="item">The item to search.</param>
+            <param name="item">The object to locate in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.</param>
             <returns>
-            The index of the specified item
+            The index of <paramref name="item"/> if found in the list; otherwise, -1.
             </returns>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.Remove(`0)">
             <summary>
-            Removes the specified item.
+            Removes the first occurrence of a specific object from the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
             </summary>
-            <param name="item">The item to remove.</param>
+            <param name="item">The object to remove from the <see cref="T:FlagLib.Collections.EventCollection`1"/>.</param>
             <returns>
-            True, if the item is successfully removed; otherwise, false.
+            true if <paramref name="item"/> was successfully removed from the <see cref="T:FlagLib.Collections.EventCollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
             </returns>
             <exception cref="T:System.NotSupportedException">
-            The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            The <see cref="T:FlagLib.Collections.EventCollection`1"/> is read-only.
               </exception>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.CopyTo(`0[],System.Int32)">
@@ -388,15 +529,15 @@
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
             <summary>
-            Returns an enumerator that iterates through the <see cref="!:EventList&lt;T&gt;"/>.
+            Returns an enumerator that iterates through the collection.
             </summary>
             <returns>
-            An <see cref="T:System.Collections.Generic.IEnumerator&lt;T&gt;"/> object that can be used to iterate through the collection.
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
             </returns>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.System#Collections#IEnumerable#GetEnumerator">
             <summary>
-            Returns an enumerator that iterates through the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
+            Returns an enumerator that iterates through a collection.
             </summary>
             <returns>
             An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
@@ -411,17 +552,29 @@
             </returns>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.Insert(System.Int32,`0)">
-            <summary>
-            Inserts the item at the specified index.
-            </summary>
-            <param name="index">The index.</param>
-            <param name="item">The item.</param>
+             <summary>
+             Inserts an item to the <see cref="T:FlagLib.Collections.EventCollection`1"/> at the specified index.
+             </summary>
+             <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+             <param name="item">The object to insert into the <see cref="T:FlagLib.Collections.EventCollection`1"/>.</param>
+             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
+               </exception>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.RemoveAt(System.Int32)">
-            <summary>
-            Removes the item at the specified index.
-            </summary>
-            <param name="index">The index of the item to remove.</param>
+             <summary>
+             Removes the <see cref="T:FlagLib.Collections.EventCollection`1"/> item at the specified index.
+             </summary>
+             <param name="index">The zero-based index of the item to remove.</param>
+             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The <see cref="T:FlagLib.Collections.EventCollection`1"/> is read-only.
+               </exception>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.OnItemAdded(FlagLib.Collections.EventCollectionEventArgs{`0})">
             <summary>
@@ -447,13 +600,13 @@
             </summary>
             <param name="e">The <see cref="T:FlagLib.Collections.EventCollectionEventArgs`1"/> instance containing the event data.</param>
         </member>
-        <member name="M:FlagLib.Collections.EventCollection`1.OnListCleared(System.EventArgs)">
+        <member name="M:FlagLib.Collections.EventCollection`1.OnCleared(System.EventArgs)">
             <summary>
             Raises the <see cref="E:ListCleared"/> event.
             </summary>
             <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
         </member>
-        <member name="M:FlagLib.Collections.EventCollection`1.OnListClearing(System.EventArgs)">
+        <member name="M:FlagLib.Collections.EventCollection`1.OnClearing(System.EventArgs)">
             <summary>
             Raises the <see cref="E:BeforeListCleared"/> event.
             </summary>
@@ -461,23 +614,30 @@
         </member>
         <member name="P:FlagLib.Collections.EventCollection`1.Count">
             <summary>
-            Gets the number of elements in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
+            Gets the number of elements contained in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
             </summary>
-            <value>
-            The number of elements in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
-            </value>
             <returns>
-            The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            The number of elements contained in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
               </returns>
         </member>
         <member name="P:FlagLib.Collections.EventCollection`1.Item(System.Int32)">
-            <summary>
-            Gets or sets the <see cref="!:T"/> at the specified index.
-            </summary>
+             <summary>
+             Gets or sets the element at the specified index.
+             </summary>
+             <returns>
+             The element at the specified index.
+               </returns>
+            
+             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
+               </exception>
+            
+             <exception cref="T:System.NotSupportedException">
+             The property is set and the  <see cref="T:FlagLib.Collections.EventCollection`1"/> is read-only.
+               </exception>
         </member>
         <member name="P:FlagLib.Collections.EventCollection`1.Capacity">
             <summary>
-            Gets or sets the capacity of the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
+            Gets or sets the capacity.
             </summary>
             <value>
             The capacity.
@@ -485,10 +645,9 @@
         </member>
         <member name="P:FlagLib.Collections.EventCollection`1.IsReadOnly">
             <summary>
-            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            Gets a value indicating whether the <see cref="T:FlagLib.Collections.EventCollection`1"/> is read-only.
             </summary>
-            <returns>
-            true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
+            <returns>true if the  <see cref="T:FlagLib.Collections.EventCollection`1"/> is read-only; otherwise, false.
               </returns>
         </member>
         <member name="E:FlagLib.Collections.EventCollection`1.ItemAdded">
@@ -498,7 +657,7 @@
         </member>
         <member name="E:FlagLib.Collections.EventCollection`1.ItemAdding">
             <summary>
-            Occurs before the item has been item added.
+            Occurs before an item has been added.
             </summary>
         </member>
         <member name="E:FlagLib.Collections.EventCollection`1.ItemRemoved">
@@ -508,154 +667,18 @@
         </member>
         <member name="E:FlagLib.Collections.EventCollection`1.ItemRemoving">
             <summary>
-            Occurs before the item has been removed.
+            Occurs before an item has been removed.
             </summary>
         </member>
-        <member name="E:FlagLib.Collections.EventCollection`1.ListCleared">
+        <member name="E:FlagLib.Collections.EventCollection`1.Cleared">
             <summary>
-            Occurs when the list has been cleared.
+            Occurs when the <see cref="T:FlagLib.Collections.EventCollection`1"/> has been cleared.
             </summary>
         </member>
-        <member name="E:FlagLib.Collections.EventCollection`1.ListClearing">
+        <member name="E:FlagLib.Collections.EventCollection`1.Clearing">
             <summary>
-            Occurs before the list has been cleared.
+            Occurs before the <see cref="T:FlagLib.Collections.EventCollection`1"/> has been cleared.
             </summary>
-        </member>
-        <member name="M:FlagLib.Patterns.RelayCommand.#ctor(System.Action{System.Object})">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Patterns.RelayCommand"/> class.
-            </summary>
-            <param name="execute">The action to execute.</param>
-        </member>
-        <member name="M:FlagLib.Patterns.RelayCommand.#ctor(System.Action{System.Object},System.Predicate{System.Object})">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.Patterns.RelayCommand"/> class.
-            </summary>
-            <param name="execute">The action to execute.</param>
-            <param name="canExecute">The predicated, which indicates if the command can execute.</param>
-        </member>
-        <member name="M:FlagLib.Patterns.RelayCommand.CanExecute(System.Object)">
-            <summary>
-            Defines the method that determines whether the command can execute in its current state.
-            </summary>
-            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
-            <returns>
-            true if this command can be executed; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:FlagLib.Patterns.RelayCommand.Execute(System.Object)">
-            <summary>
-            Defines the method to be called when the command is invoked.
-            </summary>
-            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
-        </member>
-        <member name="E:FlagLib.Patterns.RelayCommand.CanExecuteChanged">
-            <summary>
-            Occurs when changes occur that affect whether or not the command should execute.
-            </summary>
-        </member>
-        <member name="F:FlagLib.IO.FileCopyOperation.CallbackChunkFinished">
-            <summary>
-            Callback reason passed as dwCallbackReason in CopyProgressRoutine.
-            Indicates another part of the data file was copied.
-            </summary>
-        </member>
-        <member name="F:FlagLib.IO.FileCopyOperation.CallbackStreamSwitch">
-            <summary>
-            Callback reason passed as dwCallbackReason in CopyProgressRoutine.
-            Indicates another stream was created and is about to be copied. This is the callback reason given when the callback routine is first invoked.
-            </summary>
-        </member>
-        <member name="F:FlagLib.IO.FileCopyOperation.ProgressContinue">
-            <summary>
-            Return value of the CopyProgressRoutine.
-            Indicates continue the copy operation.
-            </summary>
-        </member>
-        <member name="F:FlagLib.IO.FileCopyOperation.ProgressCancel">
-            <summary>
-            Return value of the CopyProgressRoutine.
-            Indicates cancel the copy operation and delete the destination file.
-            </summary>
-        </member>
-        <member name="F:FlagLib.IO.FileCopyOperation.ProgressStop">
-            <summary>
-            Return value of the CopyProgressRoutine.
-            Indicates stop the copy operation. It can be restarted at a later time.
-            </summary>
-        </member>
-        <member name="F:FlagLib.IO.FileCopyOperation.ProgressQuiet">
-            <summary>
-            Return value of the CopyProgressRoutine.
-            Indicates continue the copy operation, but stop invoking CopyProgressRoutine to report progress.
-            </summary>
-        </member>
-        <member name="M:FlagLib.IO.FileCopyOperation.CopyProgressCallback(System.Int64,System.Int64,System.Int64,System.Int64,System.UInt32,System.UInt32,System.IntPtr,System.IntPtr,System.IntPtr)">
-            <summary>
-            The CopyProgressRoutine delegate is an application-defined callback function used with the CopyFileEx and MoveFileWithProgress functions.
-            It is called when a portion of a copy or move operation is completed.
-            </summary>
-            <param name="totalFileSize">Total size of the file, in bytes.</param>
-            <param name="totalBytesTransferred">Total number of bytes transferred from the source file to the destination file since the copy operation began.</param>
-            <param name="streamSize">Total size of the current file stream, in bytes.</param>
-            <param name="streamBytesTransferred">Total number of bytes in the current stream that have been transferred from the source file to the destination file since the copy operation began.</param>
-            <param name="dwStreamNumber">Handle to the current stream. The first time CopyProgressRoutine is called, the stream number is 1.</param>
-            <param name="dwCallbackReason">Reason that CopyProgressRoutine was called.</param>
-            <param name="hSourceFile">Handle to the source file.</param>
-            <param name="hDestinationFile">Handle to the destination file.</param>
-            <param name="lpData">Argument passed to CopyProgressRoutine by the CopyFileEx or MoveFileWithProgress function.</param>
-            <returns>
-            A value indicating how to proceed with the copy operation.
-            </returns>
-        </member>
-        <member name="M:FlagLib.IO.FileCopyOperation.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.IO.FileCopyOperation"/> class.
-            </summary>
-            <param name="sourceFile">The source file.</param>
-            <param name="targetFile">The target file.</param>
-        </member>
-        <member name="M:FlagLib.IO.FileCopyOperation.Execute">
-            <summary>
-            Executes the file copy operation.
-            </summary>
-        </member>
-        <member name="M:FlagLib.IO.FileCopyOperation.OnCopyProgress(FlagLib.IO.CopyProgressEventArgs)">
-            <summary>
-            Raises the <see cref="E:CopyProgress"/> event.
-            </summary>
-            <param name="e">The <see cref="T:FlagLib.IO.CopyProgressEventArgs"/> instance containing the event data.</param>
-        </member>
-        <member name="P:FlagLib.IO.FileCopyOperation.SourceFile">
-            <summary>
-            Gets the source file.
-            </summary>
-        </member>
-        <member name="P:FlagLib.IO.FileCopyOperation.TargetFile">
-            <summary>
-            Gets the target file.
-            </summary>
-        </member>
-        <member name="E:FlagLib.IO.FileCopyOperation.CopyProgressChanged">
-            <summary>
-            Occurs when the copy progress has changed.
-            </summary>
-        </member>
-        <member name="T:FlagLib.IO.FileCopyOperation.CopyProgressRoutine">
-            <summary>
-            The CopyProgressRoutine delegate is an application-defined callback function used with the CopyFileEx and MoveFileWithProgress functions.
-            It is called when a portion of a copy or move operation is completed.
-            </summary>
-            <param name="totalFileSize">Total size of the file.</param>
-            <param name="totalBytesTransferred">The total bytes transferred.</param>
-            <param name="streamSize">Size of the stream.</param>
-            <param name="streamBytesTransferred">The stream bytes transferred.</param>
-            <param name="dwStreamNumber">The stream number.</param>
-            <param name="dwCallbackReason">The callback reason.</param>
-            <param name="hSourceFile">The source file.</param>
-            <param name="hDestinationFile">The destination file.</param>
-            <param name="lpData">The data.</param>
-            <returns></returns>
         </member>
         <member name="T:FlagLib.ValueConverters.BoolNegationValueConverter">
             <summary>
@@ -695,8 +718,8 @@
             <summary>
             Serializes the specified collection at the specified path.
             </summary>
-            <typeparam name="T">Type of the items to serialize</typeparam>
-            <param name="collection">The items tho serialize.</param>
+            <typeparam name="T">Type of the items to serialize.</typeparam>
+            <param name="collection">The items to serialize.</param>
             <param name="path">The path of the file.</param>
         </member>
         <member name="M:FlagLib.Serialization.GenericXmlSerializer.SerializeItem``1(``0,System.String)">
@@ -731,17 +754,17 @@
             <summary>
             Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is greater than the limit.
             </summary>
-            <param name="value">The value.</param>
-            <param name="limit">The limit.</param>
-            <param name="parameterName">Name of the parameter.</param>
+            <param name="value">The value to check.</param>
+            <param name="limit">The exclusive limit.</param>
+            <param name="parameterName">The name of the parameter.</param>
         </member>
         <member name="M:FlagLib.Extensions.IntegerExtensions.ThrowIfLessThan(System.Int32,System.Int32,System.String)">
             <summary>
             Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is less than the limit.
             </summary>
-            <param name="value">The value.</param>
-            <param name="limit">The limit.</param>
-            <param name="parameterName">Name of the parameter.</param>
+            <param name="value">The value to check.</param>
+            <param name="limit">The exclusive limit.</param>
+            <param name="parameterName">The name of the parameter.</param>
         </member>
         <member name="T:FlagLib.Collections.EventCollectionEventArgs`1">
             <summary>
@@ -754,7 +777,7 @@
             Initializes a new instance of the <see cref="T:FlagLib.Collections.EventCollectionEventArgs`1"/> class.
             </summary>
             <param name="item">The item that was affected.</param>
-            <param name="index">The index of the item which was affected.</param>
+            <param name="index">The index of the item that was affected.</param>
         </member>
         <member name="P:FlagLib.Collections.EventCollectionEventArgs`1.Item">
             <summary>
@@ -780,29 +803,15 @@
         </member>
         <member name="P:FlagLib.IO.DirectoryEventArgs.Directory">
             <summary>
-            Gets the found the directory.
+            Gets the directorys that has been found.
             </summary>
             <value>
-            The found directory.
+            The directory that has been found.
             </value>
         </member>
-        <member name="T:FlagLib.Patterns.ViewModelBase`1">
+        <member name="T:FlagLib.IO.StreamCopyOperation">
             <summary>
-            Provides an abstract and generic view model base class, <para/>
-            which implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> interface
-            </summary>
-            <typeparam name="T">Type of the concrete view model</typeparam>
-        </member>
-        <member name="M:FlagLib.Patterns.ViewModelBase`1.OnPropertyChanged``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
-            <summary>
-            Called when a property has changed.
-            </summary>
-            <typeparam name="TValue">The type of the property.</typeparam>
-            <param name="propertySelector">The property selector.</param>
-        </member>
-        <member name="E:FlagLib.Patterns.ViewModelBase`1.PropertyChanged">
-            <summary>
-            Occurs when a property value changes.
+            Provides an operation to copy a stream to another stream.
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "M:FlagLib.IO.StreamCopyOperation.#ctor(System.IO.Stream,System.IO.Stream,System.Int32,System.Int32)" -->
@@ -822,18 +831,24 @@
             </summary>
             <param name="sourceStream">The source stream.</param>
             <param name="targetStream">The target stream.</param>
-            <param name="bufferSize">Size of the buffer.</param>
+            <param name="bufferSize">The size of the buffer.</param>
         </member>
         <member name="M:FlagLib.IO.StreamCopyOperation.Execute">
             <summary>
             Executes the stream copy operation.
             </summary>
         </member>
-        <member name="M:FlagLib.IO.StreamCopyOperation.OnCopyProgressChanged(FlagLib.IO.CopyProgressEventArgs)">
+        <member name="M:FlagLib.IO.StreamCopyOperation.OnCopyProgressChanged(FlagLib.IO.DataTransferEventArgs{System.IO.Stream,System.IO.Stream})">
             <summary>
             Raises the <see cref="E:CopyProgressChanged"/> event.
             </summary>
-            <param name="e">The <see cref="T:FlagLib.IO.CopyProgressEventArgs"/> instance containing the event data.</param>
+            <param name="e">The <see cref="T:FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:FlagLib.IO.StreamCopyOperation.CreateEventArgs">
+            <summary>
+            Creates the event args.
+            </summary>
+            <returns></returns>
         </member>
         <member name="E:FlagLib.IO.StreamCopyOperation.CopyProgressChanged">
             <summary>
@@ -984,71 +999,34 @@
             Occurs when the search has finished.
             </summary>
         </member>
-        <member name="T:FlagLib.IO.CopyProgressEventArgs">
-            <summary>
-            Provides data for the CopyProgress event.
-            </summary>
-        </member>
-        <member name="M:FlagLib.IO.CopyProgressEventArgs.#ctor(System.Int64,System.Int64,System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FlagLib.IO.CopyProgressEventArgs"/> class.
-            </summary>
-            <param name="totalBytes">The total number of bytes.</param>
-            <param name="copiedBytes">The number of copied bytes.</param>
-        </member>
-        <member name="P:FlagLib.IO.CopyProgressEventArgs.TotalBytes">
-            <summary>
-            Gets the total numer of bytes.
-            </summary>
-        </member>
-        <member name="P:FlagLib.IO.CopyProgressEventArgs.TotalCopiedBytes">
-            <summary>
-            Gets the number of copied bytes.
-            </summary>
-        </member>
-        <member name="P:FlagLib.IO.CopyProgressEventArgs.AverageSpeed">
-            <summary>
-            Gets the average speed in bytes per second.
-            </summary>
-        </member>
-        <member name="P:FlagLib.IO.CopyProgressEventArgs.Cancel">
-            <summary>
-            Gets or sets a value indicating whether the operation should be canceled.
-            </summary>
-            <value>
-            true if the operation should be canceled; otherwise, false.
-            </value>
-        </member>
         <member name="T:FlagLib.Extensions.EnumerableExtensions">
             <summary>
-            Extension methods for <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            Extension methods for the <see cref="T:System.Collections.Generic.IEnumerable`1"/> interface.
             </summary>
         </member>
         <member name="M:FlagLib.Extensions.EnumerableExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},``0[])">
             <summary>
-            Determines whether the specified
-            <see cref="T:System.Collections.Generic.IEnumerable`1"/>
-            contains any of the specified items
+            Determines whether a sequence contains any of the specified items by using the default equality comparer.
             </summary>
-            <typeparam name="T">The source type</typeparam>
-            <param name="value">The value.</param>
-            <param name="items">The items.</param>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">A sequence in which to locate one of the items.</param>
+            <param name="items">The items to locate in the sequence.</param>
             <returns>
-            	<c>true</c> if the specified value contains any of the specified items; otherwise, <c>false</c>.
+              <c>true</c> if the sequence contains any of the specified items; otherwise, <c>false</c>.
             </returns>
+            <exception cref="T:System.ArgumentNullException">source or items is null.</exception>
         </member>
         <member name="M:FlagLib.Extensions.EnumerableExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
             <summary>
-            Determines whether the specified
-            <see cref="T:System.Collections.Generic.IEnumerable`1"/>
-            contains any of the specified items
+            Determines whether a sequence contains any of the specified items by using the default equality comparer.
             </summary>
-            <typeparam name="T">The source type</typeparam>
-            <param name="value">The value.</param>
-            <param name="items">The items.</param>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">A sequence in which to locate one of the items.</param>
+            <param name="items">The items to locate in the sequence.</param>
             <returns>
-            	<c>true</c> if the specified value contains any of the specified items; otherwise, <c>false</c>.
+              <c>true</c> if the sequence contains any of the specified items; otherwise, <c>false</c>.
             </returns>
+            <exception cref="T:System.ArgumentNullException">source or items is null.</exception>
         </member>
         <member name="T:FlagLib.Collections.SerializableDictionary`2">
             <summary>

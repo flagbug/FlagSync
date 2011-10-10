@@ -12,7 +12,7 @@ namespace FlagSync.Core.FileSystem.Virtual
         /// <summary>
         /// Occurs when the file copy progress has changed.
         /// </summary>
-        public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
+        public event EventHandler<DataTransferEventArgs> FileCopyProgressChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VirtualFileSystem"/> class.

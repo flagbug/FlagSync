@@ -1,4 +1,4 @@
-﻿using FlagLib.Patterns;
+﻿using FlagLib.Patterns.MVVM;
 
 namespace FlagSync.View
 {

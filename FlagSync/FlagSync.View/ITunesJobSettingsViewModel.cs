@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FlagLib.Patterns;
+using FlagLib.Patterns.MVVM;
 using iTunesLib;
 
 namespace FlagSync.View

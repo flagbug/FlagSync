@@ -291,7 +291,7 @@ namespace FlagSync.Core
 
             this.OnCreatingFile(eventArgs);
 
-            EventHandler<CopyProgressEventArgs> handler = (sender, e) =>
+            EventHandler<DataTransferEventArgs> handler = (sender, e) =>
             {
                 e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
 
@@ -328,7 +328,7 @@ namespace FlagSync.Core
 
             this.OnModifyingFile(eventArgs);
 
-            EventHandler<CopyProgressEventArgs> handler = (sender, e) =>
+            EventHandler<DataTransferEventArgs> handler = (sender, e) =>
             {
                 e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
 

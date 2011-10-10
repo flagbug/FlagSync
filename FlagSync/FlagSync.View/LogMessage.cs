@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FlagLib.Extensions;
-using FlagLib.Patterns;
+using FlagLib.Patterns.MVVM;
 
 namespace FlagSync.View
 {

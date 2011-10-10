@@ -158,7 +158,7 @@ namespace FlagSync.Core
         /// Occurs when the file copy progress has changed.
         /// </summary>
         /// <remarks></remarks>
-        public event EventHandler<CopyProgressEventArgs> FileCopyProgressChanged;
+        public event EventHandler<DataTransferEventArgs> FileCopyProgressChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Job"/> class.
@@ -441,9 +441,8 @@ namespace FlagSync.Core
         /// <summary>
         /// Raises the <see cref="E:FileProgressChanged"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
-        /// <remarks></remarks>
-        protected virtual void OnFileProgressChanged(CopyProgressEventArgs e)
+        /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnFileProgressChanged(DataTransferEventArgs e)
         {
             if (this.FileCopyProgressChanged != null)
             {

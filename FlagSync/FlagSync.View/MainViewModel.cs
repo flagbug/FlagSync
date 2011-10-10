@@ -6,7 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using FlagLib.Patterns;
+using FlagLib.Patterns.MVVM;
 using FlagSync.Core;
 
 namespace FlagSync.View

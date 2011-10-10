@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using FlagLib.Patterns;
+using FlagLib.Patterns.MVVM;
 using FlagLib.Reflection;
 using FlagSync.Core;
 

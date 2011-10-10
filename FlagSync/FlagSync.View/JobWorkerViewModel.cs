@@ -8,7 +8,7 @@ using System.Timers;
 using System.Windows.Input;
 using FlagLib.Collections;
 using FlagLib.IO;
-using FlagLib.Patterns;
+using FlagLib.Patterns.MVVM;
 using FlagSync.Core;
 
 namespace FlagSync.View
@@ -349,7 +349,7 @@ namespace FlagSync.View
             this.jobWorker.DeletingFile += new EventHandler<FileDeletionEventArgs>(jobWorker_DeletingFile);
             this.jobWorker.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeletionError);
             this.jobWorker.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(jobWorker_FileCopyError);
-            this.jobWorker.FileCopyProgressChanged += new EventHandler<CopyProgressEventArgs>(jobWorker_FileCopyProgressChanged);
+            this.jobWorker.FileCopyProgressChanged += new EventHandler<DataTransferEventArgs>(jobWorker_FileCopyProgressChanged);
             this.jobWorker.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(jobWorker_FileDeletionError);
             this.jobWorker.FilesCounted += new EventHandler(jobWorker_FilesCounted);
             this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
@@ -649,13 +649,13 @@ namespace FlagSync.View
         /// Handles the FileCopyProgressChanged event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagLib.FileSystem.CopyProgressEventArgs"/> instance containing the event data.</param>
-        private void jobWorker_FileCopyProgressChanged(object sender, CopyProgressEventArgs e)
+        /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_FileCopyProgressChanged(object sender, DataTransferEventArgs e)
         {
             if (e.TotalBytes == 0)
                 return;
 
-            this.LastLogMessage.Progress = (int)(((double)e.TotalCopiedBytes / (double)e.TotalBytes) * 100);
+            this.LastLogMessage.Progress = (int)(((double)e.TransferredBytes / (double)e.TotalBytes) * 100);
             this.OnPropertyChanged(vm => vm.CurrentProgress);
 
             this.averageSpeedTotal += e.AverageSpeed;
