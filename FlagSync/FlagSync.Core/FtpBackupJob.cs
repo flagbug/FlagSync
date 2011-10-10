@@ -15,8 +15,8 @@ namespace FlagSync.Core
         /// <param name="host">The host.</param>
         /// <param name="userName">The user name.</param>
         /// <param name="password">The password.</param>
-        public FtpBackupJob(LocalDirectoryInfo sourceDirectory, FtpDirectoryInfo targetDirectory, Uri host, string userName, string password) :
-            base(new LocalFileSystem(), new FtpFileSystem(host, new NetworkCredential(userName, password)), sourceDirectory, targetDirectory)
+        public FtpBackupJob(string name, LocalDirectoryInfo sourceDirectory, FtpDirectoryInfo targetDirectory, Uri host, string userName, string password) :
+            base(name, new LocalFileSystem(), new FtpFileSystem(host, new NetworkCredential(userName, password)), sourceDirectory, targetDirectory)
         { }
 
         /// <summary>

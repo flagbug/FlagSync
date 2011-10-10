@@ -11,8 +11,8 @@ namespace FlagSync.Core
         /// Initializes a new instance of the <see cref="FtpSyncJob"/> class.
         /// </summary>
         /// <param name="setting">The setting.</param>
-        public FtpSyncJob(LocalDirectoryInfo directoryA, FtpDirectoryInfo directoryB, Uri host, string userName, string password) :
-            base(new LocalFileSystem(), new FtpFileSystem(host, new NetworkCredential(userName, password)), directoryA, directoryB)
+        public FtpSyncJob(string name, LocalDirectoryInfo directoryA, FtpDirectoryInfo directoryB, Uri host, string userName, string password) :
+            base(name, new LocalFileSystem(), new FtpFileSystem(host, new NetworkCredential(userName, password)), directoryA, directoryB)
         { }
 
         /// <summary>

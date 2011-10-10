@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using System.Threading;
 using FlagLib.IO;
-using FlagSync.Core.FileSystem;
-using FlagSync.Core.FileSystem.Abstract;
-using FlagSync.Core.FileSystem.Ftp;
-using FlagSync.Core.FileSystem.ITunes;
-using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
@@ -212,7 +205,7 @@ namespace FlagSync.Core
             {
                 this.currentJob = this.jobQueue.Dequeue();
                 this.InitializeJobEvents(this.currentJob);
-                this.OnJobStarted(new JobEventArgs(this.currentJob.Settings));
+                this.OnJobStarted(new JobEventArgs(this.currentJob));
                 this.currentJob.Start(this.performPreview);
             }
 
@@ -244,77 +237,16 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Queues the jobs.
+        /// Counts the files of all jobs together.
         /// </summary>
-        /// <param name="jobs">The jobs.</param>
-        /// <param name="preview">if set to true, a preview will be performed.</param>
-        private void QueueJobs(IEnumerable<JobSetting> jobs)
-        {
-            foreach (JobSetting jobSetting in jobs)
-            {
-                switch (jobSetting.SyncMode)
-                {
-                    case SyncMode.LocalBackup:
-                        this.jobQueue.Enqueue(new LocalBackupJob(jobSetting));
-                        break;
-
-                    case SyncMode.LocalSynchronization:
-                        this.jobQueue.Enqueue(new LocalSyncJob(jobSetting));
-                        break;
-
-                    case SyncMode.ITunes:
-                        this.jobQueue.Enqueue(new ITunesJob(jobSetting));
-                        break;
-
-                    case SyncMode.FtpBackup:
-                        this.jobQueue.Enqueue(new FtpBackupJob(jobSetting));
-                        break;
-
-                    case SyncMode.FtpSynchronization:
-                        this.jobQueue.Enqueue(new FtpSyncJob(jobSetting));
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the file counter results.
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>The result of the counting.</returns>
         private FileCounterResult GetFileCounterResults()
         {
             FileCounterResult result = new FileCounterResult();
 
             foreach (Job job in this.jobQueue)
             {
-                //TODO: Make generic for all settings
-
-                IDirectoryInfo directoryA = null;
-                IDirectoryInfo directoryB = null;
-
-                switch (job.Settings.SyncMode)
-                {
-                    case SyncMode.LocalBackup:
-                    case SyncMode.LocalSynchronization:
-                        directoryA = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryA));
-                        directoryB = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryB));
-                        break;
-
-                    case SyncMode.ITunes:
-                        directoryA = new ITunesDirectoryInfo(job.Settings.ITunesPlaylist);
-                        directoryB = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryB));
-                        break;
-
-                    case SyncMode.FtpBackup:
-                    case SyncMode.FtpSynchronization:
-                        directoryA = new LocalDirectoryInfo(new DirectoryInfo(job.Settings.DirectoryB));
-                        directoryB = new FtpDirectoryInfo(job.Settings.FtpAddress,
-                            new FlagFtp.FtpClient(new NetworkCredential(job.Settings.FtpUserName, job.Settings.FtpPassword)));
-                        break;
-                }
-
-                result += FileCounter.CountFiles(directoryA);
-                result += FileCounter.CountFiles(directoryB);
+                result += job.CountFiles();
             }
 
             return result;
@@ -550,7 +482,7 @@ namespace FlagSync.Core
         {
             Job job = (Job)sender;
 
-            this.OnJobFinished(new JobEventArgs(job.Settings));
+            this.OnJobFinished(new JobEventArgs(job));
 
             this.totalWrittenBytes += job.WrittenBytes;
 

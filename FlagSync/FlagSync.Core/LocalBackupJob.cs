@@ -12,8 +12,8 @@ namespace FlagSync.Core
         /// Initializes a new instance of the <see cref="LocalBackupJob"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public LocalBackupJob(LocalDirectoryInfo sourceDirectory, LocalDirectoryInfo targetDirectory)
-            : base(new LocalFileSystem(), new LocalFileSystem(), sourceDirectory, targetDirectory) { }
+        public LocalBackupJob(string name, LocalDirectoryInfo sourceDirectory, LocalDirectoryInfo targetDirectory)
+            : base(name, new LocalFileSystem(), new LocalFileSystem(), sourceDirectory, targetDirectory) { }
 
         /// <summary>
         /// Starts the BackupJob, copies new and modified files from directory A to directory B and finally checks for deletions

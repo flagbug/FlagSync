@@ -63,6 +63,11 @@ namespace FlagSync.Core
         public long WrittenBytes { get; private set; }
 
         /// <summary>
+        /// Gets the name of the job.
+        /// </summary>
+        public string Name { get; private set; }
+
+        /// <summary>
         /// Occurs when a file has been proceeded.
         /// </summary>
         public event EventHandler<FileProceededEventArgs> ProceededFile;
@@ -152,12 +157,15 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="targetFileSystem">The target file system.</param>
-        protected Job(IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IDirectoryInfo directoryA, IDirectoryInfo directoryB)
+        protected Job(string name, IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IDirectoryInfo directoryA, IDirectoryInfo directoryB)
         {
             sourceFileSystem.ThrowIfNull(() => sourceFileSystem);
             targetFileSystem.ThrowIfNull(() => targetFileSystem);
             directoryA.ThrowIfNull(() => directoryA);
             directoryB.ThrowIfNull(() => directoryB);
+
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentException("The name cannot be null or empty.", Reflector.GetMemberName(() => name));
 
             this.SourceFileSystem = sourceFileSystem;
             this.TargetFileSystem = targetFileSystem;
@@ -202,6 +210,15 @@ namespace FlagSync.Core
         {
             this.IsPaused = false;
             this.IsStopped = true;
+        }
+
+        /// <summary>
+        /// Counts the files of both directories of this job.
+        /// </summary>
+        /// <returns>The result of the counting of both directories of this job.</returns>
+        public FileCounterResult CountFiles()
+        {
+            return FileCounter.CountFiles(this.DirectoryA) + FileCounter.CountFiles(this.DirectoryB);
         }
 
         /// <summary>

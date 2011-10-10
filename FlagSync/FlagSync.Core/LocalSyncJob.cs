@@ -9,8 +9,8 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <remarks></remarks>
-        public LocalSyncJob(LocalDirectoryInfo directoryA, LocalDirectoryInfo directoryB)
-            : base(new LocalFileSystem(), new LocalFileSystem(), directoryA, directoryB) { }
+        public LocalSyncJob(string name, LocalDirectoryInfo directoryA, LocalDirectoryInfo directoryB)
+            : base(name, new LocalFileSystem(), new LocalFileSystem(), directoryA, directoryB) { }
 
         /// <summary>
         /// Starts the job, opies new and modified files from directory A to directory B and then switches the direction

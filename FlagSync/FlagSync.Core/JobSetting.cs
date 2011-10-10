@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Net;
+using FlagFtp;
+using FlagSync.Core.FileSystem.ITunes;
+using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
@@ -83,6 +88,62 @@ namespace FlagSync.Core
         public JobSetting()
         {
             this.IsIncluded = true;
+        }
+
+        /// <summary>
+        /// Creates a job from this job setting.
+        /// </summary>
+        /// <returns>A job that is created from this job setting.</returns>
+        public Job CreateJob()
+        {
+            switch (this.SyncMode)
+            {
+                case SyncMode.LocalBackup:
+                    {
+                        var source = new LocalDirectoryInfo(new DirectoryInfo(this.DirectoryA));
+                        var target = new LocalDirectoryInfo(new DirectoryInfo(this.DirectoryB));
+
+                        return new LocalBackupJob(this.Name, source, target);
+                    }
+
+                case SyncMode.LocalSynchronization:
+                    {
+                        var directoryA = new LocalDirectoryInfo(new DirectoryInfo(this.DirectoryA));
+                        var directoryB = new LocalDirectoryInfo(new DirectoryInfo(this.DirectoryB));
+
+                        return new LocalSyncJob(this.Name, directoryA, directoryB);
+                    }
+
+                case SyncMode.ITunes:
+                    {
+                        var source = new ITunesDirectoryInfo(this.ITunesPlaylist);
+                        var target = new LocalDirectoryInfo(new DirectoryInfo(this.DirectoryB));
+
+                        return new ITunesJob(this.Name, source, target);
+                    }
+
+                case SyncMode.FtpBackup:
+                    {
+                        var source = new LocalDirectoryInfo(new DirectoryInfo(this.DirectoryA));
+
+                        var client = new FtpClient(new NetworkCredential(this.FtpUserName, this.FtpPassword));
+                        var target = new FlagSync.Core.FileSystem.Ftp.FtpDirectoryInfo(this.FtpAddress, client);
+
+                        return new FtpBackupJob(this.Name, source, target, new Uri(this.FtpAddress), this.FtpUserName, this.FtpPassword);
+                    }
+
+                case SyncMode.FtpSynchronization:
+                    {
+                        var directoryA = new LocalDirectoryInfo(new DirectoryInfo(this.DirectoryA));
+
+                        var client = new FtpClient(new NetworkCredential(this.FtpUserName, this.FtpPassword));
+                        var directoryB = new FlagSync.Core.FileSystem.Ftp.FtpDirectoryInfo(this.FtpAddress, client);
+
+                        return new FtpBackupJob(this.Name, directoryA, directoryB, new Uri(this.FtpAddress), this.FtpUserName, this.FtpPassword);
+                    }
+            }
+
+            throw new NotSupportedException();
         }
 
         /// <summary>
