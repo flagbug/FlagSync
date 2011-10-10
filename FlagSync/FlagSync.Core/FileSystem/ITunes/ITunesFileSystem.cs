@@ -14,8 +14,6 @@ namespace FlagSync.Core.FileSystem.ITunes
     /// </summary>
     internal class ITunesFileSystem : IFileSystem
     {
-        private string playlist;
-
         private IEnumerable<ITunesDirectoryInfo> playlistStructureChache;
 
         /// <summary>
@@ -260,21 +258,6 @@ namespace FlagSync.Core.FileSystem.ITunes
             {
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ITunesFileSystem"/> class.
-        /// </summary>
-        /// <param name="playlist">The playlist.</param>
-        public ITunesFileSystem(string playlist)
-        {
-            if (playlist == null)
-                throw new ArgumentNullException("playlist");
-
-            if (playlist == string.Empty)
-                throw new ArgumentException("The playlist name cannot be empty", "playlist");
-
-            this.playlist = playlist;
         }
 
         /// <summary>

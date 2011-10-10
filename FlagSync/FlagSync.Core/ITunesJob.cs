@@ -13,7 +13,7 @@ namespace FlagSync.Core
         /// <param name="settings">The settings.</param>
         /// <remarks></remarks>
         public ITunesJob(JobSetting settings)
-            : base(settings, new ITunesFileSystem(settings.ITunesPlaylist), new LocalFileSystem()) { }
+            : base(settings, new ITunesFileSystem(), new LocalFileSystem()) { }
 
         /// <summary>
         /// Starts the iTunes job.
