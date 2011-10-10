@@ -4,7 +4,7 @@ namespace FlagSync.Core.FileSystem
 {
     internal class FileCounter
     {
-        public FileCounterResults CountFiles(IDirectoryInfo rootDirectory)
+        public static FileCounterResults CountFiles(IDirectoryInfo rootDirectory)
         {
             int files = 0;
             long bytes = 0;

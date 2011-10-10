@@ -285,7 +285,6 @@ namespace FlagSync.Core
             foreach (Job job in this.jobQueue)
             {
                 //TODO: Make generic for all settings
-                FileCounter counter = new FileCounter();
 
                 IDirectoryInfo directoryA = null;
                 IDirectoryInfo directoryB = null;
@@ -311,8 +310,8 @@ namespace FlagSync.Core
                         break;
                 }
 
-                result += counter.CountFiles(directoryA);
-                result += counter.CountFiles(directoryB);
+                result += FileCounter.CountFiles(directoryA);
+                result += FileCounter.CountFiles(directoryB);
             }
 
             return result;
