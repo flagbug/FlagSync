@@ -48,10 +48,10 @@ namespace FlagSync.Core
         protected void BackupDirectoryRecursively(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool execute)
         {
             if (!sourceDirectory.Exists)
-                throw new ArgumentException("The source directory doesn't exist.", "sourceDirectoryPath");
+                throw new ArgumentException("The source directory doesn't exist.", Reflector.GetMemberName(() => sourceDirectory));
 
             if (!targetDirectory.Exists)
-                throw new ArgumentException("The target directory doesn't exist.", "targetDirectoryPath");
+                throw new ArgumentException("The target directory doesn't exist.", Reflector.GetMemberName(() => targetDirectory));
 
             FileSystemScanner rootScanner = new FileSystemScanner(sourceDirectory);
 
