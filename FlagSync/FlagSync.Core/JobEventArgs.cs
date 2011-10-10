@@ -1,4 +1,5 @@
 ﻿using System;
+using FlagLib.Extensions;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core
@@ -17,8 +18,7 @@ namespace FlagSync.Core
         /// <param name="file">The file.</param>
         public FileDeletionErrorEventArgs(IFileInfo file)
         {
-            if (file == null)
-                throw new ArgumentNullException("file");
+            file.ThrowIfNull(() => file);
 
             this.File = file;
         }
@@ -38,8 +38,7 @@ namespace FlagSync.Core
         /// <param name="job">The job.</param>
         public JobEventArgs(JobSetting job)
         {
-            if (job == null)
-                throw new ArgumentNullException("job");
+            job.ThrowIfNull(() => job);
 
             this.Job = job;
         }
@@ -66,8 +65,7 @@ namespace FlagSync.Core
         /// <param name="fileLength">The file length.</param>
         public FileProceededEventArgs(string filePath, long fileLength)
         {
-            if (filePath == null)
-                throw new ArgumentNullException("filePath");
+            filePath.ThrowIfNull(() => filePath);
 
             this.FilePath = filePath;
             this.FileLength = fileLength;
@@ -102,14 +100,9 @@ namespace FlagSync.Core
         /// <param name="targetDirectory">The target directory.</param>
         public FileCopyEventArgs(IFileInfo file, IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
-            if (file == null)
-                throw new ArgumentNullException("file");
-
-            if (sourceDirectory == null)
-                throw new ArgumentNullException("sourceDirectory");
-
-            if (targetDirectory == null)
-                throw new ArgumentNullException("targetDirectory");
+            file.ThrowIfNull(() => file);
+            sourceDirectory.ThrowIfNull(() => sourceDirectory);
+            targetDirectory.ThrowIfNull(() => targetDirectory);
 
             this.File = file;
             this.SourceDirectory = sourceDirectory;
@@ -138,11 +131,8 @@ namespace FlagSync.Core
         /// <param name="targetDirectory">The target directory.</param>
         public FileCopyErrorEventArgs(IFileInfo file, IDirectoryInfo targetDirectory)
         {
-            if (file == null)
-                throw new ArgumentNullException("file");
-
-            if (targetDirectory == null)
-                throw new ArgumentNullException("targetDirectory");
+            file.ThrowIfNull(() => file);
+            targetDirectory.ThrowIfNull(() => targetDirectory);
 
             this.File = file;
             this.TargetDirectory = targetDirectory;
@@ -171,8 +161,7 @@ namespace FlagSync.Core
         /// <param name="file">The file path.</param>
         public FileDeletionEventArgs(string filePath, long fileSize)
         {
-            if (filePath == null)
-                throw new ArgumentNullException("filePath");
+            filePath.ThrowIfNull(() => filePath);
 
             this.FilePath = filePath;
             this.FileSize = fileSize;
@@ -200,11 +189,8 @@ namespace FlagSync.Core
         /// <param name="targetDirectory">The target directory.</param>
         public DirectoryCreationEventArgs(IDirectoryInfo directory, IDirectoryInfo targetDirectory)
         {
-            if (directory == null)
-                throw new ArgumentNullException("directory");
-
-            if (targetDirectory == null)
-                throw new ArgumentNullException("targetDirectory");
+            directory.ThrowIfNull(() => directory);
+            targetDirectory.ThrowIfNull(() => targetDirectory);
 
             this.Directory = directory;
             this.TargetDirectory = targetDirectory;
@@ -225,8 +211,7 @@ namespace FlagSync.Core
         /// <param name="directory">The directory path.</param>
         public DirectoryDeletionEventArgs(string directoryPath)
         {
-            if (directoryPath == null)
-                throw new ArgumentNullException("directoryPath");
+            directoryPath.ThrowIfNull(() => directoryPath);
 
             this.DirectoryPath = directoryPath;
         }
