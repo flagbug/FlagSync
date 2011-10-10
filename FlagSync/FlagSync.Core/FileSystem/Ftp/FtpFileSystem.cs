@@ -146,8 +146,6 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             bool succeed = false;
 
-            var uri = new Uri(targetDirectory.FullName);
-
             Uri targetFilePath = new Uri(this.CombinePath(targetDirectory.FullName, sourceFile.Name));
 
             try
