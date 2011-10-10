@@ -1,4 +1,6 @@
-﻿namespace FlagSync.Core
+﻿using FlagLib.Extensions;
+
+namespace FlagSync.Core
 {
     /// <summary>
     /// Contains the number of files counted and the total size of all files
@@ -44,6 +46,9 @@
         /// <returns>The result of the operator.</returns>
         public static FileCounterResult operator +(FileCounterResult a, FileCounterResult b)
         {
+            a.ThrowIfNull(() => a);
+            b.ThrowIfNull(() => b);
+
             return new FileCounterResult(a.CountedFiles + b.CountedFiles, a.CountedBytes + b.CountedBytes);
         }
     }
