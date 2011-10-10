@@ -13,15 +13,15 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <summary>
         /// Occurs when the file copy progress has changed.
         /// </summary>
-        /// <remarks></remarks>
         event EventHandler<DataTransferEventArgs> FileCopyProgressChanged;
 
         /// <summary>
         /// Tries to delete a file.
         /// </summary>
         /// <param name="file">The file to delete.</param>
-        /// <returns>A value indicating whether the file deletion has succeed</returns>
-        /// <remarks></remarks>
+        /// <returns>
+        ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
+        /// </returns>
         bool TryDeleteFile(IFileInfo file);
 
         /// <summary>
@@ -29,16 +29,18 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>Returns a value indicating whether the directory creation has succeed</returns>
-        /// <remarks></remarks>
+        /// <returns>
+        /// Returns a value indicating whether the directory creation has succeed
+        /// </returns>
         bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory);
 
         /// <summary>
         /// Tries to delete a directory.
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
-        /// <returns>A value indicating whether the deletion has succeed.</returns>
-        /// <remarks></remarks>
+        /// <returns>
+        /// A value indicating whether the deletion has succeed.
+        /// </returns>
         bool TryDeleteDirectory(IDirectoryInfo directory);
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <returns>
-        /// True, if the copy operation has succeed; otherwise, false
+        ///   <c>true</c>, if the copy operation has succeed; otherwise, <c>false</c>.
         /// </returns>
         bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory);
 
@@ -56,39 +58,45 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// Gets the file info at the specified path.
         /// </summary>
         /// <param name="path">The path of the file.</param>
-        /// <returns></returns>
-        /// <remarks></remarks>
+        /// <returns>
+        /// An <see cref="IFileInfo"/> of the file from the specified path.
+        /// </returns>
         IFileInfo GetFileInfo(string path);
 
         /// <summary>
         /// Gets the directory info at the specified path.
         /// </summary>
         /// <param name="path">The path of the directory.</param>
-        /// <returns></returns>
-        /// <remarks></remarks>
+        /// <returns>
+        /// An <see cref="IDirectoryInfo"/> of the directory from the specified path.
+        /// </returns>
         IDirectoryInfo GetDirectoryInfo(string path);
 
         /// <summary>
         /// Checks if the file at the specified path exists.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <returns>True, if the file exists; otherwise, false</returns>
-        /// <remarks></remarks>
+        /// <returns>
+        ///   <c>true</c>, if the file exists; otherwise, <c>false</c>.
+        /// </returns>
         bool FileExists(string path);
 
         /// <summary>
         /// Checks if the directory at the specified path exists.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <returns>True, if the directory exists; otherwise, false</returns>
-        /// <remarks></remarks>
+        /// <returns>
+        ///   <c>true</c>, if the directory exists; otherwise, <c>false</c>.
+        /// </returns>
         bool DirectoryExists(string path);
 
         /// <summary>
         /// Opens the stream of the specified file.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// A stream from from the specified file.
+        /// </returns>
         Stream OpenFileStream(IFileInfo file);
 
         /// <summary>
@@ -96,7 +104,9 @@ namespace FlagSync.Core.FileSystem.Abstract
         /// </summary>
         /// <param name="path1">The first path.</param>
         /// <param name="path2">The second path.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// A path. which is the combination of the first and second path.
+        /// </returns>
         string CombinePath(string path1, string path2);
     }
 }
