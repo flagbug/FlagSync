@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FlagLib.Extensions;
 using FlagLib.IO;
+using FlagLib.Reflection;
 using FlagSync.Core.FileSystem.Abstract;
 using FlagSync.Core.FileSystem.Local;
 using iTunesLib;
@@ -81,8 +83,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// </returns>
         public IFileInfo GetFileInfo(string path)
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             string[] split = path.Split(Path.DirectorySeparatorChar);
 
@@ -115,8 +116,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// </returns>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             if (!this.DirectoryExists(path))
             {
@@ -174,13 +174,12 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// </returns>
         public bool FileExists(string path)
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             string[] split = path.Split(Path.DirectorySeparatorChar);
 
             if (split.Length < 4)
-                throw new ArgumentException("The path is not valid.", "path");
+                throw new ArgumentException("The path is not valid.", Reflector.GetMemberName(() => path));
 
             string playlist = split[0];
             string artist = split[1];
@@ -217,8 +216,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// </returns>
         public bool DirectoryExists(string path)
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             string[] split = path.Split(Path.DirectorySeparatorChar);
 
@@ -269,8 +267,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// </returns>
         public Stream OpenFileStream(IFileInfo file)
         {
-            if (file == null)
-                throw new ArgumentNullException("file");
+            file.ThrowIfNull(() => file);
 
             return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
         }
@@ -291,23 +288,20 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <summary>
         /// Maps the specified iTunes playlist to a directory structure.
         /// </summary>
-        /// <param name="playlist">The playlist.</param>
+        /// <param name="playlistName">The playlist.</param>
         /// <returns>A directory structure which represents the specified iTunes playlist</returns>
-        public static IEnumerable<ITunesDirectoryInfo> MapPlaylistToDirectoryStructure(string playlist)
+        public static IEnumerable<ITunesDirectoryInfo> MapPlaylistToDirectoryStructure(string playlistName)
         {
-            if (playlist == null)
-                throw new ArgumentNullException("playlist");
+            if (String.IsNullOrEmpty(playlistName))
+                throw new ArgumentException("The playlist name name cannot be null or empty", Reflector.GetMemberName(() => playlistName));
 
-            if (playlist == string.Empty)
-                throw new ArgumentException("The playlist name cannot be empty", "playlist");
-
-            ITunesDirectoryInfo root = new ITunesDirectoryInfo(playlist);
+            ITunesDirectoryInfo root = new ITunesDirectoryInfo(playlistName);
 
             var files = new iTunesAppClass()
                 .LibrarySource
                 .Playlists
                 .Cast<IITPlaylist>()
-                .Single(pl => pl.Name == playlist)
+                .Single(pl => pl.Name == playlistName)
                 .Tracks
                 .Cast<IITFileOrCDTrack>();
 
@@ -363,8 +357,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <returns>A normalized form of the artist or album string</returns>
         private static string NormalizeArtistOrAlbumName(string artistOrAlbumName)
         {
-            if (artistOrAlbumName == null)
-                throw new ArgumentNullException("artistOrAlbumName");
+            artistOrAlbumName.ThrowIfNull(() => artistOrAlbumName);
 
             var invalidCharacters = Path.GetInvalidPathChars().Concat(Path.GetInvalidFileNameChars()).Distinct();
 
@@ -379,19 +372,16 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <summary>
         /// Gets the structure of the specified playlist.
         /// </summary>
-        /// <param name="playlist">The playlist.</param>
+        /// <param name="playlistName">The playlist.</param>
         /// <returns></returns>
-        private IEnumerable<ITunesDirectoryInfo> GetPlaylistStructure(string playlist)
+        private IEnumerable<ITunesDirectoryInfo> GetPlaylistStructure(string playlistName)
         {
-            if (playlist == null)
-                throw new ArgumentNullException("playlist");
-
-            if (playlist == string.Empty)
-                throw new ArgumentException("The playlist name cannot be empty", "playlist");
+            if (String.IsNullOrEmpty(playlistName))
+                throw new ArgumentException("The playlist name cannot be empty", Reflector.GetMemberName(() => playlistName));
 
             if (this.playlistStructureChache == null)
             {
-                this.playlistStructureChache = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlist);
+                this.playlistStructureChache = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlistName);
             }
 
             return playlistStructureChache;
