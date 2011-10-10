@@ -22,7 +22,6 @@ namespace FlagSync.Core
         public override void Start(bool preview)
         {
             this.BackupDirectoryRecursively(this.DirectoryA, this.DirectoryB, !preview);
-
             this.CheckDeletionsRecursively(this.DirectoryB, this.DirectoryA, !preview);
 
             this.OnFinished(EventArgs.Empty);

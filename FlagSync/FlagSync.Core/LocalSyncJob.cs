@@ -20,7 +20,6 @@ namespace FlagSync.Core
         public override void Start(bool preview)
         {
             this.BackupDirectoryRecursively(this.DirectoryA, this.DirectoryB, !preview);
-
             this.BackupDirectoryRecursively(this.DirectoryB, this.DirectoryA, !preview);
 
             this.OnFinished(System.EventArgs.Empty);

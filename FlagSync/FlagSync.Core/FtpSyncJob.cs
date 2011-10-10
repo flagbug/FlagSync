@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 using FlagSync.Core.FileSystem.Ftp;
 using FlagSync.Core.FileSystem.Local;
@@ -12,9 +11,8 @@ namespace FlagSync.Core
         /// Initializes a new instance of the <see cref="FtpSyncJob"/> class.
         /// </summary>
         /// <param name="setting">The setting.</param>
-        public FtpSyncJob(JobSetting setting) :
-            base(new LocalFileSystem(), new FtpFileSystem(new Uri(setting.FtpAddress),
-                 new NetworkCredential(setting.FtpUserName, setting.FtpPassword)))
+        public FtpSyncJob(LocalDirectoryInfo directoryA, FtpDirectoryInfo directoryB, Uri host, string userName, string password) :
+            base(new LocalFileSystem(), new FtpFileSystem(host, new NetworkCredential(userName, password)), directoryA, directoryB)
         { }
 
         /// <summary>
@@ -23,12 +21,8 @@ namespace FlagSync.Core
         /// <param name="preview">if set to <c>true</c>, a preview will be performed.</param>
         public override void Start(bool preview)
         {
-            LocalDirectoryInfo localDirectory = new LocalDirectoryInfo(new DirectoryInfo(this.Settings.DirectoryB));
-            FtpDirectoryInfo ftpDirectory = new FtpDirectoryInfo(this.Settings.FtpAddress,
-                new FlagFtp.FtpClient(new NetworkCredential(this.Settings.FtpUserName, this.Settings.FtpPassword)));
-
-            this.BackupDirectoryRecursively(localDirectory, ftpDirectory, !preview);
-            this.BackupDirectoryRecursively(ftpDirectory, localDirectory, !preview);
+            this.BackupDirectoryRecursively(this.DirectoryA, this.DirectoryB, !preview);
+            this.BackupDirectoryRecursively(this.DirectoryB, this.DirectoryA, !preview);
 
             this.OnFinished(EventArgs.Empty);
         }
