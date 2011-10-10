@@ -17,21 +17,25 @@ namespace FlagSync.Core.FileSystem.Abstract
         bool Exists { get; }
 
         /// <summary>
-        /// Return the files in the directory.
+        /// Returns a list of all files in the directory.
         /// </summary>
-        /// <returns>The files in the directory</returns>
+        /// <returns>
+        /// The files in the directory.
+        /// </returns>
         /// <exception cref="System.UnauthorizedAccessException">
         /// The exception that is thrown if the directory is locked
-        /// </exception>
+        ///   </exception>
         IEnumerable<IFileInfo> GetFiles();
 
         /// <summary>
-        /// Return the directories in the directory.
+        /// Returns a list of all directories in the directory.
         /// </summary>
-        /// <returns>The directories in the directory</returns>
+        /// <returns>
+        /// The directories in the directory.
+        /// </returns>
         /// <exception cref="System.UnauthorizedAccessException">
-        /// The exception that is thrown if the directory is locked
-        /// </exception>
+        /// The exception that is thrown if the directory is locked.
+        ///   </exception>
         IEnumerable<IDirectoryInfo> GetDirectories();
     }
 }

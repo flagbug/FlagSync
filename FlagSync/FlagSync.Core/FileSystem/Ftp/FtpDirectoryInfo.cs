@@ -8,6 +8,9 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
 {
+    /// <summary>
+    /// Represents a directory on a FTP-server
+    /// </summary>
     [DebuggerDisplay("{FullName}")]
     internal class FtpDirectoryInfo : IDirectoryInfo
     {
@@ -60,10 +63,10 @@ namespace FlagSync.Core.FileSystem.Ftp
         }
 
         /// <summary>
-        /// Return the files in the directory.
+        /// Returns a list of all files in the directory.
         /// </summary>
         /// <returns>
-        /// The files in the directory
+        /// The files in the directory.
         /// </returns>
         /// <exception cref="System.UnauthorizedAccessException">
         /// The exception that is thrown if the directory is locked
@@ -77,13 +80,13 @@ namespace FlagSync.Core.FileSystem.Ftp
         }
 
         /// <summary>
-        /// Return the directories in the directory.
+        /// Returns a list of all directories in the directory.
         /// </summary>
         /// <returns>
-        /// The directories in the directory
+        /// The directories in the directory.
         /// </returns>
         /// <exception cref="System.UnauthorizedAccessException">
-        /// The exception that is thrown if the directory is locked
+        /// The exception that is thrown if the directory is locked.
         ///   </exception>
         public IEnumerable<IDirectoryInfo> GetDirectories()
         {

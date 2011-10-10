@@ -6,6 +6,14 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
 {
+    /// <summary>
+    /// Represents a directory in the local filesystem.
+    /// </summary>
+    /// <remarks>
+    /// The <see cref="LocalDirectoryInfo"/> class is basically a wrapper around
+    /// the <see cref="System.IO.DirectoryInfo"/> class and abstracts it to be
+    /// used as an <see cref="IDirectoryInfo"/>.
+    /// </remarks>
     [DebuggerDisplay("{FullName}")]
     internal class LocalDirectoryInfo : IDirectoryInfo
     {
@@ -53,21 +61,20 @@ namespace FlagSync.Core.FileSystem.Local
         /// <param name="directoryInfo">The directory info to wrap.</param>
         public LocalDirectoryInfo(DirectoryInfo directoryInfo)
         {
-            /*
-            if (directoryInfo == null)
-                throw new ArgumentNullException("directoryInfo");
-             */
+            //Don't check for null here
 
             this.directoryInfo = directoryInfo;
         }
 
         /// <summary>
-        /// Return the files in the directory.
+        /// Returns a list of all files in the directory.
         /// </summary>
-        /// <returns>The files in the directory</returns>
+        /// <returns>
+        /// The files in the directory.
+        /// </returns>
         /// <exception cref="System.UnauthorizedAccessException">
         /// The exception that is thrown if the directory is locked
-        /// </exception>
+        ///   </exception>
         public IEnumerable<IFileInfo> GetFiles()
         {
             return this.directoryInfo
@@ -76,12 +83,14 @@ namespace FlagSync.Core.FileSystem.Local
         }
 
         /// <summary>
-        /// Return the directories in the directory.
+        /// Returns a list of all directories in the directory.
         /// </summary>
-        /// <returns>The directories in the directory</returns>
+        /// <returns>
+        /// The directories in the directory.
+        /// </returns>
         /// <exception cref="System.UnauthorizedAccessException">
-        /// The exception that is thrown if the directory is locked
-        /// </exception>
+        /// The exception that is thrown if the directory is locked.
+        ///   </exception>
         public IEnumerable<IDirectoryInfo> GetDirectories()
         {
             return this.directoryInfo

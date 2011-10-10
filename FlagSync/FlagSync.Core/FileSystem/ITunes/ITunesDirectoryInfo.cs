@@ -8,9 +8,12 @@ using FlagSync.Core.FileSystem.Abstract;
 namespace FlagSync.Core.FileSystem.ITunes
 {
     /// <summary>
-    /// Represents an iTunes directory
+    /// Represents a directory in the iTunes filesystem.
     /// </summary>
-    /// <remarks></remarks>
+    /// <remarks>
+    /// A directory in the iTunes filesystem is usually
+    /// the representation of an artist or an album of a song.
+    /// </remarks>
     [DebuggerDisplay("{FullName}")]
     internal class ITunesDirectoryInfo : IDirectoryInfo
     {

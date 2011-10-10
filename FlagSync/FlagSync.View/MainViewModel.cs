@@ -18,6 +18,9 @@ namespace FlagSync.View
         private string appDataFolderPath;
         private string logFilePath;
 
+        /// <summary>
+        /// Gets the exit application command.
+        /// </summary>
         public ICommand ExitApplicationCommand
         {
             get
