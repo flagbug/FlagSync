@@ -96,6 +96,7 @@
     <Compile Include="ITunesJobSettingsViewModel.cs" />
     <Compile Include="JobSettingsViewModel.cs" />
     <Compile Include="JobSettingViewModel.cs" />
+    <Compile Include="JobViewModel.cs" />
     <Compile Include="JobWorkerViewModel.cs" />
     <Compile Include="LocalJobSettingsPanel.xaml.cs">
       <DependentUpon>LocalJobSettingsPanel.xaml</DependentUpon>

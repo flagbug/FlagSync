@@ -11,7 +11,7 @@ using FlagSync.Core;
 
 namespace FlagSync.View
 {
-    public class MainViewModel
+    internal class MainViewModel
     {
         private JobSettingsViewModel jobSettingsViewModel = new JobSettingsViewModel();
         private JobWorkerViewModel jobWorkerViewModel = new JobWorkerViewModel();

@@ -12,9 +12,6 @@ namespace FlagSync.Core
 {
     public abstract class Job
     {
-        private bool isPaused;
-        private bool isStopped;
-
         private HashSet<string> proceededFilePaths;
         private HashSet<string> excludedPaths;
 
@@ -31,12 +28,12 @@ namespace FlagSync.Core
         /// <summary>
         /// Gets the directory A.
         /// </summary>
-        protected IDirectoryInfo DirectoryA { get; private set; }
+        public IDirectoryInfo DirectoryA { get; private set; }
 
         /// <summary>
         /// Gets the directory B.
         /// </summary>
-        protected IDirectoryInfo DirectoryB { get; private set; }
+        public IDirectoryInfo DirectoryB { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="Job"/> is paused.

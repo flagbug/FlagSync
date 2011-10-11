@@ -13,10 +13,10 @@ using FlagSync.Core;
 
 namespace FlagSync.View
 {
-    public class JobWorkerViewModel : ViewModelBase<JobWorkerViewModel>
+    internal class JobWorkerViewModel : ViewModelBase<JobWorkerViewModel>
     {
         private JobWorker jobWorker;
-        private JobSettingViewModel currentJobSetting;
+        private JobViewModel currentJob;
         private DateTime startTime;
         private long countedBytes;
         private long proceededBytes;
@@ -184,15 +184,15 @@ namespace FlagSync.View
         /// Gets the job settings of the current running job.
         /// </summary>
         /// <value>The job settings of the current running job.</value>
-        public JobSettingViewModel CurrentJobSetting
+        public JobViewModel CurrentJob
         {
-            get { return this.currentJobSetting; }
+            get { return this.currentJob; }
             private set
             {
-                if (this.CurrentJobSetting != value)
+                if (this.CurrentJob != value)
                 {
-                    this.currentJobSetting = value;
-                    this.OnPropertyChanged(vm => vm.CurrentJobSetting);
+                    this.currentJob = value;
+                    this.OnPropertyChanged(vm => vm.CurrentJob);
                 }
             }
         }
@@ -373,7 +373,10 @@ namespace FlagSync.View
         {
             if (jobSettings.All(setting => this.CheckDirectoriesExist(setting)))
             {
-                this.jobWorker.Start(jobSettings, preview);
+                var jobs = jobSettings.Select(setting => setting.CreateJob());
+
+                this.jobWorker.Start(jobs, preview);
+
                 this.IsCounting = true;
                 this.IsRunning = true;
                 this.IsPreview = preview;
@@ -402,7 +405,7 @@ namespace FlagSync.View
             this.jobWorker.Continue();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.ContinuingJobsMessage);
-            this.AddStatusMessage(Properties.Resources.StartingJobsMessage + " " + this.CurrentJobSetting.Name + "...");
+            this.AddStatusMessage(Properties.Resources.StartingJobsMessage + " " + this.CurrentJob.Name + "...");
         }
 
         /// <summary>
@@ -556,7 +559,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
         private void jobWorker_JobStarted(object sender, JobEventArgs e)
         {
-            this.CurrentJobSetting = new JobSettingViewModel(e.Job);
+            this.CurrentJob = new JobViewModel(e.Job);
             this.AddStatusMessage(Properties.Resources.StartingJobMessage + " " + e.Job.Name + "...");
         }
 
