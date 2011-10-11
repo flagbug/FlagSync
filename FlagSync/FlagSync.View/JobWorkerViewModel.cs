@@ -371,10 +371,10 @@ namespace FlagSync.View
         /// <param name="preview">if set to true, a preview will be performed.</param>
         public void StartJobWorker(IEnumerable<JobSetting> jobSettings, bool preview)
         {
-            if (jobSettings.All(setting => this.CheckDirectoriesExist(setting)))
-            {
-                var jobs = jobSettings.Select(setting => setting.CreateJob());
+            var jobs = jobSettings.Select(setting => setting.CreateJob());
 
+            if (jobs.All(job => this.CheckDirectoriesExist(job)))
+            {
                 this.jobWorker.Start(jobs, preview);
 
                 this.IsCounting = true;
@@ -434,37 +434,20 @@ namespace FlagSync.View
         /// </summary>
         /// <param name="jobSetting">The job setting.</param>
         /// <returns>A value indicating whether the both directories exist.</returns>
-        private bool CheckDirectoriesExist(JobSetting jobSetting)
+        private bool CheckDirectoriesExist(Job job)
         {
             bool exist = true;
 
-            //TODO: Add existance checks
-            switch (jobSetting.SyncMode)
+            if(!job.DirectoryA.Exists)
             {
-                case SyncMode.LocalBackup:
-                case SyncMode.LocalSynchronization:
-                    if (!Directory.Exists(jobSetting.DirectoryA))
-                    {
-                        this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryADoesntExistMessage);
-                        exist = false;
-                    }
+                this.AddStatusMessage(job.Name + ": " + Properties.Resources.DirectoryADoesntExistMessage);
+                exist = false;
+            }
 
-                    if (!Directory.Exists(jobSetting.DirectoryB))
-                    {
-                        this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
-                        exist = false;
-                    }
-                    break;
-
-                case SyncMode.ITunes:
-                case SyncMode.FtpBackup:
-                case SyncMode.FtpSynchronization:
-                    if (!Directory.Exists(jobSetting.DirectoryB))
-                    {
-                        this.AddStatusMessage(jobSetting.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
-                        exist = false;
-                    }
-                    break;
+            if(!job.DirectoryB.Exists)
+            {
+                this.AddStatusMessage(job.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
+                exist = false;
             }
 
             return exist;
