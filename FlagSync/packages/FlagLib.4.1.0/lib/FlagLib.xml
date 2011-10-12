@@ -4,6 +4,13 @@
         <name>FlagLib</name>
     </assembly>
     <members>
+        <member name="T:FlagLib.Patterns.MVVM.RelayCommand">
+            <summary>
+            Represents an <see cref="T:System.Windows.Input.ICommand"/> which takes
+            a <see cref="T:System.Action"/> as Execute method and a <see cref="!:System.Predicate"/>
+            as CanExecute method.
+            </summary>
+        </member>
         <member name="M:FlagLib.Patterns.MVVM.RelayCommand.#ctor(System.Action{System.Object})">
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.Patterns.MVVM.RelayCommand"/> class.
@@ -208,10 +215,9 @@
         </member>
         <member name="T:FlagLib.Collections.Grid`1">
             <summary>
-            Provides a generic grid with rows and columns
+            Provides a generic grid with rows and columns.
             </summary>
-            <typeparam name="T"></typeparam>
-            <remarks></remarks>
+            <typeparam name="T">The type of the items in the <see cref="T:FlagLib.Collections.Grid`1"/>.</typeparam>
         </member>
         <member name="M:FlagLib.Collections.Grid`1.#ctor(System.Int32,System.Int32)">
             <summary>
@@ -270,13 +276,28 @@
             Gets or sets the element at the specified index.
             </summary>
         </member>
+        <member name="T:FlagLib.Reflection.Reflector">
+            <summary>
+            Provides methods for reflection.
+            </summary>
+        </member>
         <member name="M:FlagLib.Reflection.Reflector.GetMemberName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
             <summary>
-            Gets the name of a member which is passed via the expression.
+            Gets the name of the member that is passed via the expression.
             </summary>
-            <typeparam name="T">Type of the member.</typeparam>
+            <typeparam name="T">The type of the member.</typeparam>
             <param name="expression">The expression which contains the member.</param>
-            <returns>The members name.</returns>
+            <returns>
+            The members name.
+            </returns>
+            <example>
+            The method can be used as following:
+              <code>
+            int myMember = 0;
+            string name = Reflector.GetMembername(() =&gt; myMember);
+            Console.Write(name); // Output: myMember
+              </code>
+              </example>
         </member>
         <member name="T:FlagLib.IO.DataTransferEventArgs">
             <summary>
@@ -347,6 +368,11 @@
             The destination.
             </value>
         </member>
+        <member name="T:FlagLib.IO.DirectoryScanErrorEventArgs">
+            <summary>
+            Provides data for the <see cref="E:FlagLib.IO.DirectoryScanner.DirectoryScanError"/> event.
+            </summary>
+        </member>
         <member name="M:FlagLib.IO.DirectoryScanErrorEventArgs.#ctor(System.String,FlagLib.IO.DirectoryScanErrorType)">
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.IO.DirectoryScanErrorEventArgs"/> class.
@@ -370,6 +396,11 @@
             The directory path.
             </value>
         </member>
+        <member name="T:FlagLib.Extensions.LongExtensions">
+            <summary>
+            Provides extension methods for the <see cref="T:System.Int64"/> class.
+            </summary>
+        </member>
         <member name="M:FlagLib.Extensions.LongExtensions.ToSizeString(System.Int64)">
             <summary>
             Formats the value to a string, which has the appropriate size-suffix.
@@ -390,10 +421,10 @@
         </member>
         <member name="T:FlagLib.Patterns.MVVM.ViewModelBase`1">
             <summary>
-            Provides an abstract and generic view model base class, <para/>
-            which implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> interface
+            Provides an abstract and generic view model base class, which
+            implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> interface.
             </summary>
-            <typeparam name="T">Type of the concrete view model</typeparam>
+            <typeparam name="T">Type of the concrete view model.</typeparam>
         </member>
         <member name="M:FlagLib.Patterns.MVVM.ViewModelBase`1.OnPropertyChanged``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
             <summary>
@@ -412,6 +443,11 @@
             Specifies which error occured during the directory scan.
             </summary>
         </member>
+        <member name="T:FlagLib.Extensions.ClassExtensions">
+            <summary>
+            Provides generic extension methods.
+            </summary>
+        </member>
         <member name="M:FlagLib.Extensions.ClassExtensions.ThrowIfNull``1(``0,System.String)">
             <summary>
             Throws an <see cref="T:System.ArgumentNullException"/> if the object is null.
@@ -427,6 +463,11 @@
             <typeparam name="T"></typeparam>
             <param name="object">The object to check.</param>
             <param name="parameterName">The expression, which resolves to the parameter name.</param>
+        </member>
+        <member name="T:FlagLib.IO.FileEventArgs">
+            <summary>
+            Provides data for the <see cref="E:FlagLib.IO.DirectoryScanner.FileFound"/> event.
+            </summary>
         </member>
         <member name="M:FlagLib.IO.FileEventArgs.#ctor(System.IO.FileInfo)">
             <summary>
@@ -445,9 +486,9 @@
         <member name="T:FlagLib.Collections.EventCollection`1">
             <summary>
             Represents a generic <see cref="T:FlagLib.Collections.EventCollection`1"/> which raises <para/>
-            events when items are added and deleted.
+            events when items are added or deleted.
             </summary>
-            <typeparam name="T">The type of elements in the <see cref="T:FlagLib.Collections.EventCollection`1"/></typeparam>
+            <typeparam name="T">The type of elements in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.</typeparam>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.#ctor">
             <summary>
@@ -629,7 +670,7 @@
                </returns>
             
              <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:FlagLib.Collections.EventCollection`1"/>.
-               </exception>
+              </exception>
             
              <exception cref="T:System.NotSupportedException">
              The property is set and the  <see cref="T:FlagLib.Collections.EventCollection`1"/> is read-only.
@@ -680,9 +721,55 @@
             Occurs before the <see cref="T:FlagLib.Collections.EventCollection`1"/> has been cleared.
             </summary>
         </member>
+        <member name="T:FlagLib.Extensions.IComparableExtensions">
+            <summary>
+            Provides extension methods for the <see cref="T:System.IComparable`1"/> interface.
+            </summary>
+        </member>
+        <member name="M:FlagLib.Extensions.IComparableExtensions.ThrowIfGreaterThan``1(System.IComparable{``0},``0,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is greater than the limit.
+            </summary>
+            <param name="value">The value to check.</param>
+            <param name="limit">The exclusive limit.</param>
+            <param name="parameterName">The name of the parameter.</param>
+        </member>
+        <member name="M:FlagLib.Extensions.IComparableExtensions.ThrowIfGreaterThan``2(System.IComparable{``0},``0,System.Linq.Expressions.Expression{System.Func{``1}})">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is greater than the limit.
+            </summary>
+            <param name="value">The value to check.</param>
+            <param name="limit">The exclusive limit.</param>
+            <param name="parameterName">The expression that contains the name of the parameter.</param>
+            <remarks>
+            This method lets the caller define the parameter name as expression,
+            so that it can be checked at compile time.
+            </remarks>
+        </member>
+        <member name="M:FlagLib.Extensions.IComparableExtensions.ThrowIfLessThan``1(System.IComparable{``0},``0,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is less than the limit.
+            </summary>
+            <param name="value">The value to check.</param>
+            <param name="limit">The exclusive limit.</param>
+            <param name="parameterName">The name of the parameter.</param>
+        </member>
+        <member name="M:FlagLib.Extensions.IComparableExtensions.ThrowIfLessThan``2(System.IComparable{``0},``0,System.Linq.Expressions.Expression{System.Func{``1}})">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is less than the limit.
+            </summary>
+            <param name="value">The value to check.</param>
+            <param name="limit">The exclusive limit.</param>
+            <param name="parameterName">The expression that contains the name of the parameter.</param>
+            <remarks>
+            This method lets the caller define the parameter name as expression,
+            so that it can be checked at compile time.
+            </remarks>
+        </member>
         <member name="T:FlagLib.ValueConverters.BoolNegationValueConverter">
             <summary>
-            Negates a boolean value
+            Provides a <see cref="T:System.Windows.Data.IValueConverter"/> which
+            negates a boolean value.
             </summary>
         </member>
         <member name="M:FlagLib.ValueConverters.BoolNegationValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
@@ -711,7 +798,7 @@
         </member>
         <member name="T:FlagLib.Serialization.GenericXmlSerializer">
             <summary>
-            Provides a static and generic xml serializer to serialize collections an single objects
+            Provides a static and generic xml serializer to serialize collections an single objects.
             </summary>
         </member>
         <member name="M:FlagLib.Serialization.GenericXmlSerializer.SerializeCollection``1(System.Collections.Generic.ICollection{``0},System.String)">
@@ -735,7 +822,7 @@
             Deserializes the collection from the specified path.
             </summary>
             <typeparam name="T">The type of the serialized items</typeparam>
-            <param name="path">The path of the file.</param>
+            <param name="path">The path of the file with the deserialized data.</param>
             <returns>
             The deserialized collection.
             </returns>
@@ -745,32 +832,32 @@
             Deserializes the item at the specified path.
             </summary>
             <typeparam name="T">The type of the serialized item</typeparam>
-            <param name="path">The path of the file.</param>
+            <param name="path">The path of the file with the serialized data.</param>
             <returns>
             The deserialized item.
             </returns>
         </member>
-        <member name="M:FlagLib.Extensions.IntegerExtensions.ThrowIfGreaterThan(System.Int32,System.Int32,System.String)">
+        <member name="M:FlagLib.Serialization.GenericXmlSerializer.InternalSerialize``1(``0,System.String)">
             <summary>
-            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is greater than the limit.
+            Executes the intern Serialize method.
             </summary>
-            <param name="value">The value to check.</param>
-            <param name="limit">The exclusive limit.</param>
-            <param name="parameterName">The name of the parameter.</param>
+            <typeparam name="T"></typeparam>
+            <param name="object">The object to serialize.</param>
+            <param name="path">The path of the file.</param>
         </member>
-        <member name="M:FlagLib.Extensions.IntegerExtensions.ThrowIfLessThan(System.Int32,System.Int32,System.String)">
+        <member name="M:FlagLib.Serialization.GenericXmlSerializer.InternDeserialize``1(System.String)">
             <summary>
-            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> if the value is less than the limit.
+            Executes the intern Deserialize method.
             </summary>
-            <param name="value">The value to check.</param>
-            <param name="limit">The exclusive limit.</param>
-            <param name="parameterName">The name of the parameter.</param>
+            <typeparam name="T"></typeparam>
+            <param name="path">The path of the file with the serialized data.</param>
+            <returns></returns>
         </member>
         <member name="T:FlagLib.Collections.EventCollectionEventArgs`1">
             <summary>
-            Provides a collection which raises events when items get added or removed
+            Provides data for the events of the <see cref="T:FlagLib.Collections.EventCollection`1"/> class.
             </summary>
-            <typeparam name="T">Type of the items</typeparam>
+            <typeparam name="T">The type of the item.</typeparam>
         </member>
         <member name="M:FlagLib.Collections.EventCollectionEventArgs`1.#ctor(`0,System.Int32)">
             <summary>
@@ -795,11 +882,16 @@
             The index of the item which was affected.
             </value>
         </member>
+        <member name="T:FlagLib.IO.DirectoryEventArgs">
+            <summary>
+            Provides data for the <see cref="E:FlagLib.IO.DirectoryScanner.DirectoryFound"/> event.
+            </summary>
+        </member>
         <member name="M:FlagLib.IO.DirectoryEventArgs.#ctor(System.IO.DirectoryInfo)">
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.IO.DirectoryEventArgs"/> class.
             </summary>
-            <param name="directory">The found directory.</param>
+            <param name="directory">The directory that has been found.</param>
         </member>
         <member name="P:FlagLib.IO.DirectoryEventArgs.Directory">
             <summary>
@@ -809,10 +901,51 @@
             The directory that has been found.
             </value>
         </member>
+        <member name="T:FlagLib.Extensions.IEnumerableExtensions">
+            <summary>
+            Provides extension methods for the <see cref="T:System.Collections.Generic.IEnumerable`1"/> interface.
+            </summary>
+        </member>
+        <member name="M:FlagLib.Extensions.IEnumerableExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},``0[])">
+            <summary>
+            Determines whether a sequence contains any of the specified items by using the default equality comparer.
+            </summary>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">A sequence in which to locate one of the items.</param>
+            <param name="items">The items to locate in the sequence.</param>
+            <returns>
+              <c>true</c> if the sequence contains any of the specified items; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">source or items is null.</exception>
+        </member>
+        <member name="M:FlagLib.Extensions.IEnumerableExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Determines whether a sequence contains any of the specified items by using the default equality comparer.
+            </summary>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">A sequence in which to locate one of the items.</param>
+            <param name="items">The items to locate in the sequence.</param>
+            <returns>
+              <c>true</c> if the sequence contains any of the specified items; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">source or items is null.</exception>
+        </member>
+        <member name="M:FlagLib.Extensions.IEnumerableExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Executes the specified action on each item of the sequence.
+            </summary>
+            <typeparam name="TSource">The type of the elements in the source.</typeparam>
+            <param name="source">The sequence to execute the action.</param>
+            <param name="action">The action to execute.</param>
+        </member>
         <member name="T:FlagLib.IO.StreamCopyOperation">
             <summary>
             Provides an operation to copy a stream to another stream.
             </summary>
+            <remarks>
+            Note that this class does not dispose the streams,
+            the caller has to do it himself.
+            </remarks>
         </member>
         <!-- Badly formed XML comment ignored for member "M:FlagLib.IO.StreamCopyOperation.#ctor(System.IO.Stream,System.IO.Stream,System.Int32,System.Int32)" -->
         <member name="M:FlagLib.IO.StreamCopyOperation.#ctor(System.IO.Stream,System.IO.Stream,System.Int32,System.Boolean)">
@@ -999,38 +1132,9 @@
             Occurs when the search has finished.
             </summary>
         </member>
-        <member name="T:FlagLib.Extensions.EnumerableExtensions">
-            <summary>
-            Extension methods for the <see cref="T:System.Collections.Generic.IEnumerable`1"/> interface.
-            </summary>
-        </member>
-        <member name="M:FlagLib.Extensions.EnumerableExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},``0[])">
-            <summary>
-            Determines whether a sequence contains any of the specified items by using the default equality comparer.
-            </summary>
-            <typeparam name="TSource">The type of the elements of source.</typeparam>
-            <param name="source">A sequence in which to locate one of the items.</param>
-            <param name="items">The items to locate in the sequence.</param>
-            <returns>
-              <c>true</c> if the sequence contains any of the specified items; otherwise, <c>false</c>.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">source or items is null.</exception>
-        </member>
-        <member name="M:FlagLib.Extensions.EnumerableExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Determines whether a sequence contains any of the specified items by using the default equality comparer.
-            </summary>
-            <typeparam name="TSource">The type of the elements of source.</typeparam>
-            <param name="source">A sequence in which to locate one of the items.</param>
-            <param name="items">The items to locate in the sequence.</param>
-            <returns>
-              <c>true</c> if the sequence contains any of the specified items; otherwise, <c>false</c>.
-            </returns>
-            <exception cref="T:System.ArgumentNullException">source or items is null.</exception>
-        </member>
         <member name="T:FlagLib.Collections.SerializableDictionary`2">
             <summary>
-            Provides a serializable dictionary
+            Provides a serializable dictionary.
             </summary>
             <typeparam name="TKey">The type of the key.</typeparam>
             <typeparam name="TValue">The type of the value.</typeparam>
