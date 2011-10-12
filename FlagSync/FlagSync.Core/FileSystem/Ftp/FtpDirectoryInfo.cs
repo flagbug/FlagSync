@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FlagFtp;
+using FlagLib.Extensions;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
@@ -102,11 +103,8 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <param name="client">The client.</param>
         public FtpDirectoryInfo(string fullName, FtpClient client)
         {
-            if (fullName == null)
-                throw new ArgumentNullException("fullName");
-
-            if (client == null)
-                throw new ArgumentNullException("client");
+            fullName.ThrowIfNull(() => fullName);
+            client.ThrowIfNull(() => client);
 
             this.FullName = fullName;
             this.client = client;

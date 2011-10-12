@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Security;
+using FlagLib.Extensions;
 using FlagLib.IO;
 using FlagSync.Core.FileSystem.Abstract;
 
@@ -23,8 +24,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public bool TryDeleteFile(IFileInfo file)
         {
-            if (file == null)
-                throw new ArgumentNullException("file");
+            file.ThrowIfNull(() => file);
 
             if (!(file is LocalFileInfo))
                 throw new ArgumentException("The file must be of type LocalFileInfo.", "file");
@@ -70,11 +70,8 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
-            if (sourceDirectory == null)
-                throw new ArgumentNullException("sourceDirectory");
-
-            if (targetDirectory == null)
-                throw new ArgumentNullException("targetDirectory");
+            sourceDirectory.ThrowIfNull(() => sourceDirectory);
+            targetDirectory.ThrowIfNull(() => targetDirectory);
 
             bool succeed = false;
 
@@ -129,8 +126,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public bool TryDeleteDirectory(IDirectoryInfo directory)
         {
-            if (directory == null)
-                throw new ArgumentNullException("directory");
+            directory.ThrowIfNull(() => directory);
 
             if (!(directory is LocalDirectoryInfo))
                 throw new ArgumentException("The directory must be of type LocalDirectoryInfo.", "directory");
@@ -176,14 +172,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
-            if (sourceFileSystem == null)
-                throw new ArgumentNullException("sourceFileSystem");
-
-            if (sourceFile == null)
-                throw new ArgumentNullException("sourceFile");
-
-            if (targetDirectory == null)
-                throw new ArgumentNullException("targetDirectory");
+            sourceFileSystem.ThrowIfNull(() => sourceFileSystem);
+            sourceFile.ThrowIfNull(() => sourceFile);
+            targetDirectory.ThrowIfNull(() => targetDirectory);
 
             if (!(targetDirectory is LocalDirectoryInfo))
                 throw new ArgumentException("The target directory must be of type LocalDirectoryInfo.", "targetDirectory");
@@ -266,8 +257,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public IFileInfo GetFileInfo(string path)
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             return new LocalFileInfo(new FileInfo(path));
         }
@@ -281,8 +271,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public IDirectoryInfo GetDirectoryInfo(string path)
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             return new LocalDirectoryInfo(new DirectoryInfo(path));
         }
@@ -296,8 +285,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public bool FileExists(string path)
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             return File.Exists(path);
         }
@@ -311,8 +299,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public bool DirectoryExists(string path)
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             return Directory.Exists(path);
         }
@@ -326,8 +313,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public Stream OpenFileStream(IFileInfo file)
         {
-            if (file == null)
-                throw new ArgumentNullException("file");
+            file.ThrowIfNull(() => file);
 
             return File.Open(file.FullName, FileMode.Open, FileAccess.Read);
         }
@@ -342,6 +328,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// </returns>
         public string CombinePath(string path1, string path2)
         {
+            path1.ThrowIfNull(() => path1);
+            path2.ThrowIfNull(() => path2);
+
             return Path.Combine(path1, path2);
         }
     }

@@ -1,4 +1,5 @@
-﻿using FlagSync.Core.FileSystem.Abstract;
+﻿using FlagLib.Extensions;
+using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem
 {
@@ -6,6 +7,8 @@ namespace FlagSync.Core.FileSystem
     {
         public static FileCounterResult CountFiles(IDirectoryInfo rootDirectory)
         {
+            rootDirectory.ThrowIfNull(() => rootDirectory);
+
             int files = 0;
             long bytes = 0;
 

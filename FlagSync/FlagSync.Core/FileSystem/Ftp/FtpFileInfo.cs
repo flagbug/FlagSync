@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using FlagFtp;
+using FlagLib.Extensions;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
@@ -77,14 +78,8 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <param name="length">The length.</param>
         public FtpFileInfo(string fullName, DateTime lastWriteTime, long length, FtpClient client)
         {
-            if (fullName == null)
-                throw new ArgumentNullException("fullName");
-
-            if (lastWriteTime == null)
-                throw new ArgumentNullException("lastWriteTime");
-
-            if (client == null)
-                throw new ArgumentNullException("client");
+            fullName.ThrowIfNull(() => fullName);
+            client.ThrowIfNull(() => client);
 
             this.FullName = fullName;
             this.LastWriteTime = lastWriteTime;
