@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using FlagLib.Extensions;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
@@ -68,8 +69,7 @@ namespace FlagSync.Core.FileSystem.Local
         /// <param name="fileInfo">The file info to wrap.</param>
         public LocalFileInfo(FileInfo fileInfo)
         {
-            if (fileInfo == null)
-                throw new ArgumentNullException("fileInfo");
+            fileInfo.ThrowIfNull(() => fileInfo);
 
             this.fileInfo = fileInfo;
         }

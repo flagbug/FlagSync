@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using FlagLib.Extensions;
 using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.ITunes
@@ -106,8 +106,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         public ITunesDirectoryInfo(string playlistName)
             : this((ITunesDirectoryInfo)null)
         {
-            if (playlistName == null)
-                throw new ArgumentNullException("playlistName");
+            playlistName.ThrowIfNull(() => playlistName);
 
             this.name = playlistName;
             this.isRoot = true;
@@ -122,11 +121,8 @@ namespace FlagSync.Core.FileSystem.ITunes
         public ITunesDirectoryInfo(string albumName, IEnumerable<IFileInfo> files, ITunesDirectoryInfo parent)
             : this(parent)
         {
-            if (albumName == null)
-                throw new ArgumentNullException("albumName");
-
-            if (files == null)
-                throw new ArgumentNullException("files");
+            albumName.ThrowIfNull(() => albumName);
+            files.ThrowIfNull(() => files);
 
             this.name = albumName;
             this.files = files;
@@ -141,11 +137,8 @@ namespace FlagSync.Core.FileSystem.ITunes
         public ITunesDirectoryInfo(string artistName, IEnumerable<ITunesDirectoryInfo> directories, ITunesDirectoryInfo parent)
             : this(parent)
         {
-            if (artistName == null)
-                throw new ArgumentNullException("artistName");
-
-            if (directories == null)
-                throw new ArgumentNullException("directories");
+            artistName.ThrowIfNull(() => artistName);
+            directories.ThrowIfNull(() => directories);
 
             this.name = artistName;
             this.directories = directories;
@@ -170,11 +163,8 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <returns></returns>
         public static ITunesDirectoryInfo CreateNonExistantDirectoryInfo(string name, ITunesDirectoryInfo parent)
         {
-            if (name == null)
-                throw new ArgumentNullException("name");
-
-            if (parent == null)
-                throw new ArgumentNullException("parent");
+            name.ThrowIfNull(() => name);
+            parent.ThrowIfNull(() => parent);
 
             ITunesDirectoryInfo directory = new ITunesDirectoryInfo(parent);
             directory.name = name;
