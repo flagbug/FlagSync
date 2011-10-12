@@ -5,7 +5,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
 {
-    internal class FtpFileInfo : IFileInfo
+    public class FtpFileInfo : IFileInfo
     {
         private FtpClient client;
 

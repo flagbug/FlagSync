@@ -2,7 +2,7 @@
 
 namespace FlagSync.Core
 {
-    internal class LocalSyncJob : Job
+    public class LocalSyncJob : Job
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalSyncJob"/> class.

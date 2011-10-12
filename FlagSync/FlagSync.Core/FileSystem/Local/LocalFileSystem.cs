@@ -7,7 +7,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
 {
-    internal class LocalFileSystem : IFileSystem
+    public class LocalFileSystem : IFileSystem
     {
         /// <summary>
         /// Occurs when the file copy progress has changed.

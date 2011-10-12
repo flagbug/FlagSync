@@ -5,7 +5,7 @@ using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
-    internal class FtpBackupJob : Job
+    public class FtpBackupJob : Job
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FtpBackupJob"/> class.

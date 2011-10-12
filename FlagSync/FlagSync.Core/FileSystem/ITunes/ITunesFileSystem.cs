@@ -14,7 +14,7 @@ namespace FlagSync.Core.FileSystem.ITunes
     /// <summary>
     /// Represents the file system of an iTunes playlist
     /// </summary>
-    internal class ITunesFileSystem : IFileSystem
+    public class ITunesFileSystem : IFileSystem
     {
         private IEnumerable<ITunesDirectoryInfo> playlistStructureChache;
 

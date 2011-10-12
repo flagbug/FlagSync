@@ -4,7 +4,7 @@ using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Core
 {
-    internal class ITunesJob : Job
+    public class ITunesJob : Job
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ITunesJob"/> class.

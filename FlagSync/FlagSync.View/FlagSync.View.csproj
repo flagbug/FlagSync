@@ -155,6 +155,10 @@
       <Project>{1149F3C5-DBFE-4CFD-98F6-DB396343E647}</Project>
       <Name>FlagSync.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlagSync.Data\FlagSync.Data.csproj">
+      <Project>{080FB9A0-A2F9-438F-8F84-60B7FB448633}</Project>
+      <Name>FlagSync.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\OpenFolder.png" />

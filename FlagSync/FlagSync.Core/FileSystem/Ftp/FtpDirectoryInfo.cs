@@ -12,7 +12,7 @@ namespace FlagSync.Core.FileSystem.Ftp
     /// Represents a directory on a FTP-server
     /// </summary>
     [DebuggerDisplay("{FullName}")]
-    internal class FtpDirectoryInfo : IDirectoryInfo
+    public class FtpDirectoryInfo : IDirectoryInfo
     {
         private FtpClient client;
 

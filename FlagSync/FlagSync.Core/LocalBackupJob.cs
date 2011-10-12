@@ -6,7 +6,7 @@ namespace FlagSync.Core
     /// <summary>
     /// A backup-job performs a synchronization only from directory A to directory B, but can delete files
     /// </summary>
-    internal class LocalBackupJob : Job
+    public class LocalBackupJob : Job
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalBackupJob"/> class.

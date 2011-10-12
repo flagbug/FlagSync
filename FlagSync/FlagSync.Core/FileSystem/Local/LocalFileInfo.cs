@@ -4,7 +4,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Local
 {
-    internal class LocalFileInfo : IFileInfo
+    public class LocalFileInfo : IFileInfo
     {
         private FileInfo fileInfo;
 

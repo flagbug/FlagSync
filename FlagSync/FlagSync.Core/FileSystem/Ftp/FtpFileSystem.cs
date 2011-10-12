@@ -9,7 +9,7 @@ using FlagSync.Core.FileSystem.Abstract;
 
 namespace FlagSync.Core.FileSystem.Ftp
 {
-    internal class FtpFileSystem : IFileSystem
+    public class FtpFileSystem : IFileSystem
     {
         private FtpClient client;
 

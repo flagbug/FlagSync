@@ -15,7 +15,7 @@ namespace FlagSync.Core.FileSystem.ITunes
     /// the representation of an artist or an album of a song.
     /// </remarks>
     [DebuggerDisplay("{FullName}")]
-    internal class ITunesDirectoryInfo : IDirectoryInfo
+    public class ITunesDirectoryInfo : IDirectoryInfo
     {
         private string name;
         private bool isRoot;

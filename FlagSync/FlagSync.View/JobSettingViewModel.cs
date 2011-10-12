@@ -4,6 +4,7 @@ using System.IO;
 using FlagLib.Patterns.MVVM;
 using FlagLib.Reflection;
 using FlagSync.Core;
+using FlagSync.Data;
 
 namespace FlagSync.View
 {

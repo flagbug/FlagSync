@@ -15,7 +15,7 @@ namespace FlagSync.Core.FileSystem.Local
     /// used as an <see cref="IDirectoryInfo"/>.
     /// </remarks>
     [DebuggerDisplay("{FullName}")]
-    internal class LocalDirectoryInfo : IDirectoryInfo
+    public class LocalDirectoryInfo : IDirectoryInfo
     {
         private DirectoryInfo directoryInfo;
 

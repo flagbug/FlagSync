@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Timers;
 using System.Windows.Input;
@@ -10,6 +9,7 @@ using FlagLib.Collections;
 using FlagLib.IO;
 using FlagLib.Patterns.MVVM;
 using FlagSync.Core;
+using FlagSync.Data;
 
 namespace FlagSync.View
 {
@@ -438,13 +438,13 @@ namespace FlagSync.View
         {
             bool exist = true;
 
-            if(!job.DirectoryA.Exists)
+            if (!job.DirectoryA.Exists)
             {
                 this.AddStatusMessage(job.Name + ": " + Properties.Resources.DirectoryADoesntExistMessage);
                 exist = false;
             }
 
-            if(!job.DirectoryB.Exists)
+            if (!job.DirectoryB.Exists)
             {
                 this.AddStatusMessage(job.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
                 exist = false;

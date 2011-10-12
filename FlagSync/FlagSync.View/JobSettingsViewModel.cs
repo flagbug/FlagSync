@@ -8,6 +8,7 @@ using System.Windows.Input;
 using FlagLib.Patterns.MVVM;
 using FlagLib.Serialization;
 using FlagSync.Core;
+using FlagSync.Data;
 
 namespace FlagSync.View
 {

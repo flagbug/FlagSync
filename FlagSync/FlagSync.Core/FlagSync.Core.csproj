@@ -60,7 +60,6 @@
     <Compile Include="ITunesJob.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobEventArgs.cs" />
-    <Compile Include="JobSetting.cs" />
     <Compile Include="JobWorker.cs" />
     <Compile Include="FileSystem\Local\LocalDirectoryInfo.cs" />
     <Compile Include="FileSystem\FileCounter.cs" />

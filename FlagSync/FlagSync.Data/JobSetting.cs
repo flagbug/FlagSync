@@ -2,10 +2,11 @@
 using System.IO;
 using System.Net;
 using FlagFtp;
+using FlagSync.Core;
 using FlagSync.Core.FileSystem.ITunes;
 using FlagSync.Core.FileSystem.Local;
 
-namespace FlagSync.Core
+namespace FlagSync.Data
 {
     [Serializable]
     public class JobSetting
