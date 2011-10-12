@@ -7,3 +7,5 @@ FlagSync/FlagSync.Setup/Release
 FlagSync/FlagSync.View/bin
 FlagSync/FlagSync.Setup/Debug
 *.psess
+FlagSync/FlagSync.Data/obj
+FlagSync/FlagSync.Data/bin
