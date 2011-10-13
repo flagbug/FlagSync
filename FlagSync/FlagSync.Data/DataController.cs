@@ -13,7 +13,7 @@ using FlagSync.Core.FileSystem.Local;
 namespace FlagSync.Data
 {
     /// <summary>
-    /// Provides methods for data-access
+    /// Provides methods for data-access.
     /// </summary>
     public static class DataController
     {

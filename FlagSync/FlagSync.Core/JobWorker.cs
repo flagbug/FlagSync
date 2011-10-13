@@ -8,6 +8,13 @@ namespace FlagSync.Core
 {
     public sealed class JobWorker
     {
+        private Job currentJob;
+        private Queue<Job> jobQueue = new Queue<Job>();
+        private long totalWrittenBytes;
+        private int proceededFiles;
+        private FileCounterResult fileCounterResult;
+        private bool performPreview;
+
         /// <summary>
         /// Occurs when a file has been proceeded.
         /// </summary>
@@ -102,13 +109,6 @@ namespace FlagSync.Core
         /// Occurs when a job has finished.
         /// </summary>
         public event EventHandler<JobEventArgs> JobFinished;
-
-        private Job currentJob;
-        private Queue<Job> jobQueue = new Queue<Job>();
-        private long totalWrittenBytes;
-        private int proceededFiles;
-        private FileCounterResult fileCounterResult;
-        private bool performPreview;
 
         /// <summary>
         /// Gets the total written bytes.
@@ -231,11 +231,11 @@ namespace FlagSync.Core
         {
             this.performPreview = preview;
 
-            this.fileCounterResult = this.GetFileCounterResults();
+            this.fileCounterResult = this.CountFiles();
 
             if (this.FilesCounted != null)
             {
-                this.FilesCounted.Invoke(this, new EventArgs());
+                this.FilesCounted(this, new EventArgs());
             }
 
             this.DoNextJob();
@@ -247,7 +247,7 @@ namespace FlagSync.Core
         /// <returns>
         /// The result of the counting.
         /// </returns>
-        private FileCounterResult GetFileCounterResults()
+        private FileCounterResult CountFiles()
         {
             FileCounterResult result = new FileCounterResult();
 
