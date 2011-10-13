@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
@@ -12,7 +11,6 @@ namespace FlagSync.View
     {
         private JobSettingsViewModel jobSettingsViewModel = new JobSettingsViewModel();
         private JobWorkerViewModel jobWorkerViewModel = new JobWorkerViewModel();
-        private string logFilePath;
 
         /// <summary>
         /// Gets the exit application command.
@@ -34,8 +32,6 @@ namespace FlagSync.View
         public MainViewModel()
         {
             DataController.CreateAppDataFolder();
-
-            this.logFilePath = Path.Combine(DataController.AppDataFolderPath, "log.txt");
         }
 
         /// <summary>
@@ -85,18 +81,6 @@ namespace FlagSync.View
             get
             {
                 return DataController.AppDataFolderPath;
-            }
-        }
-
-        /// <summary>
-        /// Gets the log file path.
-        /// </summary>
-        /// <value>The log file path.</value>
-        public string LogFilePath
-        {
-            get
-            {
-                return this.logFilePath;
             }
         }
 
