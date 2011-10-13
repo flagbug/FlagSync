@@ -39,21 +39,41 @@ namespace FlagSync.View
 
                 var vm = this.mainViewModel.JobSettingsViewModel;
 
-                if (!vm.TryLoadJobSettings(args[1]))
+                var result = vm.LoadJobSettings(args[1]);
+
+                switch (result)
                 {
-                    this.WindowState = WindowState.Maximized;
+                    case Data.JobSettingsLoadingResult.CorruptFile:
+                        {
+                            this.WindowState = WindowState.Maximized;
 
-                    MessageBox.Show(Properties.Resources.LoadSettingsErrorMessage,
-                                    Properties.Resources.ErrorString,
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Error);
+                            MessageBox.Show(Properties.Resources.LoadSettingsErrorMessage,
+                                            Properties.Resources.ErrorString,
+                                            MessageBoxButton.OK,
+                                            MessageBoxImage.Error);
 
-                    Application.Current.Shutdown();
-                }
+                            Application.Current.Shutdown();
+                        }
+                        break;
 
-                else
-                {
-                    this.StartJobWorker(false);
+                    case Data.JobSettingsLoadingResult.ITunesNotOpened:
+                        {
+                            this.WindowState = WindowState.Maximized;
+
+                            MessageBox.Show(Properties.Resources.iTunesErrorMessageBoxText,
+                                            Properties.Resources.iTunesErrorMessageBoxCaption,
+                                            MessageBoxButton.OK,
+                                            MessageBoxImage.Error);
+
+                            Application.Current.Shutdown();
+                        }
+                        break;
+
+                    case Data.JobSettingsLoadingResult.Succeed:
+                        {
+                            this.StartJobWorker(false);
+                        }
+                        break;
                 }
             }
         }
@@ -89,12 +109,27 @@ namespace FlagSync.View
                     {
                         var vm = this.mainViewModel.JobSettingsViewModel;
 
-                        if (!vm.TryLoadJobSettings(dialog.FileName))
+                        var result = vm.LoadJobSettings(dialog.FileName);
+
+                        switch (result)
                         {
-                            MessageBox.Show(Properties.Resources.LoadSettingsErrorMessage,
-                                            Properties.Resources.ErrorString,
-                                            MessageBoxButton.OK,
-                                            MessageBoxImage.Error);
+                            case Data.JobSettingsLoadingResult.CorruptFile:
+                                {
+                                    MessageBox.Show(Properties.Resources.LoadSettingsErrorMessage,
+                                                    Properties.Resources.ErrorString,
+                                                    MessageBoxButton.OK,
+                                                    MessageBoxImage.Error);
+                                }
+                                break;
+
+                            case Data.JobSettingsLoadingResult.ITunesNotOpened:
+                                {
+                                    MessageBox.Show(Properties.Resources.iTunesErrorMessageBoxText,
+                                                    Properties.Resources.iTunesErrorMessageBoxCaption,
+                                                    MessageBoxButton.OK,
+                                                    MessageBoxImage.Error);
+                                }
+                                break;
                         }
                     };
 

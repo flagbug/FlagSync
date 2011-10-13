@@ -5,6 +5,8 @@ using System.Text;
 using System.Diagnostics;
 using System.Net;
 using System.IO;
+using FlagLib.Serialization;
+using FlagSync.Core;
 
 namespace FlagSync.Data
 {
@@ -77,6 +79,36 @@ namespace FlagSync.Data
             Debug.WriteLine("New version available: " + newVersionAvailable);
 
             return newVersionAvailable;
+        }
+
+        /// <summary>
+        /// Tries the load the job settings from the specified path.
+        /// </summary>
+        /// <param name="path">The path to the file with the serialized setzings.</param>
+        /// <param name="settings">The settings.</param>
+        /// <returns>
+        /// The result of the operation.
+        /// </returns>
+        public static JobSettingsLoadingResult TryLoadJobSettings(string path, out IEnumerable<JobSetting> settings)
+        {
+            settings = new List<JobSetting>();
+
+            try
+            {
+                settings = GenericXmlSerializer.DeserializeCollection<JobSetting>(path);
+            }
+
+            catch (InvalidOperationException)
+            {
+                return JobSettingsLoadingResult.CorruptFile;
+            }
+
+            if (settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !DataController.IsITunesOpened())
+            {
+                return JobSettingsLoadingResult.ITunesNotOpened;
+            }
+
+            return JobSettingsLoadingResult.Succeed;
         }
     }
 }

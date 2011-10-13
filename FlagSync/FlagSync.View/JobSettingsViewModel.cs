@@ -139,44 +139,28 @@ namespace FlagSync.View
         /// Loads the job settings.
         /// </summary>
         /// <param name="path">The path.</param>
-        public bool TryLoadJobSettings(string path)
+        public JobSettingsLoadingResult LoadJobSettings(string path)
         {
             IEnumerable<JobSetting> settings;
 
-            try
-            {
-                settings = GenericXmlSerializer.DeserializeCollection<JobSetting>(path);
+            var result = DataController.TryLoadJobSettings(path, out settings);
+
+            if (result == JobSettingsLoadingResult.Succeed)
+            {            
+                this.JobSettings.Clear();
+
+                foreach (JobSetting setting in settings)
+                {
+                    this.JobSettings.Add(new JobSettingViewModel(setting));
+                }
+
+                if (settings.Any())
+                {
+                    this.SelectedJobSetting = this.JobSettings.First();
+                }
             }
 
-            catch (InvalidOperationException)
-            {
-                return false;
-            }
-
-            if (settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !MainViewModel.IsITunesOpened)
-            {
-                MessageBox.Show(
-                    Properties.Resources.iTunesErrorMessageBoxText,
-                    Properties.Resources.iTunesErrorMessageBoxCaption,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                return false;
-            }
-
-            this.JobSettings.Clear();
-
-            foreach (JobSetting setting in settings)
-            {
-                this.JobSettings.Add(new JobSettingViewModel(setting));
-            }
-
-            if (settings.Any())
-            {
-                this.SelectedJobSetting = this.JobSettings.First();
-            }
-
-            return true;
+            return result;
         }
     }
 }
