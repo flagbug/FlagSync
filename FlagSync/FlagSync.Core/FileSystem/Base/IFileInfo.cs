@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FlagSync.Core.FileSystem.Abstract
+namespace FlagSync.Core.FileSystem.Base
 {
     public interface IFileInfo : IFileSystemInfo
     {

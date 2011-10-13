@@ -1,4 +1,4 @@
-﻿namespace FlagSync.Core.FileSystem.Abstract
+﻿namespace FlagSync.Core.FileSystem.Base
 {
     public interface IFileSystemInfo
     {

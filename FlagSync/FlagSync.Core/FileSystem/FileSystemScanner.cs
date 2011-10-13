@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
-using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core.FileSystem
 {
@@ -68,7 +68,7 @@ namespace FlagSync.Core.FileSystem
         /// <summary>
         /// Raises the <see cref="E:FileFound"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagSync.Core.FileSystem.Abstract.FileFoundEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileSystem.Base.FileFoundEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileFound(FileFoundEventArgs e)
         {
             if (this.FileFound != null)
@@ -80,7 +80,7 @@ namespace FlagSync.Core.FileSystem
         /// <summary>
         /// Raises the <see cref="E:DirectoryFound"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagSync.Core.FileSystem.Abstract.DirectoryFoundEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.FileSystem.Base.DirectoryFoundEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryFound(DirectoryFoundEventArgs e)
         {
             if (this.DirectoryFound != null)

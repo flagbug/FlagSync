@@ -5,7 +5,7 @@ using System.Linq;
 using FlagLib.Extensions;
 using FlagLib.IO;
 using FlagLib.Reflection;
-using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Base;
 using FlagSync.Core.FileSystem.Local;
 using iTunesLib;
 

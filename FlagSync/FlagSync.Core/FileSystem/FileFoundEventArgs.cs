@@ -1,5 +1,5 @@
 ﻿using System;
-using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core.FileSystem
 {

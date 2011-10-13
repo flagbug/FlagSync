@@ -2,7 +2,7 @@
 using System.IO;
 using FlagLib.IO;
 
-namespace FlagSync.Core.FileSystem.Abstract
+namespace FlagSync.Core.FileSystem.Base
 {
     /// <summary>
     /// The base interface for all file systems

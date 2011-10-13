@@ -4,7 +4,7 @@ using System.IO;
 using System.Security;
 using FlagLib.Extensions;
 using FlagLib.IO;
-using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core.FileSystem.Local
 {

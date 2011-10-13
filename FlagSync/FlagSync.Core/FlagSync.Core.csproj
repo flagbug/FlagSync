@@ -47,10 +47,10 @@
     <Compile Include="FileCounterResult.cs" />
     <Compile Include="FileSystem\DirectoryFoundEventArgs.cs" />
     <Compile Include="FileSystem\FileFoundEventArgs.cs" />
-    <Compile Include="FileSystem\Abstract\IDirectoryInfo.cs" />
-    <Compile Include="FileSystem\Abstract\IFileInfo.cs" />
-    <Compile Include="FileSystem\Abstract\IFileSystem.cs" />
-    <Compile Include="FileSystem\Abstract\IFileSystemInfo.cs" />
+    <Compile Include="FileSystem\Base\IDirectoryInfo.cs" />
+    <Compile Include="FileSystem\Base\IFileInfo.cs" />
+    <Compile Include="FileSystem\Base\IFileSystem.cs" />
+    <Compile Include="FileSystem\Base\IFileSystemInfo.cs" />
     <Compile Include="FileSystem\FileSystemScanner.cs" />
     <Compile Include="FileSystem\Ftp\FtpDirectoryInfo.cs" />
     <Compile Include="FileSystem\Ftp\FtpFileInfo.cs" />

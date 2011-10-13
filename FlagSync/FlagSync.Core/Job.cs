@@ -6,7 +6,7 @@ using FlagLib.Extensions;
 using FlagLib.IO;
 using FlagLib.Reflection;
 using FlagSync.Core.FileSystem;
-using FlagSync.Core.FileSystem.Abstract;
+using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core
 {
