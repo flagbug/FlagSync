@@ -12,7 +12,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets the last write time.
         /// </summary>
-        /// <value>The last write time.</value>
+        /// <value>
+        /// The last write time.
+        /// </value>
         public DateTime LastWriteTime
         {
             get { return this.fileInfo.LastWriteTime; }
@@ -21,7 +23,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets the length of the file.
         /// </summary>
-        /// <value>The length of the file.</value>
+        /// <value>
+        /// The length of the file.
+        /// </value>
         public long Length
         {
             get { return this.fileInfo.Length; }
@@ -30,16 +34,20 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets the full name.
         /// </summary>
-        /// <value>The full name.</value>
+        /// <value>
+        /// The full name.
+        /// </value>
         public string FullName
         {
             get { return this.fileInfo.FullName; }
         }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets the name of the file.
         /// </summary>
-        /// <value>The name.</value>
+        /// <value>
+        /// The name of the file.
+        /// </value>
         public string Name
         {
             get { return this.fileInfo.Name; }
@@ -48,7 +56,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets the directory of the file.
         /// </summary>
-        /// <value>The directory of the file.</value>
+        /// <value>
+        /// The directory of the file.
+        /// </value>
         public IDirectoryInfo Directory
         {
             get { return new LocalDirectoryInfo(this.fileInfo.Directory); }
@@ -57,7 +67,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets a value indicating whether the file exists.
         /// </summary>
-        /// <value>true if the file exists; otherwise, false.</value>
+        /// <value>
+        /// true if the file exists; otherwise, false.
+        /// </value>
         public bool Exists
         {
             get { return this.fileInfo.Exists; }

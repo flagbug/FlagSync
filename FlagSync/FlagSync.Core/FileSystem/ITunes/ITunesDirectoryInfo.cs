@@ -25,25 +25,28 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <summary>
         /// Gets the parent directory.
         /// </summary>
-        /// <value>The parent directory.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The parent directory.
+        /// </value>
         public IDirectoryInfo Parent { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the directory exists.
         /// </summary>
-        /// <value><c>true</c> if the directory exists; otherwise, <c>false</c>.</value>
-        /// <remarks></remarks>
+        /// <value>
+        ///   <c>true</c> if the directory exists; otherwise, <c>false</c>.
+        /// </value>
         public bool Exists { get; private set; }
 
         /// <summary>
         /// Return the files in the directory.
         /// </summary>
-        /// <returns>The files in the directory</returns>
+        /// <returns>
+        /// The files in the directory.
+        /// </returns>
         /// <exception cref="System.UnauthorizedAccessException">
         /// The exception that is thrown if the directory is locked
         ///   </exception>
-        /// <remarks></remarks>
         public IEnumerable<IFileInfo> GetFiles()
         {
             return this.files;
@@ -52,11 +55,12 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <summary>
         /// Return the directories in the directory.
         /// </summary>
-        /// <returns>The directories in the directory</returns>
+        /// <returns>
+        /// The directories in the directory
+        /// </returns>
         /// <exception cref="System.UnauthorizedAccessException">
         /// The exception that is thrown if the directory is locked
         ///   </exception>
-        /// <remarks></remarks>
         public IEnumerable<IDirectoryInfo> GetDirectories()
         {
             if (this.isRoot)
@@ -71,7 +75,6 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <summary>
         /// Gets the full name.
         /// </summary>
-        /// <remarks></remarks>
         public string FullName
         {
             get
@@ -89,10 +92,11 @@ namespace FlagSync.Core.FileSystem.ITunes
         }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets the name of the directory.
         /// </summary>
-        /// <value>The name.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The name of the directory.
+        /// </value>
         public string Name
         {
             get { return this.name; }
@@ -116,8 +120,9 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// Initializes a new instance of the <see cref="ITunesDirectoryInfo"/> class.
         /// The directory will be the last level of the directory structure and contains the files.
         /// </summary>
-        /// <param name="name">The name of the album.</param>
+        /// <param name="albumName">The name of the album.</param>
         /// <param name="files">The files that are contained in this directory.</param>
+        /// <param name="parent">The parent.</param>
         public ITunesDirectoryInfo(string albumName, IEnumerable<IFileInfo> files, ITunesDirectoryInfo parent)
             : this(parent)
         {
@@ -132,8 +137,9 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// Initializes a new instance of the <see cref="ITunesDirectoryInfo"/> class.
         /// The directory will be the middle level of the directory structure and contains the album directories.
         /// </summary>
-        /// <param name="name">The name of the artist.</param>
+        /// <param name="artistName">The name of the artist.</param>
         /// <param name="directories">The directories that are contained in this directory.</param>
+        /// <param name="parent">The parent.</param>
         public ITunesDirectoryInfo(string artistName, IEnumerable<ITunesDirectoryInfo> directories, ITunesDirectoryInfo parent)
             : this(parent)
         {
@@ -147,6 +153,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <summary>
         /// Prevents a default instance of the <see cref="ITunesDirectoryInfo"/> class from being created.
         /// </summary>
+        /// <param name="parent">The parent directory.</param>
         private ITunesDirectoryInfo(ITunesDirectoryInfo parent)
         {
             this.Parent = parent;
@@ -158,9 +165,9 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <summary>
         /// Creates an iTunes directory info which does not exist.
         /// </summary>
-        /// <param name="name">The name.</param>
+        /// <param name="name">The name of the directory.</param>
         /// <param name="parent">The parent directory.</param>
-        /// <returns></returns>
+        /// <returns>A directory whichs <see cref="Exists"/> property is set to false.</returns>
         public static ITunesDirectoryInfo CreateNonExistantDirectoryInfo(string name, ITunesDirectoryInfo parent)
         {
             name.ThrowIfNull(() => name);

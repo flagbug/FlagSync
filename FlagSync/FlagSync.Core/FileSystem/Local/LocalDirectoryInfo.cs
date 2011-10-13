@@ -22,7 +22,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets the parent directory.
         /// </summary>
-        /// <value>The parent directory.</value>
+        /// <value>
+        /// The parent directory.
+        /// </value>
         public IDirectoryInfo Parent
         {
             get { return new LocalDirectoryInfo(this.directoryInfo.Parent); }
@@ -31,16 +33,20 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets the full name.
         /// </summary>
-        /// <value>The full name.</value>
+        /// <value>
+        /// The full name.
+        /// </value>
         public string FullName
         {
             get { return this.directoryInfo.FullName; }
         }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets the name of the directory.
         /// </summary>
-        /// <value>The name.</value>
+        /// <value>
+        /// The name of the directory.
+        /// </value>
         public string Name
         {
             get { return this.directoryInfo.Name; }
@@ -49,7 +55,9 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets a value indicating whether the directory exists.
         /// </summary>
-        /// <value><c>true</c> if the directory exists; otherwise, <c>false</c>.</value>
+        /// <value>
+        ///   <c>true</c> if the directory exists; otherwise, <c>false</c>.
+        /// </value>
         public bool Exists
         {
             get { return this.directoryInfo.Exists; }

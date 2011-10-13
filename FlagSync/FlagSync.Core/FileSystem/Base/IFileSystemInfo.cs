@@ -5,14 +5,14 @@
         /// <summary>
         /// Gets the full name.
         /// </summary>
-        /// <remarks></remarks>
         string FullName { get; }
 
         /// <summary>
         /// Gets the name.
         /// </summary>
-        /// <value>The name.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The name.
+        /// </value>
         string Name { get; }
     }
 }

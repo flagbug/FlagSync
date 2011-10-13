@@ -10,7 +10,7 @@ using FlagSync.Core.FileSystem.Base;
 namespace FlagSync.Core.FileSystem.Ftp
 {
     /// <summary>
-    /// Represents a directory on a FTP-server
+    /// Represents a directory on a FTP-server.
     /// </summary>
     [DebuggerDisplay("{FullName}")]
     public class FtpDirectoryInfo : IDirectoryInfo
@@ -23,10 +23,10 @@ namespace FlagSync.Core.FileSystem.Ftp
         public string FullName { get; private set; }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets the name of the directory.
         /// </summary>
         /// <value>
-        /// The name.
+        /// The name of the directory.
         /// </value>
         public string Name
         {
@@ -70,7 +70,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// The files in the directory.
         /// </returns>
         /// <exception cref="System.UnauthorizedAccessException">
-        /// The exception that is thrown if the directory is locked
+        /// The exception that is thrown if the directory is locked.
         ///   </exception>
         public IEnumerable<IFileInfo> GetFiles()
         {

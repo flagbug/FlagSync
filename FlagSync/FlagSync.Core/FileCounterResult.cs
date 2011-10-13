@@ -10,13 +10,17 @@ namespace FlagSync.Core
         /// <summary>
         /// Gets the counted files.
         /// </summary>
-        /// <value>The counted files.</value>
+        /// <value>
+        /// The counted files.
+        /// </value>
         public int CountedFiles { get; private set; }
 
         /// <summary>
         /// Gets the counted bytes.
         /// </summary>
-        /// <value>The counted bytes.</value>
+        /// <value>
+        /// The counted bytes.
+        /// </value>
         public long CountedBytes { get; private set; }
 
         /// <summary>
@@ -43,7 +47,9 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="a">The first file counter result</param>
         /// <param name="b">The second file counter result</param>
-        /// <returns>The result of the operator.</returns>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static FileCounterResult operator +(FileCounterResult a, FileCounterResult b)
         {
             a.ThrowIfNull(() => a);

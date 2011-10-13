@@ -7,13 +7,17 @@ namespace FlagSync.Core.FileSystem.Base
         /// <summary>
         /// Gets the parent directory.
         /// </summary>
-        /// <value>The parent directory.</value>
+        /// <value>
+        /// The parent directory.
+        /// </value>
         IDirectoryInfo Parent { get; }
 
         /// <summary>
         /// Gets a value indicating whether the directory exists.
         /// </summary>
-        /// <value><c>true</c> if the directory exists; otherwise, <c>false</c>.</value>
+        /// <value>
+        ///   <c>true</c> if the directory exists; otherwise, <c>false</c>.
+        /// </value>
         bool Exists { get; }
 
         /// <summary>
