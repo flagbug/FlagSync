@@ -43,7 +43,7 @@
     <Compile Include="FtpBackupJob.cs" />
     <Compile Include="FtpSyncJob.cs" />
     <Compile Include="LocalBackupJob.cs" />
-    <Compile Include="Enums.cs" />
+    <Compile Include="FtpBackupDirection.cs" />
     <Compile Include="FileCounterResult.cs" />
     <Compile Include="FileSystem\DirectoryFoundEventArgs.cs" />
     <Compile Include="FileSystem\FileFoundEventArgs.cs" />
