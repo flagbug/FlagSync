@@ -252,8 +252,6 @@ namespace FlagSync.Core
             {
                 this.CreatedFile(this, e);
             }
-
-            Logger.Current.LogSucceed("Created new file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
         }
 
         /// <summary>
@@ -278,8 +276,6 @@ namespace FlagSync.Core
             {
                 this.ModifiedFile(this, e);
             }
-
-            Logger.Current.LogSucceed("Modified file: " + e.File.Name + " in source: " + e.SourceDirectory.FullName + ", copied to target: " + e.TargetDirectory.FullName);
         }
 
         /// <summary>
@@ -304,8 +300,6 @@ namespace FlagSync.Core
             {
                 this.DeletedFile(this, e);
             }
-
-            Logger.Current.LogSucceed("Deleted file: " + e.FilePath);
         }
 
         /// <summary>
@@ -330,8 +324,6 @@ namespace FlagSync.Core
             {
                 this.CreatedDirectory(this, e);
             }
-
-            Logger.Current.LogSucceed("Created directory: " + e.Directory.Name + " in source: " + e.Directory.Parent.FullName + ", created in target: " + e.TargetDirectory.FullName);
         }
 
         /// <summary>
@@ -356,8 +348,6 @@ namespace FlagSync.Core
             {
                 this.DeletedDirectory(this, e);
             }
-
-            Logger.Current.LogSucceed("Deleted directory: " + e.DirectoryPath);
         }
 
         /// <summary>

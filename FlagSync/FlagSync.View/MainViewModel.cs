@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using FlagLib.Patterns.MVVM;
-using FlagSync.Core;
 using FlagSync.Data;
 
 namespace FlagSync.View
@@ -37,7 +36,6 @@ namespace FlagSync.View
             DataController.CreateAppDataFolder();
 
             this.logFilePath = Path.Combine(DataController.AppDataFolderPath, "log.txt");
-            Logger.Current = new Logger(this.LogFilePath);
         }
 
         /// <summary>

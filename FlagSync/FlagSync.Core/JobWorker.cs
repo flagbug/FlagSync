@@ -222,16 +222,12 @@ namespace FlagSync.Core
         {
             this.performPreview = preview;
 
-            Logger.Current.LogStatusMessage("Start counting files");
-
             this.fileCounterResult = this.GetFileCounterResults();
 
             if (this.FilesCounted != null)
             {
                 this.FilesCounted.Invoke(this, new EventArgs());
             }
-
-            Logger.Current.LogStatusMessage("Finished counting files");
 
             this.DoNextJob();
         }
@@ -499,8 +495,6 @@ namespace FlagSync.Core
             {
                 this.Finished(this, e);
             }
-
-            Logger.Current.LogStatusMessage("Finished work");
         }
 
         /// <summary>
@@ -513,8 +507,6 @@ namespace FlagSync.Core
             {
                 this.JobStarted(this, e);
             }
-
-            Logger.Current.LogStatusMessage("Started job: " + e.Job.Name);
         }
 
         /// <summary>
@@ -527,8 +519,6 @@ namespace FlagSync.Core
             {
                 this.JobFinished(this, e);
             }
-
-            Logger.Current.LogStatusMessage("Finished job: " + e.Job.Name);
         }
     }
 }
