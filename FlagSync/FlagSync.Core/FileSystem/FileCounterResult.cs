@@ -1,6 +1,6 @@
 ﻿using FlagLib.Extensions;
 
-namespace FlagSync.Core
+namespace FlagSync.Core.FileSystem
 {
     /// <summary>
     /// Contains the number of files counted and the total size of all files.
