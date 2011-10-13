@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using FlagLib.Patterns.MVVM;
 using FlagSync.Core;
+using FlagSync.Data;
 
 namespace FlagSync.View
 {
@@ -53,7 +54,7 @@ namespace FlagSync.View
         {
             get
             {
-                return Process.GetProcessesByName("iTunes").Any();
+                return DataController.IsITunesOpened();
             }
         }
 
@@ -115,33 +116,9 @@ namespace FlagSync.View
         {
             get
             {
-                WebClient client = new WebClient();
-                string versionString;
-
-                try
-                {
-                    Debug.WriteLine("Checking for newer version...");
-                    versionString = client.DownloadString("http://flagbug.bitbucket.org/flagsyncversion");
-                    Debug.WriteLine("Version on server is " + versionString);
-                }
-
-                catch (WebException)
-                {
-                    Debug.WriteLine("Exception while retrieving the new version.");
-                    return false;
-                }
-
-                Version webVersion = new Version(versionString);
-
                 Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-                Debug.WriteLine("Current version is " + currentVersion.ToString());
-
-                bool newVersionAvailable = webVersion > currentVersion;
-
-                Debug.WriteLine("New version available: " + newVersionAvailable);
-
-                return newVersionAvailable;
+                return DataController.IsNewVersionAvailable(currentVersion);
             }
         }
 
