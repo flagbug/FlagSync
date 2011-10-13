@@ -16,7 +16,6 @@ namespace FlagSync.View
     {
         private JobSettingsViewModel jobSettingsViewModel = new JobSettingsViewModel();
         private JobWorkerViewModel jobWorkerViewModel = new JobWorkerViewModel();
-        private string appDataFolderPath;
         private string logFilePath;
 
         /// <summary>
@@ -38,9 +37,9 @@ namespace FlagSync.View
         /// </summary>
         public MainViewModel()
         {
-            this.appDataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FlagSync");
-            this.CreateAppDatafolder();
-            this.logFilePath = Path.Combine(this.appDataFolderPath, "log.txt");
+            DataController.CreateAppDataFolder();
+
+            this.logFilePath = Path.Combine(DataController.AppDataFolderPath, "log.txt");
             Logger.Current = new Logger(this.LogFilePath);
         }
 
@@ -90,7 +89,7 @@ namespace FlagSync.View
         {
             get
             {
-                return this.appDataFolderPath;
+                return DataController.AppDataFolderPath;
             }
         }
 
@@ -120,14 +119,6 @@ namespace FlagSync.View
 
                 return DataController.IsNewVersionAvailable(currentVersion);
             }
-        }
-
-        /// <summary>
-        /// Creates the app datafolder.
-        /// </summary>
-        private void CreateAppDatafolder()
-        {
-            Directory.CreateDirectory(this.AppDataFolderPath);
         }
     }
 }

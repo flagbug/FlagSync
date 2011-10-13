@@ -4,11 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.Net;
+using System.IO;
 
 namespace FlagSync.Data
 {
+    /// <summary>
+    /// Provides methods for data-access
+    /// </summary>
     public static class DataController
     {
+        /// <summary>
+        /// Gets the app data folder path.
+        /// </summary>
+        public static string AppDataFolderPath
+        {
+            get
+            {
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FlagSync");
+            }
+        }
+
+        /// <summary>
+        /// Creates the app data folder.
+        /// </summary>
+        public static void CreateAppDataFolder()
+        {
+            Directory.CreateDirectory(DataController.AppDataFolderPath);
+        }
+
         /// <summary>
         /// Determines whether the iTunes application is opened.
         /// </summary>
@@ -20,6 +43,13 @@ namespace FlagSync.Data
             return Process.GetProcessesByName("iTunes").Any();
         }
 
+        /// <summary>
+        /// Determines whether a new version of this application is available.
+        /// </summary>
+        /// <param name="currentVersion">The current version of the application.</param>
+        /// <returns>
+        /// true if a new version of this application is availabl; otherwise, false.
+        /// </returns>
         public static bool IsNewVersionAvailable(Version currentVersion)
         {
             WebClient client = new WebClient();
