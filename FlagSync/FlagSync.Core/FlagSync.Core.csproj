@@ -40,8 +40,16 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DirectoryCreationEventArgs.cs" />
+    <Compile Include="DirectoryDeletionEventArgs.cs" />
+    <Compile Include="FileCopyErrorEventArgs.cs" />
+    <Compile Include="FileCopyEventArgs.cs" />
+    <Compile Include="FileDeletionErrorEventArgs.cs" />
+    <Compile Include="FileDeletionEventArgs.cs" />
+    <Compile Include="FileProceededEventArgs.cs" />
     <Compile Include="FtpBackupJob.cs" />
     <Compile Include="FtpSyncJob.cs" />
+    <Compile Include="JobEventArgs.cs" />
     <Compile Include="LocalBackupJob.cs" />
     <Compile Include="FtpBackupDirection.cs" />
     <Compile Include="FileSystem\FileCounterResult.cs" />
@@ -59,7 +67,6 @@
     <Compile Include="FileSystem\ITunes\ITunesFileSystem.cs" />
     <Compile Include="ITunesJob.cs" />
     <Compile Include="Job.cs" />
-    <Compile Include="JobEventArgs.cs" />
     <Compile Include="JobWorker.cs" />
     <Compile Include="FileSystem\Local\LocalDirectoryInfo.cs" />
     <Compile Include="FileSystem\FileCounter.cs" />
