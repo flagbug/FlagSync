@@ -12,7 +12,9 @@ namespace FlagSync.Core.FileSystem
         /// Counts recursively the files of the directory.
         /// </summary>
         /// <param name="rootDirectory">The root directory.</param>
-        /// <returns>A <see cref="FlagSync.Core.FileCounterResult"/> which indicates the result of the count.</returns>
+        /// <returns>
+        /// A <see cref="FlagSync.Core.FileCounterResult"/> which indicates the result of the count.
+        /// </returns>
         public static FileCounterResult CountFiles(IDirectoryInfo rootDirectory)
         {
             rootDirectory.ThrowIfNull(() => rootDirectory);
