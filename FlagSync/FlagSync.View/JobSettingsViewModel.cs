@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using FlagLib.Patterns.MVVM;
-using FlagLib.Serialization;
 using FlagSync.Core;
 using FlagSync.Data;
 
@@ -132,7 +129,7 @@ namespace FlagSync.View
         /// <param name="path">The path.</param>
         public void SaveJobSettings(string path)
         {
-            GenericXmlSerializer.SerializeCollection<JobSetting>(this.InternJobSettings.ToList(), path);
+            DataController.SaveJobSettings(this.InternJobSettings, path);
         }
 
         /// <summary>
@@ -146,7 +143,7 @@ namespace FlagSync.View
             var result = DataController.TryLoadJobSettings(path, out settings);
 
             if (result == JobSettingsLoadingResult.Succeed)
-            {            
+            {
                 this.JobSettings.Clear();
 
                 foreach (JobSetting setting in settings)

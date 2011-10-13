@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
-using System.Net;
 using System.IO;
+using System.Linq;
+using System.Net;
 using FlagLib.Serialization;
 using FlagSync.Core;
 
@@ -109,6 +108,16 @@ namespace FlagSync.Data
             }
 
             return JobSettingsLoadingResult.Succeed;
+        }
+
+        /// <summary>
+        /// Saves the job settings to the specified path.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="path">The path.</param>
+        public static void SaveJobSettings(IEnumerable<JobSetting> settings, string path)
+        {
+            GenericXmlSerializer.SerializeCollection<JobSetting>(settings.ToList(), path);
         }
     }
 }
