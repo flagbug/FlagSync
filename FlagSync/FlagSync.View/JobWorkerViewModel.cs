@@ -371,7 +371,7 @@ namespace FlagSync.View
         /// <param name="preview">if set to true, a preview will be performed.</param>
         public void StartJobWorker(IEnumerable<JobSetting> jobSettings, bool preview)
         {
-            var jobs = jobSettings.Select(setting => setting.CreateJob());
+            var jobs = jobSettings.Select(setting => DataController.CreateJobFromSetting(setting));
 
             if (jobs.All(job => this.CheckDirectoriesExist(job)))
             {

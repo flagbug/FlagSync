@@ -4,8 +4,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using FlagFtp;
 using FlagLib.Serialization;
 using FlagSync.Core;
+using FlagSync.Core.FileSystem.ITunes;
+using FlagSync.Core.FileSystem.Local;
 
 namespace FlagSync.Data
 {
@@ -118,6 +121,66 @@ namespace FlagSync.Data
         public static void SaveJobSettings(IEnumerable<JobSetting> settings, string path)
         {
             GenericXmlSerializer.SerializeCollection<JobSetting>(settings.ToList(), path);
+        }
+
+        /// <summary>
+        /// Creates a job from the specified job setting.
+        /// </summary>
+        /// <param name="setting">The job setting.</param>
+        /// <returns>
+        /// A job that is created from the specified job setting.
+        /// </returns>
+        public static Job CreateJobFromSetting(JobSetting setting)
+        {
+            switch (setting.SyncMode)
+            {
+                case SyncMode.LocalBackup:
+                    {
+                        var source = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
+                        var target = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
+
+                        return new LocalBackupJob(setting.Name, source, target);
+                    }
+
+                case SyncMode.LocalSynchronization:
+                    {
+                        var directoryA = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
+                        var directoryB = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
+
+                        return new LocalSyncJob(setting.Name, directoryA, directoryB);
+                    }
+
+                case SyncMode.ITunes:
+                    {
+                        var source = new ITunesDirectoryInfo(setting.ITunesPlaylist);
+                        var target = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
+
+                        return new ITunesJob(setting.Name, source, target);
+                    }
+
+                case SyncMode.FtpBackup:
+                    {
+                        var source = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
+
+                        var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
+                        var target = new FlagSync.Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
+
+                        return new FtpBackupJob(setting.Name, source, target, new Uri(setting.FtpAddress), setting.FtpUserName, setting.FtpPassword);
+                    }
+
+                case SyncMode.FtpSynchronization:
+                    {
+                        var directoryA = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
+
+                        var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
+                        var directoryB = new FlagSync.Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
+
+                        return new FtpBackupJob(setting.Name, directoryA, directoryB,
+                            new Uri(setting.FtpAddress), setting.FtpUserName, setting.FtpPassword);
+                    }
+            }
+
+            throw new NotSupportedException();
         }
     }
 }
