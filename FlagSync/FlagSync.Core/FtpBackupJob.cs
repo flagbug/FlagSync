@@ -10,9 +10,10 @@ namespace FlagSync.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="FtpBackupJob"/> class.
         /// </summary>
+        /// <param name="name">The name of the job.</param>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <param name="host">The host.</param>
+        /// <param name="host">The host server address.</param>
         /// <param name="userName">The user name.</param>
         /// <param name="password">The password.</param>
         public FtpBackupJob(string name, LocalDirectoryInfo sourceDirectory, FtpDirectoryInfo targetDirectory, Uri host, string userName, string password) :

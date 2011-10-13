@@ -4,12 +4,17 @@ using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core
 {
+    /// <summary>
+    /// Provides data for the events of the <see cref="FlagSync.Core.Job"/> and the <see cref="FlagSync.Core.JobWorker"/> class.
+    /// </summary>
     public class FileDeletionErrorEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the file.
         /// </summary>
-        /// <value>The file.</value>
+        /// <value>
+        /// The file.
+        /// </value>
         public IFileInfo File { get; private set; }
 
         /// <summary>
@@ -24,12 +29,17 @@ namespace FlagSync.Core
         }
     }
 
+    /// <summary>
+    /// Provides data for events of the <see cref="FlagSync.Core.JobWorker"/> class.
+    /// </summary>
     public class JobEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the job.
         /// </summary>
-        /// <value>The job.</value>
+        /// <value>
+        /// The job.
+        /// </value>
         public Job Job { get; private set; }
 
         /// <summary>
@@ -44,18 +54,25 @@ namespace FlagSync.Core
         }
     }
 
+    /// <summary>
+    /// Provides data for the events of the <see cref="FlagSync.Core.Job"/> and the <see cref="FlagSync.Core.JobWorker"/> class.
+    /// </summary>
     public class FileProceededEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the length of the file.
         /// </summary>
-        /// <value>The length of the file.</value>
+        /// <value>
+        /// The length of the file.
+        /// </value>
         public long FileLength { get; private set; }
 
         /// <summary>
         /// Gets the name of the file.
         /// </summary>
-        /// <value>The name of the file.</value>
+        /// <value>
+        /// The name of the file.
+        /// </value>
         public string FilePath { get; private set; }
 
         /// <summary>
@@ -72,24 +89,33 @@ namespace FlagSync.Core
         }
     }
 
+    /// <summary>
+    /// Provides data for the events of the <see cref="FlagSync.Core.Job"/> and the <see cref="FlagSync.Core.JobWorker"/> class.
+    /// </summary>
     public class FileCopyEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the file.
         /// </summary>
-        /// <value>The file.</value>
+        /// <value>
+        /// The file.
+        /// </value>
         public IFileInfo File { get; private set; }
 
         /// <summary>
         /// Gets the source directory.
         /// </summary>
-        /// <value>The source directory.</value>
+        /// <value>
+        /// The source directory.
+        /// </value>
         public IDirectoryInfo SourceDirectory { get; private set; }
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
-        /// <value>The target directory.</value>
+        /// <value>
+        /// The target directory.
+        /// </value>
         public IDirectoryInfo TargetDirectory { get; private set; }
 
         /// <summary>
@@ -110,18 +136,25 @@ namespace FlagSync.Core
         }
     }
 
+    /// <summary>
+    /// Provides data for the events of the <see cref="FlagSync.Core.Job"/> and the <see cref="FlagSync.Core.JobWorker"/> class.
+    /// </summary>
     public class FileCopyErrorEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the file.
         /// </summary>
-        /// <value>The file.</value>
+        /// <value>
+        /// The file.
+        /// </value>
         public IFileInfo File { get; private set; }
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
-        /// <value>The target directory.</value>
+        /// <value>
+        /// The target directory.
+        /// </value>
         public IDirectoryInfo TargetDirectory { get; private set; }
 
         /// <summary>
@@ -139,12 +172,17 @@ namespace FlagSync.Core
         }
     }
 
+    /// <summary>
+    /// Provides data for the events of the <see cref="FlagSync.Core.Job"/> and the <see cref="FlagSync.Core.JobWorker"/> class.
+    /// </summary>
     public class FileDeletionEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the file path.
         /// </summary>
-        /// <value>The file path.</value>
+        /// <value>
+        /// The file path.
+        /// </value>
         public string FilePath { get; private set; }
 
         /// <summary>
@@ -158,7 +196,8 @@ namespace FlagSync.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="FileDeletionEventArgs"/> class.
         /// </summary>
-        /// <param name="file">The file path.</param>
+        /// <param name="filePath">The file path.</param>
+        /// <param name="fileSize">Size of the file.</param>
         public FileDeletionEventArgs(string filePath, long fileSize)
         {
             filePath.ThrowIfNull(() => filePath);
@@ -168,18 +207,25 @@ namespace FlagSync.Core
         }
     }
 
+    /// <summary>
+    /// Provides data for the events of the <see cref="FlagSync.Core.Job"/> and the <see cref="FlagSync.Core.JobWorker"/> class.
+    /// </summary>
     public class DirectoryCreationEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the directory.
         /// </summary>
-        /// <value>The directory.</value>
+        /// <value>
+        /// The directory.
+        /// </value>
         public IDirectoryInfo Directory { get; private set; }
 
         /// <summary>
         /// Gets the target directory.
         /// </summary>
-        /// <value>The target directory.</value>
+        /// <value>
+        /// The target directory.
+        /// </value>
         public IDirectoryInfo TargetDirectory { get; private set; }
 
         /// <summary>
@@ -197,18 +243,23 @@ namespace FlagSync.Core
         }
     }
 
+    /// <summary>
+    /// Provides data for the events of the <see cref="FlagSync.Core.Job"/> and the <see cref="FlagSync.Core.JobWorker"/> class.
+    /// </summary>
     public class DirectoryDeletionEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the directory path.
         /// </summary>
-        /// <value>The directory path.</value>
+        /// <value>
+        /// The directory path.
+        /// </value>
         public string DirectoryPath { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectoryDeletionEventArgs"/> class.
         /// </summary>
-        /// <param name="directory">The directory path.</param>
+        /// <param name="directoryPath">The directory path.</param>
         public DirectoryDeletionEventArgs(string directoryPath)
         {
             directoryPath.ThrowIfNull(() => directoryPath);

@@ -3,7 +3,7 @@
 namespace FlagSync.Core
 {
     /// <summary>
-    /// Contains the number of files counted and the total size of all files
+    /// Contains the number of files counted and the total size of all files.
     /// </summary>
     public class FileCounterResult
     {

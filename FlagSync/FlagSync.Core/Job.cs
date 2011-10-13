@@ -10,6 +10,9 @@ using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core
 {
+    /// <summary>
+    /// Provides the base class for all jobs.
+    /// </summary>
     public abstract class Job
     {
         private HashSet<string> proceededFilePaths;
@@ -152,8 +155,11 @@ namespace FlagSync.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="Job"/> class.
         /// </summary>
+        /// <param name="name">The name of the job.</param>
         /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="targetFileSystem">The target file system.</param>
+        /// <param name="directoryA">The directory A.</param>
+        /// <param name="directoryB">The directory B.</param>
         protected Job(string name, IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IDirectoryInfo directoryA, IDirectoryInfo directoryB)
         {
             sourceFileSystem.ThrowIfNull(() => sourceFileSystem);
@@ -185,7 +191,7 @@ namespace FlagSync.Core
         public abstract void Start(bool preview);
 
         /// <summary>
-        /// Pauses the job
+        /// Pauses the job.
         /// </summary>
         public virtual void Pause()
         {
@@ -193,7 +199,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Continues the job (only after pause)
+        /// Continues the job (only after pause).
         /// </summary>
         public virtual void Continue()
         {
@@ -201,7 +207,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Stops the job (can't be continued)
+        /// Stops the job (can't be continued).
         /// </summary>
         public virtual void Stop()
         {
@@ -220,7 +226,7 @@ namespace FlagSync.Core
 
         /// <summary>
         /// Checks if the job is paused, when true,
-        /// a loop will be enabled which causes the thread to sleep till the job gets continued
+        /// a loop will be enabled which causes the thread to sleep till the job gets continued.
         /// </summary>
         protected void CheckPause()
         {
@@ -440,8 +446,8 @@ namespace FlagSync.Core
         /// <summary>
         /// Backups a directory recursively to another directory (without deletions).
         /// </summary>
-        /// <param name="sourceDirectoryPath">The source directory path.</param>
-        /// <param name="targetDirectoryPath">The target directory path.</param>
+        /// <param name="sourceDirectory">The source directory.</param>
+        /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the modifications, creations and deletions will be executed executed.</param>
         protected void BackupDirectoryRecursively(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool execute)
         {
@@ -539,8 +545,8 @@ namespace FlagSync.Core
         /// <summary>
         /// Checks the source directory recursively for directories and files that are not in the target directory and deletes them.
         /// </summary>
-        /// <param name="sourceDirectoryPath">The source directory path.</param>
-        /// <param name="targetDirectoryPath">The target directory path.</param>
+        /// <param name="sourceDirectory">The source directory.</param>
+        /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the modifications, creations and deletions will be executed executed.</param>
         protected void CheckDeletionsRecursively(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool execute)
         {
@@ -620,8 +626,9 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Performs a file deletion (mid level operation).
+        /// Performs a file deletion.
         /// </summary>
+        /// <param name="fileSystem">The file system.</param>
         /// <param name="file">The file to delete.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
         private void PerformFileDeletionOperation(IFileSystem fileSystem, IFileInfo file, bool execute)
@@ -645,8 +652,9 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Performs a directory deletion (mid level operation).
+        /// Performs a directory deletion.
         /// </summary>
+        /// <param name="fileSystem">The file system.</param>
         /// <param name="directory">The directory to delete.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
         private void PerformDirectoryDeletionOperation(IFileSystem fileSystem, IDirectoryInfo directory, bool execute)
@@ -679,8 +687,10 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Performs a file creation (mid level operation).
+        /// Performs a file creation.
         /// </summary>
+        /// <param name="sourceFileSystem">The source file system.</param>
+        /// <param name="targetFileSystem">The target file system.</param>
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
@@ -716,8 +726,10 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Performs a file modification (mid level operation).
+        /// Performs a file modification.
         /// </summary>
+        /// <param name="sourceFileSystem">The source file system.</param>
+        /// <param name="targetFileSystem">The target file system.</param>
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
@@ -753,8 +765,9 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Performs a directory creation (mid level operation).
+        /// Performs a directory creation.
         /// </summary>
+        /// <param name="fileSystem">The file system.</param>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="execute">if set to true, the operation gets executed.</param>
@@ -792,6 +805,11 @@ namespace FlagSync.Core
             return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
         }
 
+        /// <summary>
+        /// Normalizes the specified path.
+        /// </summary>
+        /// <param name="path">The path to normalize.</param>
+        /// <returns>A normalized version of the path.</returns>
         private string NormalizePath(string path)
         {
             return path.Replace("\\", "/").Replace("//", "/");

@@ -9,8 +9,9 @@ namespace FlagSync.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="ITunesJob"/> class.
         /// </summary>
-        /// <param name="settings">The settings.</param>
-        /// <remarks></remarks>
+        /// <param name="name">The name of the job.</param>
+        /// <param name="sourceDirectory">The source directory.</param>
+        /// <param name="targetDirectory">The target directory.</param>
         public ITunesJob(string name, ITunesDirectoryInfo sourceDirectory, LocalDirectoryInfo targetDirectory)
             : base(name, new ITunesFileSystem(), new LocalFileSystem(), sourceDirectory, targetDirectory) { }
 

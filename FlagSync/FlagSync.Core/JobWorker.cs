@@ -112,7 +112,9 @@ namespace FlagSync.Core
         /// <summary>
         /// Gets the total written bytes.
         /// </summary>
-        /// <value>The total written bytes.</value>
+        /// <value>
+        /// The total written bytes.
+        /// </value>
         public long TotalWrittenBytes
         {
             get { return this.totalWrittenBytes; }
@@ -121,7 +123,9 @@ namespace FlagSync.Core
         /// <summary>
         /// Gets the proceeded files.
         /// </summary>
-        /// <value>The proceeded files.</value>
+        /// <value>
+        /// The proceeded files.
+        /// </value>
         public int ProceededFiles
         {
             get { return this.proceededFiles; }
@@ -130,7 +134,9 @@ namespace FlagSync.Core
         /// <summary>
         /// Gets the file counter result.
         /// </summary>
-        /// <value>The file counter result.</value>
+        /// <value>
+        /// The file counter result.
+        /// </value>
         public FileCounterResult FileCounterResult
         {
             get { return this.fileCounterResult; }
@@ -139,7 +145,9 @@ namespace FlagSync.Core
         /// <summary>
         /// Gets a value indicating whether this <see cref="JobWorker"/> is paused.
         /// </summary>
-        /// <value>true if paused; otherwise, false.</value>
+        /// <value>
+        /// true if paused; otherwise, false.
+        /// </value>
         public bool IsPaused
         {
             get { return this.currentJob == null ? false : this.currentJob.IsPaused; }
@@ -182,7 +190,7 @@ namespace FlagSync.Core
         /// <summary>
         /// Starts the specified jobs.
         /// </summary>
-        /// <param name="jobSettings">The job settings.</param>
+        /// <param name="jobs">The jobs to start.</param>
         /// <param name="preview">if set to true, a preview will be performed.</param>
         public void Start(IEnumerable<Job> jobs, bool preview)
         {
@@ -235,7 +243,9 @@ namespace FlagSync.Core
         /// <summary>
         /// Counts the files of all jobs together.
         /// </summary>
-        /// <returns>The result of the counting.</returns>
+        /// <returns>
+        /// The result of the counting.
+        /// </returns>
         private FileCounterResult GetFileCounterResults()
         {
             FileCounterResult result = new FileCounterResult();
