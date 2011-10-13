@@ -48,8 +48,8 @@
     <Reference Include="FlagFtp">
       <HintPath>..\packages\FlagFtp.0.1.2\lib\FlagFtp.dll</HintPath>
     </Reference>
-    <Reference Include="FlagLib, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FlagLib.4.1.0\lib\FlagLib.dll</HintPath>
+    <Reference Include="FlagLib, Version=4.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FlagLib.4.1.1\lib\FlagLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
