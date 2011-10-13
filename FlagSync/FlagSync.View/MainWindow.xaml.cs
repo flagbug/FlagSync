@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using FlagLib.Collections;
-using FlagSync.Core;
+using FlagSync.Data;
 
 namespace FlagSync.View
 {

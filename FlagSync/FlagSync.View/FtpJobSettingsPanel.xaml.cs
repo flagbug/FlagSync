@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using FlagSync.Core;
+using FlagSync.Data;
 
 namespace FlagSync.View
 {

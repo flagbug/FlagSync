@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.IO;
 using FlagLib.Patterns.MVVM;
 using FlagLib.Reflection;
-using FlagSync.Core;
 using FlagSync.Data;
 
 namespace FlagSync.View
@@ -39,11 +38,11 @@ namespace FlagSync.View
             {
                 switch (this.SyncMode)
                 {
-                    case Core.SyncMode.FtpBackup:
-                    case Core.SyncMode.FtpSynchronization:
+                    case SyncMode.FtpBackup:
+                    case SyncMode.FtpSynchronization:
                         return this.FtpAddress;
 
-                    case Core.SyncMode.ITunes:
+                    case SyncMode.ITunes:
                         return this.ITunesPlaylist;
                 }
 
@@ -127,23 +126,23 @@ namespace FlagSync.View
 
                 switch (this.SyncMode)
                 {
-                    case Core.SyncMode.FtpBackup:
+                    case SyncMode.FtpBackup:
                         syncMode = Properties.Resources.FtpServerBackupString;
                         break;
 
-                    case Core.SyncMode.FtpSynchronization:
+                    case SyncMode.FtpSynchronization:
                         syncMode = Properties.Resources.FtpServerSynchronizationString;
                         break;
 
-                    case Core.SyncMode.LocalBackup:
+                    case SyncMode.LocalBackup:
                         syncMode = Properties.Resources.LocalBackupString;
                         break;
 
-                    case Core.SyncMode.LocalSynchronization:
+                    case SyncMode.LocalSynchronization:
                         syncMode = Properties.Resources.LocalSynchronizationString;
                         break;
 
-                    case Core.SyncMode.ITunes:
+                    case SyncMode.ITunes:
                         syncMode = Properties.Resources.iTunesString;
                         break;
                 }
@@ -273,8 +272,8 @@ namespace FlagSync.View
 
                 switch (this.SyncMode)
                 {
-                    case Core.SyncMode.LocalBackup:
-                    case Core.SyncMode.LocalSynchronization:
+                    case SyncMode.LocalBackup:
+                    case SyncMode.LocalSynchronization:
                         if ((name == Reflector.GetMemberName(() => this.DirectoryA) && !Directory.Exists(this.DirectoryA)))
                         {
                             result = Properties.Resources.DirectoryDoesntExistMessage;
@@ -282,7 +281,7 @@ namespace FlagSync.View
 
                         break;
 
-                    case Core.SyncMode.ITunes:
+                    case SyncMode.ITunes:
                         if (name == Reflector.GetMemberName(() => this.ITunesPlaylist) && string.IsNullOrEmpty(this.ITunesPlaylist))
                         {
                             result = Properties.Resources.SelectPlaylistErrorMessage;

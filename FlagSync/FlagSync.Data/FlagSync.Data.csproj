@@ -63,6 +63,7 @@
     <Compile Include="JobSetting.cs" />
     <Compile Include="JobSettingsLoadingResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyncMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlagSync.Core\FlagSync.Core.csproj">
