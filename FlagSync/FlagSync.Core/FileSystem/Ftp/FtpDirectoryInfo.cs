@@ -18,16 +18,13 @@ namespace FlagSync.Core.FileSystem.Ftp
         private FtpClient client;
 
         /// <summary>
-        /// Gets the full name.
+        /// Gets the full name of the directory.
         /// </summary>
         public string FullName { get; private set; }
 
         /// <summary>
         /// Gets the name of the directory.
         /// </summary>
-        /// <value>
-        /// The name of the directory.
-        /// </value>
         public string Name
         {
             get { return Path.GetFileName(this.FullName); }
@@ -36,9 +33,6 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <summary>
         /// Gets the parent directory.
         /// </summary>
-        /// <value>
-        /// The parent directory.
-        /// </value>
         public IDirectoryInfo Parent
         {
             get

@@ -25,9 +25,6 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <summary>
         /// Gets the parent directory.
         /// </summary>
-        /// <value>
-        /// The parent directory.
-        /// </value>
         public IDirectoryInfo Parent { get; set; }
 
         /// <summary>
@@ -73,7 +70,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         }
 
         /// <summary>
-        /// Gets the full name.
+        /// Gets the full name of the directory.
         /// </summary>
         public string FullName
         {
@@ -94,9 +91,6 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <summary>
         /// Gets the name of the directory.
         /// </summary>
-        /// <value>
-        /// The name of the directory.
-        /// </value>
         public string Name
         {
             get { return this.name; }

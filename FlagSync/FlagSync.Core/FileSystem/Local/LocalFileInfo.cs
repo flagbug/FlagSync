@@ -22,9 +22,6 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets the last write time.
         /// </summary>
-        /// <value>
-        /// The last write time.
-        /// </value>
         public DateTime LastWriteTime
         {
             get { return this.fileInfo.LastWriteTime; }
@@ -33,20 +30,14 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets the length of the file.
         /// </summary>
-        /// <value>
-        /// The length of the file.
-        /// </value>
         public long Length
         {
             get { return this.fileInfo.Length; }
         }
 
         /// <summary>
-        /// Gets the full name.
+        /// Gets the full name of the file.
         /// </summary>
-        /// <value>
-        /// The full name.
-        /// </value>
         public string FullName
         {
             get { return this.fileInfo.FullName; }
@@ -55,20 +46,14 @@ namespace FlagSync.Core.FileSystem.Local
         /// <summary>
         /// Gets the name of the file.
         /// </summary>
-        /// <value>
-        /// The name of the file.
-        /// </value>
         public string Name
         {
             get { return this.fileInfo.Name; }
         }
 
         /// <summary>
-        /// Gets the directory of the file.
+        /// Gets the directory.
         /// </summary>
-        /// <value>
-        /// The directory of the file.
-        /// </value>
         public IDirectoryInfo Directory
         {
             get { return new LocalDirectoryInfo(this.fileInfo.Directory); }

@@ -18,25 +18,16 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <summary>
         /// Gets the last write time.
         /// </summary>
-        /// <value>
-        /// The last write time.
-        /// </value>
         public DateTime LastWriteTime { get; private set; }
 
         /// <summary>
         /// Gets the length of the file.
         /// </summary>
-        /// <value>
-        /// The length of the file.
-        /// </value>
         public long Length { get; private set; }
 
         /// <summary>
         /// Gets the directory of the file.
         /// </summary>
-        /// <value>
-        /// The directory of the file.
-        /// </value>
         public IDirectoryInfo Directory
         {
             get
@@ -60,16 +51,13 @@ namespace FlagSync.Core.FileSystem.Ftp
         }
 
         /// <summary>
-        /// Gets the full name.
+        /// Gets the full name of the file.
         /// </summary>
         public string FullName { get; private set; }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets the name of the file.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
         public string Name
         {
             get { return Path.GetFileName(this.FullName); }

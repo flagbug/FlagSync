@@ -2,14 +2,14 @@
 
 namespace FlagSync.Core.FileSystem.Base
 {
+    /// <summary>
+    /// Provides the interface which all directory infos must implement.
+    /// </summary>
     public interface IDirectoryInfo : IFileSystemInfo
     {
         /// <summary>
         /// Gets the parent directory.
         /// </summary>
-        /// <value>
-        /// The parent directory.
-        /// </value>
         IDirectoryInfo Parent { get; }
 
         /// <summary>
