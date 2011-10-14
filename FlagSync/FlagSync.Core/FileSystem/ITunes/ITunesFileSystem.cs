@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using FlagLib.Extensions;
 using FlagLib.IO;
 using FlagLib.Reflection;
@@ -186,22 +188,32 @@ namespace FlagSync.Core.FileSystem.ITunes
             string album = split[2];
             string title = split[3];
 
-            var root = this.GetPlaylistStructure(playlist);
-
-            var artistDirectory = root.SingleOrDefault(dir => dir.Name == artist);
-
-            if (artistDirectory != null)
+            try
             {
-                var albumDirectory = artistDirectory
-                    .GetDirectories()
-                    .SingleOrDefault(albumDir => albumDir.Name == album);
+                var root = this.GetPlaylistStructure(playlist);
 
-                if (albumDirectory != null)
+                var artistDirectory = root.SingleOrDefault(dir => dir.Name == artist);
+
+                if (artistDirectory != null)
                 {
-                    return albumDirectory
-                        .GetFiles()
-                        .Any(file => file.Name == title);
+                    var albumDirectory = artistDirectory
+                        .GetDirectories()
+                        .SingleOrDefault(albumDir => albumDir.Name == album);
+
+                    if (albumDirectory != null)
+                    {
+                        return albumDirectory
+                            .GetFiles()
+                            .Any(file => file.Name == title);
+                    }
                 }
+            }
+
+            catch (COMException ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+                return false;
             }
 
             return false;
@@ -236,24 +248,34 @@ namespace FlagSync.Core.FileSystem.ITunes
                 album = split[2];
             }
 
-            var root = this.GetPlaylistStructure(playlist);
-
-            if (album == null)
+            try
             {
-                return root.Any(artistDir => artistDir.Name == artist);
+                var root = this.GetPlaylistStructure(playlist);
+
+                if (album == null)
+                {
+                    return root.Any(artistDir => artistDir.Name == artist);
+                }
+
+                var artistDirectory = root.SingleOrDefault(artistDir => artistDir.Name == artist);
+
+                if (artistDirectory != null)
+                {
+                    return artistDirectory
+                        .GetDirectories()
+                        .Any(albumDir => albumDir.Name == album);
+                }
+
+                else
+                {
+                    return false;
+                }
             }
 
-            var artistDirectory = root.SingleOrDefault(artistDir => artistDir.Name == artist);
-
-            if (artistDirectory != null)
+            catch (COMException ex)
             {
-                return artistDirectory
-                    .GetDirectories()
-                    .Any(albumDir => albumDir.Name == album);
-            }
+                Debug.WriteLine(ex.Message);
 
-            else
-            {
                 return false;
             }
         }
