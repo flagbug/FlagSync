@@ -1,10 +1,20 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using FlagLib.Extensions;
 using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core.FileSystem.Local
 {
+    /// <summary>
+    /// Represents a file on the local file system.
+    /// </summary>
+    /// <remarks>
+    /// The <see cref="LocalFileInfo"/> class is basically a wrapper around
+    /// the <see cref="System.IO.FileInfo"/> class and abstracts it to be
+    /// used as an <see cref="IFileInfo"/>.
+    /// </remarks>
+    [DebuggerDisplay("{FullName}")]
     public class LocalFileInfo : IFileInfo
     {
         private FileInfo fileInfo;

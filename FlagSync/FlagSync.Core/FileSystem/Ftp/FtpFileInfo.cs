@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using FlagFtp;
 using FlagLib.Extensions;
@@ -6,6 +7,10 @@ using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core.FileSystem.Ftp
 {
+    /// <summary>
+    /// Represents a file on a FTP-server
+    /// </summary>
+    [DebuggerDisplay("{FullName}")]
     public class FtpFileInfo : IFileInfo
     {
         private FtpClient client;
