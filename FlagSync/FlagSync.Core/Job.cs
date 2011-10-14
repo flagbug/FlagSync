@@ -177,6 +177,8 @@ namespace FlagSync.Core
             this.DirectoryA = directoryA;
             this.DirectoryB = directoryB;
 
+            this.Name = name;
+
             this.proceededFilePaths = new HashSet<string>();
             this.excludedPaths = new HashSet<string>();
             this.deletedDirectoryPaths = new HashSet<string>();
