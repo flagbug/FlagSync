@@ -373,7 +373,7 @@ namespace FlagSync.View
 
             if (jobs.All(job => this.CheckDirectoriesExist(job)))
             {
-                this.jobWorker.Start(jobs, preview);
+                this.jobWorker.StartAsync(jobs, preview);
 
                 this.IsCounting = true;
                 this.IsRunning = true;

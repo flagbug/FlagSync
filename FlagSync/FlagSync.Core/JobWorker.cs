@@ -193,7 +193,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="jobs">The jobs to start.</param>
         /// <param name="preview">if set to true, a preview will be performed.</param>
-        public void Start(IEnumerable<Job> jobs, bool preview)
+        public void StartAsync(IEnumerable<Job> jobs, bool preview)
         {
             this.totalWrittenBytes = 0;
 
