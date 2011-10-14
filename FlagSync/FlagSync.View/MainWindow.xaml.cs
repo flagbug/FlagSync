@@ -60,10 +60,7 @@ namespace FlagSync.View
                         {
                             this.WindowState = WindowState.Maximized;
 
-                            MessageBox.Show(Properties.Resources.iTunesErrorMessageBoxText,
-                                            Properties.Resources.iTunesErrorMessageBoxCaption,
-                                            MessageBoxButton.OK,
-                                            MessageBoxImage.Error);
+                            this.ShowITunesErrorMessageBox();
 
                             Application.Current.Shutdown();
                         }
@@ -124,10 +121,7 @@ namespace FlagSync.View
 
                             case Data.JobSettingsLoadingResult.ITunesNotOpened:
                                 {
-                                    MessageBox.Show(Properties.Resources.iTunesErrorMessageBoxText,
-                                                    Properties.Resources.iTunesErrorMessageBoxCaption,
-                                                    MessageBoxButton.OK,
-                                                    MessageBoxImage.Error);
+                                    this.ShowITunesErrorMessageBox();
                                 }
                                 break;
                         }
@@ -315,11 +309,7 @@ namespace FlagSync.View
 
             else
             {
-                MessageBox.Show(
-                    Properties.Resources.iTunesErrorMessageBoxText,
-                    Properties.Resources.iTunesErrorMessageBoxCaption,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                this.ShowITunesErrorMessageBox();
             }
         }
 
@@ -341,6 +331,20 @@ namespace FlagSync.View
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+
+        /// <summary>
+        /// Shows the Itunes error message box.
+        /// </summary>
+        private void ShowITunesErrorMessageBox()
+        {
+            MessageBox.Show
+            (
+                Properties.Resources.iTunesErrorMessageBoxText,
+                Properties.Resources.iTunesErrorMessageBoxCaption,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
         }
     }
 }
