@@ -189,11 +189,21 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Starts the specified jobs.
+        /// Starts the specified jobs asynchronous.
         /// </summary>
         /// <param name="jobs">The jobs to start.</param>
         /// <param name="preview">if set to true, a preview will be performed.</param>
         public void StartAsync(IEnumerable<Job> jobs, bool preview)
+        {
+            ThreadPool.QueueUserWorkItem(callback => this.Start(jobs, preview));
+        }
+
+        /// <summary>
+        /// Starts the specified jobs.
+        /// </summary>
+        /// <param name="jobs">The jobs to start.</param>
+        /// <param name="preview">if set to true, a preview will be performed.</param>
+        public void Start(IEnumerable<Job> jobs, bool preview)
         {
             this.totalWrittenBytes = 0;
 
@@ -202,7 +212,7 @@ namespace FlagSync.Core
                 this.jobQueue.Enqueue(job);
             }
 
-            ThreadPool.QueueUserWorkItem(callback => this.Start(preview));
+            this.InternStart(preview);
         }
 
         /// <summary>
@@ -227,7 +237,7 @@ namespace FlagSync.Core
         /// <summary>
         /// Starts the job worker.
         /// </summary>
-        private void Start(bool preview)
+        private void InternStart(bool preview)
         {
             this.performPreview = preview;
 
