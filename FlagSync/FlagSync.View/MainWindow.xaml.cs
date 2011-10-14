@@ -186,8 +186,6 @@ namespace FlagSync.View
         /// <param name="preview">if set to true a preview will be performed.</param>
         private void StartJobWorker(bool preview)
         {
-            this.mainViewModel.JobWorkerViewModel.ResetJobWorker();
-
             this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.IncludedInternJobSettings, preview);
             this.mainTabControl.SelectedIndex = 1;
         }

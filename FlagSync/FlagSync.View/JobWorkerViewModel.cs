@@ -334,9 +334,45 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Starts the job worker.
+        /// </summary>
+        /// <param name="jobSettings">The job settings.</param>
+        /// <param name="preview">if set to true, a preview will be performed.</param>
+        public void StartJobWorker(IEnumerable<JobSetting> jobSettings, bool preview)
+        {
+            this.ResetJobWorker();
+
+            var jobs = jobSettings.Select(setting => DataController.CreateJobFromSetting(setting));
+
+            if (jobs.All(job => this.CheckDirectoriesExist(job)))
+            {
+                this.jobWorker.Start(jobs, preview);
+
+                this.IsCounting = true;
+                this.IsRunning = true;
+                this.IsPreview = preview;
+                this.startTime = DateTime.Now;
+                this.updateTimer.Start();
+                this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
+                this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
+            }
+        }
+
+        /// <summary>
+        /// Stops the job worker.
+        /// </summary>
+        public void StopJobWorker()
+        {
+            this.jobWorker.Stop();
+            this.IsRunning = false;
+            this.ResetBytes();
+            this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
+        }
+
+        /// <summary>
         /// Resets the job worker.
         /// </summary>
-        public void ResetJobWorker()
+        private void ResetJobWorker()
         {
             this.jobWorker = new JobWorker();
             this.jobWorker.CreatedDirectory += new EventHandler<DirectoryCreationEventArgs>(jobWorker_CreatedDirectory);
@@ -365,32 +401,9 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Starts the job worker.
-        /// </summary>
-        /// <param name="jobSettings">The job settings.</param>
-        /// <param name="preview">if set to true, a preview will be performed.</param>
-        public void StartJobWorker(IEnumerable<JobSetting> jobSettings, bool preview)
-        {
-            var jobs = jobSettings.Select(setting => DataController.CreateJobFromSetting(setting));
-
-            if (jobs.All(job => this.CheckDirectoriesExist(job)))
-            {
-                this.jobWorker.Start(jobs, preview);
-
-                this.IsCounting = true;
-                this.IsRunning = true;
-                this.IsPreview = preview;
-                this.startTime = DateTime.Now;
-                this.updateTimer.Start();
-                this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
-                this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
-            }
-        }
-
-        /// <summary>
         /// Pauses the job worker.
         /// </summary>
-        public void PauseJobWorker()
+        private void PauseJobWorker()
         {
             this.jobWorker.Pause();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
@@ -400,23 +413,12 @@ namespace FlagSync.View
         /// <summary>
         /// Continues the job worker.
         /// </summary>
-        public void ContinueJobWorker()
+        private void ContinueJobWorker()
         {
             this.jobWorker.Continue();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.ContinuingJobsMessage);
             this.AddStatusMessage(Properties.Resources.StartingJobsMessage + " " + this.CurrentJob.Name + "...");
-        }
-
-        /// <summary>
-        /// Stops the job worker.
-        /// </summary>
-        public void StopJobWorker()
-        {
-            this.jobWorker.Stop();
-            this.IsRunning = false;
-            this.ResetBytes();
-            this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
         }
 
         /// <summary>
