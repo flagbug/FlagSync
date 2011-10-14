@@ -296,6 +296,9 @@ namespace FlagSync.View
         /// </value>
         public LogMessage LastLogMessage { get; set; }
 
+        /// <summary>
+        /// Gets the pause or continue job worker command.
+        /// </summary>
         public ICommand PauseOrContinueJobWorkerCommand
         {
             get
@@ -317,6 +320,26 @@ namespace FlagSync.View
                     arg =>
                     {
                         return this.IsRunning;
+                    }
+                );
+            }
+        }
+
+        /// <summary>
+        /// Gets the stop job worker command.
+        /// </summary>
+        public ICommand StopJobWorkerCommand
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    arg =>
+                    {
+                        this.jobWorker.Stop();
+                        this.IsRunning = false;
+                        this.ResetBytes();
+                        this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
                     }
                 );
             }
@@ -356,17 +379,6 @@ namespace FlagSync.View
                 this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
                 this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
             }
-        }
-
-        /// <summary>
-        /// Stops the job worker.
-        /// </summary>
-        public void StopJobWorker()
-        {
-            this.jobWorker.Stop();
-            this.IsRunning = false;
-            this.ResetBytes();
-            this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
         }
 
         /// <summary>

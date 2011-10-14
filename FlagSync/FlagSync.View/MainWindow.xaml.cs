@@ -191,16 +191,6 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Handles the Click event of the stopButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void stopButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.mainViewModel.JobWorkerViewModel.StopJobWorker();
-        }
-
-        /// <summary>
         /// Handles the TextChanged event of the TextBox control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
