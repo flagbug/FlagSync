@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Timers;
 using System.Windows.Input;
 using FlagLib.Collections;
+using FlagLib.Extensions;
 using FlagLib.IO;
 using FlagLib.Patterns.MVVM;
 using FlagSync.Core;
@@ -121,11 +121,11 @@ namespace FlagSync.View
         {
             get
             {
-                double averageSpeed;
+                long averageSpeed;
 
                 if (this.averageSpeedCounts != 0)
                 {
-                    averageSpeed = (this.averageSpeedTotal / this.averageSpeedCounts) / 1024.0 / 1024.0;
+                    averageSpeed = (long)(this.averageSpeedTotal / this.averageSpeedCounts);
                 }
 
                 else
@@ -133,7 +133,7 @@ namespace FlagSync.View
                     averageSpeed = 0;
                 }
 
-                return averageSpeed.ToString("#0.00", CultureInfo.InvariantCulture) + " MB/s";
+                return averageSpeed.ToSizeString() + "/s";
             }
         }
 
