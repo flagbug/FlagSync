@@ -340,6 +340,10 @@ namespace FlagSync.View
                         this.IsRunning = false;
                         this.ResetBytes();
                         this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
+                    },
+                    arg =>
+                    {
+                        return this.IsRunning;
                     }
                 );
             }
