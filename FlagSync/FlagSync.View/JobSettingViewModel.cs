@@ -12,8 +12,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets a value indicating whether this instance is included for syncing.
         /// </summary>
-        /// <value>true if this instance is included for syncing; otherwise, false.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// true if this instance is included for syncing; otherwise, false.
+        /// </value>
         public bool IsIncluded
         {
             get { return this.InternJobSetting.IsIncluded; }
@@ -30,8 +31,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets the directory A.
         /// </summary>
-        /// <value>The directory A.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The directory A.
+        /// </value>
         public string DirectoryA
         {
             get
@@ -61,8 +63,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets the directory B.
         /// </summary>
-        /// <value>The directory B.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The directory B.
+        /// </value>
         public string DirectoryB
         {
             get { return InternJobSetting.DirectoryB; }
@@ -79,8 +82,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        /// <value>The name.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The name.
+        /// </value>
         public string Name
         {
             get { return this.InternJobSetting.Name; }
@@ -97,8 +101,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets the sync mode.
         /// </summary>
-        /// <value>The sync mode.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The sync mode.
+        /// </value>
         public SyncMode SyncMode
         {
             get { return this.InternJobSetting.SyncMode; }
@@ -116,8 +121,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        /// <value>The name.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The name.
+        /// </value>
         public string SyncModeString
         {
             get
@@ -154,8 +160,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets the FTP server address.
         /// </summary>
-        /// <value>The FTP server address.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The FTP server address.
+        /// </value>
         public string FtpAddress
         {
             get { return this.InternJobSetting.FtpAddress; }
@@ -172,8 +179,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets the login name of the FTP server user.
         /// </summary>
-        /// <value>The login name of the FTP user.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The login name of the FTP user.
+        /// </value>
         public string FtpUserName
         {
             get { return this.InternJobSetting.FtpUserName; }
@@ -207,10 +215,10 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Gets or sets the iTunes playlist.
+        /// Gets or sets the Itunes playlist.
         /// </summary>
         /// <value>
-        /// The iTunes playlist.
+        /// The Itunes playlist.
         /// </value>
         public string ITunesPlaylist
         {
