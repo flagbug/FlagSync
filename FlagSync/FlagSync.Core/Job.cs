@@ -17,6 +17,7 @@ namespace FlagSync.Core
     {
         private HashSet<string> proceededFilePaths;
         private HashSet<string> excludedPaths;
+        private HashSet<string> deletedDirectoryPaths;
 
         /// <summary>
         /// Gets the source file system.
@@ -178,6 +179,7 @@ namespace FlagSync.Core
 
             this.proceededFilePaths = new HashSet<string>();
             this.excludedPaths = new HashSet<string>();
+            this.deletedDirectoryPaths = new HashSet<string>();
         }
 
         /// <summary>
@@ -571,9 +573,17 @@ namespace FlagSync.Core
 
                 string newTargetDirectoryPath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.Directory.Name);
 
-                //Check if the directory doesn't exist in the target directory
-                if (!this.SourceFileSystem.DirectoryExists(newTargetDirectoryPath))
+                // Check if the directory doesn't exist in the target directory
+                if (!this.SourceFileSystem.DirectoryExists(newTargetDirectoryPath)
+                    && !this.deletedDirectoryPaths.Any(path => this.NormalizePath(newTargetDirectoryPath).StartsWith(path)))
                 {
+                    // If we perform a preview, add the directory that gets deleted to the deleted paths,
+                    // so that the subdirectories don't get included.
+                    if (!execute)
+                    {
+                        this.deletedDirectoryPaths.Add(this.NormalizePath(newTargetDirectoryPath));
+                    }
+
                     this.PerformDirectoryDeletionOperation(this.TargetFileSystem, e.Directory, execute);
                 }
 
@@ -610,7 +620,8 @@ namespace FlagSync.Core
                 long sourceFileLength = e.File.Length;
 
                 //Check if the file doesn't exist in the target directory
-                if (!this.SourceFileSystem.FileExists(targetFilePath))
+                if (!this.SourceFileSystem.FileExists(targetFilePath)
+                    && !this.deletedDirectoryPaths.Any(path => this.NormalizePath(targetFilePath).StartsWith(path)))
                 {
                     this.PerformFileDeletionOperation(this.TargetFileSystem, e.File, execute);
 
