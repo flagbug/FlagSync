@@ -8,11 +8,16 @@ namespace FlagSync.View
     /// </summary>
     public partial class ITunesJobSettingsPanel : UserControl
     {
+        private ITunesJobSettingsViewModel viewModel;
+
         public ITunesJobSettingsPanel(JobSettingViewModel viewModel)
         {
             InitializeComponent();
 
+            this.viewModel = new ITunesJobSettingsViewModel(viewModel);
             this.viewModel.JobSetting = viewModel;
+
+            this.DataContext = this.viewModel;
         }
 
         /// <summary>

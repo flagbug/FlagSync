@@ -44,5 +44,15 @@ namespace FlagSync.View
                     .OrderBy(name => name);
             }
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ITunesJobSettingsViewModel"/> class.
+        /// </summary>
+        public ITunesJobSettingsViewModel(JobSettingViewModel setting)
+        {
+            this.JobSetting = setting;
+
+            this.JobSetting.ITunesPlaylist = this.ITunesPlaylists.First();
+        }
     }
 }

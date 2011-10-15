@@ -7,9 +7,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              HorizontalAlignment="Left" VerticalAlignment="Top">
-    <UserControl.DataContext>
-        <local:ITunesJobSettingsViewModel x:Name="viewModel"/>
-    </UserControl.DataContext>
     <Grid VerticalAlignment="Top">
         <GroupBox Header="{x:Static properties:Resources.CommonSettingsGroupBoxText}" Margin="5,0,0,0">
             <Grid VerticalAlignment="Top">
