@@ -7,7 +7,7 @@ using FlagSync.Data;
 
 namespace FlagSync.View
 {
-    internal class MainViewModel
+    internal class MainWindowViewModel
     {
         private JobSettingsViewModel jobSettingsViewModel = new JobSettingsViewModel();
         private JobWorkerViewModel jobWorkerViewModel = new JobWorkerViewModel();
@@ -27,9 +27,9 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+        /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
         /// </summary>
-        public MainViewModel()
+        public MainWindowViewModel()
         {
             DataController.CreateAppDataFolder();
         }
