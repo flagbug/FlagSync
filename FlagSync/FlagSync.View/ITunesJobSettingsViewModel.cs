@@ -36,8 +36,8 @@ namespace FlagSync.View
         {
             get
             {
-                iTunesApp iTunes = new iTunesApp();
-                return iTunes.LibrarySource.Playlists
+                var iTunesApp = new iTunesApp();
+                return iTunesApp.LibrarySource.Playlists
                     .Cast<IITPlaylist>()
                     .Where(pl => pl.Kind == ITPlaylistKind.ITPlaylistKindUser)
                     .Select(pl => pl.Name)

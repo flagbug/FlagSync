@@ -15,9 +15,9 @@ namespace FlagSync.Core
     /// </summary>
     public abstract class Job
     {
-        private HashSet<string> proceededFilePaths;
-        private HashSet<string> excludedPaths;
-        private HashSet<string> deletedDirectoryPaths;
+        private readonly HashSet<string> proceededFilePaths;
+        private readonly HashSet<string> excludedPaths;
+        private readonly HashSet<string> deletedDirectoryPaths;
 
         /// <summary>
         /// Gets the source file system.
@@ -241,7 +241,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:CreatingFile"/> event.
+        /// Raises the <see cref="CreatingFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCreatingFile(FileCopyEventArgs e)
@@ -253,7 +253,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:CreatedFile"/> event.
+        /// Raises the <see cref="CreatedFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCreatedFile(FileCopyEventArgs e)
@@ -277,7 +277,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:ModifiedFile"/> event.
+        /// Raises the <see cref="ModifiedFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         protected virtual void OnModifiedFile(FileCopyEventArgs e)
@@ -289,7 +289,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DeletingFile"/> event.
+        /// Raises the <see cref="DeletingFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDeletingFile(FileDeletionEventArgs e)
@@ -301,7 +301,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DeletedFile"/> event.
+        /// Raises the <see cref="DeletedFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDeletedFile(FileDeletionEventArgs e)
@@ -313,7 +313,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:CreatingDirectory"/> event.
+        /// Raises the <see cref="CreatingDirectory"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCreatingDirectory(DirectoryCreationEventArgs e)
@@ -325,7 +325,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:CreatedDirectory"/> event.
+        /// Raises the <see cref="CreatedDirectory"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCreatedDirectory(DirectoryCreationEventArgs e)
@@ -337,7 +337,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DeletingDirectory"/> event.
+        /// Raises the <see cref="DeletingDirectory"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDeletingDirectory(DirectoryDeletionEventArgs e)
@@ -349,7 +349,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DeletedDirectory"/> event.
+        /// Raises the <see cref="DeletedDirectory"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDeletedDirectory(DirectoryDeletionEventArgs e)
@@ -361,7 +361,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:Finished"/> event.
+        /// Raises the <see cref="Finished"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnFinished(EventArgs e)
@@ -373,7 +373,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:FileCopyError"/> event.
+        /// Raises the <see cref="FileCopyError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyErrorEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileCopyError(FileCopyErrorEventArgs e)
@@ -385,7 +385,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DirectoryDeletionError"/> event.
+        /// Raises the <see cref="DirectoryDeletionError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryDeletionError(DirectoryDeletionEventArgs e)
@@ -397,7 +397,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:FileDeletionError"/> event.
+        /// Raises the <see cref="FileDeletionError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionErrorEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileDeletionError(FileDeletionErrorEventArgs e)
@@ -409,7 +409,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:FileProgressChanged"/> event.
+        /// Raises the <see cref="FileProgressChanged"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileProgressChanged(DataTransferEventArgs e)
@@ -421,7 +421,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DirectoryCreationError"/> event.
+        /// Raises the <see cref="DirectoryCreationError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryCreationError(DirectoryCreationEventArgs e)
@@ -433,7 +433,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="E:ProceededFile"/> event.
+        /// Raises the <see cref="ProceededFile"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
         protected virtual void OnProceededFile(FileProceededEventArgs e)
@@ -461,7 +461,7 @@ namespace FlagSync.Core
             if (!targetDirectory.Exists)
                 throw new ArgumentException("The target directory doesn't exist.", Reflector.GetMemberName(() => targetDirectory));
 
-            FileSystemScanner rootScanner = new FileSystemScanner(sourceDirectory);
+            var rootScanner = new FileSystemScanner(sourceDirectory);
 
             IDirectoryInfo currentTargetDirectory = targetDirectory;
 
@@ -560,7 +560,7 @@ namespace FlagSync.Core
             if (!targetDirectory.Exists)
                 throw new ArgumentException("The target directory doesn't exist.", Reflector.GetMemberName(() => targetDirectory));
 
-            FileSystemScanner rootScanner = new FileSystemScanner(sourceDirectory);
+            var rootScanner = new FileSystemScanner(sourceDirectory);
 
             IDirectoryInfo currentTargetDirectory = targetDirectory;
 
@@ -646,12 +646,12 @@ namespace FlagSync.Core
         /// <param name="execute">if set to true, the operation gets executed.</param>
         private void PerformFileDeletionOperation(IFileSystem fileSystem, IFileInfo file, bool execute)
         {
-            FileDeletionEventArgs eventArgs = new FileDeletionEventArgs(file.FullName, file.Length);
+            var eventArgs = new FileDeletionEventArgs(file.FullName, file.Length);
 
             this.OnDeletingFile(eventArgs);
 
             //Only delete the file, if the operation should get executed
-            bool hasPerformed = execute ? fileSystem.TryDeleteFile(file) : false;
+            bool hasPerformed = execute && fileSystem.TryDeleteFile(file);
 
             if (hasPerformed)
             {
@@ -672,21 +672,19 @@ namespace FlagSync.Core
         /// <param name="execute">if set to true, the operation gets executed.</param>
         private void PerformDirectoryDeletionOperation(IFileSystem fileSystem, IDirectoryInfo directory, bool execute)
         {
-            DirectoryDeletionEventArgs eventArgs = new DirectoryDeletionEventArgs(directory.FullName);
+            var eventArgs = new DirectoryDeletionEventArgs(directory.FullName);
 
             this.OnDeletingDirectory(eventArgs);
 
-            FileSystemScanner directoryScanner = new FileSystemScanner(directory);
+            var directoryScanner = new FileSystemScanner(directory);
 
             directoryScanner.FileFound += (sender, e) =>
-            {
                 this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
-            };
 
             directoryScanner.Start();
 
             //Only delete the directory, if the operation should get executed
-            bool hasPerformed = execute ? fileSystem.TryDeleteDirectory(directory) : false;
+            bool hasPerformed = execute && fileSystem.TryDeleteDirectory(directory);
 
             if (hasPerformed)
             {
@@ -709,7 +707,7 @@ namespace FlagSync.Core
         /// <param name="execute">if set to true, the operation gets executed.</param>
         private void PerformFileCreationOperation(IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
         {
-            FileCopyEventArgs eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
+            var eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
 
             this.OnCreatingFile(eventArgs);
 
@@ -723,7 +721,7 @@ namespace FlagSync.Core
             targetFileSystem.FileCopyProgressChanged += handler;
 
             //Only copy the file, if the operation should get executed
-            bool hasPerformed = execute ? targetFileSystem.TryCopyFile(sourceFileSystem, sourceFile, targetDirectory) : false;
+            bool hasPerformed = execute && targetFileSystem.TryCopyFile(sourceFileSystem, sourceFile, targetDirectory);
 
             targetFileSystem.FileCopyProgressChanged -= handler;
 
@@ -748,7 +746,7 @@ namespace FlagSync.Core
         /// <param name="execute">if set to true, the operation gets executed.</param>
         private void PerformFileModificationOperation(IFileSystem sourceFileSystem, IFileSystem targetFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory, bool execute)
         {
-            FileCopyEventArgs eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
+            var eventArgs = new FileCopyEventArgs(sourceFile, sourceFile.Directory, targetDirectory);
 
             this.OnModifyingFile(eventArgs);
 
@@ -762,7 +760,7 @@ namespace FlagSync.Core
             targetFileSystem.FileCopyProgressChanged += handler;
 
             //Only copy the file, if the operation should get executed
-            bool hasPerformed = execute ? targetFileSystem.TryCopyFile(sourceFileSystem, sourceFile, targetDirectory) : false;
+            bool hasPerformed = execute && targetFileSystem.TryCopyFile(sourceFileSystem, sourceFile, targetDirectory);
 
             targetFileSystem.FileCopyProgressChanged -= handler;
 
@@ -786,12 +784,12 @@ namespace FlagSync.Core
         /// <param name="execute">if set to true, the operation gets executed.</param>
         private void PerformDirectoryCreationOperation(IFileSystem fileSystem, IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool execute)
         {
-            DirectoryCreationEventArgs eventArgs = new DirectoryCreationEventArgs(sourceDirectory, targetDirectory);
+            var eventArgs = new DirectoryCreationEventArgs(sourceDirectory, targetDirectory);
 
             this.OnCreatingDirectory(eventArgs);
 
             //Only create the directory, if the operation should get executed
-            bool hasPerformed = execute ? fileSystem.TryCreateDirectory(sourceDirectory, targetDirectory) : false;
+            bool hasPerformed = execute && fileSystem.TryCreateDirectory(sourceDirectory, targetDirectory);
 
             if (hasPerformed)
             {

@@ -1,5 +1,4 @@
 ﻿using System;
-using FlagSync.Core;
 
 namespace FlagSync.Data
 {

@@ -129,12 +129,11 @@ namespace FlagSync.Core.FileSystem.ITunes
             string[] split = path.Split(Path.DirectorySeparatorChar);
 
             string playlist = split[0];
-            string artist = null;
             string album = null;
 
             if (split.Length > 1)
             {
-                artist = split[1];
+                string artist = split[1];
 
                 if (split.Length > 2)
                 {
@@ -317,7 +316,7 @@ namespace FlagSync.Core.FileSystem.ITunes
             if (String.IsNullOrEmpty(playlistName))
                 throw new ArgumentException("The playlist name name cannot be null or empty", Reflector.GetMemberName(() => playlistName));
 
-            ITunesDirectoryInfo root = new ITunesDirectoryInfo(playlistName);
+            var root = new ITunesDirectoryInfo(playlistName);
 
             var files = new iTunesAppClass()
                 .LibrarySource
@@ -331,7 +330,7 @@ namespace FlagSync.Core.FileSystem.ITunes
                 .GroupBy(file => file.Artist)
                 .OrderBy(group => group.Key);
 
-            List<ITunesDirectoryInfo> artistDirectories = new List<ITunesDirectoryInfo>();
+            var artistDirectories = new List<ITunesDirectoryInfo>();
 
             foreach (var artistGroup in tracksByArtist)
             {
@@ -340,7 +339,7 @@ namespace FlagSync.Core.FileSystem.ITunes
 
                 string artistName = ITunesFileSystem.NormalizeArtistOrAlbumName(artistGroup.Key);
 
-                List<ITunesDirectoryInfo> albumDirectories = new List<ITunesDirectoryInfo>();
+                var albumDirectories = new List<ITunesDirectoryInfo>();
 
                 foreach (var album in albumGroups)
                 {
@@ -358,8 +357,7 @@ namespace FlagSync.Core.FileSystem.ITunes
                         );
                 }
 
-                ITunesDirectoryInfo artistDirectory =
-                    new ITunesDirectoryInfo(artistName, albumDirectories, root);
+                var artistDirectory = new ITunesDirectoryInfo(artistName, albumDirectories, root);
 
                 foreach (ITunesDirectoryInfo albumDirectory in artistDirectory.GetDirectories())
                 {

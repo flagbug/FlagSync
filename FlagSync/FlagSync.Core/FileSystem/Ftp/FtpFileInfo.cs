@@ -13,7 +13,7 @@ namespace FlagSync.Core.FileSystem.Ftp
     [DebuggerDisplay("{FullName}")]
     public class FtpFileInfo : IFileInfo
     {
-        private FtpClient client;
+        private readonly FtpClient client;
 
         /// <summary>
         /// Gets the last write time.

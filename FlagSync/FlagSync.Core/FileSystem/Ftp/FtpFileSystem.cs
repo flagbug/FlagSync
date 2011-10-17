@@ -11,7 +11,7 @@ namespace FlagSync.Core.FileSystem.Ftp
 {
     public class FtpFileSystem : IFileSystem
     {
-        private FtpClient client;
+        private readonly FtpClient client;
 
         /// <summary>
         /// Occurs when the file copy progress has changed.
@@ -29,7 +29,6 @@ namespace FlagSync.Core.FileSystem.Ftp
             credentials.ThrowIfNull(() => credentials);
 
             this.client = new FtpClient(credentials);
-            this.client.Credentials = credentials;
         }
 
         /// <summary>
@@ -149,7 +148,7 @@ namespace FlagSync.Core.FileSystem.Ftp
                 {
                     using (Stream targetStream = this.client.OpenWrite(targetFilePath))
                     {
-                        StreamCopyOperation copyOperation = new StreamCopyOperation(sourceStream, targetStream, 8 * 1024, true);
+                        var copyOperation = new StreamCopyOperation(sourceStream, targetStream, 8 * 1024, true);
 
                         copyOperation.CopyProgressChanged += (sender, e) =>
                         {

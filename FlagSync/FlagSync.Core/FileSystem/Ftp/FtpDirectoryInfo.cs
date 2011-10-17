@@ -15,7 +15,7 @@ namespace FlagSync.Core.FileSystem.Ftp
     [DebuggerDisplay("{FullName}")]
     public class FtpDirectoryInfo : IDirectoryInfo
     {
-        private FtpClient client;
+        private readonly FtpClient client;
 
         /// <summary>
         /// Gets the full name of the directory.

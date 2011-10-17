@@ -266,15 +266,7 @@ namespace FlagSync.View
         {
             get
             {
-                if (this.LastLogMessage == null)
-                {
-                    return 0;
-                }
-
-                else
-                {
-                    return this.LastLogMessage.Progress;
-                }
+                return this.LastLogMessage == null ? 0 : this.LastLogMessage.Progress;
             }
         }
 
@@ -499,8 +491,8 @@ namespace FlagSync.View
         /// <param name="mode">The mode.</param>
         public void AddNewJobSetting(SyncMode mode)
         {
-            var setting = new JobSettingViewModel(Properties.Resources.NewJobString + " " + (this.JobSettings.Count + 1));
-            setting.SyncMode = mode;
+            string name = Properties.Resources.NewJobString + " " + (this.JobSettings.Count + 1);
+            var setting = new JobSettingViewModel(name) { SyncMode = mode };
 
             this.JobSettings.Add(setting);
         }

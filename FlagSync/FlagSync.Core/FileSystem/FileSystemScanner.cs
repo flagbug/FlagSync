@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
+using FlagLib.Extensions;
 using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core.FileSystem
 {
     internal class FileSystemScanner
     {
-        private IDirectoryInfo rootDirectory;
+        private readonly IDirectoryInfo rootDirectory;
 
         /// <summary>
         /// Gets or sets a value indicating whether the scanner is stopped.
@@ -56,8 +57,7 @@ namespace FlagSync.Core.FileSystem
         /// </exception>
         public FileSystemScanner(IDirectoryInfo rootDirectory)
         {
-            if (rootDirectory == null)
-                throw new ArgumentNullException("rootDirectory");
+            rootDirectory.ThrowIfNull(() => rootDirectory);
 
             if (!rootDirectory.Exists)
                 throw new ArgumentException("The root directory must exist!");
@@ -66,9 +66,9 @@ namespace FlagSync.Core.FileSystem
         }
 
         /// <summary>
-        /// Raises the <see cref="E:FileFound"/> event.
+        /// Raises the <see cref="FileFound"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagSync.Core.FileSystem.Base.FileFoundEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="FileFoundEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileFound(FileFoundEventArgs e)
         {
             if (this.FileFound != null)
@@ -78,9 +78,9 @@ namespace FlagSync.Core.FileSystem
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DirectoryFound"/> event.
+        /// Raises the <see cref="DirectoryFound"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagSync.Core.FileSystem.Base.DirectoryFoundEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="DirectoryFoundEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryFound(DirectoryFoundEventArgs e)
         {
             if (this.DirectoryFound != null)
@@ -90,7 +90,7 @@ namespace FlagSync.Core.FileSystem
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DirectoryProceeded"/> event.
+        /// Raises the <see cref="DirectoryProceeded"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryProceeded(EventArgs e)
@@ -104,7 +104,7 @@ namespace FlagSync.Core.FileSystem
         /// <summary>
         /// Scans a directory recursively.
         /// </summary>
-        /// <param name="rootPath">The root path.</param>
+        /// <param name="rootDirectory">The root directory.</param>
         private void ScanDirectories(IDirectoryInfo rootDirectory)
         {
             if (this.IsStopped) { return; }
