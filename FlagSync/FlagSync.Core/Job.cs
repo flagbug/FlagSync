@@ -409,7 +409,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Raises the <see cref="FileProgressChanged"/> event.
+        /// Raises the <see cref="FileCopyProgressChanged"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileProgressChanged(DataTransferEventArgs e)
