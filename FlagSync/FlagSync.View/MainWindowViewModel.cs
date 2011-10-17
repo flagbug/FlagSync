@@ -386,10 +386,7 @@ namespace FlagSync.View
                             this.PauseJobWorker();
                         }
                     },
-                    arg =>
-                    {
-                        return this.IsRunning;
-                    }
+                    arg => this.IsRunning
                 );
             }
         }
@@ -410,10 +407,7 @@ namespace FlagSync.View
                         this.ResetBytes();
                         this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
                     },
-                    arg =>
-                    {
-                        return this.IsRunning;
-                    }
+                    arg => this.IsRunning
                 );
             }
         }
@@ -483,9 +477,9 @@ namespace FlagSync.View
         {
             this.ResetJobWorker();
 
-            var jobs = jobSettings.Select(setting => DataController.CreateJobFromSetting(setting));
+            var jobs = jobSettings.Select(DataController.CreateJobFromSetting);
 
-            if (jobs.All(job => this.CheckDirectoriesExist(job)))
+            if (jobs.All(this.CheckDirectoriesExist))
             {
                 this.jobWorker.StartAsync(jobs, preview);
 
@@ -554,25 +548,25 @@ namespace FlagSync.View
         private void ResetJobWorker()
         {
             this.jobWorker = new JobWorker();
-            this.jobWorker.CreatedDirectory += new EventHandler<DirectoryCreationEventArgs>(jobWorker_CreatedDirectory);
-            this.jobWorker.CreatedFile += new EventHandler<FileCopyEventArgs>(jobWorker_CreatedFile);
-            this.jobWorker.CreatingDirectory += new EventHandler<DirectoryCreationEventArgs>(jobWorker_CreatingDirectory);
-            this.jobWorker.CreatingFile += new EventHandler<FileCopyEventArgs>(jobWorker_CreatingFile);
-            this.jobWorker.DeletedDirectory += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DeletedDirectory);
-            this.jobWorker.DeletedFile += new EventHandler<FileDeletionEventArgs>(jobWorker_DeletedFile);
-            this.jobWorker.DeletingDirectory += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DeletingDirectory);
-            this.jobWorker.DeletingFile += new EventHandler<FileDeletionEventArgs>(jobWorker_DeletingFile);
-            this.jobWorker.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeletionError);
-            this.jobWorker.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(jobWorker_FileCopyError);
-            this.jobWorker.FileCopyProgressChanged += new EventHandler<DataTransferEventArgs>(jobWorker_FileCopyProgressChanged);
-            this.jobWorker.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(jobWorker_FileDeletionError);
-            this.jobWorker.FilesCounted += new EventHandler(jobWorker_FilesCounted);
-            this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
-            this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
-            this.jobWorker.JobStarted += new EventHandler<JobEventArgs>(jobWorker_JobStarted);
-            this.jobWorker.ModifiedFile += new EventHandler<FileCopyEventArgs>(jobWorker_ModifiedFile);
-            this.jobWorker.ModifyingFile += new EventHandler<FileCopyEventArgs>(jobWorker_ModifyingFile);
-            this.jobWorker.ProceededFile += new EventHandler<FileProceededEventArgs>(jobWorker_ProceededFile);
+            this.jobWorker.CreatedDirectory += jobWorker_CreatedDirectory;
+            this.jobWorker.CreatedFile += jobWorker_CreatedFile;
+            this.jobWorker.CreatingDirectory += jobWorker_CreatingDirectory;
+            this.jobWorker.CreatingFile += jobWorker_CreatingFile;
+            this.jobWorker.DeletedDirectory += jobWorker_DeletedDirectory;
+            this.jobWorker.DeletedFile += jobWorker_DeletedFile;
+            this.jobWorker.DeletingDirectory += jobWorker_DeletingDirectory;
+            this.jobWorker.DeletingFile += jobWorker_DeletingFile;
+            this.jobWorker.DirectoryDeletionError += jobWorker_DirectoryDeletionError;
+            this.jobWorker.FileCopyError += jobWorker_FileCopyError;
+            this.jobWorker.FileCopyProgressChanged += jobWorker_FileCopyProgressChanged;
+            this.jobWorker.FileDeletionError += jobWorker_FileDeletionError;
+            this.jobWorker.FilesCounted += jobWorker_FilesCounted;
+            this.jobWorker.Finished += jobWorker_Finished;
+            this.jobWorker.JobFinished += jobWorker_JobFinished;
+            this.jobWorker.JobStarted += jobWorker_JobStarted;
+            this.jobWorker.ModifiedFile += jobWorker_ModifiedFile;
+            this.jobWorker.ModifyingFile += jobWorker_ModifyingFile;
+            this.jobWorker.ProceededFile += jobWorker_ProceededFile;
             this.ResetMessages();
             this.ResetBytes();
             this.averageSpeedCounts = 0;
@@ -613,8 +607,10 @@ namespace FlagSync.View
         /// <summary>
         /// Checks if the specified the directories exist and add a status message, if not.
         /// </summary>
-        /// <param name="jobSetting">The job setting.</param>
-        /// <returns>A value indicating whether the both directories exist.</returns>
+        /// <param name="job">The job.</param>
+        /// <returns>
+        /// A value indicating whether the both directories exist.
+        /// </returns>
         private bool CheckDirectoriesExist(Job job)
         {
             bool exist = true;
@@ -671,9 +667,11 @@ namespace FlagSync.View
         /// <param name="type">The type.</param>
         /// <param name="sourcePath">The source path.</param>
         /// <param name="targetPath">The target path.</param>
+        /// <param name="isErrorMessage">if set to <c>true</c> the log message is an error message.</param>
+        /// <param name="fileSize">The size of the file.</param>
         private void AddLogMessage(string action, string type, string sourcePath, string targetPath, bool isErrorMessage, long? fileSize)
         {
-            LogMessage message = new LogMessage(type, action, sourcePath, targetPath, isErrorMessage, fileSize);
+            var message = new LogMessage(type, action, sourcePath, targetPath, isErrorMessage, fileSize);
             this.LogMessages.Add(message);
             this.LastLogMessage = message;
             this.LastLogMessageIndex = this.LogMessages.Count;

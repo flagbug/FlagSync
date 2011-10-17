@@ -76,10 +76,10 @@ namespace FlagSync.View
                 if (IsInProgress && !IsErrorMessage)
                     return null;
 
-                string successImagePath = "pack://application:,,,/FlagSync;component/Images/Success.png";
-                string errorImagePath = "pack://application:,,,/FlagSync;component/Images/Error.png";
+                const string successImagePath = "pack://application:,,,/FlagSync;component/Images/Success.png";
+                const string errorImagePath = "pack://application:,,,/FlagSync;component/Images/Error.png";
 
-                BitmapImage logo = new BitmapImage();
+                var logo = new BitmapImage();
 
                 logo.BeginInit();
                 logo.UriSource = new Uri(this.IsErrorMessage ? errorImagePath : successImagePath);
