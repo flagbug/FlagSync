@@ -4,7 +4,7 @@ using FlagSync.Core.FileSystem.Base;
 namespace FlagSync.Core.FileSystem
 {
     /// <summary>
-    /// Provides data for the events of the <see cref="FlagSync.Core.FileSystemScanner"/> class.
+    /// Provides data for the events of the <see cref="FileSystemScanner"/> class.
     /// </summary>
     public class DirectoryFoundEventArgs : EventArgs
     {

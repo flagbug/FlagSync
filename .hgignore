@@ -10,3 +10,4 @@ FlagSync/FlagSync.Setup/Debug
 FlagSync/FlagSync.Data/obj
 FlagSync/FlagSync.Data/bin
 *.user
+FlagSync/_ReSharper.FlagSync

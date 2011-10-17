@@ -17,7 +17,7 @@ namespace FlagSync.Core.FileSystem.Local
     [DebuggerDisplay("{FullName}")]
     public class LocalDirectoryInfo : IDirectoryInfo
     {
-        private DirectoryInfo directoryInfo;
+        private readonly DirectoryInfo directoryInfo;
 
         /// <summary>
         /// Gets the parent directory.

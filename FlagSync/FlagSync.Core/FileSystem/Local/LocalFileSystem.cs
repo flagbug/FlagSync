@@ -175,16 +175,13 @@ namespace FlagSync.Core.FileSystem.Local
 
                         using (FileStream targetStream = File.Create(targetFilePath))
                         {
-                            StreamCopyOperation copyOperation = new StreamCopyOperation(sourceStream, targetStream, 256 * 1024, true);
+                            var copyOperation = new StreamCopyOperation(sourceStream, targetStream, 256 * 1024, true);
 
                             copyOperation.CopyProgressChanged += (sender, e) =>
                                 {
-                                    if (this.FileCopyProgressChanged != null)
-                                    {
-                                        this.FileCopyProgressChanged(this, e);
+                                    this.FileCopyProgressChanged.Raise(this, e);
 
-                                        canceled = e.Cancel;
-                                    }
+                                    canceled = e.Cancel;
                                 };
 
                             copyOperation.Execute();

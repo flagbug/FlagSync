@@ -56,7 +56,7 @@ namespace FlagSync.Data
         /// </returns>
         public static bool IsNewVersionAvailable(Version currentVersion)
         {
-            WebClient client = new WebClient();
+            var client = new WebClient();
             string versionString;
 
             try
@@ -72,9 +72,9 @@ namespace FlagSync.Data
                 return false;
             }
 
-            Version webVersion = new Version(versionString);
+            var webVersion = new Version(versionString);
 
-            Debug.WriteLine("Current version is " + currentVersion.ToString());
+            Debug.WriteLine("Current version is " + currentVersion);
 
             bool newVersionAvailable = webVersion > currentVersion;
 
@@ -105,12 +105,9 @@ namespace FlagSync.Data
                 return JobSettingsLoadingResult.CorruptFile;
             }
 
-            if (settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !DataController.IsITunesOpened())
-            {
-                return JobSettingsLoadingResult.ITunesNotOpened;
-            }
-
-            return JobSettingsLoadingResult.Succeed;
+            return settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !DataController.IsITunesOpened()
+                       ? JobSettingsLoadingResult.ITunesNotOpened
+                       : JobSettingsLoadingResult.Succeed;
         }
 
         /// <summary>
@@ -120,7 +117,7 @@ namespace FlagSync.Data
         /// <param name="path">The path.</param>
         public static void SaveJobSettings(IEnumerable<JobSetting> settings, string path)
         {
-            GenericXmlSerializer.SerializeCollection<JobSetting>(settings.ToList(), path);
+            GenericXmlSerializer.SerializeCollection(settings.ToList(), path);
         }
 
         /// <summary>
@@ -163,7 +160,7 @@ namespace FlagSync.Data
                         var source = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
 
                         var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
-                        var target = new FlagSync.Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
+                        var target = new Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
 
                         return new FtpBackupJob(setting.Name, source, target, new Uri(setting.FtpAddress), setting.FtpUserName, setting.FtpPassword);
                     }
@@ -173,7 +170,7 @@ namespace FlagSync.Data
                         var directoryA = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
 
                         var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
-                        var directoryB = new FlagSync.Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
+                        var directoryB = new Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
 
                         return new FtpBackupJob(setting.Name, directoryA, directoryB,
                             new Uri(setting.FtpAddress), setting.FtpUserName, setting.FtpPassword);

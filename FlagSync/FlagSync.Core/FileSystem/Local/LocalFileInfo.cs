@@ -17,7 +17,7 @@ namespace FlagSync.Core.FileSystem.Local
     [DebuggerDisplay("{FullName}")]
     public class LocalFileInfo : IFileInfo
     {
-        private FileInfo fileInfo;
+        private readonly FileInfo fileInfo;
 
         /// <summary>
         /// Gets the last write time.

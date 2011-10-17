@@ -76,10 +76,10 @@ namespace FlagSync.View
                 if (IsInProgress && !IsErrorMessage)
                     return null;
 
-                string successImagePath = "pack://application:,,,/FlagSync;component/Images/Success.png";
-                string errorImagePath = "pack://application:,,,/FlagSync;component/Images/Error.png";
+                const string successImagePath = "pack://application:,,,/FlagSync;component/Images/Success.png";
+                const string errorImagePath = "pack://application:,,,/FlagSync;component/Images/Error.png";
 
-                BitmapImage logo = new BitmapImage();
+                var logo = new BitmapImage();
 
                 logo.BeginInit();
                 logo.UriSource = new Uri(this.IsErrorMessage ? errorImagePath : successImagePath);
@@ -108,15 +108,7 @@ namespace FlagSync.View
         {
             get
             {
-                if (this.fileSize.HasValue)
-                {
-                    return this.fileSize.Value.ToSizeString();
-                }
-
-                else
-                {
-                    return String.Empty;
-                }
+                return this.fileSize.HasValue ? this.fileSize.Value.ToSizeString() : String.Empty;
             }
         }
 
@@ -128,7 +120,7 @@ namespace FlagSync.View
         /// <param name="sourcePath">The source path.</param>
         /// <param name="targetPath">The target path.</param>
         /// <param name="isErrorMessage">if set to <c>true</c>, the message is a error message.</param>
-        /// <param name="fileSize">Size of the file.</param>
+        /// <param name="fileSize">The size of the file.</param>
         public LogMessage(string type, string action, string sourcePath, string targetPath, bool isErrorMessage, long? fileSize)
         {
             this.Type = type;

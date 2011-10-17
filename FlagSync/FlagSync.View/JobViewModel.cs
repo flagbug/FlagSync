@@ -4,7 +4,7 @@ namespace FlagSync.View
 {
     internal class JobViewModel
     {
-        private Job model;
+        private readonly Job model;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JobViewModel"/> class.

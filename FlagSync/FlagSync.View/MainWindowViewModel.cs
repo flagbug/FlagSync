@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Timers;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using FlagLib.Collections;
 using FlagLib.Extensions;
@@ -13,8 +17,9 @@ using FlagSync.Data;
 
 namespace FlagSync.View
 {
-    internal class JobWorkerViewModel : ViewModelBase<JobWorkerViewModel>
+    internal class MainWindowViewModel : ViewModelBase<MainWindowViewModel>
     {
+        private JobSettingViewModel selectedJobSetting;
         private JobWorker jobWorker;
         private JobViewModel currentJob;
         private DateTime startTime;
@@ -27,7 +32,7 @@ namespace FlagSync.View
         private string statusMessages = String.Empty;
         private string lastStatusMessage = String.Empty;
         private int lastLogMessageIndex;
-        private Timer updateTimer;
+        private readonly Timer updateTimer;
         private long averageSpeedTotal;
         private int averageSpeedCounts;
 
@@ -125,7 +130,7 @@ namespace FlagSync.View
 
                 if (this.averageSpeedCounts != 0)
                 {
-                    averageSpeed = (long)(this.averageSpeedTotal / this.averageSpeedCounts);
+                    averageSpeed = this.averageSpeedTotal / this.averageSpeedCounts;
                 }
 
                 else
@@ -261,15 +266,7 @@ namespace FlagSync.View
         {
             get
             {
-                if (this.LastLogMessage == null)
-                {
-                    return 0;
-                }
-
-                else
-                {
-                    return this.LastLogMessage.Progress;
-                }
+                return this.LastLogMessage == null ? 0 : this.LastLogMessage.Progress;
             }
         }
 
@@ -297,6 +294,70 @@ namespace FlagSync.View
         public LogMessage LastLogMessage { get; set; }
 
         /// <summary>
+        /// Gets the job settings.
+        /// </summary>
+        public ObservableCollection<JobSettingViewModel> JobSettings { get; private set; }
+
+        /// <summary>
+        /// Gets the current job settings panel.
+        /// </summary>
+        public ObservableCollection<UserControl> CurrentJobSettingsPanel { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the selected job setting.
+        /// </summary>
+        /// <value>
+        /// The selected job setting.
+        /// </value>
+        public JobSettingViewModel SelectedJobSetting
+        {
+            get { return this.selectedJobSetting; }
+            set
+            {
+                if (this.SelectedJobSetting != value)
+                {
+                    this.selectedJobSetting = value;
+                    this.OnPropertyChanged(vm => vm.SelectedJobSetting);
+
+                    this.CurrentJobSettingsPanel.Clear();
+
+                    switch (value.SyncMode)
+                    {
+                        case SyncMode.LocalBackup:
+                        case SyncMode.LocalSynchronization:
+                            this.CurrentJobSettingsPanel.Add(new LocalJobSettingsPanel(value));
+                            break;
+
+                        case SyncMode.FtpBackup:
+                        case SyncMode.FtpSynchronization:
+                            this.CurrentJobSettingsPanel.Add(new FtpJobSettingsPanel(value));
+                            break;
+
+                        case SyncMode.ITunes:
+                            this.CurrentJobSettingsPanel.Add(new ITunesJobSettingsPanel(value));
+                            break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether a new version of this application is available.
+        /// </summary>
+        /// <value>
+        /// true if a new version of this application is available; otherwise, false.
+        /// </value>
+        public bool IsNewVersionAvailable
+        {
+            get
+            {
+                Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+
+                return DataController.IsNewVersionAvailable(currentVersion);
+            }
+        }
+
+        /// <summary>
         /// Gets the pause or continue job worker command.
         /// </summary>
         public ICommand PauseOrContinueJobWorkerCommand
@@ -317,10 +378,7 @@ namespace FlagSync.View
                             this.PauseJobWorker();
                         }
                     },
-                    arg =>
-                    {
-                        return this.IsRunning;
-                    }
+                    arg => this.IsRunning
                 );
             }
         }
@@ -341,19 +399,61 @@ namespace FlagSync.View
                         this.ResetBytes();
                         this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
                     },
+                    arg => this.IsRunning
+                );
+            }
+        }
+
+        /// <summary>
+        /// Gets the delete selected job setting command.
+        /// </summary>
+        public ICommand DeleteSelectedJobSettingCommand
+        {
+            get
+            {
+                return new RelayCommand
+                (
                     arg =>
                     {
-                        return this.IsRunning;
+                        this.JobSettings.Remove(this.SelectedJobSetting);
+
+                        if (this.JobSettings.Count == 0)
+                        {
+                            this.AddNewJobSetting(SyncMode.LocalBackup);
+                        }
+
+                        this.SelectedJobSetting = this.JobSettings.Last();
                     }
                 );
             }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JobWorkerViewModel"/> class.
+        /// Gets the exit application command.
         /// </summary>
-        public JobWorkerViewModel()
+        public ICommand ExitApplicationCommand
         {
+            get
+            {
+                return new RelayCommand
+                (
+                    arg => Application.Current.Shutdown()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
+        /// </summary>
+        public MainWindowViewModel()
+        {
+            DataController.CreateAppDataFolder();
+
+            this.JobSettings = new ObservableCollection<JobSettingViewModel>();
+            this.CurrentJobSettingsPanel = new ObservableCollection<UserControl>();
+            this.AddNewJobSetting(SyncMode.LocalBackup);
+            this.SelectedJobSetting = this.JobSettings[0];
+
             this.LogMessages = new ThreadSafeObservableCollection<LogMessage>();
             this.updateTimer = new Timer(1000);
             this.updateTimer.Elapsed += new ElapsedEventHandler(updateTimer_Elapsed);
@@ -369,9 +469,9 @@ namespace FlagSync.View
         {
             this.ResetJobWorker();
 
-            var jobs = jobSettings.Select(setting => DataController.CreateJobFromSetting(setting));
+            var jobs = jobSettings.Select(DataController.CreateJobFromSetting);
 
-            if (jobs.All(job => this.CheckDirectoriesExist(job)))
+            if (jobs.All(this.CheckDirectoriesExist))
             {
                 this.jobWorker.StartAsync(jobs, preview);
 
@@ -386,30 +486,79 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Adds a new job setting with the specified mode.
+        /// </summary>
+        /// <param name="mode">The mode.</param>
+        public void AddNewJobSetting(SyncMode mode)
+        {
+            string name = Properties.Resources.NewJobString + " " + (this.JobSettings.Count + 1);
+            var setting = new JobSettingViewModel(name) { SyncMode = mode };
+
+            this.JobSettings.Add(setting);
+        }
+
+        /// <summary>
+        /// Saves the job settings.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        public void SaveJobSettings(string path)
+        {
+            DataController.SaveJobSettings(this.JobSettings.Select(setting => setting.InternJobSetting), path);
+        }
+
+        /// <summary>
+        /// Loads the job settings.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        public JobSettingsLoadingResult LoadJobSettings(string path)
+        {
+            IEnumerable<JobSetting> settings;
+
+            var result = DataController.TryLoadJobSettings(path, out settings);
+
+            if (result == JobSettingsLoadingResult.Succeed)
+            {
+                this.JobSettings.Clear();
+
+                foreach (JobSetting setting in settings)
+                {
+                    this.JobSettings.Add(new JobSettingViewModel(setting));
+                }
+
+                if (settings.Any())
+                {
+                    this.SelectedJobSetting = this.JobSettings.First();
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Resets the job worker.
         /// </summary>
         private void ResetJobWorker()
         {
             this.jobWorker = new JobWorker();
-            this.jobWorker.CreatedDirectory += new EventHandler<DirectoryCreationEventArgs>(jobWorker_CreatedDirectory);
-            this.jobWorker.CreatedFile += new EventHandler<FileCopyEventArgs>(jobWorker_CreatedFile);
-            this.jobWorker.CreatingDirectory += new EventHandler<DirectoryCreationEventArgs>(jobWorker_CreatingDirectory);
-            this.jobWorker.CreatingFile += new EventHandler<FileCopyEventArgs>(jobWorker_CreatingFile);
-            this.jobWorker.DeletedDirectory += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DeletedDirectory);
-            this.jobWorker.DeletedFile += new EventHandler<FileDeletionEventArgs>(jobWorker_DeletedFile);
-            this.jobWorker.DeletingDirectory += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DeletingDirectory);
-            this.jobWorker.DeletingFile += new EventHandler<FileDeletionEventArgs>(jobWorker_DeletingFile);
-            this.jobWorker.DirectoryDeletionError += new EventHandler<DirectoryDeletionEventArgs>(jobWorker_DirectoryDeletionError);
-            this.jobWorker.FileCopyError += new EventHandler<FileCopyErrorEventArgs>(jobWorker_FileCopyError);
-            this.jobWorker.FileCopyProgressChanged += new EventHandler<DataTransferEventArgs>(jobWorker_FileCopyProgressChanged);
-            this.jobWorker.FileDeletionError += new EventHandler<FileDeletionErrorEventArgs>(jobWorker_FileDeletionError);
-            this.jobWorker.FilesCounted += new EventHandler(jobWorker_FilesCounted);
-            this.jobWorker.Finished += new EventHandler(jobWorker_Finished);
-            this.jobWorker.JobFinished += new EventHandler<JobEventArgs>(jobWorker_JobFinished);
-            this.jobWorker.JobStarted += new EventHandler<JobEventArgs>(jobWorker_JobStarted);
-            this.jobWorker.ModifiedFile += new EventHandler<FileCopyEventArgs>(jobWorker_ModifiedFile);
-            this.jobWorker.ModifyingFile += new EventHandler<FileCopyEventArgs>(jobWorker_ModifyingFile);
-            this.jobWorker.ProceededFile += new EventHandler<FileProceededEventArgs>(jobWorker_ProceededFile);
+            this.jobWorker.CreatedDirectory += jobWorker_CreatedDirectory;
+            this.jobWorker.CreatedFile += jobWorker_CreatedFile;
+            this.jobWorker.CreatingDirectory += jobWorker_CreatingDirectory;
+            this.jobWorker.CreatingFile += jobWorker_CreatingFile;
+            this.jobWorker.DeletedDirectory += jobWorker_DeletedDirectory;
+            this.jobWorker.DeletedFile += jobWorker_DeletedFile;
+            this.jobWorker.DeletingDirectory += jobWorker_DeletingDirectory;
+            this.jobWorker.DeletingFile += jobWorker_DeletingFile;
+            this.jobWorker.DirectoryDeletionError += jobWorker_DirectoryDeletionError;
+            this.jobWorker.FileCopyError += jobWorker_FileCopyError;
+            this.jobWorker.FileCopyProgressChanged += jobWorker_FileCopyProgressChanged;
+            this.jobWorker.FileDeletionError += jobWorker_FileDeletionError;
+            this.jobWorker.FilesCounted += jobWorker_FilesCounted;
+            this.jobWorker.Finished += jobWorker_Finished;
+            this.jobWorker.JobFinished += jobWorker_JobFinished;
+            this.jobWorker.JobStarted += jobWorker_JobStarted;
+            this.jobWorker.ModifiedFile += jobWorker_ModifiedFile;
+            this.jobWorker.ModifyingFile += jobWorker_ModifyingFile;
+            this.jobWorker.ProceededFile += jobWorker_ProceededFile;
             this.ResetMessages();
             this.ResetBytes();
             this.averageSpeedCounts = 0;
@@ -450,8 +599,10 @@ namespace FlagSync.View
         /// <summary>
         /// Checks if the specified the directories exist and add a status message, if not.
         /// </summary>
-        /// <param name="jobSetting">The job setting.</param>
-        /// <returns>A value indicating whether the both directories exist.</returns>
+        /// <param name="job">The job.</param>
+        /// <returns>
+        /// A value indicating whether the both directories exist.
+        /// </returns>
         private bool CheckDirectoriesExist(Job job)
         {
             bool exist = true;
@@ -508,9 +659,11 @@ namespace FlagSync.View
         /// <param name="type">The type.</param>
         /// <param name="sourcePath">The source path.</param>
         /// <param name="targetPath">The target path.</param>
+        /// <param name="isErrorMessage">if set to <c>true</c> the log message is an error message.</param>
+        /// <param name="fileSize">The size of the file.</param>
         private void AddLogMessage(string action, string type, string sourcePath, string targetPath, bool isErrorMessage, long? fileSize)
         {
-            LogMessage message = new LogMessage(type, action, sourcePath, targetPath, isErrorMessage, fileSize);
+            var message = new LogMessage(type, action, sourcePath, targetPath, isErrorMessage, fileSize);
             this.LogMessages.Add(message);
             this.LastLogMessage = message;
             this.LastLogMessageIndex = this.LogMessages.Count;

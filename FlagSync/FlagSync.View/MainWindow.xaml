@@ -6,7 +6,6 @@
         xmlns:properties="clr-namespace:FlagSync.View.Properties"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
         mc:Ignorable="d"
         d:DesignHeight="768" d:DesignWidth="1024"
         Title="FlagSync" Name="Window" Icon="/FlagSync;component/Images/ApplicationIcon.ico"
@@ -14,7 +13,7 @@
         MinWidth="800" MinHeight="600"
         Loaded="Window_Loaded">
     <Window.DataContext>
-        <local:MainViewModel x:Name="mainViewModel" />
+        <local:MainWindowViewModel x:Name="mainWindowViewModel" />
     </Window.DataContext>
     <Window.Resources>
         <local:ByteToKiloByteConverter x:Key="ByteToKiloByteConverter"/>
@@ -113,7 +112,7 @@
             </Grid.ColumnDefinitions>
             <GroupBox Header="{x:Static properties:Resources.CurrentJobGroupBoxText}" Height="Auto" Width="Auto" Padding="3" Grid.Column="0">
                 <Grid>
-                    <Grid Visibility="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -125,22 +124,22 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.NameTextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
-                        <TextBlock Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJob.Name}" Margin="5,0,0,0" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=CurrentJob.Name}" Margin="5,0,0,0" />
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryATextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
-                        <TextBlock Grid.Row="1" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJob.DirectoryA}" Margin="5,0,0,0" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=CurrentJob.DirectoryA}" Margin="5,0,0,0" />
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryBTextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
-                        <TextBlock Grid.Row="2" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJob.DirectoryB}" Margin="5,0,0,0" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=CurrentJob.DirectoryB}" Margin="5,0,0,0" />
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.ModeTextBlockText}" Height="Auto" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Padding="0" />
-                        <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=JobWorkerViewModel.CurrentJob.SyncModeString}" Margin="5,0,0,0" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=CurrentJob.SyncModeString}" Margin="5,0,0,0" />
                     </Grid>
                     <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.NoActiveJobText}" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock.Style>
                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=JobWorkerViewModel.IsRunning}" Value="True">
+                                    <DataTrigger Binding="{Binding Path=IsRunning}" Value="True">
                                         <Setter Property="Visibility" Value="Hidden" />
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=JobWorkerViewModel.IsRunning}" Value="False">
+                                    <DataTrigger Binding="{Binding Path=IsRunning}" Value="False">
                                         <Setter Property="Visibility" Value="Visible" />
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -157,21 +156,21 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Maximum="{Binding Path=JobWorkerViewModel.CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=JobWorkerViewModel.ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=JobWorkerViewModel.IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
+                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Maximum="{Binding Path=CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
                         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{x:Static properties:Resources.TotalProgressText}"/>
                             <TextBlock Text=" " />
-                            <TextBlock Text="{Binding Path=JobWorkerViewModel.TotalProgressPercentage, StringFormat=\{0:F\}}" />
+                            <TextBlock Text="{Binding Path=TotalProgressPercentage, StringFormat=\{0:F\}}" />
                             <TextBlock Text="% "/>
-                            <TextBlock Text="{Binding Path=JobWorkerViewModel.AverageSpeed}" Visibility="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="{Binding Path=AverageSpeed}" Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1" Margin="0,3">
-                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Value="{Binding Path=JobWorkerViewModel.CurrentProgress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Value="{Binding Path=CurrentProgress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{x:Static properties:Resources.CurrentProgressText}"/>
                             <TextBlock Text=" " />
-                            <TextBlock Text="{Binding Path=JobWorkerViewModel.CurrentProgress, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}" />
+                            <TextBlock Text="{Binding Path=CurrentProgress, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}" />
                             <TextBlock Text="% " />
                         </StackPanel>
                     </Grid>
@@ -182,10 +181,10 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Content="{x:Static properties:Resources.PreviewButtonText}" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
-                        <Button Content="{x:Static properties:Resources.StartButtonText}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Click="startButton_Click" IsEnabled="{Binding Path=JobWorkerViewModel.IsRunning, Converter={StaticResource BoolNegationConverter}}" />
-                        <Button Content="{Binding Path=JobWorkerViewModel.PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Command="{Binding Path=JobWorkerViewModel.PauseOrContinueJobWorkerCommand}" />
-                        <Button Content="{x:Static properties:Resources.StopButtonText}" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Command="{Binding Path=JobWorkerViewModel.StopJobWorkerCommand}" />
+                        <Button Content="{x:Static properties:Resources.PreviewButtonText}" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" Name="previewButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Click="previewButton_Click" IsEnabled="{Binding Path=IsRunning, Converter={StaticResource BoolNegationConverter}}" />
+                        <Button Content="{x:Static properties:Resources.StartButtonText}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="startButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Click="startButton_Click" IsEnabled="{Binding Path=IsRunning, Converter={StaticResource BoolNegationConverter}}" />
+                        <Button Content="{Binding Path=PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Command="{Binding Path=PauseOrContinueJobWorkerCommand}" />
+                        <Button Content="{x:Static properties:Resources.StopButtonText}" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Command="{Binding Path=StopJobWorkerCommand}" />
                     </Grid>
                 </Grid>
             </GroupBox>
@@ -252,7 +251,7 @@
                                     </ContextMenu>
                                 </Button.ContextMenu>
                             </Button>
-                            <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}" Command="{Binding Path=JobSettingsViewModel.DeleteSelectedJobSettingCommand}">
+                            <Button Grid.Column="1" Name="deleteJobButton" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}" Command="{Binding Path=DeleteSelectedJobSettingCommand}">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="/FlagSync;component/Images/Remove.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.DeleteString}" HorizontalAlignment="Center" />
@@ -271,7 +270,7 @@
                                 </StackPanel>
                             </Button>
                         </Grid>
-                        <ListBox Grid.Row="1" SelectedItem="{Binding Path=JobSettingsViewModel.SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=JobSettingsViewModel.JobSettings, UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,0" MaxWidth="225">
+                        <ListBox Grid.Row="1" SelectedItem="{Binding Path=SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=JobSettings, UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,0" MaxWidth="225">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="5, 5, 5, 5" Orientation="Horizontal">
@@ -295,7 +294,7 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </Grid>
-                    <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=JobSettingsViewModel.CurrentJobSettingsPanel, UpdateSourceTrigger=PropertyChanged}" />
+                    <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=CurrentJobSettingsPanel, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
             </TabItem>
             <TabItem>
@@ -310,8 +309,8 @@
                         <RowDefinition Height="100" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch" Text="{Binding Path=JobWorkerViewModel.StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Cursor="Arrow" TextChanged="TextBox_TextChanged" />
-                    <ListView Grid.Row="1" DataContext="{Binding Path=JobWorkerViewModel}" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionMode="Single">
+                    <TextBox Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch" Text="{Binding Path=StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Cursor="Arrow" TextChanged="TextBox_TextChanged" />
+                    <ListView Grid.Row="1" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionMode="Single">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False">
                                 <GridViewColumn Width="30">
@@ -333,7 +332,7 @@
             </TabItem>
         </TabControl>
         <StatusBar Width="Auto" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
-            <StatusBarItem Content="{Binding Path=JobWorkerViewModel.LastStatusMessage}" />
+            <StatusBarItem Content="{Binding Path=LastStatusMessage}" />
             <StatusBarItem Visibility="{Binding Path=IsNewVersionAvailable, Converter={StaticResource BooleanToVisibilityConverter}, IsAsync=True, Mode=OneTime, FallbackValue=Hidden}" HorizontalAlignment="Right">
                 <Hyperlink NavigateUri="http://sourceforge.net/projects/flagsync/files/" RequestNavigate="Hyperlink_RequestNavigate">
                     <TextBlock Text="{x:Static properties:Resources.UpdateAvailableText}" />

@@ -18,9 +18,9 @@ namespace FlagSync.Core.FileSystem.ITunes
     public class ITunesDirectoryInfo : IDirectoryInfo
     {
         private string name;
-        private bool isRoot;
-        private IEnumerable<ITunesDirectoryInfo> directories;
-        private IEnumerable<IFileInfo> files;
+        private readonly bool isRoot;
+        private readonly IEnumerable<ITunesDirectoryInfo> directories;
+        private readonly IEnumerable<IFileInfo> files;
 
         /// <summary>
         /// Gets the parent directory.
@@ -76,15 +76,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         {
             get
             {
-                if (this.isRoot)
-                {
-                    return this.name;
-                }
-
-                else
-                {
-                    return Path.Combine(this.Parent.FullName, this.Name);
-                }
+                return this.isRoot ? this.name : Path.Combine(this.Parent.FullName, this.Name);
             }
         }
 
@@ -167,9 +159,7 @@ namespace FlagSync.Core.FileSystem.ITunes
             name.ThrowIfNull(() => name);
             parent.ThrowIfNull(() => parent);
 
-            ITunesDirectoryInfo directory = new ITunesDirectoryInfo(parent);
-            directory.name = name;
-            directory.Exists = false;
+            var directory = new ITunesDirectoryInfo(parent) { name = name, Exists = false };
 
             return directory;
         }

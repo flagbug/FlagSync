@@ -7,7 +7,7 @@
         <member name="T:FlagLib.Patterns.MVVM.RelayCommand">
             <summary>
             Represents an <see cref="T:System.Windows.Input.ICommand"/> which takes
-            a <see cref="T:System.Action"/> as Execute method and a <see cref="!:System.Predicate"/>
+            a <see cref="T:System.Action"/> as Execute method and a <see cref="T:System.Predicate`1"/>
             as CanExecute method.
             </summary>
         </member>
@@ -183,6 +183,11 @@
             </summary>
             <param name="index">The index of the item to be removed.</param>
         </member>
+        <member name="E:FlagLib.Collections.ThreadSafeObservableCollection`1.CollectionChanged">
+            <summary>
+            Occurs when the collection changes.
+            </summary>
+        </member>
         <member name="P:FlagLib.Collections.ThreadSafeObservableCollection`1.Count">
             <summary>
             Gets the number of elements contained in the <see cref="T:FlagLib.Collections.ThreadSafeObservableCollection`1"/>.
@@ -309,7 +314,7 @@
             Initializes a new instance of the <see cref="T:FlagLib.IO.DataTransferEventArgs"/> class.
             </summary>
             <param name="totalBytes">The total number of bytes.</param>
-            <param name="copiedBytes">The number of transferred bytes.</param>
+            <param name="transferredBytes">The transferred bytes.</param>
         </member>
         <member name="P:FlagLib.IO.DataTransferEventArgs.TotalBytes">
             <summary>
@@ -350,7 +355,7 @@
             Initializes a new instance of the <see cref="T:FlagLib.IO.DataTransferEventArgs"/> class.
             </summary>
             <param name="totalBytes">The total number of bytes.</param>
-            <param name="copiedBytes">The number of transferred bytes.</param>
+            <param name="transferredBytes">The transferred bytes.</param>
         </member>
         <member name="P:FlagLib.IO.DataTransferEventArgs`2.Source">
             <summary>
@@ -947,7 +952,15 @@
             the caller has to do it himself.
             </remarks>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:FlagLib.IO.StreamCopyOperation.#ctor(System.IO.Stream,System.IO.Stream,System.Int32,System.Int32)" -->
+        <member name="M:FlagLib.IO.StreamCopyOperation.#ctor(System.IO.Stream,System.IO.Stream,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FlagLib.IO.StreamCopyOperation"/> class.
+            </summary>
+            <param name="sourceStream">The source stream.</param>
+            <param name="targetStream">The target stream.</param>
+            <param name="bufferSize">Size of the buffer.</param>
+            <param name="updateInterval">The interval, after how much copied bytes the <see cref="E:FlagLib.IO.StreamCopyOperation.CopyProgressChanged"/> shall be raised.</param>
+        </member>
         <member name="M:FlagLib.IO.StreamCopyOperation.#ctor(System.IO.Stream,System.IO.Stream,System.Int32,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:FlagLib.IO.StreamCopyOperation"/> class.
@@ -973,7 +986,7 @@
         </member>
         <member name="M:FlagLib.IO.StreamCopyOperation.OnCopyProgressChanged(FlagLib.IO.DataTransferEventArgs{System.IO.Stream,System.IO.Stream})">
             <summary>
-            Raises the <see cref="E:CopyProgressChanged"/> event.
+            Raises the <see cref="E:FlagLib.IO.StreamCopyOperation.CopyProgressChanged"/> event.
             </summary>
             <param name="e">The <see cref="T:FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         </member>
@@ -1003,7 +1016,7 @@
         </member>
         <member name="P:FlagLib.IO.StreamCopyOperation.UpdateInterval">
             <summary>
-            Gets the interval, after how much copied bytes the <see cref="!:CopyProgressChaned"/> shall be raised.
+            Gets the interval, after how much copied bytes the <see cref="E:FlagLib.IO.StreamCopyOperation.CopyProgressChanged"/> shall be raised.
             </summary>
         </member>
         <member name="P:FlagLib.IO.StreamCopyOperation.StartTime">
@@ -1025,6 +1038,28 @@
             <summary>
             Gets the target stream.
             </summary>
+        </member>
+        <member name="T:FlagLib.Extensions.EventHandlerExtensions">
+            <summary>
+            Provides extension methods for the <see cref="T:System.EventHandler"/> delegate.
+            </summary>
+        </member>
+        <member name="M:FlagLib.Extensions.EventHandlerExtensions.Raise``1(System.EventHandler{``0},System.Object,``0)">
+            <summary>
+            Raises the event handler.
+            </summary>
+            <typeparam name="T">The type of the event args.</typeparam>
+            <param name="handler">The event handler.</param>
+            <param name="sender">The sender.</param>
+            <param name="eventArgs">The event args.</param>
+        </member>
+        <member name="M:FlagLib.Extensions.EventHandlerExtensions.Raise(System.EventHandler,System.Object,System.EventArgs)">
+            <summary>
+            Raises the event handler.
+            </summary>
+            <param name="handler">The event handler.</param>
+            <param name="sender">The sender.</param>
+            <param name="eventArgs">The event args.</param>
         </member>
         <member name="T:FlagLib.IO.DirectoryScanner">
             <summary>
@@ -1085,19 +1120,13 @@
         </member>
         <member name="P:FlagLib.IO.DirectoryScanner.FilesFound">
             <summary>
-            Gets the scanned files.
+            Gets the found files.
             </summary>
-            <value>
-            The scanned files.
-            </value>
         </member>
         <member name="P:FlagLib.IO.DirectoryScanner.DirectoryPath">
             <summary>
             Gets the directory path.
             </summary>
-            <value>
-            The directory path.
-            </value>
         </member>
         <member name="P:FlagLib.IO.DirectoryScanner.IsStopped">
             <summary>
