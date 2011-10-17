@@ -37,9 +37,7 @@ namespace FlagSync.View
             {
                 this.WindowState = WindowState.Minimized;
 
-                var vm = this.mainViewModel.JobSettingsViewModel;
-
-                var result = vm.LoadJobSettings(args[1]);
+                var result = this.mainWindowViewModel.LoadJobSettings(args[1]);
 
                 switch (result)
                 {
@@ -99,14 +97,12 @@ namespace FlagSync.View
             using (var dialog = new System.Windows.Forms.OpenFileDialog())
             {
                 dialog.Filter = "|*.xml";
-                dialog.InitialDirectory = this.mainViewModel.AppDataFolderPath;
+                dialog.InitialDirectory = DataController.AppDataFolderPath;
                 dialog.Multiselect = false;
 
                 dialog.FileOk += (dialogSender, dialogEventArgs) =>
                     {
-                        var vm = this.mainViewModel.JobSettingsViewModel;
-
-                        var result = vm.LoadJobSettings(dialog.FileName);
+                        var result = this.mainWindowViewModel.LoadJobSettings(dialog.FileName);
 
                         switch (result)
                         {
@@ -143,11 +139,11 @@ namespace FlagSync.View
                 dialog.AddExtension = true;
                 dialog.DefaultExt = ".xml";
                 dialog.FileName = "NewJobSettings";
-                dialog.InitialDirectory = this.mainViewModel.AppDataFolderPath;
+                dialog.InitialDirectory = DataController.AppDataFolderPath;
 
                 dialog.FileOk += (dialogSender, dialogEventArgs) =>
                     {
-                        this.mainViewModel.JobSettingsViewModel.SaveJobSettings(dialog.FileName);
+                        this.mainWindowViewModel.SaveJobSettings(dialog.FileName);
                     };
 
                 dialog.ShowDialog();
@@ -180,7 +176,7 @@ namespace FlagSync.View
         /// <param name="preview">if set to true a preview will be performed.</param>
         private void StartJobWorker(bool preview)
         {
-            this.mainViewModel.JobWorkerViewModel.StartJobWorker(this.mainViewModel.JobSettingsViewModel.IncludedInternJobSettings, preview);
+            this.mainWindowViewModel.StartJobWorker(this.mainWindowViewModel.JobSettings.Where(setting => setting.IsIncluded).Select(setting => setting.InternJobSetting), preview);
             this.mainTabControl.SelectedIndex = 1;
         }
 
@@ -201,10 +197,10 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.Controls.SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ThreadSafeObservableCollection<LogMessage> messages = this.mainViewModel.JobWorkerViewModel.LogMessages;
-            bool isPreview = this.mainViewModel.JobWorkerViewModel.IsPreview;
-            bool isRunning = this.mainViewModel.JobWorkerViewModel.IsRunning;
-            bool isPaused = this.mainViewModel.JobWorkerViewModel.IsPaused;
+            ThreadSafeObservableCollection<LogMessage> messages = this.mainWindowViewModel.LogMessages;
+            bool isPreview = this.mainWindowViewModel.IsPreview;
+            bool isRunning = this.mainWindowViewModel.IsRunning;
+            bool isPaused = this.mainWindowViewModel.IsPaused;
 
             if (!isPreview && messages.Count > 0 && isRunning && !isPaused)
             {
@@ -279,7 +275,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void newLocalJobButton_Click(object sender, RoutedEventArgs e)
         {
-            this.mainViewModel.JobSettingsViewModel.AddNewJobSetting(SyncMode.LocalBackup);
+            this.mainWindowViewModel.AddNewJobSetting(SyncMode.LocalBackup);
             this.CloseNewJobButtonContextMenu();
         }
 
@@ -290,7 +286,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void newFtpJobButton_Click(object sender, RoutedEventArgs e)
         {
-            this.mainViewModel.JobSettingsViewModel.AddNewJobSetting(SyncMode.FtpBackup);
+            this.mainWindowViewModel.AddNewJobSetting(SyncMode.FtpBackup);
             this.CloseNewJobButtonContextMenu();
         }
 
@@ -301,9 +297,9 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void newITunesJobButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindowViewModel.IsITunesOpened)
+            if (DataController.IsITunesOpened())
             {
-                this.mainViewModel.JobSettingsViewModel.AddNewJobSetting(SyncMode.ITunes);
+                this.mainWindowViewModel.AddNewJobSetting(SyncMode.ITunes);
                 this.CloseNewJobButtonContextMenu();
             }
 

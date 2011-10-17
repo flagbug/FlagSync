@@ -74,7 +74,7 @@ namespace FlagSync.Data
 
             Version webVersion = new Version(versionString);
 
-            Debug.WriteLine("Current version is " + currentVersion.ToString());
+            Debug.WriteLine("Current version is " + currentVersion);
 
             bool newVersionAvailable = webVersion > currentVersion;
 
@@ -105,12 +105,9 @@ namespace FlagSync.Data
                 return JobSettingsLoadingResult.CorruptFile;
             }
 
-            if (settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !DataController.IsITunesOpened())
-            {
-                return JobSettingsLoadingResult.ITunesNotOpened;
-            }
-
-            return JobSettingsLoadingResult.Succeed;
+            return settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !DataController.IsITunesOpened()
+                       ? JobSettingsLoadingResult.ITunesNotOpened
+                       : JobSettingsLoadingResult.Succeed;
         }
 
         /// <summary>

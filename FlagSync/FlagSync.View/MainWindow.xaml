@@ -14,7 +14,7 @@
         MinWidth="800" MinHeight="600"
         Loaded="Window_Loaded">
     <Window.DataContext>
-        <local:MainWindowViewModel x:Name="mainViewModel" />
+        <local:MainWindowViewModel x:Name="mainWindowViewModel" />
     </Window.DataContext>
     <Window.Resources>
         <local:ByteToKiloByteConverter x:Key="ByteToKiloByteConverter"/>
