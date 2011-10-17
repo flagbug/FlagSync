@@ -9,6 +9,10 @@ namespace FlagSync.View
     /// </summary>
     public partial class LocalJobSettingsPanel : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LocalJobSettingsPanel"/> class.
+        /// </summary>
+        /// <param name="viewModel">The view model.</param>
         public LocalJobSettingsPanel(JobSettingViewModel viewModel)
         {
             InitializeComponent();
@@ -80,7 +84,9 @@ namespace FlagSync.View
         /// <summary>
         /// Shows a folder dialog.
         /// </summary>
-        /// <returns>The selected folder</returns>
+        /// <returns>
+        /// The selected folder
+        /// </returns>
         private string ShowFolderDialog()
         {
             string selectedFolder = null;

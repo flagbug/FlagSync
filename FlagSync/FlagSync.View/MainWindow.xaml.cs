@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using FlagLib.Collections;
 using FlagSync.Data;
 
 namespace FlagSync.View
@@ -41,7 +40,7 @@ namespace FlagSync.View
 
                 switch (result)
                 {
-                    case Data.JobSettingsLoadingResult.CorruptFile:
+                    case JobSettingsLoadingResult.CorruptFile:
                         {
                             this.WindowState = WindowState.Maximized;
 
@@ -54,7 +53,7 @@ namespace FlagSync.View
                         }
                         break;
 
-                    case Data.JobSettingsLoadingResult.ITunesNotOpened:
+                    case JobSettingsLoadingResult.ITunesNotOpened:
                         {
                             this.WindowState = WindowState.Maximized;
 
@@ -64,7 +63,7 @@ namespace FlagSync.View
                         }
                         break;
 
-                    case Data.JobSettingsLoadingResult.Succeed:
+                    case JobSettingsLoadingResult.Succeed:
                         {
                             this.StartJobWorker(false);
                         }
@@ -80,7 +79,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void newJobButton_Click(object sender, RoutedEventArgs e)
         {
-            Button newJobButton = (Button)sender;
+            var newJobButton = (Button)sender;
             newJobButton.ContextMenu.IsEnabled = true;
             newJobButton.ContextMenu.PlacementTarget = newJobButton;
             newJobButton.ContextMenu.Placement = PlacementMode.Bottom;
@@ -106,7 +105,7 @@ namespace FlagSync.View
 
                         switch (result)
                         {
-                            case Data.JobSettingsLoadingResult.CorruptFile:
+                            case JobSettingsLoadingResult.CorruptFile:
                                 {
                                     MessageBox.Show(Properties.Resources.LoadSettingsErrorMessage,
                                                     Properties.Resources.ErrorString,
@@ -115,7 +114,7 @@ namespace FlagSync.View
                                 }
                                 break;
 
-                            case Data.JobSettingsLoadingResult.ITunesNotOpened:
+                            case JobSettingsLoadingResult.ITunesNotOpened:
                                 {
                                     this.ShowITunesErrorMessageBox();
                                 }
@@ -142,9 +141,7 @@ namespace FlagSync.View
                 dialog.InitialDirectory = DataController.AppDataFolderPath;
 
                 dialog.FileOk += (dialogSender, dialogEventArgs) =>
-                    {
-                        this.mainWindowViewModel.SaveJobSettings(dialog.FileName);
-                    };
+                    this.mainWindowViewModel.SaveJobSettings(dialog.FileName);
 
                 dialog.ShowDialog();
             }
@@ -176,7 +173,7 @@ namespace FlagSync.View
         /// <param name="preview">if set to true a preview will be performed.</param>
         private void StartJobWorker(bool preview)
         {
-            this.mainWindowViewModel.StartJobWorker(this.mainWindowViewModel.JobSettings.Where(setting => setting.IsIncluded).Select(setting => setting.InternJobSetting), preview);
+            this.mainWindowViewModel.StartJobWorker(preview);
             this.mainTabControl.SelectedIndex = 1;
         }
 
@@ -197,7 +194,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.Controls.SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ThreadSafeObservableCollection<LogMessage> messages = this.mainWindowViewModel.LogMessages;
+            var messages = this.mainWindowViewModel.LogMessages;
             bool isPreview = this.mainWindowViewModel.IsPreview;
             bool isRunning = this.mainWindowViewModel.IsRunning;
             bool isPaused = this.mainWindowViewModel.IsPaused;
@@ -235,15 +232,15 @@ namespace FlagSync.View
         /// </summary>
         private void Restart()
         {
-            MessageBoxResult result = MessageBox.Show(
+            var result = MessageBox.Show(
                 Properties.Resources.ApplicationRestartMessageBoxText,
                 Properties.Resources.ApplicationRestartMessageBoxCaption,
                 MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
-                App.Current.Shutdown();
-                System.Diagnostics.Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location);
+                Application.Current.Shutdown();
+                Process.Start(System.Reflection.Assembly.GetEntryAssembly().Location);
             }
         }
 
@@ -264,7 +261,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void aboutMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            AboutBox aboutBox = new AboutBox();
+            var aboutBox = new AboutBox();
             aboutBox.ShowDialog();
         }
 
@@ -312,7 +309,6 @@ namespace FlagSync.View
         /// <summary>
         /// Closes the new job button's context menu.
         /// </summary>
-        /// <param name="button">The button.</param>
         private void CloseNewJobButtonContextMenu()
         {
             this.newJobButton.ContextMenu.IsOpen = false;
