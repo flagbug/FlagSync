@@ -39,7 +39,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets a value indicating whether the job worker is counting.
         /// </summary>
-        /// <value>true if the job worker is counting; otherwise, false.</value>
+        /// <value>
+        /// true if the job worker is counting; otherwise, false.
+        /// </value>
         public bool IsCounting
         {
             get { return this.isCounting; }
@@ -56,7 +58,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets or sets a value indicating whetherthe job worker is started.
         /// </summary>
-        /// <value>true if the job worker is started; otherwise, false.</value>
+        /// <value>
+        /// true if the job worker is started; otherwise, false.
+        /// </value>
         public bool IsRunning
         {
             get { return this.isRunning; }
@@ -73,7 +77,9 @@ namespace FlagSync.View
         /// <summary>
         /// Gets a value indicating whether the job worker is paused.
         /// </summary>
-        /// <value>true if the job worker is paused; otherwise, false.</value>
+        /// <value>
+        /// true if the job worker is paused; otherwise, false.
+        /// </value>
         public bool IsPaused
         {
             get { return this.jobWorker.IsPaused; }
@@ -82,7 +88,6 @@ namespace FlagSync.View
         /// <summary>
         /// Gets the counted bytes.
         /// </summary>
-        /// <value>The counted bytes.</value>
         public long CountedBytes
         {
             get { return this.countedBytes; }
@@ -145,7 +150,6 @@ namespace FlagSync.View
         /// <summary>
         /// Gets the total progress percentage.
         /// </summary>
-        /// <value>The total progress percentage.</value>
         public double TotalProgressPercentage
         {
             get { return ((double)this.ProceededBytes / (double)this.CountedBytes) * 100.0; }
@@ -154,7 +158,6 @@ namespace FlagSync.View
         /// <summary>
         /// Gets the counted files.
         /// </summary>
-        /// <value>The counted files.</value>
         public int CountedFiles
         {
             get { return this.countedFiles; }
@@ -171,7 +174,6 @@ namespace FlagSync.View
         /// <summary>
         /// Gets the proceeded files.
         /// </summary>
-        /// <value>The proceeded files.</value>
         public int ProceededFiles
         {
             get { return this.proceededFiles; }
@@ -358,6 +360,46 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Gets the start job worker command.
+        /// </summary>
+        public ICommand StartJobWorkerCommand
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    param =>
+                    {
+                        bool preview = (bool)param;
+
+                        this.ResetJobWorker();
+
+                        var jobs = this.JobSettings
+                            .Where(setting => setting.IsIncluded)
+                            .Select(setting => DataController.CreateJobFromSetting(setting.InternJobSetting));
+
+                        if (jobs.All(this.CheckDirectoriesExist))
+                        {
+                            this.jobWorker.StartAsync(jobs, preview);
+
+                            this.IsCounting = true;
+                            this.IsRunning = true;
+                            this.IsPreview = preview;
+                            this.startTime = DateTime.Now;
+                            this.updateTimer.Start();
+                            this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
+                            this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
+                        }
+                    },
+                    param =>
+                    {
+                        return true;
+                    }
+                );
+            }
+        }
+
+        /// <summary>
         /// Gets the pause or continue job worker command.
         /// </summary>
         public ICommand PauseOrContinueJobWorkerCommand
@@ -366,7 +408,7 @@ namespace FlagSync.View
             {
                 return new RelayCommand
                 (
-                    arg =>
+                    param =>
                     {
                         if (this.IsPaused)
                         {
@@ -378,7 +420,7 @@ namespace FlagSync.View
                             this.PauseJobWorker();
                         }
                     },
-                    arg => this.IsRunning
+                    param => this.IsRunning
                 );
             }
         }
@@ -392,14 +434,14 @@ namespace FlagSync.View
             {
                 return new RelayCommand
                 (
-                    arg =>
+                    param =>
                     {
                         this.jobWorker.Stop();
                         this.IsRunning = false;
                         this.ResetBytes();
                         this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
                     },
-                    arg => this.IsRunning
+                    param => this.IsRunning
                 );
             }
         }
@@ -413,7 +455,7 @@ namespace FlagSync.View
             {
                 return new RelayCommand
                 (
-                    arg =>
+                    param =>
                     {
                         this.JobSettings.Remove(this.SelectedJobSetting);
 
@@ -437,7 +479,7 @@ namespace FlagSync.View
             {
                 return new RelayCommand
                 (
-                    arg => Application.Current.Shutdown()
+                    param => Application.Current.Shutdown()
                 );
             }
         }
@@ -458,32 +500,6 @@ namespace FlagSync.View
             this.updateTimer = new Timer(1000);
             this.updateTimer.Elapsed += new ElapsedEventHandler(updateTimer_Elapsed);
             this.ResetJobWorker();
-        }
-
-        /// <summary>
-        /// Starts the job worker.
-        /// </summary>
-        /// <param name="preview">if set to <c>true</c> a preview will be performed.</param>
-        public void StartJobWorker(bool preview)
-        {
-            this.ResetJobWorker();
-
-            var jobs = this.JobSettings
-                .Where(setting => setting.IsIncluded)
-                .Select(setting => DataController.CreateJobFromSetting(setting.InternJobSetting));
-
-            if (jobs.All(this.CheckDirectoriesExist))
-            {
-                this.jobWorker.StartAsync(jobs, preview);
-
-                this.IsCounting = true;
-                this.IsRunning = true;
-                this.IsPreview = preview;
-                this.startTime = DateTime.Now;
-                this.updateTimer.Start();
-                this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
-                this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
-            }
         }
 
         /// <summary>

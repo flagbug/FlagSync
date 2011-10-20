@@ -154,7 +154,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void previewButton_Click(object sender, RoutedEventArgs e)
         {
-            this.StartJobWorker(true);
+            this.mainTabControl.SelectedIndex = 1;
         }
 
         /// <summary>
@@ -164,16 +164,6 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            this.StartJobWorker(false);
-        }
-
-        /// <summary>
-        /// Starts the job worker.
-        /// </summary>
-        /// <param name="preview">if set to true a preview will be performed.</param>
-        private void StartJobWorker(bool preview)
-        {
-            this.mainWindowViewModel.StartJobWorker(preview);
             this.mainTabControl.SelectedIndex = 1;
         }
 
