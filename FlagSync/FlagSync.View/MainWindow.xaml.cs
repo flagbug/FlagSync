@@ -65,7 +65,7 @@ namespace FlagSync.View
 
                     case JobSettingsLoadingResult.Succeed:
                         {
-                            this.StartJobWorker(false);
+                            this.mainWindowViewModel.StartJobWorkerCommand.Execute(false);
                         }
                         break;
                 }
