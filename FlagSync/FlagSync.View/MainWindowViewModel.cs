@@ -389,8 +389,9 @@ namespace FlagSync.View
                         this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
                     },
                     param => !this.JobSettings
-                        .Where(setting => setting.IsIncluded)
-                        .Any(setting => setting.HasErrors));
+                                    .Where(setting => setting.IsIncluded)
+                                    .Any(setting => setting.HasErrors) && !this.IsRunning
+                );
             }
         }
 
