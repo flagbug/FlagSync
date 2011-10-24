@@ -157,7 +157,7 @@ namespace FlagSync.Data
 
                 case SyncMode.FtpBackup:
                     {
-                        var source = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
+                        var source = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
 
                         var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
                         var target = new Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
@@ -167,7 +167,7 @@ namespace FlagSync.Data
 
                 case SyncMode.FtpSynchronization:
                     {
-                        var directoryA = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
+                        var directoryA = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
 
                         var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
                         var directoryB = new Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
