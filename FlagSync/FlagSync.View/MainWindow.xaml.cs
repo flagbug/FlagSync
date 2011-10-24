@@ -148,16 +148,6 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Handles the Click event of the previewButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void previewButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.mainTabControl.SelectedIndex = 1;
-        }
-
-        /// <summary>
         /// Handles the Click event of the startButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>

@@ -393,7 +393,7 @@ namespace FlagSync.View
                     },
                     param =>
                     {
-                        return true;
+                        return !this.IsRunning;
                     }
                 );
             }
