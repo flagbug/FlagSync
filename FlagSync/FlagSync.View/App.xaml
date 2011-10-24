@@ -5,12 +5,22 @@
     <Application.Resources>
         <Style TargetType="{x:Type TextBox}">
             <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip"
-                Value="{Binding RelativeSource={RelativeSource Self},
-                       Path=(Validation.Errors)[0].ErrorContent}"/>
+                <Trigger Property="IsVisible" Value="false">
+                    <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
                 </Trigger>
             </Style.Triggers>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True" ToolTip="{Binding ElementName=controlWithError, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                            <TextBlock DockPanel.Dock="Right" Text="*" FontSize="14pt" Margin="-15,0,0,0" FontWeight="Bold" Foreground="Red" />
+                            <Border BorderBrush="Red" BorderThickness="1">
+                                <AdornedElementPlaceholder Name="controlWithError" />
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>
