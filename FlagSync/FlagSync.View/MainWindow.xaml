@@ -2,11 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FlagSync.View"
-        xmlns:flaglibconverters="clr-namespace:FlagLib.ValueConverters;assembly=FlagLib"
         xmlns:properties="clr-namespace:FlagSync.View.Properties"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
         mc:Ignorable="d"
         d:DesignHeight="768" d:DesignWidth="1024"
         Title="FlagSync" Name="Window" Icon="/FlagSync;component/Images/ApplicationIcon.ico"
@@ -18,7 +16,6 @@
     </Window.DataContext>
     <Window.Resources>
         <local:ByteToKiloByteConverter x:Key="ByteToKiloByteConverter"/>
-        <flaglibconverters:BoolNegationValueConverter x:Key="BoolNegationConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Style TargetType="{x:Type TabItem}">
             <Setter Property="Template">

@@ -390,7 +390,7 @@ namespace FlagSync.View
                     },
                     param => !this.JobSettings
                         .Where(setting => setting.IsIncluded)
-                        .Any(setting => setting.HasErrors()));
+                        .Any(setting => setting.HasErrors));
             }
         }
 

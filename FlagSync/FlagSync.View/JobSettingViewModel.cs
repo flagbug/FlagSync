@@ -314,14 +314,17 @@ namespace FlagSync.View
         /// <summary>
         /// Determines whether this instance has errors.
         /// </summary>
-        /// <returns>
-        /// true if this instance has errors; otherwise, false.
-        /// </returns>
-        public bool HasErrors()
+        /// <value>
+        ///   true if this instance has errors; otherwise, false.
+        /// </value>
+        public bool HasErrors
         {
-            return this.GetType()
-                .GetProperties()
-                .Any(property => this[property.Name] != null);
+            get
+            {
+                return this.GetType()
+                    .GetProperties()
+                    .Any(property => this[property.Name] != null);
+            }
         }
 
         /// <summary>
