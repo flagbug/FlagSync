@@ -370,7 +370,7 @@ namespace FlagSync.View
                 (
                     param =>
                     {
-                        bool preview = (bool)param;
+                        bool preview = Boolean.Parse((string)param);
 
                         this.ResetJobWorker();
 
