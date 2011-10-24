@@ -311,7 +311,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBox Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch" Text="{Binding Path=StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Cursor="Arrow" TextChanged="TextBox_TextChanged" />
-                    <ListView Grid.Row="1" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionMode="Single" DataContext="{Binding Path=LogMessages}">
+                    <ListView Grid.Row="1" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionMode="Single">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False">
                                 <GridViewColumn Width="30">
