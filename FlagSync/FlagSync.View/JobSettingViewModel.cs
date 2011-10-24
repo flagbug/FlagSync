@@ -25,6 +25,7 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.IsIncluded = value;
                     this.OnPropertyChanged(view => view.IsIncluded);
+                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
@@ -57,6 +58,7 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.DirectoryA = value;
                     this.OnPropertyChanged(view => view.DirectoryA);
+                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
@@ -76,6 +78,7 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.DirectoryB = value;
                     this.OnPropertyChanged(view => view.DirectoryB);
+                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
@@ -95,6 +98,7 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.Name = value;
                     this.OnPropertyChanged(view => view.Name);
+                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
@@ -173,6 +177,7 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.FtpAddress = value;
                     this.OnPropertyChanged(vm => vm.FtpAddress);
+                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
@@ -192,6 +197,7 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.FtpUserName = value;
                     this.OnPropertyChanged(vm => vm.FtpUserName);
+                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
@@ -211,6 +217,7 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.FtpPassword = value;
                     this.OnPropertyChanged(vm => vm.FtpPassword);
+                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
@@ -230,25 +237,7 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.ITunesPlaylist = value;
                     this.OnPropertyChanged(vm => vm.ITunesPlaylist);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether scheduling is enabled.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if scheduling is enabled; otherwise, <c>false</c>.
-        /// </value>
-        public bool EnableScheduling
-        {
-            get { return this.InternJobSetting.EnableScheduling; }
-            set
-            {
-                if (this.EnableScheduling != value)
-                {
-                    this.InternJobSetting.EnableScheduling = value;
-                    this.OnPropertyChanged(vm => vm.EnableScheduling);
+                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
