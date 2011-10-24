@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using FlagLib.Patterns.MVVM;
 using FlagLib.Reflection;
 using FlagSync.Data;
@@ -271,7 +272,6 @@ namespace FlagSync.View
         /// <returns>
         /// The error message for the property. The default is an empty string ("").
         ///   </returns>
-        /// <remarks></remarks>
         public string this[string name]
         {
             get
@@ -309,6 +309,19 @@ namespace FlagSync.View
 
                 return result;
             }
+        }
+
+        /// <summary>
+        /// Determines whether this instance has errors.
+        /// </summary>
+        /// <returns>
+        /// true if this instance has errors; otherwise, false.
+        /// </returns>
+        public bool HasErrors()
+        {
+            return this.GetType()
+                .GetProperties()
+                .Any(property => this[property.Name] != null);
         }
 
         /// <summary>

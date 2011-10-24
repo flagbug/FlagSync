@@ -378,24 +378,19 @@ namespace FlagSync.View
                             .Where(setting => setting.IsIncluded)
                             .Select(setting => DataController.CreateJobFromSetting(setting.InternJobSetting));
 
-                        if (jobs.All(this.CheckDirectoriesExist))
-                        {
-                            this.jobWorker.StartAsync(jobs, preview);
+                        this.jobWorker.StartAsync(jobs, preview);
 
-                            this.IsCounting = true;
-                            this.IsRunning = true;
-                            this.IsPreview = preview;
-                            this.startTime = DateTime.Now;
-                            this.updateTimer.Start();
-                            this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
-                            this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
-                        }
+                        this.IsCounting = true;
+                        this.IsRunning = true;
+                        this.IsPreview = preview;
+                        this.startTime = DateTime.Now;
+                        this.updateTimer.Start();
+                        this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
+                        this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
                     },
-                    param =>
-                    {
-                        return !this.IsRunning;
-                    }
-                );
+                    param => !this.JobSettings
+                        .Where(setting => setting.IsIncluded)
+                        .Any(setting => setting.HasErrors()));
             }
         }
 
@@ -498,7 +493,7 @@ namespace FlagSync.View
 
             this.LogMessages = new ThreadSafeObservableCollection<LogMessage>();
             this.updateTimer = new Timer(1000);
-            this.updateTimer.Elapsed += new ElapsedEventHandler(updateTimer_Elapsed);
+            this.updateTimer.Elapsed += updateTimer_Elapsed;
             this.ResetJobWorker();
         }
 
@@ -611,32 +606,6 @@ namespace FlagSync.View
         private void updateTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             this.OnPropertyChanged(vm => vm.AverageSpeed);
-        }
-
-        /// <summary>
-        /// Checks if the specified the directories exist and add a status message, if not.
-        /// </summary>
-        /// <param name="job">The job.</param>
-        /// <returns>
-        /// A value indicating whether the both directories exist.
-        /// </returns>
-        private bool CheckDirectoriesExist(Job job)
-        {
-            bool exist = true;
-
-            if (!job.DirectoryA.Exists)
-            {
-                this.AddStatusMessage(job.Name + ": " + Properties.Resources.DirectoryADoesntExistMessage);
-                exist = false;
-            }
-
-            if (!job.DirectoryB.Exists)
-            {
-                this.AddStatusMessage(job.Name + ": " + Properties.Resources.DirectoryBDoesntExistMessage);
-                exist = false;
-            }
-
-            return exist;
         }
 
         /// <summary>
