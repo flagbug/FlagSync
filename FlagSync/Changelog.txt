@@ -1,130 +1,151 @@
------------------------------- v2.1.3 ------------------------------
+----------------------------------- v2.2.0 -----------------------------------
+
+FEATURES:
+- Each log message now displays the size of the file.
+
+CHANGES:
+- Removed the detailed log, which writes to a file in the appdata directory.
+
+IMPROVEMENTS:
+- The average speed is now displayed dynamically, depending on the actual 
+  speed.
+- Improved the error displaying.
+- The FTP address is now validated to have the correct format.
+- The preview and start buttons now cannot be pressed anymore, if there are 
+  errors in the included job settings.
 
 BUGFIXES:
-- Fixed a bug which caused files to be copied into the wrong 
-  directory on a FTP-Server.
+- Fixed a bug, which caused a preview to list the subdirectories and files of
+  a directory that should get deleted.
+- Fixed the misspelling of "Address" in the FTP settings panel.
+- Fixed a bug, which caused the application to crash if a song in iTunes got 
+  deleted, before it was synced.
+- Fixed a bug, which let the user select no iTunes playlist.
 
------------------------------- v2.1.2 ------------------------------
+----------------------------------- v2.1.3 -----------------------------------
+
+BUGFIXES:
+- Fixed a bug which caused files to be copied into the wrong directory on a 
+  FTP-Server.
+
+----------------------------------- v2.1.2 -----------------------------------
 
 CHANGES:
 - Changed the URL of the update download site.
 - The about box now only displays three version fields.
 
 BUGFIXES:
-- Fixed a bug which caused the application to crash if the target 
-  directory of an iTunes job doesn't exist.
-- Fixed a bug which caused the application to crash if the target 
-  directory of a FTP job doesn't exist.
+- Fixed a bug which caused the application to crash if the target directory of
+  an iTunes job doesn't exist.
+- Fixed a bug which caused the application to crash if the target directory of
+  a FTP job doesn't exist.
 - Fixed a bug which caused iTunes to automatically open.
 
------------------------------- v2.1.1 ------------------------------
+----------------------------------- v2.1.1 -----------------------------------
 
 IMPROVEMENTS:
-- The application now displays a popup which prompts the user to 
-  open iTunes, if iTunes is not opened and the user tries to create 
-  or load an iTunes job.
+- The application now displays a popup which prompts the user to open iTunes, 
+  if iTunes is not opened and the user tries to create or load an iTunes job.
 
 BUGFIXES:
-- Fixed a bug, which caused all jobs to disappear, if a corrupt 
-setting has been loaded.
+- Fixed a bug, which caused all jobs to disappear, if a corrupt setting has 
+  been loaded.
 
------------------------------- v2.1.0 ------------------------------
+----------------------------------- v2.1.0 -----------------------------------
+
 FEATURES:
 - The average speed is now displayed.
-- The application now informs in the bottom right corner, if a new 
-  version is available.
+- The application now informs in the bottom right corner, if a new version is 
+  available.
 
 CHANGES:
-- Changed the layout of the log, so that the current file progress 
-  is now visible beneath the total-progress progress-bar
+- Changed the layout of the log, so that the current file progress is now 
+  visible beneath the total-progress progress-bar.
 
 IMPROVEMENTS:
-- Incresed the performance of the application drastically
+- Increased the performance of the application drastically.
 - Improved the file deletion handling.
-- The recycle-bin of a harddrive is now excluded from the 
-  synchronization and backup.
-- The current copy operations now gets aborted when the user stops 
-  the job.
+- The recycle-bin of a harddrive is now excluded from the synchronization and 
+  backup.
+- The current copy operations now gets aborted when the user stops the job.
 
 BUGFIXES:
-- Fixed a bug which caused the directory path to reset, if the 
-  folder selection dialog has been canceled.
+- Fixed a bug which caused the directory path to reset, if the folder 
+  selection dialog has been canceled.
 
------------------------------- v2.0.0 ------------------------------
-
-The application has been completely rewritten
+----------------------------------- v2.0.0 -----------------------------------
 
 FEATURES:
-- Added synchronization and backup for FTP servers
-- The application can now synchronize an iTunes playlist with a 
-      folder (useful for MP3-Players)
-- The copy progress for each separate file is now visible
+- Added synchronization and backup for FTP servers.
+- The application can now synchronize an iTunes playlist with a folder 
+  (useful for MP3-Players).
+- The copy progress for each separate file is now visible.
 
 IMPROVEMENTS:
-- Complete new user interface
+- Complete new user interface.
 
------------------------------- v1.3.3 ------------------------------
+----------------------------------- v1.3.3 -----------------------------------
 
 FEATURES:
-- Added application icon
+- Added application icon.
 
 IMPROVEMENTS:
-- Many UI improvements
-- Improved error handling
+- Many UI improvements.
+- Improved error handling.
 
 BUGFIXES:
-- Fixed threading issue
+- Fixed a threading issue.
 
------------------------------- v1.3.2 ------------------------------
+----------------------------------- v1.3.2 -----------------------------------
 
 CHANGES:
-- Removed 64-bit version of FlagSync
-- Window now maximizes at startup
+- Removed the 64-bit version of FlagSync.
+- The window now maximizes at startup.
 
 IMPROVEMENTS:
-- Improved progress-bar (now counts size of files, not number of all files)
-- Elapsed time counter now stops when a job gets paused
+- Improved progress-bar (now counts size of files, not number of all files).
+- Elapsed time counter now stops when a job gets paused.
 
------------------------------- v1.3.1 ------------------------------
+----------------------------------- v1.3.1 -----------------------------------
 
 FEATURES:
-- Added elapsed time
-- Added error log, if an invalid settings file gets read
+- Added elapsed time.
+- Added error log, if an invalid settings file gets read.
 
 IMPROVEMENTS:
-- Improved log
+- Improved log.
 
------------------------------- v1.3.0 ------------------------------
+----------------------------------- v1.3.0 -----------------------------------
 
 CHANGES:
-- Limited log to 60,000 characters
+- Limited log to 60,000 characters.
 
 IMPROVEMENTS:
-- Improved user interface
-- Improved stop function
+- Improved user interface.
+- Improved stop function.
 
------------------------------- v1.2.1 ------------------------------
+----------------------------------- v1.2.1 -----------------------------------
 
 FEATURES:
-- Added tooltips
+- Added tooltips.
 
 CHANGES:
-- New jobs are now at default checked
-- When loading the settings, they are now at default checked
+- New jobs are now at default checked.
+- When loading the settings, they are now at default checked.
 
 IMPROVEMENTS
-- Improved translations
+- Improved translations.
 
------------------------------- v1.2.0 ------------------------------
-
-FEATURES:
-- Added German translation
-
------------------------------- v1.1.0 ------------------------------
+----------------------------------- v1.2.0 -----------------------------------
 
 FEATURES:
-- Added job saving and loading
+- Added German translation.
 
------------------------------- v1.0.0 ------------------------------
+----------------------------------- v1.1.0 -----------------------------------
 
-- Release of public version
+FEATURES:
+- Added job saving and loading.
+
+----------------------------------- v1.0.0 -----------------------------------
+
+- Release of public version.
