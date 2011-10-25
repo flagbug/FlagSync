@@ -5,6 +5,7 @@ using System.Linq;
 using FlagLib.Patterns.MVVM;
 using FlagLib.Reflection;
 using FlagSync.Data;
+using FlagSync.View.Properties;
 
 namespace FlagSync.View
 {
@@ -279,9 +280,38 @@ namespace FlagSync.View
                         break;
 
                     case SyncMode.ITunes:
-                        if (name == Reflector.GetMemberName(() => this.ITunesPlaylist) && string.IsNullOrEmpty(this.ITunesPlaylist))
+                        if (name == Reflector.GetMemberName(() => this.ITunesPlaylist) && String.IsNullOrEmpty(this.ITunesPlaylist))
                         {
                             result = Properties.Resources.SelectPlaylistErrorMessage;
+                        }
+                        break;
+
+                    case SyncMode.FtpBackup:
+                    case SyncMode.FtpSynchronization:
+                        if (name == Reflector.GetMemberName(() => this.FtpAddress))
+                        {
+                            if (String.IsNullOrEmpty(this.FtpAddress))
+                            {
+                                result = Resources.FTPAddressCantBeEmptyMessage;
+                            }
+
+                            else
+                            {
+                                try
+                                {
+                                    Uri uri = new Uri(this.FtpAddress);
+
+                                    if (uri.Scheme != Uri.UriSchemeFtp)
+                                    {
+                                        result = Resources.FTPAdressWrongFormatMessage;
+                                    }
+                                }
+
+                                catch (UriFormatException)
+                                {
+                                    result = Resources.FTPAdressWrongFormatMessage;
+                                }
+                            }
                         }
                         break;
                 }
@@ -291,7 +321,7 @@ namespace FlagSync.View
                     result = Properties.Resources.DirectoryDoesntExistMessage;
                 }
 
-                if (name == Reflector.GetMemberName(() => this.Name) && this.Name == String.Empty)
+                if (name == Reflector.GetMemberName(() => this.Name) && String.IsNullOrEmpty(this.Name))
                 {
                     result = Properties.Resources.NameFieldCantBeEmptyMessage;
                 }

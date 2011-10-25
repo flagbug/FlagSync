@@ -408,4 +408,10 @@
   <data name="FileSizeGridViewColumnText" xml:space="preserve">
     <value>Dateigröße</value>
   </data>
+  <data name="FTPAddressCantBeEmptyMessage" xml:space="preserve">
+    <value>FTP-Adresse darf nicht leer sein!</value>
+  </data>
+  <data name="FTPAdressWrongFormatMessage" xml:space="preserve">
+    <value>FTP-Address hat das falsche Format!</value>
+  </data>
 </root>
