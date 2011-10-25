@@ -340,7 +340,7 @@
     <value>FTP Synchronization</value>
   </data>
   <data name="FtpServerAddressJobSettingsTextBlockText" xml:space="preserve">
-    <value>FTP-Server Adress:</value>
+    <value>FTP-Server Address:</value>
   </data>
   <data name="FtpServerPasswordJobSettingsTextBlockText" xml:space="preserve">
     <value>Password:</value>

@@ -421,7 +421,7 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FTP-Server Adress:.
+        ///   Looks up a localized string similar to FTP-Server Address:.
         /// </summary>
         public static string FtpServerAddressJobSettingsTextBlockText {
             get {
