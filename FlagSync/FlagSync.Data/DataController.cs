@@ -7,6 +7,7 @@ using System.Net;
 using FlagFtp;
 using FlagLib.Serialization;
 using FlagSync.Core;
+using FlagSync.Core.FileSystem.Ftp;
 using FlagSync.Core.FileSystem.ITunes;
 using FlagSync.Core.FileSystem.Local;
 
@@ -136,7 +137,7 @@ namespace FlagSync.Data
                         var source = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
                         var target = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
 
-                        return new LocalBackupJob(setting.Name, source, target);
+                        return new BackupJob(setting.Name, new LocalFileSystem(), new LocalFileSystem(), source, target);
                     }
 
                 case SyncMode.LocalSynchronization:
@@ -144,7 +145,7 @@ namespace FlagSync.Data
                         var directoryA = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
                         var directoryB = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
 
-                        return new LocalSyncJob(setting.Name, directoryA, directoryB);
+                        return new SyncJob(setting.Name, new LocalFileSystem(), new LocalFileSystem(), directoryA, directoryB);
                     }
 
                 case SyncMode.ITunes:
@@ -152,7 +153,7 @@ namespace FlagSync.Data
                         var source = new ITunesDirectoryInfo(setting.ITunesPlaylist);
                         var target = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
 
-                        return new ITunesJob(setting.Name, source, target);
+                        return new BackupJob(setting.Name, new ITunesFileSystem(), new LocalFileSystem(), source, target);
                     }
 
                 case SyncMode.FtpBackup:
@@ -162,7 +163,7 @@ namespace FlagSync.Data
                         var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
                         var target = new Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
 
-                        return new FtpBackupJob(setting.Name, source, target, new Uri(setting.FtpAddress), setting.FtpUserName, setting.FtpPassword);
+                        return new BackupJob(setting.Name, new LocalFileSystem(), new FtpFileSystem(new Uri(setting.FtpAddress), new NetworkCredential(setting.FtpUserName, setting.FtpPassword)), source, target);
                     }
 
                 case SyncMode.FtpSynchronization:
@@ -172,12 +173,11 @@ namespace FlagSync.Data
                         var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
                         var directoryB = new Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
 
-                        return new FtpBackupJob(setting.Name, directoryA, directoryB,
-                            new Uri(setting.FtpAddress), setting.FtpUserName, setting.FtpPassword);
+                        return new SyncJob(setting.Name, new LocalFileSystem(), new FtpFileSystem(new Uri(setting.FtpAddress), new NetworkCredential(setting.FtpUserName, setting.FtpPassword)), directoryA, directoryB);
                     }
             }
 
-            throw new NotSupportedException();
+            throw new InvalidOperationException();
         }
     }
 }

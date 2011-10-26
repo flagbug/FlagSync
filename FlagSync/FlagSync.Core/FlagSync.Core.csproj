@@ -47,10 +47,8 @@
     <Compile Include="FileDeletionErrorEventArgs.cs" />
     <Compile Include="FileDeletionEventArgs.cs" />
     <Compile Include="FileProceededEventArgs.cs" />
-    <Compile Include="FtpBackupJob.cs" />
-    <Compile Include="FtpSyncJob.cs" />
     <Compile Include="JobEventArgs.cs" />
-    <Compile Include="LocalBackupJob.cs" />
+    <Compile Include="BackupJob.cs" />
     <Compile Include="FtpBackupDirection.cs" />
     <Compile Include="FileSystem\FileCounterResult.cs" />
     <Compile Include="FileSystem\DirectoryFoundEventArgs.cs" />
@@ -65,7 +63,6 @@
     <Compile Include="FileSystem\Ftp\FtpFileSystem.cs" />
     <Compile Include="FileSystem\ITunes\ITunesDirectoryInfo.cs" />
     <Compile Include="FileSystem\ITunes\ITunesFileSystem.cs" />
-    <Compile Include="ITunesJob.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="JobWorker.cs" />
     <Compile Include="FileSystem\Local\LocalDirectoryInfo.cs" />
@@ -73,7 +70,7 @@
     <Compile Include="FileSystem\Local\LocalFileInfo.cs" />
     <Compile Include="FileSystem\Local\LocalFileSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LocalSyncJob.cs" />
+    <Compile Include="SyncJob.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FlagFtp, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
