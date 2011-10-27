@@ -1,3 +1,9 @@
+----------------------------------- v2.2.1 -----------------------------------
+
+BUGFIXES:
+- Fixed a bug, which caused the wrong iTunes playlist to be loaded, when the
+  user loaded a job.
+
 ----------------------------------- v2.2.0 -----------------------------------
 
 FEATURES:

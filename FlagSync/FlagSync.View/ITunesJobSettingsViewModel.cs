@@ -52,7 +52,7 @@ namespace FlagSync.View
         {
             this.JobSetting = setting;
 
-            this.JobSetting.ITunesPlaylist = this.ITunesPlaylists.First();
+            this.JobSetting.ITunesPlaylist = this.JobSetting.ITunesPlaylist ?? this.ITunesPlaylists.First();
         }
     }
 }
