@@ -35,6 +35,26 @@ namespace FlagSync.View
         private readonly Timer updateTimer;
         private long averageSpeedTotal;
         private int averageSpeedCounts;
+        private int tabIndex;
+
+        /// <summary>
+        /// Gets the tab index.
+        /// </summary>
+        /// <value>
+        /// The tab index.
+        /// </value>
+        public int TabIndex
+        {
+            get { return this.tabIndex; }
+            private set
+            {
+                if (this.tabIndex != value)
+                {
+                    this.tabIndex = value;
+                    this.OnPropertyChanged(vm => vm.TabIndex);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether the job worker is counting.
@@ -380,6 +400,7 @@ namespace FlagSync.View
 
                         this.jobWorker.StartAsync(jobs, preview);
 
+                        this.TabIndex = 1;
                         this.IsCounting = true;
                         this.IsRunning = true;
                         this.IsPreview = preview;
