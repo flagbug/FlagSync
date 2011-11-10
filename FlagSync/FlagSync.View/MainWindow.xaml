@@ -366,11 +366,41 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="{x:Static properties:Resources.ActionGridViewColumnText}" DisplayMemberBinding="{Binding Path=Action}" Width="75" />
-                                <GridViewColumn Header="{x:Static properties:Resources.TypeGridViewColumnText}" DisplayMemberBinding="{Binding Path=Type}" Width="75" />
-                                <GridViewColumn Header="{x:Static properties:Resources.FileSizeGridViewColumnText}" DisplayMemberBinding="{Binding Path=FileSize}" />
-                                <GridViewColumn Header="{x:Static properties:Resources.SourceGridViewColumnText}" DisplayMemberBinding="{Binding Path=SourcePath}"/>
-                                <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}" DisplayMemberBinding="{Binding Path=TargetPath}" />
+                                <GridViewColumn Header="{x:Static properties:Resources.ActionGridViewColumnText}" Width="75">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=Action}" TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.TypeGridViewColumnText}" Width="75">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=Type}" TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.FileSizeGridViewColumnText}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=FileSize}" TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.SourceGridViewColumnText}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=SourcePath}" TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.TargetGridViewColumnText}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=TargetPath}" TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
