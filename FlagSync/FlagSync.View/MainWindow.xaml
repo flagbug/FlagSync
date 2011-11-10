@@ -52,7 +52,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ProgressBar">
-                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="0" Padding="0">
+                        <Border BorderBrush="Black" Background="Silver">
                             <Grid x:Name="PART_Track">
                                 <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" Fill="#FF01D328" />
                             </Grid>
@@ -72,7 +72,7 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="RenderTransform" >
                                     <Setter.Value>
-                                        <ScaleTransform ScaleX="1.05" ScaleY="1.05" />
+                                        <ScaleTransform ScaleX="1.025" ScaleY="1.025" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
