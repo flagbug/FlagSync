@@ -46,7 +46,7 @@ namespace FlagSync.View
         public int TabIndex
         {
             get { return this.tabIndex; }
-            private set
+            set
             {
                 if (this.tabIndex != value)
                 {
