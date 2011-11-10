@@ -273,7 +273,7 @@ namespace FlagSync.Core
         private void InitializeJobEvents(Job job)
         {
             job.CreatedDirectory += currentJob_CreatedDirectory;
-            //job.CreatedFile += currentJob_CreatedFile;
+            job.CreatedFile += currentJob_CreatedFile;
             job.CreatingDirectory += currentJob_CreatingDirectory;
             job.CreatingFile += currentJob_CreatingFile;
             job.DeletedDirectory += currentJob_DeletedDirectory;
