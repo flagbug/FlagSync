@@ -48,6 +48,19 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="ProgressBar">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="0" Padding="0">
+                            <Grid x:Name="PART_Track">
+                                <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" Fill="#FF01D328" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid Name="mainGrid" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
