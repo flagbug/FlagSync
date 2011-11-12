@@ -166,9 +166,8 @@
                         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{x:Static properties:Resources.TotalProgressText}"/>
                             <TextBlock Text=" " />
-                            <TextBlock Text="{Binding Path=TotalProgressPercentage, StringFormat=\{0:F\}}" />
-                            <TextBlock Text="% "/>
-                            <TextBlock Text="{Binding Path=AverageSpeed}" Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="{Binding Path=TotalProgressPercentage, StringFormat=\{0:F\}%}" />
+                            <TextBlock Text="{Binding Path=AverageSpeed, StringFormat=@\{0\}}" Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1" Margin="0,3">
@@ -176,8 +175,7 @@
                         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{x:Static properties:Resources.CurrentProgressText}"/>
                             <TextBlock Text=" " />
-                            <TextBlock Text="{Binding Path=CurrentProgress, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}" />
-                            <TextBlock Text="% " />
+                            <TextBlock Text="{Binding Path=CurrentProgress, UpdateSourceTrigger=PropertyChanged, FallbackValue=0, StringFormat=\{0\}%}" />
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="2">
