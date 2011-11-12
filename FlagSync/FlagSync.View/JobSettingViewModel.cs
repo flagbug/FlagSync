@@ -139,23 +139,23 @@ namespace FlagSync.View
                 switch (this.SyncMode)
                 {
                     case SyncMode.FtpBackup:
-                        syncMode = Properties.Resources.FtpServerBackupString;
+                        syncMode = Resources.FtpServerBackupString;
                         break;
 
                     case SyncMode.FtpSynchronization:
-                        syncMode = Properties.Resources.FtpServerSynchronizationString;
+                        syncMode = Resources.FtpServerSynchronizationString;
                         break;
 
                     case SyncMode.LocalBackup:
-                        syncMode = Properties.Resources.LocalBackupString;
+                        syncMode = Resources.LocalBackupString;
                         break;
 
                     case SyncMode.LocalSynchronization:
-                        syncMode = Properties.Resources.LocalSynchronizationString;
+                        syncMode = Resources.LocalSynchronizationString;
                         break;
 
                     case SyncMode.ITunes:
-                        syncMode = Properties.Resources.iTunesString;
+                        syncMode = Resources.iTunesString;
                         break;
                 }
 
@@ -274,7 +274,7 @@ namespace FlagSync.View
                     case SyncMode.LocalSynchronization:
                         if ((name == Reflector.GetMemberName(() => this.DirectoryA) && !Directory.Exists(this.DirectoryA)))
                         {
-                            result = Properties.Resources.DirectoryDoesntExistMessage;
+                            result = Resources.DirectoryDoesntExistMessage;
                         }
 
                         break;
@@ -282,7 +282,7 @@ namespace FlagSync.View
                     case SyncMode.ITunes:
                         if (name == Reflector.GetMemberName(() => this.ITunesPlaylist) && String.IsNullOrEmpty(this.ITunesPlaylist))
                         {
-                            result = Properties.Resources.SelectPlaylistErrorMessage;
+                            result = Resources.SelectPlaylistErrorMessage;
                         }
                         break;
 
@@ -318,12 +318,12 @@ namespace FlagSync.View
 
                 if (name == Reflector.GetMemberName(() => this.DirectoryB) && !Directory.Exists(this.DirectoryB))
                 {
-                    result = Properties.Resources.DirectoryDoesntExistMessage;
+                    result = Resources.DirectoryDoesntExistMessage;
                 }
 
                 if (name == Reflector.GetMemberName(() => this.Name) && String.IsNullOrEmpty(this.Name))
                 {
-                    result = Properties.Resources.NameFieldCantBeEmptyMessage;
+                    result = Resources.NameFieldCantBeEmptyMessage;
                 }
 
                 return result;
