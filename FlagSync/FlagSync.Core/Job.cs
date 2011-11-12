@@ -426,14 +426,14 @@ namespace FlagSync.Core
                     //Assemble the path of the new target directory
                     string newTargetDirectoryPath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.Directory.Name);
 
+                    bool newTargetDirectoryExists = this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath);
+                    bool newTargetDirectoryIsExcluded = this.excludedPaths.Any(path => this.NormalizePath(newTargetDirectoryPath).StartsWith(path));
+
                     //Check if the new target directory exists and if not, create it
-                    if (!this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath))
+                    if (!newTargetDirectoryExists && !newTargetDirectoryIsExcluded)
                     {
-                        //The directory must not be a subdirectory of any excluded path
-                        if (!this.excludedPaths.Any(path => this.NormalizePath(newTargetDirectoryPath).StartsWith(path)))
-                        {
-                            this.PerformDirectoryCreationOperation(this.TargetFileSystem, e.Directory, currentTargetDirectory, execute);
-                        }
+                        this.PerformDirectoryCreationOperation(this.TargetFileSystem, e.Directory,
+                                                               currentTargetDirectory, execute);
                     }
 
                     currentTargetDirectory = this.TargetFileSystem.GetDirectoryInfo(newTargetDirectoryPath);
@@ -524,9 +524,11 @@ namespace FlagSync.Core
 
                 string newTargetDirectoryPath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.Directory.Name);
 
-                // Check if the directory doesn't exist in the target directory
-                if (!this.SourceFileSystem.DirectoryExists(newTargetDirectoryPath)
-                    && !this.deletedDirectoryPaths.Any(path => this.NormalizePath(newTargetDirectoryPath).StartsWith(path)))
+                bool newTargetDirectoryExists = this.SourceFileSystem.DirectoryExists(newTargetDirectoryPath);
+                bool newTargetDirectoryIsExcluded = this.deletedDirectoryPaths.Any(path => this.NormalizePath(newTargetDirectoryPath).StartsWith(path));
+
+                // Delete the directory if it doesn't exist in the source directory
+                if (!newTargetDirectoryExists && !newTargetDirectoryIsExcluded)
                 {
                     // If we perform a preview, add the directory that gets deleted to the deleted paths,
                     // so that the subdirectories don't get included.
@@ -570,9 +572,11 @@ namespace FlagSync.Core
                 string sourceFilePath = e.File.FullName;
                 long sourceFileLength = e.File.Length;
 
+                bool targetFileExists = this.SourceFileSystem.FileExists(targetFilePath);
+                bool targetFileIsExcluded = this.deletedDirectoryPaths.Any(path => this.NormalizePath(targetFilePath).StartsWith(path));
+
                 //Check if the file doesn't exist in the target directory
-                if (!this.SourceFileSystem.FileExists(targetFilePath)
-                    && !this.deletedDirectoryPaths.Any(path => this.NormalizePath(targetFilePath).StartsWith(path)))
+                if (!targetFileExists && !targetFileIsExcluded)
                 {
                     this.PerformFileDeletionOperation(this.TargetFileSystem, e.File, execute);
 
