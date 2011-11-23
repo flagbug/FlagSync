@@ -168,7 +168,7 @@
                             <TextBlock Text=" " />
                             <TextBlock Text="{Binding Path=TotalProgressPercentage, StringFormat=\{0:F\}%}" />
                             <TextBlock Text=" " />
-                            <TextBlock Text="{Binding Path=AverageSpeed, StringFormat=@\{0\}}" Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="{Binding Path=AverageSpeed, StringFormat=@ \{0\}}" Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1" Margin="0,3">
