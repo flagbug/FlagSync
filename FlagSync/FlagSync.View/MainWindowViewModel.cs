@@ -151,17 +151,8 @@ namespace FlagSync.View
         {
             get
             {
-                long averageSpeed;
-
-                if (this.averageSpeedCounts != 0)
-                {
-                    averageSpeed = this.averageSpeedTotal / this.averageSpeedCounts;
-                }
-
-                else
-                {
-                    averageSpeed = 0;
-                }
+                long averageSpeed = this.averageSpeedCounts != 0 ?
+                    this.averageSpeedTotal / this.averageSpeedCounts : 0;
 
                 return averageSpeed.ToSizeString() + "/s";
             }
