@@ -27,8 +27,6 @@ namespace FlagSync.View
         private long proceededBytes;
         private int countedFiles;
         private int proceededFiles;
-        private bool isCounting;
-        private bool isRunning;
         private string statusMessages = String.Empty;
         private string lastStatusMessage = String.Empty;
         private int lastLogMessageIndex;
@@ -64,15 +62,7 @@ namespace FlagSync.View
         /// </value>
         public bool IsCounting
         {
-            get { return this.isCounting; }
-            private set
-            {
-                if (this.IsCounting != value)
-                {
-                    this.isCounting = value;
-                    this.OnPropertyChanged(vm => vm.IsCounting);
-                }
-            }
+            get { return this.jobWorker.IsCounting; }
         }
 
         /// <summary>
@@ -83,15 +73,7 @@ namespace FlagSync.View
         /// </value>
         public bool IsRunning
         {
-            get { return this.isRunning; }
-            set
-            {
-                if (this.IsRunning != value)
-                {
-                    this.isRunning = value;
-                    this.OnPropertyChanged(vm => vm.IsRunning);
-                }
-            }
+            get { return this.jobWorker.IsRunning; }
         }
 
         /// <summary>
@@ -392,8 +374,7 @@ namespace FlagSync.View
                         this.jobWorker.StartAsync(jobs, preview);
 
                         this.TabIndex = 1;
-                        this.IsCounting = true;
-                        this.IsRunning = true;
+                        this.OnPropertyChanged(vm => vm.IsRunning);
                         this.IsPreview = preview;
                         this.startTime = DateTime.Now;
                         this.updateTimer.Start();
@@ -445,7 +426,7 @@ namespace FlagSync.View
                     param =>
                     {
                         this.jobWorker.Stop();
-                        this.IsRunning = false;
+                        this.OnPropertyChanged(vm => vm.IsRunning);
                         this.ResetBytes();
                         this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
                     },
@@ -685,7 +666,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void jobWorker_Finished(object sender, EventArgs e)
         {
-            this.IsRunning = false;
+            this.OnPropertyChanged(vm => vm.IsRunning);
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.FinishedAllJobsMessage);
             this.AddStatusMessage(Properties.Resources.ElapsedTimeMessage + " " + new DateTime((DateTime.Now - this.startTime).Ticks).ToString("HH:mm:ss"));
@@ -723,8 +704,6 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void jobWorker_FilesCounted(object sender, EventArgs e)
         {
-            this.IsCounting = false;
-
             this.CountedBytes = this.jobWorker.FileCounterResult.CountedBytes;
 
             this.ProceededFiles = 0;

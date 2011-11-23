@@ -144,6 +144,22 @@ namespace FlagSync.Core
         }
 
         /// <summary>
+        /// Gets a value indicating whether the job worker is counting the files.
+        /// </summary>
+        /// <value>
+        /// true if the job worker is counting the files; otherwise, false.
+        /// </value>
+        public bool IsCounting { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the job worker is started.
+        /// </summary>
+        /// <value>
+        /// true if the job worker is started; otherwise, false.
+        /// </value>
+        public bool IsRunning { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="JobWorker"/> class.
         /// </summary>
         public JobWorker()
@@ -160,6 +176,8 @@ namespace FlagSync.Core
             {
                 this.currentJob.Stop();
                 this.jobQueue.Clear();
+
+                this.IsRunning = false;
             }
         }
 
@@ -202,6 +220,8 @@ namespace FlagSync.Core
         /// <param name="preview">if set to true, a preview will be performed.</param>
         public void Start(IEnumerable<Job> jobs, bool preview)
         {
+            this.IsRunning = true;
+
             this.TotalWrittenBytes = 0;
 
             foreach (Job job in jobs)
@@ -221,13 +241,14 @@ namespace FlagSync.Core
             {
                 this.currentJob = this.jobQueue.Dequeue();
                 this.InitializeJobEvents(this.currentJob);
-                this.OnJobStarted(new JobEventArgs(this.currentJob));
+                this.JobStarted.Raise(this, new JobEventArgs(this.currentJob));
                 this.currentJob.Start(this.performPreview);
             }
 
             else
             {
-                this.OnFinished(EventArgs.Empty);
+                this.IsRunning = false;
+                this.Finished.Raise(this, EventArgs.Empty);
             }
         }
 
@@ -256,12 +277,16 @@ namespace FlagSync.Core
         /// </returns>
         private FileCounterResult CountFiles()
         {
+            this.IsCounting = true;
+
             var result = new FileCounterResult();
 
             foreach (Job job in this.jobQueue)
             {
                 result += job.CountFiles();
             }
+
+            this.IsCounting = false;
 
             return result;
         }
@@ -454,38 +479,11 @@ namespace FlagSync.Core
         {
             Job job = (Job)sender;
 
-            this.OnJobFinished(new JobEventArgs(job));
+            this.JobFinished.Raise(this, new JobEventArgs(job));
 
             this.TotalWrittenBytes += job.WrittenBytes;
 
             this.DoNextJob();
-        }
-
-        /// <summary>
-        /// Raises the <see cref="Finished"/> event.
-        /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void OnFinished(EventArgs e)
-        {
-            this.Finished.Raise(this, e);
-        }
-
-        /// <summary>
-        /// Raises the <see cref="JobStarted"/> event.
-        /// </summary>
-        /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
-        private void OnJobStarted(JobEventArgs e)
-        {
-            this.JobStarted(this, e);
-        }
-
-        /// <summary>
-        /// Raises the <see cref="JobFinished"/> event.
-        /// </summary>
-        /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
-        private void OnJobFinished(JobEventArgs e)
-        {
-            this.JobFinished.Raise(this, e);
         }
     }
 }
