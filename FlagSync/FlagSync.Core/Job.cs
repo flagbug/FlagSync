@@ -766,7 +766,7 @@ namespace FlagSync.Core
         /// </returns>
         private bool IsFileModified(IFileInfo fileA, IFileInfo fileB)
         {
-            return fileA.LastWriteTime.CompareTo(fileB.LastWriteTime) > 0;
+            return fileA.LastWriteTime > fileB.LastWriteTime;
         }
 
         /// <summary>
