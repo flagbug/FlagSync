@@ -31,8 +31,7 @@ namespace FlagSync.View
         private string lastStatusMessage = String.Empty;
         private int lastLogMessageIndex;
         private readonly Timer updateTimer;
-        private long averageSpeedTotal;
-        private int averageSpeedCounts;
+        private CircularBuffer<long> averageSpeedBuffer;
         private int tabIndex;
 
         /// <summary>
@@ -133,8 +132,7 @@ namespace FlagSync.View
         {
             get
             {
-                long averageSpeed = this.averageSpeedCounts != 0 ?
-                    this.averageSpeedTotal / this.averageSpeedCounts : 0;
+                long averageSpeed = this.averageSpeedBuffer.Sum() / this.averageSpeedBuffer.Count;
 
                 return averageSpeed.ToSizeString() + "/s";
             }
@@ -567,8 +565,7 @@ namespace FlagSync.View
             this.jobWorker.ProceededFile += jobWorker_ProceededFile;
             this.ResetMessages();
             this.ResetBytes();
-            this.averageSpeedCounts = 0;
-            this.averageSpeedTotal = 0;
+            this.averageSpeedBuffer = new CircularBuffer<long>(200);
         }
 
         /// <summary>
@@ -793,8 +790,7 @@ namespace FlagSync.View
             this.LastLogMessage.Progress = (int)(((double)e.TransferredBytes / (double)e.TotalBytes) * 100);
             this.OnPropertyChanged(vm => vm.CurrentProgress);
 
-            this.averageSpeedTotal += e.AverageSpeed;
-            this.averageSpeedCounts++;
+            this.averageSpeedBuffer.Add(e.AverageSpeed);
         }
 
         /// <summary>
