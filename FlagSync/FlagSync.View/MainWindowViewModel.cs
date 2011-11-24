@@ -424,6 +424,7 @@ namespace FlagSync.View
                     param =>
                     {
                         this.jobWorker.Stop();
+                        this.updateTimer.Stop();
                         this.OnPropertyChanged(vm => vm.IsRunning);
                         this.ResetBytes();
                         this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
@@ -574,6 +575,7 @@ namespace FlagSync.View
         private void PauseJobWorker()
         {
             this.jobWorker.Pause();
+            this.updateTimer.Stop();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.PausedJobsMessage);
         }
@@ -584,6 +586,7 @@ namespace FlagSync.View
         private void ContinueJobWorker()
         {
             this.jobWorker.Continue();
+            this.updateTimer.Start();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.ContinuingJobsMessage);
             this.AddStatusMessage(Properties.Resources.StartingJobsMessage + " " + this.CurrentJob.Name + "...");
