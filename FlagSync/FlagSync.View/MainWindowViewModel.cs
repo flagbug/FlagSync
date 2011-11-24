@@ -566,7 +566,7 @@ namespace FlagSync.View
             this.jobWorker.ProceededFile += jobWorker_ProceededFile;
             this.ResetMessages();
             this.ResetBytes();
-            this.averageSpeedBuffer = new CircularBuffer<long>(200);
+            this.averageSpeedBuffer = new CircularBuffer<long>(500);
         }
 
         /// <summary>
