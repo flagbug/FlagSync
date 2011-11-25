@@ -160,10 +160,7 @@ namespace FlagSync.Core.FileSystem.ITunes
                 return directoryInfo;
             }
 
-            else
-            {
-                return new ITunesDirectoryInfo(playlist);
-            }
+            return new ITunesDirectoryInfo(playlist);
         }
 
         /// <summary>
@@ -265,10 +262,7 @@ namespace FlagSync.Core.FileSystem.ITunes
                         .Any(albumDir => albumDir.Name == album);
                 }
 
-                else
-                {
-                    return false;
-                }
+                return false;
             }
 
             catch (COMException ex)
@@ -339,23 +333,20 @@ namespace FlagSync.Core.FileSystem.ITunes
 
                 string artistName = ITunesFileSystem.NormalizeArtistOrAlbumName(artistGroup.Key);
 
-                var albumDirectories = new List<ITunesDirectoryInfo>();
-
-                foreach (var album in albumGroups)
-                {
-                    string albumName = ITunesFileSystem.NormalizeArtistOrAlbumName(album.Key);
-                    albumDirectories.Add
+                var albumDirectories =
+                    from album in albumGroups
+                    let albumName = ITunesFileSystem.NormalizeArtistOrAlbumName(album.Key)
+                    select new ITunesDirectoryInfo
                         (
-                            new ITunesDirectoryInfo
+                            albumName,
+                            album
+                                .Where(track => track.Location != null)
+                                .Select
                                 (
-                                    albumName,
-                                    album.Where(track => track.Location != null)
-                                        .Select(track => new LocalFileInfo(new FileInfo(track.Location)))
-                                        .Cast<IFileInfo>(),
-                                    null
-                                )
+                                    track => (IFileInfo)new LocalFileInfo(new FileInfo(track.Location))
+                                ),
+                            null
                         );
-                }
 
                 var artistDirectory = new ITunesDirectoryInfo(artistName, albumDirectories, root);
 
