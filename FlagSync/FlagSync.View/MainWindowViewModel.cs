@@ -671,6 +671,8 @@ namespace FlagSync.View
             this.AddStatusMessage(Properties.Resources.FinishedAllJobsMessage);
             this.AddStatusMessage(Properties.Resources.ElapsedTimeMessage + " " + new DateTime((DateTime.Now - this.startTime).Ticks).ToString("HH:mm:ss"));
 
+            this.LastLogMessage.Progress = 100;
+
             //HACK:
             this.ProceededBytes = this.CountedBytes;
             this.OnPropertyChanged(vm => vm.TotalProgressPercentage);
