@@ -491,6 +491,8 @@ namespace FlagSync.View
             DataController.CreateAppDataFolder();
 
             this.JobSettings = new ObservableCollection<JobSettingViewModel>();
+            this.JobSettings.CollectionChanged += (sender, e) => this.OnPropertyChanged(vm => vm.HasNoJobs);
+
             this.CurrentJobSettingsPanel = new ObservableCollection<UserControl>();
 
             this.LogMessages = new ThreadSafeObservableCollection<LogMessage>();
