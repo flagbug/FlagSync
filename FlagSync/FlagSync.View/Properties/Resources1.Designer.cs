@@ -700,6 +700,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click on the &quot;New&quot; button to add a new job..
+        /// </summary>
+        public static string NoJobText {
+            get {
+                return ResourceManager.GetString("NoJobText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paused jobs..
         /// </summary>
         public static string PausedJobsMessage {

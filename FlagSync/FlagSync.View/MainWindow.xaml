@@ -338,10 +338,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontStyle="Normal" Visibility="{Binding Path=HasNoJobs, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            Click on the "New" button, <LineBreak/>
-                            to add a new job.
-                        </TextBlock>
+                        <TextBlock Grid.Row="1" Text="{x:Static properties:Resources.NoJobText}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontStyle="Normal" Visibility="{Binding Path=HasNoJobs, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" MaxWidth="225" />
                     </Grid>
                     <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=CurrentJobSettingsPanel, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>

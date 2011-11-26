@@ -414,4 +414,7 @@
   <data name="FTPAdressWrongFormatMessage" xml:space="preserve">
     <value>FTP-Address has the wrong format!</value>
   </data>
+  <data name="NoJobText" xml:space="preserve">
+    <value>Click on the "New" button to add a new job.</value>
+  </data>
 </root>
