@@ -1,3 +1,22 @@
+----------------------------------- v2.3.0 -----------------------------------
+
+CHANGES:
+- Changed the button, the tabs, the progressbar and the job setting menu 
+  style.
+- There is no default job anymore when the application starts. 
+  Instead, a message is displayed, that the user shoukld click on the "New" 
+  button to add a new job.
+
+IMPROVEMENTS:
+- The text in a log message now doesnt't cut off suddendly, instead it's 
+  prepended with dots, to indicate that there is more text.
+- The average speed is now calculated more accurately.
+- There is now an '@' in front of the average speed display.
+
+BUGFIXES:
+- Fixed a bug, which caused the progress of the current file not to jump to 
+  100 percent.
+
 ----------------------------------- v2.2.1 -----------------------------------
 
 BUGFIXES:
