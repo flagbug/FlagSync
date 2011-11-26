@@ -511,6 +511,8 @@ namespace FlagSync.View
             var setting = new JobSettingViewModel(name) { SyncMode = mode };
 
             this.JobSettings.Add(setting);
+
+            this.SelectedJobSetting = setting;
         }
 
         /// <summary>
