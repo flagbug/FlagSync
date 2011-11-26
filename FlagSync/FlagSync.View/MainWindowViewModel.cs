@@ -35,6 +35,17 @@ namespace FlagSync.View
         private int tabIndex;
 
         /// <summary>
+        /// Gets a value indicating whether there is any job setting in the list.
+        /// </summary>
+        /// <value>
+        /// true if there is any job setting in the list; otherwise, false.
+        /// </value>
+        public bool HasNoJobs
+        {
+            get { return this.JobSettings.Count == 0; }
+        }
+
+        /// <summary>
         /// Gets the tab index.
         /// </summary>
         /// <value>
@@ -380,8 +391,10 @@ namespace FlagSync.View
                         this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
                     },
                     param => !this.JobSettings
-                                    .Where(setting => setting.IsIncluded)
-                                    .Any(setting => setting.HasErrors) && !this.IsRunning
+                                  .Where(setting => setting.IsIncluded)
+                                  .Any(setting => setting.HasErrors)
+                             && !this.IsRunning
+                             && !this.HasNoJobs
                 );
             }
         }
@@ -447,12 +460,10 @@ namespace FlagSync.View
                     {
                         this.JobSettings.Remove(this.SelectedJobSetting);
 
-                        if (this.JobSettings.Count == 0)
+                        if (this.JobSettings.Count != 0)
                         {
-                            this.AddNewJobSetting(SyncMode.LocalBackup);
+                            this.SelectedJobSetting = this.JobSettings.Last();
                         }
-
-                        this.SelectedJobSetting = this.JobSettings.Last();
                     }
                 );
             }
@@ -481,8 +492,6 @@ namespace FlagSync.View
 
             this.JobSettings = new ObservableCollection<JobSettingViewModel>();
             this.CurrentJobSettingsPanel = new ObservableCollection<UserControl>();
-            this.AddNewJobSetting(SyncMode.LocalBackup);
-            this.SelectedJobSetting = this.JobSettings[0];
 
             this.LogMessages = new ThreadSafeObservableCollection<LogMessage>();
             this.updateTimer = new Timer(1000);
