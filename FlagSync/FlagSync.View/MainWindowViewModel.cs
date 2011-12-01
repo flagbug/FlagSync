@@ -684,7 +684,12 @@ namespace FlagSync.View
             this.AddStatusMessage(Properties.Resources.FinishedAllJobsMessage);
             this.AddStatusMessage(Properties.Resources.ElapsedTimeMessage + " " + new DateTime((DateTime.Now - this.startTime).Ticks).ToString("HH:mm:ss"));
 
-            this.LastLogMessage.Progress = 100;
+            // Set the last log message progress to 100, sometimes there
+            // is an error in the last file copy and then the progress stucks.
+            if (this.LastLogMessage != null)
+            {
+                this.LastLogMessage.Progress = 100;
+            }
 
             //HACK:
             this.ProceededBytes = this.CountedBytes;
