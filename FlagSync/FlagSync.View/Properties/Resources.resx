@@ -417,4 +417,10 @@
   <data name="NoJobText" xml:space="preserve">
     <value>Click on the "New" button to add a new job.</value>
   </data>
+  <data name="BackupString" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="SynchronizationString" xml:space="preserve">
+    <value>Synchronization</value>
+  </data>
 </root>

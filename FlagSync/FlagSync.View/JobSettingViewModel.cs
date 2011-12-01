@@ -119,47 +119,7 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.SyncMode = value;
                     this.OnPropertyChanged(vm => vm.SyncMode);
-                    this.OnPropertyChanged(vm => vm.SyncModeString);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        public string SyncModeString
-        {
-            get
-            {
-                string syncMode = string.Empty;
-
-                switch (this.SyncMode)
-                {
-                    case SyncMode.FtpBackup:
-                        syncMode = Resources.FtpServerBackupString;
-                        break;
-
-                    case SyncMode.FtpSynchronization:
-                        syncMode = Resources.FtpServerSynchronizationString;
-                        break;
-
-                    case SyncMode.LocalBackup:
-                        syncMode = Resources.LocalBackupString;
-                        break;
-
-                    case SyncMode.LocalSynchronization:
-                        syncMode = Resources.LocalSynchronizationString;
-                        break;
-
-                    case SyncMode.ITunes:
-                        syncMode = Resources.iTunesString;
-                        break;
-                }
-
-                return syncMode;
             }
         }
 

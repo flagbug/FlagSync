@@ -417,4 +417,10 @@
   <data name="NoJobText" xml:space="preserve">
     <value>Klicken Sie auf "Neu", um eine neue Aufgabe hinzuzufügen.</value>
   </data>
+  <data name="BackupString" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="SynchronizationString" xml:space="preserve">
+    <value>Synchronisation</value>
+  </data>
 </root>

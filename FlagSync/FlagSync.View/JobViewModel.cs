@@ -1,4 +1,6 @@
-﻿using FlagSync.Core;
+﻿using System;
+using FlagSync.Core;
+using FlagSync.View.Properties;
 
 namespace FlagSync.View
 {
@@ -37,6 +39,27 @@ namespace FlagSync.View
         public string Name
         {
             get { return this.model.Name; }
+        }
+
+        /// <summary>
+        /// Gets the sync mode string.
+        /// </summary>
+        public string SyncModeString
+        {
+            get
+            {
+                if (this.model is BackupJob)
+                {
+                    return Resources.BackupString;
+                }
+
+                if (this.model is SyncJob)
+                {
+                    return Resources.SynchronizationString;
+                }
+
+                throw new NotSupportedException("No such job.");
+            }
         }
     }
 }

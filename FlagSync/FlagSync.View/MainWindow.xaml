@@ -129,14 +129,14 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.NameTextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
-                        <TextBlock Grid.Row="0" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=CurrentJob.Name}" Margin="5,0,0,0" />
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryATextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
-                        <TextBlock Grid.Row="1" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=CurrentJob.DirectoryA}" Margin="5,0,0,0" />
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryBTextBlockText}" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" />
-                        <TextBlock Grid.Row="2" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=CurrentJob.DirectoryB}" Margin="5,0,0,0" />
-                        <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.ModeTextBlockText}" Height="Auto" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Padding="0" />
-                        <TextBlock Grid.Row="3" Grid.Column="1" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Text="{Binding Path=CurrentJob.SyncModeString}" Margin="5,0,0,0" />
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.NameTextBlockText}" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=CurrentJob.Name}" Margin="10,0,0,0" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryATextBlockText}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=CurrentJob.DirectoryA}" Margin="10,0,0,0" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryBTextBlockText}" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=CurrentJob.DirectoryB}" Margin="10,0,0,0" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.ModeTextBlockText}" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=CurrentJob.SyncModeString}" Margin="10,0,0,0" />
                     </Grid>
                     <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.NoActiveJobText}" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock.Style>

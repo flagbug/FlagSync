@@ -115,6 +115,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        public static string BackupString {
+            get {
+                return ResourceManager.GetString("BackupString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Common Settings.
         /// </summary>
         public static string CommonSettingsGroupBoxText {
@@ -885,6 +894,15 @@ namespace FlagSync.View.Properties {
         public static string StoppedAllJobsMessage {
             get {
                 return ResourceManager.GetString("StoppedAllJobsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronization.
+        /// </summary>
+        public static string SynchronizationString {
+            get {
+                return ResourceManager.GetString("SynchronizationString", resourceCulture);
             }
         }
         
