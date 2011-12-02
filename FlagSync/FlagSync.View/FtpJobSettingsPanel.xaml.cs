@@ -64,7 +64,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void directoryButton_Click(object sender, RoutedEventArgs e)
         {
-            string result = this.ShowFolderDialog();
+            string result = FtpJobSettingsPanel.ShowFolderDialog();
 
             if (result != null)
             {
@@ -76,7 +76,7 @@ namespace FlagSync.View
         /// Shows a folder dialog.
         /// </summary>
         /// <returns>The selected folder</returns>
-        private string ShowFolderDialog()
+        private static string ShowFolderDialog()
         {
             string selectedFolder = null;
 
