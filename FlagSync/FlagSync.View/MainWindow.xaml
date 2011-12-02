@@ -7,12 +7,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         d:DesignHeight="768" d:DesignWidth="1024"
-        Title="FlagSync" Name="Window" Icon="/FlagSync;component/Images/ApplicationIcon.ico"
+        Title="FlagSync" Icon="/FlagSync;component/Images/ApplicationIcon.ico"
         WindowState="Maximized" Closing="Window_Closing"
         MinWidth="800" MinHeight="600"
         Loaded="Window_Loaded">
     <Window.DataContext>
-        <local:MainWindowViewModel x:Name="mainWindowViewModel" />
+        <local:MainWindowViewModel x:Name="mainWindowViewModel" x:FieldModifier="private" />
     </Window.DataContext>
     <Window.Resources>
         <local:ByteToKiloByteConverter x:Key="ByteToKiloByteConverter"/>
@@ -92,7 +92,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Name="mainGrid" HorizontalAlignment="Stretch">
+    <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -102,13 +102,13 @@
         <Menu Grid.Row="0" Height="25" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Background="#FFF0F0F0">
             <MenuItem Header="{x:Static properties:Resources.ProgramMenuItemText}">
                 <MenuItem Header="{x:Static properties:Resources.LanguageMenuItemText}">
-                    <MenuItem Name="englishMenuItem" Header="{x:Static properties:Resources.EnglishString}" Click="englishMenuItem_Click" />
-                    <MenuItem Name="germanMenuItem" Header="{x:Static properties:Resources.GermanString}" Click="germanMenuItem_Click" />
+                    <MenuItem Header="{x:Static properties:Resources.EnglishString}" Click="englishMenuItem_Click" />
+                    <MenuItem Header="{x:Static properties:Resources.GermanString}" Click="germanMenuItem_Click" />
                 </MenuItem>
-                <MenuItem Name="exitMenuItem" Header="{x:Static properties:Resources.ExitMenuItemText}" Command="{Binding Path=ExitApplicationCommand}" />
+                <MenuItem Header="{x:Static properties:Resources.ExitMenuItemText}" Command="{Binding Path=ExitApplicationCommand}" />
             </MenuItem>
             <MenuItem Header="{x:Static properties:Resources.HelpMenuItemText}">
-                <MenuItem Name="aboutMenuItem" Header="{x:Static properties:Resources.AboutString}" Click="aboutMenuItem_Click" />
+                <MenuItem Header="{x:Static properties:Resources.AboutString}" Click="aboutMenuItem_Click" />
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="5, 10, 5, 5" MinHeight="100">
@@ -220,7 +220,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Name="newJobButton" ToolTip="{x:Static properties:Resources.NewJobButtonText}" Click="newJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}">
+                            <Button Grid.Column="0" Name="newJobButton" ToolTip="{x:Static properties:Resources.NewJobButtonText}" Click="newJobButton_Click" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Style="{StaticResource MouseOverButtonStyle}" x:FieldModifier="private">
                                 <Button.Content>
                                     <StackPanel Orientation="Vertical">
                                         <Image Source="/FlagSync;component/Images/Add.png" Width="50" Height="50" />
@@ -318,7 +318,7 @@
                             </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Margin="5, 5, 5, 5" Orientation="Horizontal">
+                                    <StackPanel Margin="5" Orientation="Horizontal">
                                         <CheckBox Margin="5, 0, 0, 0" IsChecked="{Binding Path=IsIncluded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
                                         <Grid Margin="10, 0, 0, 0">
                                             <Grid.ColumnDefinitions>
@@ -331,8 +331,8 @@
                                             </Grid.RowDefinitions>
                                             <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Static properties:Resources.ListBoxItemJobNameText}" FontWeight="Bold" Foreground="Green" />
                                             <TextBlock Grid.Column="0" Grid.Row="1" Text="{x:Static properties:Resources.ListBoxItemJobTypeText}" FontWeight="Bold" />
-                                            <TextBlock Grid.Column="1" Margin="5, 0, 0, 0" Grid.Row="0" Text="{Binding Path=Name}" Foreground="#FFFF6700" FontWeight="Bold" />
-                                            <TextBlock Grid.Column="1" Margin="5, 0, 0, 0" Grid.Row="1" Text="{Binding Path=SyncModeString}" />
+                                            <TextBlock Grid.Column="1" Grid.Row="0" Margin="5, 0, 0, 0" Text="{Binding Path=Name}" Foreground="#FFFF6700" FontWeight="Bold" />
+                                            <TextBlock Grid.Column="1" Grid.Row="1" Margin="5, 0, 0, 0" Text="{Binding Path=SyncModeString}" />
                                         </Grid>
                                     </StackPanel>
                                 </DataTemplate>
