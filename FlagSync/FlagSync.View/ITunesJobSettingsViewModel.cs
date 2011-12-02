@@ -30,7 +30,7 @@ namespace FlagSync.View
         /// Gets the playlists from iTunes.
         /// </summary>
         /// <value>The playlists from iTunes.</value>
-        private static IEnumerable<string> ITunesPlaylists
+        public static IEnumerable<string> ITunesPlaylists
         {
             get
             {
