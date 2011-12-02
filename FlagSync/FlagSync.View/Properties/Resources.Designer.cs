@@ -907,7 +907,7 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sychronization.
+        ///   Looks up a localized string similar to Synchronization.
         /// </summary>
         public static string SyncModeRadioButtonText {
             get {

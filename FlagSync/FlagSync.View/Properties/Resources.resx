@@ -223,7 +223,7 @@
     <value>Stopped all jobs.</value>
   </data>
   <data name="SyncModeRadioButtonText" xml:space="preserve">
-    <value>Sychronization</value>
+    <value>Synchronization</value>
   </data>
   <data name="TargetGridViewColumnText" xml:space="preserve">
     <value>Target directory</value>
