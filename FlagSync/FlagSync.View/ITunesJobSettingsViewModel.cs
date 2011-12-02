@@ -32,7 +32,7 @@ namespace FlagSync.View
         /// </summary>
         /// <value>The playlists from iTunes.</value>
         /// <remarks></remarks>
-        public IEnumerable<string> ITunesPlaylists
+        private static IEnumerable<string> ITunesPlaylists
         {
             get
             {
@@ -52,7 +52,7 @@ namespace FlagSync.View
         {
             this.JobSetting = setting;
 
-            this.JobSetting.ITunesPlaylist = this.JobSetting.ITunesPlaylist ?? this.ITunesPlaylists.First();
+            this.JobSetting.ITunesPlaylist = this.JobSetting.ITunesPlaylist ?? ITunesPlaylists.First();
         }
     }
 }
