@@ -183,7 +183,7 @@ namespace FlagSync.View
         private void englishMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Language = new CultureInfo("en-US");
-            this.Restart();
+            Restart();
         }
 
         /// <summary>
@@ -194,13 +194,13 @@ namespace FlagSync.View
         private void germanMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Language = new CultureInfo("de-DE");
-            this.Restart();
+            Restart();
         }
 
         /// <summary>
         /// Restarts this instance.
         /// </summary>
-        private void Restart()
+        private static void Restart()
         {
             var result = MessageBox.Show(
                 Properties.Resources.ApplicationRestartMessageBoxText,
