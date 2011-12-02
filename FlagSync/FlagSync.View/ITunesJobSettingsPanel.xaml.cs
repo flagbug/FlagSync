@@ -6,7 +6,7 @@ namespace FlagSync.View
     /// <summary>
     /// Interaction logic for ITunesJobSettingsPanel.xaml
     /// </summary>
-    public partial class ITunesJobSettingsPanel : UserControl
+    public sealed partial class ITunesJobSettingsPanel : UserControl
     {
         private readonly ITunesJobSettingsViewModel viewModel;
 
