@@ -15,6 +15,7 @@ using FlagLib.IO;
 using FlagLib.Patterns.MVVM;
 using FlagSync.Core;
 using FlagSync.Data;
+using FlagSync.View.Properties;
 
 namespace FlagSync.View
 {
@@ -567,6 +568,7 @@ namespace FlagSync.View
             this.jobWorker.DeletedFile += jobWorker_DeletedFile;
             this.jobWorker.DeletingDirectory += jobWorker_DeletingDirectory;
             this.jobWorker.DeletingFile += jobWorker_DeletingFile;
+            this.jobWorker.DirectoryCreationError += jobWorker_DirectoryCreationError;
             this.jobWorker.DirectoryDeletionError += jobWorker_DirectoryDeletionError;
             this.jobWorker.FileCopyError += jobWorker_FileCopyError;
             this.jobWorker.FileCopyProgressChanged += jobWorker_FileCopyProgressChanged;
@@ -753,6 +755,17 @@ namespace FlagSync.View
         {
             this.DeleteLastLogMessage();
             this.AddLogMessage(Properties.Resources.CopyErrorString, Properties.Resources.FileString, e.File.FullName, e.TargetDirectory.FullName, true, e.File.Length);
+        }
+
+        /// <summary>
+        /// Handles the DirectoryCreationError event of the jobWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        private void jobWorker_DirectoryCreationError(object sender, DirectoryCreationEventArgs e)
+        {
+            this.DeleteLastLogMessage();
+            this.AddLogMessage(Resources.CreationErrorString, Resources.DirectoryString, e.Directory.FullName, e.TargetDirectory.FullName, true, null);
         }
 
         /// <summary>

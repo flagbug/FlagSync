@@ -187,6 +187,15 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creation error.
+        /// </summary>
+        public static string CreationErrorString {
+            get {
+                return ResourceManager.GetString("CreationErrorString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Job.
         /// </summary>
         public static string CurrentJobGroupBoxText {

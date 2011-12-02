@@ -423,4 +423,7 @@
   <data name="SynchronizationString" xml:space="preserve">
     <value>Synchronization</value>
   </data>
+  <data name="CreationErrorString" xml:space="preserve">
+    <value>Creation error</value>
+  </data>
 </root>

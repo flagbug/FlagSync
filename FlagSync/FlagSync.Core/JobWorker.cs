@@ -79,6 +79,11 @@ namespace FlagSync.Core
         public event EventHandler<FileDeletionErrorEventArgs> FileDeletionError;
 
         /// <summary>
+        /// Occurs when a directory creation error has occured.
+        /// </summary>
+        public event EventHandler<DirectoryCreationEventArgs> DirectoryCreationError;
+
+        /// <summary>
         /// Occurs when a directory deletion error has been catched.
         /// </summary>
         public event EventHandler<DirectoryDeletionEventArgs> DirectoryDeletionError;
@@ -305,6 +310,7 @@ namespace FlagSync.Core
             job.DeletedFile += currentJob_DeletedFile;
             job.DeletingDirectory += currentJob_DeletingDirectory;
             job.DeletingFile += currentJob_DeletingFile;
+            job.DirectoryCreationError += currentJob_DirectoryCreationError;
             job.DirectoryDeletionError += currentJob_DirectoryDeletionError;
             job.FileCopyError += currentJob_FileCopyError;
             job.FileCopyProgressChanged += currentJob_FileCopyProgressChanged;
@@ -378,6 +384,16 @@ namespace FlagSync.Core
         private void currentJob_FileCopyError(object sender, FileCopyErrorEventArgs e)
         {
             this.FileCopyError.Raise(this, e);
+        }
+
+        /// <summary>
+        /// Handles the DirectoryCreationError event of the currentJob control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
+        private void currentJob_DirectoryCreationError(object sender, DirectoryCreationEventArgs e)
+        {
+            this.DirectoryCreationError.Raise(this, e);
         }
 
         /// <summary>
