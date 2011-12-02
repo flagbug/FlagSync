@@ -13,7 +13,6 @@ namespace FlagSync.View
         /// Gets or sets the job setting.
         /// </summary>
         /// <value>The job setting.</value>
-        /// <remarks></remarks>
         public JobSettingViewModel JobSetting
         {
             get { return this.jobSetting; }
@@ -31,7 +30,6 @@ namespace FlagSync.View
         /// Gets the playlists from iTunes.
         /// </summary>
         /// <value>The playlists from iTunes.</value>
-        /// <remarks></remarks>
         private static IEnumerable<string> ITunesPlaylists
         {
             get
