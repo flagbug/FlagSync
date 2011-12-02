@@ -7,7 +7,7 @@ namespace FlagSync.View
     /// <summary>
     /// Interaction logic for LocalJobSettingsPanel.xaml
     /// </summary>
-    public partial class LocalJobSettingsPanel : UserControl
+    public sealed partial class LocalJobSettingsPanel : UserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalJobSettingsPanel"/> class.
