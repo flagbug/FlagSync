@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Timers;
@@ -641,7 +642,7 @@ namespace FlagSync.View
         /// <param name="message">The message.</param>
         private void AddStatusMessage(string message)
         {
-            this.StatusMessages += DateTime.Now.ToString("HH:mm:ss") + ": " + message + Environment.NewLine;
+            this.StatusMessages += DateTime.Now.ToString("HH:mm:ss", new DateTimeFormatInfo()) + ": " + message + Environment.NewLine;
             this.LastStatusMessage = message;
         }
 
@@ -682,7 +683,7 @@ namespace FlagSync.View
             this.OnPropertyChanged(vm => vm.IsRunning);
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.FinishedAllJobsMessage);
-            this.AddStatusMessage(Properties.Resources.ElapsedTimeMessage + " " + new DateTime((DateTime.Now - this.startTime).Ticks).ToString("HH:mm:ss"));
+            this.AddStatusMessage(Properties.Resources.ElapsedTimeMessage + " " + new DateTime((DateTime.Now - this.startTime).Ticks).ToString("HH:mm:ss", new DateTimeFormatInfo()));
 
             // Set the last log message progress to 100, sometimes there
             // is an error in the last file copy and then the progress stucks.
