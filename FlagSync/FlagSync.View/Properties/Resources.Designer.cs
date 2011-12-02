@@ -934,7 +934,7 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Titel:.
+        ///   Looks up a localized string similar to Title:.
         /// </summary>
         public static string TitleTextBlockText {
             get {
