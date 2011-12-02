@@ -262,7 +262,7 @@ namespace FlagSync.View
         /// <returns>
         /// The error message for the property. The default is an empty string ("").
         ///   </returns>
-        public string this[string name]
+        public string this[string columnName]
         {
             get
             {
@@ -272,7 +272,7 @@ namespace FlagSync.View
                 {
                     case SyncMode.LocalBackup:
                     case SyncMode.LocalSynchronization:
-                        if ((name == Reflector.GetMemberName(() => this.DirectoryA) && !Directory.Exists(this.DirectoryA)))
+                        if ((columnName == Reflector.GetMemberName(() => this.DirectoryA) && !Directory.Exists(this.DirectoryA)))
                         {
                             result = Resources.DirectoryDoesntExistMessage;
                         }
@@ -280,7 +280,7 @@ namespace FlagSync.View
                         break;
 
                     case SyncMode.ITunes:
-                        if (name == Reflector.GetMemberName(() => this.ITunesPlaylist) && String.IsNullOrEmpty(this.ITunesPlaylist))
+                        if (columnName == Reflector.GetMemberName(() => this.ITunesPlaylist) && String.IsNullOrEmpty(this.ITunesPlaylist))
                         {
                             result = Resources.SelectPlaylistErrorMessage;
                         }
@@ -288,7 +288,7 @@ namespace FlagSync.View
 
                     case SyncMode.FtpBackup:
                     case SyncMode.FtpSynchronization:
-                        if (name == Reflector.GetMemberName(() => this.FtpAddress))
+                        if (columnName == Reflector.GetMemberName(() => this.FtpAddress))
                         {
                             if (String.IsNullOrEmpty(this.FtpAddress))
                             {
@@ -316,12 +316,12 @@ namespace FlagSync.View
                         break;
                 }
 
-                if (name == Reflector.GetMemberName(() => this.DirectoryB) && !Directory.Exists(this.DirectoryB))
+                if (columnName == Reflector.GetMemberName(() => this.DirectoryB) && !Directory.Exists(this.DirectoryB))
                 {
                     result = Resources.DirectoryDoesntExistMessage;
                 }
 
-                if (name == Reflector.GetMemberName(() => this.Name) && String.IsNullOrEmpty(this.Name))
+                if (columnName == Reflector.GetMemberName(() => this.Name) && String.IsNullOrEmpty(this.Name))
                 {
                     result = Resources.NameFieldCantBeEmptyMessage;
                 }
