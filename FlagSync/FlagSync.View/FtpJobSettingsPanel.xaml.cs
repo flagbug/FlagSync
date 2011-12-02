@@ -7,7 +7,7 @@ namespace FlagSync.View
     /// <summary>
     /// Interaction logic for FtpJobSettingsPanel.xaml
     /// </summary>
-    public partial class FtpJobSettingsPanel : UserControl
+    public sealed partial class FtpJobSettingsPanel : UserControl
     {
         public FtpJobSettingsPanel(JobSettingViewModel viewModel)
         {
