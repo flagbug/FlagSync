@@ -1,3 +1,16 @@
+----------------------------------- v2.3.1 -----------------------------------
+
+IMPROVEMENTS:
+- Increased the application's startup time.
+- Added a log message, if the creation of a directory failed.
+
+BUGFIXES:
+- Fixed a bug which caused the application to crash, if there were no file or 
+  directory changes.
+- Fixed a bug, which caused the mode of of job to disapear in the current job 
+  display.
+- Fixed some typos.
+
 ----------------------------------- v2.3.0 -----------------------------------
 
 CHANGES:
