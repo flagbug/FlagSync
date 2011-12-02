@@ -159,7 +159,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="25" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Maximum="{Binding Path=CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
@@ -186,10 +186,10 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Content="{x:Static properties:Resources.PreviewButtonText}" Height="25" Margin="0, 0, 5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="Auto" Grid.Column="0" Command="{Binding Path=StartJobWorkerCommand}" CommandParameter="true" />
-                        <Button Content="{x:Static properties:Resources.StartButtonText}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="Auto" Grid.Column="1" Command="{Binding Path=StartJobWorkerCommand}" CommandParameter="false" />
-                        <Button Content="{Binding Path=PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="5, 0, 5, 0" HorizontalAlignment="Stretch" Name="pauseButton" VerticalAlignment="Bottom" Width="Auto" Grid.Column="2" Command="{Binding Path=PauseOrContinueJobWorkerCommand}" />
-                        <Button Content="{x:Static properties:Resources.StopButtonText}" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="Auto" Grid.Column="3" Command="{Binding Path=StopJobWorkerCommand}" />
+                        <Button Grid.Column="0" Content="{x:Static properties:Resources.PreviewButtonText}" Margin="0, 0, 5, 0" Command="{Binding Path=StartJobWorkerCommand}" CommandParameter="true" />
+                        <Button Grid.Column="1" Content="{x:Static properties:Resources.StartButtonText}" Margin="5, 0, 5, 0" Command="{Binding Path=StartJobWorkerCommand}" CommandParameter="false" />
+                        <Button Grid.Column="2" Content="{Binding Path=PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Margin="5, 0, 5, 0" Command="{Binding Path=PauseOrContinueJobWorkerCommand}" />
+                        <Button Grid.Column="3" Content="{x:Static properties:Resources.StopButtonText}" Margin="5, 0, 0, 0" Command="{Binding Path=StopJobWorkerCommand}" />
                     </Grid>
                 </Grid>
             </GroupBox>
