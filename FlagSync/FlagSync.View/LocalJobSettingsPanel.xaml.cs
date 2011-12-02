@@ -58,7 +58,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void directoryAButton_Click(object sender, RoutedEventArgs e)
         {
-            string result = this.ShowFolderDialog();
+            string result = ShowFolderDialog();
 
             if (result != null)
             {
@@ -73,7 +73,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void directoryBButton_Click(object sender, RoutedEventArgs e)
         {
-            string result = this.ShowFolderDialog();
+            string result = ShowFolderDialog();
 
             if (result != null)
             {
@@ -87,7 +87,7 @@ namespace FlagSync.View
         /// <returns>
         /// The selected folder
         /// </returns>
-        private string ShowFolderDialog()
+        private static string ShowFolderDialog()
         {
             string selectedFolder = null;
 
