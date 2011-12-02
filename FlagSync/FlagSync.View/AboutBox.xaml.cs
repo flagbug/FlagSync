@@ -5,7 +5,7 @@ namespace FlagSync.View
     /// <summary>
     /// Interaction logic for AboutBox.xaml
     /// </summary>
-    public partial class AboutBox : Window
+    public sealed partial class AboutBox : Window
     {
         public AboutBox()
         {
