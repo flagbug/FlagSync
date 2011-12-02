@@ -427,7 +427,7 @@ namespace FlagSync.Core
                     string newTargetDirectoryPath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.Directory.Name);
 
                     bool newTargetDirectoryExists = this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath);
-                    bool newTargetDirectoryIsExcluded = this.excludedPaths.Any(path => this.NormalizePath(newTargetDirectoryPath).StartsWith(path));
+                    bool newTargetDirectoryIsExcluded = this.excludedPaths.Any(path => NormalizePath(newTargetDirectoryPath).StartsWith(path));
 
                     //Check if the new target directory exists and if not, create it
                     if (!newTargetDirectoryExists && !newTargetDirectoryIsExcluded)
@@ -468,7 +468,7 @@ namespace FlagSync.Core
                     string targetFilePath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name);
 
                     //The file must not be a contained in any subfolder of the excluded folders
-                    if (!this.excludedPaths.Any(path => this.NormalizePath(targetFilePath).StartsWith(path)))
+                    if (!this.excludedPaths.Any(path => NormalizePath(targetFilePath).StartsWith(path)))
                     {
                         //Check if the target file exists in the target directory and if not, create it
                         if (!this.TargetFileSystem.FileExists(targetFilePath))
@@ -480,7 +480,7 @@ namespace FlagSync.Core
                         }
 
                         //Check if the source file is newer than the target file
-                        else if (this.IsFileModified(e.File, this.TargetFileSystem.GetFileInfo(targetFilePath)))
+                        else if (IsFileModified(e.File, this.TargetFileSystem.GetFileInfo(targetFilePath)))
                         {
                             this.PerformFileModificationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
 
@@ -525,7 +525,7 @@ namespace FlagSync.Core
                 string newTargetDirectoryPath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.Directory.Name);
 
                 bool newTargetDirectoryExists = this.SourceFileSystem.DirectoryExists(newTargetDirectoryPath);
-                bool newTargetDirectoryIsExcluded = this.deletedDirectoryPaths.Any(path => this.NormalizePath(newTargetDirectoryPath).StartsWith(path));
+                bool newTargetDirectoryIsExcluded = this.deletedDirectoryPaths.Any(path => NormalizePath(newTargetDirectoryPath).StartsWith(path));
 
                 // Delete the directory if it doesn't exist in the source directory
                 if (!newTargetDirectoryExists && !newTargetDirectoryIsExcluded)
@@ -534,7 +534,7 @@ namespace FlagSync.Core
                     // so that the subdirectories don't get included.
                     if (!execute)
                     {
-                        this.deletedDirectoryPaths.Add(this.NormalizePath(newTargetDirectoryPath));
+                        this.deletedDirectoryPaths.Add(NormalizePath(newTargetDirectoryPath));
                     }
 
                     this.PerformDirectoryDeletionOperation(this.TargetFileSystem, e.Directory, execute);
@@ -573,7 +573,7 @@ namespace FlagSync.Core
                 long sourceFileLength = e.File.Length;
 
                 bool targetFileExists = this.SourceFileSystem.FileExists(targetFilePath);
-                bool targetFileIsExcluded = this.deletedDirectoryPaths.Any(path => this.NormalizePath(targetFilePath).StartsWith(path));
+                bool targetFileIsExcluded = this.deletedDirectoryPaths.Any(path => NormalizePath(targetFilePath).StartsWith(path));
 
                 //Check if the file doesn't exist in the target directory
                 if (!targetFileExists && !targetFileIsExcluded)
@@ -751,7 +751,7 @@ namespace FlagSync.Core
 
             else if (execute)
             {
-                this.excludedPaths.Add(this.NormalizePath(targetDirectory.FullName));
+                this.excludedPaths.Add(NormalizePath(targetDirectory.FullName));
                 this.OnDirectoryCreationError(new DirectoryCreationEventArgs(sourceDirectory, targetDirectory));
             }
         }
@@ -764,7 +764,7 @@ namespace FlagSync.Core
         /// <returns>
         /// True, if file A is newer, otherwise false
         /// </returns>
-        private bool IsFileModified(IFileInfo fileA, IFileInfo fileB)
+        private static bool IsFileModified(IFileInfo fileA, IFileInfo fileB)
         {
             return fileA.LastWriteTime > fileB.LastWriteTime;
         }
@@ -774,7 +774,7 @@ namespace FlagSync.Core
         /// </summary>
         /// <param name="path">The path to normalize.</param>
         /// <returns>A normalized version of the path.</returns>
-        private string NormalizePath(string path)
+        private static string NormalizePath(string path)
         {
             return path.Replace("\\", "/").Replace("//", "/");
         }
