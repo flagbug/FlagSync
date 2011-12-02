@@ -17,7 +17,7 @@ namespace FlagSync.View
         public JobSettingViewModel JobSetting
         {
             get { return this.jobSetting; }
-            set
+            private set
             {
                 if (this.JobSetting != value)
                 {
