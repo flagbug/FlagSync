@@ -352,7 +352,7 @@ namespace FlagSync.View
         /// <value>
         /// true if a new version of this application is available; otherwise, false.
         /// </value>
-        public bool IsNewVersionAvailable
+        public static bool IsNewVersionAvailable
         {
             get
             {
