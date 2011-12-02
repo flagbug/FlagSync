@@ -57,7 +57,7 @@ namespace FlagSync.View
                         {
                             this.WindowState = WindowState.Maximized;
 
-                            this.ShowITunesErrorMessageBox();
+                            ShowITunesErrorMessageBox();
 
                             Application.Current.Shutdown();
                         }
@@ -116,7 +116,7 @@ namespace FlagSync.View
 
                             case JobSettingsLoadingResult.ITunesNotOpened:
                                 {
-                                    this.ShowITunesErrorMessageBox();
+                                    ShowITunesErrorMessageBox();
                                 }
                                 break;
                         }
@@ -272,7 +272,7 @@ namespace FlagSync.View
 
             else
             {
-                this.ShowITunesErrorMessageBox();
+                ShowITunesErrorMessageBox();
             }
         }
 
@@ -298,7 +298,7 @@ namespace FlagSync.View
         /// <summary>
         /// Shows the Itunes error message box.
         /// </summary>
-        private void ShowITunesErrorMessageBox()
+        private static void ShowITunesErrorMessageBox()
         {
             MessageBox.Show
             (
