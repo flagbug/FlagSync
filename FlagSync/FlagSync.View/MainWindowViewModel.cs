@@ -16,6 +16,7 @@ using FlagLib.Patterns.MVVM;
 using FlagSync.Core;
 using FlagSync.Data;
 using FlagSync.View.Properties;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace FlagSync.View
 {
@@ -156,7 +157,17 @@ namespace FlagSync.View
         /// </summary>
         public double TotalProgressPercentage
         {
-            get { return ((double)this.ProceededBytes / (double)this.CountedBytes) * 100.0; }
+            get
+            {
+                double progress = ((double)this.ProceededBytes / (double)this.CountedBytes) * 100.0;
+
+                if (TaskbarManager.IsPlatformSupported)
+                {
+                    TaskbarManager.Instance.SetProgressValue((int)progress, 100);
+                }
+
+                return progress;
+            }
         }
 
         /// <summary>
@@ -391,6 +402,11 @@ namespace FlagSync.View
                         this.updateTimer.Start();
                         this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
                         this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
+
+                        if (TaskbarManager.IsPlatformSupported)
+                        {
+                            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate);
+                        }
                     },
                     param => !this.JobSettings
                                   .Where(setting => setting.IsIncluded)
@@ -594,6 +610,11 @@ namespace FlagSync.View
             this.updateTimer.Stop();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.PausedJobsMessage);
+
+            if (TaskbarManager.IsPlatformSupported)
+            {
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Paused);
+            }
         }
 
         /// <summary>
@@ -606,6 +627,11 @@ namespace FlagSync.View
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
             this.AddStatusMessage(Properties.Resources.ContinuingJobsMessage);
             this.AddStatusMessage(Properties.Resources.StartingJobsMessage + " " + this.CurrentJob.Name + "...");
+
+            if (TaskbarManager.IsPlatformSupported)
+            {
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
+            }
         }
 
         /// <summary>
@@ -733,6 +759,11 @@ namespace FlagSync.View
             this.CountedFiles = this.jobWorker.FileCounterResult.CountedFiles;
 
             this.AddStatusMessage(Properties.Resources.FinishedFileCountingMessage);
+
+            if (TaskbarManager.IsPlatformSupported)
+            {
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
+            }
         }
 
         /// <summary>
