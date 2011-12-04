@@ -159,7 +159,7 @@ namespace FlagSync.View
         {
             get
             {
-                double progress = ((double)this.ProceededBytes / (double)this.CountedBytes) * 100.0;
+                double progress = ((double)this.ProceededBytes / this.CountedBytes) * 100.0;
 
                 if (TaskbarManager.IsPlatformSupported)
                 {
@@ -299,7 +299,7 @@ namespace FlagSync.View
         /// <value>The pause or continue string.</value>
         public string PauseOrContinueString
         {
-            get { return this.IsPaused ? Properties.Resources.ContinueString : Properties.Resources.PauseString; }
+            get { return this.IsPaused ? Resources.ContinueString : Resources.PauseString; }
         }
 
         /// <summary>
@@ -400,8 +400,8 @@ namespace FlagSync.View
                         this.IsPreview = preview;
                         this.startTime = DateTime.Now;
                         this.updateTimer.Start();
-                        this.AddStatusMessage(Properties.Resources.StartingJobsMessage);
-                        this.AddStatusMessage(Properties.Resources.CountingFilesMessage);
+                        this.AddStatusMessage(Resources.StartingJobsMessage);
+                        this.AddStatusMessage(Resources.CountingFilesMessage);
 
                         if (TaskbarManager.IsPlatformSupported)
                         {
@@ -458,7 +458,7 @@ namespace FlagSync.View
                         this.updateTimer.Stop();
                         this.OnPropertyChanged(vm => vm.IsRunning);
                         this.ResetBytes();
-                        this.AddStatusMessage(Properties.Resources.StoppedAllJobsMessage);
+                        this.AddStatusMessage(Resources.StoppedAllJobsMessage);
                     },
                     param => this.IsRunning
                 );
@@ -525,7 +525,7 @@ namespace FlagSync.View
         /// <param name="mode">The mode.</param>
         public void AddNewJobSetting(SyncMode mode)
         {
-            string name = Properties.Resources.NewJobString + " " + (this.JobSettings.Count + 1);
+            string name = Resources.NewJobString + " " + (this.JobSettings.Count + 1);
             var setting = new JobSettingViewModel(name) { SyncMode = mode };
 
             this.JobSettings.Add(setting);
@@ -609,7 +609,7 @@ namespace FlagSync.View
             this.jobWorker.Pause();
             this.updateTimer.Stop();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
-            this.AddStatusMessage(Properties.Resources.PausedJobsMessage);
+            this.AddStatusMessage(Resources.PausedJobsMessage);
 
             if (TaskbarManager.IsPlatformSupported)
             {
@@ -625,8 +625,8 @@ namespace FlagSync.View
             this.jobWorker.Continue();
             this.updateTimer.Start();
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
-            this.AddStatusMessage(Properties.Resources.ContinuingJobsMessage);
-            this.AddStatusMessage(Properties.Resources.StartingJobsMessage + " " + this.CurrentJob.Name + "...");
+            this.AddStatusMessage(Resources.ContinuingJobsMessage);
+            this.AddStatusMessage(Resources.StartingJobsMessage + " " + this.CurrentJob.Name + "...");
 
             if (TaskbarManager.IsPlatformSupported)
             {
@@ -710,8 +710,8 @@ namespace FlagSync.View
         {
             this.OnPropertyChanged(vm => vm.IsRunning);
             this.OnPropertyChanged(vm => vm.PauseOrContinueString);
-            this.AddStatusMessage(Properties.Resources.FinishedAllJobsMessage);
-            this.AddStatusMessage(Properties.Resources.ElapsedTimeMessage + " " + new DateTime((DateTime.Now - this.startTime).Ticks).ToString("HH:mm:ss", new DateTimeFormatInfo()));
+            this.AddStatusMessage(Resources.FinishedAllJobsMessage);
+            this.AddStatusMessage(Resources.ElapsedTimeMessage + " " + new DateTime((DateTime.Now - this.startTime).Ticks).ToString("HH:mm:ss", new DateTimeFormatInfo()));
 
             // Set the last log message progress to 100, sometimes there
             // is an error in the last file copy and then the progress stucks.
@@ -732,7 +732,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
         private void jobWorker_JobFinished(object sender, JobEventArgs e)
         {
-            this.AddStatusMessage(Properties.Resources.FinishedJobMessage + " " + e.Job.Name);
+            this.AddStatusMessage(Resources.FinishedJobMessage + " " + e.Job.Name);
         }
 
         /// <summary>
@@ -743,7 +743,7 @@ namespace FlagSync.View
         private void jobWorker_JobStarted(object sender, JobEventArgs e)
         {
             this.CurrentJob = new JobViewModel(e.Job);
-            this.AddStatusMessage(Properties.Resources.StartingJobMessage + " " + e.Job.Name + "...");
+            this.AddStatusMessage(Resources.StartingJobMessage + " " + e.Job.Name + "...");
         }
 
         /// <summary>
@@ -758,7 +758,7 @@ namespace FlagSync.View
             this.ProceededFiles = 0;
             this.CountedFiles = this.jobWorker.FileCounterResult.CountedFiles;
 
-            this.AddStatusMessage(Properties.Resources.FinishedFileCountingMessage);
+            this.AddStatusMessage(Resources.FinishedFileCountingMessage);
 
             if (TaskbarManager.IsPlatformSupported)
             {
@@ -852,13 +852,13 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         private void jobWorker_FileCopyProgressChanged(object sender, DataTransferEventArgs e)
         {
-            if (e.TotalBytes == 0)
-                return;
+            if (e.TotalBytes != 0)
+            {
+                this.LastLogMessage.Progress = (int)(((double)e.TransferredBytes / e.TotalBytes) * 100);
+                this.OnPropertyChanged(vm => vm.CurrentProgress);
 
-            this.LastLogMessage.Progress = (int)(((double)e.TransferredBytes / (double)e.TotalBytes) * 100);
-            this.OnPropertyChanged(vm => vm.CurrentProgress);
-
-            this.averageSpeedBuffer.Add(e.AverageSpeed);
+                this.averageSpeedBuffer.Add(e.AverageSpeed);
+            }
         }
 
         /// <summary>
@@ -888,7 +888,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         private void jobWorker_DeletingDirectory(object sender, DirectoryDeletionEventArgs e)
         {
-            this.AddLogMessage(Properties.Resources.DeletingString, Properties.Resources.DirectoryString, e.DirectoryPath, String.Empty, false, null);
+            this.AddLogMessage(Resources.DeletingString, Resources.DirectoryString, e.DirectoryPath, String.Empty, false, null);
         }
 
         /// <summary>
