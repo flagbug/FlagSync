@@ -159,14 +159,7 @@ namespace FlagSync.View
         {
             get
             {
-                double progress = ((double)this.ProceededBytes / (double)this.CountedBytes) * 100.0;
-
-                if (TaskbarManager.IsPlatformSupported)
-                {
-                    TaskbarManager.Instance.SetProgressValue((int)progress, 100);
-                }
-
-                return progress;
+                return ((double)this.ProceededBytes / (double)this.CountedBytes) * 100.0;
             }
         }
 
@@ -822,6 +815,11 @@ namespace FlagSync.View
                 this.ProceededFiles++;
                 this.ProceededBytes += e.FileLength;
                 this.OnPropertyChanged(vm => vm.TotalProgressPercentage);
+
+                if (TaskbarManager.IsPlatformSupported)
+                {
+                    TaskbarManager.Instance.SetProgressValue((int)this.TotalProgressPercentage, 100);
+                }
             }
         }
 
