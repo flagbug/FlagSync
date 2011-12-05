@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using FlagSync.Data;
+using FlagSync.View.Properties;
 
 namespace FlagSync.View
 {
@@ -19,7 +20,7 @@ namespace FlagSync.View
         /// </summary>
         public MainWindow()
         {
-            Properties.Resources.Culture = Properties.Settings.Default.Language;
+            Properties.Resources.Culture = Settings.Default.Language;
             InitializeComponent();
         }
 
@@ -182,7 +183,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void englishMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Language = new CultureInfo("en-US");
+            Settings.Default.Language = new CultureInfo("en-US");
             Restart();
         }
 
@@ -193,7 +194,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void germanMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Language = new CultureInfo("de-DE");
+            Settings.Default.Language = new CultureInfo("de-DE");
             Restart();
         }
 
@@ -221,7 +222,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         /// <summary>

@@ -355,7 +355,7 @@
                         <RowDefinition Height="100" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch" Text="{Binding Path=StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Cursor="Arrow" TextChanged="TextBox_TextChanged" />
+                    <TextBox Grid.Row="0" Text="{Binding Path=StatusMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Mode=OneWay}" IsReadOnly="True" TextChanged="TextBox_TextChanged" Cursor="Arrow" />
                     <ListView Grid.Row="1" ItemsSource="{Binding Path=LogMessages, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionChanged="ListView_SelectionChanged" SelectedIndex="{Binding Path=LastLogMessageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" SelectionMode="Single">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False">
@@ -407,7 +407,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <StatusBar Width="Auto" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
+        <StatusBar Grid.Row="3" Width="Auto" Height="25">
             <StatusBarItem Content="{Binding Path=LastStatusMessage}" />
             <StatusBarItem Visibility="{Binding Path=IsNewVersionAvailable, Converter={StaticResource BooleanToVisibilityConverter}, IsAsync=True, Mode=OneTime, FallbackValue=Hidden}" HorizontalAlignment="Right">
                 <Hyperlink NavigateUri="http://sourceforge.net/projects/flagsync/files/" RequestNavigate="Hyperlink_RequestNavigate">
