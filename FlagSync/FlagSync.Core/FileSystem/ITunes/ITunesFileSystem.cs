@@ -333,20 +333,24 @@ namespace FlagSync.Core.FileSystem.ITunes
 
                 string artistName = ITunesFileSystem.NormalizeArtistOrAlbumName(artistGroup.Key);
 
-                var albumDirectories =
-                    from album in albumGroups
-                    let albumName = ITunesFileSystem.NormalizeArtistOrAlbumName(album.Key)
-                    select new ITunesDirectoryInfo
+                var albumDirectories = albumGroups
+                    .Select(album => new { Album = album, AlbumName = ITunesFileSystem.NormalizeArtistOrAlbumName(album.Key) })
+                    .Select
+                    (
+                        directory =>
+                        new ITunesDirectoryInfo
                         (
-                            albumName,
-                            album
+                            directory.AlbumName,
+                            directory.Album
                                 .Where(track => track.Location != null)
                                 .Select
                                 (
                                     track => (IFileInfo)new LocalFileInfo(new FileInfo(track.Location))
                                 ),
                             null
-                        );
+                        )
+                    )
+                    .ToList(); //Execute the query immediately, because a streaming causes weird bugs
 
                 var artistDirectory = new ITunesDirectoryInfo(artistName, albumDirectories, root);
 
