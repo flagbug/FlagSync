@@ -142,7 +142,8 @@ namespace FlagSync.Core.FileSystem.ITunes
 
                 var root = this.GetPlaylistStructure(playlist);
 
-                IDirectoryInfo directoryInfo = root.SingleOrDefault(dir => dir.Name == artist);
+                IDirectoryInfo directoryInfo = root
+                    .SingleOrDefault(dir => dir.Name == artist);
 
                 if (directoryInfo == null)
                 {
@@ -315,8 +316,7 @@ namespace FlagSync.Core.FileSystem.ITunes
             var files = new iTunesAppClass()
                 .LibrarySource
                 .Playlists
-                .Cast<IITPlaylist>()
-                .Single(pl => pl.Name == playlistName)
+                .ItemByName[playlistName]
                 .Tracks
                 .Cast<IITFileOrCDTrack>();
 
