@@ -29,7 +29,6 @@ namespace FlagSync.View
         private long countedBytes;
         private long proceededBytes;
         private int countedFiles;
-        private int proceededFiles;
         private string statusMessages = String.Empty;
         private string lastStatusMessage = String.Empty;
         private int lastLogMessageIndex;
@@ -160,38 +159,6 @@ namespace FlagSync.View
             get
             {
                 return ((double)this.ProceededBytes / this.CountedBytes) * 100.0;
-            }
-        }
-
-        /// <summary>
-        /// Gets the counted files.
-        /// </summary>
-        public int CountedFiles
-        {
-            get { return this.countedFiles; }
-            private set
-            {
-                if (this.CountedFiles != value)
-                {
-                    this.countedFiles = value;
-                    this.OnPropertyChanged(vm => vm.CountedFiles);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the proceeded files.
-        /// </summary>
-        public int ProceededFiles
-        {
-            get { return this.proceededFiles; }
-            private set
-            {
-                if (this.ProceededFiles != value)
-                {
-                    this.proceededFiles = value;
-                    this.OnPropertyChanged(vm => vm.ProceededFiles);
-                }
             }
         }
 
@@ -748,9 +715,6 @@ namespace FlagSync.View
         {
             this.CountedBytes = this.jobWorker.FileCounterResult.CountedBytes;
 
-            this.ProceededFiles = 0;
-            this.CountedFiles = this.jobWorker.FileCounterResult.CountedFiles;
-
             this.AddStatusMessage(Resources.FinishedFileCountingMessage);
 
             if (TaskbarManager.IsPlatformSupported)
@@ -812,7 +776,6 @@ namespace FlagSync.View
         {
             if (this.IsRunning)
             {
-                this.ProceededFiles++;
                 this.ProceededBytes += e.FileLength;
                 this.OnPropertyChanged(vm => vm.TotalProgressPercentage);
 
