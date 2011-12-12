@@ -229,10 +229,9 @@ namespace FlagSync.Core.FileSystem.ITunes
 
             string[] split = path.Split(Path.DirectorySeparatorChar);
 
-            //HACK: The case that the path is only the playlist name should also be checked
             if (split.Length == 1)
             {
-                return true;
+                return PlaylistExists(split[0]);
             }
 
             string playlist = split[0];
@@ -331,10 +330,11 @@ namespace FlagSync.Core.FileSystem.ITunes
                 var albumGroups = artistGroup
                     .GroupBy(track => track.Album);
 
-                string artistName = ITunesFileSystem.NormalizeArtistOrAlbumName(artistGroup.Key);
+                // The artist name has to be normalized, so that it doesn't contain any characters that are invalid for a path
+                string artistName = NormalizeArtistOrAlbumName(artistGroup.Key);
 
                 var albumDirectories = albumGroups
-                    .Select(album => new { Album = album, AlbumName = ITunesFileSystem.NormalizeArtistOrAlbumName(album.Key) })
+                    .Select(album => new { Album = album, AlbumName = NormalizeArtistOrAlbumName(album.Key) })
                     .Select
                     (
                         directory =>
@@ -385,10 +385,24 @@ namespace FlagSync.Core.FileSystem.ITunes
         }
 
         /// <summary>
+        /// Determines, if the playlist with the specified name exists.
+        /// </summary>
+        /// <param name="playlistName">Th name of the playlist.</param>
+        /// <returns>True, if the playlist exists; otherwise, false.</returns>
+        private static bool PlaylistExists(string playlistName)
+        {
+            return new iTunesAppClass()
+                .LibrarySource
+                .Playlists
+                .Cast<IITLibraryPlaylist>()
+                .Any(playlist => playlist.Name == playlistName);
+        }
+
+        /// <summary>
         /// Gets the structure of the specified playlist.
         /// </summary>
         /// <param name="playlistName">The playlist.</param>
-        /// <returns></returns>
+        /// <returns>A <see cref="ITunesDirectoryInfo"/> wich represents the playlist structure.</returns>
         private IEnumerable<ITunesDirectoryInfo> GetPlaylistStructure(string playlistName)
         {
             if (String.IsNullOrEmpty(playlistName))
@@ -396,7 +410,7 @@ namespace FlagSync.Core.FileSystem.ITunes
 
             if (this.playlistStructureChache == null)
             {
-                this.playlistStructureChache = ITunesFileSystem.MapPlaylistToDirectoryStructure(playlistName);
+                this.playlistStructureChache = MapPlaylistToDirectoryStructure(playlistName);
             }
 
             return playlistStructureChache;
