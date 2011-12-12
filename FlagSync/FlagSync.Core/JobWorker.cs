@@ -122,14 +122,6 @@ namespace FlagSync.Core
         public long TotalWrittenBytes { get; private set; }
 
         /// <summary>
-        /// Gets the proceeded files.
-        /// </summary>
-        /// <value>
-        /// The proceeded files.
-        /// </value>
-        public int ProceededFiles { get; private set; }
-
-        /// <summary>
         /// Gets the file counter result.
         /// </summary>
         /// <value>
@@ -332,8 +324,6 @@ namespace FlagSync.Core
             {
                 this.ProceededFile(this, e);
             }
-
-            this.ProceededFiles++;
         }
 
         /// <summary>
