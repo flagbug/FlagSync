@@ -320,10 +320,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
         private void currentJob_ProceededFile(object sender, FileProceededEventArgs e)
         {
-            if (this.ProceededFile != null)
-            {
-                this.ProceededFile(this, e);
-            }
+            this.ProceededFile.Raise(this, e);
         }
 
         /// <summary>
