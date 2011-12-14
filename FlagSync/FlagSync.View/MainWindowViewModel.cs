@@ -449,7 +449,7 @@ namespace FlagSync.View
         /// <summary>
         /// Gets the exit application command.
         /// </summary>
-        public ICommand ExitApplicationCommand
+        public static ICommand ExitApplicationCommand
         {
             get
             {
