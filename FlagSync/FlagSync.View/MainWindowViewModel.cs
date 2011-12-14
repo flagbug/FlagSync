@@ -28,7 +28,6 @@ namespace FlagSync.View
         private DateTime startTime;
         private long countedBytes;
         private long proceededBytes;
-        private int countedFiles;
         private string statusMessages = String.Empty;
         private string lastStatusMessage = String.Empty;
         private int lastLogMessageIndex;
