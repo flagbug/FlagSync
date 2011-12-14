@@ -145,6 +145,8 @@ namespace FlagSync.Core.FileSystem
                 }
             }
 
+            // Catch the exceptions and don't handle anything,
+            // we want to skip those files or directories
             catch (UnauthorizedAccessException)
             {
             }
