@@ -6,7 +6,7 @@ namespace FlagSync.Core.FileSystem
     /// <summary>
     /// Provides a method for counting recursively the files of a directory.
     /// </summary>
-    internal class FileCounter
+    internal static class FileCounter
     {
         /// <summary>
         /// Counts recursively the files of the directory.
