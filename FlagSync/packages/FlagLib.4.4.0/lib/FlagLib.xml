@@ -330,6 +330,9 @@
             <summary>
             Gets the average speed in bytes per second.
             </summary>
+            <value>
+            The average speed in bytes per second.
+            </value>
         </member>
         <member name="P:FlagLib.IO.DataTransferEventArgs.Cancel">
             <summary>
@@ -339,8 +342,8 @@
             true if the operation should be canceled; otherwise, false.
             </value>
             <remarks>
-            Note that the caller of this class is responsible for the implementation cancelable
-            data transfer and the set of this property may not work as expected.
+            Note that the caller of this class is responsible for the implementation of the
+            cancelable data transfer operation and the setter of this property may not work as expected.
             </remarks>
         </member>
         <member name="T:FlagLib.IO.DataTransferEventArgs`2">
@@ -359,18 +362,18 @@
         </member>
         <member name="P:FlagLib.IO.DataTransferEventArgs`2.Source">
             <summary>
-            Gets or sets the source.
+            Gets or sets the source of the data transfer.
             </summary>
             <value>
-            The source.
+            The source of the data transfer.
             </value>
         </member>
         <member name="P:FlagLib.IO.DataTransferEventArgs`2.Destination">
             <summary>
-            Gets or sets the destination.
+            Gets or sets the destination of the data transfer.
             </summary>
             <value>
-            The destination.
+            The destination of the data transfer.
             </value>
         </member>
         <member name="T:FlagLib.IO.DirectoryScanErrorEventArgs">
@@ -448,6 +451,21 @@
             Specifies which error occured during the directory scan.
             </summary>
         </member>
+        <member name="F:FlagLib.IO.DirectoryScanErrorType.SecurityError">
+            <summary>
+            Indicates a security exception during the directory scan.
+            </summary>
+        </member>
+        <member name="F:FlagLib.IO.DirectoryScanErrorType.AccessError">
+            <summary>
+            Indicates an access exception during the directory scan.
+            </summary>
+        </member>
+        <member name="F:FlagLib.IO.DirectoryScanErrorType.DirectoryNotFoundError">
+            <summary>
+            Indicates that a directory could not be found during the scan.
+            </summary>
+        </member>
         <member name="T:FlagLib.Extensions.ClassExtensions">
             <summary>
             Provides generic extension methods.
@@ -468,6 +486,11 @@
             <typeparam name="T"></typeparam>
             <param name="object">The object to check.</param>
             <param name="parameterName">The expression, which resolves to the parameter name.</param>
+            <remarks>
+            This method lets the caller define the parameter name as expression,
+            so that it can be checked at compile time.
+            Note that the evaluation of the parameter name at runtime is an expensive operation.
+            </remarks>
         </member>
         <member name="T:FlagLib.IO.FileEventArgs">
             <summary>
@@ -624,37 +647,37 @@
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.OnItemAdded(FlagLib.Collections.EventCollectionEventArgs{`0})">
             <summary>
-            Raises the <see cref="E:ItemAdded"/> event.
+            Raises the <see cref="E:FlagLib.Collections.EventCollection`1.ItemAdded"/> event.
             </summary>
             <param name="e">The <see cref="T:FlagLib.Collections.EventCollectionEventArgs`1"/> instance containing the event data.</param>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.OnItemAdding(FlagLib.Collections.EventCollectionEventArgs{`0})">
             <summary>
-            Raises the <see cref="E:ItemAdding"/> event.
+            Raises the <see cref="E:FlagLib.Collections.EventCollection`1.ItemAdding"/> event.
             </summary>
             <param name="e">The <see cref="T:FlagLib.Collections.EventCollectionEventArgs`1"/> instance containing the event data.</param>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.OnItemRemoved(FlagLib.Collections.EventCollectionEventArgs{`0})">
             <summary>
-            Raises the <see cref="E:ItemRemoved"/> event.
+            Raises the <see cref="E:FlagLib.Collections.EventCollection`1.ItemRemoved"/> event.
             </summary>
             <param name="e">The <see cref="T:FlagLib.Collections.EventCollectionEventArgs`1"/> instance containing the event data.</param>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.OnItemRemoving(FlagLib.Collections.EventCollectionEventArgs{`0})">
             <summary>
-            Raises the <see cref="E:ItemRemoving"/> event.
+            Raises the <see cref="E:FlagLib.Collections.EventCollection`1.ItemRemoving"/> event.
             </summary>
             <param name="e">The <see cref="T:FlagLib.Collections.EventCollectionEventArgs`1"/> instance containing the event data.</param>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.OnCleared(System.EventArgs)">
             <summary>
-            Raises the <see cref="E:ListCleared"/> event.
+            Raises the <see cref="E:FlagLib.Collections.EventCollection`1.Cleared"/> event.
             </summary>
             <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
         </member>
         <member name="M:FlagLib.Collections.EventCollection`1.OnClearing(System.EventArgs)">
             <summary>
-            Raises the <see cref="E:BeforeListCleared"/> event.
+            Raises the <see cref="E:FlagLib.Collections.EventCollection`1.Clearing"/> event.
             </summary>
             <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
         </member>
@@ -749,6 +772,7 @@
             <remarks>
             This method lets the caller define the parameter name as expression,
             so that it can be checked at compile time.
+            Note that the evaluation of the parameter name at runtime is an expensive operation.
             </remarks>
         </member>
         <member name="M:FlagLib.Extensions.IComparableExtensions.ThrowIfLessThan``1(System.IComparable{``0},``0,System.String)">
@@ -769,6 +793,7 @@
             <remarks>
             This method lets the caller define the parameter name as expression,
             so that it can be checked at compile time.
+            Note that the evaluation of the parameter name at runtime is an expensive operation.
             </remarks>
         </member>
         <member name="T:FlagLib.ValueConverters.BoolNegationValueConverter">
@@ -1044,6 +1069,23 @@
             Provides extension methods for the <see cref="T:System.EventHandler"/> delegate.
             </summary>
         </member>
+        <member name="M:FlagLib.Extensions.EventHandlerExtensions.RaiseSafe``1(System.EventHandler{``0},System.Object,``0)">
+            <summary>
+            Checks if the event handler is null and raises it, if not.
+            </summary>
+            <typeparam name="T">The type of the event argument.</typeparam>
+            <param name="handler">The event handler.</param>
+            <param name="sender">The event sender.</param>
+            <param name="eventArgs">The event args.</param>
+        </member>
+        <member name="M:FlagLib.Extensions.EventHandlerExtensions.RaiseSafe(System.EventHandler,System.Object,System.EventArgs)">
+            <summary>
+            Checks if the event handler is null and raises it, if not.
+            </summary>
+            <param name="handler">The event handler.</param>
+            <param name="sender">The event sender.</param>
+            <param name="eventArgs">The event args.</param>
+        </member>
         <member name="M:FlagLib.Extensions.EventHandlerExtensions.Raise``1(System.EventHandler{``0},System.Object,``0)">
             <summary>
             Raises the event handler.
@@ -1061,9 +1103,74 @@
             <param name="sender">The sender.</param>
             <param name="eventArgs">The event args.</param>
         </member>
+        <member name="T:FlagLib.WPF.PasswordBoxBinder">
+            <summary>
+            Provides a static class, which helps to bind the "Password" property
+            of the <see cref="T:System.Windows.Controls.PasswordBox"/> control to a viewmodel.
+            </summary>
+        </member>
+        <member name="F:FlagLib.WPF.PasswordBoxBinder.PasswordProperty">
+            <summary>
+            The password property.
+            </summary>
+        </member>
+        <member name="F:FlagLib.WPF.PasswordBoxBinder.AttachProperty">
+            <summary>
+            The attached property.
+            </summary>
+        </member>
+        <member name="M:FlagLib.WPF.PasswordBoxBinder.SetAttach(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the attached value of the depency object.
+            </summary>
+            <param name="depencyObject">The depency object.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:FlagLib.WPF.PasswordBoxBinder.GetAttach(System.Windows.DependencyObject)">
+            <summary>
+            Gets the attached value of the depency object.
+            </summary>
+            <param name="depencyObject">The depency object.</param>
+            <returns>The attached value of the depency object.</returns>
+        </member>
+        <member name="M:FlagLib.WPF.PasswordBoxBinder.GetPassword(System.Windows.DependencyObject)">
+            <summary>
+            Gets the password.
+            </summary>
+            <param name="depencyObject">The depency object.</param>
+            <returns>The password.</returns>
+        </member>
+        <member name="M:FlagLib.WPF.PasswordBoxBinder.SetPassword(System.Windows.DependencyObject,System.String)">
+            <summary>
+            Sets the password.
+            </summary>
+            <param name="depencyObject">The depency object.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:FlagLib.WPF.PasswordBoxBinder.OnPasswordChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Called when the password has changed.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:FlagLib.WPF.PasswordBoxBinder.Attach(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Attaches the specified sender.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:FlagLib.WPF.PasswordBoxBinder.PasswordChanged(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Handles the <see cref="E:System.Windows.Controls.PasswordBox.PasswordChanged"/> event.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        </member>
         <member name="T:FlagLib.IO.DirectoryScanner">
             <summary>
-            Provides a directoy scanner to scan a directory recursively for files
+            Provides a directoy scanner to scan a directory recursively for files and directories.
             </summary>
         </member>
         <member name="M:FlagLib.IO.DirectoryScanner.#ctor(System.String)">
@@ -1084,31 +1191,31 @@
         </member>
         <member name="M:FlagLib.IO.DirectoryScanner.OnFileFound(FlagLib.IO.FileEventArgs)">
             <summary>
-            Raises the <see cref="E:FileFound"/> event.
+            Raises the <see cref="E:FlagLib.IO.DirectoryScanner.FileFound"/> event.
             </summary>
             <param name="e">The <see cref="T:FlagLib.IO.FileEventArgs"/> instance containing the event data.</param>
         </member>
         <member name="M:FlagLib.IO.DirectoryScanner.OnDirectoryFound(FlagLib.IO.DirectoryEventArgs)">
             <summary>
-            Raises the <see cref="E:DirectoryFound"/> event.
+            Raises the <see cref="E:FlagLib.IO.DirectoryScanner.DirectoryFound"/> event.
             </summary>
             <param name="e">The <see cref="T:FlagLib.IO.DirectoryEventArgs"/> instance containing the event data.</param>
         </member>
         <member name="M:FlagLib.IO.DirectoryScanner.OnDirectoryScanError(FlagLib.IO.DirectoryScanErrorEventArgs)">
             <summary>
-            Raises the <see cref="E:DirectoryScanError"/> event.
+            Raises the <see cref="E:FlagLib.IO.DirectoryScanner.DirectoryScanError"/> event.
             </summary>
             <param name="e">The <see cref="T:FlagLib.IO.DirectoryScanErrorEventArgs"/> instance containing the event data.</param>
         </member>
         <member name="M:FlagLib.IO.DirectoryScanner.OnFinished(System.EventArgs)">
             <summary>
-            Raises the <see cref="E:Finished"/> event.
+            Raises the <see cref="E:FlagLib.IO.DirectoryScanner.Finished"/> event.
             </summary>
             <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
         </member>
         <member name="M:FlagLib.IO.DirectoryScanner.OnDirectoryProceeded(System.EventArgs)">
             <summary>
-            Raises the <see cref="E:DirectoryProceeded"/> event.
+            Raises the <see cref="E:FlagLib.IO.DirectoryScanner.DirectoryProceeded"/> event.
             </summary>
             <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
         </member>
