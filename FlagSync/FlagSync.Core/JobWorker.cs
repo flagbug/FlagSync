@@ -238,14 +238,14 @@ namespace FlagSync.Core
             {
                 this.currentJob = this.jobQueue.Dequeue();
                 this.InitializeJobEvents(this.currentJob);
-                this.JobStarted.Raise(this, new JobEventArgs(this.currentJob));
+                this.JobStarted.RaiseSafe(this, new JobEventArgs(this.currentJob));
                 this.currentJob.Start(this.performPreview);
             }
 
             else
             {
                 this.IsRunning = false;
-                this.Finished.Raise(this, EventArgs.Empty);
+                this.Finished.RaiseSafe(this, EventArgs.Empty);
             }
         }
 
@@ -320,7 +320,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileProceededEventArgs"/> instance containing the event data.</param>
         private void currentJob_ProceededFile(object sender, FileProceededEventArgs e)
         {
-            this.ProceededFile.Raise(this, e);
+            this.ProceededFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -330,7 +330,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void currentJob_ModifyingFile(object sender, FileCopyEventArgs e)
         {
-            this.ModifyingFile.Raise(this, e);
+            this.ModifyingFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void currentJob_ModifiedFile(object sender, FileCopyEventArgs e)
         {
-            this.ModifiedFile.Raise(this, e);
+            this.ModifiedFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -350,7 +350,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionErrorEventArgs"/> instance containing the event data.</param>
         private void currentJob_FileDeletionError(object sender, FileDeletionErrorEventArgs e)
         {
-            this.FileDeletionError.Raise(this, e);
+            this.FileDeletionError.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -360,7 +360,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         private void currentJob_FileCopyProgressChanged(object sender, DataTransferEventArgs e)
         {
-            this.FileCopyProgressChanged.Raise(this, e);
+            this.FileCopyProgressChanged.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyErrorEventArgs"/> instance containing the event data.</param>
         private void currentJob_FileCopyError(object sender, FileCopyErrorEventArgs e)
         {
-            this.FileCopyError.Raise(this, e);
+            this.FileCopyError.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -380,7 +380,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         private void currentJob_DirectoryCreationError(object sender, DirectoryCreationEventArgs e)
         {
-            this.DirectoryCreationError.Raise(this, e);
+            this.DirectoryCreationError.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -390,7 +390,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         private void currentJob_DirectoryDeletionError(object sender, DirectoryDeletionEventArgs e)
         {
-            this.DirectoryDeletionError.Raise(this, e);
+            this.DirectoryDeletionError.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -400,7 +400,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
         private void currentJob_DeletingFile(object sender, FileDeletionEventArgs e)
         {
-            this.DeletingFile.Raise(this, e);
+            this.DeletingFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -410,7 +410,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         private void currentJob_DeletingDirectory(object sender, DirectoryDeletionEventArgs e)
         {
-            this.DeletingDirectory.Raise(this, e);
+            this.DeletingDirectory.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -420,7 +420,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
         private void currentJob_DeletedFile(object sender, FileDeletionEventArgs e)
         {
-            this.DeletedFile.Raise(this, e);
+            this.DeletedFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -430,7 +430,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         private void currentJob_DeletedDirectory(object sender, DirectoryDeletionEventArgs e)
         {
-            this.DeletedDirectory.Raise(this, e);
+            this.DeletedDirectory.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -440,7 +440,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void currentJob_CreatingFile(object sender, FileCopyEventArgs e)
         {
-            this.CreatingFile.Raise(this, e);
+            this.CreatingFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -470,7 +470,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         private void currentJob_CreatedDirectory(object sender, DirectoryCreationEventArgs e)
         {
-            this.CreatedDirectory.Raise(this, e);
+            this.CreatedDirectory.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -482,7 +482,7 @@ namespace FlagSync.Core
         {
             Job job = (Job)sender;
 
-            this.JobFinished.Raise(this, new JobEventArgs(job));
+            this.JobFinished.RaiseSafe(this, new JobEventArgs(job));
 
             this.TotalWrittenBytes += job.WrittenBytes;
 

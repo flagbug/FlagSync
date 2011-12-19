@@ -179,7 +179,7 @@ namespace FlagSync.Core.FileSystem.Local
 
                             copyOperation.CopyProgressChanged += (sender, e) =>
                                 {
-                                    this.FileCopyProgressChanged.Raise(this, e);
+                                    this.FileCopyProgressChanged.RaiseSafe(this, e);
 
                                     canceled = e.Cancel;
                                 };

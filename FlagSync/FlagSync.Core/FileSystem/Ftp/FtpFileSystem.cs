@@ -152,7 +152,7 @@ namespace FlagSync.Core.FileSystem.Ftp
 
                         copyOperation.CopyProgressChanged += (sender, e) =>
                         {
-                            this.FileCopyProgressChanged.Raise(this, e);
+                            this.FileCopyProgressChanged.RaiseSafe(this, e);
 
                             canceled = e.Cancel;
                         };

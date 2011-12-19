@@ -246,7 +246,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCreatingFile(FileCopyEventArgs e)
         {
-            this.CreatingFile.Raise(this, e);
+            this.CreatingFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCreatedFile(FileCopyEventArgs e)
         {
-            this.CreatedFile.Raise(this, e);
+            this.CreatedFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         protected virtual void OnModifyingFile(FileCopyEventArgs e)
         {
-            this.ModifyingFile.Raise(this, e);
+            this.ModifyingFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         protected virtual void OnModifiedFile(FileCopyEventArgs e)
         {
-            this.ModifiedFile.Raise(this, e);
+            this.ModifiedFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -282,7 +282,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDeletingFile(FileDeletionEventArgs e)
         {
-            this.DeletingFile.Raise(this, e);
+            this.DeletingFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -291,7 +291,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDeletedFile(FileDeletionEventArgs e)
         {
-            this.DeletedFile.Raise(this, e);
+            this.DeletedFile.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -300,7 +300,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCreatingDirectory(DirectoryCreationEventArgs e)
         {
-            this.CreatingDirectory.Raise(this, e);
+            this.CreatingDirectory.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCreatedDirectory(DirectoryCreationEventArgs e)
         {
-            this.CreatedDirectory.Raise(this, e);
+            this.CreatedDirectory.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -318,7 +318,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDeletingDirectory(DirectoryDeletionEventArgs e)
         {
-            this.DeletingDirectory.Raise(this, e);
+            this.DeletingDirectory.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -327,7 +327,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDeletedDirectory(DirectoryDeletionEventArgs e)
         {
-            this.DeletedDirectory.Raise(this, e);
+            this.DeletedDirectory.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -336,7 +336,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnFinished(EventArgs e)
         {
-            this.Finished.Raise(this, e);
+            this.Finished.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyErrorEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileCopyError(FileCopyErrorEventArgs e)
         {
-            this.FileCopyError.Raise(this, e);
+            this.FileCopyError.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -354,7 +354,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryDeletionError(DirectoryDeletionEventArgs e)
         {
-            this.DirectoryDeletionError.Raise(this, e);
+            this.DirectoryDeletionError.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -363,7 +363,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileDeletionErrorEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileDeletionError(FileDeletionErrorEventArgs e)
         {
-            this.FileDeletionError.Raise(this, e);
+            this.FileDeletionError.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -372,7 +372,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileProgressChanged(DataTransferEventArgs e)
         {
-            this.FileCopyProgressChanged.Raise(this, e);
+            this.FileCopyProgressChanged.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -381,7 +381,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryCreationError(DirectoryCreationEventArgs e)
         {
-            this.DirectoryCreationError.Raise(this, e);
+            this.DirectoryCreationError.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -392,7 +392,7 @@ namespace FlagSync.Core
         {
             if (!this.proceededFilePaths.Contains(e.FilePath))
             {
-                this.ProceededFile.Raise(this, e);
+                this.ProceededFile.RaiseSafe(this, e);
             }
         }
 
