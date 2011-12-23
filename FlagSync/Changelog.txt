@@ -1,7 +1,7 @@
 ----------------------------------- v2.3.1 -----------------------------------
 
 IMPROVEMENTS:
-- Increased the application's startup time.
+- Decreased the application's startup time.
 - Added a log message, if the creation of a directory failed.
 
 BUGFIXES:
