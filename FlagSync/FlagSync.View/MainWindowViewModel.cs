@@ -367,9 +367,10 @@ namespace FlagSync.View
                             TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate);
                         }
                     },
-                    param => !this.JobSettings
-                                  .Where(setting => setting.IsIncluded)
-                                  .Any(setting => setting.HasErrors)
+                    param => this.JobSettings.Any(setting => setting.IsIncluded)
+                             && !this.JobSettings
+                                     .Where(setting => setting.IsIncluded)
+                                     .Any(setting => setting.HasErrors)
                              && !this.IsRunning
                              && !this.HasNoJobs
                 );
