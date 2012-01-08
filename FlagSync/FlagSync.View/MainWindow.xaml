@@ -319,6 +319,14 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="5" Orientation="Horizontal">
+                                        <StackPanel Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem, AncestorLevel=1}, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Button Height="20" Width="20" Padding="0" Margin="1">
+                                                <Image Source="/FlagSync;component/Images/UpArrow.png" />
+                                            </Button>
+                                            <Button Height="20" Width="20" Padding="0" Margin="1">
+                                                <Image Source="/FlagSync;component/Images/DownArrow.png" />
+                                            </Button>
+                                        </StackPanel>
                                         <CheckBox Margin="5, 0, 0, 0" IsChecked="{Binding Path=IsIncluded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
                                         <Grid Margin="10, 0, 0, 0">
                                             <Grid.ColumnDefinitions>
