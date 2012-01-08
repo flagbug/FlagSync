@@ -319,11 +319,11 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="5" Orientation="Horizontal">
-                                        <StackPanel Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem, AncestorLevel=1}, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                            <Button Height="20" Width="20" Padding="0" Margin="1">
+                                        <StackPanel Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem, AncestorLevel=1}, Path=IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" DataContext="{Binding ElementName=mainWindowViewModel}">
+                                            <Button Height="20" Width="20" Padding="0" Margin="1" Command="{Binding Path=MoveSelectedJobSettingUpCommand}">
                                                 <Image Source="/FlagSync;component/Images/UpArrow.png" />
                                             </Button>
-                                            <Button Height="20" Width="20" Padding="0" Margin="1">
+                                            <Button Height="20" Width="20" Padding="0" Margin="1" Command="{Binding Path=MoveSelectedJobSettingDownCommand}">
                                                 <Image Source="/FlagSync;component/Images/DownArrow.png" />
                                             </Button>
                                         </StackPanel>

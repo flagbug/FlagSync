@@ -448,6 +448,50 @@ namespace FlagSync.View
         }
 
         /// <summary>
+        /// Gets the move selected job setting up command.
+        /// </summary>
+        public ICommand MoveSelectedJobSettingUpCommand
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    param =>
+                    {
+                        int oldIndex = this.JobSettings.IndexOf(this.SelectedJobSetting);
+
+                        int newIndex = oldIndex - 1;
+
+                        this.JobSettings.Move(oldIndex, newIndex);
+                    },
+                    param => this.SelectedJobSetting != null && this.JobSettings.IndexOf(this.SelectedJobSetting) > 0
+                );
+            }
+        }
+
+        /// <summary>
+        /// Gets the move selected job setting down command.
+        /// </summary>
+        public ICommand MoveSelectedJobSettingDownCommand
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    param =>
+                    {
+                        int oldIndex = this.JobSettings.IndexOf(this.SelectedJobSetting);
+
+                        int newIndex = oldIndex + 1;
+
+                        this.JobSettings.Move(oldIndex, newIndex);
+                    },
+                    param => this.SelectedJobSetting != null && this.JobSettings.IndexOf(this.SelectedJobSetting) < this.JobSettings.Count - 1
+                );
+            }
+        }
+
+        /// <summary>
         /// Gets the exit application command.
         /// </summary>
         public static ICommand ExitApplicationCommand
