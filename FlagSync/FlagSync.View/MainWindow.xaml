@@ -328,14 +328,14 @@
                                             </Button>
                                         </StackPanel>
                                         <CheckBox Margin="5, 0, 0, 0" IsChecked="{Binding Path=IsIncluded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
-                                        <Grid Margin="10, 0, 0, 0">
+                                        <Grid Margin="10, 0, 0, 0" VerticalAlignment="Center">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Static properties:Resources.ListBoxItemJobNameText}" FontWeight="Bold" Foreground="Green" />
                                             <TextBlock Grid.Column="0" Grid.Row="1" Text="{x:Static properties:Resources.ListBoxItemJobTypeText}" FontWeight="Bold" />
