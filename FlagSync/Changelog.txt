@@ -1,3 +1,16 @@
+----------------------------------- v2.4.0 -----------------------------------
+
+FEATURES:
+- The progress is now shown in the taskbar, if the operating system supports 
+  this.
+- The order of the jobs can now be changed.
+
+BUGFIXES:
+- Fixed a bug, which caused the application to crash during a synchronization 
+  with iTunes.
+- Fixed a bug, which caused the start and preview buttons to be able to be 
+  pressed, if no job was included.
+
 ----------------------------------- v2.3.1 -----------------------------------
 
 IMPROVEMENTS:
