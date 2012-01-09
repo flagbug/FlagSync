@@ -464,7 +464,8 @@ namespace FlagSync.View
 
                         this.JobSettings.Move(oldIndex, newIndex);
                     },
-                    param => this.SelectedJobSetting != null && this.JobSettings.IndexOf(this.SelectedJobSetting) > 0
+                    param => this.SelectedJobSetting != null
+                        && this.JobSettings.IndexOf(this.SelectedJobSetting) > 0
                 );
             }
         }
@@ -486,7 +487,8 @@ namespace FlagSync.View
 
                         this.JobSettings.Move(oldIndex, newIndex);
                     },
-                    param => this.SelectedJobSetting != null && this.JobSettings.IndexOf(this.SelectedJobSetting) < this.JobSettings.Count - 1
+                    param => this.SelectedJobSetting != null
+                        && this.JobSettings.IndexOf(this.SelectedJobSetting) < this.JobSettings.Count - 1
                 );
             }
         }
