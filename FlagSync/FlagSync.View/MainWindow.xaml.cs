@@ -37,39 +37,36 @@ namespace FlagSync.View
             {
                 this.WindowState = WindowState.Minimized;
 
-                var result = this.mainWindowViewModel.LoadJobSettings(args[1]);
-
-                switch (result)
+                try
                 {
-                    case JobSettingsLoadingResult.CorruptFile:
-                        {
-                            this.WindowState = WindowState.Maximized;
-
-                            MessageBox.Show(Properties.Resources.LoadSettingsErrorMessage,
-                                            Properties.Resources.ErrorString,
-                                            MessageBoxButton.OK,
-                                            MessageBoxImage.Error);
-
-                            Application.Current.Shutdown();
-                        }
-                        break;
-
-                    case JobSettingsLoadingResult.ITunesNotOpened:
-                        {
-                            this.WindowState = WindowState.Maximized;
-
-                            ShowITunesErrorMessageBox();
-
-                            Application.Current.Shutdown();
-                        }
-                        break;
-
-                    case JobSettingsLoadingResult.Succeed:
-                        {
-                            this.mainWindowViewModel.StartJobWorkerCommand.Execute(false);
-                        }
-                        break;
+                    this.mainWindowViewModel.LoadJobSettings(args[1]);
                 }
+
+                catch (CorruptSaveFileException)
+                {
+                    this.WindowState = WindowState.Maximized;
+
+                    MessageBox.Show
+                        (
+                            Properties.Resources.LoadSettingsErrorMessage,
+                            Properties.Resources.ErrorString,
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error
+                        );
+
+                    Application.Current.Shutdown();
+                }
+
+                catch (ITunesNotOpenedException)
+                {
+                    this.WindowState = WindowState.Maximized;
+
+                    ShowITunesErrorMessageBox();
+
+                    Application.Current.Shutdown();
+                }
+
+                this.mainWindowViewModel.StartJobWorkerCommand.Execute(false);
             }
         }
 
@@ -102,24 +99,24 @@ namespace FlagSync.View
 
                 dialog.FileOk += (dialogSender, dialogEventArgs) =>
                     {
-                        var result = this.mainWindowViewModel.LoadJobSettings(dialog.FileName);
-
-                        switch (result)
+                        try
                         {
-                            case JobSettingsLoadingResult.CorruptFile:
-                                {
-                                    MessageBox.Show(Properties.Resources.LoadSettingsErrorMessage,
-                                                    Properties.Resources.ErrorString,
-                                                    MessageBoxButton.OK,
-                                                    MessageBoxImage.Error);
-                                }
-                                break;
+                            this.mainWindowViewModel.LoadJobSettings(dialog.FileName);
+                        }
+                        catch (CorruptSaveFileException)
+                        {
+                            MessageBox.Show
+                                (
+                                    Properties.Resources.LoadSettingsErrorMessage,
+                                    Properties.Resources.ErrorString,
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error
+                                );
+                        }
 
-                            case JobSettingsLoadingResult.ITunesNotOpened:
-                                {
-                                    ShowITunesErrorMessageBox();
-                                }
-                                break;
+                        catch (ITunesNotOpenedException)
+                        {
+                            ShowITunesErrorMessageBox();
                         }
                     };
 
