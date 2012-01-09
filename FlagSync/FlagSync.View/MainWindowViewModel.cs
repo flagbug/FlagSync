@@ -172,7 +172,7 @@ namespace FlagSync.View
         {
             get
             {
-                long averageSpeed = (long)this.averageSpeedBuffer.Average();
+                long averageSpeed = this.averageSpeedBuffer.Count == 0 ? 0 : (long)this.averageSpeedBuffer.Average();
 
                 return averageSpeed.ToSizeString() + "/s";
             }
