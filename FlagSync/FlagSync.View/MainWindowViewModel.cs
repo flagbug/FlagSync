@@ -505,28 +505,23 @@ namespace FlagSync.View
         /// Loads the job settings.
         /// </summary>
         /// <param name="path">The path.</param>
-        public JobSettingsLoadingResult LoadJobSettings(string path)
+        /// <exception cref="CorruptSaveFileException">The save file is in an invalid state.</exception>
+        /// <exception cref="ITunesNotOpenedException">The iTunes process is not started..</exception>
+        public void LoadJobSettings(string path)
         {
-            IEnumerable<JobSetting> settings;
+            IEnumerable<JobSetting> settings = DataController.LoadJobSettings(path);
 
-            var result = DataController.TryLoadJobSettings(path, out settings);
+            this.JobSettings.Clear();
 
-            if (result == JobSettingsLoadingResult.Succeed)
+            foreach (JobSetting setting in settings)
             {
-                this.JobSettings.Clear();
-
-                foreach (JobSetting setting in settings)
-                {
-                    this.JobSettings.Add(new JobSettingViewModel(setting));
-                }
-
-                if (settings.Any())
-                {
-                    this.SelectedJobSetting = this.JobSettings.First();
-                }
+                this.JobSettings.Add(new JobSettingViewModel(setting));
             }
 
-            return result;
+            if (settings.Any())
+            {
+                this.SelectedJobSetting = this.JobSettings.First();
+            }
         }
 
         /// <summary>

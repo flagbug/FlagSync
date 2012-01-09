@@ -88,27 +88,31 @@ namespace FlagSync.Data
         /// Tries the load the job settings from the specified path.
         /// </summary>
         /// <param name="path">The path to the file with the serialized setzings.</param>
-        /// <param name="settings">The settings.</param>
+        /// <exception cref="CorruptSaveFileException">The save file is in an invalid state.</exception>
+        /// <exception cref="ITunesNotOpenedException">The iTunes process is not started..</exception>
         /// <returns>
         /// The result of the operation.
         /// </returns>
-        public static JobSettingsLoadingResult TryLoadJobSettings(string path, out IEnumerable<JobSetting> settings)
+        public static IEnumerable<JobSetting> LoadJobSettings(string path)
         {
-            settings = new List<JobSetting>();
+            IEnumerable<JobSetting> settings;
 
             try
             {
                 settings = GenericXmlSerializer.DeserializeCollection<JobSetting>(path);
             }
 
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                return JobSettingsLoadingResult.CorruptFile;
+                throw new CorruptSaveFileException("The save file is corrupt.", ex);
             }
 
-            return settings.Any(setting => setting.SyncMode == SyncMode.ITunes) && !DataController.IsITunesOpened()
-                       ? JobSettingsLoadingResult.ITunesNotOpened
-                       : JobSettingsLoadingResult.Succeed;
+            if (settings.Any(setting => setting.SyncMode == SyncMode.ITunes && !DataController.IsITunesOpened()))
+            {
+                throw new ITunesNotOpenedException("iTunes is not opened.");
+            }
+
+            return settings;
         }
 
         /// <summary>
