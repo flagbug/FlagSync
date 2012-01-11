@@ -49,7 +49,6 @@
     <Compile Include="FileProceededEventArgs.cs" />
     <Compile Include="JobEventArgs.cs" />
     <Compile Include="BackupJob.cs" />
-    <Compile Include="FtpBackupDirection.cs" />
     <Compile Include="FileSystem\FileCountResult.cs" />
     <Compile Include="FileSystem\DirectoryFoundEventArgs.cs" />
     <Compile Include="FileSystem\FileFoundEventArgs.cs" />
