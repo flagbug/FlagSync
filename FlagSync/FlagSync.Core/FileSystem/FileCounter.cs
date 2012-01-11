@@ -13,9 +13,9 @@ namespace FlagSync.Core.FileSystem
         /// </summary>
         /// <param name="rootDirectory">The root directory.</param>
         /// <returns>
-        /// A <see cref="FileCounterResult"/> which indicates the result of the count.
+        /// A <see cref="FileCountResult"/> which indicates the result of the count.
         /// </returns>
-        public static FileCounterResult CountFiles(IDirectoryInfo rootDirectory)
+        public static FileCountResult CountFiles(IDirectoryInfo rootDirectory)
         {
             rootDirectory.ThrowIfNull(() => rootDirectory);
 
@@ -32,7 +32,7 @@ namespace FlagSync.Core.FileSystem
 
             scanner.Start();
 
-            return new FileCounterResult(files, bytes);
+            return new FileCountResult(files, bytes);
         }
     }
 }

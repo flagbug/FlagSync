@@ -223,7 +223,7 @@ namespace FlagSync.Core
         /// Counts the files of both directories of this job.
         /// </summary>
         /// <returns>The result of the counting of both directories of this job.</returns>
-        public FileCounterResult CountFiles()
+        public FileCountResult CountFiles()
         {
             return FileCounter.CountFiles(this.DirectoryA) + FileCounter.CountFiles(this.DirectoryB);
         }

@@ -5,7 +5,7 @@ namespace FlagSync.Core.FileSystem
     /// <summary>
     /// Contains the number of files counted and the total size of all files.
     /// </summary>
-    public class FileCounterResult
+    public class FileCountResult
     {
         /// <summary>
         /// Gets the counted files.
@@ -24,20 +24,20 @@ namespace FlagSync.Core.FileSystem
         public long CountedBytes { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileCounterResult"/> class.
+        /// Initializes a new instance of the <see cref="FileCountResult"/> class.
         /// </summary>
         /// <param name="countedFiles">The counted files.</param>
         /// <param name="countedBytes">The counted bytes.</param>
-        public FileCounterResult(int countedFiles, long countedBytes)
+        public FileCountResult(int countedFiles, long countedBytes)
         {
             this.CountedBytes = countedBytes;
             this.CountedFiles = countedFiles;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileCounterResult"/> class.
+        /// Initializes a new instance of the <see cref="FileCountResult"/> class.
         /// </summary>
-        public FileCounterResult()
+        public FileCountResult()
             : this(0, 0)
         {
         }
@@ -50,12 +50,12 @@ namespace FlagSync.Core.FileSystem
         /// <returns>
         /// The result of the operator.
         /// </returns>
-        public static FileCounterResult operator +(FileCounterResult a, FileCounterResult b)
+        public static FileCountResult operator +(FileCountResult a, FileCountResult b)
         {
             a.ThrowIfNull(() => a);
             b.ThrowIfNull(() => b);
 
-            return new FileCounterResult(a.CountedFiles + b.CountedFiles, a.CountedBytes + b.CountedBytes);
+            return new FileCountResult(a.CountedFiles + b.CountedFiles, a.CountedBytes + b.CountedBytes);
         }
     }
 }

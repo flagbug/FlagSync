@@ -127,7 +127,7 @@ namespace FlagSync.Core
         /// <value>
         /// The file counter result.
         /// </value>
-        public FileCounterResult FileCounterResult { get; private set; }
+        public FileCountResult FileCounterResult { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="JobWorker"/> is paused.
@@ -272,11 +272,11 @@ namespace FlagSync.Core
         /// <returns>
         /// The result of the counting.
         /// </returns>
-        private FileCounterResult CountFiles()
+        private FileCountResult CountFiles()
         {
             this.IsCounting = true;
 
-            var result = new FileCounterResult();
+            var result = new FileCountResult();
 
             foreach (Job job in this.jobQueue)
             {
