@@ -11,9 +11,6 @@ namespace FlagSync.Core
         /// <summary>
         /// Gets the job.
         /// </summary>
-        /// <value>
-        /// The job.
-        /// </value>
         public Job Job { get; private set; }
 
         /// <summary>

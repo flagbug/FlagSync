@@ -43,7 +43,7 @@ namespace FlagSync.Core
         /// Gets a value indicating whether the <see cref="Job"/> is paused.
         /// </summary>
         /// <value>
-        /// true if paused; otherwise, false.
+        /// true if the job is currently paused; otherwise, false.
         /// </value>
         public bool IsPaused { get; private set; }
 
@@ -51,16 +51,13 @@ namespace FlagSync.Core
         /// Gets a value indicating whether the <see cref="Job"/> is stopped.
         /// </summary>
         /// <value>
-        /// true if stopped; otherwise, false.
+        /// true if the job is currently stopped; otherwise, false.
         /// </value>
         public bool IsStopped { get; private set; }
 
         /// <summary>
-        /// Gets the written bytes.
+        /// Gets the bytes that the job has written, since it has been started.
         /// </summary>
-        /// <value>
-        /// The written bytes.
-        /// </value>
         public long WrittenBytes { get; private set; }
 
         /// <summary>
@@ -203,7 +200,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Continues the job (only after pause).
+        /// Continues the job (only if the job is currently paused).
         /// </summary>
         public virtual void Continue()
         {
@@ -211,7 +208,7 @@ namespace FlagSync.Core
         }
 
         /// <summary>
-        /// Stops the job (can't be continued).
+        /// Stops the job. This means that it can't be continued afterwards, and only be restarted.
         /// </summary>
         public virtual void Stop()
         {
