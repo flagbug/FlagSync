@@ -148,16 +148,19 @@ namespace FlagSync.Core.FileSystem.Ftp
                 {
                     using (Stream targetStream = this.client.OpenWrite(targetFilePath))
                     {
-                        var copyOperation = new StreamCopyOperation(sourceStream, targetStream, 8 * 1024, true);
-
-                        copyOperation.CopyProgressChanged += (sender, e) =>
+                        if (sourceFile.Length > 0)
                         {
-                            this.FileCopyProgressChanged.RaiseSafe(this, e);
+                            var copyOperation = new StreamCopyOperation(sourceStream, targetStream, 8 * 1024, true);
 
-                            canceled = e.Cancel;
-                        };
+                            copyOperation.CopyProgressChanged += (sender, e) =>
+                            {
+                                this.FileCopyProgressChanged.RaiseSafe(this, e);
 
-                        copyOperation.Execute();
+                                canceled = e.Cancel;
+                            };
+
+                            copyOperation.Execute();
+                        }
                     }
                 }
 
