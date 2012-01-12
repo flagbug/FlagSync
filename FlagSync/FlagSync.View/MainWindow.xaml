@@ -165,8 +165,8 @@
                         <RowDefinition Height="25" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <ProgressBar Grid.Row="0" Height="20" Maximum="{Binding Path=CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
-                        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <ProgressBar Height="20" Maximum="{Binding Path=CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{x:Static properties:Resources.TotalProgressText}"/>
                             <TextBlock Text=" " />
                             <TextBlock Text="{Binding Path=TotalProgressPercentage, StringFormat=\{0:F\}%}" />
@@ -174,9 +174,9 @@
                             <TextBlock Text="{Binding Path=AverageSpeed, StringFormat=@ \{0\}}" Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="1" Margin="0,3">
-                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Value="{Binding Path=CurrentProgress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Grid Grid.Row="1" Margin="0, 3">
+                        <ProgressBar Height="20" Value="{Binding Path=CurrentProgress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{x:Static properties:Resources.CurrentProgressText}"/>
                             <TextBlock Text=" " />
                             <TextBlock Text="{Binding Path=CurrentProgress, UpdateSourceTrigger=PropertyChanged, FallbackValue=0, StringFormat=\{0\}%}" />
@@ -197,7 +197,7 @@
                 </Grid>
             </GroupBox>
         </Grid>
-        <TabControl Grid.Row="2" Margin="5,0,5,5" SelectedIndex="{Binding Path=TabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TabControl Grid.Row="2" Margin="5, 0, 5, 5" SelectedIndex="{Binding Path=TabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
