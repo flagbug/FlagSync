@@ -716,7 +716,7 @@ namespace FlagSync.View
 
             // Set the last log message progress to 100, sometimes there
             // is an error in the last file copy and then the progress stucks.
-            if (this.LastLogMessage != null)
+            if (this.LastLogMessage != null && !this.IsPreview)
             {
                 this.LastLogMessage.Progress = 100;
             }
