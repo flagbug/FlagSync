@@ -114,12 +114,12 @@
                 <MenuItem Header="{x:Static properties:Resources.AboutString}" Click="aboutMenuItem_Click" />
             </MenuItem>
         </Menu>
-        <Grid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="5, 10, 5, 5" MinHeight="100">
+        <Grid Grid.Row="1" Margin="5, 10, 5, 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <GroupBox Header="{x:Static properties:Resources.CurrentJobGroupBoxText}" Height="Auto" Width="Auto" Padding="3" Grid.Column="0">
+            <GroupBox Grid.Column="0" Header="{x:Static properties:Resources.CurrentJobGroupBoxText}" Padding="3">
                 <Grid>
                     <Grid Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
@@ -157,7 +157,7 @@
                     </TextBlock>
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.ControlPanelGroupBoxText}" Height="Auto" Width="Auto" Padding="3">
+            <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.ControlPanelGroupBoxText}" Padding="3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -165,7 +165,7 @@
                         <RowDefinition Height="25" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <ProgressBar Grid.Row="0" Height="20" HorizontalAlignment="Stretch" Width="Auto" Maximum="{Binding Path=CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
+                        <ProgressBar Grid.Row="0" Height="20" Maximum="{Binding Path=CountedBytes, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=ProceededBytes, Mode=OneWay, Converter={StaticResource ByteToKiloByteConverter}, UpdateSourceTrigger=PropertyChanged}" IsIndeterminate="{Binding Path=IsCounting, UpdateSourceTrigger=PropertyChanged}" Minimum="0" />
                         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="{x:Static properties:Resources.TotalProgressText}"/>
                             <TextBlock Text=" " />
