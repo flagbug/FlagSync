@@ -253,15 +253,6 @@ namespace FlagSync.View
         public bool IsPreview { get; private set; }
 
         /// <summary>
-        /// Gets the pause or continue string.
-        /// </summary>
-        /// <value>The pause or continue string.</value>
-        public string PauseOrContinueString
-        {
-            get { return this.IsPaused ? Resources.ContinueString : Resources.PauseString; }
-        }
-
-        /// <summary>
         /// Gets or sets the current log message.
         /// </summary>
         /// <value>

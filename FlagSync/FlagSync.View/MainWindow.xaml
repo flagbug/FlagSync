@@ -186,7 +186,20 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" Content="{x:Static properties:Resources.PreviewButtonText}" Margin="0, 0, 5, 0" Command="{Binding Path=StartJobWorkerCommand}" CommandParameter="true" />
                         <Button Grid.Column="1" Content="{x:Static properties:Resources.StartButtonText}" Margin="5, 0, 5, 0" Command="{Binding Path=StartJobWorkerCommand}" CommandParameter="false" />
-                        <Button Grid.Column="2" Content="{Binding Path=PauseOrContinueString, UpdateSourceTrigger=PropertyChanged}" Margin="5, 0, 5, 0" Command="{Binding Path=PauseOrContinueJobWorkerCommand}" />
+                        <Button Grid.Column="2" Margin="5, 0, 5, 0" Command="{Binding Path=PauseOrContinueJobWorkerCommand}">
+                            <Button.Style>
+                                <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type Button}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsPaused}" Value="True">
+                                            <Setter Property="Content" Value="{x:Static properties:Resources.ContinueString}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsPaused}" Value="False">
+                                            <Setter Property="Content" Value="{x:Static properties:Resources.PauseString}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
                         <Button Grid.Column="3" Content="{x:Static properties:Resources.StopButtonText}" Margin="5, 0, 0, 0" Command="{Binding Path=StopJobWorkerCommand}" />
                     </Grid>
                 </Grid>
