@@ -90,14 +90,14 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid HorizontalAlignment="Stretch">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Height="25" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Top" Background="#FFF0F0F0">
+        <Menu Grid.Row="0" Background="#FFF0F0F0">
             <MenuItem Header="{x:Static properties:Resources.ProgramMenuItemText}">
                 <MenuItem Header="{x:Static properties:Resources.LanguageMenuItemText}">
                     <MenuItem Header="{x:Static properties:Resources.EnglishString}" Click="englishMenuItem_Click" />
