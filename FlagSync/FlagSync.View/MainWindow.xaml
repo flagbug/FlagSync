@@ -231,7 +231,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Name="newJobButton" ToolTip="{x:Static properties:Resources.NewJobButtonText}" Click="newJobButton_Click" x:FieldModifier="private">
+                            <Button Grid.Column="0" Margin="5" Name="newJobButton" ToolTip="{x:Static properties:Resources.NewJobButtonText}" Click="newJobButton_Click" x:FieldModifier="private">
                                 <Button.Content>
                                     <StackPanel Orientation="Vertical">
                                         <Image Source="/FlagSync;component/Images/Add.png" Width="50" Height="50" />
@@ -267,19 +267,19 @@
                                     </ContextMenu>
                                 </Button.ContextMenu>
                             </Button>
-                            <Button Grid.Column="1" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" Command="{Binding Path=DeleteSelectedJobSettingCommand}">
+                            <Button Grid.Column="1" Margin="5" ToolTip="{x:Static properties:Resources.DeleteJobButtonText}" Command="{Binding Path=DeleteSelectedJobSettingCommand}">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="/FlagSync;component/Images/Remove.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.DeleteString}" HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Button>
-                            <Button Grid.Column="2" ToolTip="{x:Static properties:Resources.LoadJobsButtonText}" Click="loadJobsButton_Click">
+                            <Button Grid.Column="2" Margin="5" ToolTip="{x:Static properties:Resources.LoadJobsButtonText}" Click="loadJobsButton_Click">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="/FlagSync;component/Images/Load.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.LoadString}" HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Button>
-                            <Button Grid.Column="3" ToolTip="{x:Static properties:Resources.SaveJobsButtonText}" Click="saveJobsButton_Click">
+                            <Button Grid.Column="3" Margin="5" ToolTip="{x:Static properties:Resources.SaveJobsButtonText}" Click="saveJobsButton_Click">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="/FlagSync;component/Images/Save.png" Width="50" Height="50" />
                                     <ContentPresenter Content="{x:Static properties:Resources.SaveString}" HorizontalAlignment="Center" />
