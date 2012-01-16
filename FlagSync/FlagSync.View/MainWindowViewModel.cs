@@ -34,6 +34,7 @@ namespace FlagSync.View
         private readonly Timer updateTimer;
         private CircularBuffer<long> averageSpeedBuffer;
         private int tabIndex;
+        private bool isAborted;
 
         /// <summary>
         /// Gets a value indicating whether there is any job setting in the list.
@@ -96,6 +97,19 @@ namespace FlagSync.View
         public bool IsPaused
         {
             get { return this.jobWorker.IsPaused; }
+        }
+
+        public bool IsAborted
+        {
+            get { return this.isAborted; }
+            set
+            {
+                if (this.IsAborted != value)
+                {
+                    this.isAborted = value;
+                    this.OnPropertyChanged(vm => vm.IsAborted);
+                }
+            }
         }
 
         /// <summary>
@@ -408,6 +422,7 @@ namespace FlagSync.View
                         this.jobWorker.Stop();
                         this.updateTimer.Stop();
                         this.OnPropertyChanged(vm => vm.IsRunning);
+                        this.IsAborted = true;
                         this.ResetBytes();
                         this.AddStatusMessage(Resources.StoppedAllJobsMessage);
                     },
@@ -591,6 +606,7 @@ namespace FlagSync.View
             this.ResetMessages();
             this.ResetBytes();
             this.averageSpeedBuffer = new CircularBuffer<long>(500);
+            this.IsAborted = false;
         }
 
         /// <summary>

@@ -52,7 +52,20 @@
                     <ControlTemplate TargetType="ProgressBar">
                         <Border BorderBrush="Black" Background="Silver">
                             <Grid x:Name="PART_Track">
-                                <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" Fill="#FF01D328" />
+                                <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left">
+                                    <Rectangle.Style>
+                                        <Style TargetType="{x:Type Rectangle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsAborted}" Value="True">
+                                                    <Setter Property="Fill" Value="Red" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=IsAborted}" Value="False">
+                                                    <Setter Property="Fill" Value="#FF01D328" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Rectangle.Style>
+                                </Rectangle>
                             </Grid>
                         </Border>
                     </ControlTemplate>
