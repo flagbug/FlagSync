@@ -92,6 +92,33 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="UpDownButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Rectangle x:Name="border" StrokeThickness="1.5" Stroke="Silver" Fill="White" />
+                            <Grid>
+                                <Label Margin="2" Padding="2" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Fill" Value="Gainsboro" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="StrokeThickness" Value="2" />
+                                <Setter TargetName="border" Property="Stroke" Value="CornflowerBlue" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Stroke" Value="Gainsboro" />
+                                <Setter TargetName="border" Property="Fill" Value="Gainsboro" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -334,10 +361,10 @@
                                 <DataTemplate>
                                     <StackPanel Margin="5" Orientation="Horizontal">
                                         <StackPanel Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem, AncestorLevel=1}, Path=IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" DataContext="{Binding ElementName=mainWindowViewModel}">
-                                            <Button Height="20" Width="20" Padding="0" Margin="1" Command="{Binding Path=MoveSelectedJobSettingUpCommand}">
+                                            <Button Style="{StaticResource UpDownButtonStyle}" Height="20" Width="20" Padding="0" Margin="1" Command="{Binding Path=MoveSelectedJobSettingUpCommand}">
                                                 <Image Source="/FlagSync;component/Images/UpArrow.png" />
                                             </Button>
-                                            <Button Height="20" Width="20" Padding="0" Margin="1" Command="{Binding Path=MoveSelectedJobSettingDownCommand}">
+                                            <Button Style="{StaticResource UpDownButtonStyle}" Height="20" Width="20" Padding="0" Margin="1" Command="{Binding Path=MoveSelectedJobSettingDownCommand}">
                                                 <Image Source="/FlagSync;component/Images/DownArrow.png" />
                                             </Button>
                                         </StackPanel>
