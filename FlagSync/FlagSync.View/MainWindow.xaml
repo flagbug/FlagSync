@@ -76,26 +76,19 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" BorderBrush="Black" Padding="5" Background="CornflowerBlue">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border x:Name="border" Padding="2" BorderThickness="1.5" BorderBrush="Silver" Background="White">
+                            <Label x:Name="content" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="RenderTransform" >
-                                    <Setter.Value>
-                                        <ScaleTransform ScaleX="1.025" ScaleY="1.025" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="RenderTransform" >
-                                    <Setter.Value>
-                                        <ScaleTransform ScaleX=".95" ScaleY=".95" />
-                                    </Setter.Value>
-                                </Setter>
+                                <Setter TargetName="border" Property="Background" Value="Gainsboro" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Background" Value="Silver" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="Gainsboro" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderThickness" Value="2" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="CornflowerBlue" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
