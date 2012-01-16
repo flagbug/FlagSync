@@ -600,7 +600,9 @@ namespace FlagSync.View
         {
             this.jobWorker.Pause();
             this.updateTimer.Stop();
-            this.OnPropertyChanged(vm => vm.PauseOrContinueString);
+
+            this.OnPropertyChanged(vm => vm.IsPaused);
+
             this.AddStatusMessage(Resources.PausedJobsMessage);
 
             if (TaskbarManager.IsPlatformSupported)
@@ -616,7 +618,9 @@ namespace FlagSync.View
         {
             this.jobWorker.Continue();
             this.updateTimer.Start();
-            this.OnPropertyChanged(vm => vm.PauseOrContinueString);
+
+            this.OnPropertyChanged(vm => vm.IsPaused);
+
             this.AddStatusMessage(Resources.ContinuingJobsMessage);
             this.AddStatusMessage(Resources.StartingJobsMessage + " " + this.CurrentJob.Name + "...");
 
@@ -701,7 +705,8 @@ namespace FlagSync.View
         private void jobWorker_Finished(object sender, EventArgs e)
         {
             this.OnPropertyChanged(vm => vm.IsRunning);
-            this.OnPropertyChanged(vm => vm.PauseOrContinueString);
+            this.OnPropertyChanged(vm => vm.IsPaused);
+
             this.AddStatusMessage(Resources.FinishedAllJobsMessage);
             this.AddStatusMessage(Resources.ElapsedTimeMessage + " " + new DateTime((DateTime.Now - this.startTime).Ticks).ToString("HH:mm:ss", new DateTimeFormatInfo()));
 
