@@ -72,7 +72,9 @@
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Rectangle x:Name="border" StrokeThickness="1.5" Stroke="Silver" Fill="White" />
-                            <Label Padding="2" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Grid>
+                                <Label Margin="2" Padding="2" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
