@@ -201,22 +201,17 @@
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding Path=IsRunning}" Value="True" />
-                                                    <Condition Binding="{Binding Path=IsCounting}" Value="False" />
-                                                    <Condition Binding="{Binding Path=IsDeleting}" Value="False" />
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="Visibility" Value="Visible" />
-                                            </MultiDataTrigger>
-                                            <DataTrigger Binding="{Binding Path=IsCounting}" Value="True">
-                                                <Setter Property="Visibility" Value="Hidden" />
+                                            <DataTrigger Binding="{Binding Path=IsCounting, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=IsDeleting}" Value="True">
-                                                <Setter Property="Visibility" Value="Hidden" />
+                                            <DataTrigger Binding="{Binding Path=IsDeleting, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=IsPaused}" Value="True">
-                                                <Setter Property="Visibility" Value="Hidden" />
+                                            <DataTrigger Binding="{Binding Path=IsPaused, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=IsRunning, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                                <Setter Property="Visibility" Value="Collapsed" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
