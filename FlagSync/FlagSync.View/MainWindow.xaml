@@ -104,6 +104,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="StrokeThickness" Value="0" />
                                 <Setter TargetName="border" Property="Fill" Value="Gainsboro" />
                             </Trigger>
                             <Trigger Property="IsFocused" Value="True">
@@ -111,8 +112,8 @@
                                 <Setter TargetName="border" Property="Stroke" Value="CornflowerBlue" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Stroke" Value="Gainsboro" />
-                                <Setter TargetName="border" Property="Fill" Value="Gainsboro" />
+                                <Setter TargetName="border" Property="StrokeThickness" Value="0" />
+                                <Setter TargetName="border" Property="Fill" Value="Silver" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
