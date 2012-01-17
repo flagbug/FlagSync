@@ -770,6 +770,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.JobEventArgs"/> instance containing the event data.</param>
         private void jobWorker_JobStarted(object sender, JobEventArgs e)
         {
+            this.IsDeleting = false;
             this.CurrentJob = new JobViewModel(e.Job);
             this.AddStatusMessage(Resources.StartingJobMessage + " " + e.Job.Name + "...");
         }
