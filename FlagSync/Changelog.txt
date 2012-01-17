@@ -1,3 +1,17 @@
+----------------------------------- v2.4.1 -----------------------------------
+
+CHANGES:
+- Changed the button style, to be closer to a metro-look.
+
+IMRPOVEMENTS:
+- General layout and interface improvements.
+
+BUGFIXES:
+- Fixed a bug, which caused the application to crash, when copying files with 
+  a size of zero bytes.
+- Fixed a bug, which caused the progress of the last log message during a 
+  preview to be set to 100 percent.
+
 ----------------------------------- v2.4.0 -----------------------------------
 
 FEATURES:
