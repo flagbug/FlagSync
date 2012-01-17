@@ -35,6 +35,7 @@ namespace FlagSync.View
         private CircularBuffer<long> averageSpeedBuffer;
         private int tabIndex;
         private bool isAborted;
+        private bool isDeleting;
 
         /// <summary>
         /// Gets a value indicating whether there is any job setting in the list.
@@ -108,6 +109,19 @@ namespace FlagSync.View
                 {
                     this.isAborted = value;
                     this.OnPropertyChanged(vm => vm.IsAborted);
+                }
+            }
+        }
+
+        public bool IsDeleting
+        {
+            get { return this.isDeleting; }
+            set
+            {
+                if (this.IsDeleting != value)
+                {
+                    this.isDeleting = value;
+                    this.OnPropertyChanged(vm => vm.IsDeleting);
                 }
             }
         }
@@ -607,6 +621,7 @@ namespace FlagSync.View
             this.ResetBytes();
             this.averageSpeedBuffer = new CircularBuffer<long>(500);
             this.IsAborted = false;
+            this.IsDeleting = false;
         }
 
         /// <summary>
@@ -902,6 +917,7 @@ namespace FlagSync.View
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryDeletionEventArgs"/> instance containing the event data.</param>
         private void jobWorker_DeletingDirectory(object sender, DirectoryDeletionEventArgs e)
         {
+            this.IsDeleting = true;
             this.AddLogMessage(Resources.DeletingString, Resources.DirectoryString, e.DirectoryPath, String.Empty, false, null);
         }
 

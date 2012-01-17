@@ -196,7 +196,31 @@
                             <TextBlock Text=" " />
                             <TextBlock Text="{Binding Path=TotalProgressPercentage, StringFormat=\{0:F\}%}" />
                             <TextBlock Text=" " />
-                            <TextBlock Text="{Binding Path=AverageSpeed, StringFormat=@ \{0\}}" Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="{Binding Path=AverageSpeed, StringFormat=@ \{0\}}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=IsRunning}" Value="True" />
+                                                    <Condition Binding="{Binding Path=IsCounting}" Value="False" />
+                                                    <Condition Binding="{Binding Path=IsDeleting}" Value="False" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding Path=IsCounting}" Value="True">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=IsDeleting}" Value="True">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=IsPaused}" Value="True">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1" Margin="0, 3">
