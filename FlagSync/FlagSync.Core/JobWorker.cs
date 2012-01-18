@@ -207,7 +207,9 @@ namespace FlagSync.Core
         /// <param name="preview">if set to true, a preview will be performed.</param>
         public void StartAsync(IEnumerable<Job> jobs, bool preview)
         {
-            ThreadPool.QueueUserWorkItem(callback => this.Start(jobs, preview));
+            this.InitializeStart(jobs, preview);
+
+            ThreadPool.QueueUserWorkItem(callback => this.InternStart());
         }
 
         /// <summary>
@@ -217,20 +219,30 @@ namespace FlagSync.Core
         /// <param name="preview">if set to true, a preview will be performed.</param>
         public void Start(IEnumerable<Job> jobs, bool preview)
         {
-            this.IsRunning = true;
+            this.InitializeStart(jobs, preview);
 
+            this.InternStart();
+        }
+
+        /// <summary>
+        /// Initializes all needed variables for the start sequence.
+        /// </summary>
+        /// <param name="jobs">The jobs to start.</param>
+        /// <param name="preview">if set to true, a preview will be performed.</param>
+        private void InitializeStart(IEnumerable<Job> jobs, bool preview)
+        {
+            this.IsRunning = true;
             this.TotalWrittenBytes = 0;
+            this.performPreview = preview;
 
             foreach (Job job in jobs)
             {
                 this.jobQueue.Enqueue(job);
             }
-
-            this.InternStart(preview);
         }
 
         /// <summary>
-        /// Does the next job.
+        /// Starts the next job, if the job queue is not empty, otherwise shuts down the job worker.
         /// </summary>
         private void DoNextJob()
         {
@@ -252,10 +264,8 @@ namespace FlagSync.Core
         /// <summary>
         /// Starts the job worker.
         /// </summary>
-        private void InternStart(bool preview)
+        private void InternStart()
         {
-            this.performPreview = preview;
-
             this.FileCounterResult = this.CountFiles();
 
             if (this.FilesCounted != null)
