@@ -580,12 +580,15 @@ namespace FlagSync.View
 
             this.JobSettings.Clear();
 
+            bool hasSettings = false;
+
             foreach (JobSetting setting in settings)
             {
+                hasSettings = true;
                 this.JobSettings.Add(new JobSettingViewModel(setting));
             }
 
-            if (settings.Any())
+            if (hasSettings)
             {
                 this.SelectedJobSetting = this.JobSettings.First();
             }
