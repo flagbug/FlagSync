@@ -47,6 +47,11 @@ namespace FlagSync.View
             get { return this.JobSettings.Count == 0; }
         }
 
+        public int TabIndex
+        {
+            get { return this.IsRunning ? 1 : 0; }
+        }
+
         /// <summary>
         /// Gets a value indicating whether the job worker is counting.
         /// </summary>
@@ -354,6 +359,8 @@ namespace FlagSync.View
                         this.jobWorker.StartAsync(jobs, preview);
 
                         this.OnPropertyChanged(vm => vm.IsRunning);
+                        this.OnPropertyChanged(vm => vm.TabIndex);
+
                         this.IsPreview = preview;
                         this.startTime = DateTime.Now;
                         this.updateTimer.Start();
