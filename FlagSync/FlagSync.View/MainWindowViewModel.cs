@@ -33,7 +33,6 @@ namespace FlagSync.View
         private int lastLogMessageIndex;
         private readonly Timer updateTimer;
         private CircularBuffer<long> averageSpeedBuffer;
-        private int tabIndex;
         private bool isAborted;
         private bool isDeleting;
 
@@ -48,23 +47,9 @@ namespace FlagSync.View
             get { return this.JobSettings.Count == 0; }
         }
 
-        /// <summary>
-        /// Gets the tab index.
-        /// </summary>
-        /// <value>
-        /// The tab index.
-        /// </value>
         public int TabIndex
         {
-            get { return this.tabIndex; }
-            set
-            {
-                if (this.tabIndex != value)
-                {
-                    this.tabIndex = value;
-                    this.OnPropertyChanged(vm => vm.TabIndex);
-                }
-            }
+            get { return this.IsRunning ? 1 : 0; }
         }
 
         /// <summary>
@@ -373,8 +358,9 @@ namespace FlagSync.View
 
                         this.jobWorker.StartAsync(jobs, preview);
 
-                        this.TabIndex = 1;
                         this.OnPropertyChanged(vm => vm.IsRunning);
+                        this.OnPropertyChanged(vm => vm.TabIndex);
+
                         this.IsPreview = preview;
                         this.startTime = DateTime.Now;
                         this.updateTimer.Start();

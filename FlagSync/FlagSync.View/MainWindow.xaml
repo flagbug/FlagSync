@@ -255,7 +255,7 @@
                 </Grid>
             </GroupBox>
         </Grid>
-        <TabControl Grid.Row="2" Margin="5, 0, 5, 5" SelectedIndex="{Binding Path=TabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TabControl Grid.Row="2" Margin="5, 0, 5, 5" SelectedIndex="{Binding Path=TabIndex, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
