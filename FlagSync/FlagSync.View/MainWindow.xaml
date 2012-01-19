@@ -255,7 +255,16 @@
                 </Grid>
             </GroupBox>
         </Grid>
-        <TabControl Grid.Row="2" Margin="5, 0, 5, 5" SelectedIndex="{Binding Path=TabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TabControl Grid.Row="2" Margin="5, 0, 5, 5">
+            <TabControl.Style>
+                <Style TargetType="TabControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsRunning, UpdateSourceTrigger=PropertyChanged, PresentationTraceSources.TraceLevel=High}" Value="True">
+                            <Setter Property="SelectedIndex" Value="1" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TabControl.Style>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
