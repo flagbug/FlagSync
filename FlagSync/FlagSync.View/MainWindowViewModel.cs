@@ -47,6 +47,12 @@ namespace FlagSync.View
             get { return this.JobSettings.Count == 0; }
         }
 
+        /// <summary>
+        /// Gets the selected index of the main tabcontrol.
+        /// </summary>
+        /// <value>
+        /// The selected index of the main tabcontrol.
+        /// </value>
         public int TabIndex
         {
             get { return this.IsRunning ? 1 : 0; }
@@ -64,10 +70,10 @@ namespace FlagSync.View
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whetherthe job worker is started.
+        /// Gets or sets a value indicating whetherthe job worker is started and currently running.
         /// </summary>
         /// <value>
-        /// true if the job worker is started; otherwise, false.
+        /// true if the job worker is started and currently running; otherwise, false.
         /// </value>
         public bool IsRunning
         {
@@ -85,6 +91,12 @@ namespace FlagSync.View
             get { return this.jobWorker.IsPaused; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the jobworker is stopped.
+        /// </summary>
+        /// <value>
+        /// true if the jobworker is stopped; otherwise, false.
+        /// </value>
         public bool IsAborted
         {
             get { return this.isAborted; }
@@ -98,6 +110,12 @@ namespace FlagSync.View
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the current backup job is in deletion mode.
+        /// </summary>
+        /// <value>
+        /// true if the current backup job is in deletion mode; otherwise, false.
+        /// </value>
         public bool IsDeleting
         {
             get { return this.isDeleting; }
