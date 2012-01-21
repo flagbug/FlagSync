@@ -3,7 +3,7 @@
 namespace FlagSync.Core.FileSystem.Base
 {
     /// <summary>
-    /// Provides the interface which all file infos must implement.
+    /// Provides the interface that all file infos have to implement.
     /// </summary>
     public interface IFileInfo : IFileSystemInfo
     {

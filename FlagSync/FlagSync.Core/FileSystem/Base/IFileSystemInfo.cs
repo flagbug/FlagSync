@@ -1,7 +1,7 @@
 ﻿namespace FlagSync.Core.FileSystem.Base
 {
     /// <summary>
-    /// Provides the basic interface for the <see cref="FlagSync.Core.FileSystem.Base.IDirectoryInfo"/>
+    /// Provides the interface for the <see cref="FlagSync.Core.FileSystem.Base.IDirectoryInfo"/>
     /// and the <see cref="FlagSync.Core.FileSystem.Base.IFileInfo"/> interface.
     /// </summary>
     public interface IFileSystemInfo
