@@ -5,7 +5,7 @@ using FlagLib.IO;
 namespace FlagSync.Core.FileSystem.Base
 {
     /// <summary>
-    /// Provides the interface which all file system must implement.
+    /// Provides the interface that all filesystems have to implement.
     /// </summary>
     public interface IFileSystem
     {
