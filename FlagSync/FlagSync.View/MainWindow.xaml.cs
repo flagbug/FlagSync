@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FlagSync.View
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public sealed partial class MainWindow : Window
+    public sealed partial class MainWindow
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -47,12 +48,12 @@ namespace FlagSync.View
                     this.WindowState = WindowState.Maximized;
 
                     MessageBox.Show
-                        (
-                            Properties.Resources.LoadSettingsErrorMessage,
-                            Properties.Resources.ErrorString,
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Error
-                        );
+                    (
+                        Properties.Resources.LoadSettingsErrorMessage,
+                        Properties.Resources.ErrorString,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
 
                     Application.Current.Shutdown();
                 }
@@ -106,12 +107,12 @@ namespace FlagSync.View
                         catch (CorruptSaveFileException)
                         {
                             MessageBox.Show
-                                (
-                                    Properties.Resources.LoadSettingsErrorMessage,
-                                    Properties.Resources.ErrorString,
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Error
-                                );
+                            (
+                                Properties.Resources.LoadSettingsErrorMessage,
+                                Properties.Resources.ErrorString,
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error
+                            );
                         }
 
                         catch (ITunesNotOpenedException)
@@ -167,7 +168,7 @@ namespace FlagSync.View
             bool isRunning = this.mainWindowViewModel.IsRunning;
             bool isPaused = this.mainWindowViewModel.IsPaused;
 
-            if (!isPreview && messages.Count > 0 && isRunning && !isPaused)
+            if (!isPreview && messages.Any() && isRunning && !isPaused)
             {
                 ((ListView)sender).ScrollIntoView(messages.Last());
             }
@@ -217,7 +218,7 @@ namespace FlagSync.View
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             Settings.Default.Save();
         }
