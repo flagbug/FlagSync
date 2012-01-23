@@ -15,35 +15,38 @@ namespace FlagSync.Core.FileSystem.Base
         event EventHandler<DataTransferEventArgs> FileCopyProgressChanged;
 
         /// <summary>
-        /// Tries to delete a file.
+        /// Deletes the specified file.
         /// </summary>
         /// <param name="file">The file to delete.</param>
         /// <returns>
         ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
         /// </returns>
-        bool TryDeleteFile(IFileInfo file);
+        /// <exception cref="AccessException">The file could not be accessed.</exception>
+        void DeleteFile(IFileInfo file);
 
         /// <summary>
-        /// Tries to create a directory in the specified directory.
+        /// Creates the specified directory in the target directory.
         /// </summary>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
         /// <returns>
         ///   <c>true</c>, if the creation has succeed; otherwise, <c>false</c>.
         /// </returns>
-        bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory);
+        /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        void CreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory);
 
         /// <summary>
-        /// Tries to delete a directory.
+        /// Deletes the specified directory.
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
         /// <returns>
         ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
         /// </returns>
-        bool TryDeleteDirectory(IDirectoryInfo directory);
+        /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        void DeleteDirectory(IDirectoryInfo directory);
 
         /// <summary>
-        /// Tries to copy a file to specified directory.
+        /// Copies the specified file to the target directory.
         /// </summary>
         /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="sourceFile">The source file.</param>
@@ -51,7 +54,8 @@ namespace FlagSync.Core.FileSystem.Base
         /// <returns>
         ///   <c>true</c>, if the copy operation has succeed; otherwise, <c>false</c>.
         /// </returns>
-        bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory);
+        /// <exception cref="AccessException">The source file or target directory could not be accessed.</exception>
+        void CopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory);
 
         /// <summary>
         /// Gets the file info at the specified path.

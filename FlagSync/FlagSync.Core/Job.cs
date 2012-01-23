@@ -600,17 +600,19 @@ namespace FlagSync.Core
 
             this.OnDeletingFile(eventArgs);
 
-            //Only delete the file, if the operation should get executed
-            bool hasPerformed = execute && fileSystem.TryDeleteFile(file);
-
-            if (hasPerformed)
+            if (execute)
             {
-                this.OnDeletedFile(eventArgs);
-            }
+                try
+                {
+                    fileSystem.DeleteFile(file);
 
-            else if (execute)
-            {
-                this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
+                    this.OnDeletedFile(eventArgs);
+                }
+
+                catch (AccessException)
+                {
+                    this.OnFileDeletionError(new FileDeletionErrorEventArgs(file));
+                }
             }
         }
 
@@ -633,17 +635,19 @@ namespace FlagSync.Core
 
             directoryScanner.Start();
 
-            //Only delete the directory, if the operation should get executed
-            bool hasPerformed = execute && fileSystem.TryDeleteDirectory(directory);
-
-            if (hasPerformed)
+            if (execute)
             {
-                this.OnDeletedDirectory(eventArgs);
-            }
+                try
+                {
+                    fileSystem.DeleteDirectory(directory);
 
-            else if (execute)
-            {
-                this.OnDirectoryDeletionError(new DirectoryDeletionEventArgs(directory.FullName));
+                    this.OnDeletedDirectory(eventArgs);
+                }
+
+                catch (AccessException)
+                {
+                    this.OnDirectoryDeletionError(new DirectoryDeletionEventArgs(directory.FullName));
+                }
             }
         }
 
@@ -661,28 +665,30 @@ namespace FlagSync.Core
 
             this.OnCreatingFile(eventArgs);
 
-            EventHandler<DataTransferEventArgs> handler = (sender, e) =>
+            if (execute)
             {
-                e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
+                EventHandler<DataTransferEventArgs> handler = (sender, e) =>
+                {
+                    e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
 
-                this.OnFileProgressChanged(e);
-            };
+                    this.OnFileProgressChanged(e);
+                };
 
-            targetFileSystem.FileCopyProgressChanged += handler;
+                targetFileSystem.FileCopyProgressChanged += handler;
 
-            //Only copy the file, if the operation should get executed
-            bool hasPerformed = execute && targetFileSystem.TryCopyFile(sourceFileSystem, sourceFile, targetDirectory);
+                try
+                {
+                    targetFileSystem.CopyFile(sourceFileSystem, sourceFile, targetDirectory);
 
-            targetFileSystem.FileCopyProgressChanged -= handler;
+                    this.OnCreatedFile(eventArgs);
+                }
 
-            if (hasPerformed)
-            {
-                this.OnCreatedFile(eventArgs);
-            }
+                catch (AccessException)
+                {
+                    this.OnFileCopyError(new FileCopyErrorEventArgs(sourceFile, targetDirectory));
+                }
 
-            else if (execute)
-            {
-                this.OnFileCopyError(new FileCopyErrorEventArgs(sourceFile, targetDirectory));
+                targetFileSystem.FileCopyProgressChanged -= handler;
             }
         }
 
@@ -700,28 +706,30 @@ namespace FlagSync.Core
 
             this.OnModifyingFile(eventArgs);
 
-            EventHandler<DataTransferEventArgs> handler = (sender, e) =>
+            if (execute)
             {
-                e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
+                EventHandler<DataTransferEventArgs> handler = (sender, e) =>
+                {
+                    e.Cancel = this.IsStopped; //Stop the copy operation if the job is stopped
 
-                this.OnFileProgressChanged(e);
-            };
+                    this.OnFileProgressChanged(e);
+                };
 
-            targetFileSystem.FileCopyProgressChanged += handler;
+                targetFileSystem.FileCopyProgressChanged += handler;
 
-            //Only copy the file, if the operation should get executed
-            bool hasPerformed = execute && targetFileSystem.TryCopyFile(sourceFileSystem, sourceFile, targetDirectory);
+                try
+                {
+                    targetFileSystem.CopyFile(sourceFileSystem, sourceFile, targetDirectory);
 
-            targetFileSystem.FileCopyProgressChanged -= handler;
+                    this.OnModifiedFile(eventArgs);
+                }
 
-            if (hasPerformed)
-            {
-                this.OnModifiedFile(eventArgs);
-            }
+                catch (AccessException)
+                {
+                    this.OnFileCopyError(new FileCopyErrorEventArgs(sourceFile, targetDirectory));
+                }
 
-            else if (execute)
-            {
-                this.OnFileCopyError(new FileCopyErrorEventArgs(sourceFile, targetDirectory));
+                targetFileSystem.FileCopyProgressChanged -= handler;
             }
         }
 
@@ -738,18 +746,20 @@ namespace FlagSync.Core
 
             this.OnCreatingDirectory(eventArgs);
 
-            //Only create the directory, if the operation should get executed
-            bool hasPerformed = execute && fileSystem.TryCreateDirectory(sourceDirectory, targetDirectory);
-
-            if (hasPerformed)
+            if (execute)
             {
-                this.OnCreatedDirectory(eventArgs);
-            }
+                try
+                {
+                    fileSystem.CreateDirectory(sourceDirectory, targetDirectory);
 
-            else if (execute)
-            {
-                this.excludedPaths.Add(NormalizePath(targetDirectory.FullName));
-                this.OnDirectoryCreationError(new DirectoryCreationEventArgs(sourceDirectory, targetDirectory));
+                    this.OnCreatedDirectory(eventArgs);
+                }
+
+                catch (AccessException)
+                {
+                    this.excludedPaths.Add(NormalizePath(targetDirectory.FullName));
+                    this.OnDirectoryCreationError(new DirectoryCreationEventArgs(sourceDirectory, targetDirectory));
+                }
             }
         }
 
