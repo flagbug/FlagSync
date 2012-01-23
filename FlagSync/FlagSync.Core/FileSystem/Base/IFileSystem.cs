@@ -22,6 +22,7 @@ namespace FlagSync.Core.FileSystem.Base
         ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="AccessException">The file could not be accessed.</exception>
+        /// <exception cref="FileSystemUnavailableException">The file system is currently unavailable.</exception>
         void DeleteFile(IFileInfo file);
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace FlagSync.Core.FileSystem.Base
         ///   <c>true</c>, if the creation has succeed; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        /// <exception cref="FileSystemUnavailableException">The file system is currently unavailable.</exception>
         void CreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory);
 
         /// <summary>
@@ -43,6 +45,7 @@ namespace FlagSync.Core.FileSystem.Base
         ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        /// <exception cref="FileSystemUnavailableException">The file system is currently unavailable.</exception>
         void DeleteDirectory(IDirectoryInfo directory);
 
         /// <summary>
@@ -55,6 +58,7 @@ namespace FlagSync.Core.FileSystem.Base
         ///   <c>true</c>, if the copy operation has succeed; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="AccessException">The source file or target directory could not be accessed.</exception>
+        /// <exception cref="FileSystemUnavailableException">The file system is currently unavailable.</exception>
         void CopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory);
 
         /// <summary>

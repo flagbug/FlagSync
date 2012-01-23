@@ -36,6 +36,7 @@ namespace FlagSync.Core.FileSystem.Ftp
         /// <param name="file">The file to delete.</param>
         /// <exception cref="AccessException">The file could not be accessed.</exception>
         /// <exception cref="ArgumentException">The file is not of type <see cref="FlagFtp.FtpFileInfo"/>.</exception>
+        /// <exception cref="FileSystemUnavailableException">The file system is currently unavailable.</exception>
         public void DeleteFile(IFileInfo file)
         {
             file.ThrowIfNull(() => file);
@@ -50,6 +51,13 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                switch (ex.Status)
+                {
+                    case WebExceptionStatus.ConnectFailure:
+                    case WebExceptionStatus.ProxyNameResolutionFailure:
+                        throw new FileSystemUnavailableException("The FTP server is currently unavailable.", ex);
+                }
+
                 throw new AccessException("The file could not be accessed", ex);
             }
         }
@@ -74,6 +82,13 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                switch (ex.Status)
+                {
+                    case WebExceptionStatus.ConnectFailure:
+                    case WebExceptionStatus.ProxyNameResolutionFailure:
+                        throw new FileSystemUnavailableException("The FTP server is currently unavailable.", ex);
+                }
+
                 throw new AccessException("The directory could not be accessed", ex);
             }
         }
@@ -97,6 +112,13 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                switch (ex.Status)
+                {
+                    case WebExceptionStatus.ConnectFailure:
+                    case WebExceptionStatus.ProxyNameResolutionFailure:
+                        throw new FileSystemUnavailableException("The FTP server is currently unavailable.", ex);
+                }
+
                 throw new AccessException("The directory could not be accessed", ex);
             }
         }
@@ -141,6 +163,13 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
+                switch (ex.Status)
+                {
+                    case WebExceptionStatus.ConnectFailure:
+                    case WebExceptionStatus.ProxyNameResolutionFailure:
+                        throw new FileSystemUnavailableException("The FTP server is currently unavailable.", ex);
+                }
+
                 throw new AccessException("The file could not be accessed", ex);
             }
         }
