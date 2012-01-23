@@ -26,52 +26,48 @@ namespace FlagSync.Core.FileSystem.ITunes
         public event EventHandler<DataTransferEventArgs> FileCopyProgressChanged;
 
         /// <summary>
-        /// Tries to delete a file.
+        /// Deletes the specified file. This method always throws an <see cref="NotSupportedException"/>.
         /// </summary>
         /// <param name="file">The file to delete.</param>
-        /// <returns>
-        ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryDeleteFile(IFileInfo file)
+        /// <exception cref="AccessException">The file could not be accessed.</exception>
+        /// <exception cref="NotSupportedException">This method is not supported.</exception>
+        public void DeleteFile(IFileInfo file)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Tries to create a directory in the specified directory.
+        /// Creates the specified directory in the target directory. This method always throws an <see cref="NotSupportedException"/>.
         /// </summary>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>
-        ///   <c>true</c>, if the creation has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
+        /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        /// <exception cref="NotSupportedException">This method is not supported.</exception>
+        public void CreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Tries to delete a directory.
+        /// Deletes the specified directory. This method always throws an <see cref="NotSupportedException"/>.
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
-        /// <returns>
-        ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryDeleteDirectory(IDirectoryInfo directory)
+        /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        /// <exception cref="NotSupportedException">This method is not supported.</exception>
+        public void DeleteDirectory(IDirectoryInfo directory)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Tries to copy a file to specified directory.
+        /// Copies the specified file to the target directory. This method always throws an <see cref="NotSupportedException"/>.
         /// </summary>
         /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>
-        ///   <c>true</c>, if the copy operation has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
+        /// <exception cref="AccessException">The source file or target directory could not be accessed.</exception>
+        /// <exception cref="NotSupportedException">This method is not supported.</exception>
+        public void CopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
             throw new NotSupportedException();
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using FlagFtp;
@@ -32,13 +31,13 @@ namespace FlagSync.Core.FileSystem.Ftp
         }
 
         /// <summary>
-        /// Tries to delete a file.
+        /// Deletes the specified file.
         /// </summary>
         /// <param name="file">The file to delete.</param>
-        /// <returns>
-        ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryDeleteFile(IFileInfo file)
+        /// <exception cref="AccessException">The file could not be accessed.</exception>
+        /// <exception cref="ArgumentException">The file is not of type <see cref="FlagFtp.FtpFileInfo"/>.</exception>
+        /// <exception cref="FileSystemUnavailableException">The file system is currently unavailable.</exception>
+        public void DeleteFile(IFileInfo file)
         {
             file.ThrowIfNull(() => file);
 
@@ -52,23 +51,24 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
-                Debug.WriteLine(ex.Message);
+                switch (ex.Status)
+                {
+                    case WebExceptionStatus.ConnectFailure:
+                    case WebExceptionStatus.ProxyNameResolutionFailure:
+                        throw new FileSystemUnavailableException("The FTP server is currently unavailable.", ex);
+                }
 
-                return false;
+                throw new AccessException("The file could not be accessed", ex);
             }
-
-            return true;
         }
 
         /// <summary>
-        /// Tries to create a directory in the specified directory.
+        /// Creates the specified directory in the target directory.
         /// </summary>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>
-        ///   <c>true</c>, if the creation has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
+        /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        public void CreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
             sourceDirectory.ThrowIfNull(() => sourceDirectory);
             targetDirectory.ThrowIfNull(() => targetDirectory);
@@ -82,22 +82,24 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
-                Debug.WriteLine(ex.Message);
+                switch (ex.Status)
+                {
+                    case WebExceptionStatus.ConnectFailure:
+                    case WebExceptionStatus.ProxyNameResolutionFailure:
+                        throw new FileSystemUnavailableException("The FTP server is currently unavailable.", ex);
+                }
 
-                return false;
+                throw new AccessException("The directory could not be accessed", ex);
             }
-
-            return true;
         }
 
         /// <summary>
-        /// Tries to delete a directory.
+        /// Deletes the specified directory.
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
-        /// <returns>
-        ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryDeleteDirectory(IDirectoryInfo directory)
+        /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        /// /// <exception cref="ArgumentException">The directory is not of type <see cref="FlagFtp.FtpDirectoryInfo"/>.</exception>
+        public void DeleteDirectory(IDirectoryInfo directory)
         {
             directory.ThrowIfNull(() => directory);
 
@@ -110,24 +112,26 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             catch (WebException ex)
             {
-                Debug.WriteLine(ex.Message);
+                switch (ex.Status)
+                {
+                    case WebExceptionStatus.ConnectFailure:
+                    case WebExceptionStatus.ProxyNameResolutionFailure:
+                        throw new FileSystemUnavailableException("The FTP server is currently unavailable.", ex);
+                }
 
-                return false;
+                throw new AccessException("The directory could not be accessed", ex);
             }
-
-            return true;
         }
 
         /// <summary>
-        /// Tries to copy a file to specified directory.
+        /// Copies the specified file to the target directory.
         /// </summary>
         /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>
-        ///   <c>true</c>, if the copy operation has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
+        /// <exception cref="AccessException">The source file or target directory could not be accessed.</exception>
+        /// /// <exception cref="ArgumentException">The target directory is not of type <see cref="FlagFtp.FtpDirectoryInfo"/>.</exception>
+        public void CopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
             sourceFileSystem.ThrowIfNull(() => sourceFileSystem);
             sourceFile.ThrowIfNull(() => sourceFile);
@@ -136,14 +140,10 @@ namespace FlagSync.Core.FileSystem.Ftp
             if (!(targetDirectory is FtpDirectoryInfo))
                 throw new ArgumentException("The target directory must be of type FtpDirectoryInfo.", "targetDirectory");
 
-            bool succeed = false;
-
             Uri targetFilePath = new Uri(this.CombinePath(targetDirectory.FullName, sourceFile.Name));
 
             try
             {
-                bool canceled = false;
-
                 using (Stream sourceStream = sourceFileSystem.OpenFileStream(sourceFile))
                 {
                     using (Stream targetStream = this.client.OpenWrite(targetFilePath))
@@ -152,27 +152,26 @@ namespace FlagSync.Core.FileSystem.Ftp
                         {
                             var copyOperation = new StreamCopyOperation(sourceStream, targetStream, 8 * 1024, true);
 
-                            copyOperation.CopyProgressChanged += (sender, e) =>
-                            {
-                                this.FileCopyProgressChanged.RaiseSafe(this, e);
-
-                                canceled = e.Cancel;
-                            };
+                            copyOperation.CopyProgressChanged +=
+                                (sender, e) => this.FileCopyProgressChanged.RaiseSafe(this, e);
 
                             copyOperation.Execute();
                         }
                     }
                 }
-
-                succeed = !canceled;
             }
 
             catch (WebException ex)
             {
-                Debug.WriteLine(ex.Message);
-            }
+                switch (ex.Status)
+                {
+                    case WebExceptionStatus.ConnectFailure:
+                    case WebExceptionStatus.ProxyNameResolutionFailure:
+                        throw new FileSystemUnavailableException("The FTP server is currently unavailable.", ex);
+                }
 
-            return succeed;
+                throw new AccessException("The file could not be accessed", ex);
+            }
         }
 
         /// <summary>

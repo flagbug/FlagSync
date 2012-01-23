@@ -47,6 +47,8 @@
     <Compile Include="FileDeletionErrorEventArgs.cs" />
     <Compile Include="FileDeletionEventArgs.cs" />
     <Compile Include="FileProceededEventArgs.cs" />
+    <Compile Include="FileSystem\AccessException.cs" />
+    <Compile Include="FileSystem\FileSystemUnavailableException.cs" />
     <Compile Include="JobEventArgs.cs" />
     <Compile Include="BackupJob.cs" />
     <Compile Include="FileSystem\FileCountResult.cs" />

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Security;
 using FlagLib.Extensions;
@@ -16,143 +15,117 @@ namespace FlagSync.Core.FileSystem.Local
         public event EventHandler<DataTransferEventArgs> FileCopyProgressChanged;
 
         /// <summary>
-        /// Tries to delete a file.
+        /// Deletes the specified file.
         /// </summary>
         /// <param name="file">The file to delete.</param>
-        /// <returns>
-        ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryDeleteFile(IFileInfo file)
+        /// <exception cref="AccessException">The file could not be accessed.</exception>
+        public void DeleteFile(IFileInfo file)
         {
             file.ThrowIfNull(() => file);
 
             if (!(file is LocalFileInfo))
                 throw new ArgumentException("The file must be of type LocalFileInfo.", "file");
 
-            bool succeed = false;
-
             try
             {
                 File.SetAttributes(file.FullName, FileAttributes.Normal);
                 File.Delete(file.FullName);
-
-                succeed = true;
             }
 
             catch (IOException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
 
             catch (SecurityException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
 
             catch (UnauthorizedAccessException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
-
-            return succeed;
         }
 
         /// <summary>
-        /// Tries to create a directory in the specified directory.
+        /// Creates the specified directory in the target directory.
         /// </summary>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>
-        ///   <c>true</c>, if the creation has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryCreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
+        /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        public void CreateDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
             sourceDirectory.ThrowIfNull(() => sourceDirectory);
             targetDirectory.ThrowIfNull(() => targetDirectory);
 
-            bool succeed = false;
-
             try
             {
                 Directory.CreateDirectory(this.CombinePath(targetDirectory.FullName, sourceDirectory.Name));
-
-                succeed = true;
             }
 
             catch (DirectoryNotFoundException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
 
             catch (PathTooLongException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
 
             catch (IOException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
 
             catch (UnauthorizedAccessException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException(ex.Message, ex);
             }
-
-            return succeed;
         }
 
         /// <summary>
-        /// Tries to delete a directory.
+        /// Deletes the specified directory.
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
-        /// <returns>
-        ///   <c>true</c>, if the deletion has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryDeleteDirectory(IDirectoryInfo directory)
+        /// <exception cref="AccessException">The directory could not be accessed.</exception>
+        public void DeleteDirectory(IDirectoryInfo directory)
         {
             directory.ThrowIfNull(() => directory);
 
             if (!(directory is LocalDirectoryInfo))
                 throw new ArgumentException("The directory must be of type LocalDirectoryInfo.", "directory");
 
-            bool succeed = false;
-
             try
             {
                 Directory.Delete(directory.FullName, true);
-
-                succeed = true;
             }
 
             catch (DirectoryNotFoundException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
 
             catch (IOException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
 
             catch (UnauthorizedAccessException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
-
-            return succeed;
         }
 
         /// <summary>
-        /// Tries to copy a file to specified directory.
+        /// Copies the specified file to the target directory.
         /// </summary>
         /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="sourceFile">The source file.</param>
         /// <param name="targetDirectory">The target directory.</param>
-        /// <returns>
-        ///   <c>true</c>, if the copy operation has succeed; otherwise, <c>false</c>.
-        /// </returns>
-        public bool TryCopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
+        /// <exception cref="AccessException">The source file or target directory could not be accessed.</exception>
+        public void CopyFile(IFileSystem sourceFileSystem, IFileInfo sourceFile, IDirectoryInfo targetDirectory)
         {
             sourceFileSystem.ThrowIfNull(() => sourceFileSystem);
             sourceFile.ThrowIfNull(() => sourceFile);
@@ -160,8 +133,6 @@ namespace FlagSync.Core.FileSystem.Local
 
             if (!(targetDirectory is LocalDirectoryInfo))
                 throw new ArgumentException("The target directory must be of type LocalDirectoryInfo.", "targetDirectory");
-
-            bool succeed = false;
 
             try
             {
@@ -171,32 +142,22 @@ namespace FlagSync.Core.FileSystem.Local
 
                     try
                     {
-                        bool canceled = false;
-
                         using (FileStream targetStream = File.Create(targetFilePath))
                         {
                             if (sourceFile.Length > 0)
                             {
                                 var copyOperation = new StreamCopyOperation(sourceStream, targetStream, 256 * 1024, true);
 
-                                copyOperation.CopyProgressChanged += (sender, e) =>
-                                {
-                                    this.FileCopyProgressChanged.RaiseSafe(
-                                        this, e);
-
-                                    canceled = e.Cancel;
-                                };
+                                copyOperation.CopyProgressChanged +=
+                                    (sender, e) => this.FileCopyProgressChanged.RaiseSafe(this, e);
 
                                 copyOperation.Execute();
                             }
                         }
-
-                        succeed = !canceled;
                     }
 
-                    catch (IOException ex)
+                    catch (IOException)
                     {
-                        Debug.WriteLine(ex.Message);
                         File.Delete(targetFilePath);
 
                         throw;
@@ -206,20 +167,18 @@ namespace FlagSync.Core.FileSystem.Local
 
             catch (UnauthorizedAccessException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
 
             catch (SecurityException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
 
             catch (IOException ex)
             {
-                Debug.WriteLine(ex.Message);
+                throw new AccessException("The file could not be accessed.", ex);
             }
-
-            return succeed;
         }
 
         /// <summary>
