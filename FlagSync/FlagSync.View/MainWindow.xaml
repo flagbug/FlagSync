@@ -147,7 +147,7 @@
             </Grid.ColumnDefinitions>
             <GroupBox Grid.Column="0" Header="{x:Static properties:Resources.CurrentJobGroupBoxText}" Padding="3">
                 <Grid>
-                    <Grid Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid VerticalAlignment="Center" Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -158,13 +158,13 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.NameTextBlockText}" />
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.NameTextBlockText}"  FontWeight="Bold"/>
                         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=CurrentJob.Name}" Margin="10,0,0,0" />
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryATextBlockText}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryATextBlockText}" FontWeight="Bold" />
                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=CurrentJob.DirectoryA}" Margin="10,0,0,0" />
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryBTextBlockText}" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.DirectoryBTextBlockText}" FontWeight="Bold" />
                         <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=CurrentJob.DirectoryB}" Margin="10,0,0,0" />
-                        <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.ModeTextBlockText}" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.ModeTextBlockText}" FontWeight="Bold" />
                         <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=CurrentJob.SyncModeString}" Margin="10,0,0,0" />
                     </Grid>
                     <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.NoActiveJobText}" HorizontalAlignment="Center" VerticalAlignment="Center">
