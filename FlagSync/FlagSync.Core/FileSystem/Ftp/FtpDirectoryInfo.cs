@@ -68,10 +68,12 @@ namespace FlagSync.Core.FileSystem.Ftp
         ///   </exception>
         public IEnumerable<IFileInfo> GetFiles()
         {
-            return this.client.GetFiles(new Uri(this.FullName))
+            return this.client
+                .GetFiles(new Uri(this.FullName))
                 .Where(file => file.Name != ".ftpquota")
                 .Select(file => new FtpFileInfo(file.FullName, file.LastWriteTime, file.Length, this.client))
-                .Cast<IFileInfo>();
+                .Cast<IFileInfo>()
+                .ToList();
         }
 
         /// <summary>
@@ -85,9 +87,11 @@ namespace FlagSync.Core.FileSystem.Ftp
         ///   </exception>
         public IEnumerable<IDirectoryInfo> GetDirectories()
         {
-            return this.client.GetDirectories(new Uri(this.FullName))
+            return this.client
+                .GetDirectories(new Uri(this.FullName))
                 .Select(directory => new FtpDirectoryInfo(directory.FullName, this.client))
-                .Cast<IDirectoryInfo>();
+                .Cast<IDirectoryInfo>()
+                .ToList();
         }
 
         /// <summary>
