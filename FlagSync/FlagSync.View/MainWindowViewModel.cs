@@ -35,6 +35,7 @@ namespace FlagSync.View
         private CircularBuffer<long> averageSpeedBuffer;
         private bool isAborted;
         private bool isDeleting;
+        private bool isPreview;
 
         /// <summary>
         /// Gets a value indicating whether there is any job setting in the list.
@@ -281,7 +282,18 @@ namespace FlagSync.View
         /// Gets or sets a value indicating whether the job worker performs a preview.
         /// </summary>
         /// <value>true if the job worker performs a preview; otherwise, false.</value>
-        public bool IsPreview { get; private set; }
+        public bool IsPreview
+        {
+            get { return this.isPreview; }
+            private set
+            {
+                if (this.IsPreview != value)
+                {
+                    this.isPreview = value;
+                    this.OnPropertyChanged(vm => vm.IsPreview);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the current log message.
