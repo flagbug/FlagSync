@@ -17,4 +17,4 @@ Features
 
 Media
 -----
-[Addictive Tipps](http://www.addictivetips.com/windows-tips/sync-itunes-with-portable-media-player-backup-data-on-ftp-usb-flagsync/)
+- [Addictive Tipps](http://www.addictivetips.com/windows-tips/sync-itunes-with-portable-media-player-backup-data-on-ftp-usb-flagsync/)
