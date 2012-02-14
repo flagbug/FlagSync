@@ -70,6 +70,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="JobCompositionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LocalJobSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +99,9 @@
       <DependentUpon>ITunesJobSettingsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ITunesJobSettingsViewModel.cs" />
+    <Compile Include="JobCompositionControl.xaml.cs">
+      <DependentUpon>JobCompositionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JobSettingViewModel.cs" />
     <Compile Include="JobViewModel.cs" />
     <Compile Include="LocalJobSettingsPanel.xaml.cs">
