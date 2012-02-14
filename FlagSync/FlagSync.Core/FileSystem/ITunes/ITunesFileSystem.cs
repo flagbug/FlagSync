@@ -384,7 +384,8 @@ namespace FlagSync.Core.FileSystem.ITunes
         {
             var playlist = new iTunesAppClass()
                 .LibrarySource
-                .Playlists.ItemByName[playlistName];
+                .Playlists
+                .ItemByName[playlistName];
 
             return playlist != null;
         }
