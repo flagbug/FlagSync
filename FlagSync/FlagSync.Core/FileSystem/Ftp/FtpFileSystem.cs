@@ -105,6 +105,7 @@ namespace FlagSync.Core.FileSystem.Ftp
 
             if (!(directory is FtpDirectoryInfo))
                 throw new ArgumentException("The directory must be of type FtpDirectoryInfo.", "directory");
+
             try
             {
                 this.client.DeleteDirectory(new Uri(directory.FullName + "/"));
