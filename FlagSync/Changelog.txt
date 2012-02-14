@@ -1,3 +1,20 @@
+----------------------------------- v2.4.2 -----------------------------------
+
+CHANGES:
+- Changed the look of the current job display a bit.
+
+IMPROVEMENTS:
+ - The average speed is now hidden, when the user starts a preview.
+
+BUGFIXES:
+- Fixed a bug, that caused the average speed text to not appear when a new 
+  job starts.
+- Fixed a bug, that caused the application to crash during the calculation of 
+  the average speed.
+- Fixed a bug, that caused the application to crash during a synchonization 
+  with iTunes.
+- Fixed a bug, that caused a wrong synchronization with FTP-servers.
+
 ----------------------------------- v2.4.1 -----------------------------------
 
 CHANGES:
