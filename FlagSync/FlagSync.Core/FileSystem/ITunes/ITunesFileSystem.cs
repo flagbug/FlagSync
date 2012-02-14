@@ -303,7 +303,7 @@ namespace FlagSync.Core.FileSystem.ITunes
 
             var root = new ITunesDirectoryInfo(playlistName);
 
-            var files = new iTunesAppClass()
+            var files = new iTunesApp()
                 .LibrarySource
                 .Playlists
                 .ItemByName[playlistName]
@@ -382,7 +382,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <returns>True, if the playlist exists; otherwise, false.</returns>
         private static bool PlaylistExists(string playlistName)
         {
-            var playlist = new iTunesAppClass()
+            var playlist = new iTunesApp()
                 .LibrarySource
                 .Playlists
                 .ItemByName[playlistName];
