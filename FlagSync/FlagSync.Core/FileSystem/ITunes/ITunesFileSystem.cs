@@ -173,7 +173,7 @@ namespace FlagSync.Core.FileSystem.ITunes
             string[] split = path.Split(Path.DirectorySeparatorChar);
 
             if (split.Length < 4)
-                throw new ArgumentException("The path is not valid.", Reflector.GetMemberName(() => path));
+                return false;
 
             string playlist = split[0];
             string artist = split[1];
@@ -382,11 +382,11 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// <returns>True, if the playlist exists; otherwise, false.</returns>
         private static bool PlaylistExists(string playlistName)
         {
-            return new iTunesAppClass()
+            var playlist = new iTunesAppClass()
                 .LibrarySource
-                .Playlists
-                .Cast<IITLibraryPlaylist>()
-                .Any(playlist => playlist.Name == playlistName);
+                .Playlists.ItemByName[playlistName];
+
+            return playlist != null;
         }
 
         /// <summary>
