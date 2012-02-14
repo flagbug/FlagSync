@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -202,10 +201,8 @@ namespace FlagSync.Core.FileSystem.ITunes
                 }
             }
 
-            catch (COMException ex)
+            catch (COMException)
             {
-                Debug.WriteLine(ex.Message);
-
                 return false;
             }
 
@@ -261,10 +258,8 @@ namespace FlagSync.Core.FileSystem.ITunes
                 return false;
             }
 
-            catch (COMException ex)
+            catch (COMException)
             {
-                Debug.WriteLine(ex.Message);
-
                 return false;
             }
         }
