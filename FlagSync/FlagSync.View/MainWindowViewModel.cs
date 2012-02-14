@@ -9,6 +9,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Shell;
 using FlagLib.Collections;
 using FlagLib.Extensions;
 using FlagLib.IO;
@@ -16,7 +17,6 @@ using FlagLib.Patterns.MVVM;
 using FlagSync.Core;
 using FlagSync.Data;
 using FlagSync.View.Properties;
-using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace FlagSync.View
 {
@@ -36,6 +36,20 @@ namespace FlagSync.View
         private bool isAborted;
         private bool isDeleting;
         private bool isPreview;
+        private TaskbarItemProgressState progressState;
+
+        public TaskbarItemProgressState ProgressState
+        {
+            get { return this.progressState; }
+            set
+            {
+                if (this.ProgressState != value)
+                {
+                    this.progressState = value;
+                    this.OnPropertyChanged(vm => vm.ProgressState);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether there is any job setting in the list.
@@ -191,6 +205,14 @@ namespace FlagSync.View
             {
                 return ((double)this.ProceededBytes / this.CountedBytes) * 100.0;
             }
+        }
+
+        /// <summary>
+        /// Gets the total progress percentage in a range from 0.0 to 1.0.
+        /// </summary>
+        public double TotalProgressPercentageSmall
+        {
+            get { return this.TotalProgressPercentage / 100; }
         }
 
         /// <summary>
@@ -397,10 +419,7 @@ namespace FlagSync.View
                         this.AddStatusMessage(Resources.StartingJobsMessage);
                         this.AddStatusMessage(Resources.CountingFilesMessage);
 
-                        if (TaskbarManager.IsPlatformSupported)
-                        {
-                            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Indeterminate);
-                        }
+                        this.ProgressState = TaskbarItemProgressState.Indeterminate;
                     },
                     param => this.JobSettings.Any(setting => setting.IsIncluded)
                              && !this.JobSettings
@@ -455,6 +474,7 @@ namespace FlagSync.View
                         this.IsAborted = true;
                         this.ResetBytes();
                         this.AddStatusMessage(Resources.StoppedAllJobsMessage);
+                        this.ProgressState = TaskbarItemProgressState.Error;
                     },
                     param => this.IsRunning
                 );
@@ -655,10 +675,7 @@ namespace FlagSync.View
 
             this.AddStatusMessage(Resources.PausedJobsMessage);
 
-            if (TaskbarManager.IsPlatformSupported)
-            {
-                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Paused);
-            }
+            this.ProgressState = TaskbarItemProgressState.Paused;
         }
 
         /// <summary>
@@ -674,10 +691,7 @@ namespace FlagSync.View
             this.AddStatusMessage(Resources.ContinuingJobsMessage);
             this.AddStatusMessage(Resources.StartingJobsMessage + " " + this.CurrentJob.Name + "...");
 
-            if (TaskbarManager.IsPlatformSupported)
-            {
-                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
-            }
+            this.ProgressState = TaskbarItemProgressState.Normal;
         }
 
         /// <summary>
@@ -805,10 +819,7 @@ namespace FlagSync.View
 
             this.AddStatusMessage(Resources.FinishedFileCountingMessage);
 
-            if (TaskbarManager.IsPlatformSupported)
-            {
-                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
-            }
+            this.ProgressState = TaskbarItemProgressState.Normal;
         }
 
         /// <summary>
@@ -866,11 +877,7 @@ namespace FlagSync.View
             {
                 this.ProceededBytes += e.FileLength;
                 this.OnPropertyChanged(vm => vm.TotalProgressPercentage);
-
-                if (TaskbarManager.IsPlatformSupported)
-                {
-                    TaskbarManager.Instance.SetProgressValue((int)this.TotalProgressPercentage, 100);
-                }
+                this.OnPropertyChanged(vm => vm.TotalProgressPercentageSmall);
             }
         }
 

@@ -11,6 +11,9 @@
         WindowState="Maximized" Closing="Window_Closing"
         MinWidth="800" MinHeight="600"
         Loaded="Window_Loaded">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo ProgressState="{Binding Path=ProgressState}" ProgressValue="{Binding Path=TotalProgressPercentageSmall}" />
+    </Window.TaskbarItemInfo>
     <Window.DataContext>
         <local:MainWindowViewModel x:Name="mainWindowViewModel" x:FieldModifier="private" />
     </Window.DataContext>

@@ -44,12 +44,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FlagLib.4.4.0\lib\FlagLib.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack">
-      <HintPath>..\packages\Microsoft.WindowsAPICodePack.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
-      <HintPath>..\packages\Microsoft.WindowsAPICodePack.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
