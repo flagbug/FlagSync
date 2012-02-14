@@ -25,7 +25,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         public event EventHandler<DataTransferEventArgs> FileCopyProgressChanged;
 
         /// <summary>
-        /// Deletes the specified file. This method always throws an <see cref="NotSupportedException"/>.
+        /// Deletes the specified file. This method always throws a <see cref="NotSupportedException"/>.
         /// </summary>
         /// <param name="file">The file to delete.</param>
         /// <exception cref="AccessException">The file could not be accessed.</exception>
@@ -36,7 +36,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         }
 
         /// <summary>
-        /// Creates the specified directory in the target directory. This method always throws an <see cref="NotSupportedException"/>.
+        /// Creates the specified directory in the target directory. This method always throws a <see cref="NotSupportedException"/>.
         /// </summary>
         /// <param name="sourceDirectory">The source directory.</param>
         /// <param name="targetDirectory">The target directory.</param>
@@ -48,7 +48,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         }
 
         /// <summary>
-        /// Deletes the specified directory. This method always throws an <see cref="NotSupportedException"/>.
+        /// Deletes the specified directory. This method always throws a <see cref="NotSupportedException"/>.
         /// </summary>
         /// <param name="directory">The directory to delete.</param>
         /// <exception cref="AccessException">The directory could not be accessed.</exception>
@@ -59,7 +59,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         }
 
         /// <summary>
-        /// Copies the specified file to the target directory. This method always throws an <see cref="NotSupportedException"/>.
+        /// Copies the specified file to the target directory. This method always throws a <see cref="NotSupportedException"/>.
         /// </summary>
         /// <param name="sourceFileSystem">The source file system.</param>
         /// <param name="sourceFile">The source file.</param>
