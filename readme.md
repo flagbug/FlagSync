@@ -18,3 +18,10 @@ Features
 Media
 -----
 - [Addictive Tipps](http://www.addictivetips.com/windows-tips/sync-itunes-with-portable-media-player-backup-data-on-ftp-usb-flagsync/)  - *Aug 19 2011*
+
+Screenshot
+----------
+![The settings tab][1]
+
+[1]: http://flagbug.github.com/flagsync/flagsync-settings.jpg
+                  
