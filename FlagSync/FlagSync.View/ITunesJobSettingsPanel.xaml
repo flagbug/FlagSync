@@ -12,7 +12,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Static properties:Resources.PlaylistJobSettingTextBlockText}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Static properties:Resources.PlaylistJobSettingTextBlockText}" VerticalAlignment="Center" />
             <ComboBox Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding Path=ITunesPlaylists}" SelectedItem="{Binding Path=JobSetting.ITunesPlaylist, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         </Grid>
     </GroupBox>

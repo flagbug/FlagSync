@@ -5,7 +5,7 @@
              xmlns:properties="clr-namespace:FlagSync.View.Properties"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top">
+             mc:Ignorable="d">
     <UserControl.DataContext>
         <local:LocalJobSettingsPanelViewModel x:Name="viewModel" />
     </UserControl.DataContext>
@@ -15,7 +15,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="0" Margin="5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Click="directoryAButton_Click">
+            <Button Grid.Column="0" Grid.Row="0" Margin="5" Height="25" Click="directoryAButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/FlagSync;component/Images/OpenFolder.png" />
                     <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryAButtonText}" VerticalAlignment="Center" />
