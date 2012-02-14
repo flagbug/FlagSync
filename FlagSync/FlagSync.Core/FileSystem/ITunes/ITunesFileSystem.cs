@@ -279,7 +279,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         }
 
         /// <summary>
-        /// Combines two paths for the specific file system.
+        /// Combines two paths for the specific file system. This method always throws a <see cref="NotSupportedException"/>.
         /// </summary>
         /// <param name="path1">The first path.</param>
         /// <param name="path2">The second path.</param>
