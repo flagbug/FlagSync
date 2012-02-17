@@ -20,9 +20,18 @@ Media
 - [Addictive Tips][1]  - *Aug 19 2011*
 
 Screenshot
-----------
-![The settings tab][2]
+-----------
+***Local backup***
+![Local backup][2]
+
+***iTunes sync***
+![iTunes sync][3]
+
+***FTP backup***
+![FTP backup][4]
 
 [1]: http://www.addictivetips.com/windows-tips/sync-itunes-with-portable-media-player-backup-data-on-ftp-usb-flagsync
-[2]: http://flagbug.github.com/flagsync/flagsync-settings.jpg
+[2]: http://flagbug.github.com/flagsync/local-backup.jpg
+[3]: http://flagbug.github.com/flagsync/iTunes-sync.JPG
+[4]: http://flagbug.github.com/flagsync/ftp-backup.jpg
                   

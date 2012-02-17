@@ -781,6 +781,10 @@ namespace FlagSync.View
                 this.LastLogMessage.Progress = 100;
             }
 
+            this.OnPropertyChanged(vm => vm.StartJobWorkerCommand);
+            this.OnPropertyChanged(vm => vm.PauseOrContinueJobWorkerCommand);
+            this.OnPropertyChanged(vm => vm.StopJobWorkerCommand);
+
             //HACK:
             this.ProceededBytes = this.CountedBytes;
             this.OnPropertyChanged(vm => vm.TotalProgressPercentage);
