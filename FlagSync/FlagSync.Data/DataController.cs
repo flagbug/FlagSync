@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using FlagFtp;
-using FlagLib.Serialization;
+using Rareform.Serialization;
 using FlagSync.Core;
 using FlagSync.Core.FileSystem.Ftp;
 using FlagSync.Core.FileSystem.ITunes;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using FlagLib.IO;
+using Rareform.IO;
 
 namespace FlagSync.Core.FileSystem.Base
 {

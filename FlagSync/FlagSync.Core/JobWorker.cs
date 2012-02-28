@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using FlagLib.Extensions;
-using FlagLib.IO;
+using Rareform.Extensions;
+using Rareform.IO;
 using FlagSync.Core.FileSystem;
 
 namespace FlagSync.Core
@@ -367,7 +367,7 @@ namespace FlagSync.Core
         /// Handles the FileCopyProgressChanged event of the currentJob control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Rareform.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         private void currentJob_FileCopyProgressChanged(object sender, DataTransferEventArgs e)
         {
             this.FileCopyProgressChanged.RaiseSafe(this, e);
