@@ -10,10 +10,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shell;
-using FlagLib.Collections;
-using FlagLib.Extensions;
-using FlagLib.IO;
-using FlagLib.Patterns.MVVM;
+using Rareform.Extensions;
+using Rareform.IO;
+using Rareform.Patterns.MVVM;
 using FlagSync.Core;
 using FlagSync.Data;
 using FlagSync.View.Properties;
@@ -909,7 +908,7 @@ namespace FlagSync.View
         /// Handles the FileCopyProgressChanged event of the jobWorker control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Rareform.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         private void jobWorker_FileCopyProgressChanged(object sender, DataTransferEventArgs e)
         {
             if (e.TotalBytes != 0)

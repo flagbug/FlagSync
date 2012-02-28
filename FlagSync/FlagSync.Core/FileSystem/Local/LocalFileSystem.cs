@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Security;
-using FlagLib.Extensions;
-using FlagLib.IO;
+using Rareform.Extensions;
+using Rareform.IO;
 using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core.FileSystem.Local

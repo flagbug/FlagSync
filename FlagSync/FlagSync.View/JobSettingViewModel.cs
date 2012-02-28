@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using FlagLib.Patterns.MVVM;
-using FlagLib.Reflection;
+using Rareform.Patterns.MVVM;
+using Rareform.Reflection;
 using FlagSync.Data;
 using FlagSync.View.Properties;
 

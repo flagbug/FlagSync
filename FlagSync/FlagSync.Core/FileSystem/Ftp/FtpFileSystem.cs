@@ -2,8 +2,8 @@
 using System.IO;
 using System.Net;
 using FlagFtp;
-using FlagLib.Extensions;
-using FlagLib.IO;
+using Rareform.Extensions;
+using Rareform.IO;
 using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core.FileSystem.Ftp

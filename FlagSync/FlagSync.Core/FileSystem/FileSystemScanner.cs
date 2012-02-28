@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
-using FlagLib.Extensions;
+using Rareform.Extensions;
 using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core.FileSystem

@@ -1,4 +1,4 @@
-﻿using FlagLib.Extensions;
+﻿using Rareform.Extensions;
 
 namespace FlagSync.Core.FileSystem
 {

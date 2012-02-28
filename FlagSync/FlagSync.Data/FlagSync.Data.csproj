@@ -49,9 +49,8 @@
     <Reference Include="FlagFtp">
       <HintPath>..\packages\FlagFtp.0.1.2\lib\FlagFtp.dll</HintPath>
     </Reference>
-    <Reference Include="FlagLib, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FlagLib.4.4.0\lib\FlagLib.dll</HintPath>
+    <Reference Include="Rareform">
+      <HintPath>..\packages\Rareform.1.0.0\lib\Rareform.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

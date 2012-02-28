@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using FlagLib.Extensions;
-using FlagLib.IO;
-using FlagLib.Reflection;
+using Rareform.Extensions;
+using Rareform.IO;
+using Rareform.Reflection;
 using FlagSync.Core.FileSystem;
 using FlagSync.Core.FileSystem.Base;
 
@@ -366,7 +366,7 @@ namespace FlagSync.Core
         /// <summary>
         /// Raises the <see cref="FileCopyProgressChanged"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Rareform.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileProgressChanged(DataTransferEventArgs e)
         {
             this.FileCopyProgressChanged.RaiseSafe(this, e);
