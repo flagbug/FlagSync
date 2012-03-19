@@ -27,29 +27,6 @@
             </ResourceDictionary.MergedDictionaries>
             <local:ByteToKiloByteConverter x:Key="ByteToKiloByteConverter"/>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <Style TargetType="{x:Type TabItem}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type TabItem}">
-                            <Grid>
-                                <Border Name="Border" Background="White" BorderBrush="Black" BorderThickness="1">
-                                    <StackPanel Orientation="Horizontal">
-                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12, 2, 12, 2"/>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter TargetName="Border" Property="Background" Value="CornflowerBlue" />
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="False">
-                                    <Setter TargetName="Border" Property="Background" Value="White" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
             <Style TargetType="ProgressBar">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -270,13 +247,7 @@
             </GroupBox>
         </Grid>
         <TabControl Grid.Row="2" Margin="5, 0, 5, 5" SelectedIndex="{Binding Path=TabIndex, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/FlagSync;component/Images/Settings.png" Width="20" Height="20" />
-                        <ContentPresenter Content="{x:Static properties:Resources.SettingsTabItemText}" Margin="5,0,0,0" VerticalAlignment="Center" />
-                    </StackPanel>
-                </TabItem.Header>
+            <TabItem Header="Settings">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -398,13 +369,7 @@
                     <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=CurrentJobSettingsPanel, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
             </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/FlagSync;component/Images/Log.png" Width="20" Height="20" />
-                        <ContentPresenter Content="{x:Static properties:Resources.LogTabItemText}" Margin="5,0,0,0" VerticalAlignment="Center" />
-                    </StackPanel>
-                </TabItem.Header>
+            <TabItem Header="Log">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />
