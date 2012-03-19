@@ -289,9 +289,9 @@
                                                 <RowDefinition Height="Auto" />
                                                 <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
-                                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Static properties:Resources.ListBoxItemJobNameText}" FontWeight="Bold" Foreground="Green" />
+                                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Static properties:Resources.ListBoxItemJobNameText}" FontWeight="Bold" />
                                             <TextBlock Grid.Column="0" Grid.Row="1" Text="{x:Static properties:Resources.ListBoxItemJobTypeText}" FontWeight="Bold" />
-                                            <TextBlock Grid.Column="1" Grid.Row="0" Margin="5, 0, 0, 0" Text="{Binding Path=Name}" Foreground="#FFFF6700" FontWeight="Bold" />
+                                            <TextBlock Grid.Column="1" Grid.Row="0" Margin="5, 0, 0, 0" Text="{Binding Path=Name}" FontWeight="Bold" />
                                             <TextBlock Grid.Column="1" Grid.Row="1" Margin="5, 0, 0, 0" Text="{Binding Path=SyncModeString}" />
                                         </Grid>
                                     </StackPanel>
