@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using FlagSync.Data;
 using FlagSync.View.Properties;
 
@@ -69,20 +68,6 @@ namespace FlagSync.View
 
                 this.mainWindowViewModel.StartJobWorkerCommand.Execute(false);
             }
-        }
-
-        /// <summary>
-        /// Handles the Click event of the newJobButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void newJobButton_Click(object sender, RoutedEventArgs e)
-        {
-            var newJobButton = (Button)sender;
-            newJobButton.ContextMenu.IsEnabled = true;
-            newJobButton.ContextMenu.PlacementTarget = newJobButton;
-            newJobButton.ContextMenu.Placement = PlacementMode.Bottom;
-            newJobButton.ContextMenu.IsOpen = true;
         }
 
         /// <summary>
@@ -232,55 +217,6 @@ namespace FlagSync.View
         {
             var aboutBox = new AboutBox();
             aboutBox.ShowDialog();
-        }
-
-        /// <summary>
-        /// Handles the Click event of the newLocalJobButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void newLocalJobButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.mainWindowViewModel.AddNewJobSetting(SyncMode.LocalBackup);
-            this.CloseNewJobButtonContextMenu();
-        }
-
-        /// <summary>
-        /// Handles the Click event of the newFtpJobButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void newFtpJobButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.mainWindowViewModel.AddNewJobSetting(SyncMode.FtpBackup);
-            this.CloseNewJobButtonContextMenu();
-        }
-
-        /// <summary>
-        /// Handles the Click event of the newITunesJobButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void newITunesJobButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataController.IsITunesOpened())
-            {
-                this.mainWindowViewModel.AddNewJobSetting(SyncMode.ITunes);
-                this.CloseNewJobButtonContextMenu();
-            }
-
-            else
-            {
-                ShowITunesErrorMessageBox();
-            }
-        }
-
-        /// <summary>
-        /// Closes the new job button's context menu.
-        /// </summary>
-        private void CloseNewJobButtonContextMenu()
-        {
-            this.newJobButton.ContextMenu.IsOpen = false;
         }
 
         /// <summary>

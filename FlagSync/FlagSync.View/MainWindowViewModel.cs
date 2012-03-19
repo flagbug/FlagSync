@@ -353,22 +353,7 @@ namespace FlagSync.View
 
                     this.CurrentJobSettingsPanel.Clear();
 
-                    switch (value.SyncMode)
-                    {
-                        case SyncMode.LocalBackup:
-                        case SyncMode.LocalSynchronization:
-                            this.CurrentJobSettingsPanel.Add(new LocalJobSettingsPanel(value));
-                            break;
-
-                        case SyncMode.FtpBackup:
-                        case SyncMode.FtpSynchronization:
-                            this.CurrentJobSettingsPanel.Add(new FtpJobSettingsPanel(value));
-                            break;
-
-                        case SyncMode.ITunes:
-                            this.CurrentJobSettingsPanel.Add(new ITunesJobSettingsPanel(value));
-                            break;
-                    }
+                    this.CurrentJobSettingsPanel.Add(new JobCompositionControl());
                 }
             }
         }
@@ -549,6 +534,25 @@ namespace FlagSync.View
             }
         }
 
+        public ICommand AddNewJobSettingCommand
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    param =>
+                    {
+                        string name = Resources.NewJobString + " " + (this.JobSettings.Count + 1);
+                        var setting = new JobSettingViewModel(name);
+
+                        this.JobSettings.Add(setting);
+
+                        this.SelectedJobSetting = setting;
+                    }
+                );
+            }
+        }
+
         /// <summary>
         /// Gets the exit application command.
         /// </summary>
@@ -579,20 +583,6 @@ namespace FlagSync.View
             this.updateTimer = new Timer(1000);
             this.updateTimer.Elapsed += updateTimer_Elapsed;
             this.ResetJobWorker();
-        }
-
-        /// <summary>
-        /// Adds a new job setting with the specified mode.
-        /// </summary>
-        /// <param name="mode">The mode.</param>
-        public void AddNewJobSetting(SyncMode mode)
-        {
-            string name = Resources.NewJobString + " " + (this.JobSettings.Count + 1);
-            var setting = new JobSettingViewModel(name) { SyncMode = mode };
-
-            this.JobSettings.Add(setting);
-
-            this.SelectedJobSetting = setting;
         }
 
         /// <summary>
