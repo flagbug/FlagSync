@@ -268,46 +268,6 @@
                             </Button>
                         </Grid>
                         <ListBox Grid.Row="1" SelectedItem="{Binding Path=SelectedJobSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=JobSettings, UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,0">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="{x:Type ListBoxItem}">
-                                    <Setter Property="Margin" Value="5" />
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                                <Grid>
-                                                    <Border Name="Border" Padding="1" Background="Silver" >
-                                                        <StackPanel>
-                                                            <ContentPresenter />
-                                                        </StackPanel>
-                                                    </Border>
-                                                    <Border Padding="1" BorderThickness="2" BorderBrush="Red" Visibility="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.HasErrors, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                                </Grid>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsSelected" Value="True">
-                                                        <Setter Property="BorderThickness" TargetName="Border" Value="0" />
-                                                        <Setter Property="Background" TargetName="Border" Value="LightBlue" />
-                                                    </Trigger>
-                                                    <Trigger Property="IsSelected" Value="false">
-                                                        <Setter Property="BorderThickness" TargetName="Border" Value="0" />
-                                                        <Setter Property="Background" TargetName="Border" Value="LightGray" />
-                                                    </Trigger>
-                                                    <MultiTrigger>
-                                                        <MultiTrigger.Conditions>
-                                                            <Condition Property="IsSelected" Value="true" />
-                                                            <Condition Property="Selector.IsSelectionActive" Value="false" />
-                                                        </MultiTrigger.Conditions>
-                                                        <Setter Property="Background" TargetName="Border" Value="SkyBlue" />
-                                                        <Setter Property="BorderBrush" TargetName="Border" Value="Blue" />
-                                                    </MultiTrigger>
-                                                    <Trigger Property="IsEnabled" Value="false">
-                                                        <Setter Property="Foreground" Value="LightGray" />
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="5" Orientation="Horizontal">
