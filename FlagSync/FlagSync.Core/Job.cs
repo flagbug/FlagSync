@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using FlagSync.Core.FileSystem;
+using FlagSync.Core.FileSystem.Base;
 using Rareform.Extensions;
 using Rareform.IO;
 using Rareform.Reflection;
-using FlagSync.Core.FileSystem;
-using FlagSync.Core.FileSystem.Base;
 
 namespace FlagSync.Core
 {
@@ -18,6 +18,7 @@ namespace FlagSync.Core
         private readonly HashSet<string> proceededFilePaths;
         private readonly HashSet<string> excludedPaths;
         private readonly HashSet<string> deletedDirectoryPaths;
+        private readonly AutoResetEvent pauseHandle;
 
         /// <summary>
         /// Gets the source file system.
@@ -179,6 +180,8 @@ namespace FlagSync.Core
             this.proceededFilePaths = new HashSet<string>();
             this.excludedPaths = new HashSet<string>();
             this.deletedDirectoryPaths = new HashSet<string>();
+
+            this.pauseHandle = new AutoResetEvent(false);
         }
 
         /// <summary>
@@ -205,6 +208,7 @@ namespace FlagSync.Core
         public virtual void Continue()
         {
             this.IsPaused = false;
+            this.pauseHandle.Set();
         }
 
         /// <summary>
@@ -231,9 +235,9 @@ namespace FlagSync.Core
         /// </summary>
         protected void CheckPause()
         {
-            while (this.IsPaused)
+            if (this.IsPaused)
             {
-                Thread.Sleep(500);
+                this.pauseHandle.WaitOne();
             }
         }
 
