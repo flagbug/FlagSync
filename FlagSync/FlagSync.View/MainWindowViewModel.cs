@@ -346,7 +346,13 @@ namespace FlagSync.View
             get { return this.selectedJobSetting; }
             set
             {
-                if (this.SelectedJobSetting != value)
+                if (value == null && this.SelectedJobSetting != null)
+                {
+                    this.selectedJobSetting = null;
+                    this.CurrentJobSettingsPanel.Clear();
+                }
+
+                else if (this.SelectedJobSetting != value)
                 {
                     this.selectedJobSetting = value;
                     this.OnPropertyChanged(vm => vm.SelectedJobSetting);
@@ -479,10 +485,7 @@ namespace FlagSync.View
                     {
                         this.JobSettings.Remove(this.SelectedJobSetting);
 
-                        if (this.JobSettings.Count != 0)
-                        {
-                            this.SelectedJobSetting = this.JobSettings.Last();
-                        }
+                        this.SelectedJobSetting = this.JobSettings.Count != 0 ? this.JobSettings.Last() : null;
                     }
                 );
             }
