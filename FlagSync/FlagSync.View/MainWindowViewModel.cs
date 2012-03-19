@@ -10,12 +10,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shell;
-using Rareform.Extensions;
-using Rareform.IO;
-using Rareform.Patterns.MVVM;
 using FlagSync.Core;
 using FlagSync.Data;
 using FlagSync.View.Properties;
+using Rareform.Collections;
+using Rareform.Extensions;
+using Rareform.IO;
+using Rareform.Patterns.MVVM;
 
 namespace FlagSync.View
 {

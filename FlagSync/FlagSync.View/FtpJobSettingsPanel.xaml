@@ -26,8 +26,8 @@
             <TextBlock Grid.Column="0" Grid.Row="1" Text="{x:Static properties:Resources.FtpServerUserNameJobSettingsTextBlockText}" VerticalAlignment="Center" HorizontalAlignment="Right" />
             <TextBox Grid.Column="1" Grid.Row="1" Margin="5" Text="{Binding Path=JobSetting.FtpUserName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
             <TextBlock Grid.Column="0" Grid.Row="2" Text="{x:Static properties:Resources.FtpServerPasswordJobSettingsTextBlockText}" VerticalAlignment="Center" HorizontalAlignment="Right" />
-            <PasswordBox Grid.Column="1" Grid.Row="2" flaglib.wpf:PasswordBoxBinder.Attach="True" flaglib.wpf:PasswordBoxBinder.Password="{Binding Text, ElementName=JobSetting.FtpPassword}" Margin="5" PasswordChanged="PasswordBox_PasswordChanged" />
-                    <PasswordBox Grid.Column="1" Grid.Row="3" Rareform.wpf:PasswordBoxBinder.Attach="True" Rareform.wpf:PasswordBoxBinder.Password="{Binding Text, ElementName=JobSetting.FtpPassword, Mode=TwoWay}" Height="25" Margin="5" PasswordChanged="PasswordBox_PasswordChanged" />
+            <PasswordBox Grid.Column="1" Grid.Row="2" Rareform.wpf:PasswordBoxBinder.Attach="True" Rareform.wpf:PasswordBoxBinder.Password="{Binding Text, ElementName=JobSetting.FtpPassword}" Margin="5" PasswordChanged="PasswordBox_PasswordChanged" />
+            <PasswordBox Grid.Column="1" Grid.Row="3" Rareform.wpf:PasswordBoxBinder.Attach="True" Rareform.wpf:PasswordBoxBinder.Password="{Binding Text, ElementName=JobSetting.FtpPassword, Mode=TwoWay}" Height="25" Margin="5" PasswordChanged="PasswordBox_PasswordChanged" />
         </Grid>
     </GroupBox>
 </UserControl>
