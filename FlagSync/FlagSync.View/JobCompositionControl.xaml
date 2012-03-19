@@ -3,17 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Properties="clr-namespace:FlagSync.View.Properties">
     <UserControl.Resources>
-        <Style x:Key="SelectionButtonStyle" TargetType="Button">
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Background" Value="Transparent" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Black" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,7 +21,7 @@
             <TextBlock Text="1." FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" />
             <TextBlock HorizontalAlignment="Center" Text="Select the first filesystem" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 5, 0, 0">
-                <Button Style="{StaticResource SelectionButtonStyle}">
+                <Button>
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
                             <Image Source="/FlagSync;component/Images/Local.png" Width="50" Height="50" />
@@ -33,7 +29,7 @@
                         </StackPanel>
                     </Button.Content>
                 </Button>
-                <Button Margin="5, 0, 0, 0" Style="{StaticResource SelectionButtonStyle}">
+                <Button Margin="5, 0, 0, 0">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
                             <Image Source="/FlagSync;component/Images/FtpServer.png" Width="50" Height="50" />
@@ -41,7 +37,7 @@
                         </StackPanel>
                     </Button.Content>
                 </Button>
-                <Button Margin="5, 0, 0, 0" Style="{StaticResource SelectionButtonStyle}">
+                <Button Margin="5, 0, 0, 0">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
                             <Image Source="/FlagSync;component/Images/iTunes.png" Width="50" Height="50" />
@@ -55,7 +51,7 @@
             <TextBlock Grid.Row="0" Text="2." FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" />
             <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="Select the second filesystem" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 5, 0, 0">
-                <Button Margin="5, 0, 0, 0" Style="{StaticResource SelectionButtonStyle}">
+                <Button Margin="5, 0, 0, 0">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
                             <Image Source="/FlagSync;component/Images/Local.png" Width="50" Height="50" />
@@ -63,7 +59,7 @@
                         </StackPanel>
                     </Button.Content>
                 </Button>
-                <Button Margin="5, 0, 0, 0" Style="{StaticResource SelectionButtonStyle}">
+                <Button Margin="5, 0, 0, 0">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
                             <Image Source="/FlagSync;component/Images/FtpServer.png" Width="50" Height="50" />
