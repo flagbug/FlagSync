@@ -21,7 +21,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" Margin="10">
             <TextBlock Text="1." FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" />
             <TextBlock HorizontalAlignment="Center" Text="Select the first filesystem:" FontWeight="Bold" />
             <GroupBox HorizontalAlignment="Center" Header="First filesystem" Margin="0, 0, 0, 5" Padding="5">
@@ -53,7 +53,7 @@
                 </StackPanel>
             </GroupBox>
         </StackPanel>
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" Margin="10">
             <TextBlock Grid.Row="0" Text="2." FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" />
             <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="Select the second filesystem:" FontWeight="Bold" />
             <GroupBox Grid.Row="2" HorizontalAlignment="Center" Header="Second filesystem" Margin="0, 0, 0, 5" Padding="5">
@@ -77,7 +77,7 @@
                 </StackPanel>
             </GroupBox>
         </StackPanel>
-        <StackPanel Grid.Column="2">
+        <StackPanel Grid.Column="2" Margin="10">
             <TextBlock Text="3." FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" />
             <TextBlock HorizontalAlignment="Center" Text="Select the job mode:" FontWeight="Bold" />
         </StackPanel>
