@@ -7,12 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync.View", "FlagSync.V
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FlagSync.Setup", "FlagSync.Setup\FlagSync.Setup.vdproj", "{F1E3BF8E-9B77-404F-ADB2-FC2F8CFFB577}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{62E976F6-E786-412F-9E92-155AF4236917}"
-	ProjectSection(SolutionItems) = preProject
-		Changelog.txt = Changelog.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagSync.Data", "FlagSync.Data\FlagSync.Data.csproj", "{080FB9A0-A2F9-438F-8F84-60B7FB448633}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E98AE14-9CE5-4194-A0F1-D23ED830E6E0}"
+	ProjectSection(SolutionItems) = preProject
+		..\Changelog.txt = ..\Changelog.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
