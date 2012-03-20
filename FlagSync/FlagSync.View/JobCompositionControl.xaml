@@ -24,7 +24,7 @@
                 <Button>
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
-                            <Image Source="/FlagSync;component/Images/Local.png" Width="50" Height="50" />
+                            <Image Source="/FlagSync;component/Images/Local.png" Width="48" Height="48" />
                             <ContentPresenter Content="{x:Static Properties:Resources.LocalString}" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button.Content>
@@ -32,7 +32,7 @@
                 <Button Margin="5, 0, 0, 0">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
-                            <Image Source="/FlagSync;component/Images/FtpServer.png" Width="50" Height="50" />
+                            <Image Source="/FlagSync;component/Images/FtpServer.png" Width="48" Height="48" />
                             <ContentPresenter Content="{x:Static Properties:Resources.FTPString}" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button.Content>
@@ -40,7 +40,7 @@
                 <Button Margin="5, 0, 0, 0">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
-                            <Image Source="/FlagSync;component/Images/iTunes.png" Width="50" Height="50" />
+                            <Image Source="/FlagSync;component/Images/iTunes.png" Width="48" Height="48" />
                             <ContentPresenter Content="{x:Static Properties:Resources.iTunesString}" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button.Content>
@@ -54,7 +54,7 @@
                 <Button Margin="5, 0, 0, 0">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
-                            <Image Source="/FlagSync;component/Images/Local.png" Width="50" Height="50" />
+                            <Image Source="/FlagSync;component/Images/Local.png" Width="48" Height="48" />
                             <ContentPresenter Content="{x:Static Properties:Resources.LocalString}" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button.Content>
@@ -62,7 +62,7 @@
                 <Button Margin="5, 0, 0, 0">
                     <Button.Content>
                         <StackPanel Orientation="Vertical">
-                            <Image Source="/FlagSync;component/Images/FtpServer.png" Width="50" Height="50" />
+                            <Image Source="/FlagSync;component/Images/FtpServer.png" Width="48" Height="48" />
                             <ContentPresenter Content="{x:Static Properties:Resources.FTPString}" HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button.Content>
