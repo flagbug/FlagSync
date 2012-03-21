@@ -8,11 +8,14 @@ namespace FlagSync.View.Views
     /// </summary>
     public sealed partial class LocalFileSystemSettingsPanel
     {
-        public LocalFileSystemSettingsPanel(LocalFileSystemSettingsViewModel viewModel)
+        private readonly LocalFileSystemViewModel viewModel;
+
+        public LocalFileSystemSettingsPanel(LocalFileSystemViewModel viewModel)
         {
             InitializeComponent();
 
             this.viewModel = viewModel;
+            this.DataContext = viewModel;
         }
 
         /// <summary>

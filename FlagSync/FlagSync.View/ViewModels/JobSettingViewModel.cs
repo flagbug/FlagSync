@@ -27,28 +27,28 @@ namespace FlagSync.View.ViewModels
             }
         }
 
-        public string FirstSource
+        public FileSystemSetting FirstFileSystem
         {
-            get { return this.InternJobSetting.FirstFileSystemSetting.Source; }
+            get { return this.InternJobSetting.FirstFileSystemSetting; }
             set
             {
-                if (this.FirstSource != value)
+                if (this.FirstFileSystem != value)
                 {
-                    this.InternJobSetting.FirstFileSystemSetting.Source = value;
-                    this.OnPropertyChanged(vm => vm.FirstSource);
+                    this.InternJobSetting.FirstFileSystemSetting = value;
+                    this.OnPropertyChanged(vm => vm.FirstFileSystem);
                 }
             }
         }
 
-        public string SecondSource
+        public FileSystemSetting SecondFileSystem
         {
-            get { return this.InternJobSetting.SecondFileSystemSetting.Source; }
+            get { return this.InternJobSetting.SecondFileSystemSetting; }
             set
             {
-                if (this.SecondSource != value)
+                if (this.SecondFileSystem != value)
                 {
-                    this.InternJobSetting.SecondFileSystemSetting.Source = value;
-                    this.OnPropertyChanged(vm => vm.SecondSource);
+                    this.InternJobSetting.SecondFileSystemSetting = value;
+                    this.OnPropertyChanged(vm => vm.SecondFileSystem);
                 }
             }
         }
@@ -142,7 +142,7 @@ namespace FlagSync.View.ViewModels
 
         public bool HasErrors
         {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
     }
 }

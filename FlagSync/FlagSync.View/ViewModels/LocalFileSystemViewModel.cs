@@ -1,9 +1,11 @@
-﻿using FlagSync.Data;
+﻿using System.Windows.Controls;
+using FlagSync.Data;
+using FlagSync.View.Views;
 using Rareform.Patterns.MVVM;
 
 namespace FlagSync.View.ViewModels
 {
-    public class LocalFileSystemSettingsViewModel : ViewModelBase<LocalFileSystemSettingsViewModel>
+    public class LocalFileSystemViewModel : ViewModelBase<LocalFileSystemViewModel>, IFileSystemViewModel
     {
         private readonly LocalFileSystemSetting setting;
 
@@ -20,13 +22,14 @@ namespace FlagSync.View.ViewModels
             }
         }
 
-        public LocalFileSystemSettingsViewModel(LocalFileSystemSetting setting)
+        public LocalFileSystemViewModel(LocalFileSystemSetting setting)
         {
             this.setting = setting;
         }
 
-        public LocalFileSystemSettingsViewModel()
+        public UserControl CreateView()
         {
+            return new LocalFileSystemSettingsPanel(this);
         }
     }
 }

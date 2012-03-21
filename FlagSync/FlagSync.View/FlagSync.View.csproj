@@ -88,6 +88,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="ViewModels\IFileSystemViewModel.cs" />
+    <Compile Include="ViewModels\JobCompositionViewModel.cs" />
     <Compile Include="Views\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
@@ -100,11 +102,11 @@
     <Compile Include="Views\FtpFileSystemSettingsPanel.xaml.cs">
       <DependentUpon>FtpFileSystemSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\FtpFileSystemSettingsViewModel.cs" />
+    <Compile Include="ViewModels\FtpFileSystemViewModel.cs" />
     <Compile Include="Views\ITunesFileSystemSettingsPanel.xaml.cs">
       <DependentUpon>ITunesFileSystemSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ITunesFileSystemSettingsViewModel.cs" />
+    <Compile Include="ViewModels\ITunesFileSystemViewModel.cs" />
     <Compile Include="Views\JobCompositionControl.xaml.cs">
       <DependentUpon>JobCompositionControl.xaml</DependentUpon>
     </Compile>
@@ -113,7 +115,7 @@
     <Compile Include="Views\LocalFileSystemSettingsPanel.xaml.cs">
       <DependentUpon>LocalFileSystemSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\LocalFileSystemSettingsViewModel.cs" />
+    <Compile Include="ViewModels\LocalFileSystemViewModel.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">

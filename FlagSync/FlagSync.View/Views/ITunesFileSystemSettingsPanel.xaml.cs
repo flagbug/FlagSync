@@ -7,11 +7,14 @@ namespace FlagSync.View.Views
     /// </summary>
     public sealed partial class ITunesFileSystemSettingsPanel
     {
-        public ITunesFileSystemSettingsPanel(ITunesFileSystemSettingsViewModel viewModel)
+        private ITunesFileSystemViewModel viewModel;
+
+        public ITunesFileSystemSettingsPanel(ITunesFileSystemViewModel viewModel)
         {
             InitializeComponent();
 
             this.viewModel = viewModel;
+            this.DataContext = viewModel;
         }
     }
 }

@@ -9,11 +9,14 @@ namespace FlagSync.View.Views
     /// </summary>
     public sealed partial class FtpFileSystemSettingsPanel
     {
-        public FtpFileSystemSettingsPanel(FtpFileSystemSettingsViewModel viewModel)
+        private readonly FtpFileSystemViewModel viewModel;
+
+        public FtpFileSystemSettingsPanel(FtpFileSystemViewModel viewModel)
         {
             InitializeComponent();
 
             this.viewModel = viewModel;
+            this.DataContext = viewModel;
         }
 
         /// <summary>

@@ -360,7 +360,7 @@ namespace FlagSync.View.ViewModels
 
                     this.CurrentJobSettingsPanel.Clear();
 
-                    this.CurrentJobSettingsPanel.Add(new JobCompositionControl());
+                    this.CurrentJobSettingsPanel.Add(new JobCompositionControl(new JobCompositionViewModel(this.selectedJobSetting)));
                 }
             }
         }

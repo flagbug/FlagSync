@@ -1,11 +1,13 @@
-﻿using FlagSync.Data;
+﻿using System.Windows.Controls;
+using FlagSync.Data;
+using FlagSync.View.Views;
 using Rareform.Patterns.MVVM;
 
 namespace FlagSync.View.ViewModels
 {
-    public class FtpFileSystemSettingsViewModel : ViewModelBase<FtpFileSystemSettingsViewModel>
+    public class FtpFileSystemViewModel : ViewModelBase<FtpFileSystemViewModel>, IFileSystemViewModel
     {
-        private FtpFileSystemSetting setting;
+        private readonly FtpFileSystemSetting setting;
 
         public string ServerAddress
         {
@@ -46,13 +48,14 @@ namespace FlagSync.View.ViewModels
             }
         }
 
-        public FtpFileSystemSettingsViewModel(FtpFileSystemSetting setting)
+        public FtpFileSystemViewModel(FtpFileSystemSetting setting)
         {
             this.setting = setting;
         }
 
-        public FtpFileSystemSettingsViewModel()
+        public UserControl CreateView()
         {
+            return new FtpFileSystemSettingsPanel(this);
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 using FlagSync.Data;
+using FlagSync.View.Views;
 using iTunesLib;
 using Rareform.Patterns.MVVM;
 
 namespace FlagSync.View.ViewModels
 {
-    public class ITunesFileSystemSettingsViewModel : ViewModelBase<ITunesFileSystemSettingsViewModel>
+    public class ITunesFileSystemViewModel : ViewModelBase<ITunesFileSystemViewModel>, IFileSystemViewModel
     {
         private readonly ITunesFileSystemSetting setting;
 
@@ -37,15 +39,16 @@ namespace FlagSync.View.ViewModels
             }
         }
 
-        public ITunesFileSystemSettingsViewModel(ITunesFileSystemSetting setting)
+        public ITunesFileSystemViewModel(ITunesFileSystemSetting setting)
         {
             this.setting = setting;
 
             this.Playlist = this.setting.Source ?? AvailablePlaylists.First();
         }
 
-        public ITunesFileSystemSettingsViewModel()
+        public UserControl CreateView()
         {
+            return new ITunesFileSystemSettingsPanel(this);
         }
     }
 }

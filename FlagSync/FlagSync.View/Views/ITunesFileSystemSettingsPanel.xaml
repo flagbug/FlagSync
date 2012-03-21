@@ -6,9 +6,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ViewModels="clr-namespace:FlagSync.View.ViewModels" mc:Ignorable="d"
              HorizontalAlignment="Left" VerticalAlignment="Top">
-    <UserControl.DataContext>
-        <ViewModels:ITunesFileSystemSettingsViewModel x:Name="viewModel" />
-    </UserControl.DataContext>
     <GroupBox Header="{x:Static properties:Resources.CommonSettingsGroupBoxText}">
         <Grid>
             <Grid.ColumnDefinitions>
