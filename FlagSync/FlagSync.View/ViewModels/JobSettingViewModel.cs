@@ -139,5 +139,10 @@ namespace FlagSync.View.ViewModels
         {
             get { throw new NotImplementedException(); }
         }
+
+        public bool HasErrors
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

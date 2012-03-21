@@ -9,11 +9,11 @@ namespace FlagSync.View.Views
     /// </summary>
     public sealed partial class FtpFileSystemSettingsPanel
     {
-        public FtpFileSystemSettingsPanel(JobSettingViewModel viewModel)
+        public FtpFileSystemSettingsPanel(FtpFileSystemSettingsViewModel viewModel)
         {
             InitializeComponent();
 
-            this.viewModel.JobSetting = viewModel;
+            this.viewModel = viewModel;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace FlagSync.View.Views
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            this.viewModel.JobSetting.FtpPassword = ((PasswordBox)sender).Password;
+            this.viewModel.Password = ((PasswordBox)sender).Password;
         }
     }
 }

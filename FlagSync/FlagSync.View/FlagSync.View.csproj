@@ -100,11 +100,11 @@
     <Compile Include="Views\FtpFileSystemSettingsPanel.xaml.cs">
       <DependentUpon>FtpFileSystemSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\FtpJobSettingsPanelViewModel.cs" />
+    <Compile Include="ViewModels\FtpFileSystemSettingsViewModel.cs" />
     <Compile Include="Views\ITunesFileSystemSettingsPanel.xaml.cs">
       <DependentUpon>ITunesFileSystemSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ITunesJobSettingsViewModel.cs" />
+    <Compile Include="ViewModels\ITunesFileSystemSettingsViewModel.cs" />
     <Compile Include="Views\JobCompositionControl.xaml.cs">
       <DependentUpon>JobCompositionControl.xaml</DependentUpon>
     </Compile>

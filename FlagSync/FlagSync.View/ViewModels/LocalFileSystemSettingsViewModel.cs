@@ -24,5 +24,9 @@ namespace FlagSync.View.ViewModels
         {
             this.setting = setting;
         }
+
+        public LocalFileSystemSettingsViewModel()
+        {
+        }
     }
 }
