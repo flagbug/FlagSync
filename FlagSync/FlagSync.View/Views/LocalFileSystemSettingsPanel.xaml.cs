@@ -8,11 +8,11 @@ namespace FlagSync.View.Views
     /// </summary>
     public sealed partial class LocalFileSystemSettingsPanel
     {
-        public LocalFileSystemSettingsPanel(JobSettingViewModel viewModel)
+        public LocalFileSystemSettingsPanel(LocalFileSystemSettingsViewModel viewModel)
         {
             InitializeComponent();
 
-            this.viewModel.JobSetting = viewModel;
+            this.viewModel = viewModel;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace FlagSync.View.Views
 
             if (result != null)
             {
-                this.viewModel.JobSetting.DirectoryA = result;
+                this.viewModel.Directory = result;
             }
         }
 

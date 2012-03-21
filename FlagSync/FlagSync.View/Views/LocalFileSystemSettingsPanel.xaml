@@ -7,7 +7,7 @@
              xmlns:ViewModels="clr-namespace:FlagSync.View.ViewModels"
              mc:Ignorable="d">
     <UserControl.DataContext>
-        <ViewModels:LocalJobSettingsPanelViewModel x:Name="viewModel" />
+        <ViewModels:LocalFileSystemSettingsViewModel x:Name="viewModel" />
     </UserControl.DataContext>
     <GroupBox Header="{x:Static properties:Resources.CommonSettingsGroupBoxText}">
         <Grid Grid.Row="0">
@@ -21,7 +21,7 @@
                     <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryAButtonText}" VerticalAlignment="Center" />
                 </StackPanel>
             </Button>
-            <TextBox Grid.Column="1" Grid.Row="0" Margin="5" Text="{Binding Path=JobSetting.DirectoryA, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            <TextBox Grid.Column="1" Grid.Row="0" Margin="5" Text="{Binding Path=Directory, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         </Grid>
     </GroupBox>
 </UserControl>
