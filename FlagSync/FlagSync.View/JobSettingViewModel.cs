@@ -1,21 +1,18 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using Rareform.Patterns.MVVM;
-using Rareform.Reflection;
 using FlagSync.Data;
 using FlagSync.View.Properties;
+using Rareform.Patterns.MVVM;
 
 namespace FlagSync.View
 {
     public class JobSettingViewModel : ViewModelBase<JobSettingViewModel>, IDataErrorInfo
     {
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is included for syncing.
+        /// Gets or sets a value indicating whether this job is included syncing.
         /// </summary>
         /// <value>
-        /// true if this instance is included for syncing; otherwise, false.
+        /// true if this job is included for syncing; otherwise, false.
         /// </value>
         public bool IsIncluded
         {
@@ -26,70 +23,36 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.IsIncluded = value;
                     this.OnPropertyChanged(view => view.IsIncluded);
-                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
 
-        /// <summary>
-        /// Gets or sets the directory A.
-        /// </summary>
-        /// <value>
-        /// The directory A.
-        /// </value>
-        public string DirectoryA
+        public string FirstSource
         {
-            get
-            {
-                switch (this.SyncMode)
-                {
-                    case SyncMode.FtpBackup:
-                    case SyncMode.FtpSynchronization:
-                        return this.FtpAddress;
-
-                    case SyncMode.ITunes:
-                        return this.ITunesPlaylist;
-                }
-
-                return this.InternJobSetting.DirectoryA;
-            }
+            get { return this.InternJobSetting.FirstFileSystemSetting.Source; }
             set
             {
-                if (this.DirectoryA != value)
+                if (this.FirstSource != value)
                 {
-                    this.InternJobSetting.DirectoryA = value;
-                    this.OnPropertyChanged(view => view.DirectoryA);
-                    this.OnPropertyChanged(vm => vm.HasErrors);
+                    this.InternJobSetting.FirstFileSystemSetting.Source = value;
+                    this.OnPropertyChanged(vm => vm.FirstSource);
                 }
             }
         }
 
-        /// <summary>
-        /// Gets or sets the directory B.
-        /// </summary>
-        /// <value>
-        /// The directory B.
-        /// </value>
-        public string DirectoryB
+        public string SecondSource
         {
-            get { return InternJobSetting.DirectoryB; }
+            get { return this.InternJobSetting.SecondFileSystemSetting.Source; }
             set
             {
-                if (this.DirectoryB != value)
+                if (this.SecondSource != value)
                 {
-                    this.InternJobSetting.DirectoryB = value;
-                    this.OnPropertyChanged(view => view.DirectoryB);
-                    this.OnPropertyChanged(vm => vm.HasErrors);
+                    this.InternJobSetting.SecondFileSystemSetting.Source = value;
+                    this.OnPropertyChanged(vm => vm.SecondSource);
                 }
             }
         }
 
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
         public string Name
         {
             get { return this.InternJobSetting.Name; }
@@ -99,17 +62,10 @@ namespace FlagSync.View
                 {
                     this.InternJobSetting.Name = value;
                     this.OnPropertyChanged(view => view.Name);
-                    this.OnPropertyChanged(vm => vm.HasErrors);
                 }
             }
         }
 
-        /// <summary>
-        /// Gets or sets the sync mode.
-        /// </summary>
-        /// <value>
-        /// The sync mode.
-        /// </value>
         public SyncMode SyncMode
         {
             get { return this.InternJobSetting.SyncMode; }
@@ -134,215 +90,16 @@ namespace FlagSync.View
         {
             get
             {
-                string syncMode = string.Empty;
-
                 switch (this.SyncMode)
                 {
-                    case SyncMode.FtpBackup:
-                        syncMode = Resources.FtpServerBackupString;
-                        break;
+                    case SyncMode.Backup:
+                        return Resources.BackupString;
 
-                    case SyncMode.FtpSynchronization:
-                        syncMode = Resources.FtpServerSynchronizationString;
-                        break;
-
-                    case SyncMode.LocalBackup:
-                        syncMode = Resources.LocalBackupString;
-                        break;
-
-                    case SyncMode.LocalSynchronization:
-                        syncMode = Resources.LocalSynchronizationString;
-                        break;
-
-                    case SyncMode.ITunes:
-                        syncMode = Resources.iTunesString;
-                        break;
+                    case SyncMode.Synchronization:
+                        return Resources.SynchronizationString;
                 }
 
-                return syncMode;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the FTP server address.
-        /// </summary>
-        /// <value>
-        /// The FTP server address.
-        /// </value>
-        public string FtpAddress
-        {
-            get { return this.InternJobSetting.FtpAddress; }
-            set
-            {
-                if (this.FtpAddress != value)
-                {
-                    this.InternJobSetting.FtpAddress = value;
-                    this.OnPropertyChanged(vm => vm.FtpAddress);
-                    this.OnPropertyChanged(vm => vm.HasErrors);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the login name of the FTP server user.
-        /// </summary>
-        /// <value>
-        /// The login name of the FTP user.
-        /// </value>
-        public string FtpUserName
-        {
-            get { return this.InternJobSetting.FtpUserName; }
-            set
-            {
-                if (this.FtpUserName != value)
-                {
-                    this.InternJobSetting.FtpUserName = value;
-                    this.OnPropertyChanged(vm => vm.FtpUserName);
-                    this.OnPropertyChanged(vm => vm.HasErrors);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the FTP server password.
-        /// </summary>
-        /// <value>
-        /// The FTP server password.
-        /// </value>
-        public string FtpPassword
-        {
-            get { return this.InternJobSetting.FtpPassword; }
-            set
-            {
-                if (this.FtpPassword != value)
-                {
-                    this.InternJobSetting.FtpPassword = value;
-                    this.OnPropertyChanged(vm => vm.FtpPassword);
-                    this.OnPropertyChanged(vm => vm.HasErrors);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the Itunes playlist.
-        /// </summary>
-        /// <value>
-        /// The Itunes playlist.
-        /// </value>
-        public string ITunesPlaylist
-        {
-            get { return this.InternJobSetting.ITunesPlaylist; }
-            set
-            {
-                if (this.ITunesPlaylist != value)
-                {
-                    this.InternJobSetting.ITunesPlaylist = value;
-                    this.OnPropertyChanged(vm => vm.ITunesPlaylist);
-                    this.OnPropertyChanged(vm => vm.HasErrors);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets an error message indicating what is wrong with this object.
-        /// </summary>
-        /// <value>The error message</value>
-        /// <returns>
-        /// An error message indicating what is wrong with this object. The default is an empty string ("").
-        ///   </returns>
-        /// <remarks></remarks>
-        public string Error
-        {
-            get { return null; }
-        }
-
-        /// <summary>
-        /// Gets the <see cref="System.String"/> with the specified name.
-        /// </summary>
-        /// <returns>
-        /// The error message for the property. The default is an empty string ("").
-        ///   </returns>
-        public string this[string columnName]
-        {
-            get
-            {
-                string result = null;
-
-                switch (this.SyncMode)
-                {
-                    case SyncMode.LocalBackup:
-                    case SyncMode.LocalSynchronization:
-                        if ((columnName == Reflector.GetMemberName(() => this.DirectoryA) && !Directory.Exists(this.DirectoryA)))
-                        {
-                            result = Resources.DirectoryDoesntExistMessage;
-                        }
-
-                        break;
-
-                    case SyncMode.ITunes:
-                        if (columnName == Reflector.GetMemberName(() => this.ITunesPlaylist) && String.IsNullOrEmpty(this.ITunesPlaylist))
-                        {
-                            result = Resources.SelectPlaylistErrorMessage;
-                        }
-                        break;
-
-                    case SyncMode.FtpBackup:
-                    case SyncMode.FtpSynchronization:
-                        if (columnName == Reflector.GetMemberName(() => this.FtpAddress))
-                        {
-                            if (String.IsNullOrEmpty(this.FtpAddress))
-                            {
-                                result = Resources.FTPAddressCantBeEmptyMessage;
-                            }
-
-                            else
-                            {
-                                try
-                                {
-                                    Uri uri = new Uri(this.FtpAddress);
-
-                                    if (uri.Scheme != Uri.UriSchemeFtp)
-                                    {
-                                        result = Resources.FTPAdressWrongFormatMessage;
-                                    }
-                                }
-
-                                catch (UriFormatException)
-                                {
-                                    result = Resources.FTPAdressWrongFormatMessage;
-                                }
-                            }
-                        }
-                        break;
-                }
-
-                if (columnName == Reflector.GetMemberName(() => this.DirectoryB) && !Directory.Exists(this.DirectoryB))
-                {
-                    result = Resources.DirectoryDoesntExistMessage;
-                }
-
-                if (columnName == Reflector.GetMemberName(() => this.Name) && String.IsNullOrEmpty(this.Name))
-                {
-                    result = Resources.NameFieldCantBeEmptyMessage;
-                }
-
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// Determines whether this instance has errors.
-        /// </summary>
-        /// <value>
-        ///   true if this instance has errors; otherwise, false.
-        /// </value>
-        public bool HasErrors
-        {
-            get
-            {
-                return this.GetType()
-                    .GetProperties()
-                    .Any(property => this[property.Name] != null);
+                throw new InvalidOperationException();
             }
         }
 
@@ -373,14 +130,14 @@ namespace FlagSync.View
             this.InternJobSetting = internJobSetting;
         }
 
-        /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
-        /// <remarks></remarks>
-        public override string ToString()
+        public string this[string columnName]
         {
-            return this.InternJobSetting.ToString();
+            get { throw new NotImplementedException(); }
+        }
+
+        public string Error
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }
