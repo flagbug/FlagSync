@@ -5,11 +5,11 @@ using FlagSync.View.ViewModels;
 namespace FlagSync.View.Views
 {
     /// <summary>
-    /// Interaction logic for FtpJobSettingsPanel.xaml
+    /// Interaction logic for FtpFileSystemSettingsPanel.xaml
     /// </summary>
-    public sealed partial class FtpJobSettingsPanel
+    public sealed partial class FtpFileSystemSettingsPanel
     {
-        public FtpJobSettingsPanel(JobSettingViewModel viewModel)
+        public FtpFileSystemSettingsPanel(JobSettingViewModel viewModel)
         {
             InitializeComponent();
 

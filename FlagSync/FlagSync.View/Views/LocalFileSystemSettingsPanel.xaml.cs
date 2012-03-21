@@ -4,15 +4,11 @@ using FlagSync.View.ViewModels;
 namespace FlagSync.View.Views
 {
     /// <summary>
-    /// Interaction logic for LocalJobSettingsPanel.xaml
+    /// Interaction logic for LocalFileSystemSettingsPanel.xaml
     /// </summary>
-    public sealed partial class LocalJobSettingsPanel
+    public sealed partial class LocalFileSystemSettingsPanel
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LocalJobSettingsPanel"/> class.
-        /// </summary>
-        /// <param name="viewModel">The view model.</param>
-        public LocalJobSettingsPanel(JobSettingViewModel viewModel)
+        public LocalFileSystemSettingsPanel(JobSettingViewModel viewModel)
         {
             InitializeComponent();
 

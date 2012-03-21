@@ -1,26 +1,17 @@
-﻿using Rareform.Patterns.MVVM;
+﻿using FlagSync.Data;
+using Rareform.Patterns.MVVM;
 
 namespace FlagSync.View.ViewModels
 {
     public class LocalJobSettingsPanelViewModel : ViewModelBase<LocalJobSettingsPanelViewModel>
     {
-        private JobSettingViewModel jobSetting;
+        private LocalFileSystemSetting setting;
 
-        /// <summary>
-        /// Gets or sets the job setting.
-        /// </summary>
-        /// <value>The job setting.</value>
-        public JobSettingViewModel JobSetting
+        public string Directory
+
+        public LocalJobSettingsPanelViewModel(LocalFileSystemSetting setting)
         {
-            get { return this.jobSetting; }
-            set
-            {
-                if (this.JobSetting != value)
-                {
-                    this.jobSetting = value;
-                    this.OnPropertyChanged(vm => vm.JobSetting);
-                }
-            }
+            this.setting = setting;
         }
     }
 }

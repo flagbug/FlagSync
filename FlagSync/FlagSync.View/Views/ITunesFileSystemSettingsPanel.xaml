@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FlagSync.View.Views.ITunesJobSettingsPanel"
+﻿<UserControl x:Class="FlagSync.View.Views.ITunesFileSystemSettingsPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:properties="clr-namespace:FlagSync.View.Properties"
