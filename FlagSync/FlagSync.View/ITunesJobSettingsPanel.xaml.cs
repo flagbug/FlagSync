@@ -1,4 +1,6 @@
-﻿namespace FlagSync.View
+﻿using FlagSync.View.ViewModels;
+
+namespace FlagSync.View
 {
     /// <summary>
     /// Interaction logic for ITunesJobSettingsPanel.xaml

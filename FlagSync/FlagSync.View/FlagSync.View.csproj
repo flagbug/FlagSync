@@ -91,7 +91,7 @@
     <Compile Include="AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AboutBoxViewModel.cs" />
+    <Compile Include="ViewModels\AboutBoxViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -100,22 +100,22 @@
     <Compile Include="FtpJobSettingsPanel.xaml.cs">
       <DependentUpon>FtpJobSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FtpJobSettingsPanelViewModel.cs" />
+    <Compile Include="ViewModels\FtpJobSettingsPanelViewModel.cs" />
     <Compile Include="ITunesJobSettingsPanel.xaml.cs">
       <DependentUpon>ITunesJobSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ITunesJobSettingsViewModel.cs" />
+    <Compile Include="ViewModels\ITunesJobSettingsViewModel.cs" />
     <Compile Include="JobCompositionControl.xaml.cs">
       <DependentUpon>JobCompositionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="JobSettingViewModel.cs" />
-    <Compile Include="JobViewModel.cs" />
+    <Compile Include="ViewModels\JobSettingViewModel.cs" />
+    <Compile Include="ViewModels\JobViewModel.cs" />
     <Compile Include="LocalJobSettingsPanel.xaml.cs">
       <DependentUpon>LocalJobSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LocalJobSettingsPanelViewModel.cs" />
+    <Compile Include="ViewModels\LocalJobSettingsPanelViewModel.cs" />
     <Compile Include="LogMessage.cs" />
-    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

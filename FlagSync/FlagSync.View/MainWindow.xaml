@@ -6,7 +6,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        mc:Ignorable="d"
+        xmlns:ViewModels="clr-namespace:FlagSync.View.ViewModels" mc:Ignorable="d"
         d:DesignHeight="768" d:DesignWidth="1024"
         Title="FlagSync" Icon="/FlagSync;component/Images/ApplicationIcon.ico"
         WindowState="Maximized" Closing="Window_Closing"
@@ -16,7 +16,7 @@
         <TaskbarItemInfo ProgressState="{Binding Path=ProgressState}" ProgressValue="{Binding Path=TotalProgressPercentageSmall}" />
     </Window.TaskbarItemInfo>
     <Window.DataContext>
-        <local:MainWindowViewModel x:Name="mainWindowViewModel" x:FieldModifier="private" />
+        <ViewModels:MainWindowViewModel x:Name="mainWindowViewModel" x:FieldModifier="private" />
     </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
