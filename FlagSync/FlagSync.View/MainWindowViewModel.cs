@@ -9,14 +9,14 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Rareform.Collections;
-using Rareform.Extensions;
-using Rareform.IO;
-using Rareform.Patterns.MVVM;
 using FlagSync.Core;
 using FlagSync.Data;
 using FlagSync.View.Properties;
 using Microsoft.WindowsAPICodePack.Taskbar;
+using Rareform.Collections;
+using Rareform.Extensions;
+using Rareform.IO;
+using Rareform.Patterns.MVVM;
 
 namespace FlagSync.View
 {
@@ -189,7 +189,11 @@ namespace FlagSync.View
         {
             get
             {
-                return ((double)this.ProceededBytes / this.CountedBytes) * 100.0;
+                double progressPercentage = ((double)this.ProceededBytes / this.CountedBytes) * 100.0;
+
+                // HACK:
+                // Let the progress hang at 99% till the job worker finished, so that it doesn't do anymore work at 100%
+                return this.IsRunning && progressPercentage > 99 ? 99 : progressPercentage;
             }
         }
 
