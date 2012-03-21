@@ -203,7 +203,11 @@ namespace FlagSync.View
         {
             get
             {
-                return ((double)this.ProceededBytes / this.CountedBytes) * 100.0;
+                double progressPercentage = ((double)this.ProceededBytes / this.CountedBytes) * 100.0;
+
+                // HACK:
+                // Let the progress hang at 99% till the job worker finished, so that it doesn't do anymore work at 100%
+                return this.IsRunning && progressPercentage > 99 ? 99 : progressPercentage;
             }
         }
 
