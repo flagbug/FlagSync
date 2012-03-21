@@ -64,23 +64,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AboutBox.xaml">
+    <Page Include="Views\AboutBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FtpJobSettingsPanel.xaml">
+    <Page Include="Views\FtpJobSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ITunesJobSettingsPanel.xaml">
+    <Page Include="Views\ITunesJobSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="JobCompositionControl.xaml">
+    <Page Include="Views\JobCompositionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LocalJobSettingsPanel.xaml">
+    <Page Include="Views\LocalJobSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,7 +88,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AboutBox.xaml.cs">
+    <Compile Include="Views\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AboutBoxViewModel.cs" />
@@ -97,20 +97,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ByteToKiloByteConverter.cs" />
-    <Compile Include="FtpJobSettingsPanel.xaml.cs">
+    <Compile Include="Views\FtpJobSettingsPanel.xaml.cs">
       <DependentUpon>FtpJobSettingsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FtpJobSettingsPanelViewModel.cs" />
-    <Compile Include="ITunesJobSettingsPanel.xaml.cs">
+    <Compile Include="Views\ITunesJobSettingsPanel.xaml.cs">
       <DependentUpon>ITunesJobSettingsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ITunesJobSettingsViewModel.cs" />
-    <Compile Include="JobCompositionControl.xaml.cs">
+    <Compile Include="Views\JobCompositionControl.xaml.cs">
       <DependentUpon>JobCompositionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\JobSettingViewModel.cs" />
     <Compile Include="ViewModels\JobViewModel.cs" />
-    <Compile Include="LocalJobSettingsPanel.xaml.cs">
+    <Compile Include="Views\LocalJobSettingsPanel.xaml.cs">
       <DependentUpon>LocalJobSettingsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\LocalJobSettingsPanelViewModel.cs" />

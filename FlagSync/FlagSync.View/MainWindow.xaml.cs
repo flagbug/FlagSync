@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using FlagSync.Data;
 using FlagSync.View.Properties;
+using FlagSync.View.Views;
 
 namespace FlagSync.View
 {

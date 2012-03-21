@@ -13,6 +13,7 @@ using System.Windows.Shell;
 using FlagSync.Core;
 using FlagSync.Data;
 using FlagSync.View.Properties;
+using FlagSync.View.Views;
 using Rareform.Collections;
 using Rareform.Extensions;
 using Rareform.IO;
