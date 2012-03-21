@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace FlagSync.View
+﻿namespace FlagSync.View.Views
 {
     /// <summary>
     /// Interaction logic for AboutBox.xaml
     /// </summary>
-    public sealed partial class AboutBox : Window
+    public sealed partial class AboutBox
     {
         public AboutBox()
         {

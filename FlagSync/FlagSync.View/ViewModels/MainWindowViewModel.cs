@@ -13,12 +13,13 @@ using System.Windows.Shell;
 using FlagSync.Core;
 using FlagSync.Data;
 using FlagSync.View.Properties;
+using FlagSync.View.Views;
 using Rareform.Collections;
 using Rareform.Extensions;
 using Rareform.IO;
 using Rareform.Patterns.MVVM;
 
-namespace FlagSync.View
+namespace FlagSync.View.ViewModels
 {
     internal class MainWindowViewModel : ViewModelBase<MainWindowViewModel>
     {
@@ -363,7 +364,7 @@ namespace FlagSync.View
 
                     this.CurrentJobSettingsPanel.Clear();
 
-                    this.CurrentJobSettingsPanel.Add(new JobCompositionControl());
+                    this.CurrentJobSettingsPanel.Add(new JobCompositionControl(new JobCompositionViewModel(this.selectedJobSetting)));
                 }
             }
         }

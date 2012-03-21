@@ -4,12 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using FlagFtp;
-using Rareform.Serialization;
 using FlagSync.Core;
-using FlagSync.Core.FileSystem.Ftp;
-using FlagSync.Core.FileSystem.ITunes;
-using FlagSync.Core.FileSystem.Local;
+using FlagSync.Core.FileSystem.Base;
+using Rareform.Serialization;
 
 namespace FlagSync.Data
 {
@@ -107,7 +104,7 @@ namespace FlagSync.Data
                 throw new CorruptSaveFileException("The save file is corrupt.", ex);
             }
 
-            if (settings.Any(setting => setting.SyncMode == SyncMode.ITunes && !DataController.IsITunesOpened()))
+            if (settings.Any(setting => setting.FirstFileSystemSetting is ITunesFileSystemSetting && !DataController.IsITunesOpened()))
             {
                 throw new ITunesNotOpenedException("iTunes is not opened.");
             }
@@ -134,51 +131,19 @@ namespace FlagSync.Data
         /// </returns>
         public static Job CreateJobFromSetting(JobSetting setting)
         {
+            IFileSystem firstFileSystem = setting.FirstFileSystemSetting.GetFileSystem();
+            IFileSystem secondFileSystem = setting.SecondFileSystemSetting.GetFileSystem();
+
+            IDirectoryInfo firstRootDirectory = setting.FirstFileSystemSetting.GetRootDirectory();
+            IDirectoryInfo secondRootDirectory = setting.SecondFileSystemSetting.GetRootDirectory();
+
             switch (setting.SyncMode)
             {
-                case SyncMode.LocalBackup:
-                    {
-                        var source = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
-                        var target = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
+                case SyncMode.Backup:
+                    return new BackupJob(setting.Name, firstFileSystem, secondFileSystem, firstRootDirectory, secondRootDirectory);
 
-                        return new BackupJob(setting.Name, new LocalFileSystem(), new LocalFileSystem(), source, target);
-                    }
-
-                case SyncMode.LocalSynchronization:
-                    {
-                        var directoryA = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryA));
-                        var directoryB = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
-
-                        return new SyncJob(setting.Name, new LocalFileSystem(), new LocalFileSystem(), directoryA, directoryB);
-                    }
-
-                case SyncMode.ITunes:
-                    {
-                        var source = new ITunesDirectoryInfo(setting.ITunesPlaylist);
-                        var target = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
-
-                        return new BackupJob(setting.Name, new ITunesFileSystem(), new LocalFileSystem(), source, target);
-                    }
-
-                case SyncMode.FtpBackup:
-                    {
-                        var source = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
-
-                        var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
-                        var target = new Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
-
-                        return new BackupJob(setting.Name, new LocalFileSystem(), new FtpFileSystem(new Uri(setting.FtpAddress), new NetworkCredential(setting.FtpUserName, setting.FtpPassword)), source, target);
-                    }
-
-                case SyncMode.FtpSynchronization:
-                    {
-                        var directoryA = new LocalDirectoryInfo(new DirectoryInfo(setting.DirectoryB));
-
-                        var client = new FtpClient(new NetworkCredential(setting.FtpUserName, setting.FtpPassword));
-                        var directoryB = new Core.FileSystem.Ftp.FtpDirectoryInfo(setting.FtpAddress, client);
-
-                        return new SyncJob(setting.Name, new LocalFileSystem(), new FtpFileSystem(new Uri(setting.FtpAddress), new NetworkCredential(setting.FtpUserName, setting.FtpPassword)), directoryA, directoryB);
-                    }
+                case SyncMode.Synchronization:
+                    return new SyncJob(setting.Name, firstFileSystem, secondFileSystem, firstRootDirectory, secondRootDirectory);
             }
 
             throw new InvalidOperationException();

@@ -2,7 +2,7 @@
 using FlagSync.Core;
 using FlagSync.View.Properties;
 
-namespace FlagSync.View
+namespace FlagSync.View.ViewModels
 {
     internal class JobViewModel
     {

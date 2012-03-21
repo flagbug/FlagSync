@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace FlagSync.View
+namespace FlagSync.View.ViewModels
 {
     public class AboutBoxViewModel
     {

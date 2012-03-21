@@ -1,21 +1,21 @@
 ﻿using System.Windows;
+using FlagSync.View.ViewModels;
 
-namespace FlagSync.View
+namespace FlagSync.View.Views
 {
     /// <summary>
-    /// Interaction logic for LocalJobSettingsPanel.xaml
+    /// Interaction logic for LocalFileSystemSettingsPanel.xaml
     /// </summary>
-    public sealed partial class LocalJobSettingsPanel
+    public sealed partial class LocalFileSystemSettingsPanel
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LocalJobSettingsPanel"/> class.
-        /// </summary>
-        /// <param name="viewModel">The view model.</param>
-        public LocalJobSettingsPanel(JobSettingViewModel viewModel)
+        private readonly LocalFileSystemViewModel viewModel;
+
+        public LocalFileSystemSettingsPanel(LocalFileSystemViewModel viewModel)
         {
             InitializeComponent();
 
-            this.viewModel.JobSetting = viewModel;
+            this.viewModel = viewModel;
+            this.DataContext = viewModel;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace FlagSync.View
 
             if (result != null)
             {
-                this.viewModel.JobSetting.DirectoryA = result;
+                this.viewModel.Directory = result;
             }
         }
 

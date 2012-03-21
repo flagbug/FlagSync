@@ -63,9 +63,13 @@
   <ItemGroup>
     <Compile Include="CorruptSaveFileException.cs" />
     <Compile Include="DataController.cs" />
+    <Compile Include="FileSystemSetting.cs" />
+    <Compile Include="FtpFileSystemSetting.cs" />
+    <Compile Include="ITunesFileSystemSetting.cs" />
     <Compile Include="ITunesNotOpenedException.cs" />
     <Compile Include="JobSetting.cs" />
     <Compile Include="JobSettingsLoadingResult.cs" />
+    <Compile Include="LocalFileSystemSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncMode.cs" />
   </ItemGroup>

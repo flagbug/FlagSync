@@ -64,23 +64,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AboutBox.xaml">
+    <Page Include="Views\AboutBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FtpJobSettingsPanel.xaml">
+    <Page Include="Views\FtpFileSystemSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ITunesJobSettingsPanel.xaml">
+    <Page Include="Views\ITunesFileSystemSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="JobCompositionControl.xaml">
+    <Page Include="Views\JobCompositionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LocalJobSettingsPanel.xaml">
+    <Page Include="Views\LocalFileSystemSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,34 +88,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AboutBox.xaml.cs">
+    <Compile Include="ViewModels\IFileSystemViewModel.cs" />
+    <Compile Include="ViewModels\JobCompositionViewModel.cs" />
+    <Compile Include="Views\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AboutBoxViewModel.cs" />
+    <Compile Include="ViewModels\AboutBoxViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ByteToKiloByteConverter.cs" />
-    <Compile Include="FtpJobSettingsPanel.xaml.cs">
-      <DependentUpon>FtpJobSettingsPanel.xaml</DependentUpon>
+    <Compile Include="Views\FtpFileSystemSettingsPanel.xaml.cs">
+      <DependentUpon>FtpFileSystemSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FtpJobSettingsPanelViewModel.cs" />
-    <Compile Include="ITunesJobSettingsPanel.xaml.cs">
-      <DependentUpon>ITunesJobSettingsPanel.xaml</DependentUpon>
+    <Compile Include="ViewModels\FtpFileSystemViewModel.cs" />
+    <Compile Include="Views\ITunesFileSystemSettingsPanel.xaml.cs">
+      <DependentUpon>ITunesFileSystemSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ITunesJobSettingsViewModel.cs" />
-    <Compile Include="JobCompositionControl.xaml.cs">
+    <Compile Include="ViewModels\ITunesFileSystemViewModel.cs" />
+    <Compile Include="Views\JobCompositionControl.xaml.cs">
       <DependentUpon>JobCompositionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="JobSettingViewModel.cs" />
-    <Compile Include="JobViewModel.cs" />
-    <Compile Include="LocalJobSettingsPanel.xaml.cs">
-      <DependentUpon>LocalJobSettingsPanel.xaml</DependentUpon>
+    <Compile Include="ViewModels\JobSettingViewModel.cs" />
+    <Compile Include="ViewModels\JobViewModel.cs" />
+    <Compile Include="Views\LocalFileSystemSettingsPanel.xaml.cs">
+      <DependentUpon>LocalFileSystemSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LocalJobSettingsPanelViewModel.cs" />
+    <Compile Include="ViewModels\LocalFileSystemViewModel.cs" />
     <Compile Include="LogMessage.cs" />
-    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
