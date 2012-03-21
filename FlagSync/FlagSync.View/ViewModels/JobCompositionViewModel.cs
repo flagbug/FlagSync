@@ -10,8 +10,11 @@ namespace FlagSync.View.ViewModels
     {
         private readonly JobSettingViewModel setting;
         private IFileSystemViewModel firstFileSystem;
+        private IFileSystemViewModel secondFileSystem;
 
         public ObservableCollection<UserControl> CurrentFirstFileSystem { get; private set; }
+
+        public ObservableCollection<UserControl> CurrentSecondFileSystem { get; private set; }
 
         public IFileSystemViewModel FirstFileSystem
         {
@@ -21,6 +24,17 @@ namespace FlagSync.View.ViewModels
 
                 this.CurrentFirstFileSystem.Clear();
                 this.CurrentFirstFileSystem.Add(this.firstFileSystem.CreateView());
+            }
+        }
+
+        public IFileSystemViewModel SecondFileSystem
+        {
+            set
+            {
+                this.secondFileSystem = value;
+
+                this.CurrentSecondFileSystem.Clear();
+                this.CurrentSecondFileSystem.Add(this.secondFileSystem.CreateView());
             }
         }
 
@@ -59,10 +73,40 @@ namespace FlagSync.View.ViewModels
             }
         }
 
+        public ICommand CreateSecondFileSystemCommand
+        {
+            get
+            {
+                return new RelayCommand
+                (
+                    param =>
+                    {
+                        var fileSystem = (string)param;
+
+                        switch (fileSystem)
+                        {
+                            case "Local":
+                                var localSetting = new LocalFileSystemSetting();
+                                this.setting.SecondFileSystem = localSetting;
+                                this.SecondFileSystem = new LocalFileSystemViewModel(localSetting);
+                                break;
+
+                            case "Ftp":
+                                var ftpSetting = new FtpFileSystemSetting();
+                                this.setting.SecondFileSystem = ftpSetting;
+                                this.SecondFileSystem = new FtpFileSystemViewModel(ftpSetting);
+                                break;
+                        }
+                    }
+                );
+            }
+        }
+
         public JobCompositionViewModel(JobSettingViewModel setting)
         {
             this.setting = setting;
             this.CurrentFirstFileSystem = new ObservableCollection<UserControl>();
+            this.CurrentSecondFileSystem = new ObservableCollection<UserControl>();
         }
     }
 }
