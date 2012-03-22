@@ -15,6 +15,14 @@
     <Window.DataContext>
         <ViewModels:AboutBoxViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="TextStyle"
+               TargetType="TextBlock">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -28,46 +36,32 @@
         <TextBlock
             Grid.Column="0"
             Grid.Row="0"
-            Text="{x:Static properties:Resources.TitleTextBlockText}"
-            Margin="5"
-            Height="16"
-            TextAlignment="Left"
-            FontSize="14"
-            FontWeight="Bold" />
+            Style="{StaticResource TextStyle}"
+            Text="{x:Static properties:Resources.TitleTextBlockText}" />
         <TextBlock
             Grid.Column="0"
             Grid.Row="1"
-            Text="{x:Static properties:Resources.AuthorTextBlockText}"
-            Margin="5"
-            FontSize="14"
-            FontWeight="Bold" />
+            Style="{StaticResource TextStyle}"
+            Text="{x:Static properties:Resources.AuthorTextBlockText}" />
         <TextBlock
             Grid.Column="0"
             Grid.Row="2"
-            Text="{x:Static properties:Resources.VersionTextBlockText}"
-            Margin="5"
-            FontWeight="Bold"
-            FontSize="14" />
+            Style="{StaticResource TextStyle}"
+            Text="{x:Static properties:Resources.VersionTextBlockText}" />
         <TextBlock
             Grid.Column="1"
             Grid.Row="0"
-            Text="{Binding Path=Title}"
-            Margin="5"
-            FontWeight="Bold"
-            FontSize="14" />
+            Style="{StaticResource TextStyle}"
+            Text="{Binding Path=Title}" />
         <TextBlock
             Grid.Column="1"
             Grid.Row="1"
-            Text="{Binding Path=Author}"
-            Margin="5"
-            FontWeight="Bold"
-            FontSize="14" />
+            Style="{StaticResource TextStyle}"
+            Text="{Binding Path=Author}" />
         <TextBlock
             Grid.Column="1"
             Grid.Row="2"
-            Text="{Binding Path=Version}"
-            Margin="5"
-            FontWeight="Bold"
-            FontSize="14" />
+            Style="{StaticResource TextStyle}"
+            Text="{Binding Path=Version}" />
     </Grid>
 </Window>
