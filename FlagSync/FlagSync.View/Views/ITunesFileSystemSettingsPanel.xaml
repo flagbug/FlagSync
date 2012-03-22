@@ -4,16 +4,16 @@
              xmlns:properties="clr-namespace:FlagSync.View.Properties"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ViewModels="clr-namespace:FlagSync.View.ViewModels" mc:Ignorable="d"
+             mc:Ignorable="d"
              HorizontalAlignment="Left" VerticalAlignment="Top">
     <GroupBox Header="{x:Static properties:Resources.CommonSettingsGroupBoxText}">
-        <Grid>
+        <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Static properties:Resources.PlaylistJobSettingTextBlockText}" VerticalAlignment="Center" />
-            <ComboBox Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding Path=AvailablePlaylists}" SelectedItem="{Binding Path=Playlist, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="{x:Static properties:Resources.PlaylistJobSettingTextBlockText}" />
+            <ComboBox Grid.Column="1" Grid.Row="0" Margin="5, 0, 0, 0" ItemsSource="{Binding Path=AvailablePlaylists}" SelectedItem="{Binding Path=Playlist, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         </Grid>
     </GroupBox>
 </UserControl>
