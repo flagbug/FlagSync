@@ -38,6 +38,34 @@ namespace FlagSync.View.ViewModels
             }
         }
 
+        public bool IsBackup
+        {
+            get { return this.setting.SyncMode == SyncMode.Backup; }
+            set
+            {
+                if (this.IsBackup != value)
+                {
+                    this.setting.SyncMode = value ? SyncMode.Backup : SyncMode.Synchronization;
+
+                    this.OnPropertyChanged(vm => vm.IsBackup);
+                }
+            }
+        }
+
+        public bool IsSynchronization
+        {
+            get { return this.setting.SyncMode == SyncMode.Synchronization; }
+            set
+            {
+                if (this.IsSynchronization != value)
+                {
+                    this.setting.SyncMode = value ? SyncMode.Synchronization : SyncMode.Backup;
+
+                    this.OnPropertyChanged(vm => vm.IsSynchronization);
+                }
+            }
+        }
+
         public ICommand CreateFirstFileSystemCommand
         {
             get
