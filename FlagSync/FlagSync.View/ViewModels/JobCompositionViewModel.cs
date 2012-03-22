@@ -38,6 +38,19 @@ namespace FlagSync.View.ViewModels
             }
         }
 
+        public string Name
+        {
+            get { return this.setting.Name; }
+            set
+            {
+                if (this.Name != value)
+                {
+                    this.setting.Name = value;
+                    this.OnPropertyChanged(vm => vm.Name);
+                }
+            }
+        }
+
         public bool IsBackup
         {
             get { return this.setting.SyncMode == SyncMode.Backup; }

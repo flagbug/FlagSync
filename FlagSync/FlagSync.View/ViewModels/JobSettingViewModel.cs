@@ -22,7 +22,7 @@ namespace FlagSync.View.ViewModels
                 if (this.IsIncluded != value)
                 {
                     this.InternJobSetting.IsIncluded = value;
-                    this.OnPropertyChanged(view => view.IsIncluded);
+                    this.OnPropertyChanged(vm => vm.IsIncluded);
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace FlagSync.View.ViewModels
                 if (this.Name != value)
                 {
                     this.InternJobSetting.Name = value;
-                    this.OnPropertyChanged(view => view.Name);
+                    this.OnPropertyChanged(vm => vm.Name);
                 }
             }
         }
