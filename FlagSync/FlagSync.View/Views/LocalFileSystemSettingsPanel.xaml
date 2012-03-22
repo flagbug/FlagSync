@@ -6,18 +6,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
     <GroupBox Header="{x:Static properties:Resources.CommonSettingsGroupBoxText}">
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="5" Height="25">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="250*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="0" Margin="5" Height="25" Click="directoryAButton_Click">
+            <Button Grid.Column="0" Grid.Row="0" Click="directoryAButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/FlagSync;component/Images/OpenFolder.png" />
-                    <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryAButtonText}" VerticalAlignment="Center" />
+                    <ContentPresenter Margin="5, 0, 0, 0" Content="{x:Static properties:Resources.DirectoryString}" />
                 </StackPanel>
             </Button>
-            <TextBox Grid.Column="1" Grid.Row="0" Margin="5" Text="{Binding Path=Directory, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            <TextBox Grid.Column="1" Grid.Row="0" Margin="5, 0, 0, 0" Text="{Binding Path=Directory, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         </Grid>
     </GroupBox>
 </UserControl>
