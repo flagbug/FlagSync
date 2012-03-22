@@ -421,7 +421,7 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FTP-Server Address:.
+        ///   Looks up a localized string similar to FTP-Server Address.
         /// </summary>
         public static string FtpServerAddressJobSettingsTextBlockText {
             get {
@@ -439,7 +439,7 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password:.
+        ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string FtpServerPasswordJobSettingsTextBlockText {
             get {
@@ -466,7 +466,7 @@ namespace FlagSync.View.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username:.
+        ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string FtpServerUserNameJobSettingsTextBlockText {
             get {

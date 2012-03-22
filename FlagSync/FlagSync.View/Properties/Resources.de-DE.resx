@@ -334,13 +334,13 @@
     <value>FTP Synchronisation</value>
   </data>
   <data name="FtpServerAddressJobSettingsTextBlockText" xml:space="preserve">
-    <value>FTP-Server Adresse:</value>
+    <value>FTP-Server Adresse</value>
   </data>
   <data name="FtpServerPasswordJobSettingsTextBlockText" xml:space="preserve">
-    <value>Passwort:</value>
+    <value>Passwort</value>
   </data>
   <data name="FtpServerUserNameJobSettingsTextBlockText" xml:space="preserve">
-    <value>Benutzername:</value>
+    <value>Benutzername</value>
   </data>
   <data name="NameJobSettingsTextBlockText" xml:space="preserve">
     <value>Name:</value>
