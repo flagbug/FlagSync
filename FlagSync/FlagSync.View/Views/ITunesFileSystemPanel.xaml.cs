@@ -3,13 +3,13 @@
 namespace FlagSync.View.Views
 {
     /// <summary>
-    /// Interaction logic for ITunesFileSystemSettingsPanel.xaml
+    /// Interaction logic for ITunesFileSystemPanel.xaml
     /// </summary>
-    public sealed partial class ITunesFileSystemSettingsPanel
+    public sealed partial class ITunesFileSystemPanel
     {
         private ITunesFileSystemViewModel viewModel;
 
-        public ITunesFileSystemSettingsPanel(ITunesFileSystemViewModel viewModel)
+        public ITunesFileSystemPanel(ITunesFileSystemViewModel viewModel)
         {
             InitializeComponent();
 

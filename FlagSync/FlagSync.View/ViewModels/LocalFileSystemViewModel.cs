@@ -29,7 +29,7 @@ namespace FlagSync.View.ViewModels
 
         public UserControl CreateView()
         {
-            return new LocalFileSystemSettingsPanel(this);
+            return new LocalFileSystemPanel(this);
         }
     }
 }

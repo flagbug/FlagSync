@@ -55,7 +55,7 @@ namespace FlagSync.View.ViewModels
 
         public UserControl CreateView()
         {
-            return new FtpFileSystemSettingsPanel(this);
+            return new FtpFileSystemPanel(this);
         }
     }
 }

@@ -68,11 +68,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FtpFileSystemSettingsPanel.xaml">
+    <Page Include="Views\FtpFileSystemPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ITunesFileSystemSettingsPanel.xaml">
+    <Page Include="Views\ITunesFileSystemPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -80,7 +80,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LocalFileSystemSettingsPanel.xaml">
+    <Page Include="Views\LocalFileSystemPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -99,12 +99,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ByteToKiloByteConverter.cs" />
-    <Compile Include="Views\FtpFileSystemSettingsPanel.xaml.cs">
-      <DependentUpon>FtpFileSystemSettingsPanel.xaml</DependentUpon>
+    <Compile Include="Views\FtpFileSystemPanel.xaml.cs">
+      <DependentUpon>FtpFileSystemPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FtpFileSystemViewModel.cs" />
-    <Compile Include="Views\ITunesFileSystemSettingsPanel.xaml.cs">
-      <DependentUpon>ITunesFileSystemSettingsPanel.xaml</DependentUpon>
+    <Compile Include="Views\ITunesFileSystemPanel.xaml.cs">
+      <DependentUpon>ITunesFileSystemPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ITunesFileSystemViewModel.cs" />
     <Compile Include="Views\JobCompositionControl.xaml.cs">
@@ -112,8 +112,8 @@
     </Compile>
     <Compile Include="ViewModels\JobSettingViewModel.cs" />
     <Compile Include="ViewModels\JobViewModel.cs" />
-    <Compile Include="Views\LocalFileSystemSettingsPanel.xaml.cs">
-      <DependentUpon>LocalFileSystemSettingsPanel.xaml</DependentUpon>
+    <Compile Include="Views\LocalFileSystemPanel.xaml.cs">
+      <DependentUpon>LocalFileSystemPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\LocalFileSystemViewModel.cs" />
     <Compile Include="LogMessage.cs" />

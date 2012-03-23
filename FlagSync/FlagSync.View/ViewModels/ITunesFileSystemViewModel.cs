@@ -48,7 +48,7 @@ namespace FlagSync.View.ViewModels
 
         public UserControl CreateView()
         {
-            return new ITunesFileSystemSettingsPanel(this);
+            return new ITunesFileSystemPanel(this);
         }
     }
 }
