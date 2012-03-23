@@ -185,7 +185,7 @@ namespace FlagSync.View.ViewModels
         }
 
         /// <summary>
-        /// Gets the average speed in Megabytes per second.
+        /// Gets the average speed in [B|KB|MB|GB|TB] per second.
         /// </summary>
         public string AverageSpeed
         {
