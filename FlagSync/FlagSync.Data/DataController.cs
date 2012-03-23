@@ -50,7 +50,7 @@ namespace FlagSync.Data
         /// </summary>
         /// <param name="currentVersion">The current version of the application.</param>
         /// <returns>
-        /// true if a new version of this application is availabl; otherwise, false.
+        /// true if a new version of this application is available; otherwise, false.
         /// </returns>
         public static bool IsNewVersionAvailable(Version currentVersion)
         {
