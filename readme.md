@@ -3,12 +3,12 @@
 ## Overview
 
 FlagSync is a synchronization and backup tool, that allows you to synchronize or backup your files 
-with local folders (or an external hard- or flashdrive) or a FTP-Server, as well as synchronize your non-iPod MP3-Player with iTunes.
+with local folders (or an external hard- or flashdrive) or an FTP-Server, as well as synchronize your non-iPod MP3-Player with iTunes.
 
 ## Features
 
 - **Backup & Synchronization:** Make a backup to your external harddrive, or synchronize your USB-Stick with your computer.
-- **FTP:** Backup your data to a FTP-server or synchronize the files on the server with your PC.
+- **FTP:** Backup your data to an FTP-server or synchronize the files on the server with your PC.
 - **iTunes:** You use iTunes but don't have an iPod? FlagSync synchronizes your MP3-Player with iTunes!
 - **Batch jobs:** Create an infinite amount of jobs that can be started with one click.
 - **Multi-Language:** FlagSync is available in English and German.
