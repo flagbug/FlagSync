@@ -490,7 +490,7 @@ namespace FlagSync.View.ViewModels
                     {
                         this.JobSettings.Remove(this.SelectedJobSetting);
 
-                        this.SelectedJobSetting = this.JobSettings.Count != 0 ? this.JobSettings.Last() : null;
+                        this.SelectedJobSetting = this.JobSettings.Any() ? this.JobSettings.Last() : null;
                     }
                 );
             }
@@ -509,9 +509,7 @@ namespace FlagSync.View.ViewModels
                     {
                         int oldIndex = this.JobSettings.IndexOf(this.SelectedJobSetting);
 
-                        int newIndex = oldIndex - 1;
-
-                        this.JobSettings.Move(oldIndex, newIndex);
+                        this.JobSettings.Move(oldIndex, oldIndex - 1);
                     },
                     param => this.SelectedJobSetting != null
                         && this.JobSettings.IndexOf(this.SelectedJobSetting) > 0
@@ -532,9 +530,7 @@ namespace FlagSync.View.ViewModels
                     {
                         int oldIndex = this.JobSettings.IndexOf(this.SelectedJobSetting);
 
-                        int newIndex = oldIndex + 1;
-
-                        this.JobSettings.Move(oldIndex, newIndex);
+                        this.JobSettings.Move(oldIndex, oldIndex + 1);
                     },
                     param => this.SelectedJobSetting != null
                         && this.JobSettings.IndexOf(this.SelectedJobSetting) < this.JobSettings.Count - 1
@@ -589,7 +585,7 @@ namespace FlagSync.View.ViewModels
 
             this.LogMessages = new ThreadSafeObservableCollection<LogMessage>();
             this.updateTimer = new Timer(1000);
-            this.updateTimer.Elapsed += updateTimer_Elapsed;
+            this.updateTimer.Elapsed += (sender, args) => UpdateAverageSpeed();
             this.ResetJobWorker();
         }
 
@@ -692,12 +688,7 @@ namespace FlagSync.View.ViewModels
             this.ProgressState = TaskbarItemProgressState.Normal;
         }
 
-        /// <summary>
-        /// Handles the Elapsed event of the updateTimer control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
-        private void updateTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void UpdateAverageSpeed()
         {
             this.OnPropertyChanged(vm => vm.AverageSpeed);
         }
