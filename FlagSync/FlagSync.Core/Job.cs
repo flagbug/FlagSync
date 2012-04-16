@@ -416,29 +416,29 @@ namespace FlagSync.Core
             IDirectoryInfo currentTargetDirectory = targetDirectory;
 
             rootScanner.DirectoryFound += (sender, e) =>
+            {
+                this.CheckPause();
+                if (this.IsStopped)
                 {
-                    this.CheckPause();
-                    if (this.IsStopped)
-                    {
-                        rootScanner.Stop();
-                        return;
-                    }
+                    rootScanner.Stop();
+                    return;
+                }
 
-                    //Assemble the path of the new target directory
-                    string newTargetDirectoryPath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.Directory.Name);
+                //Assemble the path of the new target directory
+                string newTargetDirectoryPath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.Directory.Name);
 
-                    bool newTargetDirectoryExists = this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath);
-                    bool newTargetDirectoryIsExcluded = this.excludedPaths.Any(path => NormalizePath(newTargetDirectoryPath).StartsWith(path));
+                bool newTargetDirectoryExists = this.TargetFileSystem.DirectoryExists(newTargetDirectoryPath);
+                bool newTargetDirectoryIsExcluded = this.excludedPaths.Any(path => NormalizePath(newTargetDirectoryPath).StartsWith(path));
 
-                    //Check if the new target directory exists and if not, create it
-                    if (!newTargetDirectoryExists && !newTargetDirectoryIsExcluded)
-                    {
-                        this.PerformDirectoryCreationOperation(this.TargetFileSystem, e.Directory,
-                                                               currentTargetDirectory, execute);
-                    }
+                //Check if the new target directory exists and if not, create it
+                if (!newTargetDirectoryExists && !newTargetDirectoryIsExcluded)
+                {
+                    this.PerformDirectoryCreationOperation(this.TargetFileSystem, e.Directory,
+                                                            currentTargetDirectory, execute);
+                }
 
-                    currentTargetDirectory = this.TargetFileSystem.GetDirectoryInfo(newTargetDirectoryPath);
-                };
+                currentTargetDirectory = this.TargetFileSystem.GetDirectoryInfo(newTargetDirectoryPath);
+            };
 
             rootScanner.DirectoryProceeded += (sender, e) =>
             {
@@ -457,41 +457,41 @@ namespace FlagSync.Core
             };
 
             rootScanner.FileFound += (sender, e) =>
+            {
+                this.CheckPause();
+                if (this.IsStopped)
                 {
-                    this.CheckPause();
-                    if (this.IsStopped)
+                    rootScanner.Stop();
+                    return;
+                }
+
+                //Assemble the path of the target file
+                string targetFilePath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name);
+
+                //The file must not be a contained in any subfolder of the excluded folders
+                if (!this.excludedPaths.Any(path => NormalizePath(targetFilePath).StartsWith(path)))
+                {
+                    //Check if the target file exists in the target directory and if not, create it
+                    if (!this.TargetFileSystem.FileExists(targetFilePath))
                     {
-                        rootScanner.Stop();
-                        return;
+                        this.PerformFileCreationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
+
+                        //Add the created file to the proceeded files, to avoid a double-counting
+                        this.proceededFilePaths.Add(this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name));
                     }
 
-                    //Assemble the path of the target file
-                    string targetFilePath = this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name);
-
-                    //The file must not be a contained in any subfolder of the excluded folders
-                    if (!this.excludedPaths.Any(path => NormalizePath(targetFilePath).StartsWith(path)))
+                    //Check if the source file is newer than the target file
+                    else if (IsFileModified(e.File, this.TargetFileSystem.GetFileInfo(targetFilePath)))
                     {
-                        //Check if the target file exists in the target directory and if not, create it
-                        if (!this.TargetFileSystem.FileExists(targetFilePath))
-                        {
-                            this.PerformFileCreationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
+                        this.PerformFileModificationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
 
-                            //Add the created file to the proceeded files, to avoid a double-counting
-                            this.proceededFilePaths.Add(this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name));
-                        }
-
-                        //Check if the source file is newer than the target file
-                        else if (IsFileModified(e.File, this.TargetFileSystem.GetFileInfo(targetFilePath)))
-                        {
-                            this.PerformFileModificationOperation(this.SourceFileSystem, this.TargetFileSystem, e.File, currentTargetDirectory, execute);
-
-                            //Add the created file to the proceeded files, to avoid a double-counting
-                            this.proceededFilePaths.Add(this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name));
-                        }
-
-                        this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
+                        //Add the created file to the proceeded files, to avoid a double-counting
+                        this.proceededFilePaths.Add(this.TargetFileSystem.CombinePath(currentTargetDirectory.FullName, e.File.Name));
                     }
-                };
+
+                    this.OnProceededFile(new FileProceededEventArgs(e.File.FullName, e.File.Length));
+                }
+            };
 
             rootScanner.Start();
         }
