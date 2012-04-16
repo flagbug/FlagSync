@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
-using Rareform.Extensions;
 using FlagSync.Core.FileSystem.Base;
+using Rareform.Extensions;
 
 namespace FlagSync.Core.FileSystem
 {
@@ -71,10 +71,7 @@ namespace FlagSync.Core.FileSystem
         /// <param name="e">The <see cref="FileFoundEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileFound(FileFoundEventArgs e)
         {
-            if (this.FileFound != null)
-            {
-                this.FileFound(this, e);
-            }
+            this.FileFound.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -83,10 +80,7 @@ namespace FlagSync.Core.FileSystem
         /// <param name="e">The <see cref="DirectoryFoundEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryFound(DirectoryFoundEventArgs e)
         {
-            if (this.DirectoryFound != null)
-            {
-                this.DirectoryFound(this, e);
-            }
+            this.DirectoryFound.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -95,10 +89,7 @@ namespace FlagSync.Core.FileSystem
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryProceeded(EventArgs e)
         {
-            if (this.DirectoryProceeded != null)
-            {
-                this.DirectoryProceeded(this, e);
-            }
+            this.DirectoryProceeded.RaiseSafe(this, e);
         }
 
         /// <summary>
