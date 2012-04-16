@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using FlagSync.Core.FileSystem;
 using Rareform.Extensions;
 using Rareform.IO;
-using FlagSync.Core.FileSystem;
 
 namespace FlagSync.Core
 {
@@ -460,7 +460,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.DirectoryCreationEventArgs"/> instance containing the event data.</param>
         private void currentJob_CreatingDirectory(object sender, DirectoryCreationEventArgs e)
         {
-            this.CreatingDirectory(this, e);
+            this.CreatingDirectory.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -470,7 +470,7 @@ namespace FlagSync.Core
         /// <param name="e">The <see cref="FlagSync.Core.FileCopyEventArgs"/> instance containing the event data.</param>
         private void currentJob_CreatedFile(object sender, FileCopyEventArgs e)
         {
-            this.CreatedFile(this, e);
+            this.CreatedFile.RaiseSafe(this, e);
         }
 
         /// <summary>
