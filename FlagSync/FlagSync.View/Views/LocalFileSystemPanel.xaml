@@ -30,6 +30,8 @@
                 Grid.Column="1"
                 Grid.Row="0"
                 Margin="5, 0, 0, 0"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
                 Text="{Binding Path=Directory, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         </Grid>
     </GroupBox>

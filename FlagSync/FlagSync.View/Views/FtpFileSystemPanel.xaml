@@ -29,6 +29,7 @@
                 Grid.Row="0"
                 Margin="5, 0, 0, 0"
                 VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
                 Text="{Binding Path=ServerAddress, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
             <TextBlock
                 Grid.Column="0"
@@ -41,6 +42,7 @@
                 Grid.Row="1"
                 Margin="5, 5, 0, 0"
                 VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
                 Text="{Binding Path=Username, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
             <TextBlock
                 Grid.Column="0"
@@ -53,6 +55,7 @@
                 Grid.Row="3"
                 Margin="5, 5, 0, 0"
                 VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
                 Rareform.wpf:PasswordBoxBinder.Attach="True"
                 Rareform.wpf:PasswordBoxBinder.Password="{Binding Text, ElementName=Password, Mode=TwoWay}"
                 PasswordChanged="PasswordBox_PasswordChanged" />
