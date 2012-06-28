@@ -62,11 +62,10 @@ namespace FlagSync.Core.FileSystem.ITunes
         {
             if (this.isRoot)
             {
-                return ITunesFileSystem.MapPlaylistToDirectoryStructure(this.name)
-                    .Cast<IDirectoryInfo>();
+                return ITunesFileSystem.MapPlaylistToDirectoryStructure(this.name);
             }
 
-            return this.directories.Cast<IDirectoryInfo>();
+            return this.directories;
         }
 
         /// <summary>
@@ -74,10 +73,7 @@ namespace FlagSync.Core.FileSystem.ITunes
         /// </summary>
         public string FullName
         {
-            get
-            {
-                return this.isRoot ? this.name : Path.Combine(this.Parent.FullName, this.Name);
-            }
+            get { return this.isRoot ? this.name : Path.Combine(this.Parent.FullName, this.Name); }
         }
 
         /// <summary>
